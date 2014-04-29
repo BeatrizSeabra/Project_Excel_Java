@@ -1,2 +1,2 @@
-Class-Path: antlr.jar
+Class-Path: antlr-3.5.2-complete.jar
 Main-Class: csheets.CleanSheets
