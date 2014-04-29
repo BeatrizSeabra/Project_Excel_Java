@@ -1,4 +1,4 @@
-// $ANTLR 2.7.5 (20050128): "../src/csheets/ext/assertion/AssertionParser.g" -> "AssertionLexer.java"$
+// $ANTLR 2.7.7 (20060906): "AssertionParser.g" -> "AssertionLexer.java"$
 package csheets.ext.assertion;
 import java.io.InputStream;
 import antlr.TokenStreamException;
@@ -173,7 +173,7 @@ tryAgain:
 				synPredMatched22 = false;
 			}
 			rewind(_m22);
-			inputState.guessing--;
+inputState.guessing--;
 		}
 		if ( synPredMatched22 ) {
 			match("\r\n");
@@ -391,7 +391,7 @@ tryAgain:
 				synPredMatched38 = false;
 			}
 			rewind(_m38);
-			inputState.guessing--;
+inputState.guessing--;
 		}
 		if ( synPredMatched38 ) {
 			{

@@ -17,6 +17,8 @@
  * You should have received a copy of the GNU General Public License
  * along with CleanSheets; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * 
+ * ATB (April, 2014): Updated to use antlr3 generated parser and lexer
  */
 package csheets.core.formula.compiler;
 
@@ -27,6 +29,13 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.StringReader;
+
+import org.antlr.runtime.ANTLRStringStream;
+import org.antlr.runtime.CommonTokenStream;
+import org.antlr.runtime.MismatchedTokenException;
+import org.antlr.runtime.NoViableAltException;
+import org.antlr.runtime.RecognitionException;
+import org.antlr.runtime.tree.CommonTree;
 
 import antlr.collections.AST;
 import csheets.core.Address;
@@ -65,18 +74,26 @@ public class Console {
 		String line;
 		try {
 			while ((line = reader.readLine()) != null) {
-				FormulaParser parser = new FormulaParser(
-					new FormulaLexer(new StringReader(line)));
+				ANTLRStringStream input = new ANTLRStringStream(line);
+				
+				// create the buffer of tokens between the lexer and parser 
+				FormulaLexer lexer=new FormulaLexer(input);
+				CommonTokenStream tokens = new CommonTokenStream(lexer);
+				
+				FormulaParser parser = new FormulaParser(tokens);
 				try {
-					parser.expression();
-					AST ast = parser.getAST();
+					CommonTree ast=(CommonTree)parser.expression().getTree();
 					if (ast != null) {
 						printer.println("AST: " + ast.toStringTree());
 						// new antlr.debug.misc.ASTFrame("Formula Viewer", ast).setVisible(true);
 						Expression expression = compiler.convert(cell, ast);
 						printer.println("Formula: " + expression + " = " + expression.evaluate());
 					}
-				} catch (Exception e) {
+				} catch (RecognitionException e) {
+			    	//String message="Fatal recognition exception " + e.getClass().getName()+ " : " + e;
+			    	String message=parser.getErrorMessage(e, parser.tokenNames);
+			    	printer.println("At ("+e.line+";"+e.charPositionInLine+"): "+message);
+			    } catch (Exception e) {
 					// System.err.println(e);
 					e.printStackTrace();
 				}

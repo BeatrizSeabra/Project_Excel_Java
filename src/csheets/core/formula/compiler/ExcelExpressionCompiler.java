@@ -17,16 +17,23 @@
  * You should have received a copy of the GNU General Public License
  * along with CleanSheets; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * 
+ * ATB (April, 2014): Updated to use antlr3 generated parser and lexer
  */
 package csheets.core.formula.compiler;
 
-import java.io.StringReader;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import antlr.ANTLRException;
-import antlr.collections.AST;
+import org.antlr.runtime.ANTLRStringStream;
+import org.antlr.runtime.CommonTokenStream;
+import org.antlr.runtime.MismatchedTokenException;
+import org.antlr.runtime.NoViableAltException;
+import org.antlr.runtime.RecognitionException;
+import org.antlr.runtime.tree.CommonTree;
+import org.antlr.runtime.tree.Tree;
+
 import csheets.core.Cell;
 import csheets.core.Value;
 import csheets.core.formula.BinaryOperation;
@@ -63,18 +70,43 @@ public class ExcelExpressionCompiler implements ExpressionCompiler {
 
 	public Expression compile(Cell cell, String source) throws FormulaCompilationException {
 		// Creates the lexer and parser
-		FormulaParser parser = new FormulaParser(
-			new FormulaLexer(new StringReader(source)));
-
+		ANTLRStringStream input = new ANTLRStringStream(source);
+		
+		// create the buffer of tokens between the lexer and parser 
+		FormulaLexer lexer=new FormulaLexer(input);
+		CommonTokenStream tokens = new CommonTokenStream(lexer);
+		
+		FormulaParser parser = new FormulaParser(tokens);
+		
+		CommonTree tree = null;	
+	
 		try {
 			// Attempts to match an expression
-			parser.expression();
-		} catch (ANTLRException e) {
-			throw new FormulaCompilationException(e);
-		}
+			tree=(CommonTree)parser.expression().getTree();
+		} /* catch (MismatchedTokenException e){
+	        //not production-quality code, just forming a useful message
+	        String expected = e.expecting == -1 ? "<EOF>" : parser.tokenNames[e.expecting];
+	        String found = e.getUnexpectedType() == -1 ? "<EOF>" : parser.tokenNames[e.getUnexpectedType()];
 
+	        String message="At ("+e.line+";"+e.charPositionInLine+"): "+"Fatal mismatched token exception: expected " + expected + " but was " + found;   
+	        throw new FormulaCompilationException(message);
+	    } catch (NoViableAltException e) {
+	    	//String message="Fatal recognition exception " + e.getClass().getName()+ " : " + e;
+	    	String message=parser.getErrorMessage(e, parser.tokenNames);
+	    	String message2="At ("+e.line+";"+e.charPositionInLine+"): "+message;
+	    	throw new FormulaCompilationException(message2);
+	    } */
+		catch (RecognitionException e) {
+	    	//String message="Fatal recognition exception " + e.getClass().getName()+ " : " + e;
+	    	String message=parser.getErrorMessage(e, parser.tokenNames);
+	    	throw new FormulaCompilationException("At ("+e.line+";"+e.charPositionInLine+"): "+message);
+	    } catch (Exception e) {
+	    	String message="Other exception : " + e.getMessage();
+	    	throw new FormulaCompilationException(message);
+	    } 
+		
 		// Converts the expression and returns it
-		return convert(cell, parser.getAST());
+		return convert(cell, tree);
 	}
 
 	/**
@@ -82,18 +114,18 @@ public class ExcelExpressionCompiler implements ExpressionCompiler {
 	 * @param node the abstract syntax tree node to convert
 	 * @return the result of the conversion
 	 */
-	protected Expression convert(Cell cell, AST node) throws FormulaCompilationException {
+	protected Expression convert(Cell cell, Tree node) throws FormulaCompilationException {
 		// System.out.println("Converting node '" + node.getText() + "' of tree '" + node.toStringTree() + "' with " + node.getNumberOfChildren() + " children.");
-		if (node.getNumberOfChildren() == 0) {
+		if (node.getChildCount() == 0) {
 			try {
 				switch (node.getType()) {
-					case FormulaParserTokenTypes.NUMBER:
+					case FormulaLexer.NUMBER:
 						return new Literal(Value.parseNumericValue(node.getText()));
-					case FormulaParserTokenTypes.STRING:
+					case FormulaLexer.STRING:
 						return new Literal(Value.parseValue(node.getText(), Value.Type.BOOLEAN, Value.Type.DATE));
-					case FormulaParserTokenTypes.CELL_REF:
+					case FormulaLexer.CELL_REF:
 						return new CellReference(cell.getSpreadsheet(), node.getText());
-					case FormulaParserTokenTypes.NAME:
+//					case FormulaParserTokenTypes.NAME:
 						/* return cell.getSpreadsheet().getWorkbook().
 							getRange(node.getText()) (Reference)*/
 				}
@@ -110,36 +142,36 @@ public class ExcelExpressionCompiler implements ExpressionCompiler {
 
 		if (function != null) {
 			List<Expression> args = new ArrayList<Expression>();
-			AST child = node.getFirstChild();
+			Tree child = node.getChild(0);
 			if (child != null) {
-				args.add(convert(cell, child));
-				while ((child = child.getNextSibling()) != null)
+				for (int nChild=0; nChild<node.getChildCount(); ++nChild) {
 					args.add(convert(cell, child));
+				}
 			}
 			Expression[] argArray = args.toArray(new Expression[args.size()]);
 			return new FunctionCall(function, argArray);
 		}
 
-		if (node.getNumberOfChildren() == 1)
+		if (node.getChildCount() == 1)
 			// Convert unary operation
 			return new UnaryOperation(
 				Language.getInstance().getUnaryOperator(node.getText()),
-				convert(cell, node.getFirstChild())
+				convert(cell, node.getChild(0))
 			);
-		else if (node.getNumberOfChildren() == 2) {
+		else if (node.getChildCount() == 2) {
 			// Convert binary operation
 			BinaryOperator operator = Language.getInstance().getBinaryOperator(node.getText());
 			if (operator instanceof RangeReference)
 				return new ReferenceOperation(
-					(Reference)convert(cell, node.getFirstChild()),
+					(Reference)convert(cell, node.getChild(0)),
 					(RangeReference)operator,
-					(Reference)convert(cell, node.getFirstChild().getNextSibling())
+					(Reference)convert(cell, node.getChild(1))
 				);
 			else 
 				return new BinaryOperation(
-					convert(cell, node.getFirstChild()),
+					convert(cell, node.getChild(0)),
 					operator,
-					convert(cell, node.getFirstChild().getNextSibling())
+					convert(cell, node.getChild(1))
 				);
 		} else
 			// Shouldn't happen

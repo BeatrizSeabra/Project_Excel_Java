@@ -9,7 +9,7 @@ echo Creating archive...
 jar cmf makejar.mf ../dist/csheets.jar -C ../tmp-build csheets
 
 echo Copiar as dependencias
-cp ../lib/antlr.jar ../dist/antlr.jar
+cp ../lib/antlr-3.5.2-complete.jar ../dist/antlr-3.5.2-complete.jar
 
 # echo Removing temporary files...
 # rm -R jar

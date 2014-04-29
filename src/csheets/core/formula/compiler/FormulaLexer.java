@@ -1,824 +1,1381 @@
-// $ANTLR 2.7.5 (20050128): "../src/csheets/core/formula/compiler/FormulaCompiler.g" -> "FormulaLexer.java"$
+// $ANTLR 3.5.2 ../src/csheets/core/formula/compiler/Formula.g 2014-04-29 14:32:36
+
 package csheets.core.formula.compiler;
-import java.io.InputStream;
-import antlr.TokenStreamException;
-import antlr.TokenStreamIOException;
-import antlr.TokenStreamRecognitionException;
-import antlr.CharStreamException;
-import antlr.CharStreamIOException;
-import antlr.ANTLRException;
-import java.io.Reader;
-import java.util.Hashtable;
-import antlr.CharScanner;
-import antlr.InputBuffer;
-import antlr.ByteBuffer;
-import antlr.CharBuffer;
-import antlr.Token;
-import antlr.CommonToken;
-import antlr.RecognitionException;
-import antlr.NoViableAltForCharException;
-import antlr.MismatchedCharException;
-import antlr.TokenStream;
-import antlr.ANTLRHashString;
-import antlr.LexerSharedInputState;
-import antlr.collections.impl.BitSet;
-import antlr.SemanticException;
-import csheets.core.formula.lang.Language;
 
-/**
- * A lexer that splits a string into a list of lexical tokens.
- * @author Einar Pehrson
- */
+
+import org.antlr.runtime.*;
+import java.util.Stack;
+import java.util.List;
+import java.util.ArrayList;
+
 @SuppressWarnings("all")
-public class FormulaLexer extends antlr.CharScanner implements FormulaParserTokenTypes, TokenStream
- {
-public FormulaLexer(InputStream in) {
-	this(new ByteBuffer(in));
-}
-public FormulaLexer(Reader in) {
-	this(new CharBuffer(in));
-}
-public FormulaLexer(InputBuffer ib) {
-	this(new LexerSharedInputState(ib));
-}
-public FormulaLexer(LexerSharedInputState state) {
-	super(state);
-	caseSensitiveLiterals = false;
-	setCaseSensitive(false);
-	literals = new Hashtable();
-}
+public class FormulaLexer extends Lexer {
+	public static final int EOF=-1;
+	public static final int ABS=4;
+	public static final int AMP=5;
+	public static final int CELL_REF=6;
+	public static final int COLON=7;
+	public static final int COMMA=8;
+	public static final int DIGIT=9;
+	public static final int DIV=10;
+	public static final int EQ=11;
+	public static final int EXCL=12;
+	public static final int FUNCTION=13;
+	public static final int GT=14;
+	public static final int GTEQ=15;
+	public static final int LETTER=16;
+	public static final int LPAR=17;
+	public static final int LT=18;
+	public static final int LTEQ=19;
+	public static final int MINUS=20;
+	public static final int MULTI=21;
+	public static final int NEQ=22;
+	public static final int NUMBER=23;
+	public static final int PERCENT=24;
+	public static final int PLUS=25;
+	public static final int POWER=26;
+	public static final int QUOT=27;
+	public static final int RPAR=28;
+	public static final int SEMI=29;
+	public static final int STRING=30;
+	public static final int WS=31;
 
-public Token nextToken() throws TokenStreamException {
-	Token theRetToken=null;
-tryAgain:
-	for (;;) {
-		Token _token = null;
-		int _ttype = Token.INVALID_TYPE;
-		resetText();
-		try {   // for char stream error handling
-			try {   // for lexical error handling
-				switch ( LA(1)) {
-				case '$':  case 'a':  case 'b':  case 'c':
-				case 'd':  case 'e':  case 'f':  case 'g':
-				case 'h':  case 'i':  case 'j':  case 'k':
-				case 'l':  case 'm':  case 'n':  case 'o':
-				case 'p':  case 'q':  case 'r':  case 's':
-				case 't':  case 'u':  case 'v':  case 'w':
-				case 'x':  case 'y':  case 'z':
-				{
-					mALPHABETICAL(true);
-					theRetToken=_returnToken;
-					break;
-				}
-				case '(':
-				{
-					mLPAR(true);
-					theRetToken=_returnToken;
-					break;
-				}
-				case '"':
-				{
-					mSTRING(true);
-					theRetToken=_returnToken;
-					break;
-				}
-				case '0':  case '1':  case '2':  case '3':
-				case '4':  case '5':  case '6':  case '7':
-				case '8':  case '9':
-				{
-					mNUMBER(true);
-					theRetToken=_returnToken;
-					break;
-				}
-				case ',':
-				{
-					mCOMMA(true);
-					theRetToken=_returnToken;
-					break;
-				}
-				case '=':
-				{
-					mEQ(true);
-					theRetToken=_returnToken;
-					break;
-				}
-				case '&':
-				{
-					mAMP(true);
-					theRetToken=_returnToken;
-					break;
-				}
-				case '+':
-				{
-					mPLUS(true);
-					theRetToken=_returnToken;
-					break;
-				}
-				case '-':
-				{
-					mMINUS(true);
-					theRetToken=_returnToken;
-					break;
-				}
-				case '*':
-				{
-					mMULTI(true);
-					theRetToken=_returnToken;
-					break;
-				}
-				case '/':
-				{
-					mDIV(true);
-					theRetToken=_returnToken;
-					break;
-				}
-				case '^':
-				{
-					mPOWER(true);
-					theRetToken=_returnToken;
-					break;
-				}
-				case '%':
-				{
-					mPERCENT(true);
-					theRetToken=_returnToken;
-					break;
-				}
-				case ':':
-				{
-					mCOLON(true);
-					theRetToken=_returnToken;
-					break;
-				}
-				case ';':
-				{
-					mSEMI(true);
-					theRetToken=_returnToken;
-					break;
-				}
-				case ')':
-				{
-					mRPAR(true);
-					theRetToken=_returnToken;
-					break;
-				}
-				case '\t':  case '\n':  case '\r':  case ' ':
-				{
-					mWS(true);
-					theRetToken=_returnToken;
-					break;
-				}
-				default:
-					if ((LA(1)=='<') && (LA(2)=='>')) {
-						mNEQ(true);
-						theRetToken=_returnToken;
-					}
-					else if ((LA(1)=='<') && (LA(2)=='=')) {
-						mLTEQ(true);
-						theRetToken=_returnToken;
-					}
-					else if ((LA(1)=='>') && (LA(2)=='=')) {
-						mGTEQ(true);
-						theRetToken=_returnToken;
-					}
-					else if ((LA(1)=='>') && (true)) {
-						mGT(true);
-						theRetToken=_returnToken;
-					}
-					else if ((LA(1)=='<') && (true)) {
-						mLT(true);
-						theRetToken=_returnToken;
-					}
-				else {
-					if (LA(1)==EOF_CHAR) {uponEOF(); _returnToken = makeToken(Token.EOF_TYPE);}
-				else {throw new NoViableAltForCharException((char)LA(1), getFilename(), getLine(), getColumn());}
-				}
-				}
-				if ( _returnToken==null ) continue tryAgain; // found SKIP token
-				_ttype = _returnToken.getType();
-				_ttype = testLiteralsTable(_ttype);
-				_returnToken.setType(_ttype);
-				return _returnToken;
-			}
-			catch (RecognitionException e) {
-				throw new TokenStreamRecognitionException(e);
-			}
-		}
-		catch (CharStreamException cse) {
-			if ( cse instanceof CharStreamIOException ) {
-				throw new TokenStreamIOException(((CharStreamIOException)cse).io);
+	// delegates
+	// delegators
+	public Lexer[] getDelegates() {
+		return new Lexer[] {};
+	}
+
+	public FormulaLexer() {} 
+	public FormulaLexer(CharStream input) {
+		this(input, new RecognizerSharedState());
+	}
+	public FormulaLexer(CharStream input, RecognizerSharedState state) {
+		super(input,state);
+	}
+	@Override public String getGrammarFileName() { return "../src/csheets/core/formula/compiler/Formula.g"; }
+
+	// $ANTLR start "LETTER"
+	public final void mLETTER() throws RecognitionException {
+		try {
+			// ../src/csheets/core/formula/compiler/Formula.g:106:16: ( ( 'a' .. 'z' | 'A' .. 'Z' ) )
+			// ../src/csheets/core/formula/compiler/Formula.g:
+			{
+			if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
+				input.consume();
 			}
 			else {
-				throw new TokenStreamException(cse.getMessage());
+				MismatchedSetException mse = new MismatchedSetException(null,input);
+				recover(mse);
+				throw mse;
 			}
-		}
-	}
-}
+			}
 
-	protected final void mLETTER(boolean _createToken) throws RecognitionException, CharStreamException, TokenStreamException {
-		int _ttype; Token _token=null; int _begin=text.length();
-		_ttype = LETTER;
-		int _saveIndex;
-		
-		{
-		matchRange('a','z');
 		}
-		if ( _createToken && _token==null && _ttype!=Token.SKIP ) {
-			_token = makeToken(_ttype);
-			_token.setText(new String(text.getBuffer(), _begin, text.length()-_begin));
+		finally {
+			// do for sure before leaving
 		}
-		_returnToken = _token;
 	}
-	
-	public final void mALPHABETICAL(boolean _createToken) throws RecognitionException, CharStreamException, TokenStreamException {
-		int _ttype; Token _token=null; int _begin=text.length();
-		_ttype = ALPHABETICAL;
-		int _saveIndex;
-		
-		boolean synPredMatched37 = false;
-		if ((((LA(1) >= 'a' && LA(1) <= 'z')) && (_tokenSet_0.member(LA(2))) && (true) && (true))) {
-			int _m37 = mark();
-			synPredMatched37 = true;
-			inputState.guessing++;
-			try {
-				{
-				{
-				int _cnt36=0;
-				_loop36:
-				do {
-					if (((LA(1) >= 'a' && LA(1) <= 'z'))) {
-						mLETTER(false);
+	// $ANTLR end "LETTER"
+
+	// $ANTLR start "FUNCTION"
+	public final void mFUNCTION() throws RecognitionException {
+		try {
+			int _type = FUNCTION;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ../src/csheets/core/formula/compiler/Formula.g:108:10: ( ( LETTER )+ )
+			// ../src/csheets/core/formula/compiler/Formula.g:109:4: ( LETTER )+
+			{
+			// ../src/csheets/core/formula/compiler/Formula.g:109:4: ( LETTER )+
+			int cnt1=0;
+			loop1:
+			while (true) {
+				int alt1=2;
+				int LA1_0 = input.LA(1);
+				if ( ((LA1_0 >= 'A' && LA1_0 <= 'Z')||(LA1_0 >= 'a' && LA1_0 <= 'z')) ) {
+					alt1=1;
+				}
+
+				switch (alt1) {
+				case 1 :
+					// ../src/csheets/core/formula/compiler/Formula.g:
+					{
+					if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
+						input.consume();
 					}
 					else {
-						if ( _cnt36>=1 ) { break _loop36; } else {throw new NoViableAltForCharException((char)LA(1), getFilename(), getLine(), getColumn());}
+						MismatchedSetException mse = new MismatchedSetException(null,input);
+						recover(mse);
+						throw mse;
 					}
-					
-					_cnt36++;
-				} while (true);
+					}
+					break;
+
+				default :
+					if ( cnt1 >= 1 ) break loop1;
+					EarlyExitException eee = new EarlyExitException(1, input);
+					throw eee;
 				}
-				mLPAR(false);
-				}
+				cnt1++;
 			}
-			catch (RecognitionException pe) {
-				synPredMatched37 = false;
+
 			}
-			rewind(_m37);
-			inputState.guessing--;
+
+			state.type = _type;
+			state.channel = _channel;
 		}
-		if ( synPredMatched37 ) {
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "FUNCTION"
+
+	// $ANTLR start "CELL_REF"
+	public final void mCELL_REF() throws RecognitionException {
+		try {
+			int _type = CELL_REF;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ../src/csheets/core/formula/compiler/Formula.g:114:2: ( ( ABS )? LETTER ( LETTER )? ( ABS )? ( DIGIT )+ )
+			// ../src/csheets/core/formula/compiler/Formula.g:115:3: ( ABS )? LETTER ( LETTER )? ( ABS )? ( DIGIT )+
 			{
-			int _cnt39=0;
-			_loop39:
-			do {
-				if (((LA(1) >= 'a' && LA(1) <= 'z'))) {
-					mLETTER(false);
-				}
-				else {
-					if ( _cnt39>=1 ) { break _loop39; } else {throw new NoViableAltForCharException((char)LA(1), getFilename(), getLine(), getColumn());}
-				}
-				
-				_cnt39++;
-			} while (true);
+			// ../src/csheets/core/formula/compiler/Formula.g:115:3: ( ABS )?
+			int alt2=2;
+			int LA2_0 = input.LA(1);
+			if ( (LA2_0=='$') ) {
+				alt2=1;
 			}
-			_saveIndex=text.length();
-			mLPAR(false);
-			text.setLength(_saveIndex);
-			if ( inputState.guessing==0 ) {
-				
-							try {
-								Language.getInstance().getFunction(getText());
-								_ttype = FUNCTION;
-							} catch (Exception ex) {
-								throw new RecognitionException(ex.toString());
+			switch (alt2) {
+				case 1 :
+					// ../src/csheets/core/formula/compiler/Formula.g:
+					{
+					if ( input.LA(1)=='$' ) {
+						input.consume();
+					}
+					else {
+						MismatchedSetException mse = new MismatchedSetException(null,input);
+						recover(mse);
+						throw mse;
+					}
+					}
+					break;
+
+			}
+
+			mLETTER(); 
+
+			// ../src/csheets/core/formula/compiler/Formula.g:115:19: ( LETTER )?
+			int alt3=2;
+			int LA3_0 = input.LA(1);
+			if ( ((LA3_0 >= 'A' && LA3_0 <= 'Z')||(LA3_0 >= 'a' && LA3_0 <= 'z')) ) {
+				alt3=1;
+			}
+			switch (alt3) {
+				case 1 :
+					// ../src/csheets/core/formula/compiler/Formula.g:
+					{
+					if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
+						input.consume();
+					}
+					else {
+						MismatchedSetException mse = new MismatchedSetException(null,input);
+						recover(mse);
+						throw mse;
+					}
+					}
+					break;
+
+			}
+
+			// ../src/csheets/core/formula/compiler/Formula.g:116:3: ( ABS )?
+			int alt4=2;
+			int LA4_0 = input.LA(1);
+			if ( (LA4_0=='$') ) {
+				alt4=1;
+			}
+			switch (alt4) {
+				case 1 :
+					// ../src/csheets/core/formula/compiler/Formula.g:
+					{
+					if ( input.LA(1)=='$' ) {
+						input.consume();
+					}
+					else {
+						MismatchedSetException mse = new MismatchedSetException(null,input);
+						recover(mse);
+						throw mse;
+					}
+					}
+					break;
+
+			}
+
+			// ../src/csheets/core/formula/compiler/Formula.g:116:12: ( DIGIT )+
+			int cnt5=0;
+			loop5:
+			while (true) {
+				int alt5=2;
+				int LA5_0 = input.LA(1);
+				if ( ((LA5_0 >= '0' && LA5_0 <= '9')) ) {
+					alt5=1;
+				}
+
+				switch (alt5) {
+				case 1 :
+					// ../src/csheets/core/formula/compiler/Formula.g:
+					{
+					if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
+						input.consume();
+					}
+					else {
+						MismatchedSetException mse = new MismatchedSetException(null,input);
+						recover(mse);
+						throw mse;
+					}
+					}
+					break;
+
+				default :
+					if ( cnt5 >= 1 ) break loop5;
+					EarlyExitException eee = new EarlyExitException(5, input);
+					throw eee;
+				}
+				cnt5++;
+			}
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "CELL_REF"
+
+	// $ANTLR start "STRING"
+	public final void mSTRING() throws RecognitionException {
+		try {
+			int _type = STRING;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ../src/csheets/core/formula/compiler/Formula.g:121:8: ( QUOT ( options {greedy=false; } : . )* QUOT )
+			// ../src/csheets/core/formula/compiler/Formula.g:121:10: QUOT ( options {greedy=false; } : . )* QUOT
+			{
+			mQUOT(); 
+
+			// ../src/csheets/core/formula/compiler/Formula.g:122:3: ( options {greedy=false; } : . )*
+			loop6:
+			while (true) {
+				int alt6=2;
+				int LA6_0 = input.LA(1);
+				if ( (LA6_0=='\"') ) {
+					alt6=2;
+				}
+				else if ( ((LA6_0 >= '\u0000' && LA6_0 <= '!')||(LA6_0 >= '#' && LA6_0 <= '\uFFFF')) ) {
+					alt6=1;
+				}
+
+				switch (alt6) {
+				case 1 :
+					// ../src/csheets/core/formula/compiler/Formula.g:122:28: .
+					{
+					matchAny(); 
+					}
+					break;
+
+				default :
+					break loop6;
+				}
+			}
+
+			mQUOT(); 
+
+			 setText(getText().substring(1, getText().length()-1)); 
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "STRING"
+
+	// $ANTLR start "QUOT"
+	public final void mQUOT() throws RecognitionException {
+		try {
+			int _type = QUOT;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ../src/csheets/core/formula/compiler/Formula.g:126:5: ( '\"' )
+			// ../src/csheets/core/formula/compiler/Formula.g:126:7: '\"'
+			{
+			match('\"'); 
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "QUOT"
+
+	// $ANTLR start "NUMBER"
+	public final void mNUMBER() throws RecognitionException {
+		try {
+			int _type = NUMBER;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ../src/csheets/core/formula/compiler/Formula.g:130:7: ( ( DIGIT )+ ( COMMA ( DIGIT )+ )? )
+			// ../src/csheets/core/formula/compiler/Formula.g:130:9: ( DIGIT )+ ( COMMA ( DIGIT )+ )?
+			{
+			// ../src/csheets/core/formula/compiler/Formula.g:130:9: ( DIGIT )+
+			int cnt7=0;
+			loop7:
+			while (true) {
+				int alt7=2;
+				int LA7_0 = input.LA(1);
+				if ( ((LA7_0 >= '0' && LA7_0 <= '9')) ) {
+					alt7=1;
+				}
+
+				switch (alt7) {
+				case 1 :
+					// ../src/csheets/core/formula/compiler/Formula.g:
+					{
+					if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
+						input.consume();
+					}
+					else {
+						MismatchedSetException mse = new MismatchedSetException(null,input);
+						recover(mse);
+						throw mse;
+					}
+					}
+					break;
+
+				default :
+					if ( cnt7 >= 1 ) break loop7;
+					EarlyExitException eee = new EarlyExitException(7, input);
+					throw eee;
+				}
+				cnt7++;
+			}
+
+			// ../src/csheets/core/formula/compiler/Formula.g:130:20: ( COMMA ( DIGIT )+ )?
+			int alt9=2;
+			int LA9_0 = input.LA(1);
+			if ( (LA9_0==',') ) {
+				alt9=1;
+			}
+			switch (alt9) {
+				case 1 :
+					// ../src/csheets/core/formula/compiler/Formula.g:130:22: COMMA ( DIGIT )+
+					{
+					mCOMMA(); 
+
+					// ../src/csheets/core/formula/compiler/Formula.g:130:28: ( DIGIT )+
+					int cnt8=0;
+					loop8:
+					while (true) {
+						int alt8=2;
+						int LA8_0 = input.LA(1);
+						if ( ((LA8_0 >= '0' && LA8_0 <= '9')) ) {
+							alt8=1;
+						}
+
+						switch (alt8) {
+						case 1 :
+							// ../src/csheets/core/formula/compiler/Formula.g:
+							{
+							if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
+								input.consume();
 							}
-						
+							else {
+								MismatchedSetException mse = new MismatchedSetException(null,input);
+								recover(mse);
+								throw mse;
+							}
+							}
+							break;
+
+						default :
+							if ( cnt8 >= 1 ) break loop8;
+							EarlyExitException eee = new EarlyExitException(8, input);
+							throw eee;
+						}
+						cnt8++;
+					}
+
+					}
+					break;
+
 			}
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
 		}
-		else if ((_tokenSet_1.member(LA(1))) && (_tokenSet_2.member(LA(2))) && (true) && (true)) {
-			{
-			switch ( LA(1)) {
-			case '$':
-			{
-				mABS(false);
-				break;
-			}
-			case 'a':  case 'b':  case 'c':  case 'd':
-			case 'e':  case 'f':  case 'g':  case 'h':
-			case 'i':  case 'j':  case 'k':  case 'l':
-			case 'm':  case 'n':  case 'o':  case 'p':
-			case 'q':  case 'r':  case 's':  case 't':
-			case 'u':  case 'v':  case 'w':  case 'x':
-			case 'y':  case 'z':
-			{
-				break;
-			}
-			default:
-			{
-				throw new NoViableAltForCharException((char)LA(1), getFilename(), getLine(), getColumn());
-			}
-			}
-			}
-			mLETTER(false);
-			{
-			switch ( LA(1)) {
-			case 'a':  case 'b':  case 'c':  case 'd':
-			case 'e':  case 'f':  case 'g':  case 'h':
-			case 'i':  case 'j':  case 'k':  case 'l':
-			case 'm':  case 'n':  case 'o':  case 'p':
-			case 'q':  case 'r':  case 's':  case 't':
-			case 'u':  case 'v':  case 'w':  case 'x':
-			case 'y':  case 'z':
-			{
-				mLETTER(false);
-				break;
-			}
-			case '$':  case '0':  case '1':  case '2':
-			case '3':  case '4':  case '5':  case '6':
-			case '7':  case '8':  case '9':
-			{
-				break;
-			}
-			default:
-			{
-				throw new NoViableAltForCharException((char)LA(1), getFilename(), getLine(), getColumn());
-			}
-			}
-			}
-			{
-			switch ( LA(1)) {
-			case '$':
-			{
-				mABS(false);
-				break;
-			}
-			case '0':  case '1':  case '2':  case '3':
-			case '4':  case '5':  case '6':  case '7':
-			case '8':  case '9':
-			{
-				break;
-			}
-			default:
-			{
-				throw new NoViableAltForCharException((char)LA(1), getFilename(), getLine(), getColumn());
-			}
-			}
-			}
-			{
-			int _cnt44=0;
-			_loop44:
-			do {
-				if (((LA(1) >= '0' && LA(1) <= '9'))) {
-					mDIGIT(false);
-				}
-				else {
-					if ( _cnt44>=1 ) { break _loop44; } else {throw new NoViableAltForCharException((char)LA(1), getFilename(), getLine(), getColumn());}
-				}
-				
-				_cnt44++;
-			} while (true);
-			}
-			if ( inputState.guessing==0 ) {
-				
-							_ttype = CELL_REF;
-						
-			}
+		finally {
+			// do for sure before leaving
 		}
-		else {
-			throw new NoViableAltForCharException((char)LA(1), getFilename(), getLine(), getColumn());
-		}
-		
-		if ( _createToken && _token==null && _ttype!=Token.SKIP ) {
-			_token = makeToken(_ttype);
-			_token.setText(new String(text.getBuffer(), _begin, text.length()-_begin));
-		}
-		_returnToken = _token;
 	}
-	
-	public final void mLPAR(boolean _createToken) throws RecognitionException, CharStreamException, TokenStreamException {
-		int _ttype; Token _token=null; int _begin=text.length();
-		_ttype = LPAR;
-		int _saveIndex;
-		
-		match('(');
-		if ( _createToken && _token==null && _ttype!=Token.SKIP ) {
-			_token = makeToken(_ttype);
-			_token.setText(new String(text.getBuffer(), _begin, text.length()-_begin));
-		}
-		_returnToken = _token;
-	}
-	
-	protected final void mABS(boolean _createToken) throws RecognitionException, CharStreamException, TokenStreamException {
-		int _ttype; Token _token=null; int _begin=text.length();
-		_ttype = ABS;
-		int _saveIndex;
-		
-		match('$');
-		if ( _createToken && _token==null && _ttype!=Token.SKIP ) {
-			_token = makeToken(_ttype);
-			_token.setText(new String(text.getBuffer(), _begin, text.length()-_begin));
-		}
-		_returnToken = _token;
-	}
-	
-	protected final void mDIGIT(boolean _createToken) throws RecognitionException, CharStreamException, TokenStreamException {
-		int _ttype; Token _token=null; int _begin=text.length();
-		_ttype = DIGIT;
-		int _saveIndex;
-		
-		matchRange('0','9');
-		if ( _createToken && _token==null && _ttype!=Token.SKIP ) {
-			_token = makeToken(_ttype);
-			_token.setText(new String(text.getBuffer(), _begin, text.length()-_begin));
-		}
-		_returnToken = _token;
-	}
-	
-	public final void mSTRING(boolean _createToken) throws RecognitionException, CharStreamException, TokenStreamException {
-		int _ttype; Token _token=null; int _begin=text.length();
-		_ttype = STRING;
-		int _saveIndex;
-		
-		_saveIndex=text.length();
-		mQUOT(false);
-		text.setLength(_saveIndex);
-		{
-		_loop47:
-		do {
-			// nongreedy exit test
-			if ((LA(1)=='"') && (true)) break _loop47;
-			if (((LA(1) >= '\u0000' && LA(1) <= '\u007f')) && ((LA(2) >= '\u0000' && LA(2) <= '\u007f'))) {
-				matchNot(EOF_CHAR);
+	// $ANTLR end "NUMBER"
+
+	// $ANTLR start "DIGIT"
+	public final void mDIGIT() throws RecognitionException {
+		try {
+			// ../src/csheets/core/formula/compiler/Formula.g:134:7: ( '0' .. '9' )
+			// ../src/csheets/core/formula/compiler/Formula.g:
+			{
+			if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
+				input.consume();
 			}
 			else {
-				break _loop47;
+				MismatchedSetException mse = new MismatchedSetException(null,input);
+				recover(mse);
+				throw mse;
 			}
-			
-		} while (true);
+			}
+
 		}
-		_saveIndex=text.length();
-		mQUOT(false);
-		text.setLength(_saveIndex);
-		if ( _createToken && _token==null && _ttype!=Token.SKIP ) {
-			_token = makeToken(_ttype);
-			_token.setText(new String(text.getBuffer(), _begin, text.length()-_begin));
+		finally {
+			// do for sure before leaving
 		}
-		_returnToken = _token;
 	}
-	
-	protected final void mQUOT(boolean _createToken) throws RecognitionException, CharStreamException, TokenStreamException {
-		int _ttype; Token _token=null; int _begin=text.length();
-		_ttype = QUOT;
-		int _saveIndex;
-		
-		match('"');
-		if ( _createToken && _token==null && _ttype!=Token.SKIP ) {
-			_token = makeToken(_ttype);
-			_token.setText(new String(text.getBuffer(), _begin, text.length()-_begin));
-		}
-		_returnToken = _token;
-	}
-	
-	public final void mNUMBER(boolean _createToken) throws RecognitionException, CharStreamException, TokenStreamException {
-		int _ttype; Token _token=null; int _begin=text.length();
-		_ttype = NUMBER;
-		int _saveIndex;
-		
-		{
-		int _cnt51=0;
-		_loop51:
-		do {
-			if (((LA(1) >= '0' && LA(1) <= '9'))) {
-				mDIGIT(false);
-			}
-			else {
-				if ( _cnt51>=1 ) { break _loop51; } else {throw new NoViableAltForCharException((char)LA(1), getFilename(), getLine(), getColumn());}
-			}
-			
-			_cnt51++;
-		} while (true);
-		}
-		{
-		if ((LA(1)==',')) {
-			mCOMMA(false);
+	// $ANTLR end "DIGIT"
+
+	// $ANTLR start "EQ"
+	public final void mEQ() throws RecognitionException {
+		try {
+			int _type = EQ;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ../src/csheets/core/formula/compiler/Formula.g:136:5: ( '=' )
+			// ../src/csheets/core/formula/compiler/Formula.g:136:7: '='
 			{
-			int _cnt54=0;
-			_loop54:
-			do {
-				if (((LA(1) >= '0' && LA(1) <= '9'))) {
-					mDIGIT(false);
-				}
-				else {
-					if ( _cnt54>=1 ) { break _loop54; } else {throw new NoViableAltForCharException((char)LA(1), getFilename(), getLine(), getColumn());}
-				}
-				
-				_cnt54++;
-			} while (true);
+			match('='); 
 			}
+
+			state.type = _type;
+			state.channel = _channel;
 		}
-		else {
+		finally {
+			// do for sure before leaving
 		}
-		
-		}
-		if ( _createToken && _token==null && _ttype!=Token.SKIP ) {
-			_token = makeToken(_ttype);
-			_token.setText(new String(text.getBuffer(), _begin, text.length()-_begin));
-		}
-		_returnToken = _token;
 	}
-	
-	public final void mCOMMA(boolean _createToken) throws RecognitionException, CharStreamException, TokenStreamException {
-		int _ttype; Token _token=null; int _begin=text.length();
-		_ttype = COMMA;
-		int _saveIndex;
-		
-		match(',');
-		if ( _createToken && _token==null && _ttype!=Token.SKIP ) {
-			_token = makeToken(_ttype);
-			_token.setText(new String(text.getBuffer(), _begin, text.length()-_begin));
+	// $ANTLR end "EQ"
+
+	// $ANTLR start "NEQ"
+	public final void mNEQ() throws RecognitionException {
+		try {
+			int _type = NEQ;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ../src/csheets/core/formula/compiler/Formula.g:137:6: ( '<>' )
+			// ../src/csheets/core/formula/compiler/Formula.g:137:8: '<>'
+			{
+			match("<>"); 
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
 		}
-		_returnToken = _token;
-	}
-	
-	public final void mEQ(boolean _createToken) throws RecognitionException, CharStreamException, TokenStreamException {
-		int _ttype; Token _token=null; int _begin=text.length();
-		_ttype = EQ;
-		int _saveIndex;
-		
-		match("=");
-		if ( _createToken && _token==null && _ttype!=Token.SKIP ) {
-			_token = makeToken(_ttype);
-			_token.setText(new String(text.getBuffer(), _begin, text.length()-_begin));
+		finally {
+			// do for sure before leaving
 		}
-		_returnToken = _token;
 	}
-	
-	public final void mNEQ(boolean _createToken) throws RecognitionException, CharStreamException, TokenStreamException {
-		int _ttype; Token _token=null; int _begin=text.length();
-		_ttype = NEQ;
-		int _saveIndex;
-		
-		match("<>");
-		if ( _createToken && _token==null && _ttype!=Token.SKIP ) {
-			_token = makeToken(_ttype);
-			_token.setText(new String(text.getBuffer(), _begin, text.length()-_begin));
+	// $ANTLR end "NEQ"
+
+	// $ANTLR start "LTEQ"
+	public final void mLTEQ() throws RecognitionException {
+		try {
+			int _type = LTEQ;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ../src/csheets/core/formula/compiler/Formula.g:138:6: ( '<=' )
+			// ../src/csheets/core/formula/compiler/Formula.g:138:8: '<='
+			{
+			match("<="); 
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
 		}
-		_returnToken = _token;
-	}
-	
-	public final void mLTEQ(boolean _createToken) throws RecognitionException, CharStreamException, TokenStreamException {
-		int _ttype; Token _token=null; int _begin=text.length();
-		_ttype = LTEQ;
-		int _saveIndex;
-		
-		match("<=");
-		if ( _createToken && _token==null && _ttype!=Token.SKIP ) {
-			_token = makeToken(_ttype);
-			_token.setText(new String(text.getBuffer(), _begin, text.length()-_begin));
+		finally {
+			// do for sure before leaving
 		}
-		_returnToken = _token;
 	}
-	
-	public final void mGTEQ(boolean _createToken) throws RecognitionException, CharStreamException, TokenStreamException {
-		int _ttype; Token _token=null; int _begin=text.length();
-		_ttype = GTEQ;
-		int _saveIndex;
-		
-		match(">=");
-		if ( _createToken && _token==null && _ttype!=Token.SKIP ) {
-			_token = makeToken(_ttype);
-			_token.setText(new String(text.getBuffer(), _begin, text.length()-_begin));
+	// $ANTLR end "LTEQ"
+
+	// $ANTLR start "GTEQ"
+	public final void mGTEQ() throws RecognitionException {
+		try {
+			int _type = GTEQ;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ../src/csheets/core/formula/compiler/Formula.g:139:6: ( '>=' )
+			// ../src/csheets/core/formula/compiler/Formula.g:139:8: '>='
+			{
+			match(">="); 
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
 		}
-		_returnToken = _token;
-	}
-	
-	public final void mGT(boolean _createToken) throws RecognitionException, CharStreamException, TokenStreamException {
-		int _ttype; Token _token=null; int _begin=text.length();
-		_ttype = GT;
-		int _saveIndex;
-		
-		match('>');
-		if ( _createToken && _token==null && _ttype!=Token.SKIP ) {
-			_token = makeToken(_ttype);
-			_token.setText(new String(text.getBuffer(), _begin, text.length()-_begin));
+		finally {
+			// do for sure before leaving
 		}
-		_returnToken = _token;
 	}
-	
-	public final void mLT(boolean _createToken) throws RecognitionException, CharStreamException, TokenStreamException {
-		int _ttype; Token _token=null; int _begin=text.length();
-		_ttype = LT;
-		int _saveIndex;
-		
-		match('<');
-		if ( _createToken && _token==null && _ttype!=Token.SKIP ) {
-			_token = makeToken(_ttype);
-			_token.setText(new String(text.getBuffer(), _begin, text.length()-_begin));
+	// $ANTLR end "GTEQ"
+
+	// $ANTLR start "GT"
+	public final void mGT() throws RecognitionException {
+		try {
+			int _type = GT;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ../src/csheets/core/formula/compiler/Formula.g:140:5: ( '>' )
+			// ../src/csheets/core/formula/compiler/Formula.g:140:7: '>'
+			{
+			match('>'); 
+			}
+
+			state.type = _type;
+			state.channel = _channel;
 		}
-		_returnToken = _token;
-	}
-	
-	public final void mAMP(boolean _createToken) throws RecognitionException, CharStreamException, TokenStreamException {
-		int _ttype; Token _token=null; int _begin=text.length();
-		_ttype = AMP;
-		int _saveIndex;
-		
-		match('&');
-		if ( _createToken && _token==null && _ttype!=Token.SKIP ) {
-			_token = makeToken(_ttype);
-			_token.setText(new String(text.getBuffer(), _begin, text.length()-_begin));
+		finally {
+			// do for sure before leaving
 		}
-		_returnToken = _token;
 	}
-	
-	public final void mPLUS(boolean _createToken) throws RecognitionException, CharStreamException, TokenStreamException {
-		int _ttype; Token _token=null; int _begin=text.length();
-		_ttype = PLUS;
-		int _saveIndex;
-		
-		match('+');
-		if ( _createToken && _token==null && _ttype!=Token.SKIP ) {
-			_token = makeToken(_ttype);
-			_token.setText(new String(text.getBuffer(), _begin, text.length()-_begin));
+	// $ANTLR end "GT"
+
+	// $ANTLR start "LT"
+	public final void mLT() throws RecognitionException {
+		try {
+			int _type = LT;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ../src/csheets/core/formula/compiler/Formula.g:141:5: ( '<' )
+			// ../src/csheets/core/formula/compiler/Formula.g:141:7: '<'
+			{
+			match('<'); 
+			}
+
+			state.type = _type;
+			state.channel = _channel;
 		}
-		_returnToken = _token;
-	}
-	
-	public final void mMINUS(boolean _createToken) throws RecognitionException, CharStreamException, TokenStreamException {
-		int _ttype; Token _token=null; int _begin=text.length();
-		_ttype = MINUS;
-		int _saveIndex;
-		
-		match('-');
-		if ( _createToken && _token==null && _ttype!=Token.SKIP ) {
-			_token = makeToken(_ttype);
-			_token.setText(new String(text.getBuffer(), _begin, text.length()-_begin));
+		finally {
+			// do for sure before leaving
 		}
-		_returnToken = _token;
 	}
-	
-	public final void mMULTI(boolean _createToken) throws RecognitionException, CharStreamException, TokenStreamException {
-		int _ttype; Token _token=null; int _begin=text.length();
-		_ttype = MULTI;
-		int _saveIndex;
-		
-		match('*');
-		if ( _createToken && _token==null && _ttype!=Token.SKIP ) {
-			_token = makeToken(_ttype);
-			_token.setText(new String(text.getBuffer(), _begin, text.length()-_begin));
+	// $ANTLR end "LT"
+
+	// $ANTLR start "AMP"
+	public final void mAMP() throws RecognitionException {
+		try {
+			int _type = AMP;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ../src/csheets/core/formula/compiler/Formula.g:144:6: ( '&' )
+			// ../src/csheets/core/formula/compiler/Formula.g:144:8: '&'
+			{
+			match('&'); 
+			}
+
+			state.type = _type;
+			state.channel = _channel;
 		}
-		_returnToken = _token;
-	}
-	
-	public final void mDIV(boolean _createToken) throws RecognitionException, CharStreamException, TokenStreamException {
-		int _ttype; Token _token=null; int _begin=text.length();
-		_ttype = DIV;
-		int _saveIndex;
-		
-		match('/');
-		if ( _createToken && _token==null && _ttype!=Token.SKIP ) {
-			_token = makeToken(_ttype);
-			_token.setText(new String(text.getBuffer(), _begin, text.length()-_begin));
+		finally {
+			// do for sure before leaving
 		}
-		_returnToken = _token;
 	}
-	
-	public final void mPOWER(boolean _createToken) throws RecognitionException, CharStreamException, TokenStreamException {
-		int _ttype; Token _token=null; int _begin=text.length();
-		_ttype = POWER;
-		int _saveIndex;
-		
-		match('^');
-		if ( _createToken && _token==null && _ttype!=Token.SKIP ) {
-			_token = makeToken(_ttype);
-			_token.setText(new String(text.getBuffer(), _begin, text.length()-_begin));
+	// $ANTLR end "AMP"
+
+	// $ANTLR start "PLUS"
+	public final void mPLUS() throws RecognitionException {
+		try {
+			int _type = PLUS;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ../src/csheets/core/formula/compiler/Formula.g:147:6: ( '+' )
+			// ../src/csheets/core/formula/compiler/Formula.g:147:8: '+'
+			{
+			match('+'); 
+			}
+
+			state.type = _type;
+			state.channel = _channel;
 		}
-		_returnToken = _token;
-	}
-	
-	public final void mPERCENT(boolean _createToken) throws RecognitionException, CharStreamException, TokenStreamException {
-		int _ttype; Token _token=null; int _begin=text.length();
-		_ttype = PERCENT;
-		int _saveIndex;
-		
-		match('%');
-		if ( _createToken && _token==null && _ttype!=Token.SKIP ) {
-			_token = makeToken(_ttype);
-			_token.setText(new String(text.getBuffer(), _begin, text.length()-_begin));
+		finally {
+			// do for sure before leaving
 		}
-		_returnToken = _token;
 	}
-	
-	protected final void mEXCL(boolean _createToken) throws RecognitionException, CharStreamException, TokenStreamException {
-		int _ttype; Token _token=null; int _begin=text.length();
-		_ttype = EXCL;
-		int _saveIndex;
-		
-		match('!');
-		if ( _createToken && _token==null && _ttype!=Token.SKIP ) {
-			_token = makeToken(_ttype);
-			_token.setText(new String(text.getBuffer(), _begin, text.length()-_begin));
+	// $ANTLR end "PLUS"
+
+	// $ANTLR start "MINUS"
+	public final void mMINUS() throws RecognitionException {
+		try {
+			int _type = MINUS;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ../src/csheets/core/formula/compiler/Formula.g:148:7: ( '-' )
+			// ../src/csheets/core/formula/compiler/Formula.g:148:9: '-'
+			{
+			match('-'); 
+			}
+
+			state.type = _type;
+			state.channel = _channel;
 		}
-		_returnToken = _token;
-	}
-	
-	public final void mCOLON(boolean _createToken) throws RecognitionException, CharStreamException, TokenStreamException {
-		int _ttype; Token _token=null; int _begin=text.length();
-		_ttype = COLON;
-		int _saveIndex;
-		
-		match(':');
-		if ( _createToken && _token==null && _ttype!=Token.SKIP ) {
-			_token = makeToken(_ttype);
-			_token.setText(new String(text.getBuffer(), _begin, text.length()-_begin));
+		finally {
+			// do for sure before leaving
 		}
-		_returnToken = _token;
 	}
-	
-	public final void mSEMI(boolean _createToken) throws RecognitionException, CharStreamException, TokenStreamException {
-		int _ttype; Token _token=null; int _begin=text.length();
-		_ttype = SEMI;
-		int _saveIndex;
-		
-		match(';');
-		if ( _createToken && _token==null && _ttype!=Token.SKIP ) {
-			_token = makeToken(_ttype);
-			_token.setText(new String(text.getBuffer(), _begin, text.length()-_begin));
+	// $ANTLR end "MINUS"
+
+	// $ANTLR start "MULTI"
+	public final void mMULTI() throws RecognitionException {
+		try {
+			int _type = MULTI;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ../src/csheets/core/formula/compiler/Formula.g:149:7: ( '*' )
+			// ../src/csheets/core/formula/compiler/Formula.g:149:9: '*'
+			{
+			match('*'); 
+			}
+
+			state.type = _type;
+			state.channel = _channel;
 		}
-		_returnToken = _token;
-	}
-	
-	public final void mRPAR(boolean _createToken) throws RecognitionException, CharStreamException, TokenStreamException {
-		int _ttype; Token _token=null; int _begin=text.length();
-		_ttype = RPAR;
-		int _saveIndex;
-		
-		match(')');
-		if ( _createToken && _token==null && _ttype!=Token.SKIP ) {
-			_token = makeToken(_ttype);
-			_token.setText(new String(text.getBuffer(), _begin, text.length()-_begin));
+		finally {
+			// do for sure before leaving
 		}
-		_returnToken = _token;
 	}
-	
-	public final void mWS(boolean _createToken) throws RecognitionException, CharStreamException, TokenStreamException {
-		int _ttype; Token _token=null; int _begin=text.length();
-		_ttype = WS;
-		int _saveIndex;
-		
-		{
-		switch ( LA(1)) {
-		case ' ':
-		{
-			match(' ');
+	// $ANTLR end "MULTI"
+
+	// $ANTLR start "DIV"
+	public final void mDIV() throws RecognitionException {
+		try {
+			int _type = DIV;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ../src/csheets/core/formula/compiler/Formula.g:150:6: ( '/' )
+			// ../src/csheets/core/formula/compiler/Formula.g:150:8: '/'
+			{
+			match('/'); 
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "DIV"
+
+	// $ANTLR start "POWER"
+	public final void mPOWER() throws RecognitionException {
+		try {
+			int _type = POWER;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ../src/csheets/core/formula/compiler/Formula.g:151:7: ( '^' )
+			// ../src/csheets/core/formula/compiler/Formula.g:151:9: '^'
+			{
+			match('^'); 
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "POWER"
+
+	// $ANTLR start "PERCENT"
+	public final void mPERCENT() throws RecognitionException {
+		try {
+			int _type = PERCENT;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ../src/csheets/core/formula/compiler/Formula.g:152:9: ( '%' )
+			// ../src/csheets/core/formula/compiler/Formula.g:152:11: '%'
+			{
+			match('%'); 
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "PERCENT"
+
+	// $ANTLR start "ABS"
+	public final void mABS() throws RecognitionException {
+		try {
+			// ../src/csheets/core/formula/compiler/Formula.g:155:14: ( '$' )
+			// ../src/csheets/core/formula/compiler/Formula.g:155:16: '$'
+			{
+			match('$'); 
+			}
+
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "ABS"
+
+	// $ANTLR start "EXCL"
+	public final void mEXCL() throws RecognitionException {
+		try {
+			// ../src/csheets/core/formula/compiler/Formula.g:156:14: ( '!' )
+			// ../src/csheets/core/formula/compiler/Formula.g:156:17: '!'
+			{
+			match('!'); 
+			}
+
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "EXCL"
+
+	// $ANTLR start "COLON"
+	public final void mCOLON() throws RecognitionException {
+		try {
+			int _type = COLON;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ../src/csheets/core/formula/compiler/Formula.g:157:7: ( ':' )
+			// ../src/csheets/core/formula/compiler/Formula.g:157:9: ':'
+			{
+			match(':'); 
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "COLON"
+
+	// $ANTLR start "COMMA"
+	public final void mCOMMA() throws RecognitionException {
+		try {
+			int _type = COMMA;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ../src/csheets/core/formula/compiler/Formula.g:160:7: ( ',' )
+			// ../src/csheets/core/formula/compiler/Formula.g:160:9: ','
+			{
+			match(','); 
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "COMMA"
+
+	// $ANTLR start "SEMI"
+	public final void mSEMI() throws RecognitionException {
+		try {
+			int _type = SEMI;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ../src/csheets/core/formula/compiler/Formula.g:161:6: ( ';' )
+			// ../src/csheets/core/formula/compiler/Formula.g:161:8: ';'
+			{
+			match(';'); 
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "SEMI"
+
+	// $ANTLR start "LPAR"
+	public final void mLPAR() throws RecognitionException {
+		try {
+			int _type = LPAR;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ../src/csheets/core/formula/compiler/Formula.g:162:6: ( '(' )
+			// ../src/csheets/core/formula/compiler/Formula.g:162:8: '('
+			{
+			match('('); 
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "LPAR"
+
+	// $ANTLR start "RPAR"
+	public final void mRPAR() throws RecognitionException {
+		try {
+			int _type = RPAR;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ../src/csheets/core/formula/compiler/Formula.g:163:6: ( ')' )
+			// ../src/csheets/core/formula/compiler/Formula.g:163:8: ')'
+			{
+			match(')'); 
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "RPAR"
+
+	// $ANTLR start "WS"
+	public final void mWS() throws RecognitionException {
+		try {
+			int _type = WS;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ../src/csheets/core/formula/compiler/Formula.g:167:3: ( ( ' ' | '\\r' '\\n' | '\\n' | '\\t' ) )
+			// ../src/csheets/core/formula/compiler/Formula.g:167:5: ( ' ' | '\\r' '\\n' | '\\n' | '\\t' )
+			{
+			// ../src/csheets/core/formula/compiler/Formula.g:167:5: ( ' ' | '\\r' '\\n' | '\\n' | '\\t' )
+			int alt10=4;
+			switch ( input.LA(1) ) {
+			case ' ':
+				{
+				alt10=1;
+				}
+				break;
+			case '\r':
+				{
+				alt10=2;
+				}
+				break;
+			case '\n':
+				{
+				alt10=3;
+				}
+				break;
+			case '\t':
+				{
+				alt10=4;
+				}
+				break;
+			default:
+				NoViableAltException nvae =
+					new NoViableAltException("", 10, 0, input);
+				throw nvae;
+			}
+			switch (alt10) {
+				case 1 :
+					// ../src/csheets/core/formula/compiler/Formula.g:167:7: ' '
+					{
+					match(' '); 
+					}
+					break;
+				case 2 :
+					// ../src/csheets/core/formula/compiler/Formula.g:168:4: '\\r' '\\n'
+					{
+					match('\r'); 
+					match('\n'); 
+					}
+					break;
+				case 3 :
+					// ../src/csheets/core/formula/compiler/Formula.g:169:4: '\\n'
+					{
+					match('\n'); 
+					}
+					break;
+				case 4 :
+					// ../src/csheets/core/formula/compiler/Formula.g:170:4: '\\t'
+					{
+					match('\t'); 
+					}
+					break;
+
+			}
+
+			_channel=HIDDEN;
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "WS"
+
+	@Override
+	public void mTokens() throws RecognitionException {
+		// ../src/csheets/core/formula/compiler/Formula.g:1:8: ( FUNCTION | CELL_REF | STRING | QUOT | NUMBER | EQ | NEQ | LTEQ | GTEQ | GT | LT | AMP | PLUS | MINUS | MULTI | DIV | POWER | PERCENT | COLON | COMMA | SEMI | LPAR | RPAR | WS )
+		int alt11=24;
+		switch ( input.LA(1) ) {
+		case 'A':
+		case 'B':
+		case 'C':
+		case 'D':
+		case 'E':
+		case 'F':
+		case 'G':
+		case 'H':
+		case 'I':
+		case 'J':
+		case 'K':
+		case 'L':
+		case 'M':
+		case 'N':
+		case 'O':
+		case 'P':
+		case 'Q':
+		case 'R':
+		case 'S':
+		case 'T':
+		case 'U':
+		case 'V':
+		case 'W':
+		case 'X':
+		case 'Y':
+		case 'Z':
+		case 'a':
+		case 'b':
+		case 'c':
+		case 'd':
+		case 'e':
+		case 'f':
+		case 'g':
+		case 'h':
+		case 'i':
+		case 'j':
+		case 'k':
+		case 'l':
+		case 'm':
+		case 'n':
+		case 'o':
+		case 'p':
+		case 'q':
+		case 'r':
+		case 's':
+		case 't':
+		case 'u':
+		case 'v':
+		case 'w':
+		case 'x':
+		case 'y':
+		case 'z':
+			{
+			switch ( input.LA(2) ) {
+			case 'A':
+			case 'B':
+			case 'C':
+			case 'D':
+			case 'E':
+			case 'F':
+			case 'G':
+			case 'H':
+			case 'I':
+			case 'J':
+			case 'K':
+			case 'L':
+			case 'M':
+			case 'N':
+			case 'O':
+			case 'P':
+			case 'Q':
+			case 'R':
+			case 'S':
+			case 'T':
+			case 'U':
+			case 'V':
+			case 'W':
+			case 'X':
+			case 'Y':
+			case 'Z':
+			case 'a':
+			case 'b':
+			case 'c':
+			case 'd':
+			case 'e':
+			case 'f':
+			case 'g':
+			case 'h':
+			case 'i':
+			case 'j':
+			case 'k':
+			case 'l':
+			case 'm':
+			case 'n':
+			case 'o':
+			case 'p':
+			case 'q':
+			case 'r':
+			case 's':
+			case 't':
+			case 'u':
+			case 'v':
+			case 'w':
+			case 'x':
+			case 'y':
+			case 'z':
+				{
+				int LA11_22 = input.LA(3);
+				if ( (LA11_22=='$'||(LA11_22 >= '0' && LA11_22 <= '9')) ) {
+					alt11=2;
+				}
+
+				else {
+					alt11=1;
+				}
+
+				}
+				break;
+			case '$':
+			case '0':
+			case '1':
+			case '2':
+			case '3':
+			case '4':
+			case '5':
+			case '6':
+			case '7':
+			case '8':
+			case '9':
+				{
+				alt11=2;
+				}
+				break;
+			default:
+				alt11=1;
+			}
+			}
 			break;
-		}
-		case '\r':
-		{
-			match('\r');
-			match('\n');
+		case '$':
+			{
+			alt11=2;
+			}
 			break;
-		}
-		case '\n':
-		{
-			match('\n');
+		case '\"':
+			{
+			int LA11_3 = input.LA(2);
+			if ( ((LA11_3 >= '\u0000' && LA11_3 <= '\uFFFF')) ) {
+				alt11=3;
+			}
+
+			else {
+				alt11=4;
+			}
+
+			}
 			break;
-		}
+		case '0':
+		case '1':
+		case '2':
+		case '3':
+		case '4':
+		case '5':
+		case '6':
+		case '7':
+		case '8':
+		case '9':
+			{
+			alt11=5;
+			}
+			break;
+		case '=':
+			{
+			alt11=6;
+			}
+			break;
+		case '<':
+			{
+			switch ( input.LA(2) ) {
+			case '>':
+				{
+				alt11=7;
+				}
+				break;
+			case '=':
+				{
+				alt11=8;
+				}
+				break;
+			default:
+				alt11=11;
+			}
+			}
+			break;
+		case '>':
+			{
+			int LA11_7 = input.LA(2);
+			if ( (LA11_7=='=') ) {
+				alt11=9;
+			}
+
+			else {
+				alt11=10;
+			}
+
+			}
+			break;
+		case '&':
+			{
+			alt11=12;
+			}
+			break;
+		case '+':
+			{
+			alt11=13;
+			}
+			break;
+		case '-':
+			{
+			alt11=14;
+			}
+			break;
+		case '*':
+			{
+			alt11=15;
+			}
+			break;
+		case '/':
+			{
+			alt11=16;
+			}
+			break;
+		case '^':
+			{
+			alt11=17;
+			}
+			break;
+		case '%':
+			{
+			alt11=18;
+			}
+			break;
+		case ':':
+			{
+			alt11=19;
+			}
+			break;
+		case ',':
+			{
+			alt11=20;
+			}
+			break;
+		case ';':
+			{
+			alt11=21;
+			}
+			break;
+		case '(':
+			{
+			alt11=22;
+			}
+			break;
+		case ')':
+			{
+			alt11=23;
+			}
+			break;
 		case '\t':
-		{
-			match('\t');
+		case '\n':
+		case '\r':
+		case ' ':
+			{
+			alt11=24;
+			}
 			break;
-		}
 		default:
-		{
-			throw new NoViableAltForCharException((char)LA(1), getFilename(), getLine(), getColumn());
+			NoViableAltException nvae =
+				new NoViableAltException("", 11, 0, input);
+			throw nvae;
 		}
+		switch (alt11) {
+			case 1 :
+				// ../src/csheets/core/formula/compiler/Formula.g:1:10: FUNCTION
+				{
+				mFUNCTION(); 
+
+				}
+				break;
+			case 2 :
+				// ../src/csheets/core/formula/compiler/Formula.g:1:19: CELL_REF
+				{
+				mCELL_REF(); 
+
+				}
+				break;
+			case 3 :
+				// ../src/csheets/core/formula/compiler/Formula.g:1:28: STRING
+				{
+				mSTRING(); 
+
+				}
+				break;
+			case 4 :
+				// ../src/csheets/core/formula/compiler/Formula.g:1:35: QUOT
+				{
+				mQUOT(); 
+
+				}
+				break;
+			case 5 :
+				// ../src/csheets/core/formula/compiler/Formula.g:1:40: NUMBER
+				{
+				mNUMBER(); 
+
+				}
+				break;
+			case 6 :
+				// ../src/csheets/core/formula/compiler/Formula.g:1:47: EQ
+				{
+				mEQ(); 
+
+				}
+				break;
+			case 7 :
+				// ../src/csheets/core/formula/compiler/Formula.g:1:50: NEQ
+				{
+				mNEQ(); 
+
+				}
+				break;
+			case 8 :
+				// ../src/csheets/core/formula/compiler/Formula.g:1:54: LTEQ
+				{
+				mLTEQ(); 
+
+				}
+				break;
+			case 9 :
+				// ../src/csheets/core/formula/compiler/Formula.g:1:59: GTEQ
+				{
+				mGTEQ(); 
+
+				}
+				break;
+			case 10 :
+				// ../src/csheets/core/formula/compiler/Formula.g:1:64: GT
+				{
+				mGT(); 
+
+				}
+				break;
+			case 11 :
+				// ../src/csheets/core/formula/compiler/Formula.g:1:67: LT
+				{
+				mLT(); 
+
+				}
+				break;
+			case 12 :
+				// ../src/csheets/core/formula/compiler/Formula.g:1:70: AMP
+				{
+				mAMP(); 
+
+				}
+				break;
+			case 13 :
+				// ../src/csheets/core/formula/compiler/Formula.g:1:74: PLUS
+				{
+				mPLUS(); 
+
+				}
+				break;
+			case 14 :
+				// ../src/csheets/core/formula/compiler/Formula.g:1:79: MINUS
+				{
+				mMINUS(); 
+
+				}
+				break;
+			case 15 :
+				// ../src/csheets/core/formula/compiler/Formula.g:1:85: MULTI
+				{
+				mMULTI(); 
+
+				}
+				break;
+			case 16 :
+				// ../src/csheets/core/formula/compiler/Formula.g:1:91: DIV
+				{
+				mDIV(); 
+
+				}
+				break;
+			case 17 :
+				// ../src/csheets/core/formula/compiler/Formula.g:1:95: POWER
+				{
+				mPOWER(); 
+
+				}
+				break;
+			case 18 :
+				// ../src/csheets/core/formula/compiler/Formula.g:1:101: PERCENT
+				{
+				mPERCENT(); 
+
+				}
+				break;
+			case 19 :
+				// ../src/csheets/core/formula/compiler/Formula.g:1:109: COLON
+				{
+				mCOLON(); 
+
+				}
+				break;
+			case 20 :
+				// ../src/csheets/core/formula/compiler/Formula.g:1:115: COMMA
+				{
+				mCOMMA(); 
+
+				}
+				break;
+			case 21 :
+				// ../src/csheets/core/formula/compiler/Formula.g:1:121: SEMI
+				{
+				mSEMI(); 
+
+				}
+				break;
+			case 22 :
+				// ../src/csheets/core/formula/compiler/Formula.g:1:126: LPAR
+				{
+				mLPAR(); 
+
+				}
+				break;
+			case 23 :
+				// ../src/csheets/core/formula/compiler/Formula.g:1:131: RPAR
+				{
+				mRPAR(); 
+
+				}
+				break;
+			case 24 :
+				// ../src/csheets/core/formula/compiler/Formula.g:1:136: WS
+				{
+				mWS(); 
+
+				}
+				break;
+
 		}
-		}
-		if ( inputState.guessing==0 ) {
-			_ttype = Token.SKIP;
-		}
-		if ( _createToken && _token==null && _ttype!=Token.SKIP ) {
-			_token = makeToken(_ttype);
-			_token.setText(new String(text.getBuffer(), _begin, text.length()-_begin));
-		}
-		_returnToken = _token;
 	}
-	
-	
-	private static final long[] mk_tokenSet_0() {
-		long[] data = { 1099511627776L, 576460743713488896L, 0L, 0L};
-		return data;
-	}
-	public static final BitSet _tokenSet_0 = new BitSet(mk_tokenSet_0());
-	private static final long[] mk_tokenSet_1() {
-		long[] data = { 68719476736L, 576460743713488896L, 0L, 0L};
-		return data;
-	}
-	public static final BitSet _tokenSet_1 = new BitSet(mk_tokenSet_1());
-	private static final long[] mk_tokenSet_2() {
-		long[] data = { 287948969894477824L, 576460743713488896L, 0L, 0L};
-		return data;
-	}
-	public static final BitSet _tokenSet_2 = new BitSet(mk_tokenSet_2());
-	
-	}
+
+
+
+}

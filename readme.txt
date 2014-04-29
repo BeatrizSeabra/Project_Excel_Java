@@ -8,6 +8,13 @@ Attention: You should always maintain the scripts up-to-date!
 You should install Graphviz (http://www.graphviz.org/) in your computer 
 to be able to generate all type of diagrams in javadoc!
 
+Cleansheets uses two different versions of ANTLR. ANTLR v2 is used by
+the assertion extension. ANTLR v3 (and ANTLRWorks) are used in the formula
+parser and lexer. The antlr-3.5.2-complete.jar contains both APIs of 
+ANTLR: v2 and v3. ANTLRWorks is contained in a jar file that is located
+in the lib folder (antlrworks-1.5.2-complete.jar). You can run this jar
+to open the IDE for developing ANTLR v3 grammars.
+
 One of the first tasks is to generate technical documentation and study it.
 For that you should do:
 $> cd scripts

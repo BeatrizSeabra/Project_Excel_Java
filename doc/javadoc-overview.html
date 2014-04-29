@@ -126,8 +126,8 @@ class CellImpl {
 Spreadsheet <|-- SpreadsheetImpl
 Cell <|-- CellImpl
 
+Workbook -left-> WorkbookListener : listeneers 
  Workbook --> Spreadsheet : spreadsheets
- Workbook --> WorkbookListener : listeneers
  Spreadsheet --> Cell : iterator
  Spreadsheet --> CellListener : listeners
  
@@ -245,6 +245,33 @@ deactivate FC
  @enduml
 -->
 
+<!-- 
+
+  @startuml api/csheets/doc-files/us01_design1.png
+  participant "uic : UIController" as UIC
+  participant ExtensionManager as ExtM
+  participant "extension : CommentsExtension" as EExample
+  participant "uiExtension : UIExtensionComments" as UIExt
+  participant "CommentPanel : JPanel" as cp
+  UIC -> ExtM : extensions=getExtensions();
+  loop for Extension ext : extensions
+  	UIC -> EExample : uiExtension=getUIExtension(this);
+  	activate EExample
+  	create UIExt
+  	EExample -> UIExt : new(extension, uic)
+  	deactivate EExample
+  	UIExt -> UIExt : getSideBar();
+  	activate UIExt
+  	create cp
+  	UIExt -> cp :  new (uic)  	
+  	deactivate UIExt
+  	UIC -> UIC : uiExtensions.add(uiExtension);
+  end
+  @enduml
+
+
+-->
+
 </head>
 <body>
 CleanSheets is a spreadsheet application for the Java platform, featuring Excel-style formulas and an extension mechanism. The application requires the Java 2 Platform Standard Edition 5.0 to compile and run. <br/>
@@ -255,13 +282,10 @@ Questions and comments can be addressed to Alexandre Braganca (atb@isep.ipp.pt).
 <h1>Technical documentation regarding LAPR4 project extensions</h1><br/>
 
 This technical documentation is divided in the following sections:<br/>
-<li><a href="#project_workflow">Project Workflow</a></li>
+<li><a href="#project_workflow">Project Overview</a></li>
 <li><a href="#arranque_da_aplicacao">Application Startup</a></li>
-<li><a href="#mecanisno_de_extensoes">Extension Mechaninsm</a></li>
 <li><a href="#modelo_de_dominio">Domain Model</a></li> 
-<li><a href="#persistencia">Persistence</a></li>
-<li><a href="#linguagens">Languages</a></li>
-<li><a href="#partilha">Shared Memory</a></li>
+<li><a href="#casosdeuso">Use Cases/User Stories</a></li>
 </ul>
 
 <br/>
@@ -269,68 +293,24 @@ This technical documentation is divided in the following sections:<br/>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
-<B><a name="project_workflow">Project Workflow</a></B>
+<B><a name="project_workflow">Project Overview</a></B>
 </FONT></TH>
 </TR>
 </TABLE>
 
 <br/>
-This sections explains the workflow of the LAPR4 project. <br/>
+This sections explains some important technical aspects of the LAPR4 project. <br/>
 <br/>
-<b>The team and the repository</b><br/>
-The LAPR4 project is to be developed by a group (team) of 3 students during 3 weeks at full time.<br/>
-Each group will have a supervisor which is a teacher of LAPR4.<br/>
-Each group should make a fork of the CleanSheets repository at bitbucket (https://bitbucket.org). This is a Git repository.<br/>
-The resulting repository should by private and acessible only by the group members, the group supervisor and the LAPR4 regent (atb@isep.ipp.pt)<br/>
-The repository should also have "issues" enabled, since these will be used during the project to register the work of each group member.<br/>
-<br/>
-<b>The requirements iteractions</b><br/>
-The project regards extensions and adaptations to CleanSheets. The requirements of these extensions and adaptations are presented and explained to the group in a iteratively fashion.<br/>
-At the beginning of each week new requirements are presented to the group. The group is expected to use a scrum-like work method to develop the project.<br/>
-At the beginning of each week the group should plan the week's "sprint" in order to address the requirements of that week. This should be done with the help and supervision of the Management teachers at the management module class at the beginning of the week.<br/>
-Issues should be used to register how requirements will be addressed and by whom. It is of paramount importance to use the "issues" feature of bitbucket because it will serve as a major input for the assessment of the project.<br/>
-<br/>
-<b>The project structure</b><br/>
-As stated before each team will be composed of 3 students. The project duration is 3 weeks. The functional requirements are devided in 3 major areas: persistence; languages and shared memory.</br>
-Each member of a team is supposed to address a specific functional area each week. However that are also common tasks, like tool support, research, documentation, etc. that need to be addressed by the team. The planning of all these tasks is one of the major results of the week's planning class, as denoted before.<br/> 
-The individual assessment of each member is majorated by how many different functional areas has he worked on.<br/> For instance, a group member that addressed 3 different functional areas during the 3 weeks will (normally) have his work better graded than a group member that only addressed a single functional area during the same 3 weeks.<br/> 
-Excepcionally there can be groups with only 2 members. Even so, each member of these groups can address as many as 3 functional areas but less deeply. For instance, a specific student in this case could address the first week requirements for the persistence area during week 1, the second week requirements for the languages area during week 2 (assuming his collegue had worked this area in the first week) and the first week requirements for the shared memory area during the final week.<br/>
-Each team should configure the issues features of the project in bitbucket as follows:<br/>
-- Components: persistence; languages; shared memory.<br/>
-- Milestones: week1(alfa), week2(beta), week3(release candidate).<br/>
-- Version: 1.5a<br/>
-<br/>
-<b>Working with issues in bitbucket</b><br/>
-At the beginning of the week the team shall meet to plan the sprint. A series of issues resulting from the requirements should be defined. Each team member should be responsible for one or more issues. Issues should be registered in bitbucket as described earlier.<br/>
-Each issue registered in bitbucket is identified by an integer number. Every time a team member commits work in the repository the commit message should contain the related issue number as weel as the email of the author. The following is an example of a commit message "223322@isep.ipp.pt: added the setup classes for the annotation extension ref #1"<br/> 
-There are some keyworks that are specially identified by bitbucket in commits and result in some automatic behavior. In the previous example, the keyword "ref" followed by "#" and the issue number will automatically generate a comment in the issue 1 with the text of the commit message as weel as a reference to the changeset produced by the commit. Other very usefull keyword is "close", which changes the state of the issue to closed. This keyword should be used when the author enters the last commit regarding an issue.<br/> 
-Team members should also use bitbucket to register comments regarding important events or notes in issues. For instance, if a team member did some specific task related to an issue that did not result in a commit he can (shall) register that in a comment of the issue. For instance "Done some research on how to validate xml files. Going to document this in a new section of the technical documentation in a future commit.". Comments in issues can also be used to alert other team members of encountered problems, for instance.<br/> 
-<br/>
-<b>Issues, Requirements and Use Cases</b><br/>
-At the beginning of each week a new requirements document is published. From the statement of the requirements one or more use cases can be identified. Usually support tasks are not identified as use cases (i.e., setup or configurations required to support a use case) if they will be addressed by the same team member that will be responsible for the use case.<br/>
-Each use case will usually also give origin to one issue in bitbucket that will be assigned to one team member.<br/>
-However, even in these cases, a issue that resulted from a use case will usually require several tasks (each item ~ a working day):<br/>
-- to scope the problem (i.g., what information to include/exclude when saving a spreadsheet) and to address specific technical problems (e.g. study how xml files can be validated);<br/>
-- detailed analysis of the use case and first draft of a solution by proposing a use case realization. Identification of possible updates to the domain model. The first draft of unit tests for the use case;<br/>
-- design (apply design patterns, etc.) and coding of the solution. Address the technical documentation (javadoc);<br/>
-- when coding is completed do as much tests as possible (this time use case tests, not unit tests). Complete the technical documentation (e.g., domain model diagram, use case relization diagram, technical descriptions, etc.). Commit the issue and mark it as closed so that other team member can run use case tests on it;<br/>
-- run use case tests (this should be done by a team member that was not the author of the use case). If bugs are detected reopen the issue so that the author can address the bug. When all the issues (use cases) of the sprint are tested and closed a tag should be added to the repository to mark the milestone.<br/>
-<br/>
-<b>Unit Tests and Use Case Tests</b><br/>
-The member that will address a specific requirement (i.e., issue) will also be responsible for: the unit tests regarding the classes used to implement the requirement and the technical documentation of the requirement (i.e., updating this documentation).<br/>
-However, it is expected that use case tests (i.e., manual tests based on the use cases) be executed by a member that did not design and implement the use case. <br/>
-The use case tests should be executed after the issue (requirement) is closed by the member that implemented the requirement. If the member that executes the use case test identifies a problem or a bug he should re-open the issue and alert his collegue to this situation. <br/>
-Obviouslly it is a goal of the developer not to close issues (requirements) that may have problems/bugs. Also, for a use case tester the goal is to identify as many problems/bugs as possible before the release of a version to the end user.<br/>
-<br/>
-<b>Technical documentation</b><br/>
+
+<b>Technical Documentation</b><br/>
 The technical documentation of the project is the one presented in this collection of html files that was generated by javadoc. Javadoc is a tool (included in the java sdk) that essentially generates the technical documentation from special comments on the source code of the project.<br/>
-Therefore the technical documentation that javadoc usually produces regards documentation about elements of the code (classes, methods, etc.). For this kind of project this is not enough since a very important part of the technical documentation regards aspects that relate to other stages of the software development process, like analysis and design. In these cases, documentation usually does not directely relate to code elements. Formats such as narrative text or visual diagrams are used (e.g., UML diagrams).<br/>
+Therefore, the technical documentation that javadoc usually produces regards documentation about elements of the code (classes, methods, etc.). For this kind of project this is not enough since a very important part of the technical documentation regards aspects that relate to other stages of the software development process, like analysis and design. In these cases, documentation usually does not directly relate to code elements. Formats such as narrative text or visual diagrams are used (e.g., UML diagrams).<br/>
 Since javadoc does not provide direct support to generate UML diagrams a tool named PlanUML (plantuml.sourceforge.net) was adopted to generate the diagrams and incorporate them in the html that is generated with javadoc.<br/>
 PlantUML is not a drawing tool, it is a tool that generates diagrams from textual descriptions of the diagrams, by using a simple and intuitive textual language.<br/> 
 These textual descriptions of the diagrams can be incorporated in comments, near the javadoc comments. Javadoc directives can then reference the diagrams (since plantuml will generate an image for each diagram).<br/>
-All the documentation of this technical documentation was generate from javadoc comments inside the java source files of the project (with plantuml diagrams) except for this page (javadoc-overview.html) that is the main and default page (and is not generated by javadoc but is included in the folder containing the generated documentation).<br/> 
+All the documentation presented in these html files was generate from javadoc comments inside the java source files of the project (with plantuml diagrams) except for this page (javadoc-overview.html) that is the main and default page (and is not generated by javadoc but is included in the folder containing the generated documentation).<br/> 
 By following this approach it becomes more easy to maintain the documentation in synch with the code and always in control by the DVCS (Distributed Version Control System).<br/>  
-The PlanUML jar is included in the project (in the lib folder). PlanUML requires that Graphviz (http://www.graphviz.org/) be installed in th system for the generation of all types of diagrams except sequence diagrams.<br/>
+The PlanUML jar is included in the project (in the lib folder). PlanUML requires that Graphviz (http://www.graphviz.org/) be installed in the system for the generation of all types of diagrams except sequence diagrams.<br/>
 <br/>
 <b>Design</b><br/>
 Cleansheets uses a lot of design patterns. You should study carefully its code to identify and learn how several design patterns - that you have studied in other courses of the Informatics Engineering program - were applied.<br/>
@@ -368,7 +348,7 @@ These are the artifacts required for the DVCS (Git):<br/>
 - <b>.git</b>: This folder contains all the data of the repository<br/>
 <br/>
 <b>Scripts</b><br/>
-The project includes scripts that are used to accomplish several tasks in the project. Even if the team uses netbeans or eclipse as an environment for the development process it should always maintain the scripts updated. <b>The scripts will always be used for presentation of the project and for evaluations.</b><br/>
+The project includes scripts that are used to accomplish several tasks in the project. Even if the team uses netbeans or eclipse as an environment for the development process it should always maintain the scripts updated. <b>The scripts will always be used for presentation of the project and for assessment.</b><br/>
 The project comes with scripts for Linux and Mac OS (.sh) and for Windows (.bat). Team members should keep the scripts up-to-date.<br/>
 Scripts should be executed within a terminal/console and with the "scripts" folder as current folder<br/>
 To build the Cleansheets jar:<br/>
@@ -417,32 +397,19 @@ The MenuBar class will build the menu options. These menu options include not on
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
-<B><a name="mecanismo_de_estensoes">Extension Mechanism</a></B>
-</FONT></TH>
-</TR>
-</TABLE>
-
-</br>
-Place here documentation regarding the extension mechanism.
-<br/>
-<br/>
-
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B><a name="modelo_de_dominio">Domain Model</a></B>
 </FONT></TH>
 </TR>
 </TABLE>
 
 <br/>
-Place here documentation regarding the domain model.
+Main concepts:
 <br/>
 
 <img src="csheets/doc-files/domain_model_image1.png"></a> 
 
 <br/>
-The formulas...
+The formulas:
 <br/>
 <img src="csheets/doc-files/domain_model_formulas_image1.png"></a> 
 <br/>
@@ -450,40 +417,229 @@ The formulas...
 
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
-<B><a name="persistencia">Persistence</a></B>
+<TH ALIGN="left" COLSPAN="3"><FONT SIZE="+2">
+<B><a name="casosdeuso">Use Cases/User Stories</a></B>
+</FONT></TH>
+</TR>
+<tr>
+<th><a href="#uc_1">US01: setup commentable cells</a></th><th><a href="#uc_2">US02: save comments of cells</a></th><th><a href="#uc_3">US03: decorate cells with comments</a></th>
+</tr>
+<tr>
+<th><a href="#uc_4">US04: User Story 4...</a></th><th><a href="#uc_5">US05: User Story 5...</a></th><th>US06: User Story 6...</th>
+</tr>
+
+</TABLE>
+
+</br>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="3"><FONT SIZE="+2">
+<B><a name="uc_1">US01: setup commentable cells</a></B>
 </FONT></TH>
 </TR>
 </TABLE>
 
-</br>
-Place here documentation regarding the persistence functional area of the project.
+<br/>
+<b>Requirement</b><br/>
+Setup extension for commentable cells. The user should be able to activate and deactivate comments on cells. When activated, a sidebar for the comments should appear. The sidebar should be composed of a simple textbox to display and edit a comment. At the moment no real comment should be saved.
+<br/>
+<br/>
+<b>Author(s):</b> Alexandre Braganca<br/>
+<br/>
+
+
+<FONT SIZE="+1">
+<b>S01a: Analysis</b><br/>
+Since comments on cells will be supported in a new extension to cleansheets we need to study how extensions are loaded by cleansheets and how they work.<br/> 
+The first sequence diagram in the section <a href="#arranque_da_aplicacao">Application Startup</a> tells us that extensions must be subclasses of the Extension abstract class and be registered in special files.<br/>
+The Extension class has a method called getUIExtension that should be implemented and return an instance of a class that is a subclass of UIExtension.<br/>
+In this subclass of UIExtension there is a method (getSideBar) that returns the sidebar for the extension. A sidebar is a JPanel.<br/><br/>
+</FONT>
+
+<FONT SIZE="+1">
+<b>S01d: Design</b><br/>
+To realize this user story we will need to create a subclass of Extension. We will also need to create a subclass of UIExtension. For the sidebar we need to implement a JPanel.<br/>
+The following diagram shows how these new classe will be loaded and "integrated" with cleansheets.<br/><br/>
+<img src="csheets/doc-files/us01_design1.png"> 
+<br/>
+<br/>
+</FONT>
+
+<FONT SIZE="+1">
+<b>S01c: Coding</b><br/>
+see:<br/>
+<a href="csheets/ext/comments/package-summary.html">csheets.ext.comments</a><br/>
+<a href="csheets/ext/comments/ui/package-summary.html">csheets.ext.comments.ui</a><br/>
+<br/>
+</FONT>
+
+<FONT SIZE="+1">
+<b>S01u: Unit Tests</b><br/>
+see:<br/>
+<a href="csheets/ext/comments/package-summary.html">csheets.ext.comments</a><br/>
+<a href="csheets/ext/comments/ui/package-summary.html">csheets.ext.comments.ui</a><br/>
+<br/>
+</FONT>
+
+<FONT SIZE="+1">
+<b>S01f: Functional Tests</b><br/>
+To test this user story, the user should follow these steps:<br/>
+1- run cleansheets;<br/>
+2- click on the View menu and select sidebars. There must appear a list of menu options containning one option for the comments sidebar;<br/>
+3- the previous option is a check box that: when checked, the sidebar should appear; when not checked, the sidebar should disappear;<br/>
+4- the sidebar window should have only one editbox. <br/>
+<br/>
+</FONT>
+
 <br/>
 <br/>
 
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
-<B><a name="linguagens">Languages</a></B>
+<TH ALIGN="left" COLSPAN="3"><FONT SIZE="+2">
+<B><a name="uc_2">US02: save comments of cells</a></B>
 </FONT></TH>
 </TR>
-</TABLE> 
+</TABLE>
 
-</br>
-Place here documentation regarding the languages functional area of the project.
+<br/>
+Inserir aqui a documentacao do caso de uso...
+<br/>
+<br/>
+
+
+<FONT SIZE="+1">
+<b>S02a: Analysis</b><br/>
+</FONT>
+
+<FONT SIZE="+1">
+<b>S02d: Design</b><br/>
+</FONT>
+
+<FONT SIZE="+1">
+<b>S02c: Coding</b><br/>
+</FONT>
+
+<FONT SIZE="+1">
+<b>S02u: Unit Tests</b><br/>
+</FONT>
+
+<FONT SIZE="+1">
+<b>S02f: Functional Tests</b><br/>
+</FONT>
+
 <br/>
 <br/>
 
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
-<B><a name="partilha">Shared Memory</a></B>
+<TH ALIGN="left" COLSPAN="3"><FONT SIZE="+2">
+<B><a name="uc_3">US03: decorate cells with comments</a></B>
 </FONT></TH>
 </TR>
 </TABLE>
 
-</br>
-Place here documentation regarding the shared memory functional area of the project.
+<br/>
+Inserir aqui a documentacao do caso de uso...
+<br/>
+<br/>
+
+
+<FONT SIZE="+1">
+<b>S03a: Analysis</b><br/>
+</FONT>
+
+<FONT SIZE="+1">
+<b>S03d: Design</b><br/>
+</FONT>
+
+<FONT SIZE="+1">
+<b>S03c: Coding</b><br/>
+</FONT>
+
+<FONT SIZE="+1">
+<b>S03u: Unit Tests</b><br/>
+</FONT>
+
+<FONT SIZE="+1">
+<b>S03f: Functional Tests</b><br/>
+</FONT>
+
+<br/>
+<br/>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="3"><FONT SIZE="+2">
+<B><a name="uc_4">US04: User Story 4</a></B>
+</FONT></TH>
+</TR>
+</TABLE>
+
+<br/>
+Inserir aqui a documentacao do caso de uso...
+<br/>
+<br/>
+
+
+<FONT SIZE="+1">
+<b>S04a: Analysis</b><br/>
+</FONT>
+
+<FONT SIZE="+1">
+<b>S04d: Design</b><br/>
+</FONT>
+
+<FONT SIZE="+1">
+<b>S04c: Coding</b><br/>
+</FONT>
+
+<FONT SIZE="+1">
+<b>S04u: Unit Tests</b><br/>
+</FONT>
+
+<FONT SIZE="+1">
+<b>S04f: Functional Tests</b><br/>
+</FONT>
+
+<br/>
+<br/>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="3"><FONT SIZE="+2">
+<B><a name="uc_5">US05: User Story 5</a></B>
+</FONT></TH>
+</TR>
+</TABLE>
+
+<br/>
+Inserir aqui a documentacao do caso de uso...
+<br/>
+<br/>
+
+
+<FONT SIZE="+1">
+<b>S05a: Analysis</b><br/>
+</FONT>
+
+<FONT SIZE="+1">
+<b>S05d: Design</b><br/>
+</FONT>
+
+<FONT SIZE="+1">
+<b>S05c: Coding</b><br/>
+</FONT>
+
+<FONT SIZE="+1">
+<b>S05u: Unit Tests</b><br/>
+</FONT>
+
+<FONT SIZE="+1">
+<b>S05f: Functional Tests</b><br/>
+</FONT>
+
 <br/>
 <br/>
 
