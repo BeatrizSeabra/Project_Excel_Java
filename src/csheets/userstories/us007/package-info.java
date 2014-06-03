@@ -23,8 +23,10 @@
 * <img src="../../../csheets/userstories/us007/doc-files/us007_design1.png"> 
 * <br/>
 * <br/>
- * 
- * @startuml doc-files/us007_design7.png
+ * */
+
+/*
+    @startuml doc-files/us007_design1.png
  Create SortAction
  Create JPane
  SortAction->JPane: create()
@@ -41,6 +43,7 @@
  SortAction->Cell:setContent(content)
  end
  @enduml
- * */
+ * 
+ */
 
 package csheets.userstories.us007;
