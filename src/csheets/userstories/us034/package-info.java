@@ -32,10 +32,11 @@
  * essa expressao irá originar uma FunctionCall (Eval (argumentos))
  * esses argumentos, irao originar uma binaryOperation (LeftOperand, Operator, RightOperand)
  * o resultado da BinaryOperation irá ser o novo texto a ser apresentado na celula original.
- *
+ * 
+ * 
  * <br/>
  * <br/>
- * <img src="../../../csheets/userstories/us001/doc-files/us034_design1.png"> 
+ * <img src="../../../csheets/userstories/us034/doc-files/us034_design1.png"> 
  * <br/>
  * <br/>
  * 
@@ -68,13 +69,13 @@
  *
   @startuml doc-files/us034_design1.png
     User ->Cell :Escreve formula na Cell
-    Cell -> Formula  : Cell.setContent(texto)
-    Formula -> Expression : Formula.evaluate()
+    Cell -> Formula  : Cell.setContent(texto);
+    Formula -> Expression : Formula.evaluate();
     Expression -> ExpressionCompiler : texto
     ExpressionCompiler -> FunctionCall: (texto =Eval)
     ExpressionCompiler -> BinaryOperation :(argumentos da funçao)
-    BinaryOperation -> Formula : toString(resultado dos argumentos)
-    Formula -> Cell : Formula(Cell cell, String texto)
+    BinaryOperation -> Cell : toString(resultado dos argumentos);
+    end
   @enduml
  *
  */
