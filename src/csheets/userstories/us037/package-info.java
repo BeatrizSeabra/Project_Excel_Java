@@ -1,25 +1,33 @@
 /**
- * Technical documentation regarding the user story 001: setup commentable cells. 
+ * Documentação tecnica da user story 037 : Operador de atribuicão. 
  * <br/>
  * <br/>
  * 
  * <b>Requirement</b><br/>
- * Setup extension for commentable cells. The user should be able to activate and deactivate comments on cells. When activated, a sidebar for the comments should appear. The sidebar should be composed of a simple textbox to display and edit a comment. At the moment no real comment should be saved.
+ * Acrescentar o operator ":=" para atribuicao. Este operador deve atribuir a
+ * esquerda o resultado da expressao a 
+ * direita do operador. Para ja a esquerda deve se possivel colocar o nome de uma celula.
  * <br/>
  * <br/>
  *  
  * <b>S001a: Analysis</b><br/>
- * Since comments on cells will be supported in a new extension to cleansheets we need to study how extensions are loaded by cleansheets and how they work.<br/> 
- * The first sequence diagram in the section <a href="../../../overview-summary.html#arranque_da_aplicacao">Application Startup</a> tells us that extensions must be subclasses of the Extension abstract class and be registered in special files.<br/>
- * The Extension class has a method called getUIExtension that should be implemented and return an instance of a class that is a subclass of UIExtension.<br/>
- * In this subclass of UIExtension there is a method (getSideBar) that returns the sidebar for the extension. A sidebar is a JPanel.
+ * Vai ser criada uma nova formula,
+ * verifica la na celulua
+ * colocar um novo token :=
+ * Fazer a funçao para atribuicao e colocar na celula certa
+ *  
  * <br/>
  * <br/>
  * 
  * <b>S001d: Design</b><br/>
- * To realize this user story we will need to create a subclass of Extension. We will also need to create a subclass of UIExtension. For the sidebar we need to implement a JPanel.<br/>
- * The following diagram shows how these new classes will be loaded and "integrated" with cleansheets.<br/><br/>
- * <img src="../../../csheets/userstories/us001/doc-files/us001_design1.png"> 
+ * <br/><br/>
+ * O user introduz texto na celula.
+ * Se o texto começar por = assim assume uma formula.
+ * A formula por sua vez é uma expressao.
+ * Vai validar a expressao e faz o que é pretendido
+ * 
+ * 
+ * <img src="../../../csheets/userstories/us001/doc-files/us037_design1.png"> 
  * <br/>
  * <br/>
  * 
@@ -46,31 +54,27 @@
  * <br/>
  * <br/>
  * 
- * @author alexandrebraganca
+ * @author Frederico Calor
  */
 /*
  *
-  @startuml doc-files/us001_design1.png
-  participant "uic : UIController" as UIC
-  participant ExtensionManager as ExtM
-  participant "extension : CommentsExtension" as EExample
-  participant "uiExtension : UIExtensionComments" as UIExt
-  participant "CommentPanel : JPanel" as cp
-  UIC -> ExtM : extensions=getExtensions();
-  loop for Extension ext : extensions
-  	UIC -> EExample : uiExtension=getUIExtension(this);
-  	activate EExample
-  	create UIExt
-  	EExample -> UIExt : new(extension, uic)
-  	deactivate EExample
-  	UIExt -> UIExt : getSideBar();
-  	activate UIExt
-  	create cp
-  	UIExt -> cp :  new (uic)  	
-  	deactivate UIExt
-  	UIC -> UIC : uiExtensions.add(uiExtension);
+  @startuml doc-files/us037_design1.png
+  title Operador de Distribuicao
+
+
+User -> Cell : Escreve na cell;
+Cell -> Formula : cell.setContent(string);
+note right of Cell: vai ver se esta correcto;
+Formula -> Expression : formula.evaluete();
+
+Expression -> ExpressionCompiler : texto;
+Expression -> BinaryOperation : texto;
+
+BinaryOperation()->Cell : toString(resultado para a cell pretendida);
+
+
   end
   @enduml
  *
  */
-package csheets.userstories.us001;
+package csheets.userstories.us037;
