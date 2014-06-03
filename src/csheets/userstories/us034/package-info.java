@@ -1,12 +1,12 @@
 /**
- * Documentação tecnica da user story 034 : Função Eval. 
+ * Documentacao tecnica da user story 034 : Funcao Eval. 
  * <br/>
  * <br/>
  * 
  * <b>Requirement</b><br/>
- * Esta função tem um único parâmetro que é uma string. A execução dessa função 
+ * Esta funcao tem um único parametro que é uma string. A execucao dessa funcao 
  * o que faz é compilar o texto da string e executar a expressão obtida. O 
- * resultado da função eval é o resultado da expressão compilada. Por exemplo, 
+ * resultado da funcão eval é o resultado da expressão compilada. Por exemplo, 
  * se escrevermos a seguinte fórmula “=“2+3”” o que obtemos é a string “2+3” na 
  * célula. No entanto, se escrevermos a fórmula “=eval(“2+3”)” o que obtemos é o 
  * valor 5 na célula. 
@@ -16,7 +16,7 @@
  * <b>S001a: Analysis</b><br/>
  * Terá de ser criada uma nova Formula para ser verificada na cell. Para isso, 
  * terá de ser acrescentado á gramatica existente o reconhecimento lexico da 
- * função Eval("").
+ * funcão Eval("").
  * irá ser definido um novo token a acrescentar ao Formula.tokens; 
  * irá ser definido uma nova regra no Formula.g
  * irá ser actualizado o FormulaLexer e o FormulaParser
@@ -27,9 +27,15 @@
  * <br/>
  * 
  * <b>S001d: Design</b><br/>
- * To realize this user story we will need to create a subclass of Extension. We will also need to create a subclass of UIExtension. For the sidebar we need to implement a JPanel.<br/>
- * The following diagram shows how these new classes will be loaded and "integrated" with cleansheets.<br/><br/>
- * <img src="../../../csheets/userstories/us001/doc-files/us001_design1.png"> 
+ * O utilizador ira introduzir um texto numa celula. Se o texto comecar por '='
+ * isto ira despoletar um trigger e assumir uma nova formula (expressao)
+ * essa expressao irá originar uma FunctionCall (Eval (argumentos))
+ * esses argumentos, irao originar uma binaryOperation (LeftOperand, Operator, RightOperand)
+ * o resultado da BinaryOperation irá ser o novo texto a ser apresentado na celula original.
+ *
+ * <br/>
+ * <br/>
+ * <img src="../../../csheets/userstories/us001/doc-files/us034_design1.png"> 
  * <br/>
  * <br/>
  * 
@@ -60,26 +66,15 @@
  */
 /*
  *
-  @startuml doc-files/us001_design1.png
-  participant "uic : UIController" as UIC
-  participant ExtensionManager as ExtM
-  participant "extension : CommentsExtension" as EExample
-  participant "uiExtension : UIExtensionComments" as UIExt
-  participant "CommentPanel : JPanel" as cp
-  UIC -> ExtM : extensions=getExtensions();
-  loop for Extension ext : extensions
-  	UIC -> EExample : uiExtension=getUIExtension(this);
-  	activate EExample
-  	create UIExt
-  	EExample -> UIExt : new(extension, uic)
-  	deactivate EExample
-  	UIExt -> UIExt : getSideBar();
-  	activate UIExt
-  	create cp
-  	UIExt -> cp :  new (uic)  	
-  	deactivate UIExt
-  	UIC -> UIC : uiExtensions.add(uiExtension);
-  end
+  @startuml doc-files/us034_design1.png
+    User ->Cell :Escreve formula na Cell
+    Cell -> Formula  : Cell.setContent(texto)
+    Formula -> Expression : Formula.evaluate()
+    Expression -> ExpressionCompiler : texto
+    ExpressionCompiler -> FunctionCall: (texto =Eval)
+    ExpressionCompiler -> BinaryOperation :(argumentos da funçao)
+    BinaryOperation -> Formula : toString(resultado dos argumentos)
+    Formula -> Cell : Formula(Cell cell, String texto)
   @enduml
  *
  */
