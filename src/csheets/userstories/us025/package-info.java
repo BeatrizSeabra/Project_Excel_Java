@@ -22,6 +22,7 @@
  * Teremos de adicionar a opção de salvar como xml na IterfaceUI responsável por tal.<br/>
  * O diagrama de sequencia seguinte descreve como irá ocorrer a iteração entre classes.<br/>
  * <img src="../../../csheets/userstories/us025/doc-files/us025_design1.png"> 
+ * <a href="../../../csheets/userstories/us025/XMLcleanSheets.xsd" target="_blank">xml schema</a>
  * <br/>
  * <br/>
  * 
