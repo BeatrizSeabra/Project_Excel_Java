@@ -8,8 +8,15 @@
  * <br/>
  * <br/>
  *  
- * <b>S001a: Analysis</b><br/>
- * Since events on cells are 
+ * <b>S055a: Analysis</b><br/>
+ * Since there are three events that can occur on cells (onclick, onchange, rightclick) we have to study how and when said events occur.
+ * With further investigation we learned that every event are subclasses of the AbstractAction class.
+ * With the need of making a graphic interface we have to study how to add another sub-menu. We latter have to sketch an example of the interface as it will be added to the code.
+ * <br/>
+ * <br/>
+ * 
+ * <b>S055d: Design</b><br/>
+ * 
  * <br/>
  * <br/>
  * 
