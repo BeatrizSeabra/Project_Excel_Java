@@ -1,59 +1,62 @@
 /**
+ * Technical documentation regarding the user story 064: Iniciar Partilha. 
  * <br/>
  * <br/>
  * 
  * <b>Requirement</b><br/>
- * US064- Iniciar partilha. Permitir estabelecer uma conexão com uma outra instância do cleansheets
- * e enviar um range de celulas para a outra instância. O conteúdo recebido deve ser apresentado no mesmo
- * “local”. Para isso, em cada instância do cleansheets deve ser possível deﬁnir uma porta para ligações.
+ * Permitir estabelecer uma conexao com uma outra instancia do cleansheets e enviar um range de celulas para a outra instancia.<br/>
+ * O conteudo recebido deve ser apresentado no mesmo “local”. <br/>
+ * Para isso, em cada instancia do cleansheets deve ser possivel deﬁnir uma porta para ligacoes.<br/>
  * <br/>
  * <br/>
  *  
  * <b>S064a: Analysis</b><br/>
- * Na UserStory 064 é pedido que seja efectuado uma ligação entre duas instâncias do projecto cleansheets, esta ligação vai partilhar o conteúdo de um dado número de células no mesmo local onde estavam na primeira janela de cleansheets.
- * Vai ser adicionado uma opção no menu "extensions" para fazer parte das opções do utilizador.
- * Na analise do codigo do projecto que nos foi fornecido a classe CellListener no package csheets.core contem um metodo, cellCopied, que deverá ser utilizado para copiar os valores das celulas de uma folha de calculo para a outra.
- * 
- * 
+ * Na UserStory 064 é pedido que seja efectuado uma ligação entre duas instâncias do projecto cleansheets, esta ligação vai partilhar o conteúdo de um dado número de células no mesmo local onde estavam na primeira janela de cleansheets.<br/>
+ * Vai ser adicionado uma opção no menu "extensions" para fazer parte das opções do utilizador.<br/>
+ * Na analise do codigo do projecto que nos foi fornecido a classe CellListener no package csheets.core contem um metodo, cellCopied, que deverá ser utilizado para copiar os valores das celulas de uma folha de calculo para a outra.<br/>
+ * <br/>
  * <br/>
  * 
  * <b>S064d: Design</b><br/>
+ * Criação do diagrama de sequencia na plataforma plantuml da US064.<br/>
+ * Partilha de "range" entre servidor e cliente, onde o cliente vai ser o ip do servidor so vai ser pedida a porta.
+ * <br/>
  * <br/>
  * 
  * <b>S064c: Coding</b><br/>
+ * see:<br/>
+ * 
+ * <br/>
  * <br/>
  * 
  * <b>S064u: Unit Tests</b><br/>
+ * 
+ * <br/>
  * <br/>
  * 
  * <b>S064f: Functional Tests</b><br/>
+ * 
+ * <br/>
  * <br/>
  * 
  * @author 1110506
  */
 /*
  *
-  @startuml doc-files/us064_design1.png
-  participant "uic : UIController" as UIC
-  participant ExtensionManager as ExtM
-  participant "extension : CommentsExtension" as EExample
-  participant "uiExtension : UIExtensionComments" as UIExt
-  participant "CommentPanel : JPanel" as cp
-  UIC -> ExtM : extensions=getExtensions();
-  loop for Extension ext : extensions
-  	UIC -> EExample : uiExtension=getUIExtension(this);
-  	activate EExample
-  	create UIExt
-  	EExample -> UIExt : new(extension, uic)
-  	deactivate EExample
-  	UIExt -> UIExt : getSideBar();
-  	activate UIExt
-  	create cp
-  	UIExt -> cp :  new (uic)  	
-  	deactivate UIExt
-  	UIC -> UIC : uiExtensions.add(uiExtension);
-  end
+ @startuml doc-files/us064_design1.png
+UIController -> FocusOwnerAction : getSelectedCells()
+FocusOwnerAction --> UIController : getSelectedCells()
+User -> UIController : enterShareName(String name)
+User -> UIController : enterPort(int port)
+UIController -> ShareInfo : new(int shareid,int sharePort,ArrayList<Cell> sharedCells,String shareName)
+UIController -> ServerConnectionHandler : createServerConnection()
+UIController -> ServerConnectionHandlerFactory : createShareHandlerFactory(UIController uiController,ShareInfo currentShareInfo)
+ServerShareHandlerFactory --> ServerShareHandler : createShareHandler(UIController uiController,ShareInfo current ShareInfo)
+ServerConnectionHandler -> ObjectOutputStream : new(connection.getOutputStream())
+ServerConnectionHandler -> ObjectInputStream : new(connection.getInputStream())
+ServerConnectionHandler -> ServerConnectionHandler : sendObject(currentShareInfo)
   @enduml
+ 
  *
  */
 package csheets.userstories.us064;

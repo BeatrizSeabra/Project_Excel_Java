@@ -1,59 +1,65 @@
 /**
+ * Technical documentation regarding the user story 067: Find workbooks files.
  * <br/>
  * <br/>
  * 
  * <b>Requirement</b><br/>
- * US064- Iniciar partilha. Permitir estabelecer uma conexão com uma outra instância do cleansheets
- * e enviar um range de celulas para a outra instância. O conteúdo recebido deve ser apresentado no mesmo
- * “local”. Para isso, em cada instância do cleansheets deve ser possível deﬁnir uma porta para ligações.
+ * Enable research on the local disk files that are leaves calculation of cleansheets. 
+ * Must do a thorough search to all folders and display a list of all files found.
  * <br/>
  * <br/>
  *  
- * <b>S064a: Analysis</b><br/>
- * Na UserStory 064 é pedido que seja efectuado uma ligação entre duas instâncias do projecto cleansheets, esta ligação vai partilhar o conteúdo de um dado número de células no mesmo local onde estavam na primeira janela de cleansheets.
- * Vai ser adicionado uma opção no menu "extensions" para fazer parte das opções do utilizador.
- * Na analise do codigo do projecto que nos foi fornecido a classe CellListener no package csheets.core contem um metodo, cellCopied, que deverá ser utilizado para copiar os valores das celulas de uma folha de calculo para a outra.
- * 
- * 
+ * <b>S067a: Analysis</b><br/>
+ * At first sight, I thought implement an option in the application menu,  
+ * which serve to perform the functionality to search for workbooks cleansheets files (*.cls), 
+ * which are the files supported by the application. Running this option, 
+ * the program will search for all files with this extension, in all the hdd directories, 
+ * showing to the user, a list of found files.
+ * <br/>
  * <br/>
  * 
- * <b>S064d: Design</b><br/>
+ * <b>S067d: Design</b><br/> 
+ * <br/>
+ * To realize this user story we will need to create a submenu option in the menu option File, named "List workbooks files in hdd".
+ * We will also need to create a subclass of UIExtension. For the sidebar we need to implement a JPanel.<br/>
+ * The following diagram shows how these new classes will be loaded and "integrated" with cleansheets.<br/><br/>
+ * <img src="../../../csheets/userstories/us001/doc-files/us067_design1.png">
  * <br/>
  * 
- * <b>S064c: Coding</b><br/>
+ * <b>S067c: Coding</b><br/>
  * <br/>
  * 
- * <b>S064u: Unit Tests</b><br/>
+ * <b>S067u: Unit Tests</b><br/>
  * <br/>
  * 
- * <b>S064f: Functional Tests</b><br/>
+ * <b>S067f: Functional Tests</b><br/>
  * <br/>
  * 
- * @author 1110506
+ * @author 1090675
  */
 /*
  *
-  @startuml doc-files/us064_design1.png
+  @startuml doc-files/us067_design1.png
   participant "uic : UIController" as UIC
-  participant ExtensionManager as ExtM
-  participant "extension : CommentsExtension" as EExample
-  participant "uiExtension : UIExtensionComments" as UIExt
-  participant "CommentPanel : JPanel" as cp
-  UIC -> ExtM : extensions=getExtensions();
-  loop for Extension ext : extensions
-  	UIC -> EExample : uiExtension=getUIExtension(this);
-  	activate EExample
-  	create UIExt
-  	EExample -> UIExt : new(extension, uic)
-  	deactivate EExample
-  	UIExt -> UIExt : getSideBar();
-  	activate UIExt
-  	create cp
-  	UIExt -> cp :  new (uic)  	
-  	deactivate UIExt
-  	UIC -> UIC : uiExtensions.add(uiExtension);
-  end
+    participant ExtensionManager as ExtM
+    participant "extension : CommentsExtension" as EExample
+    participant "uiExtension : UIExtensionComments" as UIExt
+    participant "CommentPanel : JPanel" as cp
+    UIC -> ExtM : extensions=getExtensions();
+    loop for Extension ext : extensions
+           UIC -> EExample : uiExtension=getUIExtension(this);
+           activate EExample
+           create UIExt
+           EExample -> UIExt : new(extension, uic)
+           deactivate EExample
+           UIExt -> UIExt : getSideBar();
+           activate UIExt
+           create cp
+           UIExt -> cp :  new (uic)  	
+           deactivate UIExt
+           UIC -> UIC : uiExtensions.add(uiExtension);
+    end
   @enduml
  *
  */
-package csheets.userstories.us064;
+package csheets.userstories.us067;
