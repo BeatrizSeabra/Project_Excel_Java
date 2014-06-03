@@ -19,7 +19,12 @@
  * <br/>
  * <br/>
  * 
+ * <b>S040d: Design</b><br/>
+ * Para realizar este caso de uso é necessário guardar as funções disponíveis (de modo a poder mostrá-las para que o utilizador escolha uma).
+ * Será necessário criar uma subclasse de Extension, de UIExtension, de BaseAction, e de JFrame (que será a janela que queremos criar).
  * 
+ * <br/>
+ * <br/>
  * @author 1120268
  */
 

@@ -1,5 +1,6 @@
-package csheets.ext.simple.ui;
+package csheets.ext.invokefunction.ui;
 
+import csheets.ext.simple.ui.*;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JOptionPane;
@@ -11,7 +12,7 @@ import csheets.ui.ctrl.UIController;
  * An action of the simple extension that exemplifies how to interact with the spreadsheet.
  * @author Alexandre Braganca
  */
-public class ExampleAction extends BaseAction {
+public class InvokeFunctionAction extends BaseAction {
 
 	/** The user interface controller */
 	protected UIController uiController;
@@ -20,12 +21,12 @@ public class ExampleAction extends BaseAction {
 	 * Creates a new action.
 	 * @param uiController the user interface controller
 	 */
-	public ExampleAction(UIController uiController) {
+	public InvokeFunctionAction(UIController uiController) {
 		this.uiController = uiController;
 	}
 
 	protected String getName() {
-		return "Example...";
+		return "Invoke Function";
 	}
 
 	protected void defineProperties() {
@@ -37,17 +38,12 @@ public class ExampleAction extends BaseAction {
 	 * @param event the event that was fired
 	 */
 	public void actionPerformed(ActionEvent event) {
-
-		// Lets user select a font
-		int result=JOptionPane.showConfirmDialog(null, "You have selected the Example option. Do you want to set cell A1 to 'Changed'");
+                
 		
-		if (result==JOptionPane.YES_OPTION) {
-		// Vamos exemplificar como se acede ao modelo de dominio (o workbook)
 		try {
 			this.uiController.getActiveSpreadsheet().getCell(0, 0).setContent("Changed");
 		} catch (Exception ex) {
 			// para ja ignoramos a excepcao
-		}
-		}
+                }
 	}
 }

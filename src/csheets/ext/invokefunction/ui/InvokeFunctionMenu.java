@@ -1,5 +1,6 @@
-package csheets.ext.simple.ui;
+package csheets.ext.invokefunction.ui;
 
+import csheets.ext.simple.ui.*;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JMenu;
@@ -10,7 +11,7 @@ import csheets.ui.ctrl.UIController;
  * Representes the UI extension menu of the simple extension.
  * @author Alexandre Braganca
  */
-public class ExampleMenu extends JMenu {
+public class InvokeFunctionMenu extends JMenu {
 
 	/**
 	 * Creates a new simple menu.
@@ -19,11 +20,11 @@ public class ExampleMenu extends JMenu {
 	 * A menu option is an action (in this case {@link csheets.ext.simple.ui.ExampleAction})
 	 * @param uiController the user interface controller
 	 */
-	public ExampleMenu(UIController uiController) {
-		super("Example");
-		setMnemonic(KeyEvent.VK_E);
+	public InvokeFunctionMenu(UIController uiController) {
+		super("Invoke Function");
+		setMnemonic(KeyEvent.VK_I);
 
 		// Adds font actions
-		add(new ExampleAction(uiController));
+		add(new InvokeFunctionAction(uiController));
 	}	
 }

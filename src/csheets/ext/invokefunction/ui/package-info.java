@@ -3,6 +3,6 @@
  *
  * @author Alexandre Braganca
  */
-package csheets.ext.simple.ui;
+package csheets.ext.invokefunction.ui;
 
 

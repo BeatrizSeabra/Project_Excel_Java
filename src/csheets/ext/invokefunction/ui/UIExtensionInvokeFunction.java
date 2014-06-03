@@ -1,5 +1,6 @@
-package csheets.ext.simple.ui;
+package csheets.ext.invokefunction.ui;
 
+import csheets.ext.simple.ui.*;
 import javax.swing.Icon;
 import javax.swing.JComponent;
 import javax.swing.JMenu;
@@ -17,15 +18,15 @@ import csheets.ui.ext.UIExtension;
  * @see UIExtension
  * @author Alexandre Braganca
  */
-public class UIExtensionExample extends UIExtension {
+public class UIExtensionInvokeFunction extends UIExtension {
 
 	/** The icon to display with the extension's name */
 	private Icon icon;
 
 	/** The menu of the extension */
-	private ExampleMenu menu;
+	private InvokeFunctionMenu menu;
 
-	public UIExtensionExample(Extension extension, UIController uiController) {
+	public UIExtensionInvokeFunction(Extension extension, UIController uiController) {
 		super(extension, uiController);
 		// TODO Auto-generated constructor stub
 	}
@@ -41,12 +42,12 @@ public class UIExtensionExample extends UIExtension {
 	/**
 	 * Returns an instance of a class that implements JMenu.
 	 * In this simple case this class only supplies one menu option.
-	 * @see ExampleMenu
+	 * @see InvokeFunctionMenu
 	 * @return a JMenu component
 	 */
 	public JMenu getMenu() {
 		if (menu == null)
-			menu = new ExampleMenu(uiController);
+			menu = new InvokeFunctionMenu(uiController);
 		return menu;
 	}
 	

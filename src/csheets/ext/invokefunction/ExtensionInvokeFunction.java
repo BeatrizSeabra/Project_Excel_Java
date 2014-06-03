@@ -1,7 +1,7 @@
-package csheets.ext.simple;
+package csheets.ext.invokefunction;
 
 import csheets.ext.Extension;
-import csheets.ext.simple.ui.UIExtensionExample;
+import csheets.ext.invokefunction.ui.UIExtensionInvokeFunction;
 import csheets.ui.ctrl.UIController;
 import csheets.ui.ext.UIExtension;
 
@@ -12,15 +12,15 @@ import csheets.ui.ext.UIExtension;
  * @see Extension
  * @author Alexandre Braganca
  */
-public class ExtensionExample extends Extension {
+public class ExtensionInvokeFunction extends Extension {
 
 	/** The name of the extension */
-	public static final String NAME = "Example";
+	public static final String NAME = "Invoke Function";
 
 	/**
 	 * Creates a new Example extension.
 	 */
-	public ExtensionExample() {
+	public ExtensionInvokeFunction() {
 		super(NAME);
 	}
 	
@@ -31,6 +31,6 @@ public class ExtensionExample extends Extension {
 	 * @return a user interface extension, or null if none is provided
 	 */
 	public UIExtension getUIExtension(UIController uiController) {
-		return new UIExtensionExample(this, uiController);
+		return new UIExtensionInvokeFunction(this, uiController);
 	}
 }
