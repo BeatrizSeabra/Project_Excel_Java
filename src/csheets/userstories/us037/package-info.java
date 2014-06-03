@@ -1,10 +1,10 @@
 /**
- * Documentação tecnica da user story 037 : Operador de atribuição. 
+ * Documentação tecnica da user story 037 : Operador de atribuicão. 
  * <br/>
  * <br/>
  * 
  * <b>Requirement</b><br/>
- *Acrescentar o operator ":=" para atribuicao. Este operador deve atribuir a
+ * Acrescentar o operator ":=" para atribuicao. Este operador deve atribuir a
  * esquerda o resultado da expressao a 
  * direita do operador. Para ja a esquerda deve se possivel colocar o nome de uma celula.
  * <br/>
@@ -14,15 +14,20 @@
  * Vai ser criada uma nova formula,
  * verifica la na celulua
  * colocar um novo token :=
- * Fazer a funçao para atribuiçao e colocar na celula certa
+ * Fazer a funçao para atribuicao e colocar na celula certa
  *  
  * <br/>
  * <br/>
  * 
  * <b>S001d: Design</b><br/>
- * To realize this user story we will need to create a subclass of Extension. We will also need to create a subclass of UIExtension. For the sidebar we need to implement a JPanel.<br/>
- * The following diagram shows how these new classes will be loaded and "integrated" with cleansheets.<br/><br/>
- * <img src="../../../csheets/userstories/us001/doc-files/us001_design1.png"> 
+ * <br/><br/>
+ * O user introduz texto na celula.
+ * Se o texto começar por = assim assume uma formula.
+ * A formula por sua vez é uma expressao.
+ * Vai validar a expressao e faz o que é pretendido
+ * 
+ * 
+ * <img src="../../../csheets/userstories/us001/doc-files/us037_design1.png"> 
  * <br/>
  * <br/>
  * 
@@ -49,29 +54,25 @@
  * <br/>
  * <br/>
  * 
- * @author JSilva314 - 1040314 - João Paulo Silva
+ * @author Frederico Calor
  */
 /*
  *
-  @startuml doc-files/us001_design1.png
-  participant "uic : UIController" as UIC
-  participant ExtensionManager as ExtM
-  participant "extension : CommentsExtension" as EExample
-  participant "uiExtension : UIExtensionComments" as UIExt
-  participant "CommentPanel : JPanel" as cp
-  UIC -> ExtM : extensions=getExtensions();
-  loop for Extension ext : extensions
-  	UIC -> EExample : uiExtension=getUIExtension(this);
-  	activate EExample
-  	create UIExt
-  	EExample -> UIExt : new(extension, uic)
-  	deactivate EExample
-  	UIExt -> UIExt : getSideBar();
-  	activate UIExt
-  	create cp
-  	UIExt -> cp :  new (uic)  	
-  	deactivate UIExt
-  	UIC -> UIC : uiExtensions.add(uiExtension);
+  @startuml doc-files/us037_design1.png
+  title Operador de Distribuicao
+
+
+User -> Cell : Escreve na cell;
+Cell -> Formula : cell.setContent(string);
+note right of Cell: vai ver se esta correcto;
+Formula -> Expression : formula.evaluete();
+
+Expression -> ExpressionCompiler : texto;
+Expression -> BinaryOperation : texto;
+
+BinaryOperation()->Cell : toString(resultado para a cell pretendida);
+
+
   end
   @enduml
  *
