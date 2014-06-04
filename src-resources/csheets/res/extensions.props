@@ -9,3 +9,4 @@ csheets.ext.image.ExtensionImage
 csheets.ext.logFile.ExtensionLogFile
 csheets.ext.sort.SortExtension
 csheets.ext.chat.ChatExtension
+csheets.ext.exporttxt.ExtensionTxt
