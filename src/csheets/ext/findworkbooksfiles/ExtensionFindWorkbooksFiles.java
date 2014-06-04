@@ -1,7 +1,7 @@
 package csheets.ext.findworkbooksfiles;
 
 import csheets.ext.Extension;
-import csheets.ext.simple.ui.UIExtensionExample;
+import csheets.ext.findworkbooksfiles.ui.UIExtensionFindWorkbooksFiles;
 import csheets.ui.ctrl.UIController;
 import csheets.ui.ext.UIExtension;
 
@@ -30,7 +30,8 @@ public class ExtensionFindWorkbooksFiles extends Extension {
 	 * @param uiController the user interface controller
 	 * @return a user interface extension, or null if none is provided
 	 */
+        @Override
 	public UIExtension getUIExtension(UIController uiController) {
-		return new UIExtensionExample(this, uiController);
+		return new UIExtensionFindWorkbooksFiles(this, uiController);
 	}
 }
