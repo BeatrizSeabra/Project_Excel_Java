@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package csheets.ext.sort.ui;
 
 /**
@@ -19,9 +20,10 @@ import csheets.ui.ctrl.BaseAction;
 import csheets.ui.ctrl.UIController;
 import java.util.ArrayList;
 import java.util.Collections;
+import static javax.swing.Action.SMALL_ICON;
 import javax.swing.ImageIcon;
 
-public class SortAction extends BaseAction {
+public class SortActionZA extends BaseAction {
 
     /**
      * The user interface controller
@@ -34,12 +36,12 @@ public class SortAction extends BaseAction {
      *
      * @param uiController the user interface controller
      */
-    public SortAction(UIController uiController) {
+    public SortActionZA(UIController uiController) {
         this.uiController = uiController;
     }
 
     protected String getName() {
-        return "Sort Cell from A-Z";
+        return "Sort Cell from Z-A";
     }
 
     protected void defineProperties() {
@@ -52,13 +54,14 @@ public class SortAction extends BaseAction {
         try {
             int maxrows = this.uiController.getActiveSpreadsheet().getRowCount();
             int collumn = this.uiController.getActiveCell().getAddress().getColumn();
-            sortAZ(maxrows,collumn, conteudos);
+            sortZA(maxrows,collumn,conteudos);
+            
         } catch (Exception ex) {
             // para ja ignoramos a excepcao
         }
     }
     
-    public void sortAZ(int maxrows, int collumn, ArrayList<String> conteudos) throws FormulaCompilationException{
+    public void sortZA(int maxrows, int collumn, ArrayList<String> conteudos) throws FormulaCompilationException{
         if (!conteudos.isEmpty()) {
                 conteudos.removeAll(conteudos);
             }
@@ -67,7 +70,7 @@ public class SortAction extends BaseAction {
                 conteudos.add(conteudo);
             }
             Collections.sort(conteudos, String.CASE_INSENSITIVE_ORDER);
-            //Collections.reverse(conteudos);
+            Collections.reverse(conteudos);
             for (int i = 0; i < maxrows; i++) {
                 if(!(conteudos.get(i)=="")){
                     this.uiController.getActiveSpreadsheet().getCell(collumn, i).setContent(conteudos.get(i));
@@ -75,3 +78,4 @@ public class SortAction extends BaseAction {
             }
     }
 }
+
