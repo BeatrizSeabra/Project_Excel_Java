@@ -6,10 +6,17 @@
 
 package csheets.ext.image.ui;
 
+import csheets.CleanSheets;
 import csheets.ui.ctrl.BaseAction;
 import csheets.ui.ctrl.UIController;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -17,7 +24,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author Nélson
  */
 class InsertImageAction extends BaseAction {
-
+    private JLabel imageLabel;
+    protected UIController uiController;
     public InsertImageAction(UIController uiController) {
     }
     
@@ -26,6 +34,8 @@ class InsertImageAction extends BaseAction {
     }
 
     protected void defineProperties() {
+        setEnabled(true);
+        putValue(SMALL_ICON, new ImageIcon(CleanSheets.class.getResource("res/img/jpg.png")));
 	}
 
 
@@ -37,8 +47,11 @@ class InsertImageAction extends BaseAction {
         int returnVal = chooser.showOpenDialog(null);
         if(returnVal == JFileChooser.APPROVE_OPTION) {
             System.out.println("You chose to open this file: " + chooser.getSelectedFile().getName());
-    }
-        
+            final ImageIcon image=new ImageIcon(chooser.getSelectedFile().getAbsolutePath());
+            imageLabel= new JLabel(image);
+            imageLabel.setBounds(15, 225,image.getIconWidth(),image.getIconHeight());
+           
+        }
     }
     
 }
