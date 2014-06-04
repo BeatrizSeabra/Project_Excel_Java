@@ -5,7 +5,7 @@
  * 
  * <b>Requirement</b><br/>
  * Deve ser possível exportar o conteúdo (valores) de uma
-sheet para um ﬁcheiro PDF. Apenas o conteúdo das células deve ser exportado (i.e., não é necessário
+sheet para um ficheiro PDF. Apenas o conteúdo das células deve ser exportado (i.e., não é necessário
 exportar as formulas, etc.). Não é necessária grande preocupação no aspecto visual.
  * <br/>
  * <br/>

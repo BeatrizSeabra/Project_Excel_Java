@@ -5,8 +5,8 @@
  * 
  * <b>Requirement</b><br/>
  * Permitir estabelecer uma conexao com uma outra instancia do cleansheets e enviar um range de celulas para a outra instancia.<br/>
- * O conteudo recebido deve ser apresentado no mesmo “local”. <br/>
- * Para isso, em cada instancia do cleansheets deve ser possivel deﬁnir uma porta para ligacoes.<br/>
+ * O conteudo recebido deve ser apresentado no mesmo "local". <br/>
+ * Para isso, em cada instancia do cleansheets deve ser possivel definir uma porta para ligacoes.<br/>
  * <br/>
  * <br/>
  *  

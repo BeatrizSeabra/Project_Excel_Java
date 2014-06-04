@@ -5,7 +5,7 @@
  *
  *<b>Requerimento</b><br/>
  *US073- Exportar ficheiro de texto. Deve ser possível exportar dados para um ficheiro de texto,
- *cujas colunas são divididas por “,”. Os dados devem ser exportados a partir de uma célula que é identificada
+ *cujas colunas são divididas por ",". Os dados devem ser exportados a partir de uma célula que é identificada
  *como o canto superior esquerdo.
  *</br>
  *</br>

@@ -6,7 +6,7 @@
  * <b>Requirement</b><br/>
  * Deve existir uma janela que permite escolher a função que de deseja executar.
  * Ela apresenta numa edit box a sintaxe para se escrever.
- * Deve apresentar um “help” com o que faz a função.
+ * Deve apresentar um "help" com o que faz a função.
  * Quando se confirma o texto da função é escrito na barra de fórmulas.
  * <br/>
  * <br/>
