@@ -4,42 +4,31 @@
  * and open the template in the editor.
  */
 
-package csheets.ext.sort.ui;
+package csheets.ext.pdf.ui;
 
-/**
- *
- * @author Stefan Parker
- */
-import csheets.CleanSheets;
+import csheets.ext.Extension;
+import csheets.ext.simple.ui.ExampleMenu;
+import csheets.ui.ctrl.UIController;
+import csheets.ui.ext.CellDecorator;
+import csheets.ui.ext.TableDecorator;
+import csheets.ui.ext.UIExtension;
 import javax.swing.Icon;
 import javax.swing.JComponent;
 import javax.swing.JMenu;
 import javax.swing.JToolBar;
 
-import csheets.ext.Extension;
-import csheets.ext.sort.SortExtension;
-import csheets.ext.style.StyleExtension;
-import csheets.ui.ctrl.UIController;
-import csheets.ui.ext.CellDecorator;
-import csheets.ui.ext.TableDecorator;
-import csheets.ui.ext.UIExtension;
-import javax.swing.ImageIcon;
-
 /**
- * This class implements the UI interface extension for the simple extension.
- * A UI interface extension must extend the UIExtension abstract class.
- * @see UIExtension
- * @author Alexandre Braganca
+ *
+ * @author Marc
  */
-public class UIExtensionSort extends UIExtension {
+public class UIExtensionPdf extends UIExtension{
 
-	/** The icon to display with the extension's name */
-	private Icon icon;
+    private Icon icon;
 
 	/** The menu of the extension */
-	private SortMenu menu;
+    private PdfMenu menu;
 
-	public UIExtensionSort(Extension extension, UIController uiController) {
+	public UIExtensionPdf(Extension extension, UIController uiController) {
 		super(extension, uiController);
 		// TODO Auto-generated constructor stub
 	}
@@ -49,23 +38,19 @@ public class UIExtensionSort extends UIExtension {
 	 * @return an icon with style
 	 */
 	public Icon getIcon() {
-		if (icon == null){
-                    icon = new ImageIcon(CleanSheets.class.getResource("res/img/sort.gif"));
-                }
-		return icon;
-            //return null;
-            
+		return null;
 	}
 
 	/**
 	 * Returns an instance of a class that implements JMenu.
 	 * In this simple case this class only supplies one menu option.
-	 * @see InvokeFunctionMenu
+	 * @see ExampleMenu
 	 * @return a JMenu component
 	 */
+    @Override
 	public JMenu getMenu() {
 		if (menu == null)
-                    menu=new SortMenu(uiController);
+			menu = new PdfMenu(uiController);
 		return menu;
 	}
 	
@@ -73,6 +58,7 @@ public class UIExtensionSort extends UIExtension {
 	 * Returns a cell decorator that visualizes the data added by the extension.
 	 * @return a cell decorator, or null if the extension does not provide one
 	 */
+    @Override
 	public CellDecorator getCellDecorator() {
 		return null;
 	}
@@ -81,13 +67,17 @@ public class UIExtensionSort extends UIExtension {
 	 * Returns a table decorator that visualizes the data added by the extension.
 	 * @return a table decorator, or null if the extension does not provide one
 	 */
-		
+    @Override
+	public TableDecorator getTableDecorator() {
+		return null;
+	}	
 	
 	/**
 	 * Returns a toolbar that gives access to extension-specific
 	 * functionality.
 	 * @return a JToolBar component, or null if the extension does not provide one
 	 */
+    @Override
 	public JToolBar getToolBar() {
 		return null;
 	}
@@ -97,5 +87,10 @@ public class UIExtensionSort extends UIExtension {
 	 * functionality.
 	 * @return a component, or null if the extension does not provide one
 	 */
-	
+    @Override
+	public JComponent getSideBar() {
+		return null;
+	}
+   
+    
 }
