@@ -18,18 +18,18 @@ import javax.persistence.Query;
  */
 public class ContactsRepository {
     
-    @Override
+    
 	public void add(Contact contact) {
 		EntityManager entityManager = csheets.PersistenceJPA.Persistence.getEntityManager();
 		entityManager.getTransaction().begin();
 		entityManager.persist(contact);
 		entityManager.getTransaction().commit();
 		entityManager.close();
-		System.err.println("The following contact was added: " + Contact.getFirstName() + " " + Contact.getLastName());
+		//System.err.println("The following contact was added: " + Contact.getFirstName() + " " + Contact.getLastName());
 		
 	}
         
-        @Override
+       
 	public void changeOccupation(Contact contact, String occupation) {
 		EntityManager entityManager = csheets.PersistenceJPA.Persistence.getEntityManager();
                 entityManager.getTransaction().begin();
