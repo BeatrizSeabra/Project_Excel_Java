@@ -11,3 +11,4 @@ csheets.ext.logFile.ExtensionLogFile
 csheets.ext.sort.SortExtension
 csheets.ext.extensionsmanager.ExtensionsManager
 csheets.ext.contacts.ExtensionContacts
+csheets.ext.importfiles.ExtensionImport
