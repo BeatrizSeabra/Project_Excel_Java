@@ -18,7 +18,7 @@ public final class Persistence {
     public static EntityManager getEntityManager() {
 
 		EntityManagerFactory entityManagerFActory = javax.persistence.Persistence.
-			createEntityManagerFactory("ExpenseManager");
+			createEntityManagerFactory("ContactsManager");
 		EntityManager entityManager = entityManagerFActory.
 			createEntityManager();
 		return entityManager;

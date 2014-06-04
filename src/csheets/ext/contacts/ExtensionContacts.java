@@ -11,6 +11,11 @@ import csheets.ext.contacts.ui.UIExtensionContacts;
 import csheets.ext.simple.ui.UIExtensionExample;
 import csheets.ui.ctrl.UIController;
 import csheets.ui.ext.UIExtension;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+
 
 /**
  *
@@ -28,4 +33,19 @@ public class ExtensionContacts extends Extension {
 		return new UIExtensionContacts(this, uiController);
     }
     
+    public String importOccupations() throws FileNotFoundException{
+        
+        String occupations = "";
+        Scanner scanner = new Scanner(new File("src-resources\\csheets\\ext\\contacts\\occupations.csv"));
+        scanner.useDelimiter("\n");
+        while(scanner.hasNext()){
+            occupations+=scanner.next()+"\n";
+        }
+        scanner.close();
+        return occupations;
+    }
+
+
 }
+    
+

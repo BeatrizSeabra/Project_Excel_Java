@@ -23,6 +23,7 @@ public class Contact implements Serializable {
     private int id;
     private String firstName;
     private String lastName;
+    private String occupation;
 
     public Contact(int id, String firstName, String lastName) {
         this.id = id;
@@ -55,6 +56,20 @@ public class Contact implements Serializable {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    /**
+     * @return the occupation
+     */
+    public String getOccupation() {
+        return occupation;
+    }
+
+    /**
+     * @param occupation the occupation to set
+     */
+    public void setOccupation(String occupation) {
+        this.occupation = occupation;
     }
     
     
