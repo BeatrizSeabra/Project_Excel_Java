@@ -27,7 +27,7 @@ public class SortAction extends BaseAction {
      * The user interface controller
      */
     protected UIController uiController;
-    ArrayList<String> conteudos = new ArrayList<>();
+    ArrayList<String> conteudos = new ArrayList();
 
     /**
      * Creates a new action.

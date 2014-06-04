@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 csheets.ext.style.StyleExtension
 csheets.ext.deptree.DependencyTreeExtension
 csheets.ext.assertion.AssertionExtension
@@ -6,8 +7,31 @@ csheets.ext.simple.ExtensionExample
 csheets.ext.comments.CommentsExtension
 csheets.ext.findworkbooksfiles.ExtensionFindWorkbooksFiles
 csheets.ext.invokefunction.ExtensionInvokeFunction
+csheets.ext.edMenu.EdMenuExtension
+csheets.ext.image.ExtensionImage
+csheets.ext.logFile.ExtensionLogFile
+csheets.ext.sort.SortExtension
+<<<<<<< HEAD
+csheets.ext.pdf.ExtensionPdf
+=======
+csheets.ext.share.ExtensionShare
+csheets.ext.extensionsmanager.ExtensionsManager
+csheets.ext.contacts.ExtensionContacts
+
+=======
+csheets.ext.style.StyleExtension
+csheets.ext.deptree.DependencyTreeExtension
+csheets.ext.assertion.AssertionExtension
+csheets.ext.test.TestExtension
+csheets.ext.simple.ExtensionExample
+csheets.ext.comments.CommentsExtension
+csheets.ext.invokefunction.ExtensionInvokeFunction
+csheets.ext.edMenu.EdMenuExtension
 csheets.ext.image.ExtensionImage
 csheets.ext.logFile.ExtensionLogFile
 csheets.ext.sort.SortExtension
 csheets.ext.extensionsmanager.ExtensionsManager
 csheets.ext.contacts.ExtensionContacts
+csheets.ext.importfiles.ExtensionImport
+>>>>>>> e030d98ba79950f4de24b4ea0e2888bf0fe5d26b
+>>>>>>> a3ce62d1045e1c0f24fb31b061c3ea9746cbd8b0

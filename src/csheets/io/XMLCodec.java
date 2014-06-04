@@ -37,15 +37,15 @@ public class XMLCodec implements Codec {
 
         // Writes content of rows
         Spreadsheet sheet = workbook.getSpreadsheet(0);
-        writer.print(" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \n" +
+        writer.print(" <xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \n" +
 "            xmlns=\"http://www.dei.isep.ipp.pt/lapr4\" \n" +
-"            xsi:schemaLocation=\"http://www.dei.isep.ipp.pt/lapr4 cleanSheets.xsd\"\n");
+"            xsi:schemaLocation=\"http://www.dei.isep.ipp.pt/lapr4 cleanSheets.xsd\">\n");
 
         for (int column = 0; column < sheet.getColumnCount(); column++) {
-            writer.print("    <column id="+""+ ">\n");
+            writer.print("    <column id="+(column+1)+ ">\n");
             for (int row = 0; row < sheet.getRowCount(); row++) {
 
-                writer.print("        <row id=\"1\"></row>\n");
+                writer.print("        <row id="+(row+1)+">\n");
 
                 if (column + 1 < sheet.getColumnCount()) {
                     writer.print("            <cell>"+sheet.getCell(column, row).getContent()+"</cell>\n");
