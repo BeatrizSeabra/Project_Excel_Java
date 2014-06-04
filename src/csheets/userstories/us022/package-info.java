@@ -25,6 +25,15 @@
  *<img src="../../../csheets/userstories/us022/doc-files/us022_design1.png"> 
  *<br/>
  *<br/>
+ *
+ * 
+ * <b>S022c: Coding</b><br/>
+ * see:<br/>
+ * <a href="../../../csheets/ui/crtl/package-summary.html">csheets.ui.crtl</a><br/>
+ * <a href="../../../csheets/ext/searchandreplace/package-summary.html">csheets.ext.searchandreplace</a><br/>
+ * <br/>
+ * <br/>
+ * 
  * @author Diogo Moreira (1120339)
  */
 /*
@@ -32,12 +41,13 @@
 @startuml doc-files/us022_design1.png
 User -> UIController: searchAndReplace()
 UIController -> SearchAction: actionListener()
-SearchAction -> Search: create()
-Search -> JDialogSearchAndReplace: create()
-Search <- JDialogSearchAndReplace: texto
+SearchAction -> JDialogSearchAndReplace: create()
+JDialogSearchAndReplace-> Search : create()
+JDialogSearchAndReplace-> Search : texto
 Search -> Search: search()
-SearchAction <- Search: celula
-SearchAction -> SpreadsheetTable:changeSelection()
+JDialogSearchAndReplace<- Search: celula
+SearchAction<- JDialogSearchAndReplace: celula
+SearchAction -> SpreadsheetTable:changeSelection(celula)
 @enduml
 *
 */
