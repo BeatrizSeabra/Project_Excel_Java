@@ -18,9 +18,8 @@ exportar as formulas, etc.). Não é necessária grande preocupação no aspecto
  * <br/>
  * 
  * <b>S028d: Design</b><br/>
- * 
- * 
- * 
+ * O Diagrama de Sequência demonstra como irá ser efectuado o caso de uso:<br/>
+ * <img src="../../../csheets/userstories/us028/doc-files/us028_design1.png"> 
  * <br/>
  * <br/>
  * 
