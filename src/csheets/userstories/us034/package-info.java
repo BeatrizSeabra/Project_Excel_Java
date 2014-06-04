@@ -7,8 +7,8 @@
  * Esta funcao tem um único parametro que é uma string. A execucao dessa funcao 
  * o que faz é compilar o texto da string e executar a expressão obtida. O 
  * resultado da funcão eval é o resultado da expressão compilada. Por exemplo, 
- * se escrevermos a seguinte fórmula “=“2+3”” o que obtemos é a string “2+3” na 
- * célula. No entanto, se escrevermos a fórmula “=eval(“2+3”)” o que obtemos é o 
+ * se escrevermos a seguinte fórmula "="2+3"" o que obtemos é a string "2+3" na 
+ * célula. No entanto, se escrevermos a fórmula "=eval("2+3")" o que obtemos é o 
  * valor 5 na célula. 
  * <br/>
  * <br/>
@@ -27,9 +27,16 @@
  * <br/>
  * 
  * <b>S001d: Design</b><br/>
- * To realize this user story we will need to create a subclass of Extension. We will also need to create a subclass of UIExtension. For the sidebar we need to implement a JPanel.<br/>
- * The following diagram shows how these new classes will be loaded and "integrated" with cleansheets.<br/><br/>
- * <img src="../../../csheets/userstories/us001/doc-files/us001_design1.png"> 
+ * O utilizador ira introduzir um texto numa celula. Se o texto comecar por '='
+ * isto ira despoletar um trigger e assumir uma nova formula (expressao)
+ * essa expressao irá originar uma FunctionCall (Eval (argumentos))
+ * esses argumentos, irao originar uma binaryOperation (LeftOperand, Operator, RightOperand)
+ * o resultado da BinaryOperation irá ser o novo texto a ser apresentado na celula original.
+ * 
+ * 
+ * <br/>
+ * <br/>
+ * <img src="../../../csheets/userstories/us034/doc-files/us034_design1.png"> 
  * <br/>
  * <br/>
  * 
@@ -61,7 +68,19 @@
 /*
  *
   @startuml doc-files/us034_design1.png
-  
+    User->Cell: dados
+    Cell->CellImpl: setContent()
+    CellImpl->Formula: create
+    Formula->FormulaCompiler: getInstance()
+    FormulaCompiler->FormulaCompiler: compile()
+    FormulaCompiler->Eval : String
+    Eval->Formula: create
+    Formula->FormulaCompiler: getInstance()
+    FormulaCompiler->FormulaCompiler: compile()
+    FormulaCompiler->CellImpl: instance
+    CellImpl->CellImpl: updateDependencies()
+    CellImpl->CellImpl: fireContentChanged()
+    CellImpl->CellImpl: reevaluate()
   @enduml
  *
  */

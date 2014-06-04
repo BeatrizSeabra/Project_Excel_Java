@@ -4,6 +4,14 @@ csheets.ext.assertion.AssertionExtension
 csheets.ext.test.TestExtension
 csheets.ext.simple.ExtensionExample
 csheets.ext.comments.CommentsExtension
+<<<<<<< HEAD
 csheets.ext.findworkbooksfiles.ExtensionFindWorkbooksFiles
 
 
+=======
+csheets.ext.invokefunction.ExtensionInvokeFunction
+csheets.ext.image.ExtensionImage
+csheets.ext.logFile.ExtensionLogFile
+csheets.ext.sort.SortExtension
+csheets.ext.extensionsmanager.ExtensionsManager
+>>>>>>> e60f4d6fd9f528f6ae698e78185162175b93f9d8
