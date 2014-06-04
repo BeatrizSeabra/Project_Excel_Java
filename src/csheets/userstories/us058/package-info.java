@@ -18,7 +18,14 @@
  * <br/>
  * 
  * 
-@startuml
+ * <b>S001d: Design</b><br/>
+ * To realize this user story we don't need to create any new subclass, we can simply use the classes and methods allready in use to create a new JMenu.
+ * Also it will be needed a method to assign the correct menus that the user wants to work on, by creating methods with the UI regarding Java knowledge.
+* <br/>
+* <br/>
+ * */
+/*
+@startuml doc-files/us058_design1.png
 participant "uic : UIController" as UIC
  participant ExtensionManager as ExtM
  participant "extension : MenuExtension" as EM
