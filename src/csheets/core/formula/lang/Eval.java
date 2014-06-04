@@ -25,6 +25,10 @@ import csheets.core.Value;
 import csheets.core.formula.Expression;
 import csheets.core.formula.Function;
 import csheets.core.formula.FunctionParameter;
+import csheets.core.formula.compiler.ExcelExpressionCompiler;
+import csheets.core.formula.compiler.FormulaCompilationException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * A function that returns the numeric average of its arguments.
@@ -48,7 +52,7 @@ public class Eval implements Function {
 	}
 
 	public Value applyTo(Expression[] arguments) throws IllegalValueTypeException {
-		String param="";
+		String param="";Expression exp=null;
                 for (Expression expression : arguments) {
 			Value value = expression.evaluate();
 			if (value.getType() == Value.Type.TEXT) {
@@ -56,14 +60,22 @@ public class Eval implements Function {
 			} else 	throw new IllegalValueTypeException(value, Value.Type.TEXT);
 		}
                 param = '=' + param;
-		return new Value(param);
-	}
-
+                ExcelExpressionCompiler express = new ExcelExpressionCompiler();
+                try {
+                      exp = express.compile(null, param);
+                    } catch (FormulaCompilationException ex) {
+                         Logger.getLogger(Eval.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                return new Value(exp.evaluate().toString());
+                
+        }
+        
 	public FunctionParameter[] getParameters() {
 		return parameters;
 	}
 
 	public boolean isVarArg() {
-		return true;
+		return false;
 	}
 }
