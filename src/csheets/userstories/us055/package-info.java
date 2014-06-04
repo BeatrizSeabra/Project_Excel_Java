@@ -24,7 +24,8 @@
  * <br/>
  * 
  * 
- * 
+ **/
+/*
  * @startuml doc-files/us055_design55.png
 participant "User" as User
 participant "lfc:EventLogFileController" as LFC

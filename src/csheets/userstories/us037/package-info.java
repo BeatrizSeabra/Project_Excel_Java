@@ -25,6 +25,11 @@
  * Se o texto começar por = assim assume uma formula.
  * A formula por sua vez é uma expressao.
  * Vai validar a expressao e faz o que é pretendido
+ * use case:
+ * o user coloca a informaçao e vai para cell
+ * vai para o cell imp pelo set content
+ * cria uma nova formula e vai ao formula compilar ver se 
+ * esta correcta eenvia novamente para a cellImp
  * 
  * 
  * <img src="../../../csheets/userstories/us001/doc-files/us037_design1.png"> 
@@ -59,21 +64,15 @@
 /*
  *
   @startuml doc-files/us037_design1.png
-  title Operador de Distribuicao
-
-
-User -> Cell : Escreve na cell;
-Cell -> Formula : cell.setContent(string);
-note right of Cell: vai ver se esta correcto;
-Formula -> Expression : formula.evaluete();
-
-Expression -> ExpressionCompiler : texto;
-Expression -> BinaryOperation : texto;
-
-BinaryOperation()->Cell : toString(resultado para a cell pretendida);
-
-
-  end
+   User->Cell: dados 
+   Cell->CellImpl: setContent() 
+   CellImpl->Formula: create
+   Formula->FormulaCompiler: getInstance()
+   FormulaCompiler->FormulaCompiler: compile() 
+   FormulaCompiler->CellImpl: instance 
+   CellImpl->CellImpl: updateDependencies() 
+   CellImpl->CellImpl: fireContentChanged() 
+   CellImpl->CellImpl: reevaluate()
   @enduml
  *
  */
