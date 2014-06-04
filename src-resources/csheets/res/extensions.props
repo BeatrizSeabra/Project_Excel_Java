@@ -5,8 +5,13 @@ csheets.ext.test.TestExtension
 csheets.ext.simple.ExtensionExample
 csheets.ext.comments.CommentsExtension
 csheets.ext.invokefunction.ExtensionInvokeFunction
+<<<<<<< HEAD
+csheets.ext.edMenu.EdMenuExtension
+
+=======
 csheets.ext.image.ExtensionImage
 csheets.ext.logFile.ExtensionLogFile
 csheets.ext.sort.SortExtension
 csheets.ext.extensionsmanager.ExtensionsManager
 csheets.ext.contacts.ExtensionContacts
+>>>>>>> aa0d57094f626ea37c3fbccb53059478c51b0675
