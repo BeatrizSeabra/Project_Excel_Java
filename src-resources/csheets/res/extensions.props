@@ -10,3 +10,4 @@ csheets.ext.logfile.ExtensionLogFile
 csheets.ext.sort.SortExtension
 csheets.ext.chat.ChatExtension
 csheets.ext.exporttxt.ExtensionTxt
+csheets.ext.searchFiles.ExtensionSearchFiles
