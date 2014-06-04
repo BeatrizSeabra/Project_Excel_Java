@@ -5,5 +5,6 @@ csheets.ext.test.TestExtension
 csheets.ext.simple.ExtensionExample
 csheets.ext.comments.CommentsExtension
 csheets.ext.invokefunction.ExtensionInvokeFunction
-
-
+csheets.ext.image.ExtensionImage
+csheets.ext.logFile.ExtensionLogFile
+csheets.ext.sort.SortExtension
