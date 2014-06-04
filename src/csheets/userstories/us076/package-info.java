@@ -17,6 +17,10 @@
  * <br/>
  * 
  * <b>S076d: Design</b><br/>
+ * Para realizar esta user story, temos de criar a classe JDialogSearch, para o Utilizador inserir o padrao e para mostrar os resultados,
+ * e a classe Search para realizar a pesquisa dos ficheiros. O diagrama seguinte
+ * mostra como integrar estas classes... <br/><br/>
+ * <img src="../../../csheets/userstories/us076/doc-files/US076_design.png"> 
  * <br/>
  * <br/>
  * 
@@ -33,6 +37,19 @@
  * <br/>
  * 
  * @author 1120564MarcoEsteves
+ */
+ /*
+ *
+ @startuml doc-files/US076_design.png
+ User -> UIController: searchFiles()
+ UIController -> SearchAction: actionListener()
+ SearchAction -> SearchFiles: create()
+ SearchFiles -> JDialogSearch: create()
+ SearchFiles <- JDialogSearch: pattern
+ SearchFiles -> SearchFiles : search()
+ SearchFiles -> JDialogSearch: results
+ @enduml
+ *
  */
 
 package csheets.userstories.us076;
