@@ -10,6 +10,7 @@ package csheets.ext.sort.ui;
  *
  * @author Stefan Parker
  */
+import csheets.ext.style.ui.FontAction;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JMenu;
@@ -32,8 +33,9 @@ public class SortMenu extends JMenu {
 	public SortMenu(UIController uiController) {
 		super("Sort Cell");
 		setMnemonic(KeyEvent.VK_I);
-
+                
 		// Adds font actions
 		add(new SortAction(uiController));
+                add(new SortActionZA(uiController));
 	}	
 }
