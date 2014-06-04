@@ -10,6 +10,7 @@ package csheets.ext.sort.ui;
  *
  * @author Stefan Parker
  */
+import csheets.CleanSheets;
 import javax.swing.Icon;
 import javax.swing.JComponent;
 import javax.swing.JMenu;
@@ -48,11 +49,11 @@ public class UIExtensionSort extends UIExtension {
 	 * @return an icon with style
 	 */
 	public Icon getIcon() {
-//		if (icon == null)
-//			icon = new ImageIcon(
-//				SortExtension.class.getResource("res/img/logo.gif"));
-//		return icon;
-            return null;
+		if (icon == null){
+                    icon = new ImageIcon(CleanSheets.class.getResource("res/img/sort.gif"));
+                }
+		return icon;
+            //return null;
             
 	}
 
