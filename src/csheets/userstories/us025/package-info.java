@@ -4,8 +4,8 @@
  * <br/>
  * 
  * <b>Requirement</b><br/>
- *  Deve ser possível exportar o conteúdo de uma folha para um ﬁcheiro XML.Apenas o conteúdo das células deve ser exportado (i.e., não é necessário exportar as formulas, etc.).
-
+ *  Deve ser possivel exportar o conteudo de uma folha para um ficheiro XML. Apenas o conteudo das celulas deve ser exportado (i.e., nao e necessario exportar as formulas, etc.).
+ *
  * <br/>
  * <br/>
  *  
@@ -17,14 +17,13 @@
  * Após a troca de dados com a exportXmlUI uma instancia do controlExportXML será criada e essa ira instanciar a classe ExportXML e a informação contida no objecto da classe Workbook será exportada para xml.<br/>
  * <br/>
  *
- * <b>S025d: Design</b><br/>
- * Para realizar este use case iremos precisar de utilizar uma interface que controle as classes responsáveis pela exportação e importação.Iremos precisar também de uma classe responsável pela exportação em xml, XMLCodec.<br/>
- * Teremos de adicionar a opção de salvar como xml na IterfaceUI responsável por tal.<br/>
- * O diagrama de sequencia seguinte descreve como irá ocorrer a iteração entre classes.<br/>
- * <img src="../../../csheets/userstories/us025/doc-files/us025_design1.png"> 
- * <a href="../../../csheets/userstories/us025/XMLcleanSheets.xsd" target="_blank">xml schema</a>
- * <br/>
- * <br/>
+ *<b>S025d: Design</b><br/>
+ *Para realizar este use case iremos precisar de utilizar uma interface que controle as classes responsáveis pela exportação e importação.Iremos precisar também de uma classe responsável pela exportação em xml, XMLCodec.<br/>
+ *Teremos de adicionar a opção de salvar como xml na IterfaceUI responsável por tal.<br/>
+ *O diagrama de sequencia seguinte descreve como irá ocorrer a iteração entre classes.<br/>
+ *<img src="../../../csheets/userstories/us025/doc-files/us025_design1.png"> 
+ *<br/>
+ *<br/>
  * 
  * @author 1120388
  */
@@ -43,4 +42,5 @@
  @enduml
  *
  */
+ 
 package csheets.userstories.us025;

@@ -1,22 +1,22 @@
 /**
-* Technical documentation regarding the user story 001: setup commentable cells. 
+* Technical documentation regarding the user story 100: Addresses - Residences. 
 * <br/>
 * <br/>
 * 
 * <b>Requirement</b><br/>
-* Edição de Moradas.
+* Editing Residences.
 * <br/>
 * <br/>
 *  
 * <b>S001a: Analysis</b><br/>
-* Definição do conteúdo de cada morada, por exemplo: Rua, Localidade, Código Postal, Cidade, País e tipo: a principal e a secundária.</br></br>
-* Definição do layout para apresentação, remoção e actualização das moradas.
+* Definition content of each residence, for exemple: Street, Locality, Postal Code, City, Country and Type: primary or secundary.</br></br>
+* Definition layout for presentation, remotion and update residences.
 * <br/>
 * <br/>
 * 
 * <b>S001d: Design</b><br/>
-* Escolha dos recursos a utilizar para guardar as moradas.<br/><br/>
-* Criação dos diagramas que melhor representem a solução para o problema.<br/><br/>
+* Choice of the resources used for store the residences.<br/><br/>
+* Creation of diagrams to represent a solution for the problem.<br/><br/>
 * <img src="../../../csheets/userstories/us001/doc-files/us100_design1.png"> 
 * <br/>
 * <br/>
@@ -48,20 +48,20 @@
 */
 /*
 *
- @startuml doc-files/us001_design1.png
- participant "uic : UIController" as UIC
- participant ExtensionManager as ExtM
- participant "extension : CommentsExtension" as EExample
- participant "uiExtension : UIExtensionComments" as UIExt
- participant "CommentPanel : JPanel" as cp
+ @startuml doc-files/us100_design1.png
+ participant "uic : UIExtensionResidence" as UIC
+ participant ExtensionResidence as ExtM
+ participant "extension : ResidenceMenu" as EExample
+ participant "uiExtension : ResidenceAction" as UIExt
+ participant "ResidencePanel : JPanel" as cp
  UIC -> ExtM : extensions=getExtensions();
  loop for Extension ext : extensions
- 	UIC -> EExample : uiExtension=getUIExtension(this);
+ 	UIC -> EExample : uiExtension=getMenu(this);
  	activate EExample
  	create UIExt
  	EExample -> UIExt : new(extension, uic)
  	deactivate EExample
- 	UIExt -> UIExt : getSideBar();
+ 	UIExt -> UIExt : getMenu();
  	activate UIExt
  	create cp
  	UIExt -> cp :  new (uic)  	

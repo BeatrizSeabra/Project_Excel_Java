@@ -132,6 +132,6 @@
   @enduml
   
  */
-package csheets.ext.simple;
+package csheets.ext.invokefunction;
 
 

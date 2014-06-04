@@ -7,8 +7,8 @@
  * Esta funcao tem um único parametro que é uma string. A execucao dessa funcao 
  * o que faz é compilar o texto da string e executar a expressão obtida. O 
  * resultado da funcão eval é o resultado da expressão compilada. Por exemplo, 
- * se escrevermos a seguinte fórmula “=“2+3”” o que obtemos é a string “2+3” na 
- * célula. No entanto, se escrevermos a fórmula “=eval(“2+3”)” o que obtemos é o 
+ * se escrevermos a seguinte fórmula "="2+3"" o que obtemos é a string "2+3" na 
+ * célula. No entanto, se escrevermos a fórmula "=eval("2+3")" o que obtemos é o 
  * valor 5 na célula. 
  * <br/>
  * <br/>
