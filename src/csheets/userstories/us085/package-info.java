@@ -35,23 +35,24 @@
  *      Extenção em si
  *      - inicializar os GUI e eventos.
  *      - Inicializar as funcionalidades de connecção em rede.
- *          enviar uma mensagem em broadcast e contar o numero de respostas.
+ *          enviar uma mensagem em broadcast e e listar os perfis de quem respondeu.
  *          no caso de não haver resposta este jogador passa a ser o servidor.
  *          no caso de haver resposta(s) este jogador é um cliente.
  *      - Establecer connecção com outro jogador.
- *          (opcional)ofrecer suporte para conectar por IP
- *          no caso de só haver um jogador, ele fica como servidor e espera que alguem entre em contacto.
- *          no caos de haver mais do que 2 jogadores, os restantes ficam como espectadores.
- *      - Preparar jogo, jogadores e espetadores
- *          escolher o jogo, os jogadores e espetadores se necessario.
- *      - Iniciar o jogo e emitir-lo para todos os jogadores.
+ *          Mostrar uma lista com todos os jogadores.
+ *          Escolher o jogador desejado e entrar na lobby.
+ *      - Preparar jogo, jogadores
+ *          escolher o jogo.
+ *      - Iniciar o jogo.
  *      - Noção de Lobby e Jogo
- *          quando o jogo termina voltamos para o lobby onde se repetem passos a cima.
+ *          quando o jogo termina voltamos para o lobby onde se repetem passos a cima que não são de inicialização.
  * 
  * Grafico:
+ *      -Lista jogadores
+ *          
  *      -Lobby mockup:
- *      <img src="../../../csheets/userstories/us085/doc-files/LobbyMockup.png"> 
- * 
+ *          <img src="../../../csheets/userstories/us085/doc-files/LobbyMockup.png"> 
+ *      
  * 
  * 
  * 
