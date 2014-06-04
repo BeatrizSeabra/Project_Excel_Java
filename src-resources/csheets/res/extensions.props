@@ -8,3 +8,4 @@ csheets.ext.invokefunction.ExtensionInvokeFunction
 csheets.ext.image.ExtensionImage
 csheets.ext.logFile.ExtensionLogFile
 csheets.ext.sort.SortExtension
+csheets.ext.pdf.ExtensionPdf
