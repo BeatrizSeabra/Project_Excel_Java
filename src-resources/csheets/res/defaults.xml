@@ -10,6 +10,8 @@
 <entry key="filetype1.description">Comma-separated file (*.csv)</entry>
 <entry key="filetype2.extension">txt</entry>
 <entry key="filetype2.description">Text file (*.txt)</entry>
+<entry key="filetype3.extension">xml</entry>
+<entry key="filetype3.description">XML file (*.xml)</entry>
 
 <entry key="dependencies.ui.sidebar">true</entry>
 <entry key="style.ui.toolbar">true</entry>
