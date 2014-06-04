@@ -4,9 +4,11 @@
  */
 package csheets.ext.extensionsmanager.ui;
 
+import csheets.CleanSheets;
 import csheets.ui.ctrl.BaseAction;
 import csheets.ui.ctrl.UIController;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -30,6 +32,7 @@ public class ExtensionsManagerAction extends BaseAction {
 	}
 
 	protected void defineProperties() {
+            putValue(SMALL_ICON, new ImageIcon(CleanSheets.class.getResource("res/img/toolbar.gif")));
 	}
 
 	/**
@@ -41,7 +44,11 @@ public class ExtensionsManagerAction extends BaseAction {
                 
 		
 		try {
-			//this.uiController.getActiveSpreadsheet().getCell(0, 0).setContent("Changed");
+                        ExtensionsManagerWindow emw = new ExtensionsManagerWindow();
+                        emw.setVisible(true);
+                        emw.setSize(500, 350);
+                        emw.setResizable(true);
+                        emw.setLocationRelativeTo(null);
 		} catch (Exception ex) {
 			// para ja ignoramos a excepcao
                 }
