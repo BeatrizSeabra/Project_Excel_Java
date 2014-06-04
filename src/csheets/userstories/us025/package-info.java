@@ -22,6 +22,8 @@
  *Teremos de adicionar a opção de salvar como xml na IterfaceUI responsável por tal.<br/>
  *O diagrama de sequencia seguinte descreve como irá ocorrer a iteração entre classes.<br/>
  *<img src="../../../csheets/userstories/us025/doc-files/us025_design1.png"> 
+ *Para validar o xml exportado e limitar o conteúdo das celulas, foi criado uma ficheiro xsd. <br/>
+ * <a src="../../../csheets/io/cleanSheets.xsd" target="_blank">cleanSheet xsd</a> 
  *<br/>
  *<br/>
  * 
@@ -38,7 +40,6 @@
  CleanSheets -> Codec : new CodecFactory().getCodec(file)
  Codec  -> XMLCodec : getCodec()
  XMLCodec -> CleanSheets  : write()
- end
  @enduml
  *
  */
