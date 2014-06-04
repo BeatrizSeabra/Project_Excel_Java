@@ -5,7 +5,7 @@
  * 
  * <b>Requirement</b><br/>
  * Deve ser possível exportar o conteúdo (valores) de uma
-sheet para um ﬁcheiro PDF. Apenas o conteúdo das células deve ser exportado (i.e., não é necessário
+sheet para um ficheiro PDF. Apenas o conteúdo das células deve ser exportado (i.e., não é necessário
 exportar as formulas, etc.). Não é necessária grande preocupação no aspecto visual.
  * <br/>
  * <br/>
@@ -18,7 +18,8 @@ exportar as formulas, etc.). Não é necessária grande preocupação no aspecto
  * <br/>
  * 
  * <b>S028d: Design</b><br/>
- * 
+ * O Diagrama de Sequência demonstra como irá ser efectuado o caso de uso:<br/>
+ * <img src="../../../csheets/userstories/us028/doc-files/us028_design1.png"> 
  * <br/>
  * <br/>
  * 
@@ -42,25 +43,16 @@ exportar as formulas, etc.). Não é necessária grande preocupação no aspecto
 /*
  *
   @startuml doc-files/us028_design1.png
-  participant "uic : UIController" as UIC
-  participant ExtensionManager as ExtM
-  participant "extension : CommentsExtension" as EExample
-  participant "uiExtension : UIExtensionComments" as UIExt
-  participant "CommentPanel : JPanel" as cp
-  UIC -> ExtM : extensions=getExtensions();
-  loop for Extension ext : extensions
-  	UIC -> EExample : uiExtension=getUIExtension(this);
-  	activate EExample
-  	create UIExt
-  	EExample -> UIExt : new(extension, uic)
-  	deactivate EExample
-  	UIExt -> UIExt : getSideBar();
-  	activate UIExt
-  	create cp
-  	UIExt -> cp :  new (uic)  	
-  	deactivate UIExt
-  	UIC -> UIC : uiExtensions.add(uiExtension);
-  end
+  "uic:UIController" -> ExtensionManager : extensions = getExtensions()
+loop [for Extension ext: extensions]
+"uic:UIController" -> "extension:ImportExtensions" : uiExtension=getUIExtension(this)
+"extension:ImportExtensions" -> "uiExtension:UIExtensionImport" : new(extension,uic)
+"uiExtension:UIExtensionImport" -> "uiExtension:UIExtensionImport" : getMenu()
+"uiExtension:UIExtensionImport" -> "menu:ImportMenuAction" : new(uic)
+
+note over of ExtensionManager: Completar .....
+"uic:UIController" -> "uic:UIController" : uiExtensions.add(uiExtension)
+end
   @enduml
  *
  */

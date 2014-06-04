@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!--
+-->
+
+<xs:schema version="1.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.dei.isep.ipp.pt/xml/lapr4"
+           xmlns="http://www.dei.isep.ipp.pt" 
+           elementFormDefault="qualified">
+    <xs:element name="CleanSheet" type="TCleanSheet"/>
+    <xs:complexType name="TCleanSheet">
+        <xs:sequence>
+            <xs:element name="Coluna" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Linha" maxOccurs="unbounded">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:pattern value="[a-zA-z0-9][ a-zA-z0-9]*"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                    </xs:sequence>
+                    <xs:attribute name="id" type="TL">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:pattern value="[1-9][0-9]*"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:attribute> 
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="id" type="TC">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:pattern value="[A-Z][A-Z]*"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+
+</xs:schema>

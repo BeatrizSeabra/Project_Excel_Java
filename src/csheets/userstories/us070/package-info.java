@@ -4,7 +4,7 @@
  * <br/>
  * 
  * <b>Requerimento</b><br/>
- * Deve ser possível importar dados de um ficheiro de texto, cujas colunas são divididas por “,”. Os dados devem aparecer a partir de uma célula que é identificada como o canto superior esquerdo.
+ * Deve ser possível importar dados de um ficheiro de texto, cujas colunas são divididas por ",". Os dados devem aparecer a partir de uma célula que é identificada como o canto superior esquerdo.
  * <br/>
  * <br/>
  *  
