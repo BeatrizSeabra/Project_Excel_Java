@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  * @author 1121228
  * @author 1110506
  */
-public abstract class Connection extends Thread {
+public class Connection extends Thread {
 
     private InetAddress ipAddress;
     private DatagramSocket socket;
@@ -39,22 +39,15 @@ public abstract class Connection extends Thread {
         }
     }
 
-    public void run() {
-        while (true) {
-            byte[] data = new byte[1024];
-            DatagramPacket packet = new DatagramPacket(data, data.length);
-            try {
-                socket.receive(packet);
-            } catch (IOException ex) {
-                Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            this.handleMessage(packet.getData(), packet.getAddress(), packet.getPort());
-//            String message = new String(packet.getData());
-//            System.out.println("Server > " + message);
-        }
+    public InetAddress getIpAddress() {
+        return ipAddress;
     }
 
-    public abstract void handleMessage(byte[] data, InetAddress address, int port);
+    public void setIpAddress(InetAddress ipAddress) {
+        this.ipAddress = ipAddress;
+    }
+
+   
 
     public void sendData(byte[] data) {
         DatagramPacket packet = new DatagramPacket(data, data.length, ipAddress, port);

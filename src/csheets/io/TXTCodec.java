@@ -42,7 +42,7 @@ import csheets.core.Workbook;
 public class TXTCodec implements Codec {
 
 	/** The string used to separate the content of different cells */
-	public static final String SEPARATOR = ";";
+	public static final String SEPARATOR = ",";
 
 	/**
 	 * Creates a new CSV codec.

@@ -27,6 +27,8 @@ import javax.swing.ImageIcon;
 import javax.swing.KeyStroke;
 
 import csheets.CleanSheets;
+import csheets.ext.searchandreplace.Search;
+import javax.swing.JOptionPane;
 
 /**
  * A search and replace operation.
@@ -45,7 +47,7 @@ public class SearchAction extends FocusOwnerAction {
 	}
 
 	protected void defineProperties() {
-		setEnabled(false);
+		setEnabled(true);
 		putValue(MNEMONIC_KEY, KeyEvent.VK_F);
 		putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_F, ActionEvent.CTRL_MASK));
 		putValue(SMALL_ICON, new ImageIcon(CleanSheets.class.getResource("res/img/find.gif")));
@@ -56,11 +58,19 @@ public class SearchAction extends FocusOwnerAction {
 	 * @param event the event that was fired
 	 */
 	public void actionPerformed(ActionEvent event) {
-		if (focusOwner != null) {
-			focusOwner.changeSelection(0, 0, false, false);
-			focusOwner.changeSelection(
-				focusOwner.getSpreadsheet().getRowCount() - 1,
-				focusOwner.getSpreadsheet().getColumnCount() - 1, false, true);
-		}
+//		if (focusOwner != null) {
+//			focusOwner.changeSelection(0, 0, false, false);
+//			focusOwner.changeSelection(focusOwner.getSpreadsheet().getRowCount() - 1, focusOwner.getSpreadsheet().getColumnCount() - 1, false, true);
+//		}
+                Search search = new Search();
+                search.getTextFromDialog();
+                int cell[] = new int[2];
+                cell=search.textSearch(focusOwner);
+                if(cell==null){
+                    JOptionPane.showMessageDialog(null, "No text found");
+                }else{
+                    focusOwner.changeSelection(cell[0], cell[1], true, false);
+                }
+                
 	}
 }

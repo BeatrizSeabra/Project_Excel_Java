@@ -20,7 +20,8 @@
  * 
  * <b>S067d: Design</b><br/> 
  * <br/>
- * To realize this user story we will need to create a submenu option in the menu option File, named "List workbooks files in hdd".
+ * To realize this user story we will need to create a submenu option in the menu option File, named "List workbooks files".
+ * 
  * We will also need to create a subclass of UIExtension. For the sidebar we need to implement a JPanel.<br/>
  * The following diagram shows how these new classes will be loaded and "integrated" with cleansheets.<br/><br/>
  * <img src="../../../csheets/userstories/us001/doc-files/us067_design1.png">
