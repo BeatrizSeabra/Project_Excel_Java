@@ -38,7 +38,7 @@ public class ContactsAction extends BaseAction {
      */
     public void actionPerformed(ActionEvent event) {
 
-        // Lets user select a font
+        /* Lets user select a font
         int result = JOptionPane.showConfirmDialog(null, "You have selected the Example option. Do you want to set cell A1 to 'Changed'");
 
         if (result == JOptionPane.YES_OPTION) {
@@ -49,5 +49,11 @@ public class ContactsAction extends BaseAction {
                 // para ja ignoramos a excepcao
             }
         }
+                */
+       ContactsWindow cWindow = new ContactsWindow();
+       cWindow.setVisible(true);
+       cWindow.setSize(352, 200);
+      // cWindow.setResizable(true);
+      // cWindow.setLocationRelativeTo(null);
     }
 }
