@@ -20,6 +20,7 @@ GreaterThanOrEqual
 # Miscellaneous binary operators
 Concatenator
 RangeReference
+Eval
 
 # Logic functions
 True
