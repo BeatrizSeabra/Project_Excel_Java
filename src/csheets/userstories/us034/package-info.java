@@ -68,14 +68,19 @@
 /*
  *
   @startuml doc-files/us034_design1.png
-    User ->Cell :Escreve formula na Cell
-    Cell -> Formula  : Cell.setContent(texto);
-    Formula -> Expression : Formula.evaluate();
-    Expression -> ExpressionCompiler : texto
-    ExpressionCompiler -> FunctionCall: (texto =Eval)
-    ExpressionCompiler -> BinaryOperation :(argumentos da funçao)
-    BinaryOperation -> Cell : toString(resultado dos argumentos);
-    end
+    User->Cell: dados
+    Cell->CellImpl: setContent()
+    CellImpl->Formula: create
+    Formula->FormulaCompiler: getInstance()
+    FormulaCompiler->FormulaCompiler: compile()
+    FormulaCompiler->Eval : String
+    Eval->Formula: create
+    Formula->FormulaCompiler: getInstance()
+    FormulaCompiler->FormulaCompiler: compile()
+    FormulaCompiler->CellImpl: instance
+    CellImpl->CellImpl: updateDependencies()
+    CellImpl->CellImpl: fireContentChanged()
+    CellImpl->CellImpl: reevaluate()
   @enduml
  *
  */
