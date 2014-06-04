@@ -25,8 +25,7 @@ public class ExtensionFindWorkbooksFiles extends Extension {
 	}
 	
 	/**
-	 * Returns the user interface extension of this extension (an instance of the class {@link  csheets.ext.simple.ui.UIExtensionExample}). <br/>
-	 * In this extension example we are only extending the user interface.
+	 * Returns the user interface extension of this extension (an instance of the class {@link  csheets.ext.findworkbooksfiles.ui.UIExtensionFindWorkbooksFiles}). <br/>	
 	 * @param uiController the user interface controller
 	 * @return a user interface extension, or null if none is provided
 	 */
