@@ -6,12 +6,9 @@
 
 package csheets.ext.chat.ui;
 
-import csheets.CleanSheets;
 import csheets.ui.ctrl.BaseAction;
 import csheets.ui.ctrl.UIController;
 import java.awt.event.ActionEvent;
-import static javax.swing.Action.SMALL_ICON;
-import javax.swing.ImageIcon;
  
 /**
  *
@@ -28,6 +25,7 @@ public class ChatAction extends BaseAction{
 	 */
 	public ChatAction(UIController uiController) {
 		this.uiController = uiController;
+                chat= new UIChat();
 	}
 
 	protected String getName() {
@@ -39,8 +37,6 @@ public class ChatAction extends BaseAction{
 	}
 
 	public void actionPerformed(ActionEvent event) {
-                chat= new UIChat();
                 chat.setVisible(true);
-		
 	}
 }
