@@ -11,6 +11,7 @@ import csheets.ext.chat.ui.UIChat;
 import csheets.ext.connection.Connection;
 import csheets.ext.connection.Server;
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 
@@ -20,7 +21,7 @@ import java.util.ArrayList;
  */
 public class ChatController {
     
-    private ArrayList<Connection> connections;
+    private ArrayList<String> connections;
     private final ArrayList<Chat> chats;
     private final Server servidor;
     private final int porta=30347;
@@ -35,8 +36,8 @@ public class ChatController {
             @Override
             public void handleMessage(byte[] data, InetAddress address, int port) {
                  boolean existe=false;
-                for(Connection con: connections){
-                    if(con.getIpAddress().equals(address)){
+                for(String con: connections){
+                    if(con.equals(address)){
                         existe=true;
                     }
                 }
@@ -54,7 +55,7 @@ public class ChatController {
     }
     public void newChat(String ip){
        if(!existe(ip)){
-       connections.add(new Connection(ip, porta));
+       connections.add(ip);
        Chat p= new Chat(ip, this);
        p.setVisible(true);
        chats.add(p);
@@ -74,8 +75,8 @@ public class ChatController {
     public String[] listConnections(){
         String[] ret= new String[connections.size()];
         int cont=0;
-         for(Connection con: connections){
-            ret[cont]=con.getIpAddress().getHostAddress();
+         for(String con: connections){
+            ret[cont]=con;
             cont++; 
          }
         return ret;
@@ -96,18 +97,16 @@ public class ChatController {
             }
         }
     }
-    public void sendMessage(String ip, String data){
+    public void sendMessage(String ip, String data) throws UnknownHostException{
          boolean existe=false;
-         for(Connection con: connections){
-                    if(con.getIpAddress().getHostAddress().equals(ip)){
+         for(String con: connections){
+                    if(con.equals(ip)){
                         existe=true;
-                        con.sendData(data.getBytes(Charset.forName("UTF-8")));
+                        servidor.sendData(data.getBytes(Charset.forName("UTF-8")),con,porta);
                     }
          }
          if(!existe){
-             Connection p= new Connection(ip, getPorta());
-             p.sendData(data.getBytes(Charset.forName("UTF-8")));
-             connections.add(p);
+             connections.add(ip);
          }
     }
     public void deactivating(){
@@ -115,13 +114,6 @@ public class ChatController {
                 con.dispose();
          }
         chats.clear();
-        for(Connection con: connections){
-            try{
-            con.interrupt();
-            }catch(SecurityException ape){
-                
-            }
-        }
         connections.clear();
         try{
             servidor.interrupt();
