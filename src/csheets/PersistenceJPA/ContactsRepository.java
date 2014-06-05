@@ -18,55 +18,52 @@ import javax.persistence.Query;
 public class ContactsRepository {
 
     public void add(Contact contact) {
-        EntityManager entityManager = csheets.PersistenceJPA.Persistence.getEntityManager();
+        EntityManager entityManager = csheets.PersistenceJPA.Persistence.getInstance().connection("JAP2PU");
         entityManager.getTransaction().begin();
         entityManager.persist(contact);
         entityManager.getTransaction().commit();
-        entityManager.close();
+        csheets.PersistenceJPA.Persistence.getInstance().close(); 
         //System.err.println("The following contact was added: " + Contact.getFirstName() + " " + Contact.getLastName());
 
     }
 
     public void changeOccupation(Contact contact, String occupation) {
-        EntityManager entityManager = csheets.PersistenceJPA.Persistence.getEntityManager();
+        EntityManager entityManager = csheets.PersistenceJPA.Persistence.getInstance().connection("JAP2PU");
         entityManager.getTransaction().begin();
         String hqlString = "UPDATE Contacts SET Occupation='" + occupation + "', WHERE Id='" + contact.getId() + "';";
         entityManager.createQuery(hqlString).executeUpdate();
         entityManager.refresh(contact);
-        entityManager.close();
+        csheets.PersistenceJPA.Persistence.getInstance().close(); 
     }
 
     public void changeFirstName(Contact contact, String firstName) {
-        EntityManager entityManager = csheets.PersistenceJPA.Persistence.getEntityManager();
+        EntityManager entityManager = csheets.PersistenceJPA.Persistence.getInstance().connection("JAP2PU");
         entityManager.getTransaction().begin();
         String hqlString = "UPDATE Contacts SET firstName='" + firstName + "', WHERE Id='" + contact.getId() + "';";
         entityManager.createQuery(hqlString).executeUpdate();
         entityManager.refresh(contact);
-        entityManager.close();
+        csheets.PersistenceJPA.Persistence.getInstance().close();
     }
 
     public void changeLastName(Contact contact, String lastName) {
-        EntityManager entityManager = csheets.PersistenceJPA.Persistence.getEntityManager();
+        EntityManager entityManager = csheets.PersistenceJPA.Persistence.getInstance().connection("JAP2PU");
         entityManager.getTransaction().begin();
-        String hqlString = "UPDATE Contacts SET lastName='" + lastName + "', WHERE Id='" + contact.getId() + "';";
+        String hqlString = "UPDATE Contact SET lastName='" + lastName + "', WHERE Id='" + contact.getId() + "';";
         entityManager.createQuery(hqlString).executeUpdate();
         entityManager.refresh(contact);
-        entityManager.close();
+        csheets.PersistenceJPA.Persistence.getInstance().close();
 
     }
-    
-    
-    
+
     public List<Contact> getAll()
     {
-        EntityManager em = csheets.PersistenceJPA.Persistence.getEntityManager();
-
-        Query query = em.createQuery("SELECT e FROM Contact e");
-        
+        EntityManager entityManager = csheets.PersistenceJPA.Persistence.getInstance().connection("JAP2PU");
+        entityManager.getTransaction().begin();
+        Query query = entityManager.createQuery("SELECT e FROM Contact e");
         List<Contact> listContact = new ArrayList<>();
-        
         listContact = query.getResultList();
-        
+        csheets.PersistenceJPA.Persistence.getInstance().close();  
+              
         return listContact;
 
     }
