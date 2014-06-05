@@ -55,6 +55,8 @@ public class ContactsRepository {
 
     }
     
+    
+    
     public List<Contact> getAll()
     {
         EntityManager em = ConnectionManager.getInstance().getEm();
