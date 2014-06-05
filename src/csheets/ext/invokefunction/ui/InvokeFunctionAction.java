@@ -8,8 +8,8 @@ import csheets.ui.ctrl.BaseAction;
 import csheets.ui.ctrl.UIController;
 
 /**
- * An action of the simple extension that exemplifies how to interact with the spreadsheet.
- * @author Alexandre Braganca
+ * An action of the invoke function extension that exemplifies how to interact with the spreadsheet.
+ * @author 1120268
  */
 public class InvokeFunctionAction extends BaseAction {
 
@@ -32,13 +32,14 @@ public class InvokeFunctionAction extends BaseAction {
 	}
 
 	/**
-	 * A simple action that presents a confirmation dialog.
-	 * If the user confirms then the contents of the cell A1 of the current sheet are set to the string "Changed".
+	 * An action that presents a new window, in which the user can select a function of the showned ones.
 	 * @param event the event that was fired
 	 */
 	public void actionPerformed(ActionEvent event) {
                 
-		InvokeUI invoke=new InvokeUI();
+		Invoke invoke=new Invoke();
+                invoke.setVisible(true);
+                invoke.setLocation(500, 200);
 		try {
 			this.uiController.getActiveSpreadsheet().getCell(0, 0).setContent("Changed");
 		} catch (Exception ex) {
