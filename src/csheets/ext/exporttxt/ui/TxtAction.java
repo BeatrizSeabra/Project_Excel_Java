@@ -19,7 +19,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
- * @author 1110401
+ * @author Tiba
  */
 public class TxtAction extends BaseAction {
 

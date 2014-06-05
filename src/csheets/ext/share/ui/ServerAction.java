@@ -1,20 +1,18 @@
 package csheets.ext.share.ui;
 
 import csheets.core.Cell;
-import csheets.ui.ctrl.FocusOwnerAction;
+import csheets.ext.share.ExtensionShare;
+import csheets.ext.share.ui.*;
 import java.awt.event.ActionEvent;
-
-
+import csheets.ui.ctrl.FocusOwnerAction;
 import csheets.ui.ctrl.UIController;
 
 /**
- * An action of the share extension that exemplifies how to interact with the
- * spreadsheet.
- *
+ * An action of the share extension that creates a new Server.
+ * 
  * @author Rui 1110506
  */
-public class ServerAction extends FocusOwnerAction {
-
+public class ServerAction extends FocusOwnerAction{
     /**
      * The user interface controller
      */
@@ -29,27 +27,24 @@ public class ServerAction extends FocusOwnerAction {
         this.uiController = uiController;
     }
 
-    protected String getName() {
+    protected String getName() {//Server Option
         return "Server";
     }
 
-    protected void defineProperties() {
+    protected void defineProperties() {//no properties
     }
 
     /**
-     * A simple action that presents a confirmation dialog. If the user confirms
-     * then the contents of the cell A1 of the current sheet are set to the
-     * string "Changed".
-     *
+     * The share action that
+     *creates a new @see ServerUI
      * @param event the event that was fired
      */
     public void actionPerformed(ActionEvent event) {
 
-        Cell area[][] = super.focusOwner.getSelectedCells();
+        Cell area[][]=super.focusOwner.getSelectedCells();
         
-       ServerUI server = new ServerUI(super.focusOwner, uiController);
-       server.run();
-       
+        ServerUI server=new ServerUI(super.focusOwner,uiController);
+        server.run();
+        
     }
-
 }

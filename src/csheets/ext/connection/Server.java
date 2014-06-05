@@ -25,6 +25,7 @@ import java.util.logging.Logger;
 public abstract class Server extends Thread {
     private DatagramSocket socket;
     private int port;
+    public boolean allDone=false;
 
     public Server(int port) {
         try {
@@ -50,6 +51,9 @@ public abstract class Server extends Thread {
             }
             if(recebeu){
                 handleMessage(data, packet.getAddress(), packet.getPort());
+            }
+            if(allDone){
+                return ;
             }
                     
         }
