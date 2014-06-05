@@ -41,25 +41,25 @@
  * <br/>
  * 
  * <b>S001c: Coding</b><br/>
- * see:<br/>
- * <a href="../../../csheets/ext/comments/package-summary.html">csheets.ext.comments</a><br/>
- * <a href="../../../csheets/ext/comments/ui/package-summary.html">csheets.ext.comments.ui</a><br/>
+ * //csheets.core.formula.lang/Eval.java<br/>
  * <br/>
  * <br/>
  * 
  * <b>S001u: Unit Tests</b><br/>
- * see:<br/>
- * <a href="../../../csheets/ext/comments/package-summary.html">csheets.ext.comments</a><br/>
- * <a href="../../../csheets/ext/comments/ui/package-summary.html">csheets.ext.comments.ui</a><br/>
+ * //Test Packages/csheets.core.formula.lang/EvalTest.java<br/>
  * <br/>
  * <br/>
  * 
  * <b>S001f: Functional Tests</b><br/>
- * To test this user story, the user should follow these steps:<br/>
- * 1- run cleansheets;<br/>
- * 2- click on the View menu and select sidebars. There must appear a list of menu options containning one option for the comments sidebar;<br/>
- * 3- the previous option is a check box that: when checked, the sidebar should appear; when not checked, the sidebar should disappear;<br/>
- * 4- the sidebar window should have only one editbox. <br/>
+ * Para testar esta User Story, o Utilizador deve fazer:<br/>
+ * 1- abrir o Cleansheets;<br/>
+ * 2- Seleccionar uma Celula;<br/>
+ * 3- escrever uma formula de teste:;<br/>
+ *  3.1- Deve comecar por = <br/>
+ *  3.2- Deve conter o identificador da função Eval <br/>
+ *  3.3- Deve conter a expressao a testar entre parentesis e aspas <br/>
+ * 4- na celula, deverá ficar o resultado da expressao testada. <br/>
+ * 5- Exemplo : =Eval("2+3")   Resultado na celula : 5 <br/>
  * <br/>
  * <br/>
  * 
