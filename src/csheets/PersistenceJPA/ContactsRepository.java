@@ -59,7 +59,7 @@ public class ContactsRepository {
     
     public List<Contact> getAll()
     {
-        EntityManager em = ConnectionManager.getInstance().getEm();
+        EntityManager em = csheets.PersistenceJPA.Persistence.getEntityManager();
 
         Query query = em.createQuery("SELECT e FROM Contact e");
         
