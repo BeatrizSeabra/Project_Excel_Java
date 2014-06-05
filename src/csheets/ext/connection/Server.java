@@ -21,11 +21,11 @@ import java.util.logging.Logger;
  * @author 1121228
  * @author 1110506
  */
-public abstract class Server {
+public abstract class Server extends Thread {
     private DatagramSocket socket;
     private int port;
 
-    public Server( int port) {
+    public Server(int port) {
         try {
             this.socket = new DatagramSocket();
             //TODO adicionar verificação à porta
@@ -36,9 +36,7 @@ public abstract class Server {
     }
 
     public void run() {
-        Boolean existe=false;
         while (true) {
-            existe=false;
             byte[] data = new byte[1024];
             DatagramPacket packet = new DatagramPacket(data, data.length);
             try {

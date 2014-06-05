@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  * @author 1121228
  * @author 1110506
  */
-public class Connection extends Thread {
+public class Connection extends Thread{
 
     private InetAddress ipAddress;
     private DatagramSocket socket;
@@ -30,7 +30,6 @@ public class Connection extends Thread {
         try {
             this.socket = new DatagramSocket();
             this.ipAddress = InetAddress.getByName(ipAddress);
-            //TODO adicionar verificação à porta
             this.port = port;
         } catch (SocketException ex) {
             Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
