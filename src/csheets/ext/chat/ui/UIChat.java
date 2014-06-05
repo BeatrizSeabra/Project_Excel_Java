@@ -181,8 +181,11 @@ public ChatController controlo;
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     if(controlo==null){
         controlo= new ChatController(this);
-    }else{
         controlo.getServidor().start();
+    }else{
+        if(controlo.getServidor().isInterrupted()){
+        controlo.getServidor().start();
+        }
     }
     }//GEN-LAST:event_jButton1ActionPerformed
 

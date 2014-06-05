@@ -8,6 +8,9 @@ package csheets.ext.chat.ui;
 
 import csheets.ext.chat.ChatController;
 import java.awt.event.KeyEvent;
+import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -129,7 +132,11 @@ public class Chat extends javax.swing.JFrame {
             
         JOptionPane.showMessageDialog(rootPane, "Error, no message to send");
         }else{
-            controlo.sendMessage(ip,jTextField2.getText());
+            try {
+                controlo.sendMessage(ip,jTextField2.getText());
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
+            }
             addMensagem("Me",jTextField2.getText());
             jTextField2.setText("");
             this.repaint();

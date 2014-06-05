@@ -8,13 +8,8 @@ import csheets.ui.ctrl.BaseAction;
 import csheets.ui.ctrl.UIController;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Vector;
-import javax.swing.JFrame;
-import javax.swing.JList;
-import javax.swing.ListModel;
+import java.io.FilenameFilter;
+
 
 /**
  * 
@@ -22,6 +17,7 @@ import javax.swing.ListModel;
  */
 public class SearchFilesAction extends BaseAction {
 
+        private JDialogSearchFiles searchFiles;
 	/** The user interface controller */
 	protected UIController uiController;
 
@@ -31,6 +27,7 @@ public class SearchFilesAction extends BaseAction {
 	 */
 	public SearchFilesAction(UIController uiController) {
 		this.uiController = uiController;
+                //searchFiles = JDialogSearchFiles();
 	}
 
 	protected String getName() {
@@ -42,30 +39,42 @@ public class SearchFilesAction extends BaseAction {
 
 	public void actionPerformed(ActionEvent event) {
                 
-		String pattern=JOptionPane.showInputDialog(null, "Choose a pattern:");
-                //File f = new File(pattern);
-               // List files = new ArrayList();
-                //searchFiles(files, f, pattern);
-                String arr [] = new String [30];
-                    arr[0]=pattern;
-                    arr[1]=pattern;
-                    arr[2]=pattern;
-                //JOptionPane.showMessageDialog(null, Arrays.toString(arr));
-                JOptionPane.showInputDialog(null, "List of files:", "Input", JOptionPane.INFORMATION_MESSAGE, null, arr, "OK");
+		final String pattern=JOptionPane.showInputDialog(null, "Choose a pattern:");
+                File dir = new File("D:");
+                searchFiles(pattern, dir);
+                
         }
          
-       public static void searchFiles(List files, File f, String pattern) {  
-            File[] paths = f.listFiles();  
-            for (int i = 0; i < paths.length; ++i) {  
-                File pathname = paths[i];  
-                String nm = pathname.getName();  
-                if (nm.equalsIgnoreCase(pattern)) {  
-                    files.add (pathname);  
-                }  
-                if (pathname.isDirectory() && !nm.equals(".") && !nm.equals("..")) {  
-                    searchFiles(files, pathname, pattern);  
-                }  
-            }  
+       public static void searchFiles(final String pattern, File dir) {  
+             
+                FilenameFilter filter = new FilenameFilter() {
+                    public boolean accept(File dir, String name) {
+                        return name.contains(pattern);
+                    }
+                };
+                File [] FilesAndDirs = dir.listFiles();
+                String [] paths = dir.list(filter);
+                /*for (int i = 0; i < FilesAndDirs.length; ++i) {
+                    File tempFile = FilesAndDirs[i];
+                    String filename = tempFile.getName();
+                    
+                    if (tempFile.isDirectory() && !filename.equals(".") && !filename.equals("..")) {  
+                    searchFiles(pattern, tempFile);
+                    }
+                }*/
+                 
+                if (paths == null || paths.length == 0) {
+                    JOptionPane.showMessageDialog(null, "No files", "Search Results", JOptionPane.ERROR_MESSAGE);
+                }
+                else {
+                String displayMessage = "";
+                    for (String path : paths) {
+                        displayMessage += "*   ";
+                        displayMessage += path;
+                        displayMessage += "\n";
+                    }
+                JOptionPane.showMessageDialog(null, displayMessage,"List of files:", JOptionPane.INFORMATION_MESSAGE);
         }
-        
+       }
+ 
 }
