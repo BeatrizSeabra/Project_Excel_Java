@@ -184,7 +184,7 @@ public ChatController controlo;
         controlo.getServidor().start();
     }else{
         if(controlo.getServidor().isInterrupted()){
-        controlo.getServidor().start();
+        controlo.getServidor().resume();
         }
     }
     }//GEN-LAST:event_jButton1ActionPerformed

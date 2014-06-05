@@ -7,10 +7,12 @@
 package csheets.ext.chat.ui;
 
 import csheets.ext.chat.ChatController;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 /**
@@ -31,8 +33,9 @@ public class Chat extends javax.swing.JFrame {
         initComponents();
         ip=ipc;
         controlo=p;
-        jTextField3.setText(ipc);
-    }
+        jTextField3.setText(ipc); }
+    
+
     
    public String getIp() {
         return ip;
@@ -135,7 +138,7 @@ public class Chat extends javax.swing.JFrame {
             try {
                 controlo.sendMessage(ip,jTextField2.getText());
             } catch (UnknownHostException ex) {
-                Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
+               JOptionPane.showMessageDialog(this,"Erro, endereço inválido");
             }
             addMensagem("Me",jTextField2.getText());
             jTextField2.setText("");
