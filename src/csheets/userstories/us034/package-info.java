@@ -7,8 +7,8 @@
  * Esta funcao tem um único parametro que é uma string. A execucao dessa funcao 
  * o que faz é compilar o texto da string e executar a expressão obtida. O 
  * resultado da funcão eval é o resultado da expressão compilada. Por exemplo, 
- * se escrevermos a seguinte fórmula “=“2+3”” o que obtemos é a string “2+3” na 
- * célula. No entanto, se escrevermos a fórmula “=eval(“2+3”)” o que obtemos é o 
+ * se escrevermos a seguinte fórmula "="2+3"" o que obtemos é a string "2+3" na 
+ * célula. No entanto, se escrevermos a fórmula "=eval("2+3")" o que obtemos é o 
  * valor 5 na célula. 
  * <br/>
  * <br/>
@@ -68,14 +68,19 @@
 /*
  *
   @startuml doc-files/us034_design1.png
-    User ->Cell :Escreve formula na Cell
-    Cell -> Formula  : Cell.setContent(texto);
-    Formula -> Expression : Formula.evaluate();
-    Expression -> ExpressionCompiler : texto
-    ExpressionCompiler -> FunctionCall: (texto =Eval)
-    ExpressionCompiler -> BinaryOperation :(argumentos da funçao)
-    BinaryOperation -> Cell : toString(resultado dos argumentos);
-    end
+    User->Cell: dados
+    Cell->CellImpl: setContent()
+    CellImpl->Formula: create
+    Formula->FormulaCompiler: getInstance()
+    FormulaCompiler->FormulaCompiler: compile()
+    FormulaCompiler->Eval : String
+    Eval->Formula: create
+    Formula->FormulaCompiler: getInstance()
+    FormulaCompiler->FormulaCompiler: compile()
+    FormulaCompiler->CellImpl: instance
+    CellImpl->CellImpl: updateDependencies()
+    CellImpl->CellImpl: fireContentChanged()
+    CellImpl->CellImpl: reevaluate()
   @enduml
  *
  */

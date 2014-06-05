@@ -5,7 +5,7 @@
  * 
  * <b>Requirement</b><br/>
  * Deve ser possível exportar o conteúdo (valores) de uma
-sheet para um ﬁcheiro PDF. Apenas o conteúdo das células deve ser exportado (i.e., não é necessário
+sheet para um ficheiro PDF. Apenas o conteúdo das células deve ser exportado (i.e., não é necessário
 exportar as formulas, etc.). Não é necessária grande preocupação no aspecto visual.
  * <br/>
  * <br/>
@@ -18,9 +18,8 @@ exportar as formulas, etc.). Não é necessária grande preocupação no aspecto
  * <br/>
  * 
  * <b>S028d: Design</b><br/>
- * 
- * 
- * 
+ * O Diagrama de Sequência demonstra como irá ser efectuado o caso de uso:<br/>
+ * <img src="../../../csheets/userstories/us028/doc-files/us028_design1.png"> 
  * <br/>
  * <br/>
  * 
