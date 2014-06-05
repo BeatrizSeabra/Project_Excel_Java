@@ -63,7 +63,7 @@ public class SearchTest {
         System.out.println("simpleSearch");
         CleanSheets cleanSheets = new CleanSheets();
         UIController controller = new UIController(cleanSheets);
-        File file = new File("C:\\Users\\Diogo\\Desktop\\teste.cls");
+        File file = new File("src-tests/csheets/ext/searchandreplace/testeus22.cls");
         try {
             cleanSheets.load(file);
         } catch (IOException ex) {
@@ -91,7 +91,7 @@ public class SearchTest {
         System.out.println("simpleSearch");
         CleanSheets cleanSheets = new CleanSheets();
         UIController controller = new UIController(cleanSheets);
-        File file = new File("C:\\Users\\Diogo\\Desktop\\teste.cls");
+        File file = new File("src-tests/csheets/ext/searchandreplace/testeus22.cls");
         try {
             cleanSheets.load(file);
         } catch (IOException ex) {
@@ -119,7 +119,7 @@ public class SearchTest {
         System.out.println("simpleSearch");
         CleanSheets cleanSheets = new CleanSheets();
         UIController controller = new UIController(cleanSheets);
-        File file = new File("C:\\Users\\Diogo\\Desktop\\teste.cls");
+        File file = new File("src-tests/csheets/ext/searchandreplace/testeus22.cls");
         try {
             cleanSheets.load(file);
         } catch (IOException ex) {
@@ -147,7 +147,7 @@ public class SearchTest {
         System.out.println("simpleSearch");
         CleanSheets cleanSheets = new CleanSheets();
         UIController controller = new UIController(cleanSheets);
-        File file = new File("C:\\Users\\Diogo\\Desktop\\teste.cls");
+        File file = new File("src-tests/csheets/ext/searchandreplace/testeus22.cls");
         try {
             cleanSheets.load(file);
         } catch (IOException ex) {
@@ -175,7 +175,7 @@ public class SearchTest {
         System.out.println("simpleSearch");
         CleanSheets cleanSheets = new CleanSheets();
         UIController controller = new UIController(cleanSheets);
-        File file = new File("../src-tests/csheets/ext/searchandreplace/testeus22.cls");
+        File file = new File("src-tests/csheets/ext/searchandreplace/testeus22.cls");
         try {
             cleanSheets.load(file);
         } catch (IOException ex) {
