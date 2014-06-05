@@ -20,13 +20,25 @@ import java.util.ArrayList;
  * @author i121228
  */
 public class ChatController {
+
+    
     
     private ArrayList<String> connections;
-    private final ArrayList<Chat> chats;
-    private final Server servidor;
-    private final int porta=30347;
+    private ArrayList<Chat> chats;
+    private Server servidor;
+    private int porta=30347;
     private UIChat UI;
-
+ /**
+     * empty constructor
+     */
+    
+    public ChatController() {
+        chats= new ArrayList();
+        connections= new ArrayList();
+    }
+    /**
+     * construtor
+     */
     public ChatController(UIChat sp) {
         chats= new ArrayList();
         connections= new ArrayList();
@@ -53,25 +65,70 @@ public class ChatController {
             }
         };
     }
+
+    public void setChats(ArrayList<Chat> chats) {
+        this.chats = chats;
+    }
+    
+     /**
+     * get Chats UI
+     */
+    public ArrayList<Chat> getChats() {
+        return chats;
+    }
+    /**
+     * get ip list
+     */
+    public ArrayList<String> getConnections() {
+        return connections;
+    }
+    /**
+     * set Arraylist of connections
+     */
+    public void setConnections(ArrayList<String> connections) {
+        this.connections = connections;
+    }
+    /**
+     * get UI
+     */
+    public UIChat getUI() {
+        return UI;
+    }
+    /**
+     * set UI
+     */
+    public void setUI(UIChat UI) {
+        this.UI = UI;
+    }
+    
+    /**
+     * cria um novo chat
+     * */
     public void newChat(String ip){
        if(!existe(ip)){
        connections.add(ip);
        Chat p= new Chat(ip, this);
        p.setVisible(true);
-       chats.add(p);
+       getChats().add(p);
        UI.refreshChatList(listConnections());
        }else{
            setvisible(ip);
        }
     }
+    /**
+     * reabre chat
+     * */
     public void setvisible(String ip){
-         for(Chat con: chats){
+         for(Chat con: getChats()){
             if(con.getIp().equals(ip)){
                 con.setVisible(true);
             }        
          }
         
     }
+    /**
+     * retorna os ips com que houve troca de mensagem
+     */
     public String[] listConnections(){
         String[] ret= new String[connections.size()];
         int cont=0;
@@ -81,22 +138,31 @@ public class ChatController {
          }
         return ret;
     }
+    /**
+     * Verifica se existe um ip na lista
+     * */
     public boolean existe(String ip){
-        for(Chat con: chats){
-            if(con.getIp().equals(ip)){
+        for(String con: connections){
+            if(con.equals(ip)){
                 return true;
             }        
          }
         return false;
     }
+    /**
+     * construtor
+     */
     public void refreshChat(String ip, String data){
-        for(Chat chat: chats){
+        for(Chat chat: getChats()){
             if(chat.getIp().equals(ip)){
                 chat.addMensagem(ip, data);
                 chat.setVisible(true);
             }
         }
     }
+    /**
+     
+     */
     public void sendMessage(String ip, String data) throws UnknownHostException{
          boolean existe=false;
          for(String con: connections){
@@ -109,14 +175,17 @@ public class ChatController {
              connections.add(ip);
          }
     }
+    /**
+     
+     */
     public void deactivating(){
-        for(Chat con: chats){
+        for(Chat con: getChats()){
                 con.dispose();
          }
-        chats.clear();
+        getChats().clear();
         connections.clear();
         try{
-            servidor.interrupt();
+            servidor.allDone=true;
         }catch(SecurityException ape){
 
         }
