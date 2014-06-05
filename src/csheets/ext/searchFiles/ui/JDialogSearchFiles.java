@@ -26,10 +26,10 @@ public class JDialogSearchFiles extends javax.swing.JDialog {
         initComponents();
     }
 
-    public void refreshList(String[] paths){
+    public void refreshList(String[] paths) {
         jList1.removeAll();
-        DefaultListModel lm1= new DefaultListModel();
-        for(int i=0;i<paths.length;i++){
+        DefaultListModel lm1 = new DefaultListModel();
+        for (int i = 0; i < paths.length; i++) {
             lm1.addElement(paths[i]);
         }
         jList1.setModel(lm1);
@@ -161,25 +161,31 @@ public class JDialogSearchFiles extends javax.swing.JDialog {
 
     private void OkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OkButtonActionPerformed
         String pattern = jTextField4.getText();
-        if (pattern.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Invalid Pattern", "ERROR", JOptionPane.ERROR_MESSAGE);
-        }
-
         String dir = jTextField3.getText();
-        if (dir.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Invalid Directory", "ERROR", JOptionPane.ERROR_MESSAGE);
-        }
-
-        File dirr = new File(dir);
-        String[] paths = searchFiles(pattern, dirr);
-        if (paths == null || paths.length == 0) {
-            JOptionPane.showMessageDialog(null, "No files", "Search Results", JOptionPane.ERROR_MESSAGE);
+        if (pattern.isEmpty() && dir.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Invalid Pattern \n Invalid Directory", "ERROR", JOptionPane.ERROR_MESSAGE);
         } else {
-            refreshList(paths);
-        }
-        return;
+            if (dir.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Invalid Directory", "ERROR", JOptionPane.ERROR_MESSAGE);
+            } else {
+                if (pattern.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Invalid Pattern", "ERROR", JOptionPane.ERROR_MESSAGE);
+                } else {
 
+                    File dirr = new File(dir);
+                    String[] paths = searchFiles(pattern, dirr);
+                    if (paths == null || paths.length == 0) {
+                        JOptionPane.showMessageDialog(null, "No files", "Search Results", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        refreshList(paths);
+                    }
+                    return;
+                }
+
+            }
+        }
     }
+    
 
     public static String[] searchFiles(final String pattern, File dir) {
 
