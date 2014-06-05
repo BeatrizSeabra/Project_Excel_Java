@@ -9,17 +9,17 @@ package csheets.ext.contacts;
 
 
 import java.io.Serializable;
-//import javax.persistence.*;
+import javax.persistence.*;
 
 /**
  *
  * @author PedroRosário
  */
 
-//@Entity
+@Entity
 public class Contact implements Serializable {
     
-    //@Id
+    @Id
     private int id;
     private String firstName;
     private String lastName;
