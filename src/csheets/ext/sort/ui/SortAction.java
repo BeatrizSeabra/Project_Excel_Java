@@ -52,25 +52,26 @@ public class SortAction extends BaseAction {
         try {
             int maxrows = this.uiController.getActiveSpreadsheet().getRowCount();
             int collumn = this.uiController.getActiveCell().getAddress().getColumn();
-            sortAZ(maxrows,collumn);
+            sortAZ(maxrows, collumn);
         } catch (Exception ex) {
             // para ja ignoramos a excepcao
         }
     }
-    
-    public void sortAZ(int maxrows, int collumn) throws FormulaCompilationException{
+
+    public void sortAZ(int maxrows, int collumn) throws FormulaCompilationException {
         if (!conteudos.isEmpty()) {
-                conteudos.removeAll(conteudos);
-            }
+            conteudos.removeAll(conteudos);
+        }
         for (int i = 0; i < maxrows; i++) {
-                String conteudo = this.uiController.getActiveSpreadsheet().getCell(collumn, i).getContent();
+            String conteudo = this.uiController.getActiveSpreadsheet().getCell(collumn, i).getContent();
+            if (!(conteudo.isEmpty() || conteudo.equals(" "))) {
+                this.uiController.getActiveSpreadsheet().getCell(collumn, i).setContent("");
                 conteudos.add(conteudo);
             }
-            Collections.sort(conteudos, String.CASE_INSENSITIVE_ORDER);
-            for (int i = 0; i < maxrows; i++) {
-                if(!(conteudos.get(i)=="")){
-                    this.uiController.getActiveSpreadsheet().getCell(collumn, i).setContent(conteudos.get(i));
-                }
-            }
+        }
+        Collections.sort(conteudos, String.CASE_INSENSITIVE_ORDER);
+        for (int i = 0; i < maxrows; i++) {
+            this.uiController.getActiveSpreadsheet().getCell(collumn, i).setContent(conteudos.get(i));
+        }
     }
 }
