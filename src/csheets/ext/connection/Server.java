@@ -11,6 +11,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,7 +28,7 @@ public abstract class Server extends Thread {
 
     public Server(int port) {
         try {
-            this.socket = new DatagramSocket();
+            this.socket = new DatagramSocket(port);
             //TODO adicionar verificação à porta
             this.port = port;
         } catch (SocketException ex) {
@@ -36,15 +37,30 @@ public abstract class Server extends Thread {
     }
 
     public void run() {
+        boolean recebeu;
         while (true) {
+            recebeu=false;
             byte[] data = new byte[1024];
             DatagramPacket packet = new DatagramPacket(data, data.length);
             try {
                 socket.receive(packet);
+                recebeu=true;
             } catch (IOException ex) {
                 Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
             }
-                    handleMessage(data, packet.getAddress(), packet.getPort());
+            if(recebeu){
+                handleMessage(data, packet.getAddress(), packet.getPort());
+            }
+                    
+        }
+    }
+    
+    public void sendData(byte[] data,String address, int port) throws UnknownHostException {
+        DatagramPacket packet = new DatagramPacket(data, data.length, InetAddress.getByName(address), port);
+        try {
+            socket.send(packet);
+        } catch (IOException ex) {
+            Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
