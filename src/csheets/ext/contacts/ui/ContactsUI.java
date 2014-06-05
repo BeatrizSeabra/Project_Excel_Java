@@ -3,8 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package csheets.ext.contacts.ui;
+
+import csheets.PersistenceJPA.ContactsRepository;
+import csheets.ext.contacts.Contact;
+import java.util.*;
+import javax.swing.JList;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -12,11 +18,25 @@ package csheets.ext.contacts.ui;
  */
 public class ContactsUI extends javax.swing.JFrame {
 
+    ContactsRepository cr = new ContactsRepository();
+    Contact c = new Contact();
+
     /**
      * Creates new form ContactsUI
      */
     public ContactsUI() {
         initComponents();
+    }
+
+    public String[] auxiliar() {
+//        List<Contact> aux = ContactsRepository.getAll();
+//         String contactsAux = "";
+//         for (Contact c : aux) {
+//         contactsAux += "sasa" + " " + "sasa" + "-";
+//         }
+//         String[] strings2 = contactsAux.split("-");
+        String[] strings2 = {"asas", "asddas"};
+        return strings2;
     }
 
     /**
@@ -40,7 +60,28 @@ public class ContactsUI extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
+        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jList1);
+        jList1.setModel(new javax.swing.AbstractListModel() {
+            String [] strings=auxiliar();
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+
+        jScrollPane1.setViewportView(jList1);
+
+        jList1.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                List<Contact> l = ContactsRepository.getAll();
+                c=l.get(jList1.getSelectedIndex());
+                EditRemoveUI erw = new EditRemoveUI(c);
+                erw.setVisible(true);
+                //unitsInvolved.add(unitsLei.get(list.getSelectedIndex()));
+                // JOptionPane.showMessageDialog(Janela.this, "Unit added with sucess!\nUnits currently added:" + unitsInvolvedString);
+            }
+
+        });
 
         jButton1.setText("Create");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -93,8 +134,8 @@ public class ContactsUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-       CreateUI cw = new CreateUI();
-       cw.setVisible(true);
+        CreateUI cw = new CreateUI();
+        cw.setVisible(true);
     }//GEN-LAST:event_jButton1MouseClicked
 
     /**
