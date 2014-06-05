@@ -54,5 +54,19 @@ public class ContactsRepository {
         entityManager.close();
 
     }
+    
+    public List<Contact> getAll()
+    {
+        EntityManager em = ConnectionManager.getInstance().getEm();
+
+        Query query = em.createQuery("SELECT e FROM Contact e");
+        
+        List<Contact> listContact = new ArrayList<>();
+        
+        listContact = query.getResultList();
+        
+        return listContact;
+
+    }
 
 }

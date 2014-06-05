@@ -20,10 +20,12 @@ import javax.persistence.*;
 public class Contact implements Serializable {
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String firstName;
     private String lastName;
     private String occupation;
+    private Residence residence;
 
     public Contact(int id, String firstName, String lastName) {
         this.id = id;
@@ -71,6 +73,21 @@ public class Contact implements Serializable {
     public void setOccupation(String occupation) {
         this.occupation = occupation;
     }
+
+    /**
+     * @return the residence
+     */
+    public Residence getResidence() {
+        return residence;
+    }
+
+    /**
+     * @param residence the residence to set
+     */
+    public void setResidence(Residence residence) {
+        this.residence = residence;
+    }
+    
     
     
     
