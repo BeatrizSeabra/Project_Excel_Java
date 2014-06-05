@@ -155,8 +155,8 @@ public class MenuBar extends JMenuBar {
 				// Adds menu
 				extensionsMenu.add(extensionMenu);
 			}
-		}
-
+		};
+                
 		// Creates the window menu
 		add(new WindowMenu(app, uiController));
 
@@ -179,4 +179,6 @@ public class MenuBar extends JMenuBar {
 		menu.setMnemonic(mnemonic);
 		return add(menu);
 	}
+
+   
 }
