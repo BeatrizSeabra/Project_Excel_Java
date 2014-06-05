@@ -33,6 +33,11 @@ public class ExtensionContacts extends Extension {
 		return new UIExtensionContacts(this, uiController);
     }
     
+    /**
+     *  Author: Luís Abreu 1120546
+     * @return Returns an Occupation List from a pre-configured CSV file.
+     * @throws FileNotFoundException
+     */
     public String importOccupations() throws FileNotFoundException{
         
         String occupations = "";

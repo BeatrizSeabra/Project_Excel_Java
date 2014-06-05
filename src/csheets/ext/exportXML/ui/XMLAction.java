@@ -22,6 +22,11 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class XMLAction extends BaseAction {
 
     /**
+     * Variável auxiliar para teste unitário uma vez que o método a testar é
+     * void
+     */
+    protected boolean unit = false;
+    /**
      * The user interface controller
      */
     protected UIController uiController;
@@ -52,8 +57,6 @@ public class XMLAction extends BaseAction {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        int c = this.uiController.getActiveSpreadsheet().getColumnCount();
-        int r = this.uiController.getActiveSpreadsheet().getRowCount();
 
         try {
             JFileChooser fc = new JFileChooser();
@@ -68,8 +71,6 @@ public class XMLAction extends BaseAction {
             writer = new PrintWriter(new FileWriter(caminho + ".xml"));
             Spreadsheet sheet = uiController.getActiveSpreadsheet();
 
-            System.out.println(c);
-            System.out.println(r);
 
             writer.print("<CleanSheet xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \n"
                     + "\t\t\txmlns=\"http://www.dei.isep.ipp.pt/lapr4\" \n"
@@ -97,12 +98,12 @@ public class XMLAction extends BaseAction {
             System.out.println("Done!");
 
             JOptionPane.showMessageDialog(null, "Ficheiro guardado com sucesso!");
-
-
+            unit=true;
         } catch (IOException ex) {
+            unit = false;
             Logger.getLogger(XMLAction.class.getName()).log(Level.SEVERE, null, ex);
+
         }
 
     }
-
 }

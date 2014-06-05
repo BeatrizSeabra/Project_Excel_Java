@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package csheets.ext.sort.ui;
 
 /**
@@ -31,14 +30,14 @@ public class SortActionZA extends BaseAction {
      */
     protected UIController uiController;
     ArrayList<String> conteudos = new ArrayList();
-   
+
     /**
      * Creates a new action.
      *
      * @param uiController the user interface controller
      */
     public SortActionZA(UIController uiController) {
-        this.uiController = uiController;  
+        this.uiController = uiController;
     }
 
     protected String getName() {
@@ -51,32 +50,32 @@ public class SortActionZA extends BaseAction {
     }
 
     public void actionPerformed(ActionEvent event) {
-            
+
         try {
             int maxrows = this.uiController.getActiveSpreadsheet().getRowCount();
             int collumn = this.uiController.getActiveCell().getAddress().getColumn();
-            sortZA(maxrows,collumn);
-            
+            sortZA(maxrows, collumn);
+
         } catch (Exception ex) {
             // para ja ignoramos a excepcao
         }
     }
-    
-    public void sortZA(int maxrows, int collumn) throws FormulaCompilationException{
+
+    public void sortZA(int maxrows, int collumn) throws FormulaCompilationException {
         if (!conteudos.isEmpty()) {
-                conteudos.removeAll(conteudos);
-            }
+            conteudos.removeAll(conteudos);
+        }
         for (int i = 0; i < maxrows; i++) {
-                String conteudo = this.uiController.getActiveSpreadsheet().getCell(collumn, i).getContent();
+            String conteudo = this.uiController.getActiveSpreadsheet().getCell(collumn, i).getContent();
+            if (!(conteudo.isEmpty() || conteudo.equals(" "))) {
+                this.uiController.getActiveSpreadsheet().getCell(collumn, i).setContent("");
                 conteudos.add(conteudo);
             }
-            Collections.sort(conteudos, String.CASE_INSENSITIVE_ORDER);
-            Collections.reverse(conteudos);
-            for (int i = 0; i < maxrows; i++) {
-                if(!(conteudos.get(i)=="")){
-                    this.uiController.getActiveSpreadsheet().getCell(collumn, i).setContent(conteudos.get(i));
-                }
-            }
+        }
+        Collections.sort(conteudos, String.CASE_INSENSITIVE_ORDER);
+        Collections.reverse(conteudos);
+        for (int i = 0; i < conteudos.size(); i++) {
+            this.uiController.getActiveSpreadsheet().getCell(collumn, i).setContent(conteudos.get(i));
+        }
     }
 }
-
