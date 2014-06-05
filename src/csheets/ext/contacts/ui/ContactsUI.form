@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -90,6 +90,9 @@
                   </StringArray>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jList1.setModel(new javax.swing.AbstractListModel() {&#xa;            String [] strings=auxiliar();&#xa;            public int getSize() { return strings.length; }&#xa;            public Object getElementAt(int i) { return strings[i]; }&#xa;});&#xa;&#xa;jScrollPane1.setViewportView(jList1);&#xa;&#xa;jList1.addListSelectionListener(new ListSelectionListener() {&#xa;                        @Override&#xa;        public void valueChanged(ListSelectionEvent e) {&#xa;                                List&lt;Contact&gt; l = ContactsRepository.getAll();&#xa;                                c=l.get(jList1.getSelectedIndex());&#xa;                                EditRemoveUI erw = new EditRemoveUI(c);&#xa;                                erw.setVisible(true);&#xa;                                //unitsInvolved.add(unitsLei.get(list.getSelectedIndex()));&#xa;                               // JOptionPane.showMessageDialog(Janela.this, &quot;Unit added with sucess!\nUnits currently added:&quot; + unitsInvolvedString);&#xa;                            }&#xa;                       &#xa;                    });"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>

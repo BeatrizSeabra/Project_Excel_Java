@@ -43,6 +43,6 @@ public class ContactsAction extends BaseAction {
        window.setVisible(true);
       //cWindow.setSize(352, 200);
       // cWindow.setResizable(true);
-      // cWindow.setLocationRelativeTo(null);
+      //cWindow.setLocationRelativeTo(null);
     }
 }
