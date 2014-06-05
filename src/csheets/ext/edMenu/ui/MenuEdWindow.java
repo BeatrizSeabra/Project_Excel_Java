@@ -2,7 +2,9 @@ package csheets.ext.edMenu.ui;
 
 import csheets.ui.ctrl.UIController;
 import csheets.ui.ext.UIExtension;
+import javax.swing.JDialog;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -100,6 +102,7 @@ public class MenuEdWindow extends javax.swing.JFrame{
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        if(!jTextField1.getText().equals("")){
         UIExtension aux[] = uiController.getExtensions();
        for (UIExtension aux1 : aux) {
             if (aux1 instanceof EdMenuUIExtension) {
@@ -108,7 +111,12 @@ public class MenuEdWindow extends javax.swing.JFrame{
                aux1.getMenu().add(i);
             }
         }
-        this.dispose();
+       this.dispose();
+        }else
+        {
+          JOptionPane.showMessageDialog(this, "Error!! Please write a name to the extension!!");
+        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
