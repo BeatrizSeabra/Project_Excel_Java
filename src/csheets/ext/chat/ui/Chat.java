@@ -6,19 +6,43 @@
 
 package csheets.ext.chat.ui;
 
+import csheets.ext.chat.ChatController;
+import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author i121228
  */
 public class Chat extends javax.swing.JFrame {
 
+    private String ip;
+    private ChatController controlo;
+
+ 
+    
     /**
      * Creates new form Chat
      */
-    public Chat() {
+    public Chat(String ipc, ChatController p) {
         initComponents();
+        ip=ipc;
+        controlo=p;
+        jTextField3.setText(ipc);
     }
-
+    
+   public String getIp() {
+        return ip;
+    }
+   
+   public void addMensagem(String sender, String message){
+       jTextArea1.append(sender);
+       jTextArea1.append(":\n");
+       jTextArea1.append(message);
+       jTextArea1.append("\n");
+       this.repaint();
+       this.revalidate();
+   }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,7 +59,11 @@ public class Chat extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jTextField3 = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("Ip Adress:");
@@ -46,6 +74,16 @@ public class Chat extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTextArea1);
 
         jButton1.setText("SEND");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jButton1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton1KeyPressed(evt);
+            }
+        });
 
         jTextField3.setEditable(false);
 
@@ -85,6 +123,28 @@ public class Chat extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(jTextField2.getText()==null ||jTextField2.getText().isEmpty() ){
+            
+        JOptionPane.showMessageDialog(rootPane, "Error, no message to send");
+        }else{
+            controlo.sendMessage(ip,jTextField2.getText());
+            addMensagem("Me",jTextField2.getText());
+            jTextField2.setText("");
+            this.repaint();
+            this.revalidate();
+            
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+
+    }//GEN-LAST:event_formWindowClosing
+
+    private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
+
+    }//GEN-LAST:event_jButton1KeyPressed
 
     /**
      * @param args the command line arguments

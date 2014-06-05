@@ -13,3 +13,5 @@ csheets.ext.exporttxt.ExtensionTxt
 csheets.ext.searchFiles.ExtensionSearchFiles
 csheets.ext.contacts.ExtensionContacts
 csheets.ext.edMenu.EdMenuExtension
+csheets.ext.extensionsmanager.ExtensionsManager
+
