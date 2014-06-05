@@ -10,7 +10,7 @@ import csheets.ui.ctrl.UIController;
 /**
  * An action of the share extension that creates a new Server.
  * 
- * @author Júlia Dias
+ * @author Rui 1110506
  */
 public class ServerAction extends FocusOwnerAction{
     /**

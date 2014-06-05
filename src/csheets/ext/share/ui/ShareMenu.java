@@ -7,7 +7,7 @@ import csheets.ui.ctrl.UIController;
 /**
  * Represents the UI extension menu of the share extension.
  *
- * @author Júlia Dias
+ * @author  Rui 1110506
  */
 public class ShareMenu extends JMenu {
 
