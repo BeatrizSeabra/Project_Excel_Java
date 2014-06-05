@@ -11,6 +11,7 @@ package csheets.ext.sort.ui;
  * @author Stefan Parker
  */
 import csheets.CleanSheets;
+import csheets.core.Cell;
 import csheets.core.formula.compiler.FormulaCompilationException;
 import java.awt.event.ActionEvent;
 
@@ -30,14 +31,14 @@ public class SortActionZA extends BaseAction {
      */
     protected UIController uiController;
     ArrayList<String> conteudos = new ArrayList();
-
+   
     /**
      * Creates a new action.
      *
      * @param uiController the user interface controller
      */
     public SortActionZA(UIController uiController) {
-        this.uiController = uiController;
+        this.uiController = uiController;  
     }
 
     protected String getName() {
@@ -50,18 +51,18 @@ public class SortActionZA extends BaseAction {
     }
 
     public void actionPerformed(ActionEvent event) {
-
+            
         try {
             int maxrows = this.uiController.getActiveSpreadsheet().getRowCount();
             int collumn = this.uiController.getActiveCell().getAddress().getColumn();
-            sortZA(maxrows,collumn,conteudos);
+            sortZA(maxrows,collumn);
             
         } catch (Exception ex) {
             // para ja ignoramos a excepcao
         }
     }
     
-    public void sortZA(int maxrows, int collumn, ArrayList<String> conteudos) throws FormulaCompilationException{
+    public void sortZA(int maxrows, int collumn) throws FormulaCompilationException{
         if (!conteudos.isEmpty()) {
                 conteudos.removeAll(conteudos);
             }

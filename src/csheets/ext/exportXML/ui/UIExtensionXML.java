@@ -1,26 +1,21 @@
-package csheets.ext.share.ui;
+package csheets.ext.exportXML.ui;
 
+import csheets.ext.Extension;
+import csheets.ext.exportXML.ExtensionXML;
+import csheets.ui.ctrl.UIController;
+import csheets.ui.ext.CellDecorator;
+import csheets.ui.ext.TableDecorator;
+import csheets.ui.ext.UIExtension;
 import javax.swing.Icon;
 import javax.swing.JComponent;
 import javax.swing.JMenu;
 import javax.swing.JToolBar;
 
-import csheets.ext.Extension;
-import csheets.ui.ctrl.UIController;
-import csheets.ui.ext.CellDecorator;
-import csheets.ui.ext.TableDecorator;
-import csheets.ui.ext.UIExtension;
-
 /**
- **
- * This class implements the UI interface extension for the share extension. A
- * UI interface extension must extend the UIExtension abstract class.
  *
- * @see UIExtension
- *
- * @author Julia Dias
+ * @author i120388
  */
-public class UIExtensionShare extends UIExtension {
+public class UIExtensionXML extends UIExtension {
 
     /**
      * The icon to display with the extension's name
@@ -30,9 +25,9 @@ public class UIExtensionShare extends UIExtension {
     /**
      * The menu of the extension
      */
-    private ShareMenu menu;
+    private XMLMenu menu;
 
-    public UIExtensionShare(Extension extension, UIController uiController) {
+    public UIExtensionXML(Extension extension, UIController uiController) {
         super(extension, uiController);
         // TODO Auto-generated constructor stub
     }
@@ -47,14 +42,15 @@ public class UIExtensionShare extends UIExtension {
     }
 
     /**
-     * Returns an instance of a class that implements JMenu.
+     * Returns an instance of a class that implements JMenu. In this simple case
+     * this class only supplies one menu option.
      *
-     * @see ShareMenu
+     * @see ExampleMenu
      * @return a JMenu component
      */
     public JMenu getMenu() {
         if (menu == null) {
-            menu = new ShareMenu(uiController);
+            menu = new XMLMenu(uiController);
         }
         return menu;
     }
@@ -96,5 +92,4 @@ public class UIExtensionShare extends UIExtension {
     public JComponent getSideBar() {
         return null;
     }
-
 }

@@ -36,6 +36,9 @@ public abstract class Extension implements Comparable<Extension> {
 
 	/** The base key to use for properties of the extension */
 	private final String basePropKey;
+        
+        /** The base key to use for properties of the extension */
+	private final boolean statusExtension=true;
 
 	/**
 	 * Creates a new extension.
@@ -67,6 +70,14 @@ public abstract class Extension implements Comparable<Extension> {
 		return basePropKey;
 	}
 
+        /**
+	 * Returns the base key to use for properties of the UI extension.
+	 * @return the base key to use for properties of the UI extension
+	 */
+	public final boolean getstatusExtension() {
+		return statusExtension;
+	}
+        
 	/**
 	 * Compares this extension with the given extension for order.
 	 * Ordering is done by the extensions' names.

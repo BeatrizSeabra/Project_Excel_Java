@@ -2,79 +2,50 @@ package csheets.ext.searchFiles.ui;
 
 import java.awt.event.ActionEvent;
 
-import javax.swing.JOptionPane;
 
 import csheets.ui.ctrl.BaseAction;
 import csheets.ui.ctrl.UIController;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 
-import java.io.File;
-import java.io.FilenameFilter;
-
+import javax.swing.JFrame;
 
 /**
- * 
+ *
  * @author 1120564MarcoEsteves
  */
 public class SearchFilesAction extends BaseAction {
 
-        private JDialogSearchFiles searchFiles;
-	/** The user interface controller */
-	protected UIController uiController;
+    protected JFrame searchFiles;
+    /**
+     * The user interface controller
+     */
+    protected UIController uiController;
 
-	/**
-	 * Creates a new action.
-	 * @param uiController the user interface controller
-	 */
-	public SearchFilesAction(UIController uiController) {
-		this.uiController = uiController;
-                //searchFiles = JDialogSearchFiles();
-	}
+    /**
+     * Creates a new action.
+     *
+     * @param uiController the user interface controller
+     */
+    public SearchFilesAction(UIController uiController) {
+        this.uiController = uiController;
+        this.searchFiles = searchFiles;
+    }
 
-	protected String getName() {
-		return "Search Files";
-	}
+    protected String getName() {
+        return "Search Files";
+    }
 
-	protected void defineProperties() {
-	}
+    protected void defineProperties() {
+    }
 
-	public void actionPerformed(ActionEvent event) {
-                
-		final String pattern=JOptionPane.showInputDialog(null, "Choose a pattern:");
-                File dir = new File("D:");
-                searchFiles(pattern, dir);
-                
+    public void actionPerformed(ActionEvent event) {
+        JDialogSearchFiles p= new JDialogSearchFiles(searchFiles,true);
+        p.setVisible(true);
+        p.setResizable(enabled);
+        p.setMinimumSize(new Dimension(40, 40));
+        p.setLocationRelativeTo(null);
+        p.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );  
+        
         }
-         
-       public static void searchFiles(final String pattern, File dir) {  
-             
-                FilenameFilter filter = new FilenameFilter() {
-                    public boolean accept(File dir, String name) {
-                        return name.contains(pattern);
-                    }
-                };
-                File [] FilesAndDirs = dir.listFiles();
-                String [] paths = dir.list(filter);
-                /*for (int i = 0; i < FilesAndDirs.length; ++i) {
-                    File tempFile = FilesAndDirs[i];
-                    String filename = tempFile.getName();
-                    
-                    if (tempFile.isDirectory() && !filename.equals(".") && !filename.equals("..")) {  
-                    searchFiles(pattern, tempFile);
-                    }
-                }*/
-                 
-                if (paths == null || paths.length == 0) {
-                    JOptionPane.showMessageDialog(null, "No files", "Search Results", JOptionPane.ERROR_MESSAGE);
-                }
-                else {
-                String displayMessage = "";
-                    for (String path : paths) {
-                        displayMessage += "*   ";
-                        displayMessage += path;
-                        displayMessage += "\n";
-                    }
-                JOptionPane.showMessageDialog(null, displayMessage,"List of files:", JOptionPane.INFORMATION_MESSAGE);
-        }
-       }
- 
-}
+    }
