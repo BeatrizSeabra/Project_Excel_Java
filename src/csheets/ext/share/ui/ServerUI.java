@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Júlia Dias
+ * @author Rui 1110506
  */
 public class ServerUI extends javax.swing.JFrame {
 

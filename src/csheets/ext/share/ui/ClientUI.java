@@ -14,7 +14,7 @@ import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
- * @author Júlia Dias
+ * @author  Rui 1110506
  */
 public class ClientUI extends javax.swing.JFrame {
 
