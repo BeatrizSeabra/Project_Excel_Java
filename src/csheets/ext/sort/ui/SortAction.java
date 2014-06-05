@@ -52,13 +52,13 @@ public class SortAction extends BaseAction {
         try {
             int maxrows = this.uiController.getActiveSpreadsheet().getRowCount();
             int collumn = this.uiController.getActiveCell().getAddress().getColumn();
-            sortAZ(maxrows,collumn, conteudos);
+            sortAZ(maxrows,collumn);
         } catch (Exception ex) {
             // para ja ignoramos a excepcao
         }
     }
     
-    public void sortAZ(int maxrows, int collumn, ArrayList<String> conteudos) throws FormulaCompilationException{
+    public void sortAZ(int maxrows, int collumn) throws FormulaCompilationException{
         if (!conteudos.isEmpty()) {
                 conteudos.removeAll(conteudos);
             }
@@ -67,7 +67,6 @@ public class SortAction extends BaseAction {
                 conteudos.add(conteudo);
             }
             Collections.sort(conteudos, String.CASE_INSENSITIVE_ORDER);
-            //Collections.reverse(conteudos);
             for (int i = 0; i < maxrows; i++) {
                 if(!(conteudos.get(i)=="")){
                     this.uiController.getActiveSpreadsheet().getCell(collumn, i).setContent(conteudos.get(i));

@@ -19,14 +19,14 @@ import javax.swing.border.Border;
  * Super classe que qualquer ligação, independente de ser do tipo
  * "Client" ou "Server" controla os dados de entrada e os de saida. 
  *
- * @author Júlia Dias
+ * @author  Rui 1110506
  */
 public abstract class BaseConnection {
 
     private Spreadsheet folha;
     private int port;
-    private Address inicio;//cell inicio
-    private Address fim;//cell fim
+    private Address inicio;
+    private Address fim;
     private boolean receberData;
     private ArrayList<Boolean> receberDataServer;
     public Thread threadIn;
