@@ -1,6 +1,5 @@
 package csheets.ext.invokefunction.ui;
 
-import csheets.ext.simple.ui.*;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JOptionPane;
@@ -26,7 +25,7 @@ public class InvokeFunctionAction extends BaseAction {
 	}
 
 	protected String getName() {
-		return "Invoke Function";
+		return "Choose Function";
 	}
 
 	protected void defineProperties() {
@@ -39,7 +38,7 @@ public class InvokeFunctionAction extends BaseAction {
 	 */
 	public void actionPerformed(ActionEvent event) {
                 
-		
+		InvokeUI invoke=new InvokeUI();
 		try {
 			this.uiController.getActiveSpreadsheet().getCell(0, 0).setContent("Changed");
 		} catch (Exception ex) {

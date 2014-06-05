@@ -69,18 +69,14 @@
  *
   @startuml doc-files/us034_design1.png
     User->Cell: dados
-    Cell->CellImpl: setContent()
-    CellImpl->Formula: create
-    Formula->FormulaCompiler: getInstance()
-    FormulaCompiler->FormulaCompiler: compile()
-    FormulaCompiler->Eval : String
-    Eval->Formula: create
-    Formula->FormulaCompiler: getInstance()
-    FormulaCompiler->FormulaCompiler: compile()
-    FormulaCompiler->CellImpl: instance
-    CellImpl->CellImpl: updateDependencies()
-    CellImpl->CellImpl: fireContentChanged()
-    CellImpl->CellImpl: reevaluate()
+    Cell->ExcelExpressionCompiler: compile()
+    ExcelExpressionCompiler->Expression : dados 
+    Expression->Value : evaluate()
+    Value: toString()
+    Value->ExcelExpressionCompiler: compile()
+    ExcelExpressionCompiler->Expression : dados 
+    Expression->Value : evaluate()
+    Value->Cell : return
   @enduml
  *
  */
