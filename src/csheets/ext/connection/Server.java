@@ -11,6 +11,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -51,6 +52,15 @@ public abstract class Server extends Thread {
                 handleMessage(data, packet.getAddress(), packet.getPort());
             }
                     
+        }
+    }
+    
+    public void sendData(byte[] data,String address, int port) throws UnknownHostException {
+        DatagramPacket packet = new DatagramPacket(data, data.length, InetAddress.getByName(address), port);
+        try {
+            socket.send(packet);
+        } catch (IOException ex) {
+            Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
