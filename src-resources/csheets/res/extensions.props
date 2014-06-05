@@ -6,5 +6,10 @@ csheets.ext.simple.ExtensionExample
 csheets.ext.comments.CommentsExtension
 csheets.ext.invokefunction.ExtensionInvokeFunction
 csheets.ext.image.ExtensionImage
-csheets.ext.logFile.ExtensionLogFile
+csheets.ext.logfile.ExtensionLogFile
 csheets.ext.sort.SortExtension
+csheets.ext.chat.ChatExtension
+csheets.ext.exporttxt.ExtensionTxt
+csheets.ext.searchFiles.ExtensionSearchFiles
+csheets.ext.contacts.ExtensionContacts
+csheets.ext.edMenu.EdMenuExtension
