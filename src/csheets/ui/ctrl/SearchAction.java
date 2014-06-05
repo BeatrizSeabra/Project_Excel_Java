@@ -71,10 +71,9 @@ public class SearchAction extends FocusOwnerAction {
             focusOwner.changeSelection(focusOwner.getSpreadsheet().getRowCount() - 1, focusOwner.getSpreadsheet().getColumnCount() - 1, false, true);
         }
         JDialogSearchAndReplace searchAndReplace = new JDialogSearchAndReplace(null, true, focusOwner);
-        searchAndReplace.setEnabled(true);
-        searchAndReplace.setAlwaysOnTop(true);
+        searchAndReplace.setLocationRelativeTo(null);
         searchAndReplace.setVisible(true);
-        searchAndReplace.setLocationRelativeTo(focusOwner);
+        
         Address address = searchAndReplace.getCell();
         focusOwner.clearSelection();
 
