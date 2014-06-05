@@ -6,6 +6,7 @@
 
 package csheets.ext.logfile.ui;
 
+import csheets.ui.ctrl.UIController;
 import java.util.ArrayList;
 
 
@@ -15,13 +16,22 @@ import java.util.ArrayList;
  * @author RafaelChaves
  */
 public class LogFileUI extends javax.swing.JFrame {
-    private ArrayList<String> mylist;
+    private UIController uiController;
     /**
      * Creates new form LogFileUI
      */
-    public LogFileUI(ArrayList<String> list) {
-        mylist=list;
+    public LogFileUI(UIController uic) {
+        uiController=uic;
+        ArrayList<String> mylist=uiController.getEvl();
         initComponents();
+        if(!mylist.contains("onClick"))
+            {
+                jCheckBox1.setSelected(false);
+            }
+        if(!mylist.contains("onChange"))
+            {
+                jCheckBox2.setSelected(false);
+            }
     }
 
     /**
@@ -38,7 +48,7 @@ public class LogFileUI extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jCheckBox1.setText("OnClick");
         jCheckBox1.setSelected(true);
@@ -100,7 +110,7 @@ public class LogFileUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        ArrayList<String> mylist=uiController.getEvl();
         if(jCheckBox1.isSelected()){
             if(!mylist.contains("onClick"))
             {
@@ -125,6 +135,7 @@ public class LogFileUI extends javax.swing.JFrame {
             }
         }
         
+        uiController.setEvl(mylist);
         this.dispose();
         
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -164,10 +175,6 @@ public class LogFileUI extends javax.swing.JFrame {
         });
     }
     
-    public ArrayList<String> getList()
-    {
-        return mylist;
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
