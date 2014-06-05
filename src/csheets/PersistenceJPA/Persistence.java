@@ -18,7 +18,7 @@ public final class Persistence {
     public static EntityManager getEntityManager() {
 
 		EntityManagerFactory entityManagerFActory = javax.persistence.Persistence.
-			createEntityManagerFactory("ContactsManager");
+			createEntityManagerFactory("JPA2PU");
 		EntityManager entityManager = entityManagerFActory.
 			createEntityManager();
 		return entityManager;
