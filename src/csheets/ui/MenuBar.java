@@ -39,6 +39,7 @@ import csheets.ui.ext.SideBarAction;
 import csheets.ui.ext.TableDecorator;
 import csheets.ui.ext.TableDecoratorAction;
 import csheets.ui.ext.UIExtension;
+import javax.swing.JMenuItem;
 
 /**
  * The menu bar.
@@ -140,9 +141,13 @@ public class MenuBar extends JMenuBar {
 		sheetMenu.add(actionManager.getAction("removecolumn"));
 		sheetMenu.add(actionManager.getAction("insertrow"));
 		sheetMenu.add(actionManager.getAction("removerow"));
-
+                
 		// Creates the extension menus
 		JMenu extensionsMenu = addMenu("Extensions", KeyEvent.VK_X);
+                
+                JMenu extensionManagerMenu = new JMenu("Extensions Manager");
+                extensionsMenu.add(extensionManagerMenu);
+                extensionManagerMenu.add(actionManager.getAction("extensions"));
 		for (UIExtension extension : uiController.getExtensions()) {
 			JMenu extensionMenu = extension.getMenu();
 			if (extensionMenu != null) {
@@ -155,7 +160,7 @@ public class MenuBar extends JMenuBar {
 				// Adds menu
 				extensionsMenu.add(extensionMenu);
 			}
-		}
+		}                
 
 		// Creates the window menu
 		add(new WindowMenu(app, uiController));
