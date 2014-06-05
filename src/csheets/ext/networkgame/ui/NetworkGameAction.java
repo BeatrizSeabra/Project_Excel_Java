@@ -1,11 +1,13 @@
 package csheets.ext.networkgame.ui;
 
+import csheets.ext.connection.Server;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JOptionPane;
 
 import csheets.ui.ctrl.BaseAction;
 import csheets.ui.ctrl.UIController;
+import java.net.InetAddress;
 import javax.swing.JFrame;
 
 /**
@@ -21,6 +23,7 @@ public class NetworkGameAction extends BaseAction {
      */
     protected UIController uiController;
     public int port;
+
     /**
      * Creates a new action.
      *
@@ -54,10 +57,22 @@ public class NetworkGameAction extends BaseAction {
 
         if (result == JOptionPane.YES_OPTION) {
             //server6
+            mainWindow.add(new ServerPanel());
             mainWindow.pack();
             mainWindow.setVisible(true);
+            //start server in port: 7777
+            Server s = new Server(7777) {
+
+                @Override
+                public void handleMessage(byte[] data, InetAddress address, int port) {
+                    System.out.println("Waiting..." + data.toString());
+                }
+            };
         } else {
             //client
+            mainWindow.add(new ClientPanel());
+            mainWindow.pack();
+            mainWindow.setVisible(true);
         }
 
         // Set up the player selection screen
