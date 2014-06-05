@@ -1,7 +1,8 @@
-package csheets.ext.findworkbooksfiles;
+package csheets.ext.exporttxt;
 
+import csheets.ext.exporttxt.ui.UIExtensionTxt;
 import csheets.ext.Extension;
-import csheets.ext.findworkbooksfiles.ui.UIExtensionFindWorkbooksFiles;
+import csheets.ext.simple.ui.UIExtensionExample;
 import csheets.ui.ctrl.UIController;
 import csheets.ui.ext.UIExtension;
 
@@ -10,27 +11,27 @@ import csheets.ui.ext.UIExtension;
  * An extension must extend the Extension abstract class.
  * The class that implements the Extension is the "bootstrap" of the extension.
  * @see Extension
- * @author 1090675
+ * @author Tiba
  */
-public class ExtensionFindWorkbooksFiles extends Extension {
+public class ExtensionTxt extends Extension {
 
 	/** The name of the extension */
-	public static final String NAME = "Find Workbooks Files";
+	public static final String NAME = "Export";
 
 	/**
 	 * Creates a new Example extension.
 	 */
-	public ExtensionFindWorkbooksFiles() {
+	public ExtensionTxt() {
 		super(NAME);
 	}
 	
 	/**
-	 * Returns the user interface extension of this extension (an instance of the class {@link  csheets.ext.findworkbooksfiles.ui.UIExtensionFindWorkbooksFiles}). <br/>	
+	 * Returns the user interface extension of this extension (an instance of the class {@link  csheets.ext.simple.ui.UIExtensionExample}). <br/>
+	 * In this extension example we are only extending the user interface.
 	 * @param uiController the user interface controller
 	 * @return a user interface extension, or null if none is provided
 	 */
-        @Override
 	public UIExtension getUIExtension(UIController uiController) {
-		return new UIExtensionFindWorkbooksFiles(this, uiController);
+		return new UIExtensionTxt(this, uiController);
 	}
 }

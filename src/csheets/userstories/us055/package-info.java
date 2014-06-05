@@ -9,7 +9,7 @@
  * <br/>
  *  
  * <b>S055a: Analysis</b><br/>
- * Since there are three events that can occur on cells (onclick, onchange, rightclick) we have to study how and when said events occur.
+ * Since there are three events that can occur on cells (onclick, onchange) we have to study how and when said events occur.
  * We have to add three new CellListeners which will be implemented in the CellImpl class.
  * With the need of making a graphic interface we have to study how to add another sub-menu. We latter have to sketch an example of the interface as it will be added to the code.
  * <br/>
