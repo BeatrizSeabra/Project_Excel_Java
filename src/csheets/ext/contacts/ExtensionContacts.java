@@ -36,12 +36,12 @@ public class ExtensionContacts extends Extension {
     public String importOccupations() throws FileNotFoundException{
         
         String occupations = "";
-        Scanner scanner = new Scanner(new File("src-resources\\csheets\\ext\\contacts\\occupations.csv"));
-        scanner.useDelimiter("\n");
-        while(scanner.hasNext()){
-            occupations+=scanner.next()+"\n";
+        try (Scanner scanner = new Scanner(new File("src-resources\\csheets\\ext\\contacts\\occupations.csv"))) {
+            scanner.useDelimiter("\n");
+            while(scanner.hasNext()){
+                occupations+=scanner.next()+"\n";
+            }
         }
-        scanner.close();
         return occupations;
     }
 
