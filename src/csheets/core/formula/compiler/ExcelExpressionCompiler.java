@@ -35,6 +35,7 @@ import org.antlr.runtime.tree.CommonTree;
 import org.antlr.runtime.tree.Tree;
 
 import csheets.core.Cell;
+import csheets.core.IllegalValueTypeException;
 import csheets.core.Value;
 import csheets.core.formula.BinaryOperation;
 import csheets.core.formula.BinaryOperator;
@@ -44,6 +45,7 @@ import csheets.core.formula.FunctionCall;
 import csheets.core.formula.Literal;
 import csheets.core.formula.Reference;
 import csheets.core.formula.UnaryOperation;
+import csheets.core.formula.lang.Attribution;
 import csheets.core.formula.lang.CellReference;
 import csheets.core.formula.lang.Language;
 import csheets.core.formula.lang.RangeReference;
@@ -167,7 +169,27 @@ public class ExcelExpressionCompiler implements ExpressionCompiler {
 					(RangeReference)operator,
 					(Reference)convert(cell, node.getChild(1))
 				);
-			else 
+			 
+                            // se o operator for o da atribuicao entao
+                    else if (operator instanceof Attribution) {
+                             try {
+                            //crias uma referencia para a cell
+                            CellReference cellR = new CellReference(cell.getSpreadsheet(), node.getChild(0).getText());
+                            //buscar a cell,atraves da referencia
+                            Cell cellToAttribute = cellR.getCell();
+                            //vou buscar a expressao que se encontra a direita do :=
+                            Expression exp = convert(cellToAttribute, node.getChild(1));
+                            //colocaquei na cell o resultado da expressao anterior
+                            cellToAttribute.setContent(exp.evaluate().toString());
+                            }catch (ParseException e) {
+                                throw new FormulaCompilationException(e);
+                            }
+                             catch (IllegalValueTypeException ex) {
+                                throw new FormulaCompilationException(ex);
+                            }
+                            return new BinaryOperation(
+                                    (Reference) convert(cell, node.getChild(0)), operator, convert(cell, node.getChild(1)));
+                            }        
 				return new BinaryOperation(
 					convert(cell, node.getChild(0)),
 					operator,
