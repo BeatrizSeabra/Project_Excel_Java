@@ -44,6 +44,8 @@ exportar as formulas, etc.). Não é necessária grande preocupação no aspecto
  * 6 - Escolher o caminho e o nome do ficheiro <br/>
  * 7 - Clicar no botao "save". <br/>
  * 
+ * Se tentar guardar um documento em branco/sem nada escrito nas celulas, dá erro e guarda um ficheiro com extensão PDF corrompido.
+ * 
  * <br/>
  * <br/>
  * 

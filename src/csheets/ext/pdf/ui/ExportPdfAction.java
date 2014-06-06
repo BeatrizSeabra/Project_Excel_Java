@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -75,6 +76,7 @@ public class ExportPdfAction extends BaseAction {
 
                 }
                 document.close();
+                JOptionPane.showMessageDialog(null, "Ficheiro guardado com sucesso!");
             } catch (DocumentException ex) {
                 System.err.println(ex.getMessage());
             } catch (FileNotFoundException ex) {
