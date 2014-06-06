@@ -17,4 +17,5 @@ csheets.ext.edMenu.EdMenuExtension
 csheets.ext.importfiles.ExtensionImport
 csheets.ext.residence.ExtensionResidence
 csheets.ext.networkgame.NetworkGameExtension
+csheets.ext.contacts.ExtensionContacts
 
