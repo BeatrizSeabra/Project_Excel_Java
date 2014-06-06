@@ -12,8 +12,9 @@
  *  
  * <b>S001a: Analysis</b><br/>
  * For this issue the program, will need basically a new option on the Menubar() of the cleansheet.
- * This new option will pop a window to the user and then give him the option of creating a new menu option, under the existing MenuBar() option or create a new MenuItem().
- * After reading the issue, we can confirm that we only need to create a new Menu or subMenu option, it is not require for it to do anything so the user can see the option but can not use it, or if he does, it won't happen anything.
+ * The new option will be under the Extensions options with the name "New Menus" with a option to the new ones under that same option (so this way it's sure that the program follow the basics).
+ * This new option will pop a window to the user and then give him the option of creating a new menu option.
+ * After reading the issue, we can confirm that we only need to create a new subMenu option, it is not require for it to do anything so the user can see the option but can not use it, or if he does, it won't happen anything.
  * <br/>
  * <br/>
  * 
