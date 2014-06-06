@@ -15,6 +15,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.JMenu;
 
 import csheets.ui.ctrl.UIController;
+import java.util.ArrayList;
 
 /**
  * Representes the UI extension menu of the simple extension.
@@ -30,10 +31,11 @@ public class LogFileMenu extends JMenu {
 	 * @param uiController the user interface controller
 	 */
 	public LogFileMenu(UIController uiController) {
-		super("LogFile");
+		super("EventLog File");
 		setMnemonic(KeyEvent.VK_L);
 
 		// Adds font actions
 		add(new LogFileAction(uiController));
-	}	
+	}
+
 }

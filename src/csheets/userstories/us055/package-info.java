@@ -9,8 +9,7 @@
  * <br/>
  *  
  * <b>S055a: Analysis</b><br/>
- * Since there are three events that can occur on cells (onclick, onchange) we have to study how and when said events occur.
- * We have to add three new CellListeners which will be implemented in the CellImpl class.
+ * Since there are two types of events that can occur on cells (onclick, onchange) we have to study how and when said events occur.
  * With the need of making a graphic interface we have to study how to add another sub-menu. We latter have to sketch an example of the interface as it will be added to the code.
  * <br/>
  * <br/>
@@ -18,12 +17,34 @@
  * <b>S055d: Design</b><br/>
  * For the User Interface we will need to create a subclass Extention. We will also need to create a subclass of UIExtension. For the sub-menu we will need a MenuItem named EventLogFile.
  * To demonstrate the interaction between the User and the UI heres a diagram: <img src="../../../csheets/userstories/us055/doc-files/us055_design1.png">. Every event will be added to the EventList by default.
- * To add Events to cells we have to create new CellListeners, each with its own name and code, but since for this US we only need to write to the logfile, everytime the event occurs the system checks the event's name against the list. If the name is in there it writes to the logFile (name and date).
- * (Diagram Comming Soon)
+ * Since for this US we only need to write to the logfile, every time the events occurs the system checks the event's name against the list. If the name is in there it writes to the logFile (Events name + cell + date).
+ * onClick: the source of this event is when the activeCell changes, so after some research we found that in the class SpreadsheetTable theres a changeSelection method, so after the method to change the active cell is called we call the writeLogFile method. 
+ * onChange: the source of this event is when something changes on the cell, and after said research we found that in the CellEditor class theres a method that is called after the editting of a cell. So after the method setContent is calle we call our own method, writeLogFile. 
  * <br/>
  * <br/>
  * 
+ * <b>S055c: Coding</b><br/>
+ * see:<br/>
+ * <a href="../../../csheets/ext/logfile/package-summary.html">csheets.ext.logfile</a><br/>
+ * <a href="../../../csheets/ext/logfile/ui/package-summary.html">csheets.ext.logfile.ui</a><br/>
+ * <br/>
+ * <br/>
  * 
+ * <b>S055u: Unit Tests</b><br/>
+ * Since this US only has a txt file writting method theres no need for unit teste. To teste this US see Functional Tests below.
+ * <br/>
+ * <br/>
+ * 
+ * <b>S055f: Functional Tests</b><br/>
+ * To test this user story, the user should follow these steps:
+ * 1- run cleansheets;
+ * 2- click on the Extension menu, go to EventLogFile. There must appear a menu option containning one option for the EventLog File Options;<br/>
+ * 3- the previous option is a set of two check boxes that: when checked and after the said event occurs it will be logged into to EventLog; when not checked the event will not be logged;<br/>
+ * 4- click on cells or change its content to see the event being logged into the EventLog file. <br/>
+ * <br/>
+ * <br/>
+ * 
+ * @author RafaelChaves
  **/
 /*
  * @startuml doc-files/us055_design55.png

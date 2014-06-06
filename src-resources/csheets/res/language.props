@@ -21,6 +21,7 @@ GreaterThanOrEqual
 Concatenator
 RangeReference
 Eval
+Attribution
 
 # Logic functions
 True

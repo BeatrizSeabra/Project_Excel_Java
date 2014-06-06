@@ -33,15 +33,20 @@ public class ExtensionContacts extends Extension {
 		return new UIExtensionContacts(this, uiController);
     }
     
-    public String importOccupations() throws FileNotFoundException{
+    /**
+     *  Author: Luís Abreu 1120546
+     * @return Returns an Occupation List from a pre-configured CSV file.
+     * @throws FileNotFoundException
+     */
+    public static String importOccupations() throws FileNotFoundException{
         
         String occupations = "";
-        Scanner scanner = new Scanner(new File("src-resources\\csheets\\ext\\contacts\\occupations.csv"));
-        scanner.useDelimiter("\n");
-        while(scanner.hasNext()){
-            occupations+=scanner.next()+"\n";
+        try (Scanner scanner = new Scanner(new File("src-resources\\csheets\\ext\\contacts\\occupations.csv"))) {
+            scanner.useDelimiter("\n");
+            while(scanner.hasNext()){
+                occupations+=scanner.next()+"\n";
+            }
         }
-        scanner.close();
         return occupations;
     }
 

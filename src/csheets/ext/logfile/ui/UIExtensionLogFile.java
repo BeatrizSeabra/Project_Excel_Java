@@ -21,6 +21,7 @@ import csheets.ui.ctrl.UIController;
 import csheets.ui.ext.CellDecorator;
 import csheets.ui.ext.TableDecorator;
 import csheets.ui.ext.UIExtension;
+import java.util.ArrayList;
 
 /**
  * This class implements the UI interface extension for the simple extension.
@@ -48,6 +49,7 @@ public class UIExtensionLogFile extends UIExtension {
 	public Icon getIcon() {
 		return null;
 	}
+
 
 	/**
 	 * Returns an instance of a class that implements JMenu.

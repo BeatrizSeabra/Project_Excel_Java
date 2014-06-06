@@ -31,13 +31,32 @@
  * <br/>
  * 
  * <b>S079c: Coding</b><br/>
+ * Foram criadas duas extensões ChatExtension  e UIExtensionChat.<br/>
+ * Alem das extensões foi criado um controller, chatcontroller, e duas JFrames ( Chat e UIChat ).<br/>
+ * ChatAction e ChatMenu para integrar a extensão na aplicacao.<br/>
+ * Classe Server criada em conjunto com 2 colegas.<br/>
  * <br/>
  * <br/>
  * 
  * <b>S079u: Unit Tests</b><br/>
+ * Foram realizados testes ao envio de mensagens, sendo que nao foram realizados com JUnit.<br/>
+ * Foram realizados testes unitarios a classe ChatController<br/>
  * <br/>
  * 
  * <b>S079f: Functional Tests</b><br/>
+ * Envio:
+ * 1-Executar programa
+ * 2-Clicar em Extension>Chat>Chat
+ * 3-Activar Chat
+ * 4-Introduzir IP válido
+ * 5-Start Chat
+ * 6-Escrever Mensagem
+ * 7-SEND
+ * Receber:
+ * 1-Executar programa
+ * 2-Clicar em Extension>Chat>Chat
+ * 3-Activar Chat
+ * 4-Receber Mensagem -> Abre Janela.
  * <br/>
  * <br/>
  * 

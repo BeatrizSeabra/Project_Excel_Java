@@ -8,16 +8,16 @@ import javax.swing.JMenu;
 import csheets.ui.ctrl.UIController;
 
 /**
- * Representes the UI extension menu of the simple extension.
- * @author Alexandre Braganca
+ * Representes the UI extension menu of the invoke function extension.
+ * @author 1120268
  */
 public class InvokeFunctionMenu extends JMenu {
 
 	/**
-	 * Creates a new simple menu.
+	 * Creates a new invoke function menu.
 	 * This constructor creates and adds the menu options. 
-	 * In this simple example only one menu option is created.
-	 * A menu option is an action (in this case {@link csheets.ext.simple.ui.ExampleAction})
+	 * Only one menu option is created.
+	 * A menu option is an action (in this case {@link csheets.ext.simple.ui.InvokeFunctionAction})
 	 * @param uiController the user interface controller
 	 */
 	public InvokeFunctionMenu(UIController uiController) {

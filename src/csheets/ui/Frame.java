@@ -37,6 +37,7 @@ import javax.swing.JToolBar;
 
 import csheets.CleanSheets;
 import csheets.core.Workbook;
+import csheets.ui.ctrl.ExtensionsManagerAction;
 import csheets.ui.ctrl.AboutAction;
 import csheets.ui.ctrl.ActionManager;
 import csheets.ui.ctrl.AddSpreadsheetAction;
@@ -134,6 +135,9 @@ public class Frame extends JFrame implements SelectionListener {
 		actionManager.registerAction("insertrow", new InsertRowAction());
 		actionManager.registerAction("removerow", new RemoveRowAction());
 
+                // Registers Extensions Manager in "Extensions" MenuBar
+                actionManager.registerAction("extensions", new ExtensionsManagerAction(app, uiController));
+                
 		// Registers help actions
 		actionManager.registerAction("help", new HelpAction());
 		actionManager.registerAction("license", new LicenseAction());
@@ -188,7 +192,7 @@ public class Frame extends JFrame implements SelectionListener {
 		pane.add(topPanel, BorderLayout.NORTH);
 		pane.add(splitPane, BorderLayout.CENTER);
 		setJMenuBar(new MenuBar(app, actionManager, uiController));
-
+                
 		// Registers listeners
 		uiController.addSelectionListener(this);
 		addWindowListener(new WindowClosingHandler(this,

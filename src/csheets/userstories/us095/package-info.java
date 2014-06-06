@@ -37,27 +37,21 @@
  */
 /*
  *
-//  @startuml doc-files/us095_design1.png
-//  participant "uic : UIController" as UIC
-//  participant ExtensionManager as ExtM
-//  participant "extension : CommentsExtension" as EExample
-//  participant "uiExtension : UIExtensionComments" as UIExt
-//  participant "CommentPanel : JPanel" as cp
-//  UIC -> ExtM : extensions=getExtensions();
-//  loop for Extension ext : extensions
-//  	UIC -> EExample : uiExtension=getUIExtension(this);
-//  	activate EExample
-//  	create UIExt
-//  	EExample -> UIExt : new(extension, uic)
-//  	deactivate EExample
-//  	UIExt -> UIExt : getSideBar();
-//  	activate UIExt
-//  	create cp
-//  	UIExt -> cp :  new (uic)  	
-//  	deactivate UIExt
-//  	UIC -> UIC : uiExtensions.add(uiExtension);
-//  end
-//  @enduml
+  @startuml doc-files/us095_design1.png
+  participant "uic : UIController" as UIC
+  participant ExtensionManager as ExtM
+  participant "ContactExtension" as EExample
+  UIC -> ExtM : extensions=getExtensions();
+  loop for Extension ext : extensions
+  	UIC -> EExample : uiExtension=getUIExtension(ContactExtension);
+  end
+  	activate EExample
+  	EExample -> UIC : getUIUpdateContact()
+        UIC -> EExample: updateContact(this)
+        EExample -> UIC : getUIUpdateOccupation()
+        UIC -> EExample : updateOccuppation(this)
+  	deactivate EExample
+  @enduml
  *
  */
 package csheets.userstories.us095;

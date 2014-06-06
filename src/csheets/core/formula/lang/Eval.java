@@ -31,7 +31,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * A function that returns the numeric average of its arguments.
+ * A Function that receives a String containing an expression, and returns the result of that expression
  * @author JSilva314 - 1040314 - João Paulo Silva
  */
 public class Eval implements Function {

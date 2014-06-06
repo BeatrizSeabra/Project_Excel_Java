@@ -42,6 +42,7 @@ import csheets.core.Address;
 import csheets.core.Cell;
 import csheets.core.formula.compiler.FormulaCompilationException;
 import csheets.core.formula.lang.UnknownElementException;
+import csheets.ext.logfile.WriteLogFile;
 import csheets.ui.ctrl.SelectionEvent;
 import csheets.ui.ctrl.SelectionListener;
 import csheets.ui.ctrl.UIController;
@@ -114,6 +115,7 @@ public class CellEditor extends JTextField implements TableCellEditor, Selection
 			// Updates cell content (and parses formula)
 			try {
 				cell.setContent(content);
+                                 uiController.writeLogFile(cell.getAddress().toString(), "onChange");
 			} catch (FormulaCompilationException e) {
 				// Retrieves correct message
 				String message;

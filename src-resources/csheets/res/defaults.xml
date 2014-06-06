@@ -12,6 +12,8 @@
 <entry key="filetype2.description">Text file (*.txt)</entry>
 <entry key="filetype3.extension">xml</entry>
 <entry key="filetype3.description">XML file (*.xml)</entry>
+<entry key="filetype3.extension">pdf</entry>
+<entry key="filetype3.description">PDF file (*.pdf)</entry>
 
 <entry key="dependencies.ui.sidebar">true</entry>
 <entry key="style.ui.toolbar">true</entry>

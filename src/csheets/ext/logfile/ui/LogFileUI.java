@@ -6,6 +6,7 @@
 
 package csheets.ext.logfile.ui;
 
+import csheets.ui.ctrl.UIController;
 import java.util.ArrayList;
 
 
@@ -15,13 +16,22 @@ import java.util.ArrayList;
  * @author RafaelChaves
  */
 public class LogFileUI extends javax.swing.JFrame {
-    private ArrayList<String> mylist;
+    private UIController uiController;
     /**
      * Creates new form LogFileUI
      */
-    public LogFileUI(ArrayList<String> list) {
-        mylist=list;
+    public LogFileUI(UIController uic) {
+        uiController=uic;
+        ArrayList<String> mylist=uiController.getEvl();
         initComponents();
+        if(!mylist.contains("onClick"))
+            {
+                jCheckBox1.setSelected(false);
+            }
+        if(!mylist.contains("onChange"))
+            {
+                jCheckBox2.setSelected(false);
+            }
     }
 
     /**
@@ -37,8 +47,9 @@ public class LogFileUI extends javax.swing.JFrame {
         jCheckBox2 = new javax.swing.JCheckBox();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jCheckBox1.setText("OnClick");
         jCheckBox1.setSelected(true);
@@ -60,6 +71,8 @@ public class LogFileUI extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Choose the events to be logged");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -67,25 +80,29 @@ public class LogFileUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBox2)
-                            .addComponent(jCheckBox1)))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCheckBox1)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(44, 44, 44)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jCheckBox2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(jLabel1)))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jCheckBox1)
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jCheckBox2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBox2)
+                    .addComponent(jCheckBox1))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -100,7 +117,7 @@ public class LogFileUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        ArrayList<String> mylist=uiController.getEvl();
         if(jCheckBox1.isSelected()){
             if(!mylist.contains("onClick"))
             {
@@ -125,6 +142,7 @@ public class LogFileUI extends javax.swing.JFrame {
             }
         }
         
+        uiController.setEvl(mylist);
         this.dispose();
         
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -164,15 +182,12 @@ public class LogFileUI extends javax.swing.JFrame {
         });
     }
     
-    public ArrayList<String> getList()
-    {
-        return mylist;
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

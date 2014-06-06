@@ -32,7 +32,7 @@ public class EdMenuUIExtension extends UIExtension {
 	}
 
 	/**
-	 * Returns a menu that provides editing of style.
+	 * Returns a menu that provides editing of Menu.
 	 * @return a JMenu component
 	 */
 	public JMenu getMenu() {
@@ -42,7 +42,7 @@ public class EdMenuUIExtension extends UIExtension {
 	}
 
 	/**
-	 * Returns a toolbar that provides editing of style.
+	 * Returns a toolbar that provides editing of Menu.
 	 * @return a JToolBar component
 	 */
 	public JToolBar getToolBar() {

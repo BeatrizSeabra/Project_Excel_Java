@@ -29,7 +29,7 @@ import javax.swing.ImageIcon;
  * This class implements the UI interface extension for the simple extension.
  * A UI interface extension must extend the UIExtension abstract class.
  * @see UIExtension
- * @author Alexandre Braganca
+ * @author Stefan Parker
  */
 public class UIExtensionSort extends UIExtension {
 
@@ -41,7 +41,7 @@ public class UIExtensionSort extends UIExtension {
 
 	public UIExtensionSort(Extension extension, UIController uiController) {
 		super(extension, uiController);
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	/**
@@ -60,7 +60,7 @@ public class UIExtensionSort extends UIExtension {
 	/**
 	 * Returns an instance of a class that implements JMenu.
 	 * In this simple case this class only supplies one menu option.
-	 * @see InvokeFunctionMenu
+	 * @see SortMenu
 	 * @return a JMenu component
 	 */
 	public JMenu getMenu() {
@@ -78,12 +78,6 @@ public class UIExtensionSort extends UIExtension {
 	}
 
 	/**
-	 * Returns a table decorator that visualizes the data added by the extension.
-	 * @return a table decorator, or null if the extension does not provide one
-	 */
-		
-	
-	/**
 	 * Returns a toolbar that gives access to extension-specific
 	 * functionality.
 	 * @return a JToolBar component, or null if the extension does not provide one
@@ -92,10 +86,4 @@ public class UIExtensionSort extends UIExtension {
 		return null;
 	}
 
-	/**
-	 * Returns a side bar that gives access to extension-specific
-	 * functionality.
-	 * @return a component, or null if the extension does not provide one
-	 */
-	
 }

@@ -27,6 +27,7 @@ public class ContactsAction extends BaseAction {
     }
 
     protected void defineProperties() {
+        setEnabled(true);
     }
 
     /**
@@ -37,23 +38,9 @@ public class ContactsAction extends BaseAction {
      * @param event the event that was fired
      */
     public void actionPerformed(ActionEvent event) {
-
-        /* Lets user select a font
-        int result = JOptionPane.showConfirmDialog(null, "You have selected the Example option. Do you want to set cell A1 to 'Changed'");
-
-        if (result == JOptionPane.YES_OPTION) {
-            // Vamos exemplificar como se acede ao modelo de dominio (o workbook)
-            try {
-                this.uiController.getActiveSpreadsheet().getCell(0, 0).setContent("Changed");
-            } catch (Exception ex) {
-                // para ja ignoramos a excepcao
-            }
-        }
-                */
-       ContactsWindow cWindow = new ContactsWindow();
-       cWindow.setVisible(true);
-       cWindow.setSize(352, 200);
-      // cWindow.setResizable(true);
-      // cWindow.setLocationRelativeTo(null);
+ 
+       ContactsUI window = new ContactsUI();
+       window.setVisible(true);
+       window.setLocationRelativeTo(null);
     }
 }
