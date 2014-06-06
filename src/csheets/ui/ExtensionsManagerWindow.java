@@ -9,33 +9,40 @@ import csheets.core.Workbook;
 import csheets.ext.Extension;
 import csheets.ext.ExtensionManager;
 import csheets.ui.ctrl.UIController;
+import csheets.ui.ext.UIExtension;
 import java.awt.Checkbox;
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 import java.lang.reflect.Array;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
 import javax.swing.JPanel;
 
 /**
  *
  * @author Oleg
  */
-public class ExtensionsManagerWindow extends javax.swing.JFrame {
+public class ExtensionsManagerWindow extends JFrame {
 
     /**
      * Creates new form ExtensionsManagerWindow
      */
+    
+    private UIExtension[] extensions;
+    
     public ExtensionsManagerWindow(CleanSheets app, UIController uiController) {
         initComponents();
         /** The user interface controller */
-        ExtensionManager instance = ExtensionManager.getInstance();
-        Extension[] extensions = instance.getExtensions();        
-        jPanel1.setLayout(new GridLayout(extensions.length/2, 2, 30, 5));
-        for(Extension ex : extensions){
-            jPanel1.add(new Checkbox(ex.getName(), null, true));                    
-        }
         
+        extensions = uiController.getExtensions();       
+        jPanel1.setLayout(new GridLayout(extensions.length/2, 2, 30, 5));
+        for(UIExtension ex : extensions){
+            if(ex.getMenu()!=null){
+                jPanel1.add(new Checkbox(ex.getExtension().getName(), null, ex.getMenu().isEnabled()));
+            }                        
+        }
+        //jPanel1.addComponentListener();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -112,6 +119,16 @@ public class ExtensionsManagerWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void applyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyButtonActionPerformed
+
+        for(int i=0; i<jPanel1.getComponentCount(); i++){
+            for(UIExtension ex : extensions){
+                if(ex.getMenu()!=null){
+                    if(jPanel1.getComponent(i).isCursorSet()==true && ex.getMenu().getName().equalsIgnoreCase(jPanel1.getComponent(i).getName())){
+                    jPanel1.getComponent(i).setEnabled(!ex.getMenu().isEnabled());
+                    }
+                }
+            }            
+        }
         this.dispose();
     }//GEN-LAST:event_applyButtonActionPerformed
 

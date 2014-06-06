@@ -45,8 +45,6 @@ public class ExtensionsManagerAction extends BaseAction{
 	}
 
 	protected void defineProperties() {
-            //putValue(MNEMONIC_KEY, KeyEvent.VK_C);
-            //putValue(ACTION_COMMAND_KEY, (String)TransferHandler.getPasteAction().getValue(Action.NAME));
             putValue(SMALL_ICON, new ImageIcon(CleanSheets.class.getResource("res/img/toolbar.gif")));
 	}
 
@@ -56,23 +54,10 @@ public class ExtensionsManagerAction extends BaseAction{
                         emw.setVisible(true);
                         emw.setSize(500, 350);
                         emw.setResizable(true);
-                        emw.setLocationRelativeTo(null);
-                        
+                        emw.setLocationRelativeTo(null);                        
 		} catch (Exception ex) {
-			// para ja ignoramos a excepcao
+			// ignore
                 }
-            
-           /* setEnabled(true);
-            ExtensionManager instance = ExtensionManager.getInstance();
-        Extension[] extensions = instance.getExtensions();
-        JFrame jframe = new JFrame("Extensions Manager2");
-        JPanel jPanel1 = new JPanel(new GridLayout(extensions.length/2, 2, 30, 5));
-        jframe.add(jPanel1);
-        for(Extension ex : extensions){
-            if(!ex.getName().equalsIgnoreCase("Extensions Manager2")){
-                jPanel1.add(new Checkbox(ex.getName(), null, true));
-            }                    
-        }*/
     }
 	
 
