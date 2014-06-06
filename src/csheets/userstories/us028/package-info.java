@@ -36,6 +36,14 @@ exportar as formulas, etc.). Não é necessária grande preocupação no aspecto
  * 
  * <b>S028f: Functional Tests</b><br/>
  * To test this user story, the user should follow these steps:<br/>
+ * 1 - Correr o cleansheets <br/>
+ * 2 - Escrever nas celula <br/>
+ * 3 - Seleccionar uma celula sem qualquer texto escrito <br/>
+ * 4 - Ir ao Menu "Extensions" <br/>
+ * 5 - Seleccionar a opcao "Export" e em seguida "PDF" <br/>
+ * 6 - Escolher o caminho e o nome do ficheiro <br/>
+ * 7 - Clicar no botao "save". <br/>
+ * 
  * <br/>
  * <br/>
  * 

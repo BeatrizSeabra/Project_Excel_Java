@@ -24,9 +24,32 @@
  *<img src="../../../csheets/userstories/us025/doc-files/us025_design1.png"> 
  *Para validar o xml exportado e limitar o conteudo das celulas, foi criado uma ficheiro xsd. <br/>
  * <a src="../../../csheets/io/cleanSheets.xsd" target="_blank">cleanSheet xsd</a> 
- *<br/>
- *<br/>
- * 
+   <br/>
+* <br/>
+* 
+* <b>S025c: Coding</b><br/>
+* see:<br/>
+* <a href="../../../csheets/ext/exportXML/package-summary.html">csheets.ext.exportXML</a><br/>
+* <a href="../../../csheets/ext/exportXML/ui/package-summary.html">csheets.ext.exportXML.ui</a><br/>
+* <br/>
+* <br/>
+* 
+* <b>S025u: Unit Tests</b><br/>
+* Os metodos necessarios para a implementacao do use case 25, exportar xml,<br/> 
+* sao metodos void por isso nao foi possivel ealizar teste unitarios.<br/> 
+* <br/>
+* <br/>
+* 
+* <b>S025f: Functional Tests</b><br/>
+* Passos para teste funcionais:<br/>
+* 1correr cleansheets;<br/>
+* 2selecionar a celula com indice a baixo da ultima celula escrita, para garantir que toda informacao e exportada.<br/> 
+* 3selecionar a opcao do menu "extensions". Selecionar no sub-menu a opcao Export e selecionar a opcao xml;<br/>
+* 4escolher um nome para o ficheiro; E selecionar o local para salvar o ficheiro;<br/>
+* 5Confimar accao. <br/>
+* <br/>
+* <br/>
+* 
  * @author 1120388
  */
 /*
