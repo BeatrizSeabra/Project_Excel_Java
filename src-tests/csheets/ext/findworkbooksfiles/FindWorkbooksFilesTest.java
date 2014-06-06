@@ -41,17 +41,23 @@ public class FindWorkbooksFilesTest {
     }
 
     /**
-     * Test of findWorkbooksFiles method, of class FindWorkbooksFiles.     
+     * Test of findWorkbooksFiles method, of class FindWorkbooksFiles.
+     * The test checks the number of occurrences of the search on "C:\\SuperTeste"
+     * directory, the number of workbooks files in this directory are 15 (expResult=15).
+     * Compares the number of elements returning in "findWorkbooksFiles" method,
+     * and the size of the list, must be equal to the variable expResult.
      */
     @Test
     public void testFindWorkbooksFiles() {
         System.out.println("findWorkbooksFiles");
-        File startingDirectory = new File("C:\\SuperTeste");
+        long expResult = 15;
+        File startingDirectory = new File("C:\\SuperTeste");        
         String pattern = ".*\\.cls";
         FindWorkbooksFiles instance = new FindWorkbooksFiles();
-        List<File> expResult = instance.findWorkbooksFiles(startingDirectory, pattern);
         List<File> result = instance.findWorkbooksFiles(startingDirectory, pattern);
-        assertEquals(expResult, result);
+        System.out.println("Expected Value: "+expResult+" founded workbooks files");
+        System.out.println("Result: "+result.size()+" founded workbooks files");
+        assertEquals(expResult, (long)result.size());
     }
     
 }
