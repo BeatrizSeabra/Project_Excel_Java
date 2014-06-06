@@ -20,14 +20,19 @@
  * 
  * <b>S067d: Design</b><br/> 
  * <br/>
- * To realize this user story we will need to create a submenu option in the menu option Extensions, named "Find Workbooks Files".
- * 
- * We will also need to create a subclass of UIExtension. For the sidebar we need to implement a JPanel.<br/>
+ * To realize this user story we will need to create a submenu option in the menu option Extensions, 
+ * named "Find Workbooks Files". We will also need to create a subclass of UIExtension. For select a directory
+ * to search workbooks files we need to create a instance of the FileChooser, to perform this operation.
+ * To find the files in the directory, we will create a class named FindWorkbooksFiles, and implement
+ * a recursive method to search the files in the directory and in his subdirectories, to return a ArrayList
+ * with all workbooks files. Finally to show the listing with the names and paths of the files, we need to
+ * create a JFrame with components JTable (with DefaultTableModel) and JScroll, to show one window with table style. 
  * The following diagram shows how these new classes will be loaded and "integrated" with cleansheets.<br/><br/>
  * <img src="../../../csheets/userstories/us067/doc-files/us067_design1.png">
  * <br/>
  * 
  * <b>S067c: Coding</b><br/>
+*  <br/>
  * <br/>
  * 
  * <b>S067u: Unit Tests</b><br/>

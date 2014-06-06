@@ -17,8 +17,8 @@ import javax.swing.JOptionPane;
  * through file chooser window (instance of FileChooser class), and then class
  * FindWorkbooksFiles will search for workbooks files, on the directory picked from user,
  * and if the files exist, an instance of the class WindowListWorkbooksFiles(extends JFrame),
- * will be created, to show an window with table style, to inform the names and
- * the paths of that files, to user.
+ * will be created, to show an window with table style, to inform the name(s)and
+ * the path(s) of that file(s), to user.
  * @author 1090675 - Tiago Pereira
  */
 public class FindWorkbooksFilesAction extends BaseAction {
@@ -46,11 +46,11 @@ public class FindWorkbooksFilesAction extends BaseAction {
     /**
      * A action that presents the functionality to find workbooks files on
      * specified directory choose by the user, indicated through the FileChooser
-     * component that provides to user choice a diretory on disk, and then
-     * show to the user, an window represent a table model, if the directory
-     * will have workbooks files, inform the name and the respective path of the file,
-     * otherwise if the specified directory don´t have any workbooks files, inform
-     * the user through message.
+     * component that provides to user choice a diretory on disk, and then show
+     * to the user, an window represent a table model, if the directory will have
+     * workbooks files, inform the name and the respective path of the file, otherwise
+     * if the specified directory don´t have any workbooks files, inform the user
+     * through message. The listing of the founded files are shown alphabetically.
      * 
      * @param event the event that was fired
      */
