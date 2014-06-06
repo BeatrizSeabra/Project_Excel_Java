@@ -52,7 +52,6 @@ public class UIExtensionImport extends UIExtension {
 		if (menu == null){
                     FileChooser f = new FileChooser(null,null);
                     f.setFileFilter(new FileNameExtensionFilter("Ficheiro TXT (.txt)", "txt"));
-            String caminho = "";
 			menu = new ImportMenu(uiController,f);
                 }
                         return menu;
