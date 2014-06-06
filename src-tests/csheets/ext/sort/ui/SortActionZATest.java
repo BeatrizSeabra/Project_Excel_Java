@@ -3,13 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package csheets.ext.sort.ui;
 
-import csheets.CleanSheets;
-import csheets.core.Cell;
-import csheets.core.Spreadsheet;
-import csheets.core.Workbook;
 import csheets.ui.ctrl.UIController;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
@@ -25,22 +20,22 @@ import static org.junit.Assert.*;
  * @author Stefan Parker
  */
 public class SortActionZATest {
-    
+
     public SortActionZATest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -51,12 +46,11 @@ public class SortActionZATest {
     @Test
     public void testGetName() {
         System.out.println("getName");
-        UIController uiController=null;
+        UIController uiController = null;
         SortActionZA instance = new SortActionZA(uiController);
         String expResult = "Sort Cell from Z-A";
         String result = instance.getName();
         assertEquals(expResult, result);
-        
     }
 
     /**
@@ -65,10 +59,10 @@ public class SortActionZATest {
     @Test
     public void testDefineProperties() {
         System.out.println("defineProperties");
-        UIController uiController=null;
+        UIController uiController = null;
         SortActionZA instance = new SortActionZA(uiController);
         instance.defineProperties();
-        
+
     }
 
     /**
@@ -78,10 +72,11 @@ public class SortActionZATest {
     public void testActionPerformed() {
         System.out.println("actionPerformed");
         ActionEvent event = null;
-        UIController uiController=null;
+        UIController uiController = null;
         SortActionZA instance = new SortActionZA(uiController);
         instance.actionPerformed(event);
-        
+        fail("The test case is a prototype.");
+
     }
 
     /**
@@ -90,27 +85,76 @@ public class SortActionZATest {
     @Test
     public void testSortZA() throws Exception {
         System.out.println("sortZA");
-        ArrayList<String> conteudos = new ArrayList();
-        conteudos.add("e");
-        conteudos.add("d");
-        conteudos.add("c");
-        conteudos.add("b");
-        conteudos.add("a");
-        CleanSheets cs= new CleanSheets();
-        UIController uiController = new UIController(cs);
-        Workbook wb=new Workbook(2);
-	Spreadsheet s=wb.getSpreadsheet(0);
-        Cell c=s.getCell(0,0);
-        s.getCell(0,0).setContent("a");
-        s.getCell(0,1).setContent("b");
-        s.getCell(0,2).setContent("c");
-        s.getCell(0,3).setContent("d");
-        s.getCell(0,4).setContent("e");
-        int maxrows = 5;
+        int maxrows = 4;
         int collumn = 0;
+        UIController uiController = null;
         SortActionZA instance = new SortActionZA(uiController);
         instance.sortZA(maxrows, collumn);
-        assertEquals(conteudos, instance.conteudos);
+        fail("The test case is a prototype.");
     }
-    
+
+    /**
+     * Test of addToLists method, of class SortActionZA.
+     */
+    @Test
+    public void testAddToLists() throws Exception {
+        System.out.println("addToLists");
+        int maxrows = 4;
+        int collumn = 0;
+        UIController uiController = null;
+        SortActionZA instance = new SortActionZA(uiController);
+        instance.addToLists(maxrows, collumn);
+        //Ver aqui se o tamanho dos dois arrays são iguais
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of checkListEmpty method, of class SortActionZA.
+     */
+    @Test
+    public void testCheckListEmpty() {
+        System.out.println("checkListEmpty");
+        UIController uiController=null;
+        SortActionZA instance = new SortActionZA(uiController);
+        instance.checkListEmpty();
+        int expected=0;
+        int result=instance.conteudos.size();
+        assertEquals(expected,result);
+        
+    }
+
+    /**
+     * Test of setContentCells method, of class SortActionZA.
+     */
+    @Test
+    public void testSetContentCells() throws Exception {
+        System.out.println("setContentCells");
+        int collumn = 0;
+        SortActionZA instance = null;
+        instance.setContentCells(collumn);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of orderContents method, of class SortActionZA.
+     */
+    @Test
+    public void testOrderContents() {
+        System.out.println("orderContents");
+        SortActionZA instance = null;
+        instance.conteudos.set(0, "a");
+        instance.conteudos.set(1, "b");
+        instance.conteudos.set(2, "c");
+        instance.conteudos.set(3, "d");
+        instance.orderContents();
+        ArrayList test = new ArrayList();
+        test.add("d");
+        test.add("c");
+        test.add("b");
+        test.add("a");
+        assertEquals(instance.conteudos,test);
+        fail("The test case is a prototype.");
+    }
+
 }
