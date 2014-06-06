@@ -12,7 +12,7 @@ mkdir ..\dist
 call jar cfm ../dist/csheets.jar makejar.mf -C ../tmp-build/ csheets
 
 echo Copiar as dependencias
-call copy /Y ..\lib\antlr-3.5.2-complete.jar ..\dist 
+call copy /Y ..\lib\*.jar ..\dist 
 
 REM echo Removing temporary files...
 REM call rmdir jar /Q /S
