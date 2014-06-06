@@ -10,7 +10,7 @@
  * <br/>
  * <br/>
  *  
- * <b>S001a: Analysis</b><br/>
+ * <b>S037a: Analysis</b><br/>
  * Vai ser criada uma nova formula,
  * verifica la na celulua
  * colocar um novo token :=
@@ -19,7 +19,7 @@
  * <br/>
  * <br/>
  * 
- * <b>S001d: Design</b><br/>
+ * <b>S037d: Design</b><br/>
  * <br/><br/>
  * O user introduz texto na celula.
  * Se o texto começar por = assim assume uma formula.
@@ -36,21 +36,21 @@
  * <br/>
  * <br/>
  * 
- * <b>S001c: Coding</b><br/>
+ * <b>S037c: Coding</b><br/>
+ * see:<br/>
+ * <a href="../../../csheets/core/formula/lang/package-summary.html">csheets.core.formula.lang</a><br/>
+ * <a href="../../../csheets/core/formula/compiler/package-summary.html">csheets.core.formula.compiler</a><br/>
+ * <br/>
+ * <br/>
+ * 
+ * <b>S037u: Unit Tests</b><br/>
  * see:<br/>
  * <a href="../../../csheets/ext/comments/package-summary.html">csheets.ext.comments</a><br/>
  * <a href="../../../csheets/ext/comments/ui/package-summary.html">csheets.ext.comments.ui</a><br/>
  * <br/>
  * <br/>
  * 
- * <b>S001u: Unit Tests</b><br/>
- * see:<br/>
- * <a href="../../../csheets/ext/comments/package-summary.html">csheets.ext.comments</a><br/>
- * <a href="../../../csheets/ext/comments/ui/package-summary.html">csheets.ext.comments.ui</a><br/>
- * <br/>
- * <br/>
- * 
- * <b>S001f: Functional Tests</b><br/>
+ * <b>S037f: Functional Tests</b><br/>
  * To test this user story, the user should follow these steps:<br/>
  * 1- run cleansheets;<br/>
  * 2- click on the View menu and select sidebars. There must appear a list of menu options containning one option for the comments sidebar;<br/>
