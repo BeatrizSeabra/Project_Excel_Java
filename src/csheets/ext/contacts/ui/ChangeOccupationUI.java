@@ -7,7 +7,12 @@ package csheets.ext.contacts.ui;
 
 import csheets.PersistenceJPA.ContactsRepository;
 import csheets.ext.contacts.Contact;
+import csheets.ext.contacts.ExtensionContacts;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JList;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -16,7 +21,7 @@ import javax.swing.event.ListSelectionListener;
  *
  * @author PedroRosário
  */
-public class ContactsUI extends javax.swing.JFrame {
+public class ChangeOccupationUI extends javax.swing.JFrame {
     
     
     ContactsRepository cr = new ContactsRepository();
@@ -25,19 +30,21 @@ public class ContactsUI extends javax.swing.JFrame {
     /**
      * Creates new form ContactsUI
      */
-    public ContactsUI() {
+    public ChangeOccupationUI(Contact c1) {
+        c=c1;
         setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
         initComponents();
     }
 
     public String[] auxiliar() {
         List<Contact> aux = ContactsRepository.getAll();
-         String contactsAux = "";
-         for (Contact c : aux) {
-         contactsAux += c.getFirstName() + " " + c.getLastName() + "-";
-         }
-         String[] strings2 = contactsAux.split("-");
-//        String[] strings2 = {"asas", "asddas"};
+         String occupations = null;
+        try {
+            occupations = ExtensionContacts.importOccupations();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ChangeOccupationUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         String[] strings2 = occupations.split("\n");
         return strings2;
     }
 
@@ -80,23 +87,14 @@ public class ContactsUI extends javax.swing.JFrame {
 
         });
 
-        jButton1.setText("Create");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
-                .addGap(62, 62, 62)
-                .addComponent(jButton1)
-                .addGap(41, 41, 41))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -104,19 +102,32 @@ public class ContactsUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jButton1.setText("Confirm");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(133, 133, 133)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -124,6 +135,8 @@ public class ContactsUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -134,6 +147,22 @@ public class ContactsUI extends javax.swing.JFrame {
         CreateUI cw = new CreateUI();
         cw.setVisible(true);
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int i = jList1.getSelectedIndex();
+        String newOccupation = null;
+        Scanner scanner = null;
+        try {
+            scanner = new Scanner(new File("src-resources\\csheets\\ext\\contacts\\occupations.csv"));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ChangeOccupationUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for (int j = 0; j < i; j++) {
+            newOccupation=scanner.next();
+        }
+        
+        ContactsRepository.changeOccupation(c, newOccupation);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -6,12 +6,21 @@
 
 package csheets.ext.invokefunction.ui;
 
+import csheets.core.Value;
+import csheets.core.formula.Expression;
 import csheets.core.formula.FunctionParameter;
 import javax.swing.JOptionPane;
 import csheets.core.formula.lang.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import csheets.core.formula.Function;
+import csheets.core.formula.FunctionCall;
+import csheets.core.formula.Literal;
+import csheets.ui.ctrl.UIController;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  *
@@ -22,12 +31,13 @@ public class Invoke extends javax.swing.JFrame {
     /**
      * Creates new form Invoke
      */
+    protected final UIController uiController;
     
     private String[] help = {"A function that returns true if and only if all of its arguments are true.",
         "A function that returns the numeric average of its arguments.",
         "A function that counts those of its arguments that yield numeric values.",
         "A function that emulates a looping statement, where each cell in a given range that satisfy a given condition, or each corresponding cell in another range, are passed to a function.",
-        "A function that returns the numeric average of its arguments.",
+        "A function that that receives a String containing an expression, and returns the result of that expression.",
         "A function that returns the factorial of its argument.",
         "A function that returns the boolean value false.",
         "A function that emulates the if-then-else statement.",
@@ -37,8 +47,9 @@ public class Invoke extends javax.swing.JFrame {
         "A function that returns the numeric sum of its arguments.",
         "A function that returns the boolean value true."};
     
-    public Invoke() {
+    public Invoke(UIController uiController) {
         initComponents();
+        this.uiController=uiController;
     }
 
     /**
@@ -50,7 +61,6 @@ public class Invoke extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jFormattedTextField2 = new javax.swing.JFormattedTextField();
         jPanel1 = new javax.swing.JPanel();
         jComboBox1 = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
@@ -59,8 +69,6 @@ public class Invoke extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
-
-        jFormattedTextField2.setText("jFormattedTextField2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -177,7 +185,7 @@ public class Invoke extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
+        chooseFunction(jFormattedTextField1.getText(),jComboBox1.getSelectedItem().toString());
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -217,51 +225,68 @@ public class Invoke extends javax.swing.JFrame {
             return "";
         }
     }
-//    private Class getClass(String function) throws ClassNotFoundException{
-//        return Class.forName("csheets.core.formula.lang."+function);
-//    }
+    
+    private Literal[] argumentos(String sintaxe,Function funcao){
+        String[] args=sintaxe.split(";");
+        Literal[] argumentos=new Literal[args.length];
+        FunctionParameter[] parameters = funcao.getParameters();
+        int k=1;
+        if(funcao.isVarArg()){
+            k=0;
+        }
+        for(int i=0; i<args.length; i++){
+            try {
+                Value v;
+                switch(parameters[i*k].getValueType()){
+                    case NUMERIC:
+                        v=new Value(Double.valueOf(args[i]));
+                        break;
+                    case BOOLEAN:
+                        if(args[i].toUpperCase()=="TRUE"){
+                            v=new Value(true);
+                        }else{
+                            v=new Value(false);
+                        }
+                        break;
+                    case DATE:
+                        Date date = new SimpleDateFormat("d/M/yy", Locale.ROOT).parse(args[i]);
+                        v=new Value(date);
+                        break;
+                    default:
+                        v=new Value(args[i]);
+                }
+                argumentos[i]=new Literal(v);
+            } catch (ParseException ex) {
+            }
+        }
+        return argumentos;
+    }
+    
+    private void chooseFunction(String sintaxe, String funcao){
+        String s=sintaxe.substring(sintaxe.indexOf("("),sintaxe.indexOf(")"));
+        try{
+            Function f=(Function) Class.forName("csheets.core.formula.lang."+funcao).newInstance();
+            Literal[] args = argumentos(s,f);
+            FunctionCall fCall = new FunctionCall(f,args);
+            this.uiController.getActiveSpreadsheet().getCell(0, 0).setContent(fCall.evaluate().toString());
+        }
+        catch(Exception ex){
+            int result=JOptionPane.showConfirmDialog(null, "Invalid Parameters. Do you want to correct them?");
+            if (result==JOptionPane.NO_OPTION) {
+                dispose();
+            }
+        }
+    }
     
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Invoke.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Invoke.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Invoke.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Invoke.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Invoke().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JFormattedTextField jFormattedTextField1;
-    private javax.swing.JFormattedTextField jFormattedTextField2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

@@ -39,9 +39,9 @@ public class ContactsRepository {
      */
     public static void changeOccupation(Contact contact, String occupation) {
         EntityManager entityManager = csheets.PersistenceJPA.Persistence.getInstance().connection("JPA2PU");
-        String hqlString = "UPDATE Contact SET Occupation='" + occupation + "', WHERE Id='" + contact.getId() + "';";
-        entityManager.createQuery(hqlString).executeUpdate();
-        entityManager.refresh(contact);
+        Query query = entityManager.createQuery("update Contact c set c.occupation='"+occupation+"' where c.id like :id");
+        query.setParameter("id", contact.getId());
+        int changed = query.executeUpdate();
         csheets.PersistenceJPA.Persistence.getInstance().close();
     }
 
@@ -52,9 +52,9 @@ public class ContactsRepository {
      */
     public static void changeFirstName(Contact contact, String firstName) {
         EntityManager entityManager = csheets.PersistenceJPA.Persistence.getInstance().connection("JPA2PU");
-        String hqlString = "UPDATE Contact SET firstName='" + firstName + "', WHERE Id='" + contact.getId() + "';";
-        entityManager.createQuery(hqlString).executeUpdate();
-        entityManager.refresh(contact);
+        Query query = entityManager.createQuery("update Contact c set c.lastName='"+firstName+"' where c.id like :id");
+        query.setParameter("id", contact.getId());
+        int changed = query.executeUpdate();
         csheets.PersistenceJPA.Persistence.getInstance().close();
     }
 
@@ -65,22 +65,27 @@ public class ContactsRepository {
      */
     public static void changeLastName(Contact contact, String lastName) {
         EntityManager entityManager = csheets.PersistenceJPA.Persistence.getInstance().connection("JPA2PU");
-        String hqlString = "UPDATE Contact SET lastName='" + lastName + "', WHERE Id='" + contact.getId() + "';";
-        entityManager.createQuery(hqlString).executeUpdate();
-        entityManager.refresh(contact);
+        Query query = entityManager.createQuery("update Contact c set c.lastName='"+lastName+"' where c.id like :id");
+        query.setParameter("id", contact.getId());
+        int changed = query.executeUpdate();
         csheets.PersistenceJPA.Persistence.getInstance().close();
 
     }
     
     /**
      *  Removes a contact from the contact table on the JPA database
-     * @param Contact
+     * @param contact
      */
     public static void remove(Contact contact) {
         EntityManager entityManager = csheets.PersistenceJPA.Persistence.getInstance().connection("JPA2PU");
-        String hqlString = "DELETE contact from Contact, WHERE Id='" + contact.getId() + "';";
-        entityManager.createQuery(hqlString).executeUpdate();
-        entityManager.refresh(contact);
+//        String hqlString = "DELETE contact FROM Contact c, WHERE Id=" + contact.getId() + ";";
+//        entityManager.createQuery(hqlString).executeUpdate();
+//        entityManager.refresh(contact);
+//        csheets.PersistenceJPA.Persistence.getInstance().close();
+        
+        Query query = entityManager.createQuery("delete from Contact c where c.id like :id");
+        query.setParameter("id", contact.getId());
+        int deleted = query.executeUpdate();
         csheets.PersistenceJPA.Persistence.getInstance().close();
 
     }
@@ -89,7 +94,7 @@ public class ContactsRepository {
     {
         EntityManager em = csheets.PersistenceJPA.Persistence.getInstance().connection("JPA2PU");
 
-        Query query = em.createQuery("SELECT c FROM CONTACTS");
+        Query query = em.createQuery("SELECT c FROM Contact c");
         
         List<Contact> listContact = query.getResultList();
         

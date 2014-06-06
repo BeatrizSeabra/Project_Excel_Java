@@ -38,7 +38,7 @@ public class ExtensionContacts extends Extension {
      * @return Returns an Occupation List from a pre-configured CSV file.
      * @throws FileNotFoundException
      */
-    public String importOccupations() throws FileNotFoundException{
+    public static String importOccupations() throws FileNotFoundException{
         
         String occupations = "";
         try (Scanner scanner = new Scanner(new File("src-resources\\csheets\\ext\\contacts\\occupations.csv"))) {
