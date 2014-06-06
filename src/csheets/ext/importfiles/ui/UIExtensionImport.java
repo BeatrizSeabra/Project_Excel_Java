@@ -1,23 +1,22 @@
 package csheets.ext.importfiles.ui;
 
-import csheets.ext.invokefunction.ui.*;
-import csheets.ext.simple.ui.*;
+import csheets.ext.Extension;
+import csheets.ext.importfiles.ui.ImportMenu;
+import csheets.ui.FileChooser;
+import csheets.ui.ctrl.UIController;
+import csheets.ui.ext.CellDecorator;
+import csheets.ui.ext.TableDecorator;
+import csheets.ui.ext.UIExtension;
 import javax.swing.Icon;
 import javax.swing.JComponent;
 import javax.swing.JMenu;
 import javax.swing.JToolBar;
 
-import csheets.ext.Extension;
-import csheets.ui.ctrl.UIController;
-import csheets.ui.ext.CellDecorator;
-import csheets.ui.ext.TableDecorator;
-import csheets.ui.ext.UIExtension;
-
 /**
  * This class implements the UI interface extension for the simple extension.
  * A UI interface extension must extend the UIExtension abstract class.
  * @see UIExtension
- * @author Alexandre Braganca
+ * @author Tiago
  */
 public class UIExtensionImport extends UIExtension {
 
@@ -26,6 +25,8 @@ public class UIExtensionImport extends UIExtension {
 
 	/** The menu of the extension */
 	private ImportMenu menu;
+        
+       
 
 	public UIExtensionImport(Extension extension, UIController uiController) {
 		super(extension, uiController);
@@ -47,9 +48,11 @@ public class UIExtensionImport extends UIExtension {
 	 * @return a JMenu component
 	 */
 	public JMenu getMenu() {
-		if (menu == null)
-			menu = new ImportMenu(uiController);
-		return menu;
+		if (menu == null){
+                    FileChooser f = new FileChooser(null,null);
+			menu = new ImportMenu(uiController,f);
+                }
+                        return menu;
 	}
 	
 	/**
