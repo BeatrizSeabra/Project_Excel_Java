@@ -36,7 +36,7 @@
  *
  * <b>S022u: Unit Tests</b><br/>
  * see:<br/>
- * <a href="../../../src-tests/csheets/ext/searchandreplace/package-summary.html">src-tests.csheets.ext.searchandreplace</a><br/>
+ * <a href="../../../csheets/ext/searchandreplace/package-summary.html">csheets.ext.searchandreplace</a><br/>
  * <br/>
  * <br/>
  * 
