@@ -36,7 +36,7 @@ public class ExportPdfAction extends BaseAction {
     }
 
     protected String getName() {
-        return "ExportPDF";
+        return "PDF";
     }
 
     protected void defineProperties() {

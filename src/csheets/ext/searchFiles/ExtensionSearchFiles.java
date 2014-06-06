@@ -10,18 +10,18 @@ import csheets.ui.ext.UIExtension;
  */
 public class ExtensionSearchFiles extends Extension {
 
-	/** The name of the extension */
+	/** Nome da Extensao */
 	public static final String NAME = "Search Files";
 
 	/**
-	 * Creates a new Example extension.
+	 * Cria uma nova Extensao SearchFiles.
 	 */
 	public ExtensionSearchFiles() {
 		super(NAME);
 	}
 	
 	/**
-	 * @return a user interface extension, or null if none is provided
+	 * @return Uma interface para o Utilizador.
 	 */
 	public UIExtension getUIExtension(UIController uiController) {
 		return new UIExtensionSearchFiles(this, uiController);

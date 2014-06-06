@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import csheets.ui.ctrl.BaseAction;
 import csheets.ui.ctrl.UIController;
 import java.awt.Dimension;
-import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 
@@ -18,14 +17,14 @@ public class SearchFilesAction extends BaseAction {
 
     protected JFrame searchFiles;
     /**
-     * The user interface controller
+     * Controlador da interface com o utilizador.
      */
     protected UIController uiController;
 
     /**
-     * Creates a new action.
+     * Cria uma nova ação.
      *
-     * @param uiController the user interface controller
+     * @param uiController A interface com o utilizador.
      */
     public SearchFilesAction(UIController uiController) {
         this.uiController = uiController;
@@ -45,7 +44,7 @@ public class SearchFilesAction extends BaseAction {
         p.setResizable(enabled);
         p.setMinimumSize(new Dimension(40, 40));
         p.setLocationRelativeTo(null);
-        p.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );  
+        p.setDefaultCloseOperation( JFrame.DO_NOTHING_ON_CLOSE );  
         
         }
     }
