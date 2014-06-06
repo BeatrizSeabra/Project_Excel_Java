@@ -32,7 +32,6 @@ public class ResidenceRepository {
     public void insert(Residence residence) {
 
         EntityManager entityManager = csheets.PersistenceJPA.Persistence.getInstance().connection("JPA2PU");
-        entityManager.getTransaction().begin();
         entityManager.persist(residence);
         entityManager.getTransaction().commit();
         csheets.PersistenceJPA.Persistence.getInstance().close(); 
@@ -42,10 +41,10 @@ public class ResidenceRepository {
     public List<Residence> getAll()
     {
         EntityManager entityManager = csheets.PersistenceJPA.Persistence.getInstance().connection("JPA2PU");
-        entityManager.getTransaction().begin();
         Query query = entityManager.createQuery("SELECT e FROM Residence e");
         List<Residence> listResidence = new ArrayList<>();
         listResidence = query.getResultList();
+        csheets.PersistenceJPA.Persistence.getInstance().close();
 
         return listResidence;
 

@@ -40,6 +40,7 @@ import csheets.core.Spreadsheet;
 import csheets.core.Workbook;
 import csheets.ext.Extension;
 import csheets.ext.ExtensionManager;
+import csheets.ext.logfile.WriteLogFile;
 import csheets.ui.ext.UIExtension;
 import csheets.ui.sheet.CellTransferHandler;
 
@@ -83,6 +84,9 @@ public class UIController implements SpreadsheetAppListener {
 
 	// private Map<Workbook, Spreadsheet> activeSpreadsheets;
 	// private Map<Spreadsheet, Cell> activeCells;
+        
+        /** The List of events that will be logged */
+	private ArrayList<String> evl;
 
 	/**
 	 * Creates a new user interface controller.
@@ -102,6 +106,8 @@ public class UIController implements SpreadsheetAppListener {
 		}
 		this.extensions =
 			uiExtensions.toArray(new UIExtension[uiExtensions.size()]);
+                evl=new ArrayList<String>();
+                initEvl();
 	}
 
 /*
@@ -197,8 +203,10 @@ public class UIController implements SpreadsheetAppListener {
 				activeWorkbook, activeSpreadsheet, activeCell,
 				prevWorkbook, prevSpreadsheet, prevCell));
 		}
+                                
 	}
-
+        
+            
 /*
  * EDITING
  */
@@ -240,6 +248,22 @@ public class UIController implements SpreadsheetAppListener {
 	public TransferHandler getCellTransferHandler() {
 		return transferHandler;
 	}
+        
+        private void initEvl()
+        {
+            evl.add("onClick");
+            evl.add("onChange");
+        }
+        
+        public ArrayList<String> getEvl()
+        {
+            return evl;
+        }
+        
+        public void setEvl(ArrayList<String> e)
+        {
+            evl=e;
+        }
 
 /*
  * PROPERTIES

@@ -1,27 +1,26 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package csheets.ext.extensionsmanager;
+package csheets.ext.residence;
 
 import csheets.ext.Extension;
-import csheets.ext.extensionsmanager.ui.UIExtensionsManager;
+import csheets.ext.residence.ui.UIExtensionResidence;
 import csheets.ui.ctrl.UIController;
 import csheets.ui.ext.UIExtension;
 
 /**
- *
- * @author Oleg
+ * A simple extension just to show how the extension mechanism works.
+ * An extension must extend the Extension abstract class.
+ * The class that implements the Extension is the "bootstrap" of the extension.
+ * @see Extension
+ * @author Alexandre Braganca
  */
-public class ExtensionsManager extends Extension {
-    
-    /** The name of the extension */
-	public static final String NAME = "Extensions Manager";
+public class ExtensionResidence extends Extension {
+
+	/** The name of the extension */
+	public static final String NAME = "Residence";
 
 	/**
 	 * Creates a new Example extension.
 	 */
-	public ExtensionsManager() {
+	public ExtensionResidence() {
 		super(NAME);
 	}
 	
@@ -32,7 +31,6 @@ public class ExtensionsManager extends Extension {
 	 * @return a user interface extension, or null if none is provided
 	 */
 	public UIExtension getUIExtension(UIController uiController) {
-		return new UIExtensionsManager(this, uiController);
+		return new UIExtensionResidence(this, uiController);
 	}
-    
 }

@@ -2,10 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package csheets.ext.extensionsmanager.ui;
+package csheets.ui;
 
+import csheets.CleanSheets;
+import csheets.core.Workbook;
 import csheets.ext.Extension;
 import csheets.ext.ExtensionManager;
+import csheets.ui.ctrl.UIController;
 import java.awt.Checkbox;
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
@@ -23,18 +26,17 @@ public class ExtensionsManagerWindow extends javax.swing.JFrame {
     /**
      * Creates new form ExtensionsManagerWindow
      */
-    public ExtensionsManagerWindow() {
+    public ExtensionsManagerWindow(CleanSheets app, UIController uiController) {
         initComponents();
-        ExtensionManager instance = ExtensionManager.getInstance();    
-        Extension[] extensions = instance.getExtensions();
+        /** The user interface controller */
+        ExtensionManager instance = ExtensionManager.getInstance();
+        Extension[] extensions = instance.getExtensions();        
         jPanel1.setLayout(new GridLayout(extensions.length/2, 2, 30, 5));
         for(Extension ex : extensions){
-            if(!ex.getName().equalsIgnoreCase("Extensions Manager")){
-                jPanel1.add(new Checkbox(ex.getName(), null, true));
-            }                    
-        }              
+            jPanel1.add(new Checkbox(ex.getName(), null, true));                    
+        }
+        
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -110,7 +112,7 @@ public class ExtensionsManagerWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void applyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyButtonActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_applyButtonActionPerformed
 
     /**
@@ -143,7 +145,7 @@ public class ExtensionsManagerWindow extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ExtensionsManagerWindow().setVisible(true);         
+                //new ExtensionsManagerWindow(CleanSheets app, UIController uiController).setVisible(true);         
             }
         });
     }

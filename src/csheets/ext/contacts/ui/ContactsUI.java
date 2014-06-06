@@ -29,12 +29,12 @@ public class ContactsUI extends javax.swing.JFrame {
     }
 
     public String[] auxiliar() {
-        /* List<Contact> aux = ContactsRepository.getAll();
-         String contactsAux = "";
-         for (Contact c : aux) {
-         contactsAux += "sasa" + " " + "sasa" + "-";
-         }
-         */
+//        List<Contact> aux = ContactsRepository.getAll();
+//         String contactsAux = "";
+//         for (Contact c : aux) {
+//         contactsAux += "sasa" + " " + "sasa" + "-";
+//         }
+//         String[] strings2 = contactsAux.split("-");
         String[] strings2 = {"asas", "asddas"};
         return strings2;
     }
@@ -60,6 +60,7 @@ public class ContactsUI extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
+        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jList1);
         jList1.setModel(new javax.swing.AbstractListModel() {
             String [] strings=auxiliar();

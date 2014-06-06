@@ -39,6 +39,7 @@ import javax.swing.table.TableModel;
 import csheets.core.Address;
 import csheets.core.Cell;
 import csheets.core.Spreadsheet;
+import csheets.ext.logfile.WriteLogFile;
 import csheets.ext.style.StylableSpreadsheet;
 import csheets.ext.style.StyleExtension;
 import csheets.ui.ctrl.SelectionEvent;
@@ -221,8 +222,10 @@ public class SpreadsheetTable extends Grid implements SelectionListener {
 	 */
 	public void changeSelection(int row, int column, boolean toggle, boolean extend) {
 		super.changeSelection(row, column, toggle, extend);
-		if (!extend)
+		if (!extend){
 			uiController.setActiveCell(getSelectedCell());
+                        WriteLogFile.writeLogFile(getSelectedCell().getAddress(), "onClick", uiController.getEvl());
+                }
 	}
 
 	/**

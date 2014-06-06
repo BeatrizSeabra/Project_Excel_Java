@@ -1,10 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package csheets.ext.extensionsmanager.ui;
+package csheets.ext.residence.ui;
 
-import csheets.ext.simple.ui.*;
 import javax.swing.Icon;
 import javax.swing.JComponent;
 import javax.swing.JMenu;
@@ -17,18 +12,20 @@ import csheets.ui.ext.TableDecorator;
 import csheets.ui.ext.UIExtension;
 
 /**
- *
- * @author Oleg
+ * This class implements the UI interface extension for the simple extension.
+ * A UI interface extension must extend the UIExtension abstract class.
+ * @see UIExtension
+ * @author Alexandre Braganca
  */
-public class UIExtensionsManager extends UIExtension {
-    
-    /** The icon to display with the extension's name */
+public class UIExtensionResidence extends UIExtension {
+
+	/** The icon to display with the extension's name */
 	private Icon icon;
 
 	/** The menu of the extension */
-	private ExtensionsManagerMenu menu;
+	private ResidenceMenu menu;
 
-	public UIExtensionsManager(Extension extension, UIController uiController) {
+	public UIExtensionResidence(Extension extension, UIController uiController) {
 		super(extension, uiController);
 		// TODO Auto-generated constructor stub
 	}
@@ -44,13 +41,12 @@ public class UIExtensionsManager extends UIExtension {
 	/**
 	 * Returns an instance of a class that implements JMenu.
 	 * In this simple case this class only supplies one menu option.
-	 * @see InvokeFunctionMenu
+	 * @see ResidenceMenu
 	 * @return a JMenu component
 	 */
-        
 	public JMenu getMenu() {
 		if (menu == null)
-			menu = new ExtensionsManagerMenu(uiController);
+			menu = new ResidenceMenu(uiController);
 		return menu;
 	}
 	
@@ -86,6 +82,5 @@ public class UIExtensionsManager extends UIExtension {
 	 */
 	public JComponent getSideBar() {
 		return null;
-	}
-    
+	}	
 }

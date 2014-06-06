@@ -47,6 +47,7 @@ import csheets.core.Address;
 import csheets.core.Spreadsheet;
 import csheets.core.Workbook;
 import csheets.core.WorkbookListener;
+import csheets.ext.logfile.WriteLogFile;
 import csheets.ui.ctrl.ActionManager;
 import csheets.ui.ctrl.SelectionEvent;
 import csheets.ui.ctrl.SelectionListener;
@@ -188,6 +189,7 @@ public class WorkbookPane extends JTabbedPane implements SelectionListener {
 					int activeRow = table.getSelectionModel().getAnchorSelectionIndex();
 					uiController.setActiveCell(table.getSpreadsheet()
 						.getCell(new Address(activeColumn, activeRow)));
+                                       
 				}
 			}
 		}

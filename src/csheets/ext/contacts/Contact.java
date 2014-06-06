@@ -17,10 +17,11 @@ import javax.persistence.*;
  */
 
 @Entity
+@Table(name = "Contacts")
 public class Contact implements Serializable {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)    
     private int id;
     private static int id2;
     private String firstName;

@@ -76,6 +76,9 @@ public class CellImpl implements Cell {
 	/** The cell extensions that have been instantiated */
 	private transient Map<String, CellExtension> extensions = 
 		new HashMap<String, CellExtension>();
+        
+        /** The List of events that will be logged */
+	private ArrayList<String> evl;
 
 	/**
 	 * Creates a new cell at the given address in the given spreadsheet.
@@ -430,4 +433,14 @@ public class CellImpl implements Cell {
 		for (CellExtension extension : extensions.values())
 			stream.writeObject(extension);
 	}
+
+       public ArrayList<String> getEvl()
+        {
+            return evl;
+        }
+        
+        public void setEvl(ArrayList<String> e)
+        {
+            evl=e;
+        }
 }
