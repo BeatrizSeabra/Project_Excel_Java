@@ -162,6 +162,7 @@ public class ChangeOccupationUI extends javax.swing.JFrame {
         }
         
         ContactsRepository.changeOccupation(c, newOccupation);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
