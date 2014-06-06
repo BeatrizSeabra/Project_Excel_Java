@@ -4,37 +4,45 @@ import csheets.ext.share.ExtensionShare;
 import java.awt.event.ActionEvent;
 import csheets.ui.ctrl.FocusOwnerAction;
 import csheets.ui.ctrl.UIController;
+import javax.swing.ImageIcon;
+
 /**
  *
- * @author Júlia Dias
+ * @author Rui 1110506
  */
-public class ClientAction extends FocusOwnerAction{
-    /** The user interface controller */
-	protected UIController uiController;
+public class ClientAction extends FocusOwnerAction {
 
-	/**
-	 * Creates a new action.
-	 * @param uiController the user interface controller
-	 */
-	public ClientAction(UIController uiController) {
-		this.uiController = uiController;
-	}
+    /**
+     * The user interface controller
+     */
+    protected UIController uiController;
 
-	protected String getName() {
-		return "Client";
-	}
+    /**
+     * Creates a new action.
+     *
+     * @param uiController the user interface controller
+     */
+    public ClientAction(UIController uiController) {
+        this.uiController = uiController;
+    }
 
-	protected void defineProperties() {//no properties
-	}
+    protected String getName() {
+        return "Client";
+    }
 
-	/**
-	 * A share action that creates a new Client
-	 * @param event the event that was fired
-	 */
-	public void actionPerformed(ActionEvent event) {
-            
-           ClientUI client = new ClientUI(uiController.getActiveSpreadsheet(),super.focusOwner.getSelectedCell().getAddress(),focusOwner);
-           client.run();
-	}
-    
+    protected void defineProperties() {
+        putValue(SMALL_ICON, new ImageIcon(ExtensionShare.class.getResource("res/img/client.png")));
+    }
+
+    /**
+     * A share action that creates a new Client
+     *
+     * @param event the event that was fired
+     */
+    public void actionPerformed(ActionEvent event) {
+
+        ClientUI client = new ClientUI(uiController.getActiveSpreadsheet(), super.focusOwner.getSelectedCell().getAddress(), focusOwner);
+        client.run();
+    }
+
 }

@@ -6,10 +6,12 @@ import javax.swing.JMenu;
 import javax.swing.JToolBar;
 
 import csheets.ext.Extension;
+import csheets.ext.share.ExtensionShare;
 import csheets.ui.ctrl.UIController;
 import csheets.ui.ext.CellDecorator;
 import csheets.ui.ext.TableDecorator;
 import csheets.ui.ext.UIExtension;
+import javax.swing.ImageIcon;
 
 /**
  **
@@ -18,7 +20,7 @@ import csheets.ui.ext.UIExtension;
  *
  * @see UIExtension
  *
- * @author Julia Dias
+ * @author Rui 1110506
  */
 public class UIExtensionShare extends UIExtension {
 
@@ -43,7 +45,10 @@ public class UIExtensionShare extends UIExtension {
      * @return an icon with style
      */
     public Icon getIcon() {
-        return null;
+        if (icon == null)
+			icon = new ImageIcon(
+				ExtensionShare.class.getResource("res/img/share.png"));
+		return icon;
     }
 
     /**

@@ -4,150 +4,104 @@ import csheets.core.Address;
 import csheets.core.Cell;
 import csheets.core.CellListener;
 import csheets.core.Spreadsheet;
-import csheets.ext.style.StylableCell;
-import csheets.ext.style.StyleExtension;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.Random;
-import javax.swing.BorderFactory;
-import javax.swing.border.Border;
+import org.jasypt.util.binary.BasicBinaryEncryptor;
 
 /**
- * Super classe que qualquer ligação, independente de ser do tipo
- * "Client" ou "Server" controla os dados de entrada e os de saida. 
+ * Super classe que qualquer ligação, controla os dados de entrada e os de
+ * saida. (Client / Server)
  *
- * @author  Rui 1110506
+ * @author Rui 1110506
  */
 public abstract class BaseConnection {
 
+    private String password;
     private Spreadsheet folha;
     private int port;
     private Address inicio;
     private Address fim;
     private boolean receberData;
-    private ArrayList<Boolean> receberDataServer;
+    private BasicBinaryEncryptor binaryEncryptor;
     public Thread threadIn;
     public Thread threadOut;
 
-    
-    public BaseConnection(Spreadsheet folha, int port, Address inicio, Address fim) {
-     
+    public BaseConnection(String password, Spreadsheet folha, int port, Address inicio, Address fim) {
         this.folha = folha;
         this.port = port;
         this.inicio = inicio;
         this.fim = fim;
-
+        this.password = password;
         this.receberData = false;
-        this.receberDataServer = new ArrayList<Boolean>();
-        
+
+        binaryEncryptor = new BasicBinaryEncryptor();
+        binaryEncryptor.setPassword(password);
     }
 
     /**
-     * Metodo para fazer @Override nas suas subclasses
-     * @param cod 
-    */
-    public void stop(int cod) {
-    }
-    
-    /**
-     * @return the folha
+     * Metodo para encriptar qualquer objecto
+     *
+     * @param obj
+     * @return dados encriptados do @see obj
      */
-    public Spreadsheet getFolha() {
-        return folha;
+    public Object encryptor(Object obj) {
+        try {
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            ObjectOutputStream os = new ObjectOutputStream(out);
+            os.writeObject(obj);
+            byte[] bites = out.toByteArray();
+            byte[] encrypt = binaryEncryptor.encrypt(bites);
+            return (Object) new ByteObject(encrypt);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     /**
-     * @param folha the folha to set
+     * Metodo para desencriptar dados do tipo @see ByteObject
+     *
+     * @param obj
+     * @return
      */
-    public void setFolha(Spreadsheet folha) {
-        this.folha = folha;
+    public Object decrypt(Object obj) {
+        try {
+            byte[] bites = ((ByteObject) obj).bytes;
+            byte[] plainBytes = binaryEncryptor.decrypt(bites);
+            ByteArrayInputStream in = new ByteArrayInputStream(plainBytes);
+            ObjectInputStream is = new ObjectInputStream(in);
+            return is.readObject();
+        } catch (Exception e) {
+            //e.printStackTrace();
+            return null;
+        }
     }
 
-    /**
-     * @return the port
-     */
+    public String getPassword() {
+        return password;
+    }
+
     public int getPort() {
         return port;
     }
 
-    /**
-     * @param port the port to set
-     */
-    public void setPort(int port) {
-        this.port = port;
-    }
-
-    /**
-     * @return the inicio
-     */
     public Address getInicio() {
         return inicio;
     }
 
-    /**
-     * @param inicio the inicio to set
-     */
-    public void setInicio(Address inicio) {
-        this.inicio = inicio;
-    }
-
-    /**
-     * @return the fim
-     */
     public Address getFim() {
         return fim;
     }
 
-    /**
-     * @param fim the fim to set
-     */
-    public void setFim(Address fim) {
-        if (this.fim == null) {
-            this.fim = fim;
-            
-        } else {
-            this.fim = fim;
-        }
+    public boolean isReceberData() {
+        return receberData;
+
     }
 
-
-    /**
-     * @param cod_client
-     * @return
-     */
-    public boolean isReceberData(int cod_client) {
-        if (cod_client == -1) {
-            return receberData;
-        }
-        return getReceberDataServer().get(cod_client);
-    }
-
-    /**
-     *
-     */
-    public void setReceberData(boolean receberData, int cod_client) {
-        if (cod_client == -1) {
-            this.receberData = receberData;
-        } else {
-            this.getReceberDataServer().add(cod_client, receberData);
-        }
-    }
-
-    /**
-     * @return the receberDataServer
-     */
-    public ArrayList<Boolean> getReceberDataServer() {
-        return receberDataServer;
-    }
-
-    /**
-     * @param receberDataServer the receberDataServer to set
-     */
-    public void setReceberDataServer(ArrayList<Boolean> receberDataServer) {
-        this.receberDataServer = receberDataServer;
+    public void setReceberData(boolean receberData) {
+        this.receberData = receberData;
     }
 
     /**
@@ -156,49 +110,35 @@ public abstract class BaseConnection {
     public class In implements Runnable {
 
         private ObjectInputStream ois;
-        private int cod_client;
 
         public In(ObjectInputStream ois) {
             this.ois = ois;
-            cod_client = -1;
-        }
 
-        public In(ObjectInputStream ois, int cod) {
-            this.ois = ois;
-            cod_client = cod;
         }
 
         @Override
         public void run() {
             try {
-
-                while (true) {
-                    synchronized (ois) {
-                        Object recv=ois.readObject();
-                        
-                        try {
-                               //vai buscar inicio e fim da selecao das celulas
-                            String[][] share = (String[][]) recv;
-                            toSpreedsheet(share);
-                            setFim(new Address(getInicio().getColumn() + share[0].length - 1, getInicio().getRow() + share.length - 1));
-                        } catch (Exception e) {
-                        }
+                synchronized (ois) {
+                    Object recv = decrypt(ois.readObject());
+                    try {
+                        String[][] share = (String[][]) recv;
+                        toSpreedsheet(share);
+                    } catch (Exception e) {
                     }
-
                 }
-
             } catch (Exception e) {
-                stop(cod_client);
             }
 
         }
 
         /**
          * exporta para a @see Spreedsheet os dados recebidos
-         * @param share 
+         *
+         * @param share
          */
         private void toSpreedsheet(String[][] share) {
-            setReceberData(true, cod_client);
+            setReceberData(true);
             for (int i = 0; i < share.length; i++) {
                 for (int j = 0; j < share[0].length; j++) {
                     try {
@@ -208,61 +148,45 @@ public abstract class BaseConnection {
                     }
                 }
             }
-            setReceberData(false, cod_client);
+            setReceberData(false);
         }
     }
 
     /**
-     * Classe responsavel pelos controlo de actividade das celulas pertencentes
-     * a area partilhada
-     *
-     * @see CellListener, controla todos os dados de saida da ligação
+     * controla todos os dados de saida da ligação
      */
-    public class Out implements Runnable {
+    public class Out implements Runnable, CellListener {
 
         private ObjectOutputStream oos;
         private Object obj = new String("obj");
-        private int cod_client;
 
         public Out(ObjectOutputStream oos) {
             this.oos = oos;
-            cod_client = -1;
-            
-        }
+            folha.addCellListener(this);
 
-        public Out(ObjectOutputStream oos, int cod) {
-            this.oos = oos;
-            cod_client = cod;
-           
         }
 
         @Override
         public void run() {
             try {
-
-                while (true) {
-                    if (getFim() != null) {
-                        synchronized (getObj()) {
-                            getOos().writeObject(getCells());
-                            getOos().flush();
-                        }
-
+                if (getFim() != null) {
+                    synchronized (getObj()) {
+                        getOos().writeObject(encryptor(getCells()));
+                        getOos().flush();
                     }
-                    synchronized (obj) {
-                        obj.wait();
-                    }
-
                 }
-
+                synchronized (obj) {
+                    obj.wait();
+                }
             } catch (Exception e) {
                 //e.printStackTrace();
             }
-
         }
 
         /**
-         * retorna uma matriz de @see Cell 
-         * @return 
+         * retorna uma matriz de @see Cell
+         *
+         * @return
          */
         private String[][] getCells() {
             String[][] matriz = new String[getFim().getRow() - getInicio().getRow() + 1][getFim().getColumn() - getInicio().getColumn() + 1];
@@ -270,37 +194,44 @@ public abstract class BaseConnection {
                 for (int j = 0; j < matriz[0].length; j++) {
                     matriz[i][j] = folha.getCell(getInicio().getColumn() + j, getInicio().getRow() + i).getContent();
                 }
-
             }
             return matriz;
         }
 
-        /**
-         * @return the oos
-         */
+        @Override
+        public void valueChanged(Cell cell) {
+            if (cell.getAddress().getColumn() >= getInicio().getColumn() && cell.getAddress().getRow() >= getInicio().getRow()) {
+                if (cell.getAddress().getColumn() <= getFim().getColumn() && cell.getAddress().getRow() <= getFim().getRow()) {
+                    synchronized (getObj()) {
+                        getObj().notifyAll();
+                    }
+                }
+            }
+        }
+
+        @Override
+        public void contentChanged(Cell cell) {
+        }
+
+        @Override
+        public void dependentsChanged(Cell cell) {
+        }
+
+        @Override
+        public void cellCleared(Cell cell) {
+        }
+
+        @Override
+        public void cellCopied(Cell cell, Cell source) {
+        }
+
         public ObjectOutputStream getOos() {
             return oos;
         }
 
-        /**
-         * @param oos the oos to set
-         */
-        public void setOos(ObjectOutputStream oos) {
-            this.oos = oos;
-        }
-
-        /**
-         * @return the obj
-         */
         public Object getObj() {
             return obj;
         }
 
-        /**
-         * @param obj the obj to set
-         */
-        public void setObj(Object obj) {
-            this.obj = obj;
-        }
     }
 }
