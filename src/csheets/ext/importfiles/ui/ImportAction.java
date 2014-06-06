@@ -1,33 +1,28 @@
 package csheets.ext.importfiles.ui;
 
-import csheets.core.Cell;
+import csheets.core.Address;
 import csheets.core.Spreadsheet;
-import csheets.core.Workbook;
-import csheets.ext.invokefunction.ui.*;
-import csheets.ext.simple.ui.*;
-import csheets.io.Codec;
-import csheets.io.TXTCodec;
 import csheets.ui.FileChooser;
 import java.awt.event.ActionEvent;
 
-import javax.swing.JOptionPane;
-
+import csheets.core.Cell;
+import csheets.core.formula.compiler.FormulaCompilationException;
 import csheets.ui.ctrl.BaseAction;
 import csheets.ui.ctrl.UIController;
-import java.awt.Component;
-import java.io.ByteArrayInputStream;
+import java.io.BufferedReader;
 import java.io.File;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import java.util.Properties;
-import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileNameExtensionFilter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * An action of the simple extension that exemplifies how to interact with the
  * spreadsheet.
  *
- * @author Alexandre Braganca
+ * @author Tiago
  */
 public class ImportAction extends BaseAction {
 
@@ -35,14 +30,18 @@ public class ImportAction extends BaseAction {
      * The user interface controller
      */
     protected UIController uiController;
+    private FileChooser chooser;
+
+    public static final String SEPARATOR = ",";
 
     /**
      * Creates a new action.
      *
      * @param uiController the user interface controller
      */
-    public ImportAction(UIController uiController) {
+    public ImportAction(UIController uiController, FileChooser chooser) {
         this.uiController = uiController;
+        this.chooser = chooser;
     }
 
     protected String getName() {
@@ -61,27 +60,83 @@ public class ImportAction extends BaseAction {
      */
     public void actionPerformed(ActionEvent event) {
 
-        FileChooser chooser = new FileChooser(null, null);
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("TXT", "txt");
-        chooser.setFileFilter(filter);
-        int returnVal = chooser.showOpenDialog(null);
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
+        //Filechooser to select file
+        File file = getFile();
+
+        //Variables to manipulate txt file
+        FileReader fileReader = null;
+        BufferedReader bufferedReader;
+        String line = "";
+        Cell cl;
+        List<String> data;
+        Spreadsheet ss;
+        Address addr;
+
+        int it = 0;
+
+        if (file != null) {
+            //Opens the selected file
             try {
-                TXTCodec c = null;
-                String file = chooser.getSelectedFile().getName();
-                InputStream stream = new ByteArrayInputStream(file.getBytes(StandardCharsets.UTF_8));
-//                c.read(stream);
-                this.uiController.getActiveCell();
-                this.uiController.setActiveSpreadsheet((Spreadsheet) stream);
-            } catch (Exception ex) {
-                // para ja ignoramos a excepcao
+                fileReader = new FileReader(file.getAbsolutePath());
+            } catch (FileNotFoundException ex) {
+                showErrorDialog("The file you requested was not found.\n");
             }
-            System.out.println("You chose to open this file: " + chooser.getSelectedFile().getName());
 
+            if (fileReader != null) {
+                bufferedReader = new BufferedReader(fileReader);
+                cl = uiController.getActiveCell();
+                addr = cl.getAddress();
+                ss = cl.getSpreadsheet();
+
+                //Reads the first line
+                try {
+                    line = bufferedReader.readLine();
+                } catch (IOException ex) {
+                    showErrorDialog("There was a problem reading a line.\n");
+                }
+
+                while (line != null) {
+
+                    data = Arrays.asList(line.split(","));
+
+                    for (int i = 0; i < data.size(); i++) {
+                        cl = ss.getCell(addr.getColumn() + i, addr.getRow() + it);
+
+                        //Inserts data into the cell
+                        try {
+                            cl.setContent(data.get(i));
+                        } catch (FormulaCompilationException ex) {
+                            showErrorDialog("There was a problem inserting data into the cell\n");
+                        }
+
+                    }
+
+                    it++;
+                    try {
+                        line = bufferedReader.readLine();
+                    } catch (IOException ex) {
+                        showErrorDialog("There was a problem reading the file\n");
+                    }
+                }
+
+                //Closes the file
+                try {
+                    bufferedReader.close();
+                } catch (IOException ex) {
+                    showErrorDialog("There was a problem closing the file\n");
+                }
+
+            }
         }
-//        int result = JOptionPane.showConfirmDialog(null, "You have selected the Example option. Do you want to set cell A1 to 'Changed'");
+    }
 
-        
+    /**
+     * Returns the file to open.
+     *
+     * @return file the file to open
+     */
+    public File getFile() {
+        return chooser.getFileToOpen();
+
     }
 }
-
