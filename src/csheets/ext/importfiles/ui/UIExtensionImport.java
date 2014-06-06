@@ -11,6 +11,7 @@ import javax.swing.Icon;
 import javax.swing.JComponent;
 import javax.swing.JMenu;
 import javax.swing.JToolBar;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  * This class implements the UI interface extension for the simple extension.
@@ -50,6 +51,8 @@ public class UIExtensionImport extends UIExtension {
 	public JMenu getMenu() {
 		if (menu == null){
                     FileChooser f = new FileChooser(null,null);
+                    f.setFileFilter(new FileNameExtensionFilter("Ficheiro TXT (.txt)", "txt"));
+            String caminho = "";
 			menu = new ImportMenu(uiController,f);
                 }
                         return menu;
