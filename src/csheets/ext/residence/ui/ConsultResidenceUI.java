@@ -30,7 +30,7 @@ public final class ConsultResidenceUI extends JFrame {
     JLabel id_residence;
     JLabel street;
     JLabel locality;
-    JLabel postal_code;
+    JLabel postal; JLabel code;
     JLabel city;
     JLabel country;
     
@@ -50,13 +50,16 @@ public final class ConsultResidenceUI extends JFrame {
         c.setLayout(new BorderLayout());
         
         JPanel p1 = new JPanel(new GridLayout(6,2,2,0));
+        JPanel postal_code = new JPanel(new FlowLayout());
         
         id_residence = new JLabel();
         street = new JLabel();
         locality = new JLabel();
-        postal_code = new JLabel();
+        postal = new JLabel(); code = new JLabel();
         city = new JLabel();
         country = new JLabel();
+        
+        postal_code.add(postal); postal_code.add(new JLabel(" - ")); postal_code.add(code);
         
         p1.add(new JLabel("id street")); p1.add(id_residence);
         p1.add(new JLabel("Street")); p1.add(street);
@@ -133,10 +136,18 @@ public final class ConsultResidenceUI extends JFrame {
         id_residence.setText(Integer.toString(listResidence.get(index).getId_residence()));
         street.setText(listResidence.get(index).getStreet());
         locality.setText(listResidence.get(index).getLocality());
-        postal_code.setText(Integer.toString(listResidence.get(index).getPostal_code()));
         city.setText(listResidence.get(index).getCity());
         country.setText(listResidence.get(index).getCountry());
         
+        String postal_code = Integer.toString(listResidence.get(index).getPostal_code());
+        
+        String scode = postal_code.substring(4);
+        
+        String spostal = postal_code.substring(0,4);
+        
+        postal.setText(spostal);
+        code.setText(scode);
+ 
     }
     
     public void next() {
@@ -145,7 +156,7 @@ public final class ConsultResidenceUI extends JFrame {
         
         if(index >= listResidence.size())
         {
-            index = 0;
+            index--;
         }
         
         fill();
@@ -156,7 +167,7 @@ public final class ConsultResidenceUI extends JFrame {
         
         if(index < 0)
         {
-            index = listResidence.size() - 1;
+            index++;
         }
         
         fill();

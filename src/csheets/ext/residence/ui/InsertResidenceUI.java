@@ -27,10 +27,10 @@ import javax.swing.JTextField;
  */
 public class InsertResidenceUI extends JFrame {
     
-    JTextField id_residence;
     JTextField street;
     JTextField locality;
-    JTextField postal_code;
+    JTextField postal;
+    JTextField code;
     JTextField city;
     JTextField country;
     
@@ -43,16 +43,17 @@ public class InsertResidenceUI extends JFrame {
         Container c = getContentPane();
         c.setLayout(new BorderLayout());
         
-        JPanel p1 = new JPanel(new GridLayout(6,2,2,0));
+        JPanel p1 = new JPanel(new GridLayout(5,2,2,0));
+        JPanel postal_code = new JPanel(new FlowLayout());
         
-        id_residence = new JTextField("", 12);
         street = new JTextField("", 12);
         locality = new JTextField("", 12);
-        postal_code = new JTextField("", 12);
+        postal = new JTextField("", 4); code = new JTextField("", 3);
         city = new JTextField("", 12);
         country = new JTextField("", 12);
         
-        p1.add(new JLabel("id street")); p1.add(id_residence);
+        postal_code.add(postal); postal_code.add(new JLabel(" - ")); postal_code.add(code);
+        
         p1.add(new JLabel("Street")); p1.add(street);
         p1.add(new JLabel("Locality")); p1.add(locality);
         p1.add(new JLabel("Postal Code")); p1.add(postal_code);
@@ -86,15 +87,18 @@ public class InsertResidenceUI extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             if(save == e.getSource()) {
-                
-                int id_res = Integer.parseInt(id_residence.getText());
+
                 String stree = street.getText();
                 String local = locality.getText();
-                int post_cod = Integer.parseInt(postal_code.getText());
+                int post = Integer.parseInt(postal.getText());
+                int cod = Integer.parseInt(code.getText());
+                
+                int post_cod = post * 1000 + cod;
+                
                 String cit = city.getText();
                 String count = country.getText();
                 
-                Residence residence = new Residence(id_res, stree, local, post_cod, cit, count);
+                Residence residence = new Residence(0, stree, local, post_cod, cit, count);
                 
                 ResidenceRepository resRep = new ResidenceRepository();
                 resRep.insert(residence);
