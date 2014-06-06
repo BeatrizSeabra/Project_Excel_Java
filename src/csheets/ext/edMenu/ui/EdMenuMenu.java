@@ -9,7 +9,6 @@ package csheets.ext.edMenu.ui;
 import java.awt.event.KeyEvent;
 import javax.swing.JMenu;
 import csheets.ui.ctrl.UIController;
-import csheets.ext.edMenu.ui.EdMenuAction;
 
 /**
  *
@@ -22,11 +21,11 @@ public class EdMenuMenu extends JMenu {
 	 * @param uiController the user interface controller
 	 */
 	public EdMenuMenu(UIController uiController) {
-		super("Editor Menu");
+		super("New Menus");
 		setMnemonic(KeyEvent.VK_S);
                 
                 add(new EdMenuAction(uiController));
-
+                    
 		
 	}
 }

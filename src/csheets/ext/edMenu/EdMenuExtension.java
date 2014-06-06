@@ -19,7 +19,7 @@ import csheets.ui.ext.UIExtension;
 public class EdMenuExtension extends Extension {
     
     /** The name of the extension */
-	public static final String NAME = "Menu Editor";
+	public static final String NAME = "Add Menu";
     
     /**
     * Creates a new style extension.

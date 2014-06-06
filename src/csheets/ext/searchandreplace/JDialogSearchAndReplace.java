@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package csheets.ext.searchandreplace;
 
 import csheets.core.Address;
@@ -20,7 +19,7 @@ public class JDialogSearchAndReplace extends javax.swing.JDialog {
      */
     public JDialogSearchAndReplace(java.awt.Frame parent, boolean modal, SpreadsheetTable focusOwner) {
         super(parent, modal);
-        this.focusOwner=focusOwner;
+        this.focusOwner = focusOwner;
         initComponents();
     }
 
@@ -56,7 +55,7 @@ public class JDialogSearchAndReplace extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(62, 62, 62))
+                .addGap(59, 59, 59))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,9 +116,8 @@ public class JDialogSearchAndReplace extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addComponent(cancelButton)
                 .addContainerGap())
@@ -166,9 +164,9 @@ public class JDialogSearchAndReplace extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-        String text=searchText.getText();
+        String text = searchText.getText();
         Search search = new Search();
-        cell=search.simpleSearch(focusOwner, text);
+        cell = search.simpleSearch(focusOwner, text);
         dispose();
     }//GEN-LAST:event_searchButtonActionPerformed
 
@@ -217,10 +215,11 @@ public class JDialogSearchAndReplace extends javax.swing.JDialog {
             }
         });
     }
-    public Address getCell(){
+
+    public Address getCell() {
         return this.cell;
     }
-    
+
     private Address cell;
     private SpreadsheetTable focusOwner;
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -9,9 +9,15 @@ csheets.ext.image.ExtensionImage
 csheets.ext.logfile.ExtensionLogFile
 csheets.ext.sort.SortExtension
 csheets.ext.chat.ChatExtension
-csheets.ext.exporttxt.ExtensionTxt
+csheets.ext.share.ExtensionShare
+csheets.ext.exportfiles.ExportExtension
 csheets.ext.searchFiles.ExtensionSearchFiles
 csheets.ext.contacts.ExtensionContacts
 csheets.ext.edMenu.EdMenuExtension
+csheets.ext.importfiles.ExtensionImport
+<<<<<<< HEAD
 csheets.ext.extensionsmanager.ExtensionsManager
+=======
+csheets.ext.residence.ExtensionResidence
+>>>>>>> d136f074b0f895de57e1cae70f6fb0f1f7405ea8
 

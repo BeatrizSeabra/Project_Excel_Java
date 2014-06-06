@@ -8,14 +8,10 @@ package csheets.ext.logfile.ui;
 
 import java.awt.event.ActionEvent;
 
-import javax.swing.JOptionPane;
 
 import csheets.ui.ctrl.BaseAction;
 import csheets.ui.ctrl.UIController;
-import java.awt.*;
-import java.awt.event.*;
 import java.util.ArrayList;
-import javax.swing.*;
 
 /**
  *
@@ -25,7 +21,6 @@ public class LogFileAction extends BaseAction {
 
 	/** The user interface controller */
 	protected UIController uiController;
-        protected ArrayList<String> eventlist;
 
 	/**
 	 * Creates a new action.
@@ -33,11 +28,10 @@ public class LogFileAction extends BaseAction {
 	 */
 	public LogFileAction(UIController uiController) {
 		this.uiController = uiController;
-                this.eventlist= new ArrayList();
 	}
 
 	protected String getName() {
-		return "LogFile";
+		return "EventLog File Options";
 	}
 
 	protected void defineProperties() {
@@ -48,15 +42,23 @@ public class LogFileAction extends BaseAction {
 	 * If the user confirms then the contents of the cell A1 of the current sheet are set to the string "Changed".
 	 * @param event the event that was fired
 	 */
+                        
+       /* private void initEventList()
+        {
+            eventlist.add("OnClick");
+            eventlist.add("OnChange");
+
+        }
+        */
         
 	public void actionPerformed(ActionEvent event) {
 
-            LogFileUI l= new LogFileUI(eventlist);
-            l.setSize(170, 170);
+            LogFileUI l= new LogFileUI(uiController);
+            l.setSize(255, 170);
             l.setResizable(false);
             l.setLocationRelativeTo(null);
             l.setVisible(true);
-            eventlist=l.getList();   
+            //eventlist=l.getList();
 
 	}
         

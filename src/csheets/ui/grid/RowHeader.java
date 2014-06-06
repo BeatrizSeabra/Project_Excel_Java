@@ -20,6 +20,7 @@
  */
 package csheets.ui.grid;
 
+import csheets.ext.logfile.WriteLogFile;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;

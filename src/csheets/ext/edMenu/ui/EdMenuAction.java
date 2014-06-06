@@ -6,23 +6,13 @@
 
 package csheets.ext.edMenu.ui;
 
-import csheets.ext.edMenu.EdMenuExtension;
 import csheets.ui.ctrl.BaseAction;
-import csheets.ui.ctrl.FocusOwnerAction;
 import csheets.ui.ctrl.UIController;
-import java.awt.*;
+import csheets.ui.ext.UIExtension;
 import java.awt.event.*;
-import static javax.swing.Action.MNEMONIC_KEY;
-import javax.swing.JComboBox;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import static javax.swing.Action.MNEMONIC_KEY;
+import javax.swing.JMenuItem;
 
 /**
  *
@@ -35,7 +25,7 @@ public class EdMenuAction extends BaseAction {
 	protected UIController uiController;
 
 	/**
-	 * Creates a new font action.
+	 * Creates a new  action.
 	 * @param uiController the user interface controller
 	 */
 	public EdMenuAction(UIController uiController) {
@@ -43,7 +33,7 @@ public class EdMenuAction extends BaseAction {
 	}
 
 	protected String getName() {
-		return "Menu Editor...";
+		return "*Add menu to window...*";
 	}
 
 	protected void defineProperties() {
@@ -52,15 +42,11 @@ public class EdMenuAction extends BaseAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-       MenuEdWindow m = new MenuEdWindow();
+       MenuEdWindow m = new MenuEdWindow(uiController);
        m.setVisible(true);
        m.setSize(352, 200);
        m.setResizable(true);
-       m.setLocationRelativeTo(null);
+       m.setLocationRelativeTo(null);   
+       
     }
-    
-    
-    
-    
-    
 }

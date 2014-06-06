@@ -36,7 +36,7 @@ public abstract class Extension implements Comparable<Extension> {
 
 	/** The base key to use for properties of the extension */
 	private final String basePropKey;
-
+       
 	/**
 	 * Creates a new extension.
 	 * @param name the name of the extension
@@ -66,7 +66,7 @@ public abstract class Extension implements Comparable<Extension> {
 	public final String getPropertyKey() {
 		return basePropKey;
 	}
-
+        
 	/**
 	 * Compares this extension with the given extension for order.
 	 * Ordering is done by the extensions' names.
