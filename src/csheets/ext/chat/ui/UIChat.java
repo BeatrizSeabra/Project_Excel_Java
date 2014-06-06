@@ -61,6 +61,7 @@ public ChatController controlo;
         jLabel3 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
 
+        setBounds(new java.awt.Rectangle(460, 200, 0, 0));
         getContentPane().setLayout(new java.awt.CardLayout());
 
         jButton1.setText("Activate Chat");
@@ -187,8 +188,8 @@ public ChatController controlo;
         controlo= new ChatController(this);
         controlo.getServidor().start();
     }else{
-        if(!(controlo.getServidor().allDone==true)){
-        controlo.getServidor().start();
+        if(controlo.getServidor().allDone==true){
+        controlo.getServidor().allDone=false;
         }
     }
     }//GEN-LAST:event_jButton1ActionPerformed
