@@ -11,9 +11,16 @@ import csheets.ext.ExtensionManager;
 import csheets.ui.ctrl.UIController;
 import csheets.ui.ext.UIExtension;
 import java.awt.Checkbox;
+import java.awt.Component;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ComponentListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -31,19 +38,45 @@ public class ExtensionsManagerWindow extends JFrame {
     
     private UIExtension[] extensions;
     
+    private ItemListener l;
+    private ItemEvent e;
+    private ArrayList<JCheckBox> cb;
+    UIExtension ext;
+    
     public ExtensionsManagerWindow(CleanSheets app, UIController uiController) {
         initComponents();
         /** The user interface controller */
-        
-        extensions = uiController.getExtensions();       
+        extensions = uiController.getExtensions();
         jPanel1.setLayout(new GridLayout(extensions.length/2, 2, 30, 5));
+        int i=0;
         for(UIExtension ex : extensions){
             if(ex.getMenu()!=null){
-                jPanel1.add(new Checkbox(ex.getExtension().getName(), null, ex.getMenu().isEnabled()));
-            }                        
+                
+                //new JCheckBox(ex.getExtension().getName(), null, ex.getMenu().isEnabled());
+                jPanel1.add(new JCheckBox(ex.getExtension().getName(), null, ex.getMenu().isEnabled()));
+                //System.out.println(cb.get(0));               
+                JCheckBox box = new JCheckBox(ex.getExtension().getName(), null, ex.getMenu().isEnabled());
+                box.addItemListener(l);                
+            }
         }
-        //jPanel1.addComponentListener();
-    }
+        /*for(JCheckBox jcb : cb){             
+                jcb.addItemListener(l);
+            }*/
+        l.itemStateChanged(e);
+        }
+        
+   
+      
+    public void itemStateChanged(ItemEvent e) {
+           if(e.getStateChange() == ItemEvent.SELECTED){
+               ext.getMenu().setEnabled(true);
+           }
+           if(e.getStateChange() == ItemEvent.DESELECTED){
+               ext.getMenu().setEnabled(false);
+           }
+        }
+    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
