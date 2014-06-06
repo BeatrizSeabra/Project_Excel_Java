@@ -22,16 +22,16 @@ public class EdMenuExtension extends Extension {
 	public static final String NAME = "Add Menu";
     
     /**
-    * Creates a new style extension.
+    * Creates a new EdMenu extension.
     */
         public EdMenuExtension() {
 		super(NAME);
 	}
             
     /**
-	 * Returns a user interface extension for style.
+	 * Returns a user interface extension for EdMenu.
 	 * @param uiController the user interface controller
-	 * @return a user interface extension for style
+	 * @return a user interface extension for EdMenu
 	 */
 	public UIExtension getUIExtension(UIController uiController) {
 		return new EdMenuUIExtension(this, uiController);  
