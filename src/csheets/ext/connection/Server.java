@@ -38,9 +38,10 @@ public abstract class Server extends Thread {
     }
 
     public void run() {
-        boolean recebeu;
+        boolean recebeu,ler;
         while (true) {
             recebeu=false;
+            ler=true;
             byte[] data = new byte[1024];
             DatagramPacket packet = new DatagramPacket(data, data.length);
             try {
@@ -49,13 +50,14 @@ public abstract class Server extends Thread {
             } catch (IOException ex) {
                 Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
             }
-            if(recebeu){
+             while(allDone){
+                ler=false;
+            }
+                
+            if(recebeu && ler){
                 handleMessage(data, packet.getAddress(), packet.getPort());
             }
-            if(allDone){
-                return ;
-            }
-                    
+               
         }
     }
     
