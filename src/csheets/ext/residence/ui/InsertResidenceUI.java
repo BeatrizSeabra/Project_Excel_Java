@@ -25,7 +25,7 @@ import javax.swing.JTextField;
  *
  * @author Nuno
  */
-public class ResidenceUI extends JFrame {
+public class InsertResidenceUI extends JFrame {
     
     JTextField id_residence;
     JTextField street;
@@ -37,9 +37,9 @@ public class ResidenceUI extends JFrame {
     JButton save;
     JButton cancel;
     
-    public ResidenceUI()
+    public InsertResidenceUI()
     {
-        super("Residences");
+        super("Insert Residences");
         Container c = getContentPane();
         c.setLayout(new BorderLayout());
         
@@ -64,7 +64,6 @@ public class ResidenceUI extends JFrame {
         save.addActionListener(new BotaoListener());
         
         cancel = new JButton("Cancel");
-        
         cancel.addActionListener(new BotaoListener());
         
         p2.add(save);
@@ -104,7 +103,7 @@ public class ResidenceUI extends JFrame {
             }
             else if(cancel == e.getSource())
             {
-                 ResidenceUI.this.dispose();
+                 InsertResidenceUI.this.dispose();
             }
         }
     }   

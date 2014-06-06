@@ -1,32 +1,33 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 package csheets.ext.residence.ui;
-
-import csheets.ext.simple.ui.*;
-import java.awt.event.ActionEvent;
-
-import javax.swing.JOptionPane;
 
 import csheets.ui.ctrl.BaseAction;
 import csheets.ui.ctrl.UIController;
+import java.awt.event.ActionEvent;
 
 /**
- * An action of the simple extension that exemplifies how to interact with the spreadsheet.
- * @author Alexandre Braganca
+ *
+ * @author Nuno
  */
-public class ResidenceAction extends BaseAction {
-
-	/** The user interface controller */
+public class ConsultResidenceAction extends BaseAction {
+/** The user interface controller */
 	protected UIController uiController;
 
 	/**
 	 * Creates a new action.
 	 * @param uiController the user interface controller
 	 */
-	public ResidenceAction(UIController uiController) {
+	public ConsultResidenceAction(UIController uiController) {
 		this.uiController = uiController;
 	}
 
 	protected String getName() {
-		return "Residence...";
+		return "Consult Residence...";
 	}
 
 	protected void defineProperties() {
@@ -38,7 +39,7 @@ public class ResidenceAction extends BaseAction {
 	 * @param event the event that was fired
 	 */
 	public void actionPerformed(ActionEvent event) {
-            ResidenceUI residenceUI = new ResidenceUI();
+            ConsultResidenceUI residenceUI = new ConsultResidenceUI();
             
 	}
 }
