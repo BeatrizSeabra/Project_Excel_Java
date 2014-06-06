@@ -47,7 +47,7 @@ expression
        	;
 
 attribution
-        : CELL_REF ATT^ (comparison | attribution)comparison
+        : CELL_REF ATT^ (attribution | comparison)
         ;
 
 comparison
