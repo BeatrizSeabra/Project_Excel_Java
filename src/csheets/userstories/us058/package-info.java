@@ -25,7 +25,13 @@
  * The Diagram for this use case:<img src="../../../csheets/userstories/us058/doc-files/us058_design1.png">
  * <br/>
  * <br/>
- * */
+ *
+ * <b>S001d: Coding</b><br/>
+ * <a href="../../../csheets/ext/edMenu/package-summary.html">csheets.ext.edMenu</a><br/>
+ * <a href="../../../csheets/ext/edMenu/ui/package-summary.html">csheets.ext.edMenu.ui</a><br/>
+ * <br/>
+ * <br/>
+ */
 /*
 @startuml doc-files/us058_design1.png
 participant "uic : UIController" as UIC
