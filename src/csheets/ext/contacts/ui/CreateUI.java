@@ -8,12 +8,17 @@ package csheets.ext.contacts.ui;
 
 import csheets.PersistenceJPA.ContactsRepository;
 import csheets.ext.contacts.*;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
  * @author PedroRosário
  */
 public class CreateUI extends javax.swing.JFrame {
+    private JLabel imageLabel;
 
     /**
      * Creates new form CreateUI
@@ -53,6 +58,11 @@ public class CreateUI extends javax.swing.JFrame {
         jLabel2.setText("Last Name:");
 
         jButton1.setText("Import image");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         jButton2.setText("Confirm");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -135,7 +145,27 @@ public class CreateUI extends javax.swing.JFrame {
         lastName=jTextField2.getText();
         ContactsRepository.add(new Contact(firstName, lastName));
         this.dispose();
+        
+        ContactsUI cUI = new ContactsUI();
+        cUI.setVisible(true);
+        cUI.setLocationRelativeTo(null);
+        
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        JFileChooser chooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG", "jpg");
+        chooser.setFileFilter(filter);
+        int returnVal = chooser.showOpenDialog(null);
+        if(returnVal == JFileChooser.APPROVE_OPTION) {
+            System.out.println("You chose to open this file: " + chooser.getSelectedFile().getName());
+            final ImageIcon image=new ImageIcon(chooser.getSelectedFile().getAbsolutePath());
+            imageLabel= new JLabel(image);
+            imageLabel.setBounds(15, 225,image.getIconWidth(),image.getIconHeight());
+           
+        }
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments

@@ -41,8 +41,6 @@ public class ContactsAction extends BaseAction {
  
        ContactsUI window = new ContactsUI();
        window.setVisible(true);
-      //cWindow.setSize(352, 200);
-      // cWindow.setResizable(true);
-      //cWindow.setLocationRelativeTo(null);
+       window.setLocationRelativeTo(null);
     }
 }

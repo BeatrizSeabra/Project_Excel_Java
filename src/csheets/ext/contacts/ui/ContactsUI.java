@@ -9,6 +9,7 @@ import csheets.PersistenceJPA.ContactsRepository;
 import csheets.ext.contacts.Contact;
 import java.util.*;
 import javax.swing.JList;
+import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -17,7 +18,8 @@ import javax.swing.event.ListSelectionListener;
  * @author PedroRosário
  */
 public class ContactsUI extends javax.swing.JFrame {
-    
+
+   
     
     ContactsRepository cr = new ContactsRepository();
     Contact c = new Contact();
@@ -75,7 +77,7 @@ public class ContactsUI extends javax.swing.JFrame {
                 c=l.get(jList1.getSelectedIndex());
                 EditRemoveUI erw = new EditRemoveUI(c);
                 erw.setVisible(true);
-
+                erw.setLocationRelativeTo(null);
             }
 
         });
@@ -133,6 +135,9 @@ public class ContactsUI extends javax.swing.JFrame {
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         CreateUI cw = new CreateUI();
         cw.setVisible(true);
+        cw.setLocationRelativeTo(null);
+       
+        this.dispose();
     }//GEN-LAST:event_jButton1MouseClicked
 
     /**

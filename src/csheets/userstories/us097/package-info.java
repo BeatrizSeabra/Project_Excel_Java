@@ -26,7 +26,7 @@
  * <br/>
  * <br/>
  *
- * <b>S001c: Coding</b><br/>
+ * <b>S097c: Coding</b><br/>
  * see:<br/>
  * <a
  * href="../../../csheets/ext/comments/package-summary.html">csheets.ext.comments</a><br/>
@@ -35,7 +35,7 @@
  * <br/>
  * <br/>
  *
- * <b>S001u: Unit Tests</b><br/>
+ * <b>S097u: Unit Tests</b><br/>
  * see:<br/>
  * <a
  * href="../../../csheets/ext/comments/package-summary.html">csheets.ext.comments</a><br/>
@@ -44,7 +44,7 @@
  * <br/>
  * <br/>
  *
- * <b>S001f: Functional Tests</b><br/>
+ * <b>S097f: Functional Tests</b><br/>
  * To test this user story, the user should follow these steps:<br/>
  * 1run cleansheets;<br/>
  * 2click on the View menu and select sidebars. There must appear a list of menu
