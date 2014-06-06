@@ -10,7 +10,7 @@ import csheets.ui.ext.UIExtension;
  * An extension must extend the Extension abstract class.
  * The class that implements the Extension is the "bootstrap" of the extension.
  * @see Extension
- * @author 1090675
+ * @author 1090675 - Tiago Pereira
  */
 public class ExtensionFindWorkbooksFiles extends Extension {
 

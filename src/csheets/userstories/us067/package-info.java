@@ -4,8 +4,10 @@
  * <br/>
  * 
  * <b>Requirement</b><br/>
- * Enable research on the local disk files that are leaves calculation of cleansheets. 
- * Must do a thorough search to all folders and display a list of all files found.
+ * Find workbooks files in a directory choosed for user throught a file choose window,
+ * and then if files exist, will appear a window with table style, to show to user,
+ * the name(s) and path(s) of the founded files, otherwise send a message to user,
+ * to inform that in the specified directory, don´t have any workbooks files.
  * <br/>
  * <br/>
  *  
@@ -39,6 +41,17 @@
  * <br/>
  * 
  * <b>S067f: Functional Tests</b><br/>
+ * To test this user story, the user should follow these steps:<br/>
+ * 1run cleansheets program<br/>
+ * 2go to the menu Extensions, and select the submenu "Find Workbooks Files", and
+ * choose option "Find Workbooks Files"<br/>
+ * 3will appear file chooser window, to select the directory on computer, where
+ * you pretend search for workbook(s) file(s)<br/>
+ * Note: depending on the contents of the directory, it may take a few minutes 
+ * to be displayed the founded files, on the search results window.
+ * 5after this, if files exist, will show to you, a window with table style model,
+ * with a listing of the found files, otherwise inform you that don´t have any workbooks
+ * files on the choosed directory.<br/>
  * <br/>
  * 
  * @author 1090675 - Tiago Pereira
