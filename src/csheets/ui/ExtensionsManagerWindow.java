@@ -13,9 +13,6 @@ import csheets.ui.ext.UIExtension;
 import java.awt.Checkbox;
 import java.awt.Component;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
@@ -51,18 +48,16 @@ public class ExtensionsManagerWindow extends JFrame {
         int i=0;
         for(UIExtension ex : extensions){
             if(ex.getMenu()!=null){
-                
-                //new JCheckBox(ex.getExtension().getName(), null, ex.getMenu().isEnabled());
-                jPanel1.add(new JCheckBox(ex.getExtension().getName(), null, ex.getMenu().isEnabled()));
-                //System.out.println(cb.get(0));               
-                JCheckBox box = new JCheckBox(ex.getExtension().getName(), null, ex.getMenu().isEnabled());
-                box.addItemListener(l);                
+                jPanel1.add(new JCheckBox(ex.getExtension().getName(), null, ex.getMenu().isEnabled()));               
+                //LANÇA EXCEPCAO
+                //JCheckBox box = new JCheckBox(ex.getExtension().getName(), null, ex.getMenu().isEnabled());
+                //box.addItemListener(l);                
             }
         }
         /*for(JCheckBox jcb : cb){             
                 jcb.addItemListener(l);
             }*/
-        l.itemStateChanged(e);
+        //l.itemStateChanged(e);
         }
         
    
