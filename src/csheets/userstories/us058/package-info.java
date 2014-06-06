@@ -20,29 +20,32 @@
  * 
  * 
  * <b>S001d: Design</b><br/>
- * To realize this user story we don't need to create any new subclass, we can simply use the classes and methods allready in use to create a new JMenu.
+ * To realize this user story we need to create the classes relative to extensions, so we need to do two packages and do the respective classes to add in the options.
  * Also it will be needed a method to assign the correct menus that the user wants to work on, by creating methods with the UI regarding Java knowledge.
-* <br/>
-* <br/>
+ * The Diagram for this use case:<img src="../../../csheets/userstories/us058/doc-files/us058_design1.png">
+ * <br/>
+ * <br/>
  * */
 /*
 @startuml doc-files/us058_design1.png
 participant "uic : UIController" as UIC
  participant ExtensionManager as ExtM
  participant "extension : MenuExtension" as EM
- participant "uiExtension : UIExtensionNewMenu" as UIExt
- participant "newMenuPanel : JMenuItem" as cp
+ participant "uiExtension : EdMenuUIExtension" as UIEd
+ participant "aux1 : MenuEdWindow" as MEW
+ participant "uiext : UIExtension" as uext
+ participant "jMenu : JMenu" as jm
  UIC -> ExtM : extensions=getExtensions();
   loop for Extension ext : extensions
  	UIC -> EM : uiExtension=getUIExtension(this);
-        EM -> UIC : name=addMenu(name);
- 	EM -> UIC : mnemonic=addMenu(mnemonic);
- 	EM -> UIExt : new(extension, uic)
- 	UIExt -> UIExt : getMenuItem();
-        activate UIExt
- 	create cp
- 	UIExt -> cp :  new (uic)
-        deactivate UIExt  	
+ 	EM -> UIEd : new(extension, uic)
+ 	UIEd -> UIEd : getMenuItem();
+        activate UIEd
+ 	create MEW
+ 	UIEd -> MEW :  new (uic)
+        deactivate UIEd
+  	MEW -> uext : getMenu()
+        uext -> jm : add(i)
  	UIC -> UIC : uiExtensions.add(uiExtension);
  end
 @enduml

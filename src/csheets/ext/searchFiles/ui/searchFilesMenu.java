@@ -6,16 +6,13 @@ import javax.swing.JMenu;
 import csheets.ui.ctrl.UIController;
 
 /**
- * Representes the UI extension menu of the simple extension.
+ * Representa o Menu UI da Extensao searchFiles.
  * @author 1120564MarcoEsteves
  */
 public class searchFilesMenu extends JMenu {
 
 	/**
-	 * Creates a new simple menu.
-	 * This constructor creates and adds the menu options. 
-	 * In this simple example only one menu option is created.
-	 * @param uiController the user interface controller
+	 * Cria um menu da extensao searchFiles.
 	 */
 	public searchFilesMenu(UIController uiController) {
 		super("SearchFiles Menu");
