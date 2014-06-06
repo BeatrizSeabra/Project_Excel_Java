@@ -37,13 +37,8 @@ public class InvokeFunctionAction extends BaseAction {
 	 */
 	public void actionPerformed(ActionEvent event) {
                 
-		Invoke invoke=new Invoke();
+		Invoke invoke=new Invoke(this.uiController);
                 invoke.setVisible(true);
                 invoke.setLocation(500, 200);
-		try {
-			this.uiController.getActiveSpreadsheet().getCell(0, 0).setContent("Changed");
-		} catch (Exception ex) {
-			// para ja ignoramos a excepcao
-                }
 	}
 }
