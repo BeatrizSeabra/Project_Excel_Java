@@ -175,11 +175,10 @@ public class JDialogSearchFiles extends javax.swing.JDialog {
                 } else {
 
                     String[] paths = SearchFilesController.searchNames(pattern, dir);
-                    if (paths == null || paths.length == 0) {
-                        JOptionPane.showMessageDialog(null, "No files", "Search Results", JOptionPane.ERROR_MESSAGE);
-                    } else {
-                        refreshList(paths);
+                    if(paths != null) {
+                    refreshList(paths);
                     }
+
                 }
             }
         }

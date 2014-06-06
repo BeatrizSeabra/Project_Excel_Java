@@ -23,6 +23,10 @@ public class SearchFilesController {
     public static String[] searchNames(String pattern, String dir) {
         File dirr = new File(dir);
         File[] files = searchFiles(pattern, dirr);
+        if (files == null || files.length == 0 || dir == null || dir.length()==0) {
+            JOptionPane.showMessageDialog(null, "No files", "Search Results", JOptionPane.ERROR_MESSAGE);
+            return null;
+        } 
         String[] paths = new String[files.length];
         //O seguinte codigo serve para pesquisar ficheiros dentro dos directorios do directorio indicado.
         //Nao esta correctamente implementado.
