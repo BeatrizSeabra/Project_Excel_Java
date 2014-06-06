@@ -43,8 +43,12 @@ package csheets.core.formula.compiler;
 }
 	         
 expression
-	: EQ! comparison EOF! 
-	;
+	: EQ! (attribution | comparison) EOF!
+       	;
+
+attribution
+        : CELL_REF ATT^ (comparison | attribution)comparison
+        ;
 
 comparison
 	: concatenation
@@ -171,5 +175,9 @@ WS: ( ' '
 	) {$channel=HIDDEN;}
 	;
 	
+/* Attribution*/
+ ATT    : ':=' ;
+
+
 	
  
