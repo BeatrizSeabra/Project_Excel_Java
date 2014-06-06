@@ -7,6 +7,7 @@ package csheets.ext.searchFiles.ui;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,21 +17,27 @@ import javax.swing.JOptionPane;
 public class SearchFilesController {
 
     /**
-     * Este metodo invoca outro metodo e receb os ficheiros, e depois retorna o nome dos ficheiros ou directorios
-     * que recebeu.
+     * Este metodo invoca outro metodo e receb os ficheiros, e depois retorna o
+     * nome dos ficheiros ou directorios que recebeu.
      */
     public static String[] searchNames(String pattern, String dir) {
         File dirr = new File(dir);
         File[] files = searchFiles(pattern, dirr);
         String[] paths = new String[files.length];
-        /*for (int i = 0; i < FilesAndDirs.length; ++i) {
-         -                    File tempFile = FilesAndDirs[i];
-         -                    String filename = tempFile.getName();
-         -                    
-         -                    if (tempFile.isDirectory() && !filename.equals(".") && !filename.equals("..")) {  
-         -                    searchNames(pattern, tempFile);
-         -                    }
-         -                }*/
+        //O seguinte codigo serve para pesquisar ficheiros dentro dos directorios do directorio indicado.
+        //Nao esta correctamente implementado.
+        /*File[] filesDirs = dirr.listFiles();
+        List tempFiles = null;
+        for (int i = 0; i < filesDirs.length; ++i) {
+            File tempFile = filesDirs[i];
+            String filename = tempFile.getName();
+            if (filename.contains(pattern)) {
+                tempFiles.add(filename);
+            }
+            if (tempFile.isDirectory() && !filename.equals(".") && !filename.equals("..")) {
+                searchNames(pattern, filename);
+            }
+        }*/
         for (int i = 0; i < files.length; ++i) {
             if (files[i].isDirectory()) {
                 paths[i] = files[i].getName() + "-------------------- Is a Directory!!";
