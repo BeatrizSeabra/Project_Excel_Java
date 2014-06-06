@@ -5,6 +5,8 @@
  */
 package csheets.ext.networkgame;
 
+import csheets.ext.connection.Server;
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,10 +18,18 @@ public class GameController {
 
     Game game;
     List<Player> players = new ArrayList();
+    Server s;
+    InetAddress address;
     
-    public GameController(Game game, List<Player> players) {
+    
+    public GameController(Game game, List<Player> players, Server s, InetAddress address) {
         this.game = game;
-        this.game.init("Exeplo", players);
+        this.s = s;
+        this.address = address;
         this.game.start();
+    }
+
+    void recieve(byte[] data) {
+        game.handleData(data);
     }
 }

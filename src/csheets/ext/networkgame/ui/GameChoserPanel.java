@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package csheets.ext.networkgame.ui;
 
+import csheets.ext.connection.Server;
 import csheets.ext.networkgame.Game;
 import csheets.ext.networkgame.GameController;
 import csheets.ext.networkgame.NetworkGameController;
 import csheets.ext.networkgame.Player;
+import java.net.InetAddress;
 import java.util.List;
 
 /**
@@ -19,7 +20,9 @@ import java.util.List;
 public class GameChoserPanel extends javax.swing.JPanel {
 
     List<Player> players;
-    
+    Server s;
+    InetAddress address;
+
     /**
      * Creates new form GameChoserPanel
      */
@@ -27,15 +30,16 @@ public class GameChoserPanel extends javax.swing.JPanel {
         initComponents();
     }
 
-    public GameChoserPanel(List<Game> games, byte[] data) {
+    public GameChoserPanel(List<Game> games, byte[] data, Server s, InetAddress address) {
         initComponents();
-        String[] s = new String[games.size()];
+        String[] st = new String[games.size()];
         for (int i = 0; i < games.size(); i++) {
-            s[i] = games.get(i).getName();
+            st[i] = games.get(i).getName();
         }
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(s));
-        
-        parsePlayers();
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(st));
+        this.s = s;
+        this.address = address;
+        parsePlayers(data);
     }
 
     /**
@@ -94,18 +98,21 @@ public class GameChoserPanel extends javax.swing.JPanel {
 
     private void pickGame(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pickGame
         for (Game game : NetworkGameController.games) {
-            if(game.getName().equals((String)jComboBox1.getSelectedItem())){
+            if (game.getName().equals((String) jComboBox1.getSelectedItem())) {
                 //temos o jogo certo
-                new GameController(game, players);
+                new GameController(game, players, s, address);
             };
         }
     }//GEN-LAST:event_pickGame
 
-    void parsePlayers(){
-        
+    void parsePlayers(byte[] data) {
+        String file_string = "";
+        for (int i = 0; i < data.length; i++) {
+            file_string += (char) data[i];
+        }
     }
-    
-    
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jComboBox1;

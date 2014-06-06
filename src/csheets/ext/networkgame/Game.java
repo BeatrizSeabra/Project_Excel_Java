@@ -6,6 +6,8 @@
 
 package csheets.ext.networkgame;
 
+import csheets.ext.connection.Server;
+import java.net.InetAddress;
 import java.util.List;
 
 /**
@@ -16,10 +18,22 @@ public abstract class Game {
     
     protected String name;
     protected List<Player> players;
+    protected Server s;
+    protected InetAddress address;
     
-    public abstract void init(String name, List<Player> players);
+    public Game(String name, List<Player> players, Server s, InetAddress address){
+        this.s = s;
+        this.name = name;
+        this.players = players;
+        this.address = address;
+        init();
+    }
+    
+    public abstract void init();
     
     public abstract void start();
+    
+    public abstract void handleData(byte[] dados);
     
     public String getName(){
         return this.name;

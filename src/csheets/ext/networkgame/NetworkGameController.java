@@ -6,12 +6,14 @@
 package csheets.ext.networkgame;
 
 import csheets.ext.connection.Server;
+import csheets.ext.networkgame.ui.ClientPanel;
 import csheets.ext.networkgame.ui.GameChoserPanel;
 import csheets.ext.networkgame.ui.ServerPanel;
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,38 +23,83 @@ public class NetworkGameController {
 
     public static JFrame mainWindow;
     public static boolean connected = false;
+    public static Player profile = new Player("Player 1");
+    public static List<Player> players = new ArrayList();
     public static List<Game> games = new ArrayList();
+    public static Server s;
+    public static GameController gc;
 
     public NetworkGameController() {
 
         //start server in port: 7777
-        Server s = new Server(7777) {
+        s = new Server(7777) {
 
             @Override
             public void handleMessage(byte[] data, InetAddress address, int port) {
-                initJFrame();
-                mainWindow.add(new GameChoserPanel(games, data));
-                packJFrame();
+                String file_string = "";
+                for (int i = 0; i < data.length; i++) {
+                    file_string += (char) data[i];
+                }
+                if (file_string.contains("CN")) {                       //CN Connection
+                    initJFrame("Players Found");
+                    mainWindow.add(new GameChoserPanel(games, data, s, address));
+                    packJFrame();
+                } else if (file_string.contains("GS")) {                                        //GS game selected response  
+                    int game = parseGame(data);
+                    players.add(parsePlayer(data));
+                    if (players.size() == 1) {
+                        profile = new Player("Player 2");
+                        players.add(profile);
+                    }
+                    gc = new GameController(games.get(game), players, s, address);
+                } else if (file_string.contains("GM")) {                                        //GM GAme message
+                    gc.recieve(data);
+                }
 
                 //System.out.println("Recivied " + data.toString().toString());
             }
         };
-        s.start();
+        int result = JOptionPane.showConfirmDialog(null, "Run a server?");
 
-        initJFrame();
-        mainWindow.add(new ServerPanel());
-        packJFrame();
+        if (result == JOptionPane.YES_OPTION) {
+            s.start();
+            initJFrame("Looking For players...");
+            mainWindow.add(new ServerPanel());
+            players.add(profile);
+            packJFrame();
+        } else {
+            initJFrame("Looking For players...");
+            mainWindow.add(new ClientPanel(s, profile.name));
+            packJFrame();
+        }
 
     }
 
-    void initJFrame() {
-        mainWindow = new JFrame("Looking For players...");
+    public static void initJFrame(String title) {
+        mainWindow = new JFrame(title);
         mainWindow.setSize(800, 600);
         mainWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
-    void packJFrame() {
+    public static void packJFrame() {
         mainWindow.pack();
         mainWindow.setVisible(true);
     }
+
+    public static int parseGame(byte[] data) {
+        return (int) data[2];
+    }
+
+    public static Player parsePlayer(byte[] data) {
+        Player p;
+        String s = "";
+        for (int i = 3; i < data.length; i++) {
+            s += (char) data[i];
+        }
+
+        p = new Player(s);
+
+        return p;
+    }
+
 }
