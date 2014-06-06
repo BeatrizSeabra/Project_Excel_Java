@@ -37,6 +37,15 @@
  * <br/>
  * <br/>
  * 
+ * <b>S058f: Functional Tests</b><br/>
+ * To test this function, the user should follow these steps:
+ * 1- Run cleansheets;
+ * 2- Click on the Extension menu, go to New Menus. There must appear a menu option containning "*Add Menu to window...*";<br/>
+ * 3- The previous option will pop a new window with text field and a add and cancel options. After inserting a name for the new option, click on the Add button;<br/>
+ * 4- To verify that the menu was added just do the same procedure as above and the new option must appear under the "*Add Menu to window...*" option. <br/>
+ * <br/>
+ * <br/>
+ * 
  * 
  */
 /*
