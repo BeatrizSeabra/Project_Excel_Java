@@ -47,11 +47,11 @@
  * <b>S097f: Functional Tests</b><br/>
  * To test this user story, the user should follow these steps:<br/>
  * 1run cleansheets;<br/>
- * 2click on the View menu and select sidebars. There must appear a list of menu
- * options containning one option for the comments sidebar;<br/>
- * 3the previous option is a check box that: when checked, the sidebar should
- * appear; when not checked, the sidebar should disappear;<br/>
- * 4the sidebar window should have only one editbox. <br/>
+ * 2click on the Extension menu and select contacts. There must appear a contacts list.<br/>
+ * 3to test create option, he should click on create button it will show a new window, now user must fill data, if succeed the contact created is visible on the list.<br/>
+ * 4to test edit/remove option, he should click on contact he wants edit, it will pop a window with contact information, then if chooses to remove and confirm and get succeed it will be removed from the list,
+ * if he chooses to edit user is able to edit the textfields, then if fields edited and confirmed and get succeed contact will appear edited on the list.  <br/>
+ * 
  * <br/>
  * <br/>
  * 

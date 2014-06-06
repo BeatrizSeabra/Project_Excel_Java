@@ -159,11 +159,8 @@ public class CreateUI extends javax.swing.JFrame {
         chooser.setFileFilter(filter);
         int returnVal = chooser.showOpenDialog(null);
         if(returnVal == JFileChooser.APPROVE_OPTION) {
-            System.out.println("You chose to open this file: " + chooser.getSelectedFile().getName());
-            final ImageIcon image=new ImageIcon(chooser.getSelectedFile().getAbsolutePath());
-            imageLabel= new JLabel(image);
-            imageLabel.setBounds(15, 225,image.getIconWidth(),image.getIconHeight());
            
+            
         }
     }//GEN-LAST:event_jButton1MouseClicked
 
