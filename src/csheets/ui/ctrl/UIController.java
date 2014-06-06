@@ -264,6 +264,11 @@ public class UIController implements SpreadsheetAppListener {
         {
             evl=e;
         }
+        
+        public void writeLogFile(String cell, String event)
+        {
+            WriteLogFile.writeLogFile(cell, event, getEvl());
+        }
 
 /*
  * PROPERTIES
