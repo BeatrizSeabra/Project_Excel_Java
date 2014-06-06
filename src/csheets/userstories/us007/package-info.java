@@ -13,6 +13,7 @@
  * Since the cells will be filled with strings and number, they will need to be sort by order. The user will be able to choose how he/she want to order the collumn.
  * This will be added to the submenu Sort Cell on Extensions menu that will get the collumn of the active cell.
  * The class method that will be called is SortActionAZ()or SortActionZA(), depending on order that user choose, that allow to order the collumn.
+ * That method will call a bunch of methods since order cells, to clean arrays and set cells.
  * <br/>
  * <br/>
  * 
