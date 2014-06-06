@@ -23,6 +23,9 @@ public class Search {
     
 
     public Address simpleSearch(SpreadsheetTable focusOwner, String text) {
+        if(text==null){
+            return null;
+        }
         Spreadsheet spreadsheet = focusOwner.getSpreadsheet();
         int rows=spreadsheet.getRowCount();
         Cell row[];
