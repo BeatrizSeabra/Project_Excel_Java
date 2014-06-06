@@ -24,18 +24,27 @@
  * <br/>
  * 
  * <b>S064c: Coding</b><br/>
- * see:<br/>
+ * <br/>
  * 
  * <br/>
  * <br/>
  * 
  * <b>S064u: Unit Tests</b><br/>
- * 
+ * Neste caso de uso (US064) não foi possível realizar teste unitários devido ao facto de os metodos a serem testados (que estão dentro de uma classe JForm) não terem return.<br/>
+ * Devido à falta de return é dificil de esperar um resultado para casos de testes.<br/>
+ * Por exemplo:<br/>
+ * Como o metodo run não possui um return logo é dificil de ter um resultado esperado para confirmar o caso de teste.<br/>
+ * No ActionPerformed do botão do ServerUI já está a validar o valor da porta e a password.
  * <br/>
  * <br/>
  * 
  * <b>S064f: Functional Tests</b><br/>
- * 
+ * Antes de tudo, teem de estar abertas duas instancias do cleansheets.
+ * Depois, teem de se preencher celulas e selecionar as que quer partilhar.
+ * Em seguida, ir ao menu extensions e escolher a opcao share e depois server.
+ * Vai inserir uma porta e uma password para a partilha.
+ * Na segunda instancia selecionar as celulas onde quer que a informação apareca e escolher o menu extensions -> share - > client.
+ * Escrever o ip do servidor, a porta e a password (definidas anteriormente)e a informação aparecerá onde estão as celulas selecionadas.
  * <br/>
  * <br/>
  * 
@@ -44,19 +53,19 @@
 /*
  *
  @startuml doc-files/us064_design1.png
-UIController -> FocusOwnerAction : getSelectedCells()
-FocusOwnerAction --> UIController : getSelectedCells()
-User -> UIController : enterShareName(String name)
-User -> UIController : enterPort(int port)
-UIController -> ShareInfo : new(int shareid,int sharePort,ArrayList<Cell> sharedCells,String shareName)
-UIController -> ServerConnectionHandler : createServerConnection()
-UIController -> ServerConnectionHandlerFactory : createShareHandlerFactory(UIController uiController,ShareInfo currentShareInfo)
-ServerShareHandlerFactory --> ServerShareHandler : createShareHandler(UIController uiController,ShareInfo current ShareInfo)
-ServerConnectionHandler -> ObjectOutputStream : new(connection.getOutputStream())
-ServerConnectionHandler -> ObjectInputStream : new(connection.getInputStream())
-ServerConnectionHandler -> ServerConnectionHandler : sendObject(currentShareInfo)
+User -> ServerUI : ActionListener()
+ServerUI -> Server : Server(String pass, int port, Address inicio, Address fim, Spreadsheet folha)
+Server -> TrataCliente : new(socket)
   @enduml
  
+@startuml doc-files/us064_design2.png
+User -> ClientUI : ActionListener()
+ClientUI -> Client :Client(String pass, int port, Spreadsheet folha_actual, Address addres, String ip)
+  @enduml
+
+
+
+
  *
  */
 package csheets.userstories.us064;

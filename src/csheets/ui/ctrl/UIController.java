@@ -107,7 +107,7 @@ public class UIController implements SpreadsheetAppListener {
 		this.extensions =
 			uiExtensions.toArray(new UIExtension[uiExtensions.size()]);
                 evl=new ArrayList<String>();
-                initEvl();
+                //initEvl();
 	}
 
 /*
@@ -263,6 +263,11 @@ public class UIController implements SpreadsheetAppListener {
         public void setEvl(ArrayList<String> e)
         {
             evl=e;
+        }
+        
+        public void writeLogFile(String cell, String event)
+        {
+            WriteLogFile.writeLogFile(cell, event, getEvl());
         }
 
 /*

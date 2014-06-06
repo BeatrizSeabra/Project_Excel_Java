@@ -103,12 +103,12 @@ public class MenuEdWindow extends javax.swing.JFrame{
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         if(!jTextField1.getText().equals("")){
-        UIExtension aux[] = uiController.getExtensions();
-       for (UIExtension aux1 : aux) {
-            if (aux1 instanceof EdMenuUIExtension) {
+        UIExtension ListExt[] = uiController.getExtensions();
+       for (UIExtension choosen : ListExt) {
+            if (choosen instanceof EdMenuUIExtension) {
                JMenuItem i= new JMenuItem(jTextField1.getText());
                i.setEnabled(false);
-               aux1.getMenu().add(i);
+               choosen.getMenu().add(i);
             }
         }
        this.dispose();

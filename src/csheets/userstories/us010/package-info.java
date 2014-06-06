@@ -18,12 +18,21 @@
  * <br/>
  *  
  * <b>S010d: Design</b><br/>
- * Para a realização deste User Story será necessário acrescentar métodos à classe ExtensionManager e criar classe UIExtensionManager. 
- * Para criar uma nova janela, onde as propriedades (Activo / Não activo) possam ser alteradas será necessário criar um JPanel.<br/>
+ * Para a realização deste User Story foi necessário criar uma classe ExtensionsManagerWindow e ExtensionsManagerAction, e também alterar as
+ * propriedades de classes como MenuBar e Frame para acrescentar a opção de menu na Janela principal, também foi necessário registar a acção da ExtensionsManagerAction
+ * na classe ActionManager. 
+ * Para criar uma nova janela, onde as propriedades (Activo / Não activo) possam ser alteradas será necessário criar um JFrame.<br/>
  * O diagrama abaixo apresentado descreve o processo de interação das classes do cleansheets utilizadas para o desenvolvimento do US010.<br/><br/>
  * <img src="../../../csheets/userstories/us010/doc-files/us010_design1.png"> 
  * <br/>
  * <br/>
+ * 
+ * <b>S010c: Coding</b><br/>
+* see:<br/>
+* <a href="../../../csheets/ui/package-summary.html">csheets.ui</a><br/>
+* <a href="../../../csheets/ui/ctrl/package-summary.html">csheets.ui.ctrl</a><br/>
+* <br/>
+* <br/>
  * @author Oleh Yermak (1120622)
  * */
 
@@ -31,22 +40,16 @@
 *
 @startuml doc-files/us010_design1.png
 actor User
- participant JPanel as JP
- participant ExtensionManager as EM
- participant Extencion as EX
+ participant ExtensionsManagerWindow as EXW
+ participant ExtensionsManagerAction as EMA
+ participant UIController as UIE
  participant UIExtencion as UIEX
 
 
- User -> JP : manageExtencion()
- JP -> EM : getExtensions()
-loop for Extension ext : extensions
- JP -> EM : getExtension(ext.getName())
- JP -> EX : getStatus(ext); 
-end
-alt result==changed
-   JP -> UIEX : setEnabledProperty(extension)
-  else
-  end
+ User -> EMA : manageExtencion()
+ EMA -> EXW : callWindow()
+ EXW -> UIE : getExtensions()
+ EXW -> UIEX : setEnabled(Extension)
  
 @enduml
 *

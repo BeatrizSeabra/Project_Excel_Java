@@ -13,7 +13,7 @@
  * <br/>
  * <br/>
  *  
- * <b>S001a: Analysis</b><br/>
+ * <b>S034a: Analysis</b><br/>
  * Terá de ser criada uma nova Formula para ser verificada na cell. Para isso, 
  * terá de ser acrescentado á gramatica existente o reconhecimento lexico da 
  * funcão Eval("").
@@ -26,7 +26,7 @@
  * <br/>
  * <br/>
  * 
- * <b>S001d: Design</b><br/>
+ * <b>S034d: Design</b><br/>
  * O utilizador ira introduzir um texto numa celula. Se o texto comecar por '='
  * isto ira despoletar um trigger e assumir uma nova formula (expressao)
  * essa expressao irá originar uma FunctionCall (Eval (argumentos))
@@ -40,17 +40,17 @@
  * <br/>
  * <br/>
  * 
- * <b>S001c: Coding</b><br/>
+ * <b>S034c: Coding</b><br/>
  * //csheets.core.formula.lang/Eval.java<br/>
  * <br/>
  * <br/>
  * 
- * <b>S001u: Unit Tests</b><br/>
+ * <b>S034u: Unit Tests</b><br/>
  * //Test Packages/csheets.core.formula.lang/EvalTest.java<br/>
  * <br/>
  * <br/>
  * 
- * <b>S001f: Functional Tests</b><br/>
+ * <b>S034f: Functional Tests</b><br/>
  * Para testar esta User Story, o Utilizador deve fazer:<br/>
  * 1- abrir o Cleansheets;<br/>
  * 2- Seleccionar uma Celula;<br/>

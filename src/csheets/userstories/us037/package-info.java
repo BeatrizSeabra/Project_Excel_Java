@@ -10,16 +10,17 @@
  * <br/>
  * <br/>
  *  
- * <b>S001a: Analysis</b><br/>
+ * <b>S037a: Analysis</b><br/>
  * Vai ser criada uma nova formula,
  * verifica la na celulua
  * colocar um novo token :=
  * Fazer a funçao para atribuicao e colocar na celula certa
+ * Ver se funciona 
  *  
  * <br/>
  * <br/>
  * 
- * <b>S001d: Design</b><br/>
+ * <b>S037d: Design</b><br/>
  * <br/><br/>
  * O user introduz texto na celula.
  * Se o texto começar por = assim assume uma formula.
@@ -32,28 +33,28 @@
  * esta correcta eenvia novamente para a cellImp
  * 
  * 
- * <img src="../../../csheets/userstories/us001/doc-files/us037_design1.png"> 
+ * <img src="../../../csheets/userstories/us0037/doc-files/us037_design1.png"> 
  * <br/>
  * <br/>
  * 
- * <b>S001c: Coding</b><br/>
+ * <b>S037c: Coding</b><br/>
+ * see:<br/>
+ * <a href="../../../csheets/core/formula/compiler/lang/package-summary.html">csheets.core.formula.lang</a><br/>
+ * <a href="../../../csheets/core/formula/compiler/compiler/package-summary.html">csheets.core.formula.lang</a><br/>
+ * <br/>
+ * <br/>
+ * 
+ * <b>S037u: Unit Tests</b><br/>
  * see:<br/>
  * <a href="../../../csheets/ext/comments/package-summary.html">csheets.ext.comments</a><br/>
  * <a href="../../../csheets/ext/comments/ui/package-summary.html">csheets.ext.comments.ui</a><br/>
  * <br/>
  * <br/>
  * 
- * <b>S001u: Unit Tests</b><br/>
- * see:<br/>
- * <a href="../../../csheets/ext/comments/package-summary.html">csheets.ext.comments</a><br/>
- * <a href="../../../csheets/ext/comments/ui/package-summary.html">csheets.ext.comments.ui</a><br/>
- * <br/>
- * <br/>
- * 
- * <b>S001f: Functional Tests</b><br/>
- * To test this user story, the user should follow these steps:<br/>
- * 1- run cleansheets;<br/>
- * 2- click on the View menu and select sidebars. There must appear a list of menu options containning one option for the comments sidebar;<br/>
+ * <b>S037f: Functional Tests</b><br/>
+ * Para verificar a atribuição necessita:<br/>
+ * 1- colocar a correr o cleansheets;<br/>
+ * 2- colocar numa celula =;<br/>
  * 3- the previous option is a check box that: when checked, the sidebar should appear; when not checked, the sidebar should disappear;<br/>
  * 4- the sidebar window should have only one editbox. <br/>
  * <br/>

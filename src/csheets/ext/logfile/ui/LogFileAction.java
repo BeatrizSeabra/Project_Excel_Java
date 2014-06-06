@@ -31,7 +31,7 @@ public class LogFileAction extends BaseAction {
 	}
 
 	protected String getName() {
-		return "LogFile";
+		return "EventLog File Options";
 	}
 
 	protected void defineProperties() {
@@ -54,7 +54,7 @@ public class LogFileAction extends BaseAction {
 	public void actionPerformed(ActionEvent event) {
 
             LogFileUI l= new LogFileUI(uiController);
-            l.setSize(170, 170);
+            l.setSize(255, 170);
             l.setResizable(false);
             l.setLocationRelativeTo(null);
             l.setVisible(true);

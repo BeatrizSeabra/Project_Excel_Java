@@ -44,6 +44,19 @@
  * <br/>
  * 
  * <b>S079f: Functional Tests</b><br/>
+ * Envio:
+ * 1-Executar programa
+ * 2-Clicar em Extension>Chat>Chat
+ * 3-Activar Chat
+ * 4-Introduzir IP válido
+ * 5-Start Chat
+ * 6-Escrever Mensagem
+ * 7-SEND
+ * Receber:
+ * 1-Executar programa
+ * 2-Clicar em Extension>Chat>Chat
+ * 3-Activar Chat
+ * 4-Receber Mensagem -> Abre Janela.
  * <br/>
  * <br/>
  * 

@@ -17,11 +17,11 @@ import csheets.ui.ctrl.UIController;
 public class EdMenuMenu extends JMenu {
 
 	/**
-	 * Creates a new style menu.
+	 * Creates a new  menu.
 	 * @param uiController the user interface controller
 	 */
 	public EdMenuMenu(UIController uiController) {
-		super("Editor Menu");
+		super("New Menus");
 		setMnemonic(KeyEvent.VK_S);
                 
                 add(new EdMenuAction(uiController));

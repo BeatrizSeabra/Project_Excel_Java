@@ -16,11 +16,16 @@ import java.util.Date;
 
 /**
  *
- * @author Rafael
+ * @author RafaelChaves
  */
+
+/*
+ * 
+ * */
 public final class WriteLogFile {
 
-    public static void writeLogFile(Address address, String event, ArrayList<String> evl) {
+    //Create or writes at the end of the EventLog file each event that occurs in the cells. 
+    public static void writeLogFile(String address, String event, ArrayList<String> evl) {
         if (evl.contains(event)) {
             try {
                 DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -29,7 +34,7 @@ public final class WriteLogFile {
                 String log = "";
                 String newLine = System.getProperty("line.separator");
                 BufferedWriter writer = new BufferedWriter(new FileWriter("EventLog.txt", true));
-                log = String.format("%s Event, on cell %s. time:%s\n\n\n", event, address.toString(), dateFormat.format(date));
+                log = String.format("%s Event, on cell %s. time:%s\n\n\n", event, address, dateFormat.format(date));
                 writer.write(log + newLine);
                 writer.close();
 

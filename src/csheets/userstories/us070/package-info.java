@@ -27,7 +27,12 @@
  * <br/>
  * <br/>
  * 
- * <b>S070f: Functional Tests</b><br/>
+* <b>S070f: Functional Tests</b><br/>
+* Para testar o caso de uso, o utilizador deve seguir os seguintes passos::<br/>
+* 1 - Abrir o cleansheets;<br/>
+* 2 - Clicar no menu Extensions, deve aparecer uma lista de extensões implementadas, e clicar na opção Import, TXT;<br/>
+* 3 - Irá abrir um FileChooser no qual terá de escolher um ficheiro com formato txt;<br/>
+* 5 - Aparece uma showMessageDialog a dizer que foi importado o ficheiro com sucessoe e importo os dados a partir da célula activa. <br/>
  * <br/>
  * <br/>
  * 

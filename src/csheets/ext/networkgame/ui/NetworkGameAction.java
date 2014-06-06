@@ -1,6 +1,7 @@
 package csheets.ext.networkgame.ui;
 
 import csheets.ext.connection.Server;
+import csheets.ext.networkgame.NetworkGameController;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JOptionPane;
@@ -49,35 +50,6 @@ public class NetworkGameAction extends BaseAction {
      */
     public void actionPerformed(ActionEvent event) {
 
-        JFrame mainWindow = new JFrame("Looking For players...");
-        mainWindow.setSize(800, 600);
-        mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        int result = JOptionPane.showConfirmDialog(null, "Do you want to host a game?");
-
-        if (result == JOptionPane.YES_OPTION) {
-            //server6
-            mainWindow.add(new ServerPanel());
-            mainWindow.pack();
-            mainWindow.setVisible(true);
-            //start server in port: 7777
-            Server s = new Server(7777) {
-
-                @Override
-                public void handleMessage(byte[] data, InetAddress address, int port) {
-                    System.out.println("Waiting..." + data.toString());
-                }
-            };
-        } else {
-            //client
-            mainWindow.add(new ClientPanel());
-            mainWindow.pack();
-            mainWindow.setVisible(true);
-        }
-
-        // Set up the player selection screen
-        mainWindow.pack();
-        mainWindow.setVisible(true);
-
+        new NetworkGameController();
     }
 }
