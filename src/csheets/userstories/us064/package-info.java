@@ -39,7 +39,12 @@
  * <br/>
  * 
  * <b>S064f: Functional Tests</b><br/>
- * 
+ * Antes de tudo, teem de estar abertas duas instancias do cleansheets.
+ * Depois, teem de se preencher celulas e selecionar as que quer partilhar.
+ * Em seguida, ir ao menu extensions e escolher a opcao share e depois server.
+ * Vai inserir uma porta e uma password para a partilha.
+ * Na segunda instancia selecionar as celulas onde quer que a informação apareca e escolher o menu extensions -> share - > client.
+ * Escrever o ip do servidor, a porta e a password (definidas anteriormente)e a informação aparecerá onde estão as celulas selecionadas.
  * <br/>
  * <br/>
  * 
