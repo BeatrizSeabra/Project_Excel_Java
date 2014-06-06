@@ -10,12 +10,8 @@ package csheets.ext.sort.ui;
  * @author Stefan Parker
  */
 import csheets.CleanSheets;
-import csheets.core.Cell;
 import csheets.core.formula.compiler.FormulaCompilationException;
 import java.awt.event.ActionEvent;
-
-import javax.swing.JOptionPane;
-
 import csheets.ui.ctrl.BaseAction;
 import csheets.ui.ctrl.UIController;
 import java.util.ArrayList;
@@ -40,6 +36,7 @@ public class SortActionZA extends BaseAction {
         this.uiController = uiController;
     }
 
+    @Override
     protected String getName() {
         return "Sort Cell from Z-A";
     }
@@ -55,9 +52,8 @@ public class SortActionZA extends BaseAction {
             int maxrows = this.uiController.getActiveSpreadsheet().getRowCount();
             int collumn = this.uiController.getActiveCell().getAddress().getColumn();
             sortZA(maxrows, collumn);
-
-        } catch (Exception ex) {
-            // para ja ignoramos a excepcao
+        } catch (FormulaCompilationException ex) {
+            System.out.println("Não foi possivel localizar a celula ativa ou o numero de linhas existentes");
         }
     }
 
@@ -77,5 +73,5 @@ public class SortActionZA extends BaseAction {
         for (int i = 0; i < conteudos.size(); i++) {
             this.uiController.getActiveSpreadsheet().getCell(collumn, i).setContent(conteudos.get(i));
         }
-    }
+    } 
 }
