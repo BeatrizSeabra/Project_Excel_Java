@@ -7,6 +7,7 @@ package csheets.ext.contacts.ui;
 
 import csheets.PersistenceJPA.ContactsRepository;
 import csheets.ext.contacts.Contact;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -14,6 +15,7 @@ import csheets.ext.contacts.Contact;
  */
 public class EditRemoveUI extends javax.swing.JFrame {
 
+  
     Contact c1 = new Contact();
 
     /**
@@ -31,6 +33,7 @@ public class EditRemoveUI extends javax.swing.JFrame {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+ 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -181,7 +184,7 @@ public class EditRemoveUI extends javax.swing.JFrame {
                             .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
@@ -225,7 +228,10 @@ public class EditRemoveUI extends javax.swing.JFrame {
             ContactsRepository.changeOccupation(c1, aux3);
             this.dispose();
         }
-
+        
+            ContactsUI cUI = new ContactsUI();
+            cUI.setVisible(true);
+            cUI.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
@@ -274,7 +280,7 @@ public class EditRemoveUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EditRemoveUI().setVisible(true);
+                new EditRemoveUI().setVisible(false);
             }
         });
     }
