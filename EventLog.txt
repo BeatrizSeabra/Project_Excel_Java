@@ -1242,3 +1242,23 @@ onClick Event, on cell B5. time:2014/06/06 14:11:51
 
 
 
+onClick Event, on cell A1. time:2014/06/06 14:23:07
+
+
+
+onClick Event, on cell A1. time:2014/06/06 14:23:07
+
+
+
+onClick Event, on cell A1. time:2014/06/06 14:23:09
+
+
+
+onChange Event, on cell A1. time:2014/06/06 14:23:11
+
+
+
+onClick Event, on cell B8. time:2014/06/06 14:23:11
+
+
+
