@@ -19,6 +19,7 @@ public class CreateUI extends javax.swing.JFrame {
      * Creates new form CreateUI
      */
     public CreateUI() {
+        setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
         initComponents();
     }
 
@@ -39,7 +40,7 @@ public class CreateUI extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,6 +134,7 @@ public class CreateUI extends javax.swing.JFrame {
         firstName=jTextField1.getText();
         lastName=jTextField2.getText();
         ContactsRepository.add(new Contact(firstName, lastName));
+        this.dispose();
     }//GEN-LAST:event_jButton2MouseClicked
 
     /**
