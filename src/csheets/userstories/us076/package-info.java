@@ -25,10 +25,16 @@
  * <br/>
  * 
  * <b>S076c: Coding</b><br/>
+ * see:<br/>
+ * <a href="../../../csheets/ext/searchFiles/package-summary.html">csheets.ext.searchFiles</a><br/>
+ * <a href="../../../csheets/ext/searchFiles/ui/package-summary.html">csheets.ext.searchFiles.ui</a><br/>
  * <br/>
  * <br/>
  * 
  * <b>S076u: Unit Tests</b><br/>
+ * see:<br/>
+ * <a href="../../../csheets/ext/searchFiles/package-summary.html">csheets.ext.searchFiles</a><br/>
+ * <a href="../../../csheets/ext/searchFiles/ui/package-summary.html">csheets.ext.searchFiles.ui</a><br/>
  * <br/>
  * <br/>
  * 
