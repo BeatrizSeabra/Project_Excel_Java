@@ -12,9 +12,6 @@ package csheets.ext.sort.ui;
 import csheets.CleanSheets;
 import csheets.core.formula.compiler.FormulaCompilationException;
 import java.awt.event.ActionEvent;
-
-import javax.swing.JOptionPane;
-
 import csheets.ui.ctrl.BaseAction;
 import csheets.ui.ctrl.UIController;
 import java.util.ArrayList;
@@ -53,8 +50,8 @@ public class SortAction extends BaseAction {
             int maxrows = this.uiController.getActiveSpreadsheet().getRowCount();
             int collumn = this.uiController.getActiveCell().getAddress().getColumn();
             sortAZ(maxrows, collumn);
-        } catch (Exception ex) {
-            // para ja ignoramos a excepcao
+        } catch (FormulaCompilationException ex) {
+            System.out.println("Não foi possivel localizar a celula ativa ou o numero de linhas existentes");
         }
     }
 
@@ -70,7 +67,7 @@ public class SortAction extends BaseAction {
             }
         }
         Collections.sort(conteudos, String.CASE_INSENSITIVE_ORDER);
-        for (int i = 0; i < maxrows; i++) {
+        for (int i = 0; i < conteudos.size(); i++) {
             this.uiController.getActiveSpreadsheet().getCell(collumn, i).setContent(conteudos.get(i));
         }
     }

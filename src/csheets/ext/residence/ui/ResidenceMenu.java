@@ -24,6 +24,7 @@ public class ResidenceMenu extends JMenu {
 		setMnemonic(KeyEvent.VK_E);
 
 		// Adds font actions
-		add(new ResidenceAction(uiController));
+		add(new InsertResidenceAction(uiController));
+                add(new ConsultResidenceAction(uiController));
 	}	
 }
