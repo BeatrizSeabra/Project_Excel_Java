@@ -19,12 +19,13 @@ public class ServerUI extends javax.swing.JFrame {
 
     private SpreadsheetTable folha;
     private UIController uiController;
+
     /**
      * Creates new form ServerUI
      */
     public ServerUI(SpreadsheetTable folha, UIController cotrl) {
         this.folha = folha;
-        this.uiController=cotrl;
+        this.uiController = cotrl;
         initComponents();
 
         try {
@@ -48,12 +49,12 @@ public class ServerUI extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        txtPort = new javax.swing.JTextField();
         btnShare = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtIP = new javax.swing.JTextField();
+        txtPort1 = new javax.swing.JTextField();
+        jPasswordField1 = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
-        jName = new javax.swing.JTextField();
 
         jTextField1.setText("jTextField1");
 
@@ -67,10 +68,6 @@ public class ServerUI extends javax.swing.JFrame {
         jLabel1.setText("Port:");
         jLabel1.setName("lblPort"); // NOI18N
 
-        txtPort.setMaximumSize(new java.awt.Dimension(100, 20));
-        txtPort.setMinimumSize(new java.awt.Dimension(100, 20));
-        txtPort.setName("txtPort"); // NOI18N
-
         btnShare.setText("Share");
         btnShare.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,83 +76,87 @@ public class ServerUI extends javax.swing.JFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("IP");
+        jLabel2.setText("IP: ");
 
         txtIP.setEditable(false);
         txtIP.setEnabled(false);
 
+        txtPort1.setMaximumSize(new java.awt.Dimension(100, 20));
+        txtPort1.setMinimumSize(new java.awt.Dimension(100, 20));
+        txtPort1.setName("txtPort"); // NOI18N
+
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("Name");
+        jLabel3.setText("Passsword:");
+        jLabel3.setName("lblPort"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jName)
-                    .addComponent(txtIP, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-                    .addComponent(txtPort, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(16, 16, 16))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnShare)
-                .addGap(98, 98, 98))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPort1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtIP, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(83, 83, 83)
+                        .addComponent(btnShare)))
+                .addGap(0, 31, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtIP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addGap(28, 28, 28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtPort1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(btnShare)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(290, 244));
+        setSize(new java.awt.Dimension(296, 174));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnShareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShareActionPerformed
 
-        if (txtPort.getText().isEmpty() || jName.getText().isEmpty()) {
+        if (txtPort1.getText().isEmpty() || jPasswordField1.getPassword().length == 0) {
             JOptionPane.showMessageDialog(this, "Please fill all fields");
         } else {
-
             try {
-                int porta = Integer.parseInt(txtPort.getText());
-                if (porta <= 0 && porta > 65535) {
-                    JOptionPane.showMessageDialog(this, "Please insert a valid number for the field port");
-                } else {
+                int porta = Integer.parseInt(txtPort1.getText());
 
-                    int x = folha.getSelectedCells().length;
-                    int y = folha.getSelectedCells()[0].length;
-                    System.out.println(folha.getSelectedCells()[0][0].getAddress());
-                    System.out.println(folha.getSelectedCells()[x - 1][y - 1]);
+                int x = folha.getSelectedCells().length;
+                int y = folha.getSelectedCells()[0].length;
+                   // System.out.println(folha.getSelectedCells()[0][0].getAddress());
+                // System.out.println(folha.getSelectedCells()[x - 1][y - 1]);
 
-                    Address inicio = folha.getSelectedCells()[0][0].getAddress();
-                    Address fim = folha.getSelectedCells()[folha.getSelectedCells().length-1][folha.getSelectedCells()[0].length-1].getAddress();
-                    Runnable runnable = new Server(jName.getText(), Integer.parseInt(txtPort.getText()),inicio, fim, uiController.getActiveSpreadsheet());
-                    Thread thread = new Thread(runnable);
-                    thread.start();
-                    dispose();
-                }
+                Address inicio = folha.getSelectedCells()[0][0].getAddress();
+                Address fim = folha.getSelectedCells()[folha.getSelectedCells().length - 1][folha.getSelectedCells()[0].length - 1].getAddress();
+                Runnable runnable = new Server(String.valueOf(jPasswordField1.getPassword()), porta, inicio, fim, uiController.getActiveSpreadsheet());
+                Thread thread = new Thread(runnable);
+                thread.start();
+                dispose();
+
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Please insert a number for the field port");
                 System.out.println(e.getMessage());
@@ -172,9 +173,9 @@ public class ServerUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField jName;
+    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField txtIP;
-    private javax.swing.JTextField txtPort;
+    private javax.swing.JTextField txtPort1;
     // End of variables declaration//GEN-END:variables
 }
