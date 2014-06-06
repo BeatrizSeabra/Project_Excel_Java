@@ -21,7 +21,7 @@ public class EdMenuMenu extends JMenu {
 	 * @param uiController the user interface controller
 	 */
 	public EdMenuMenu(UIController uiController) {
-		super("Editor Menu");
+		super("New Menus");
 		setMnemonic(KeyEvent.VK_S);
                 
                 add(new EdMenuAction(uiController));
