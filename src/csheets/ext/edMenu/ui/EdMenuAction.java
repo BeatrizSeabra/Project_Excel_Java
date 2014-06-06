@@ -33,7 +33,7 @@ public class EdMenuAction extends BaseAction {
 	}
 
 	protected String getName() {
-		return "Menu Editor...";
+		return "*Add menu to window...*";
 	}
 
 	protected void defineProperties() {

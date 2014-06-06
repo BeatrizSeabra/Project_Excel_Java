@@ -11,7 +11,7 @@ import csheets.ui.ext.UIExtension;
  *
  * @see Extension
  *
- * @author  Rui 1110506
+ * @author Rui 1110506
  */
 public class ExtensionShare extends Extension {
 

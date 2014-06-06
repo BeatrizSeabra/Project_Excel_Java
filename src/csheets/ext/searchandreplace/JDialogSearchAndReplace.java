@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package csheets.ext.searchandreplace;
 
 import csheets.core.Address;
@@ -20,7 +19,7 @@ public class JDialogSearchAndReplace extends javax.swing.JDialog {
      */
     public JDialogSearchAndReplace(java.awt.Frame parent, boolean modal, SpreadsheetTable focusOwner) {
         super(parent, modal);
-        this.focusOwner=focusOwner;
+        this.focusOwner = focusOwner;
         initComponents();
     }
 
@@ -165,9 +164,9 @@ public class JDialogSearchAndReplace extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-        String text=searchText.getText();
+        String text = searchText.getText();
         Search search = new Search();
-        cell=search.simpleSearch(focusOwner, text);
+        cell = search.simpleSearch(focusOwner, text);
         dispose();
     }//GEN-LAST:event_searchButtonActionPerformed
 
@@ -216,10 +215,11 @@ public class JDialogSearchAndReplace extends javax.swing.JDialog {
             }
         });
     }
-    public Address getCell(){
+
+    public Address getCell() {
         return this.cell;
     }
-    
+
     private Address cell;
     private SpreadsheetTable focusOwner;
     // Variables declaration - do not modify//GEN-BEGIN:variables

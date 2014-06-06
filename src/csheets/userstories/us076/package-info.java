@@ -25,14 +25,26 @@
  * <br/>
  * 
  * <b>S076c: Coding</b><br/>
+ * see:<br/>
+ * <a href="../../../csheets/ext/searchFiles/package-summary.html">csheets.ext.searchFiles</a><br/>
+ * <a href="../../../csheets/ext/searchFiles/ui/package-summary.html">csheets.ext.searchFiles.ui</a><br/>
  * <br/>
  * <br/>
  * 
  * <b>S076u: Unit Tests</b><br/>
+ * see:<br/>
+ * <a href="../../../csheets/ext/searchFiles/package-summary.html">csheets.ext.searchFiles</a><br/>
+ * <a href="../../../csheets/ext/searchFiles/ui/package-summary.html">csheets.ext.searchFiles.ui</a><br/>
  * <br/>
  * <br/>
  * 
  * <b>S076f: Functional Tests</b><br/>
+ * Para testar esta user story, o utilizador deve seguir os passos seguintes:<br/>
+ * 1 Executar o CleanSheets;<br/>
+ * 2 Clicar no menu Extensions onde serao apresentadas as extensoes disponiveis;<br/>
+ * 3 Clicar na extensao searchFiles Menu, será apresentada uma janela;<br/>
+ * 4 Nessa janela, o utilizador deverá inserir o padrao do nome do ficheiro e o directorio onde deseja fazer a pesquisa;<br/>
+ * 5 O utilizador carrega no botao 'OK' e uma lista de ficheiros ou directorios é apresentada na janela com os resultados da pesquisa.<br/>
  * <br/>
  * <br/>
  * 

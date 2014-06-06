@@ -1,29 +1,26 @@
 package csheets.ext.searchFiles.ui;
 
-import csheets.ext.simple.ui.*;
+
+import csheets.CleanSheets;
 import javax.swing.Icon;
-import javax.swing.JComponent;
 import javax.swing.JMenu;
-import javax.swing.JToolBar;
+
 
 import csheets.ext.Extension;
 import csheets.ui.ctrl.UIController;
-import csheets.ui.ext.CellDecorator;
-import csheets.ui.ext.TableDecorator;
 import csheets.ui.ext.UIExtension;
+import javax.swing.ImageIcon;
 
 /**
- * This class implements the UI interface extension for the simple extension.
- * A UI interface extension must extend the UIExtension abstract class.
- * @see UIExtension
+ * Esta classe implementa a interface UI da Extensao SearchFiles.
  * @author 1120564MarcoEsteves
  */
 public class UIExtensionSearchFiles extends UIExtension {
 
-	/** The icon to display with the extension's name */
+	/** Icon mostrado com o nome da Extensao. */
 	private Icon icon;
 
-	/** The menu of the extension */
+	/** Menu da extensao */
 	private searchFilesMenu menu;
 
 	public UIExtensionSearchFiles(Extension extension, UIController uiController) {
@@ -32,18 +29,19 @@ public class UIExtensionSearchFiles extends UIExtension {
 	}
 	
 	/**
-	 * Returns an icon to display with the extension's name.
-	 * @return an icon with style
+	 * Retorna o Icon mostrado com o nome da Extensao
 	 */
 	public Icon getIcon() {
-		return null;
+		if (icon == null){
+                    icon = new ImageIcon(CleanSheets.class.getResource("res/img/find.gif"));
+                }
+		return icon;
 	}
 
 	/**
-	 * Returns an instance of a class that implements JMenu.
-	 * In this simple case this class only supplies one menu option.
+	 * Retorna a instancia da classe que cria o JMenu.
 	 * @see searchFilesMenu
-	 * @return a JMenu component
+	 * @return Um componente JMenu.
 	 */
 	public JMenu getMenu() {
 		if (menu == null)

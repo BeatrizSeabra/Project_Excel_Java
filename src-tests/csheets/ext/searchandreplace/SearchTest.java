@@ -7,14 +7,8 @@
 package csheets.ext.searchandreplace;
 
 import csheets.CleanSheets;
-import csheets.SpreadsheetAppEvent;
 import csheets.core.Address;
-import csheets.core.Cell;
-import csheets.core.CellImpl;
-import csheets.core.CellListener;
 import csheets.core.Spreadsheet;
-import csheets.core.Workbook;
-import csheets.core.formula.compiler.FormulaCompilationException;
 import csheets.ui.ctrl.UIController;
 import csheets.ui.sheet.SpreadsheetTable;
 import java.io.File;
@@ -194,6 +188,34 @@ public class SearchTest {
         String text = "";
         Search instance = new Search();
         Address expResult = new Address(5, 0);
+        Address result = instance.simpleSearch(focusOwner, text);
+        assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testSimpleSearch6() {
+        System.out.println("simpleSearch");
+        CleanSheets cleanSheets = new CleanSheets();
+        UIController controller = new UIController(cleanSheets);
+        File file = new File("src-tests/csheets/ext/searchandreplace/testeus22.cls");
+        try {
+            cleanSheets.load(file);
+        } catch (IOException ex) {
+            Logger.getLogger(SearchTest.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(SearchTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        Spreadsheet s=cleanSheets.getWorkbooks()[0].getSpreadsheet(0);
+        
+        controller.setActiveWorkbook(cleanSheets.getWorkbooks()[0]);
+        controller.setActiveSpreadsheet(s);
+        
+        SpreadsheetTable focusOwner= new SpreadsheetTable(s, controller);
+        
+        String text = null;
+        Search instance = new Search();
+        Address expResult = null;
         Address result = instance.simpleSearch(focusOwner, text);
         assertEquals(expResult, result);
     }

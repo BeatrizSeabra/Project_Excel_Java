@@ -28,10 +28,7 @@ import javax.swing.KeyStroke;
 
 import csheets.CleanSheets;
 import csheets.core.Address;
-import csheets.core.Cell;
-import csheets.core.CellImpl;
 import csheets.ext.searchandreplace.JDialogSearchAndReplace;
-import csheets.ext.searchandreplace.Search;
 import javax.swing.JOptionPane;
 
 /**
@@ -82,6 +79,5 @@ public class SearchAction extends FocusOwnerAction {
         } else {
             focusOwner.changeSelection(address.getRow(), address.getColumn(), true, false);
         }
-
     }
 }
