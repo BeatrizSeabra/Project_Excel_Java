@@ -10,7 +10,7 @@
  * <br/>
  * <br/>
  *  
- * <b>S001a: Analysis</b><br/>
+ * <b>S058a: Analysis</b><br/>
  * For this issue the program, will need basically a new option on the Menubar() of the cleansheet.
  * The new option will be under the Extensions options with the name "New Menus" with a option to the new ones under that same option (so this way it's sure that the program follow the basics).
  * This new option will pop a window to the user and then give him the option of creating a new menu option.
@@ -19,18 +19,25 @@
  * <br/>
  * 
  * 
- * <b>S001d: Design</b><br/>
+ * <b>S058d: Design</b><br/>
  * To realize this user story we need to create the classes relative to extensions, so we need to do two packages and do the respective classes to add in the options.
  * Also it will be needed a method to assign the correct menus that the user wants to work on, by creating methods with the UI regarding Java knowledge.
  * The Diagram for this use case:<img src="../../../csheets/userstories/us058/doc-files/us058_design1.png">
  * <br/>
  * <br/>
  *
- * <b>S001d: Coding</b><br/>
+ * <b>S058c: Coding</b><br/>
  * <a href="../../../csheets/ext/edMenu/package-summary.html">csheets.ext.edMenu</a><br/>
  * <a href="../../../csheets/ext/edMenu/ui/package-summary.html">csheets.ext.edMenu.ui</a><br/>
  * <br/>
  * <br/>
+ *
+ * <b>S058u: Unit Tests</b><br/>
+ * Since this US only has user to graphic interface conection, there is no need ne realiza Unit. To try this function, we can check the functional tests on the next separator.
+ * <br/>
+ * <br/>
+ * 
+ * 
  */
 /*
 @startuml doc-files/us058_design1.png

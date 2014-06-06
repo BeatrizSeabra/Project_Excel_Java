@@ -107,7 +107,7 @@ public class UIController implements SpreadsheetAppListener {
 		this.extensions =
 			uiExtensions.toArray(new UIExtension[uiExtensions.size()]);
                 evl=new ArrayList<String>();
-                initEvl();
+                //initEvl();
 	}
 
 /*
