@@ -7,6 +7,10 @@
 package csheets.ext.chat.ui;
 
 import csheets.ext.chat.ChatController;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -183,7 +187,7 @@ public ChatController controlo;
         controlo= new ChatController(this);
         controlo.getServidor().start();
     }else{
-        if(controlo.getServidor().isInterrupted()){
+        if(!(controlo.getServidor().allDone==true)){
         controlo.getServidor().start();
         }
     }
@@ -196,7 +200,13 @@ public ChatController controlo;
         if(jTextField1.getText()==null || jTextField1.getText().isEmpty()){
         JOptionPane.showMessageDialog(rootPane, "Must enter a valid IP address");
     }  else{
-       controlo.newChat(jTextField1.getText());
+            try {
+                InetAddress.getByName(jTextField1.getText()); 
+                controlo.newChat(jTextField1.getText());
+            } catch (UnknownHostException ex) {
+                JOptionPane.showMessageDialog(rootPane, "Must enter a valid IP address");
+            }
+      
     }
      }
     }//GEN-LAST:event_jButton3ActionPerformed

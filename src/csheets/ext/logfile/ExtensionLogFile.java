@@ -10,6 +10,7 @@ import csheets.ext.Extension;
 import csheets.ext.logfile.ui.UIExtensionLogFile;
 import csheets.ui.ctrl.UIController;
 import csheets.ui.ext.UIExtension;
+import java.util.ArrayList;
 /**
  *
  * @author RafaelChaves
@@ -19,11 +20,13 @@ public class ExtensionLogFile extends Extension {
 	/** The name of the extension */
 	public static final String NAME = "LogFile";
 
+
 	/**
 	 * Creates a new Example extension.
 	 */
 	public ExtensionLogFile() {
 		super(NAME);
+                
 	}
 	
 	/**
@@ -35,4 +38,6 @@ public class ExtensionLogFile extends Extension {
 	public UIExtension getUIExtension(UIController uiController) {
 		return new UIExtensionLogFile(this, uiController);
 	}
+        
+       
 }

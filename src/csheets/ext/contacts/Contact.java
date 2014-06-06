@@ -17,18 +17,21 @@ import javax.persistence.*;
  */
 
 @Entity
+@Table(name = "Contacts")
 public class Contact implements Serializable {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)    
     private int id;
+    private static int id2;
     private String firstName;
     private String lastName;
     private String occupation;
     private Residence residence;
 
-    public Contact(int id, String firstName, String lastName) {
-        this.id = id;
+    public Contact(String firstName, String lastName) {
+        id2++;
+        this.id=id2;
         this.firstName = firstName;
         this.lastName = lastName;
     }

@@ -21,6 +21,7 @@
  */
 package csheets.ext.deptree;
 
+import csheets.ext.logfile.WriteLogFile;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 

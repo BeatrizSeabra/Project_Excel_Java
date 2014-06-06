@@ -1,6 +1,5 @@
 package csheets.ext.invokefunction.ui;
 
-import csheets.ext.simple.ui.*;
 import javax.swing.Icon;
 import javax.swing.JComponent;
 import javax.swing.JMenu;
@@ -13,7 +12,7 @@ import csheets.ui.ext.TableDecorator;
 import csheets.ui.ext.UIExtension;
 
 /**
- * This class implements the UI interface extension for the simple extension.
+ * This class implements the UI interface extension for the invoke function extension.
  * A UI interface extension must extend the UIExtension abstract class.
  * @see UIExtension
  * @author Alexandre Braganca

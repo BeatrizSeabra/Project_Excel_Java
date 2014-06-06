@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package csheets.ext.sort.ui;
 
 /**
@@ -13,9 +12,6 @@ package csheets.ext.sort.ui;
 import csheets.CleanSheets;
 import csheets.core.formula.compiler.FormulaCompilationException;
 import java.awt.event.ActionEvent;
-
-import javax.swing.JOptionPane;
-
 import csheets.ui.ctrl.BaseAction;
 import csheets.ui.ctrl.UIController;
 import java.util.ArrayList;
@@ -40,6 +36,7 @@ public class SortActionZA extends BaseAction {
         this.uiController = uiController;
     }
 
+    @Override
     protected String getName() {
         return "Sort Cell from Z-A";
     }
@@ -54,28 +51,27 @@ public class SortActionZA extends BaseAction {
         try {
             int maxrows = this.uiController.getActiveSpreadsheet().getRowCount();
             int collumn = this.uiController.getActiveCell().getAddress().getColumn();
-            sortZA(maxrows,collumn,conteudos);
-            
-        } catch (Exception ex) {
-            // para ja ignoramos a excepcao
+            sortZA(maxrows, collumn);
+        } catch (FormulaCompilationException ex) {
+            System.out.println("Não foi possivel localizar a celula ativa ou o numero de linhas existentes");
         }
     }
-    
-    public void sortZA(int maxrows, int collumn, ArrayList<String> conteudos) throws FormulaCompilationException{
+
+    public void sortZA(int maxrows, int collumn) throws FormulaCompilationException {
         if (!conteudos.isEmpty()) {
-                conteudos.removeAll(conteudos);
-            }
+            conteudos.removeAll(conteudos);
+        }
         for (int i = 0; i < maxrows; i++) {
-                String conteudo = this.uiController.getActiveSpreadsheet().getCell(collumn, i).getContent();
+            String conteudo = this.uiController.getActiveSpreadsheet().getCell(collumn, i).getContent();
+            if (!(conteudo.isEmpty() || conteudo.equals(" "))) {
+                this.uiController.getActiveSpreadsheet().getCell(collumn, i).setContent("");
                 conteudos.add(conteudo);
             }
-            Collections.sort(conteudos, String.CASE_INSENSITIVE_ORDER);
-            Collections.reverse(conteudos);
-            for (int i = 0; i < maxrows; i++) {
-                if(!(conteudos.get(i)=="")){
-                    this.uiController.getActiveSpreadsheet().getCell(collumn, i).setContent(conteudos.get(i));
-                }
-            }
-    }
+        }
+        Collections.sort(conteudos, String.CASE_INSENSITIVE_ORDER);
+        Collections.reverse(conteudos);
+        for (int i = 0; i < conteudos.size(); i++) {
+            this.uiController.getActiveSpreadsheet().getCell(collumn, i).setContent(conteudos.get(i));
+        }
+    } 
 }
-
