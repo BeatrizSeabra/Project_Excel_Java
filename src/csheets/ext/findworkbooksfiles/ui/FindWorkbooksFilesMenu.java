@@ -1,6 +1,5 @@
 package csheets.ext.findworkbooksfiles.ui;
 
-import csheets.ext.findworkbooksfiles.ui.*;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JMenu;

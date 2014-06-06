@@ -20,11 +20,11 @@
  * 
  * <b>S067d: Design</b><br/> 
  * <br/>
- * To realize this user story we will need to create a submenu option in the menu option File, named "List workbooks files".
+ * To realize this user story we will need to create a submenu option in the menu option Extensions, named "Find Workbooks Files".
  * 
  * We will also need to create a subclass of UIExtension. For the sidebar we need to implement a JPanel.<br/>
  * The following diagram shows how these new classes will be loaded and "integrated" with cleansheets.<br/><br/>
- * <img src="../../../csheets/userstories/us001/doc-files/us067_design1.png">
+ * <img src="../../../csheets/userstories/us067/doc-files/us067_design1.png">
  * <br/>
  * 
  * <b>S067c: Coding</b><br/>
@@ -36,30 +36,68 @@
  * <b>S067f: Functional Tests</b><br/>
  * <br/>
  * 
- * @author 1090675
+ * @author 1090675 - Tiago Pereira
  */
 /*
  *
-  @startuml doc-files/us067_design1.png
-  participant "uic : UIController" as UIC
-    participant ExtensionManager as ExtM
-    participant "extension : CommentsExtension" as EExample
-    participant "uiExtension : UIExtensionComments" as UIExt
-    participant "CommentPanel : JPanel" as cp
-    UIC -> ExtM : extensions=getExtensions();
-    loop for Extension ext : extensions
-           UIC -> EExample : uiExtension=getUIExtension(this);
-           activate EExample
-           create UIExt
-           EExample -> UIExt : new(extension, uic)
-           deactivate EExample
-           UIExt -> UIExt : getSideBar();
-           activate UIExt
-           create cp
-           UIExt -> cp :  new (uic)  	
-           deactivate UIExt
-           UIC -> UIC : uiExtensions.add(uiExtension);
-    end
+  @startuml doc-files/us067_design1.png  
+  hide footbox
+  skinparam backgroundColor #EEEBDC
+
+  skinparam sequence {
+            ArrowColor DeepSkyBlue
+            ActorBorderColor DeepSkyBlue
+            LifeLineBorderColor blue
+            LifeLineBackgroundColor #A9DCDF
+
+            ParticipantBorderColor DeepSkyBlue
+            ParticipantBackgroundColor DodgerBlue
+            ParticipantFontName Impact
+            ParticipantFontSize 17
+            ParticipantFontColor #A9DCDF
+
+            ActorBackgroundColor blue
+            ActorFontColor DeepSkyBlue
+            ActorFontSize 17
+            ActorFontName Aapex
+  }
+  actor User
+  participant FindWorkbooksFileAction as FWFA
+  participant "<b>fc</b> : FileChooser" as FC
+  participant "<b>findWF</b> : FindWorkbooksFiles" as FWF
+  participant "<b>windowLWF</b> : WindowListWorkbooksFiles" as WLWF
+  participant "ArrayList<File>" as AL
+  User -> FWFA : actionPerformed(ActionEvent event)
+  FWFA -> FC : <b>fc</b> = new FileChooser()
+  FWFA -> FC : <b>fc</b>.setFileSelectionMode(FileChooser.DIRECTORIES_ONLY)
+  FWFA -> FC : <b>fc</b>.showDialog()
+  ...
+  FWFA -> FWF : <b>findWF</b> = new FindWorkbooksFiles()
+  FWFA -> FWF : <b>findWF</b>.findWorkbooksFiles(fc.getSelectedFile(), ".*\\.cls")
+  ...
+  FWF -> AL: <b>listingFiles</b> = new ArrayList<File>
+  activate FWF
+  deactivate FWF
+  loop for File <b>fileDirectory</b> : sub
+       FWF -> FWF : <b>listingFiles</b>.add(<b>fileDirectory</b>)
+  end
+  ...some seconds or minutes later...
+  FWF --> FWFA : return <b>listingFiles</b>
+  FWF --> FWFA : List<File> <b>listingFiles</b>
+  FWFA --> User : if(<b>listingFiles</b>.isEmpty())
+  note left
+      show a message to inform the user
+      that in the specified directory
+      has no workbooks files
+  end note
+  ...
+  FWFA -> WLWF : <b>windowLWF</b> = new WindowListWorkbooksFiles(listingF)
+  WLWF --> User
+  note left
+      show to the user a listing of
+      all workbooks files found in
+      the specified directory
+  end note
   @enduml
  *
  */

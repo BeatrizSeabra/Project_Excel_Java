@@ -1,6 +1,5 @@
 package csheets.ext.findworkbooksfiles.ui;
 
-import csheets.ext.findworkbooksfiles.ui.*;
 import javax.swing.Icon;
 import javax.swing.JComponent;
 import javax.swing.JMenu;
