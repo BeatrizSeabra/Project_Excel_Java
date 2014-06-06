@@ -28,8 +28,9 @@ exportar as formulas, etc.). Não é necessária grande preocupação no aspecto
  * <br/>
  * <br/>
  * 
- * <b>S028u: Unit Tests</b><br/>
- * see:<br/>
+ * <b>S028u: Unit Tests:</b><br/>
+ * Os metodos utilizados sao void e portanto nao foi possivel a realizaçao de testes unitarios.
+ * <br/>
  * <br/>
  * <br/>
  * 
