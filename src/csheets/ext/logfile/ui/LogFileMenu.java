@@ -31,7 +31,7 @@ public class LogFileMenu extends JMenu {
 	 * @param uiController the user interface controller
 	 */
 	public LogFileMenu(UIController uiController) {
-		super("LogFile");
+		super("EventLog File");
 		setMnemonic(KeyEvent.VK_L);
 
 		// Adds font actions

@@ -224,7 +224,7 @@ public class SpreadsheetTable extends Grid implements SelectionListener {
 		super.changeSelection(row, column, toggle, extend);
 		if (!extend){
 			uiController.setActiveCell(getSelectedCell());
-                        WriteLogFile.writeLogFile(getSelectedCell().getAddress(), "onClick", uiController.getEvl());
+                        uiController.writeLogFile(getSelectedCell().getAddress().toString(), "onClick");
                 }
 	}
 
