@@ -24,12 +24,12 @@ public class WindowListWorkbooksFiles extends JFrame {
     
     /**
      * Creates a window to show the workbooks files in a table style window.
-     * @param listingF, ArrayList<File> that receives the workbooks files founded
+     * @param listingF ArrayList<File> that receives the workbooks files founded
      */
     public WindowListWorkbooksFiles(List<File> listingF)
     {        
         setTitle("Listing Workbooks files found in the directory");
-        setSize(500,200);
+        setSize(600,200);
         DefaultTableModel dtm = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int rowIndex, int mColIndex) {  
@@ -45,12 +45,12 @@ public class WindowListWorkbooksFiles extends JFrame {
         dtm.addColumn("Name");
         dtm.addColumn("Path");
         jTable.getColumnModel().getColumn(0).setPreferredWidth(15);
-        jTable.getColumnModel().getColumn(1).setPreferredWidth(250);
+        jTable.getColumnModel().getColumn(1).setPreferredWidth(400);
         for (int i = 0; i < listingF.size(); i++)
         {
             dtm.insertRow(i, new Object[] {listingF.get(i).getName(),listingF.get(i).getAbsolutePath()});
         }
-        getContentPane().add(new JScrollPane(jTable));        
+        getContentPane().add(new JScrollPane(jTable));
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
