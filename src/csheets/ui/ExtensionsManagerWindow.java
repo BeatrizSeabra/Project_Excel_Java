@@ -12,11 +12,8 @@ import csheets.ui.ctrl.UIController;
 import csheets.ui.ext.UIExtension;
 import java.awt.Checkbox;
 import java.awt.GridLayout;
-import java.awt.event.ComponentListener;
-import java.awt.event.ContainerListener;
 import java.awt.event.KeyEvent;
 import java.lang.reflect.Array;
-import javax.swing.ActionMap;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -123,13 +120,15 @@ public class ExtensionsManagerWindow extends JFrame {
 
     private void applyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyButtonActionPerformed
 
-        /*for(int i=0; i<jPanel1.getComponentCount(); i++){
+        for(int i=0; i<jPanel1.getComponentCount(); i++){
             for(UIExtension ex : extensions){
-                if(jPanel1.getComponent(i).getFocusTraversalKeysEnabled()==true && ex.getMenu().getName().equalsIgnoreCase(jPanel1.getComponent(i).getName())){
+                if(ex.getMenu()!=null){
+                    if(jPanel1.getComponent(i).isCursorSet()==true && ex.getMenu().getName().equalsIgnoreCase(jPanel1.getComponent(i).getName())){
                     jPanel1.getComponent(i).setEnabled(!ex.getMenu().isEnabled());
+                    }
                 }
             }            
-        }*/
+        }
         this.dispose();
     }//GEN-LAST:event_applyButtonActionPerformed
 
