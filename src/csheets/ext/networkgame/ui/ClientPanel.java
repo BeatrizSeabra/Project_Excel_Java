@@ -5,7 +5,14 @@
  */
 package csheets.ext.networkgame.ui;
 
-import csheets.ext.connection.Connection;
+import csheets.ext.connection.Server;
+import csheets.ext.networkgame.GameController;
+import csheets.ext.networkgame.NetworkGameController;
+import static csheets.ext.networkgame.NetworkGameController.mainWindow;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -13,11 +20,16 @@ import csheets.ext.connection.Connection;
  */
 public class ClientPanel extends javax.swing.JPanel {
 
+    Server s;
+    String PlayerName;
+
     /**
      * Creates new form ClientPanel
      */
-    public ClientPanel() {
+    public ClientPanel(Server s, String playerName) {
         initComponents();
+        this.s = s;
+        this.PlayerName = playerName;
     }
 
     /**
@@ -98,9 +110,14 @@ public class ClientPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_EnterKeyRelesed
 
     private void connect(String ipAddress) {
-        Connection c = new Connection(ipAddress, 7777);
-        c.sendData("Test".getBytes());
-
+        byte flag[] = ("CN" + PlayerName).getBytes();
+        try {
+            s.sendData(flag, ipAddress, 7777);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(NetworkGameController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        NetworkGameController.initJFrame("Connected, waiting response....");
+        NetworkGameController.packJFrame();
     }
 
 

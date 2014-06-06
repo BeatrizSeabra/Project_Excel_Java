@@ -4,9 +4,15 @@
  */
 package csheets.core.formula.lang;
 
+import csheets.core.Address;
+import csheets.core.Cell;
+import csheets.core.Spreadsheet;
 import csheets.core.Value;
+import csheets.core.Workbook;
 import csheets.core.formula.Expression;
+import csheets.core.formula.Formula;
 import csheets.core.formula.FunctionParameter;
+import csheets.core.formula.Literal;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -39,23 +45,32 @@ public class EvalTest {
         String expResult = "EVAL";
         String result = instance.getIdentifier();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
     }
 
     /**
      * Test of applyTo method, of class Eval.
+     * @throws java.lang.Exception
      */
-    @Test
-    public void testApplyTo() throws Exception {
-        System.out.println("applyTo");
-        Expression[] arguments = null;
-        Eval instance = new Eval();
-        Value expResult = null;
-        Value result = instance.applyTo(arguments);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       public void testApplyTo() throws Exception {
+       System.out.println("applyTo");
+
+       // Fetches a cell
+       Workbook workbook = new Workbook(1);
+       Spreadsheet sheet = workbook.getSpreadsheet(0);
+       Cell cell = sheet.getCell(new Address(0, 0));
+       String txt = "2+3"; 
+       Expression expTest = new Formula(cell, new Literal(new Value(txt)));
+       Expression[] expArr = new Expression[1];
+       expArr[0] = expTest;
+       Eval instance = new Eval();
+
+       Value expResult = new Value(5);
+       Value result = instance.applyTo(expArr);
+       System.out.println("result: "+ result.toString());
+       System.out.println("expResult: "+ expResult.toString());
+       assertEquals(expResult.toString(), result.toString());
+
     }
 
     /**
@@ -68,8 +83,7 @@ public class EvalTest {
         FunctionParameter[] expResult = null;
         FunctionParameter[] result = instance.getParameters();
         assertArrayEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
     }
 
     /**
@@ -82,7 +96,6 @@ public class EvalTest {
         boolean expResult = false;
         boolean result = instance.isVarArg();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 }
