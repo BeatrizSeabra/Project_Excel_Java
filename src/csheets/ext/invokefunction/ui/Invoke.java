@@ -227,8 +227,16 @@ public class Invoke extends javax.swing.JFrame {
     }
     
     private Literal[] argumentos(String sintaxe,Function funcao){
-        String[] args=sintaxe.split(";");
-        Literal[] argumentos=new Literal[args.length];
+        Literal[] argumentos;
+        String[] args;
+        if(sintaxe.isEmpty()){
+            args=new String[0];
+        }
+        else{
+            args=sintaxe.split(";");
+        }
+        argumentos=new Literal[args.length];
+        
         FunctionParameter[] parameters = funcao.getParameters();
         int k=1;
         if(funcao.isVarArg()){
@@ -239,18 +247,26 @@ public class Invoke extends javax.swing.JFrame {
                 Value v;
                 switch(parameters[i*k].getValueType()){
                     case NUMERIC:
-                        v=new Value(Double.valueOf(args[i]));
+                        v=new Value((Number)Double.valueOf(args[i]));
                         break;
                     case BOOLEAN:
-                        if(args[i].toUpperCase()=="TRUE"){
-                            v=new Value(true);
-                        }else{
+                        if(args[i].toUpperCase().equalsIgnoreCase("FALSE")){
                             v=new Value(false);
+                        }else{
+                            v=new Value(true);
                         }
                         break;
                     case DATE:
                         Date date = new SimpleDateFormat("d/M/yy", Locale.ROOT).parse(args[i]);
                         v=new Value(date);
+                        break;
+                    case UNDEFINED:
+                        try{
+                            v=new Value((Number)Double.valueOf(args[i]));
+                        }
+                        catch(Exception ex){
+                            v=new Value(args[i]);
+                        }
                         break;
                     default:
                         v=new Value(args[i]);
@@ -263,15 +279,18 @@ public class Invoke extends javax.swing.JFrame {
     }
     
     private void chooseFunction(String sintaxe, String funcao){
-        String s=sintaxe.substring(sintaxe.indexOf("("),sintaxe.indexOf(")"));
+        String s=sintaxe.substring(sintaxe.indexOf("(")+1,sintaxe.indexOf(")"));
         try{
             Function f=(Function) Class.forName("csheets.core.formula.lang."+funcao).newInstance();
             Literal[] args = argumentos(s,f);
             FunctionCall fCall = new FunctionCall(f,args);
+            JOptionPane.showMessageDialog(rootPane, fCall.evaluate().toString());
             this.uiController.getActiveSpreadsheet().getCell(0, 0).setContent(fCall.evaluate().toString());
         }
         catch(Exception ex){
+            ex.printStackTrace();
             int result=JOptionPane.showConfirmDialog(null, "Invalid Parameters. Do you want to correct them?");
+            
             if (result==JOptionPane.NO_OPTION) {
                 dispose();
             }
