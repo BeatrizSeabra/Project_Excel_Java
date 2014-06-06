@@ -55,8 +55,8 @@
  * Para verificar a atribuição necessita:<br/>
  * 1- colocar a correr o cleansheets;<br/>
  * 2- colocar numa celula =;<br/>
- * 3- the previous option is a check box that: when checked, the sidebar should appear; when not checked, the sidebar should disappear;<br/>
- * 4- the sidebar window should have only one editbox. <br/>
+ * 3- Colocar de seguida a celula "a2" ou "c7" com a atribuiçao e o numero exemplo: a4:=7;<br/>
+ * 4- pode colocar a4:=g4:=5, ou colocar a5:=4<6, aparecendo true ou false. <br/>
  * <br/>
  * <br/>
  * 
