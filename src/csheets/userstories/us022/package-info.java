@@ -33,7 +33,21 @@
  * <a href="../../../csheets/ext/searchandreplace/package-summary.html">csheets.ext.searchandreplace</a><br/>
  * <br/>
  * <br/>
+ *
+ * <b>S022u: Unit Tests</b><br/>
+ * see:<br/>
+ * <a href="../../../src-tests/csheets/ext/searchandreplace/package-summary.html">src-tests.csheets.ext.searchandreplace</a><br/>
+ * <br/>
+ * <br/>
  * 
+ * <b>S022f: Functional Tests</b><br/>
+ * Para testar esta User Story e' necessario seguir os seguintes passos:<br/>
+ * 1Correr o cleansheets;<br/>
+ * 2Clicar no menu Edit e selecionar Search And Replace;<br/>
+ * 3Escrever o texto ou expressao regular que pretende encontrar e clicar no botao Search;<br/>
+ * 4A primeira celula com o texto encontrado sera selecionada. <br/>
+ * <br/>
+ * <br/> 
  * @author Diogo Moreira (1120339)
  */
 /*
