@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package csheets.PersistenceJPA;
 
 import csheets.ext.contacts.Residence;
@@ -17,7 +16,7 @@ import javax.persistence.Query;
  * @author Nuno
  */
 public class ResidenceRepository {
-    
+
 //    private static ResidenceRepository instance;
 //    
 //    private ResidenceRepository() {}
@@ -28,18 +27,16 @@ public class ResidenceRepository {
 //        }
 //        return instance;
 //    }
-    
     public void insert(Residence residence) {
 
         EntityManager entityManager = csheets.PersistenceJPA.Persistence.getInstance().connection("JPA2PU");
         entityManager.persist(residence);
         entityManager.getTransaction().commit();
-        csheets.PersistenceJPA.Persistence.getInstance().close(); 
-        
+        csheets.PersistenceJPA.Persistence.getInstance().close();
+
     }
-    
-    public List<Residence> getAll()
-    {
+
+    public List<Residence> getAll() {
         EntityManager entityManager = csheets.PersistenceJPA.Persistence.getInstance().connection("JPA2PU");
         Query query = entityManager.createQuery("SELECT e FROM Residence e");
         List<Residence> listResidence = new ArrayList<>();
@@ -48,5 +45,12 @@ public class ResidenceRepository {
 
         return listResidence;
 
+    }
+
+    public void edit(Residence residence) {
+        EntityManager entityManager = csheets.PersistenceJPA.Persistence.getInstance().connection("JPA2PU");
+        entityManager.merge(residence);
+        entityManager.getTransaction().commit();
+        csheets.PersistenceJPA.Persistence.getInstance().close();
     }
 }

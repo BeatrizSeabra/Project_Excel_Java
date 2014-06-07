@@ -5,6 +5,7 @@
  */
 package csheets.ext.residence.ui;
 
+import static com.sun.glass.ui.Cursor.setVisible;
 import csheets.PersistenceJPA.ResidenceRepository;
 import csheets.ext.contacts.Residence;
 import java.awt.BorderLayout;
@@ -16,7 +17,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -24,7 +24,7 @@ import javax.swing.JTextField;
  *
  * @author Nuno
  */
-public class InsertResidenceUI extends JFrame {
+public class EditResidenceUI extends JFrame {
 
     JTextField street;
     JTextField locality;
@@ -35,21 +35,30 @@ public class InsertResidenceUI extends JFrame {
 
     JButton save;
     JButton cancel;
+    
+    int id_residence;
 
-    public InsertResidenceUI() {
-        super("Insert Residence");
+    public EditResidenceUI(Residence residence) {
+
+        super("Edit Residence");
+
+        id_residence = residence.getId_residence();
         Container c = getContentPane();
         c.setLayout(new BorderLayout());
 
         JPanel p1 = new JPanel(new GridLayout(5, 2, 2, 0));
         JPanel postal_code = new JPanel(new FlowLayout());
 
-        street = new JTextField("", 12);
-        locality = new JTextField("", 12);
-        postal = new JTextField("", 4);
-        code = new JTextField("", 3);
-        city = new JTextField("", 12);
-        country = new JTextField("", 12);
+        String spostal_code = Integer.toString(residence.getPostal_code());
+        String scode = spostal_code.substring(4);
+        String spostal = spostal_code.substring(0, 4);
+
+        street = new JTextField(residence.getStreet(), 12);
+        locality = new JTextField(residence.getLocality(), 12);
+        postal = new JTextField(spostal, 4);
+        code = new JTextField(scode, 3);
+        city = new JTextField(residence.getCity(), 12);
+        country = new JTextField(residence.getCountry(), 12);
 
         postal_code.add(postal);
         postal_code.add(new JLabel(" - "));
@@ -93,16 +102,17 @@ public class InsertResidenceUI extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (save == e.getSource()) {
-                save();
-
+                edit();
+                dispose();
+                
             } else if (cancel == e.getSource()) {
-                InsertResidenceUI.this.dispose();
+                dispose();
             }
         }
     }
 
-    public void save() {
-        
+    public void edit() {
+
         String stree = street.getText();
         String local = locality.getText();
         int post = Integer.parseInt(postal.getText());
@@ -113,11 +123,14 @@ public class InsertResidenceUI extends JFrame {
         String cit = city.getText();
         String count = country.getText();
 
-        Residence residence = new Residence(0, stree, local, post_cod, cit, count);
+        Residence residence = new Residence(id_residence, stree, local, post_cod, cit, count);
 
         ResidenceRepository resRep = new ResidenceRepository();
-        resRep.insert(residence);
+        resRep.edit(residence);
 
-        JOptionPane.showMessageDialog(rootPane, "A new residence incert");
+        ConsultResidenceUI.getInstance().insertListResidences();
+        ConsultResidenceUI.getInstance().fill();
+        
     }
+
 }
