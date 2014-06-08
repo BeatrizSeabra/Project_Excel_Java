@@ -19,6 +19,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -151,11 +152,10 @@ public final class ConsultResidenceUI extends JFrame {
             {
                 Residence residence = new Residence(listResidence.get(index));
                 EditResidenceUI editResidenceUI = new EditResidenceUI(residence);
-
             }
             else if(delete == e.getSource())
             {
-                
+                delete();
             }
         }
     }
@@ -228,4 +228,21 @@ public final class ConsultResidenceUI extends JFrame {
         return index;
     }
     
+    public void delete() {
+            JFrame fDelete = new JFrame();
+
+            int option = JOptionPane.showConfirmDialog(fDelete, "Delete Residence?", "Residences",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE) ; 
+
+            if(option == JOptionPane.YES_OPTION)
+            {
+                Residence residence = new Residence(listResidence.get(index));
+                ResidenceRepository resRepo = new ResidenceRepository();
+                resRepo.delete(residence);
+
+                insertListResidences();
+                fill();
+            }
+    }
 }
