@@ -14,6 +14,10 @@
  * <br/>
  * 
  * <b>S077d: Design</b><br/>
+ * Para realizar esta user story, temos de criar a classe JDialogSearch, para o Utilizador inserir o padrao e para mostrar os resultados,
+ * e a classe Search para realizar a pesquisa dos ficheiros e uma classe qque representara a Thread. O diagrama seguinte
+ * mostra como integrar estas classes... <br/><br/>
+ * <img src="../../../csheets/userstories/us077/doc-files/US077_design.png"> 
  * <br/>
  * <br/>
  * 
@@ -35,7 +39,17 @@
  */
  /*
  *
-
+ @startuml doc-files/US077_design.png
+ User -> UIController: searchFiles()
+ UIController -> SearchAction: actionListener()
+ SearchAction -> Thread : search()
+ SearchAction <- Thread
+ SearchAction -> SearchFiles: create()
+ SearchFiles -> JDialogSearch: create()
+ SearchFiles <- JDialogSearch: pattern
+ SearchFiles -> SearchFiles : search()
+ SearchFiles -> JDialogSearch: results
+ @enduml
  *
  */
 
