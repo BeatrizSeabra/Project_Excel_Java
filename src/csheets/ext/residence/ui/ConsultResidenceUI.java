@@ -19,6 +19,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -36,6 +37,8 @@ public final class ConsultResidenceUI extends JFrame {
     
     JButton next;
     JButton preview;
+    JButton edit;
+    JButton delete;
     JButton home;
     JButton end;
     
@@ -43,7 +46,16 @@ public final class ConsultResidenceUI extends JFrame {
     
     int index = 0;
     
-    public ConsultResidenceUI()
+    private static ConsultResidenceUI instance;
+    
+    public static synchronized ConsultResidenceUI getInstance() {
+        if (instance == null) {
+            instance = new ConsultResidenceUI();
+        }
+        return instance;
+    }
+    
+    private ConsultResidenceUI()
     {
         super("Consult Residence");
         Container c = getContentPane();
@@ -71,7 +83,7 @@ public final class ConsultResidenceUI extends JFrame {
         JPanel p2 = new JPanel(new FlowLayout());
         preview = new JButton("Preview");
         preview.addActionListener(new BotaoListener());
-        
+
         next = new JButton("Next");
         next.addActionListener(new BotaoListener());
         
@@ -81,13 +93,27 @@ public final class ConsultResidenceUI extends JFrame {
         end = new JButton("End");
         end.addActionListener(new BotaoListener());
         
+        edit = new JButton("Edit");
+        edit.addActionListener(new BotaoListener());
+        
+        delete = new JButton("Delete");
+        delete.addActionListener(new BotaoListener());
+        
         p2.add(home);
         p2.add(preview);
         p2.add(next);
         p2.add(end);
         
+        JPanel pSouth = new JPanel(new GridLayout(2,1,2,2));
+        JPanel p3 = new JPanel();
+        p3.add(edit);
+        p3.add(delete);
+        
+        pSouth.add(p2);
+        pSouth.add(p3);
+        
         c.add(p1, BorderLayout.CENTER);
-        c.add(p2, BorderLayout.SOUTH);
+        c.add(pSouth, BorderLayout.SOUTH);
         c.add(new JPanel(), BorderLayout.NORTH);
         c.add(new JPanel(), BorderLayout.WEST);
         c.add(new JPanel(), BorderLayout.EAST);
@@ -121,6 +147,15 @@ public final class ConsultResidenceUI extends JFrame {
             else if(end == e.getSource())
             {
                 end();
+            }
+            else if(edit == e.getSource())
+            {
+                Residence residence = new Residence(listResidence.get(index));
+                EditResidenceUI editResidenceUI = new EditResidenceUI(residence);
+            }
+            else if(delete == e.getSource())
+            {
+                delete();
             }
         }
     }
@@ -183,5 +218,31 @@ public final class ConsultResidenceUI extends JFrame {
         index = listResidence.size() - 1;
         
         fill();
+    }
+    
+    public void setResidence(int i, Residence residence) {
+        listResidence.set(i, residence);
+    }
+    
+    public int getIndex() {
+        return index;
+    }
+    
+    public void delete() {
+            JFrame fDelete = new JFrame();
+
+            int option = JOptionPane.showConfirmDialog(fDelete, "Delete Residence?", "Residences",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE) ; 
+
+            if(option == JOptionPane.YES_OPTION)
+            {
+                Residence residence = new Residence(listResidence.get(index));
+                ResidenceRepository resRepo = new ResidenceRepository();
+                resRepo.delete(residence);
+
+                insertListResidences();
+                fill();
+            }
     }
 }

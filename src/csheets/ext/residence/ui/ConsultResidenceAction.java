@@ -39,7 +39,7 @@ public class ConsultResidenceAction extends BaseAction {
 	 * @param event the event that was fired
 	 */
 	public void actionPerformed(ActionEvent event) {
-            ConsultResidenceUI residenceUI = new ConsultResidenceUI();
+            ConsultResidenceUI residenceUI = ConsultResidenceUI.getInstance();
             
 	}
 }

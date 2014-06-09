@@ -36,6 +36,15 @@ public class Residence implements java.io.Serializable {
         this.city = city;
         this.country = country;
     }
+    
+    public Residence(Residence residence) {
+        this.id_residence = residence.getId_residence();
+        this.street = residence.getStreet();
+        this.locality = residence.getLocality();
+        this.postal_code = residence.getPostal_code();
+        this.city = residence.getCity();
+        this.country = residence.getCountry();
+    }
 
     /**
      * @return the id_residence
