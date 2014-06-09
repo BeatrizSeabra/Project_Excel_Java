@@ -40,6 +40,6 @@ public class ConsultResidenceAction extends BaseAction {
 	 */
 	public void actionPerformed(ActionEvent event) {
             ConsultResidenceUI residenceUI = ConsultResidenceUI.getInstance();
-            
+            ConsultResidenceUI.getInstance().setVisible(true);
 	}
 }
