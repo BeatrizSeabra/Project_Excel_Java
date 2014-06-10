@@ -1,8 +1,5 @@
-package csheets.ext.importfiles.ui;
+package csheets.ext.residenceimport.ui;
 
-import csheets.ext.importfiles.ui.ImportAction;
-import csheets.ext.residenceimport.ui.ResidenceImportAction;
-import csheets.ui.FileChooser;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JMenu;
@@ -11,9 +8,9 @@ import csheets.ui.ctrl.UIController;
 
 /**
  * Representes the UI extension menu of the simple extension.
- * @author Tiago
+ * @author Alexandre Braganca
  */
-public class ImportMenu extends JMenu {
+public class ResidenceImportMenu extends JMenu {
 
 	/**
 	 * Creates a new simple menu.
@@ -22,13 +19,10 @@ public class ImportMenu extends JMenu {
 	 * A menu option is an action (in this case {@link csheets.ext.simple.ui.ExampleAction})
 	 * @param uiController the user interface controller
 	 */
-	public ImportMenu(UIController uiController, FileChooser chooser) {
-            super("Import");
-            setMnemonic(KeyEvent.VK_I);
-
+	public ResidenceImportMenu(UIController uiController) {
+            super("Residence");
+	    setMnemonic(KeyEvent.VK_E);
             // Adds font actions
-            add(new ImportAction(uiController,chooser));
             add(new ResidenceImportAction(uiController));                
-	}	
+        }
 }
-
