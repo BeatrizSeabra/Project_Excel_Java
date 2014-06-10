@@ -17,6 +17,10 @@
  * <br/>
  * 
  * <b>S076d: Design</b><br/>
+ * Para realizar esta user story, temos de criar a classe JDialogMacro, para o Utilizador inserir o macro e para mostrar os resultados,
+ * e a classe runMacro para que a macro introduzida pelo utilizador seja executada. O diagrama seguinte
+ * mostra como integrar estas classes... <br/><br/>
+ * <img src="../../../csheets/userstories/us043/doc-files/US043_design.png">
  * <br/>
  * <br/>
  * 
@@ -33,6 +37,19 @@
  * <br/>
  * 
  * @author 1120564MarcoEsteves
+ */
+/*
+ *
+ @startuml doc-files/US043_design.png
+ User -> UIController: runMacro()
+ UIController -> RunMacroAction: actionListener()
+ RunMacroAction -> RunMacro: create()
+ RunMacro -> JDialogMacro: create()
+ RunMacro <- JDialogMacro: macro
+ RunMacro -> RunMacro : ExecuteMacro()
+ RunMacro -> JDialogMacro: results
+ @enduml
+ *
  */
 
 
