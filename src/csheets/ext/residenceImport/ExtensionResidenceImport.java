@@ -41,4 +41,3 @@ public class ExtensionResidenceImport extends Extension {
             return new UIExtensionResidenceImport(this, uiController);
 	}
 }
-

@@ -7,19 +7,20 @@
 package csheets.ext.residenceexport;
 
 import csheets.ext.Extension;
-import csheets.ext.residenceexport.ui.UIExtensionResidenceExport;
+import csheets.ext.residenceimport.ui.UIExtensionResidenceImport;
 import csheets.ui.ctrl.UIController;
 import csheets.ui.ext.UIExtension;
 
-import csheets.ext.Extension;
-
 /**
- *
- * @author 1090675 - Tiago Pereira
+ * A simple extension just to show how the extension mechanism works.
+ * An extension must extend the Extension abstract class.
+ * The class that implements the Extension is the "bootstrap" of the extension.
+ * @see Extension
+ * @author Alexandre Braganca
  */
 public class ExtensionResidenceExport extends Extension {
-    
-    /** The name of the extension */
+
+	/** The name of the extension */
 	public static final String NAME = "Residence";
 
 	/**
@@ -37,6 +38,6 @@ public class ExtensionResidenceExport extends Extension {
 	 */
         @Override
 	public UIExtension getUIExtension(UIController uiController) {
-            return new UIExtensionResidenceExport(this, uiController);
+            return new UIExtensionResidenceImport(this, uiController);
 	}
 }
