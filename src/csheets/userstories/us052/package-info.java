@@ -23,7 +23,11 @@ visuais suportados são: botao, edit box e text box. Na janela de edição de fo
 * <br/>
 * 
 * <b>S052d: Design</b><br/>
-* 
+* Para realizar este User Story será necessário criar elementos de Interface Gráfica, subclasse da UIExtension.
+* Classe da Extensão FormEdit subclasse da Extension.
+* Serão necessárias várias janelas de interface com o utilizador.
+* As classes serão implementadas de forma que a instáncia de um formulário criado/editado fiquei gravada na memória.
+* <img src="../../../csheets/userstories/us052/doc-files/us052_design1.png"> 
 * <br/>
 * <br/>
 * 
