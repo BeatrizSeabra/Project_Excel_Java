@@ -43,7 +43,14 @@
 /*
 *
  @startuml doc-files/us016_design1.png
-
+UIController -> EmailExtension : getUIExtension(this);
+EmailExtension -> UIExtensionEmail : new();
+UIExtensionEmail -> EmailMenu : getMenu();
+EmailMenu -> EmailAction : new EmailAction();
+EmailAction -> EmailConfiguration : showDialog();
+EmailConfiguration -> EmailAccount : new EmailAccount();
+EmailAccount -> EmailConfiguration : EmailAccount data;
+EmailConfiguration -> EmailConfiguration : send();
  @enduml
 *
 */
