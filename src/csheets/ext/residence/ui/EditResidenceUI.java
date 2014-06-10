@@ -5,7 +5,6 @@
  */
 package csheets.ext.residence.ui;
 
-import static com.sun.glass.ui.Cursor.setVisible;
 import csheets.PersistenceJPA.ResidenceRepository;
 import csheets.ext.contacts.Residence;
 import java.awt.BorderLayout;
