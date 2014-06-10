@@ -10,9 +10,9 @@
  * <br/>
  *  
  * <b>S056a: Analysis</b><br/>
- * Since there are two types of events that are already defined, we need now to add this type that consists when we write a formula on the cell.
- * I will take the interface that already exists to ask about previous events and will add the new event named Formulas.
- * When is writen some formula on some cell, it will write on EventLogFile that register at what hour it occurred and what formula was introduced.
+ * Since there are two types of events that are already defined, the user can atribute a formula that event.
+ * So if the cell event has a formula assigned to it, everytime that event occurs, the formula is executed.
+ * For everytime that a formula is executed, it will write on log file when the event occurs.
  * <br/>
  * <br/>
  * 
