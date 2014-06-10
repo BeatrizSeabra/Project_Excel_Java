@@ -17,7 +17,6 @@
  * <br/>
  *
  *
- *
  * <br/>
  * <br/>
  *
@@ -40,13 +39,14 @@
  *
  *
  *
+ * @startuml doc-files/us046_design1.png menuBar -> ButtonSheet : create();
+ * buttonSheet -> StyleToolbar : add(); buttonSheet -> SpreadSheetTable:
+ * getselectedcells(); buttonSheet -> Workbook: show();
+ * @enduml
  *
  *
+ * /
  *
- * /*
- *
- */
-/**
  * @author 1110316
  *
  */
