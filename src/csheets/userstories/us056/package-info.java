@@ -17,7 +17,10 @@
  * <br/>
  * 
  * <b>S056d: Design</b><br/>
- *
+ * The user will introduce a text in a cell. If the text starts by "=" and contains EVSET it will assign a event cell that is on the parameters to the formula that comes afer the event cell.
+ * That expression will originate a functionCall and there will have a method that will associate the event cell to the formula. 
+ * Then will have a method that will verify if the cell event have any formula assign and if there is will write on the cell the content relative to the formula.
+ * Then if setContent() happens, it will write too on the EventLogFile.
  * <br/>
  * <br/>
  * 
