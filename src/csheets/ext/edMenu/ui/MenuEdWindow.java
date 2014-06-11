@@ -1,7 +1,12 @@
 package csheets.ext.edMenu.ui;
 
+import csheets.core.formula.compiler.FormulaCompilationException;
 import csheets.ui.ctrl.UIController;
 import csheets.ui.ext.UIExtension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -10,14 +15,15 @@ import javax.swing.JOptionPane;
  *
  * @author Pedro
  */
-public class MenuEdWindow extends javax.swing.JFrame{
+public class MenuEdWindow extends javax.swing.JFrame {
 
     UIController uiController;
+
     /**
      * Creates new form MenuEdWindow
      */
     public MenuEdWindow(UIController uic) {
-        uiController=uic;
+        uiController = uic;
         initComponents();
     }
 
@@ -35,6 +41,9 @@ public class MenuEdWindow extends javax.swing.JFrame{
         jButton2 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
+        jLabel2 = new javax.swing.JLabel();
+        checkbox1 = new java.awt.Checkbox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -60,6 +69,22 @@ public class MenuEdWindow extends javax.swing.JFrame{
 
         jLabel1.setText("Choose the new Menu Option name:");
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "A1=1", "B1+1", "C1*2", "D1=\"TESTE\"" }));
+        jComboBox1.setEnabled(false);
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Bind menu to a macro");
+
+        checkbox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                checkbox1ItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -76,10 +101,15 @@ public class MenuEdWindow extends javax.swing.JFrame{
                 .addGap(50, 50, 50))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(56, 56, 56))
+                    .addComponent(jTextField1)
+                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(checkbox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(39, 39, 39))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -89,12 +119,18 @@ public class MenuEdWindow extends javax.swing.JFrame{
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
+                    .addComponent(checkbox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -102,21 +138,73 @@ public class MenuEdWindow extends javax.swing.JFrame{
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if(!jTextField1.getText().equals("")){
-        UIExtension ListExt[] = uiController.getExtensions();
-       for (UIExtension choosen : ListExt) {
-            if (choosen instanceof EdMenuUIExtension) {
-               JMenuItem i= new JMenuItem(jTextField1.getText());
-               i.setEnabled(false);
-               choosen.getMenu().add(i);
+        if (!jTextField1.getText().equals("")) {
+            UIExtension ListExt[] = uiController.getExtensions();
+            for (UIExtension choosen : ListExt) {
+                if (choosen instanceof EdMenuUIExtension) {
+                    JMenuItem i = new JMenuItem(jTextField1.getText());
+                    if (checkbox1.getState() == true) {
+
+                        i.setEnabled(true);
+                        ActionListener a = new ActionListener() {
+
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+
+                                try {
+//                               Macro m = jComboBox1.getSelectedItem();
+//                               Macros.execMacro(m);    Esta parte do código só pode ser implementada quando a US44 for implementada.
+                                    //                              até lá vamos usar os exemplos abaixo
+
+                                    switch (jComboBox1.getSelectedIndex()) {
+                                        case 0:
+                                            uiController.getActiveSpreadsheet().getCell(0, 0).setContent("1"); //Esta macro de exemplo muda o conteudo da celula A1 para 1
+                                            break;
+                                        case 1:
+                                            if (uiController.getActiveSpreadsheet().getCell(1, 0).getContent().equals("")) {
+                                                uiController.getActiveSpreadsheet().getCell(1, 0).setContent("0");
+                                            }
+                                            int aux = Integer.parseInt(uiController.getActiveSpreadsheet().getCell(1, 0).getContent());
+                                            aux++;
+                                            String aux2 = "" + aux;
+                                            uiController.getActiveSpreadsheet().getCell(1, 0).setContent(aux2); // Esta macro de exemplo soma 1 à celula b1                                            
+                                            break;
+                                        case 2:
+                                            if (uiController.getActiveSpreadsheet().getCell(2, 0).getContent().equals("")) {
+                                                JOptionPane.showMessageDialog(rootPane, "ERROR! Cell C1 is empty!");
+                                            } else {
+                                                int aux3 = Integer.parseInt(uiController.getActiveSpreadsheet().getCell(2, 0).getContent());
+                                                aux3 = aux3 * 2;
+                                                String aux4 = "" + aux3;
+                                                uiController.getActiveSpreadsheet().getCell(2, 0).setContent(aux4); // Esta macro de exemplo multiplica a celula c1 por 2
+                                            }
+
+                                            break;
+                                        case 3:
+                                            uiController.getActiveSpreadsheet().getCell(3, 0).setContent("TESTE"); // Esta macro de exemplo muda o conteudo da celula d1 para TESTE
+                                    }
+                                    JOptionPane.showMessageDialog(rootPane, "Macro executed");
+
+                                } catch (Exception ex) {
+                                    //Para ja ignoramos a excepcao
+                                }
+
+                            }
+                        };
+                        i.addActionListener(a);
+                        choosen.getMenu().add(i);
+
+                    } else {
+                        i.setEnabled(false);
+                        choosen.getMenu().add(i);
+                    }
+                }
             }
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Error!! Please write a name to the extension!!");
         }
-       this.dispose();
-        }else
-        {
-          JOptionPane.showMessageDialog(this, "Error!! Please write a name to the extension!!");
-        }
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -127,6 +215,19 @@ public class MenuEdWindow extends javax.swing.JFrame{
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void checkbox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_checkbox1ItemStateChanged
+        if (checkbox1.getState() == true) {
+
+            jComboBox1.setEnabled(true);
+        } else {
+            jComboBox1.setEnabled(false);
+        }
+    }//GEN-LAST:event_checkbox1ItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -163,9 +264,12 @@ public class MenuEdWindow extends javax.swing.JFrame{
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private java.awt.Checkbox checkbox1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
