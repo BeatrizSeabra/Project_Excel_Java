@@ -55,8 +55,8 @@ public class Evset implements Function {
                 }
                 }
                 AtributeFormula a = new AtributeFormula(evento,formula);
-                UIController uiController = new UIController(a.cs);
-                uiController.events.add(a);
+                //UIController uiController = new UIController(a.cs);
+                //uiController.events.add(a);
                 return new Value(formula);
 
 	}

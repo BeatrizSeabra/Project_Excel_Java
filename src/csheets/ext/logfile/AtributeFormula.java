@@ -17,11 +17,11 @@ public class AtributeFormula {
     
     String evento,formula;
     public boolean activo=false;
-    public CleanSheets cs;
+    //public CleanSheets cs;
     
-    public AtributeFormula(CleanSheets cs){
+    /*public AtributeFormula(CleanSheets cs){
 		this.cs = cs;
-	}
+	}*/
     
     public AtributeFormula(String evento, String formula) {
         setEvento(evento);
