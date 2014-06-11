@@ -25,14 +25,14 @@ public class GameExample extends Game{
     
     public GameExample(String name, List<Player> players, Server s,InetAddress address) {
         super(name, players, s, address);
+        this.name = name;
+        this.players = players;
     }
     
     
     @Override
     public void init() {
         //set up some variables
-        this.name = name;
-        this.players = players;
         NetworkGameController.initJFrame("Example game");
         NetworkGameController.mainWindow.add(lbl);
         NetworkGameController.packJFrame();
