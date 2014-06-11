@@ -35,27 +35,27 @@
 *
 @startuml doc-files/us068_design1.png
 actor User
-participant FindWorkbooksFileAction as FWFA
+participant "AdvancedWorkbookSearchAction" as searchAction
 participant "<b>fc</b> : FileChooser" as FC
-participant "<b>findWF</b> : FindWorkbooksFiles" as FWF
-participant runThread as thread
-participant "ArrayList<File>" as AL
-participant "<b>windowLWF</b> : WindowListWorkbooksFiles" as WLWF
-  
-User -> FWFA : actionPerformed(ActionEvent event)
-FWFA -> FC : <b>fc</b> = new FileChooser()
-FWFA -> FC : <b>fc</b>.setFileSelectionMode(FileChooser.DIRECTORIES_ONLY)
-FWFA -> FC : <b>fc</b>.showDialog()
-...
-FWFA -> FWF : <b>findWF</b> = new FindWorkbooksFiles()
-FWFA -> FWF : <b>findWF</b>.findWorkbooksFiles(fc.getSelectedFile(), ".*\\.cls")
-FWF -> thread: run()
-...
-thread-> AL: <b>listingFiles</b> = new ArrayList<File>
+participant "AdvancedWorkbookSearch" as workbookSearch
+participant Thread as thread
+participant "JFrameWorkbookSearchResults" as window
 
-loop for File <b>fileDirectory</b> : sub
-   thread-> thread: <b>listingFiles</b>.add(<b>fileDirectory</b>)
-   thread-> WLWF : <b>windowLWF</b> = new WindowListWorkbooksFiles(listingF)
+  
+User -> searchAction: actionPerformed(ActionEvent event)
+searchAction-> FC : <b>fc</b> = new FileChooser()
+searchAction-> FC : <b>fc</b>.setFileSelectionMode(FileChooser.DIRECTORIES_ONLY)
+searchAction-> FC : <b>fc</b>.showDialog()
+...
+searchAction-> window: <b>workbookSearchResults</b> = new JFrameWorkbookSearchResults(null)
+searchAction-> workbookSearch: <b>advancedWorkbookSearch</b> = new AdvancedWorkbookSearch()
+searchAction-> workbookSearch: <b>advancedWorkbookSearch</b>.advancedWorkbookSearch(fc.getSelectedFile(), ".*\\.cls", workbookSearchResults)
+workbookSearch-> thread: <b>thread</b> = new Thread(new ParallelSearch(startingDirectory, pattern, workbookSearchResults))
+workbookSearch-> thread: <b>thread</b>.start()
+...
+
+loop for File <b>fileDirectory</b> : 
+   thread-> window: <b>windowLWF</b>.updateInformation(File file)
 end
 @enduml
 *
