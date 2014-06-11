@@ -44,8 +44,8 @@ public class EdMenuAction extends BaseAction {
     public void actionPerformed(ActionEvent e) {
        MenuEdWindow m = new MenuEdWindow(uiController);
        m.setVisible(true);
-       m.setSize(352, 200);
-       m.setResizable(true);
+//       m.setSize(352, 300);
+       m.setResizable(false);
        m.setLocationRelativeTo(null);   
        
     }
