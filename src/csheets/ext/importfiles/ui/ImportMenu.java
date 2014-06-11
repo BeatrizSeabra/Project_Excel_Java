@@ -1,6 +1,7 @@
 package csheets.ext.importfiles.ui;
 
 import csheets.ext.importfiles.ui.ImportAction;
+import csheets.ext.residenceimport.ui.ResidenceImportAction;
 import csheets.ui.FileChooser;
 import java.awt.event.KeyEvent;
 
@@ -22,11 +23,12 @@ public class ImportMenu extends JMenu {
 	 * @param uiController the user interface controller
 	 */
 	public ImportMenu(UIController uiController, FileChooser chooser) {
-		super("Import");
-		setMnemonic(KeyEvent.VK_I);
+            super("Import");
+            setMnemonic(KeyEvent.VK_I);
 
-		// Adds font actions
-		add(new ImportAction(uiController,chooser));
+            // Adds font actions
+            add(new ImportAction(uiController,chooser));
+            add(new ResidenceImportAction(uiController));                
 	}	
 }
 

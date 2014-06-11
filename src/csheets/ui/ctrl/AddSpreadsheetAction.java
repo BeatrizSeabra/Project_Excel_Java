@@ -61,5 +61,6 @@ public class AddSpreadsheetAction extends FocusOwnerAction {
 			return;
 		focusOwner.getSpreadsheet().getWorkbook().addSpreadsheet();
 		uiController.setWorkbookModified(focusOwner.getSpreadsheet().getWorkbook());
+                uiController.writeLogFileWB("sheetCreated");
 	}
 }

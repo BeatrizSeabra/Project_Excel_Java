@@ -1,4 +1,4 @@
-// $ANTLR 3.5.2 ../src/csheets/core/formula/compiler/Formula.g 2014-06-06 16:52:40
+// $ANTLR 3.5.2 ../src/csheets/core/formula/compiler/Formula.g 2014-06-11 16:47:20
 
 package csheets.core.formula.compiler;
 
@@ -16,8 +16,9 @@ public class FormulaParser extends Parser {
 	public static final String[] tokenNames = new String[] {
 		"<invalid>", "<EOR>", "<DOWN>", "<UP>", "ABS", "AMP", "ATT", "CELL_REF", 
 		"COLON", "COMMA", "DIGIT", "DIV", "EQ", "EXCL", "FUNCTION", "GT", "GTEQ", 
-		"LETTER", "LPAR", "LT", "LTEQ", "MINUS", "MULTI", "NEQ", "NUMBER", "PERCENT", 
-		"PLUS", "POWER", "QUOT", "RPAR", "SEMI", "STRING", "WS"
+		"LBRA", "LETTER", "LPAR", "LT", "LTEQ", "MINUS", "MULTI", "NEQ", "NUMBER", 
+		"PERCENT", "PLUS", "POWER", "QUOT", "RBRA", "RPAR", "SEMI", "STRING", 
+		"WS"
 	};
 	public static final int EOF=-1;
 	public static final int ABS=4;
@@ -33,22 +34,24 @@ public class FormulaParser extends Parser {
 	public static final int FUNCTION=14;
 	public static final int GT=15;
 	public static final int GTEQ=16;
-	public static final int LETTER=17;
-	public static final int LPAR=18;
-	public static final int LT=19;
-	public static final int LTEQ=20;
-	public static final int MINUS=21;
-	public static final int MULTI=22;
-	public static final int NEQ=23;
-	public static final int NUMBER=24;
-	public static final int PERCENT=25;
-	public static final int PLUS=26;
-	public static final int POWER=27;
-	public static final int QUOT=28;
-	public static final int RPAR=29;
-	public static final int SEMI=30;
-	public static final int STRING=31;
-	public static final int WS=32;
+	public static final int LBRA=17;
+	public static final int LETTER=18;
+	public static final int LPAR=19;
+	public static final int LT=20;
+	public static final int LTEQ=21;
+	public static final int MINUS=22;
+	public static final int MULTI=23;
+	public static final int NEQ=24;
+	public static final int NUMBER=25;
+	public static final int PERCENT=26;
+	public static final int PLUS=27;
+	public static final int POWER=28;
+	public static final int QUOT=29;
+	public static final int RBRA=30;
+	public static final int RPAR=31;
+	public static final int SEMI=32;
+	public static final int STRING=33;
+	public static final int WS=34;
 
 	// delegates
 	public Parser[] getDelegates() {
@@ -256,7 +259,7 @@ public class FormulaParser extends Parser {
 				if ( (LA2_1==ATT) ) {
 					alt2=1;
 				}
-				else if ( (LA2_1==EOF||LA2_1==AMP||LA2_1==COLON||(LA2_1 >= DIV && LA2_1 <= EQ)||(LA2_1 >= GT && LA2_1 <= GTEQ)||(LA2_1 >= LT && LA2_1 <= NEQ)||(LA2_1 >= PERCENT && LA2_1 <= POWER)) ) {
+				else if ( (LA2_1==EOF||LA2_1==AMP||LA2_1==COLON||(LA2_1 >= DIV && LA2_1 <= EQ)||(LA2_1 >= GT && LA2_1 <= GTEQ)||(LA2_1 >= LT && LA2_1 <= NEQ)||(LA2_1 >= PERCENT && LA2_1 <= POWER)||LA2_1==RBRA||LA2_1==SEMI) ) {
 					alt2=2;
 				}
 
@@ -1464,57 +1467,283 @@ public class FormulaParser extends Parser {
 	}
 	// $ANTLR end "literal"
 
+
+	public static class block_return extends ParserRuleReturnScope {
+		Object tree;
+		@Override
+		public Object getTree() { return tree; }
+	};
+
+
+	// $ANTLR start "block"
+	// ../src/csheets/core/formula/compiler/Formula.g:109:1: block : EQ ! LBRA ( attribution | comparison ) ( SEMI ( attribution | comparison ) )* RBRA EOF !;
+	public final FormulaParser.block_return block() throws RecognitionException {
+		FormulaParser.block_return retval = new FormulaParser.block_return();
+		retval.start = input.LT(1);
+
+		Object root_0 = null;
+
+		Token EQ51=null;
+		Token LBRA52=null;
+		Token SEMI55=null;
+		Token RBRA58=null;
+		Token EOF59=null;
+		ParserRuleReturnScope attribution53 =null;
+		ParserRuleReturnScope comparison54 =null;
+		ParserRuleReturnScope attribution56 =null;
+		ParserRuleReturnScope comparison57 =null;
+
+		Object EQ51_tree=null;
+		Object LBRA52_tree=null;
+		Object SEMI55_tree=null;
+		Object RBRA58_tree=null;
+		Object EOF59_tree=null;
+
+		try {
+			// ../src/csheets/core/formula/compiler/Formula.g:110:9: ( EQ ! LBRA ( attribution | comparison ) ( SEMI ( attribution | comparison ) )* RBRA EOF !)
+			// ../src/csheets/core/formula/compiler/Formula.g:110:17: EQ ! LBRA ( attribution | comparison ) ( SEMI ( attribution | comparison ) )* RBRA EOF !
+			{
+			root_0 = (Object)adaptor.nil();
+
+
+			EQ51=(Token)match(input,EQ,FOLLOW_EQ_in_block475); 
+			LBRA52=(Token)match(input,LBRA,FOLLOW_LBRA_in_block478); 
+			LBRA52_tree = (Object)adaptor.create(LBRA52);
+			adaptor.addChild(root_0, LBRA52_tree);
+
+			// ../src/csheets/core/formula/compiler/Formula.g:110:26: ( attribution | comparison )
+			int alt17=2;
+			int LA17_0 = input.LA(1);
+			if ( (LA17_0==CELL_REF) ) {
+				int LA17_1 = input.LA(2);
+				if ( (LA17_1==ATT) ) {
+					alt17=1;
+				}
+				else if ( (LA17_1==AMP||LA17_1==COLON||(LA17_1 >= DIV && LA17_1 <= EQ)||(LA17_1 >= GT && LA17_1 <= GTEQ)||(LA17_1 >= LT && LA17_1 <= NEQ)||(LA17_1 >= PERCENT && LA17_1 <= POWER)||LA17_1==RBRA||LA17_1==SEMI) ) {
+					alt17=2;
+				}
+
+				else {
+					int nvaeMark = input.mark();
+					try {
+						input.consume();
+						NoViableAltException nvae =
+							new NoViableAltException("", 17, 1, input);
+						throw nvae;
+					} finally {
+						input.rewind(nvaeMark);
+					}
+				}
+
+			}
+			else if ( (LA17_0==FUNCTION||LA17_0==LPAR||LA17_0==MINUS||LA17_0==NUMBER||LA17_0==STRING) ) {
+				alt17=2;
+			}
+
+			else {
+				NoViableAltException nvae =
+					new NoViableAltException("", 17, 0, input);
+				throw nvae;
+			}
+
+			switch (alt17) {
+				case 1 :
+					// ../src/csheets/core/formula/compiler/Formula.g:110:27: attribution
+					{
+					pushFollow(FOLLOW_attribution_in_block481);
+					attribution53=attribution();
+					state._fsp--;
+
+					adaptor.addChild(root_0, attribution53.getTree());
+
+					}
+					break;
+				case 2 :
+					// ../src/csheets/core/formula/compiler/Formula.g:110:41: comparison
+					{
+					pushFollow(FOLLOW_comparison_in_block485);
+					comparison54=comparison();
+					state._fsp--;
+
+					adaptor.addChild(root_0, comparison54.getTree());
+
+					}
+					break;
+
+			}
+
+			// ../src/csheets/core/formula/compiler/Formula.g:110:53: ( SEMI ( attribution | comparison ) )*
+			loop19:
+			while (true) {
+				int alt19=2;
+				int LA19_0 = input.LA(1);
+				if ( (LA19_0==SEMI) ) {
+					alt19=1;
+				}
+
+				switch (alt19) {
+				case 1 :
+					// ../src/csheets/core/formula/compiler/Formula.g:110:54: SEMI ( attribution | comparison )
+					{
+					SEMI55=(Token)match(input,SEMI,FOLLOW_SEMI_in_block489); 
+					SEMI55_tree = (Object)adaptor.create(SEMI55);
+					adaptor.addChild(root_0, SEMI55_tree);
+
+					// ../src/csheets/core/formula/compiler/Formula.g:110:59: ( attribution | comparison )
+					int alt18=2;
+					int LA18_0 = input.LA(1);
+					if ( (LA18_0==CELL_REF) ) {
+						int LA18_1 = input.LA(2);
+						if ( (LA18_1==ATT) ) {
+							alt18=1;
+						}
+						else if ( (LA18_1==AMP||LA18_1==COLON||(LA18_1 >= DIV && LA18_1 <= EQ)||(LA18_1 >= GT && LA18_1 <= GTEQ)||(LA18_1 >= LT && LA18_1 <= NEQ)||(LA18_1 >= PERCENT && LA18_1 <= POWER)||LA18_1==RBRA||LA18_1==SEMI) ) {
+							alt18=2;
+						}
+
+						else {
+							int nvaeMark = input.mark();
+							try {
+								input.consume();
+								NoViableAltException nvae =
+									new NoViableAltException("", 18, 1, input);
+								throw nvae;
+							} finally {
+								input.rewind(nvaeMark);
+							}
+						}
+
+					}
+					else if ( (LA18_0==FUNCTION||LA18_0==LPAR||LA18_0==MINUS||LA18_0==NUMBER||LA18_0==STRING) ) {
+						alt18=2;
+					}
+
+					else {
+						NoViableAltException nvae =
+							new NoViableAltException("", 18, 0, input);
+						throw nvae;
+					}
+
+					switch (alt18) {
+						case 1 :
+							// ../src/csheets/core/formula/compiler/Formula.g:110:60: attribution
+							{
+							pushFollow(FOLLOW_attribution_in_block492);
+							attribution56=attribution();
+							state._fsp--;
+
+							adaptor.addChild(root_0, attribution56.getTree());
+
+							}
+							break;
+						case 2 :
+							// ../src/csheets/core/formula/compiler/Formula.g:110:74: comparison
+							{
+							pushFollow(FOLLOW_comparison_in_block496);
+							comparison57=comparison();
+							state._fsp--;
+
+							adaptor.addChild(root_0, comparison57.getTree());
+
+							}
+							break;
+
+					}
+
+					}
+					break;
+
+				default :
+					break loop19;
+				}
+			}
+
+			RBRA58=(Token)match(input,RBRA,FOLLOW_RBRA_in_block501); 
+			RBRA58_tree = (Object)adaptor.create(RBRA58);
+			adaptor.addChild(root_0, RBRA58_tree);
+
+			EOF59=(Token)match(input,EOF,FOLLOW_EOF_in_block503); 
+			}
+
+			retval.stop = input.LT(-1);
+
+			retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+			adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
+
+		}
+
+			catch (RecognitionException e) {
+				reportError(e);
+				throw e; 
+			}
+
+		finally {
+			// do for sure before leaving
+		}
+		return retval;
+	}
+	// $ANTLR end "block"
+
 	// Delegated rules
 
 
 
-	public static final BitSet FOLLOW_EQ_in_expression80 = new BitSet(new long[]{0x0000000081244080L});
+	public static final BitSet FOLLOW_EQ_in_expression80 = new BitSet(new long[]{0x0000000202484080L});
 	public static final BitSet FOLLOW_attribution_in_expression84 = new BitSet(new long[]{0x0000000000000000L});
 	public static final BitSet FOLLOW_comparison_in_expression88 = new BitSet(new long[]{0x0000000000000000L});
 	public static final BitSet FOLLOW_EOF_in_expression91 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_CELL_REF_in_attribution117 = new BitSet(new long[]{0x0000000000000040L});
-	public static final BitSet FOLLOW_ATT_in_attribution119 = new BitSet(new long[]{0x0000000081244080L});
+	public static final BitSet FOLLOW_ATT_in_attribution119 = new BitSet(new long[]{0x0000000202484080L});
 	public static final BitSet FOLLOW_attribution_in_attribution123 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_comparison_in_attribution127 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_concatenation_in_comparison146 = new BitSet(new long[]{0x0000000000999002L});
-	public static final BitSet FOLLOW_EQ_in_comparison154 = new BitSet(new long[]{0x0000000081244080L});
-	public static final BitSet FOLLOW_NEQ_in_comparison159 = new BitSet(new long[]{0x0000000081244080L});
-	public static final BitSet FOLLOW_GT_in_comparison164 = new BitSet(new long[]{0x0000000081244080L});
-	public static final BitSet FOLLOW_LT_in_comparison169 = new BitSet(new long[]{0x0000000081244080L});
-	public static final BitSet FOLLOW_LTEQ_in_comparison174 = new BitSet(new long[]{0x0000000081244080L});
-	public static final BitSet FOLLOW_GTEQ_in_comparison179 = new BitSet(new long[]{0x0000000081244080L});
+	public static final BitSet FOLLOW_concatenation_in_comparison146 = new BitSet(new long[]{0x0000000001319002L});
+	public static final BitSet FOLLOW_EQ_in_comparison154 = new BitSet(new long[]{0x0000000202484080L});
+	public static final BitSet FOLLOW_NEQ_in_comparison159 = new BitSet(new long[]{0x0000000202484080L});
+	public static final BitSet FOLLOW_GT_in_comparison164 = new BitSet(new long[]{0x0000000202484080L});
+	public static final BitSet FOLLOW_LT_in_comparison169 = new BitSet(new long[]{0x0000000202484080L});
+	public static final BitSet FOLLOW_LTEQ_in_comparison174 = new BitSet(new long[]{0x0000000202484080L});
+	public static final BitSet FOLLOW_GTEQ_in_comparison179 = new BitSet(new long[]{0x0000000202484080L});
 	public static final BitSet FOLLOW_concatenation_in_comparison184 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_arithmetic_lowest_in_concatenation198 = new BitSet(new long[]{0x0000000000000022L});
-	public static final BitSet FOLLOW_AMP_in_concatenation204 = new BitSet(new long[]{0x0000000081244080L});
+	public static final BitSet FOLLOW_AMP_in_concatenation204 = new BitSet(new long[]{0x0000000202484080L});
 	public static final BitSet FOLLOW_arithmetic_lowest_in_concatenation207 = new BitSet(new long[]{0x0000000000000022L});
-	public static final BitSet FOLLOW_arithmetic_low_in_arithmetic_lowest221 = new BitSet(new long[]{0x0000000004200002L});
-	public static final BitSet FOLLOW_PLUS_in_arithmetic_lowest229 = new BitSet(new long[]{0x0000000081244080L});
-	public static final BitSet FOLLOW_MINUS_in_arithmetic_lowest234 = new BitSet(new long[]{0x0000000081244080L});
-	public static final BitSet FOLLOW_arithmetic_low_in_arithmetic_lowest239 = new BitSet(new long[]{0x0000000004200002L});
-	public static final BitSet FOLLOW_arithmetic_medium_in_arithmetic_low253 = new BitSet(new long[]{0x0000000000400802L});
-	public static final BitSet FOLLOW_MULTI_in_arithmetic_low261 = new BitSet(new long[]{0x0000000081244080L});
-	public static final BitSet FOLLOW_DIV_in_arithmetic_low266 = new BitSet(new long[]{0x0000000081244080L});
-	public static final BitSet FOLLOW_arithmetic_medium_in_arithmetic_low271 = new BitSet(new long[]{0x0000000000400802L});
-	public static final BitSet FOLLOW_arithmetic_high_in_arithmetic_medium285 = new BitSet(new long[]{0x0000000008000002L});
-	public static final BitSet FOLLOW_POWER_in_arithmetic_medium291 = new BitSet(new long[]{0x0000000081244080L});
+	public static final BitSet FOLLOW_arithmetic_low_in_arithmetic_lowest221 = new BitSet(new long[]{0x0000000008400002L});
+	public static final BitSet FOLLOW_PLUS_in_arithmetic_lowest229 = new BitSet(new long[]{0x0000000202484080L});
+	public static final BitSet FOLLOW_MINUS_in_arithmetic_lowest234 = new BitSet(new long[]{0x0000000202484080L});
+	public static final BitSet FOLLOW_arithmetic_low_in_arithmetic_lowest239 = new BitSet(new long[]{0x0000000008400002L});
+	public static final BitSet FOLLOW_arithmetic_medium_in_arithmetic_low253 = new BitSet(new long[]{0x0000000000800802L});
+	public static final BitSet FOLLOW_MULTI_in_arithmetic_low261 = new BitSet(new long[]{0x0000000202484080L});
+	public static final BitSet FOLLOW_DIV_in_arithmetic_low266 = new BitSet(new long[]{0x0000000202484080L});
+	public static final BitSet FOLLOW_arithmetic_medium_in_arithmetic_low271 = new BitSet(new long[]{0x0000000000800802L});
+	public static final BitSet FOLLOW_arithmetic_high_in_arithmetic_medium285 = new BitSet(new long[]{0x0000000010000002L});
+	public static final BitSet FOLLOW_POWER_in_arithmetic_medium291 = new BitSet(new long[]{0x0000000202484080L});
 	public static final BitSet FOLLOW_arithmetic_high_in_arithmetic_medium294 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_arithmetic_highest_in_arithmetic_high308 = new BitSet(new long[]{0x0000000002000002L});
+	public static final BitSet FOLLOW_arithmetic_highest_in_arithmetic_high308 = new BitSet(new long[]{0x0000000004000002L});
 	public static final BitSet FOLLOW_PERCENT_in_arithmetic_high312 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_MINUS_in_arithmetic_highest329 = new BitSet(new long[]{0x0000000081044080L});
+	public static final BitSet FOLLOW_MINUS_in_arithmetic_highest329 = new BitSet(new long[]{0x0000000202084080L});
 	public static final BitSet FOLLOW_atom_in_arithmetic_highest335 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_function_call_in_atom346 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_reference_in_atom351 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_literal_in_atom356 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_LPAR_in_atom361 = new BitSet(new long[]{0x0000000081244080L});
-	public static final BitSet FOLLOW_comparison_in_atom364 = new BitSet(new long[]{0x0000000020000000L});
+	public static final BitSet FOLLOW_LPAR_in_atom361 = new BitSet(new long[]{0x0000000202484080L});
+	public static final BitSet FOLLOW_comparison_in_atom364 = new BitSet(new long[]{0x0000000080000000L});
 	public static final BitSet FOLLOW_RPAR_in_atom366 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_FUNCTION_in_function_call378 = new BitSet(new long[]{0x0000000000040000L});
-	public static final BitSet FOLLOW_LPAR_in_function_call381 = new BitSet(new long[]{0x00000000A1244080L});
-	public static final BitSet FOLLOW_comparison_in_function_call389 = new BitSet(new long[]{0x0000000060000000L});
-	public static final BitSet FOLLOW_SEMI_in_function_call393 = new BitSet(new long[]{0x0000000081244080L});
-	public static final BitSet FOLLOW_comparison_in_function_call396 = new BitSet(new long[]{0x0000000060000000L});
+	public static final BitSet FOLLOW_FUNCTION_in_function_call378 = new BitSet(new long[]{0x0000000000080000L});
+	public static final BitSet FOLLOW_LPAR_in_function_call381 = new BitSet(new long[]{0x0000000282484080L});
+	public static final BitSet FOLLOW_comparison_in_function_call389 = new BitSet(new long[]{0x0000000180000000L});
+	public static final BitSet FOLLOW_SEMI_in_function_call393 = new BitSet(new long[]{0x0000000202484080L});
+	public static final BitSet FOLLOW_comparison_in_function_call396 = new BitSet(new long[]{0x0000000180000000L});
 	public static final BitSet FOLLOW_RPAR_in_function_call406 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_CELL_REF_in_reference418 = new BitSet(new long[]{0x0000000000000102L});
 	public static final BitSet FOLLOW_COLON_in_reference426 = new BitSet(new long[]{0x0000000000000080L});
 	public static final BitSet FOLLOW_CELL_REF_in_reference431 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_EQ_in_block475 = new BitSet(new long[]{0x0000000000020000L});
+	public static final BitSet FOLLOW_LBRA_in_block478 = new BitSet(new long[]{0x0000000202484080L});
+	public static final BitSet FOLLOW_attribution_in_block481 = new BitSet(new long[]{0x0000000140000000L});
+	public static final BitSet FOLLOW_comparison_in_block485 = new BitSet(new long[]{0x0000000140000000L});
+	public static final BitSet FOLLOW_SEMI_in_block489 = new BitSet(new long[]{0x0000000202484080L});
+	public static final BitSet FOLLOW_attribution_in_block492 = new BitSet(new long[]{0x0000000140000000L});
+	public static final BitSet FOLLOW_comparison_in_block496 = new BitSet(new long[]{0x0000000140000000L});
+	public static final BitSet FOLLOW_RBRA_in_block501 = new BitSet(new long[]{0x0000000000000000L});
+	public static final BitSet FOLLOW_EOF_in_block503 = new BitSet(new long[]{0x0000000000000002L});
 }

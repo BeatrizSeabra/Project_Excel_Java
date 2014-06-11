@@ -80,6 +80,12 @@ public class Chat extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
+        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField2KeyReleased(evt);
+            }
+        });
+
         jButton1.setText("SEND");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,6 +138,10 @@ public class Chat extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        send();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    public void send() {
         if(jTextField2.getText()==null ||jTextField2.getText().isEmpty() ){
             
         JOptionPane.showMessageDialog(rootPane, "Error, no message to send");
@@ -145,10 +155,9 @@ public class Chat extends javax.swing.JFrame {
             jTextField2.setText("");
             this.repaint();
             this.revalidate();
-            
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
+    }
+    
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
 
     }//GEN-LAST:event_formWindowClosing
@@ -156,6 +165,13 @@ public class Chat extends javax.swing.JFrame {
     private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
 
     }//GEN-LAST:event_jButton1KeyPressed
+
+    private void jTextField2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyReleased
+        if(evt.getKeyCode() == evt.VK_ENTER)
+        {
+            send();
+        }
+    }//GEN-LAST:event_jTextField2KeyReleased
 
     /**
      * @param args the command line arguments
