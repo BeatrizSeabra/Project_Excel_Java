@@ -16,7 +16,20 @@
  * O jogo do enforcado consiste numa palavra que vai gerar uma palavra. 
  * 
  * <b>S086d: Design</b><br/>
+ * O jogo será um jogo entre dois jogadores a tentarem adivinhar a palavra certa.
+ * Cada jogador vê o mesmo progresso na plavra (espaços completos com letras) e as tentativas.
+ * Cada jogador ve o seu proprio enforcado.
  * 
+ * O jogo inicia com o metodo init() que tem que rescrever:
+ *  Neste metodo vai ser carregado o dicionario(um txt com as palavras possiveis)
+ *  O outro metodo que tem que ser rescrito é o run(), neste metodo toda a logica do jogo sera construida
+ * assim como enviar e receber dados. 
+ * 
+ * O jogo inicia e os jogadores têm 2 opções:
+ *  -Adivinhar a palavra.
+ *  -Tentar usar uma letra.
+ * 
+ * O jogo joga-se em tempo real podendo um jogador nem usar uma tentativa enquanto o outro perde/ganha o jogo.
  * 
  * <br/>
  * <br/>
