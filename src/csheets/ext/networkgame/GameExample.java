@@ -34,10 +34,10 @@ public class GameExample extends Game{
     @Override
     public void start() {
         //game logic here
-        String message = "GM"+"Player " + players.get(0).name + " wins";
-        System.out.println(message);
+        String message = "Sending to: " + address + "GM"+"Player " + players.get(0).name + " wins";
         try {
             s.sendData(message.getBytes(), address.getHostName(), 7777);
+            System.out.println(message);
         } catch (UnknownHostException ex) {
             Logger.getLogger(GameExample.class.getName()).log(Level.SEVERE, null, ex);
         }
