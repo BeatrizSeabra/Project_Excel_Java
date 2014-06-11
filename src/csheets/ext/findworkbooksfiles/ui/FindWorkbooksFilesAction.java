@@ -14,11 +14,11 @@ import javax.swing.JOptionPane;
 
 /**
  * An action that allow to search workbooks files, in a directory choosed from user,
- * through file chooser window (instance of FileChooser class), and then class
- * FindWorkbooksFiles will search for workbooks files, on the directory picked from user,
- * and if the files exist, an instance of the class WindowListWorkbooksFiles(extends JFrame),
- * will be created, to show an window with table style, to inform the name(s)and
- * the path(s) of that file(s), to user.
+ through file chooser window (instance of FileChooser class), and then class
+ FindWorkbooksFiles will search for workbooks files, on the directory picked from user,
+ and if the files exist, an instance of the class JFrameWorkbookSearchResults(extends JFrame),
+ will be created, to show an window with table style, to inform the name(s)and
+ the path(s) of that file(s), to user.
  * @author 1090675 - Tiago Pereira
  */
 public class FindWorkbooksFilesAction extends BaseAction {
@@ -80,7 +80,7 @@ public class FindWorkbooksFilesAction extends BaseAction {
         }
         else
         {                
-            WindowListWorkbooksFiles windowLWF = new WindowListWorkbooksFiles(listingFiles);
+            JFrameWorkbookSearchResults windowLWF = new JFrameWorkbookSearchResults(listingFiles);
         }
     }
         

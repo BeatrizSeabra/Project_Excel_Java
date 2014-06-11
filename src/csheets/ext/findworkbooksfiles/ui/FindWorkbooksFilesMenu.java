@@ -1,5 +1,6 @@
 package csheets.ext.findworkbooksfiles.ui;
 
+import csheets.ext.findworkbooksfiles.AdvancedWorkbookSearch;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JMenu;
@@ -24,6 +25,7 @@ public class FindWorkbooksFilesMenu extends JMenu {
 		setMnemonic(KeyEvent.VK_E);
 
 		// Adds font actions
-		add(new FindWorkbooksFilesAction(uiController));                
+		add(new FindWorkbooksFilesAction(uiController));
+                add(new AdvancedWorkbookSearchAction(uiController));
         }
 }
