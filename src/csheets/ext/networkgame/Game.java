@@ -26,7 +26,6 @@ public abstract class Game {
         this.name = name;
         this.players = players;
         this.address = address;
-        init();
     }
     
     public abstract void init();

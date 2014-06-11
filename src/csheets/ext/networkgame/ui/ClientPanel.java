@@ -116,7 +116,10 @@ public class ClientPanel extends javax.swing.JPanel {
         } catch (UnknownHostException ex) {
             Logger.getLogger(NetworkGameController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        NetworkGameController.mainWindow.dispose();
         NetworkGameController.initJFrame("Connected, waiting response....");
+        s.start();
+        NetworkGameController.mainWindow.add(new WaitingGameChoserPanel());
         NetworkGameController.packJFrame();
     }
 
