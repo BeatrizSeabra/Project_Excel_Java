@@ -19,8 +19,11 @@ import csheets.core.formula.Literal;
 import csheets.ui.ctrl.UIController;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+import javax.swing.JComboBox;
 
 /**
  *
@@ -32,6 +35,7 @@ public class Invoke extends javax.swing.JFrame {
      * Creates new form Invoke
      */
     protected final UIController uiController;
+    private Language lang=Language.getInstance();
     
     private String[] help = {"A function that returns true if and only if all of its arguments are true.",
         "A function that returns the numeric average of its arguments.",
@@ -50,6 +54,16 @@ public class Invoke extends javax.swing.JFrame {
     public Invoke(UIController uiController) {
         initComponents();
         this.uiController=uiController;
+        
+    }
+    
+    public String[] funcoes(){
+        Function[] functions=lang.getFunctions();
+        String[] funcoes=new String[functions.length];
+        for (int i = 0; i < functions.length; i++) {
+            funcoes[i]=functions[i].getIdentifier();
+        }
+        return funcoes;
     }
 
     /**
@@ -62,7 +76,7 @@ public class Invoke extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox();
+        jComboBox1 = new javax.swing.JComboBox(funcoes());
         jLabel1 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -72,7 +86,6 @@ public class Invoke extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "And", "Average", "Count", "Do", "Eval", "Factorial", "False", "If", "Not", "NumericFunction", "Or", "Sum", "True" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -195,7 +208,7 @@ public class Invoke extends javax.swing.JFrame {
     private String getSintaxe(String funcao){
         String r="";
         try{
-            Function f = (Function) Class.forName("csheets.core.formula.lang."+funcao).newInstance();
+            Function f=lang.getFunction(funcao);
             FunctionParameter[] parameters = f.getParameters();
             if(f.isVarArg()){
                 r+=f.getIdentifier()+"(";
@@ -281,14 +294,13 @@ public class Invoke extends javax.swing.JFrame {
     private void chooseFunction(String sintaxe, String funcao){
         String s=sintaxe.substring(sintaxe.indexOf("(")+1,sintaxe.indexOf(")"));
         try{
-            Function f=(Function) Class.forName("csheets.core.formula.lang."+funcao).newInstance();
+            Function f=lang.getFunction(funcao);
             Literal[] args = argumentos(s,f);
             FunctionCall fCall = new FunctionCall(f,args);
             JOptionPane.showMessageDialog(rootPane, fCall.evaluate().toString());
             this.uiController.getActiveSpreadsheet().getCell(0, 0).setContent(fCall.evaluate().toString());
         }
         catch(Exception ex){
-            ex.printStackTrace();
             int result=JOptionPane.showConfirmDialog(null, "Invalid Parameters. Do you want to correct them?");
             
             if (result==JOptionPane.NO_OPTION) {

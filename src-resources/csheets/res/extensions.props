@@ -20,3 +20,7 @@ csheets.ext.networkgame.NetworkGameExtension
 csheets.ext.contacts.ExtensionContacts
 csheets.ext.residenceimport.ExtensionResidenceImport
 csheets.ext.residenceexport.ExtensionResidenceExport
+csheets.ext.runMacro.ExtensionRunMacro
+csheets.ext.findinstances.ExtensionFindInstances
+csheets.ext.formeditor.ExtensionFormEditor
+csheets.ext.email.ExtensionEmail

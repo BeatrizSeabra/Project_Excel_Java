@@ -9,6 +9,7 @@ import csheets.ext.connection.Server;
 import csheets.ext.networkgame.ui.ClientPanel;
 import csheets.ext.networkgame.ui.GameChoserPanel;
 import csheets.ext.networkgame.ui.ServerPanel;
+import java.awt.Point;
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,7 @@ public class NetworkGameController {
     public static GameController gc;
 
     public NetworkGameController() {
-
+        
         //start server in port: 7777
         s = new Server(7777) {
 
@@ -41,10 +42,13 @@ public class NetworkGameController {
                     file_string += (char) data[i];
                 }
                 if (file_string.contains("CN")) {                       //CN Connection
+                    mainWindow.dispose();
                     initJFrame("Players Found");
+                    games.add(new GameExample("Example", players, s, address));
                     mainWindow.add(new GameChoserPanel(games, data, s, address));
                     packJFrame();
                 } else if (file_string.contains("GS")) {                                        //GS game selected response  
+                    games.add(new GameExample("Example", players, s, address));
                     int game = parseGame(data);
                     players.add(parsePlayer(data));
                     if (players.size() == 1) {
@@ -52,6 +56,7 @@ public class NetworkGameController {
                         players.add(profile);
                     }
                     gc = new GameController(games.get(game), players, s, address);
+                    System.out.println("GC init");
                 } else if (file_string.contains("GM")) {                                        //GM GAme message
                     gc.recieve(data);
                 }
@@ -79,6 +84,7 @@ public class NetworkGameController {
         mainWindow = new JFrame(title);
         mainWindow.setSize(800, 600);
         mainWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        mainWindow.setLocation(new Point(600, 400));
     }
 
     public static void packJFrame() {

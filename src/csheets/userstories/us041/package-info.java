@@ -16,6 +16,13 @@
  * <br/>
  * <br/>
  * 
+ * <b>S041d:Design</b><br/>
+ * Ao escolher a extensão Invoke Function -> Choose Function é aberta uma janela com uma combobox com a lista das funções, uma caixa de texto com a sintaxe da mesma (que é modificada quando se escolhe uma função diferente na combobox), e dois botões: Choose e Help.
+ * Nesta user storie (que usa o que já foi feito noutra anterior adicionando-lhe mais algumas funcionalidades), serão adicionadas caixas de texto consoante os parâmetros da função seleccionada (na combobox, tal como anteriormente), e será adicionada uma label onde se mostrará o resultado preliminar da invocação da função com os parâmetros já introduzidos à medida que o utilizador os introduz.
+ * Para isso, quando o utilizador carregar ENTER (depois de escrever na caixa de texto correspondente ao parâmetro da função) ou quando ele seleccionar a caixa de texto do parâmetro seguinte, o sistema verificará se há parâmetros anteriores em falta e caso isso não se verifique introduzirá automaticamente na label final o resultado da função com esses parâmetros.
+ * <br/>
+ * <br/>
+ * 
  * @author 1120268
 */
 
