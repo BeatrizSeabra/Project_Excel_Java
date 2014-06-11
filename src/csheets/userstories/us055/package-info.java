@@ -10,7 +10,7 @@
  *  
  * <b>S055a: Analysis</b><br/>
  * Since there are two types of events that can occur on cells (onclick, onchange) we have to study how and when said events occur.
- * With the need of making a graphic interface we have to study how to add another sub-menu. We latter have to sketch an example of the interface as it will be added to the code.
+ * With the need of making a graphic interface we have to study how to add another sub-menu. We later have to sketch an example of the interface as it will be added to the code.
  * <br/>
  * <br/>
  * 
