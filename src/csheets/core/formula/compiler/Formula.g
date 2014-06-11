@@ -48,6 +48,7 @@ expression
 
 attribution
         : CELL_REF ATT^ (attribution | comparison)
+        : TEMP LETTER ATT^ (attribution | comparison)
         ;
 
 comparison
@@ -159,6 +160,8 @@ PERCENT : '%' ;
 fragment ABS : '$' ;
 fragment EXCL:  '!'  ;
 COLON	: ':' ;
+TEMP : '@' ;
+
  
 /* Miscellaneous operators */
 COMMA	: ',' ;
