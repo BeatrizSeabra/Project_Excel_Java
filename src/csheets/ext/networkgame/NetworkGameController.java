@@ -48,6 +48,7 @@ public class NetworkGameController {
                     mainWindow.add(new GameChoserPanel(games, data, s, address));
                     packJFrame();
                 } else if (file_string.contains("GS")) {                                        //GS game selected response  
+                    games.add(new GameExample("Example", players, s, address));
                     int game = parseGame(data);
                     players.add(parsePlayer(data));
                     if (players.size() == 1) {
