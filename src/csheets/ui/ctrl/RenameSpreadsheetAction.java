@@ -61,5 +61,6 @@ public class RenameSpreadsheetAction extends FocusOwnerAction {
 	public void actionPerformed(ActionEvent event) {
 		if (focusOwner == null)
 			return;
+                uiController.writeLogFileWB("sheetRenamed");
 	}
 }

@@ -48,8 +48,8 @@ public class LogFileAction extends BaseAction {
             eventlist.add("OnClick");
             eventlist.add("OnChange");
 
-        }
-        */
+        }*/
+        
         
 	public void actionPerformed(ActionEvent event) {
 
@@ -58,7 +58,7 @@ public class LogFileAction extends BaseAction {
             l.setResizable(false);
             l.setLocationRelativeTo(null);
             l.setVisible(true);
-            //eventlist=l.getList();
+           // eventlist=l.getList();
 
 	}
         

@@ -253,6 +253,11 @@ public class UIController implements SpreadsheetAppListener {
         {
             evl.add("onClick");
             evl.add("onChange");
+            evl.add("Open");
+            evl.add("Close");
+            evl.add("sheetCreated");
+            evl.add("sheetDeleted");
+            evl.add("sheetRenamed");
         }
         
         public ArrayList<String> getEvl()
@@ -264,7 +269,10 @@ public class UIController implements SpreadsheetAppListener {
         {
             evl=e;
         }
-        
+        public void writeLogFileWB(String event)
+        {
+            WriteLogFile.writeLogFile( event, getEvl());
+        }
         public void writeLogFile(String cell, String event)
         {
             WriteLogFile.writeLogFile(cell, event, getEvl());

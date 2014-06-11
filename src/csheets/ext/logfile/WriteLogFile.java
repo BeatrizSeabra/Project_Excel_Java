@@ -43,4 +43,22 @@ public final class WriteLogFile {
             }
         }
     }
+    public static void writeLogFile(String event, ArrayList<String> evl) {
+        if (evl.contains(event)) {
+            try {
+                DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                Date date = new Date();
+                File file;
+                String log = "";
+                String newLine = System.getProperty("line.separator");
+                BufferedWriter writer = new BufferedWriter(new FileWriter("EventLog.txt", true));
+                log = String.format("%s WorkBookEvent, time:%s\n\n\n", event, dateFormat.format(date));
+                writer.write(log + newLine);
+                writer.close();
+
+            } catch (Exception ee) {
+                ee.printStackTrace();
+            }
+        }
+    }
 }

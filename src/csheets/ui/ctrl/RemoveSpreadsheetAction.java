@@ -62,5 +62,6 @@ public class RemoveSpreadsheetAction extends FocusOwnerAction {
 		focusOwner.getSpreadsheet().getWorkbook().removeSpreadsheet(
 			focusOwner.getSpreadsheet());
 		uiController.setWorkbookModified(focusOwner.getSpreadsheet().getWorkbook());
+                uiController.writeLogFileWB("sheetDeleted");
 	}
 }
