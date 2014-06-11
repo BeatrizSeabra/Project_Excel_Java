@@ -1242,3 +1242,91 @@ Close WorkBookEvent, time:2014/06/11 16:28:18
 
 
 
+onClick Event, on cell A1. time:2014/06/11 16:56:54
+
+
+
+onClick Event, on cell A1. time:2014/06/11 16:56:54
+
+
+
+Close WorkBookEvent, time:2014/06/11 16:57:01
+
+
+
+Close WorkBookEvent, time:2014/06/11 16:57:01
+
+
+
+onClick Event, on cell A1. time:2014/06/11 16:58:12
+
+
+
+onClick Event, on cell A1. time:2014/06/11 16:58:13
+
+
+
+onClick Event, on cell A1. time:2014/06/11 16:58:55
+
+
+
+onClick Event, on cell A1. time:2014/06/11 16:58:55
+
+
+
+onClick Event, on cell A1. time:2014/06/11 16:59:43
+
+
+
+onClick Event, on cell A1. time:2014/06/11 16:59:43
+
+
+
+onClick Event, on cell A1. time:2014/06/11 17:04:31
+
+
+
+onClick Event, on cell A1. time:2014/06/11 17:04:31
+
+
+
+Close WorkBookEvent, time:2014/06/11 17:05:01
+
+
+
+Close WorkBookEvent, time:2014/06/11 17:05:01
+
+
+
+onClick Event, on cell A1. time:2014/06/11 17:08:55
+
+
+
+onClick Event, on cell A1. time:2014/06/11 17:08:55
+
+
+
+Close WorkBookEvent, time:2014/06/11 17:09:59
+
+
+
+Close WorkBookEvent, time:2014/06/11 17:09:59
+
+
+
+onClick Event, on cell A1. time:2014/06/11 17:16:15
+
+
+
+onClick Event, on cell A1. time:2014/06/11 17:16:15
+
+
+
+Close WorkBookEvent, time:2014/06/11 17:16:29
+
+
+
+Close WorkBookEvent, time:2014/06/11 17:16:29
+
+
+
