@@ -32,26 +32,12 @@
  * <a href="../../../csheets/ext/logfile/ui/package-summary.html">csheets.ext.logfile.ui</a><br/>
  * <br/>
  * <br/>
- * 
- * <b>S055u: Unit Tests</b><br/>
- * Since this US only has a txt file writting method theres no need for unit teste. To teste this US see Functional Tests below.
- * <br/>
- * <br/>
- * 
- * <b>S055f: Functional Tests</b><br/>
- * To test this user story, the user should follow these steps:
- * 1- run cleansheets;
- * 2- click on the Extension menu, go to EventLogFile. There must appear a menu option containning one option for the WorkBook events;<br/>
- * 3- the previous option is a set of two check boxes that: when checked and after the said event occurs it will be logged into to EventLog; when not checked the event will not be logged;<br/>
- * 4- click on cells or change its content to see the event being logged into the EventLog file. <br/>
- * <br/>
- * <br/>
- * 
- * @author RafaelChaves
+ *
+ * @author Nélson Mourão
  **/
 /*
- * @startuml doc-files/us055_design55.png
-participant "User" as User
+ * @startuml doc-files/us049_design.png
+actor User 
 participant "lfc:EventLogFileController" as LFC
 participant "EventLogFile" as LogFileUI
 participant "el:EventList" as el

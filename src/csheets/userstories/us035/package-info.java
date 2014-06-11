@@ -13,9 +13,9 @@
  * <br/>
  *
  * <b>S035a: Analysis</b><br/>
- * This functionality is the continuation of US034. The eval function will now allow
- * the user insert in the formula bar a block of instructions that will be executed 
- * sequentially, being displayed in cell the result of last instruction
+ * This functionality function will now allow the user insert in the formula bar a block
+ * of instructions that will be executed sequentially, being displayed in cell the result
+ * of last instruction.
  * <br/>
  * <br/>
  *
