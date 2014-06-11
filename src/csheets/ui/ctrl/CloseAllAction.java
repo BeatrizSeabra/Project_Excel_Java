@@ -64,5 +64,6 @@ public class CloseAllAction extends CloseAction {
 			if (workbook.equals(uiController.getActiveWorkbook()))
 				break;
 		}
+                uiController.writeLogFileWB("Close");
 	}
 }

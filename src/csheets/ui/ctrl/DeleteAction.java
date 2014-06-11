@@ -53,5 +53,6 @@ public class DeleteAction extends FocusOwnerAction {
 	public void actionPerformed(ActionEvent e) {
 		if (focusOwner != null)
 			focusOwner.clearSelectedCells();
+                System.out.println("asdoaskd");
 	}
 }
