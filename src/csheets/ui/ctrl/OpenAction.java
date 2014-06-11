@@ -99,6 +99,7 @@ public class OpenAction extends BaseAction {
 			else
 				uiController.setActiveWorkbook(workbook);
 		}
+                uiController.writeLogFileWB("Open");
 	}
 
 	/**

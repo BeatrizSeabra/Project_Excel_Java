@@ -36,6 +36,7 @@ public class LogFileMenu extends JMenu {
 
 		// Adds font actions
 		add(new LogFileAction(uiController));
+                add(new LogFileWorkBookAction(uiController));
 	}
 
 }

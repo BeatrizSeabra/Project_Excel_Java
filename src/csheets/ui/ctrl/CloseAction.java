@@ -82,6 +82,7 @@ public class CloseAction extends SaveAction {
 			}
 			app.unload(workbook);
 		}
+                uiController.writeLogFileWB("Close");
 	}
 
 	protected boolean requiresModification() {

@@ -6,32 +6,28 @@
 
 package csheets.ext.logfile.ui;
 
-import java.awt.event.ActionEvent;
-
-
 import csheets.ui.ctrl.BaseAction;
 import csheets.ui.ctrl.UIController;
-import java.util.ArrayList;
+import java.awt.event.ActionEvent;
 
 /**
  *
- * @author RafaelChaves
+ * @author Nélson
  */
-public class LogFileAction extends BaseAction {
-
-	/** The user interface controller */
+public class LogFileWorkBookAction extends BaseAction {
+  /** The user interface controller */
 	protected UIController uiController;
 
 	/**
 	 * Creates a new action.
 	 * @param uiController the user interface controller
 	 */
-	public LogFileAction(UIController uiController) {
+	public LogFileWorkBookAction(UIController uiController) {
 		this.uiController = uiController;
 	}
 
 	protected String getName() {
-		return "EventLog File Options";
+		return "Workbook Events";
 	}
 
 	protected void defineProperties() {
@@ -43,24 +39,18 @@ public class LogFileAction extends BaseAction {
 	 * @param event the event that was fired
 	 */
                         
-       /* private void initEventList()
-        {
-            eventlist.add("OnClick");
-            eventlist.add("OnChange");
-
-        }*/
-        
         
 	public void actionPerformed(ActionEvent event) {
 
-            LogFileUI l= new LogFileUI(uiController);
-            l.setSize(255, 170);
+            WorkBookEventsUI l= new WorkBookEventsUI(uiController);
+            l.setSize(340, 270);
             l.setResizable(false);
             l.setLocationRelativeTo(null);
             l.setVisible(true);
-           // eventlist=l.getList();
 
 	}
         
        
 }
+  
+

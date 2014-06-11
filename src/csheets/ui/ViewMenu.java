@@ -77,7 +77,8 @@ public class ViewMenu extends JMenu implements SelectionListener, SpreadsheetApp
 	 * @param event the spreadsheet application event that occured
 	 */
 	public void workbookCreated(SpreadsheetAppEvent event) {
-		// Creates item and names it
+		          System.out.println("ALALA");
+                // Creates item and names it
 		JCheckBoxMenuItem item = new JCheckBoxMenuItem(
 			new SelectWorkbookAction(event.getWorkbook(), uiController));
 		int index = getItemCount() + 1;
@@ -102,8 +103,8 @@ public class ViewMenu extends JMenu implements SelectionListener, SpreadsheetApp
 	 */
 	public void workbookLoaded(SpreadsheetAppEvent event) {
 		workbookCreated(event);
-	}
-
+                uiController.writeLogFileWB("Open");
+        }
 	/**
 	 * Removes the item of the workbook that was unloaded, and renames the other.
 	 * @param event the spreadsheet application event that occured
