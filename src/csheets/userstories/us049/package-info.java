@@ -9,7 +9,7 @@
  * <br/>
  *  
  * <b>S055a: Analysis</b><br/>
- * Since there are many events to apply on the workbook like (sheetOpen, sheetClosed, sheetCreated, sheetDeleted and sheetRenamed) we have to study how and when said events occur.
+ * Since there are many events to apply on the workbook like (Open, Close, sheetCreated, sheetDeleted and sheetRenamed) we have to study how and when said events occur.
  * With the need of making a graphic interface we have to study how to add another sub-menu. We latter have to sketch an example of the interface as it will be added to the code.
  * <br/>
  * <br/>
@@ -17,9 +17,12 @@
  * <b>S055d: Design</b><br/>
  * For the User Interface we will need to create a subclass Extention. We will also need to create a subclass of UIExtension. For the sub-menu we will need a MenuItem named EventLogFile.
  * To demonstrate the interaction between the User and the UI heres a diagram: <img src="../../../csheets/userstories/us055/doc-files/us055_design1.png">. Every event will be added to the EventList by default.
- * Since for this US we only need to write to the logfile, every time the events occurs the system checks the event's name against the list. If the name is in there it writes to the logFile (Events name + cell + date).
- * onClick: the source of this event is when the activeCell changes, so after some research we found that in the class SpreadsheetTable theres a changeSelection method, so after the method to change the active cell is called we call the writeLogFile method. 
- * onChange: the source of this event is when something changes on the cell, and after said research we found that in the CellEditor class theres a method that is called after the editting of a cell. So after the method setContent is calle we call our own method, writeLogFile. 
+ * Since for this US we only need to write to the logfile, every time the events occurs the system checks the event's name against the list. If the name is in there it writes to the logFile (Events name + date).
+ * Close: the source of this event is when the workbook close,after the method to close the workbook is called we call the writeLogFile method. 
+ * Open: the source of this event is when the workbook open,after the method to open the workbook is called we call the writeLogFile method.
+ * sheetCreated: the source of this event is when a sheet is created,after the method to create a sheet is called we call the writeLogFile method.
+ * sheetDeleted: the source of this event is when a sheet is removed,after the method to remove a sheet is called we call the writeLogFile method.
+ * sheetRenamed: the source of this event is when a sheet is renamed,after the method to rename a sheet is called we call the writeLogFile method. The method to rename is not implemented in de cheasheets yet.
  * <br/>
  * <br/>
  * 
@@ -38,7 +41,7 @@
  * <b>S055f: Functional Tests</b><br/>
  * To test this user story, the user should follow these steps:
  * 1- run cleansheets;
- * 2- click on the Extension menu, go to EventLogFile. There must appear a menu option containning one option for the EventLog File Options;<br/>
+ * 2- click on the Extension menu, go to EventLogFile. There must appear a menu option containning one option for the WorkBook events;<br/>
  * 3- the previous option is a set of two check boxes that: when checked and after the said event occurs it will be logged into to EventLog; when not checked the event will not be logged;<br/>
  * 4- click on cells or change its content to see the event being logged into the EventLog file. <br/>
  * <br/>
