@@ -56,6 +56,10 @@ public class CellTransferHandler extends TransferHandler {
 		}
 		return null;
 	}
+        
+        public Cell[][] getSelec(){
+            return sourceTable.getSelectedCells();
+        }
 
 	public boolean importData(JComponent c, Transferable t) {
 		if (canImport(c, t.getTransferDataFlavors())) {
