@@ -12,6 +12,8 @@ import java.net.UnknownHostException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
@@ -19,6 +21,8 @@ import java.util.logging.Logger;
  */
 public class GameExample extends Game{
 
+    JLabel lbl = new JLabel("In game!");
+    
     public GameExample(String name, List<Player> players, Server s,InetAddress address) {
         super(name, players, s, address);
     }
@@ -29,6 +33,9 @@ public class GameExample extends Game{
         //set up some variables
         this.name = name;
         this.players = players;
+        NetworkGameController.initJFrame("Example game");
+        NetworkGameController.mainWindow.add(lbl);
+        NetworkGameController.packJFrame();
     }
 
     @Override
@@ -50,6 +57,7 @@ public class GameExample extends Game{
         for (int i = 2; i < dados.length; i++) {
             s += (char) dados[i];
         }
+        lbl = new JLabel(s);
         System.out.println("Recebido de "+ address.toString() +": "+s);
     }
     

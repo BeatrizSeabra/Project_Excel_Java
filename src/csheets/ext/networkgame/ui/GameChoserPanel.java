@@ -103,6 +103,7 @@ public class GameChoserPanel extends javax.swing.JPanel {
                 new GameController(game, players, s, address);
             };
         }
+        NetworkGameController.mainWindow.dispose();
     }//GEN-LAST:event_pickGame
 
     void parsePlayers(byte[] data) {
