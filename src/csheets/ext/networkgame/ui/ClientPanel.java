@@ -118,6 +118,7 @@ public class ClientPanel extends javax.swing.JPanel {
         }
         NetworkGameController.mainWindow.dispose();
         NetworkGameController.initJFrame("Connected, waiting response....");
+        s.start();
         NetworkGameController.mainWindow.add(new WaitingGameChoserPanel());
         NetworkGameController.packJFrame();
     }

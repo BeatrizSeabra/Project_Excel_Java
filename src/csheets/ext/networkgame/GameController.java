@@ -26,6 +26,7 @@ public class GameController {
         this.game = game;
         this.s = s;
         this.address = address;
+        this.game.init();
         this.game.start();
     }
 

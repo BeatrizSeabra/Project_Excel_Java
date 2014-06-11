@@ -1,5 +1,5 @@
 /**
- * Documentação referente ao user story us073: Exportação de ficheiros de texto
+ * Documentação referente ao user story us046: Botoes nas folhas
  * <br/>
  * <br/>
  *
@@ -21,7 +21,7 @@
  * <br/>
  *
  * <b>S073a: Design</b><br/>
- *
+ * <img src="../../../csheets/userstories/us046/doc-files/US046_design.png">
  * <br/>
  * <br/>
  *

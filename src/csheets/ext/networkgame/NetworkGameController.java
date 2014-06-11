@@ -55,6 +55,7 @@ public class NetworkGameController {
                         players.add(profile);
                     }
                     gc = new GameController(games.get(game), players, s, address);
+                    System.out.println("GC init");
                 } else if (file_string.contains("GM")) {                                        //GM GAme message
                     gc.recieve(data);
                 }

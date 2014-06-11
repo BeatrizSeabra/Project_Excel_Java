@@ -11,7 +11,10 @@ import csheets.ext.networkgame.GameController;
 import csheets.ext.networkgame.NetworkGameController;
 import csheets.ext.networkgame.Player;
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -97,12 +100,20 @@ public class GameChoserPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void pickGame(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pickGame
+        int i = 0;
         for (Game game : NetworkGameController.games) {
             if (game.getName().equals((String) jComboBox1.getSelectedItem())) {
                 //temos o jogo certo
                 new GameController(game, players, s, address);
+                try {
+                    s.sendData(("GS" + i).getBytes(), address.getHostName(), 7777);
+                } catch (UnknownHostException ex) {
+                    Logger.getLogger(GameChoserPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
             };
+            i++;
         }
+        NetworkGameController.mainWindow.dispose();
     }//GEN-LAST:event_pickGame
 
     void parsePlayers(byte[] data) {
