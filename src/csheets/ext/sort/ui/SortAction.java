@@ -12,10 +12,10 @@ package csheets.ext.sort.ui;
 import csheets.CleanSheets;
 import csheets.core.Cell;
 import csheets.core.formula.compiler.FormulaCompilationException;
-import java.awt.event.ActionEvent;
 import csheets.ui.ctrl.BaseAction;
 import csheets.ui.ctrl.UIController;
 import csheets.ui.sheet.CellTransferHandler;
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -67,6 +67,7 @@ public class SortAction extends BaseAction {
             int maxrows = this.uiController.getActiveSpreadsheet().getRowCount();
             cth=(CellTransferHandler)this.uiController.getCellTransferHandler();
             range=cth.getSelec();
+            
             ArrayList columns = getCollumns();
             for(int i=0; i<columns.size();i++){
                 sortAZ(maxrows, (int)columns.get(i));

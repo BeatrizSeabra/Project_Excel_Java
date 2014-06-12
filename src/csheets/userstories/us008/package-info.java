@@ -19,13 +19,26 @@
  *
  * <b>S008d: Design</b><br/>
  * 
- * For this sequel, the program will create a user interface for the client to choose the columns that will need.
- * So it will be basically a new option on Extensions->Sort Cell->Sort range of cells.
- * What will happen in this option is that the client willl introduce the columns that he wishes to sort, and then he just has to press the "Ok" button, then the wanted columns will be automatically sorted.
+ * For this sequel, the user will select a range of columns for example A to C, and by selecting the sort option, all the columns will be sorted.
+ * So it will be basically the same option a before on Extensions->SortAZ or SortZA.
+ * <img src="../../../csheets/userstories/us008/doc-files/us008_design1.png"> 
  * <br/>
  * <br/>
+ *
+ *<>
  *
  *
  *
  */
+/*
+@startuml
+ participant "uic : UIController" as UIC
+ participant "cth : CellTransferHandler" as CTH
+ participant "c : Cell" as C
+ participant "sa : SortAction" as SA
+ UIC->CTH : getCellTransferHandler()
+ C->CTH : getSelec()
+ CTH->SA : sourceTable.getSelectedCells()
+@end
+*/
 package csheets.userstories.us008;
