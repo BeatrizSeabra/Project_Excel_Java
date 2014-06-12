@@ -39,7 +39,12 @@
  * 
  * <b>S071d: Design</b><br/>
  * <br/>O Diagrama de sequência vai ser exactamente igual ao anterior excepto
- * o ultimo metodo invocado que é o fileImport() neste caso vai invocar a thread<br/>
+ * o ultimo metodo invocado que é o fileImport() neste caso vai invocar a thread.
+ * 
+ * De referiri que a US071 importação paralela e a US074 Exportação paralela
+ * foram pensadas em comum assim sendo os ficheiros podem ser importados e exportador
+ * colocando como o primeiro caracter de separação e os restantes como dados ou header.
+ * <br/>
 
  * 
  * 
@@ -60,10 +65,11 @@
  * <br/>
  * 
  * <b>S071f: Functional Tests</b><br/>
- *  De referiri que a US071 importação paralela e a US074 Exportação paralela
- *  foram pensadas em comum assim sendo os ficheiros podem ser importados e exportador
- *  sem que exista qualquer problema, reconhecendo cabeçalho e dados
- *  A varavel SEPARATOR nao pode ter valores reservados EX: [ ] . ?...
+ *  1. o utilizador escolhe a menu "Extensions"
+ *  2. escolhe opção import em TXT
+ *  3. escolhe o ficheiro pretendido
+ *  4. Ve o resultado nas celulas.
+ *  A variavel SEPARATOR nao pode ter valores reservados EX: [ ] . ? \etc
  * <br/>
  * <br/>
  * 
