@@ -12,6 +12,11 @@ import csheets.core.formula.Expression;
 import csheets.core.formula.Function;
 import csheets.core.formula.FunctionParameter;
 import csheets.ext.logfile.AtributeFormula;
+import csheets.ext.logfile.WriteLogFile;
+import static csheets.ext.logfile.WriteLogFile.writeLogFile;
+import static csheets.ext.logfile.WriteLogFile.writeLogFile;
+import static csheets.ext.logfile.WriteLogFile.writeLogFile;
+import static csheets.ext.logfile.WriteLogFile.writeLogFile;
 import static csheets.ext.logfile.WriteLogFile.writeLogFile;
 import csheets.ui.ctrl.UIController;
 
@@ -23,7 +28,7 @@ import csheets.ui.ctrl.UIController;
 public class Evset implements Function {
 
     /**
-     * The function's two parameters: Event and formula
+     * The function's one parameters: Event and formula on the same
      */
     public static final FunctionParameter[] parameters = new FunctionParameter[]{
         new FunctionParameter(Value.Type.UNDEFINED, "Event", false, "The event that pretend to assign the function"),
@@ -52,7 +57,8 @@ public class Evset implements Function {
                 formula = funcaoS[1];
             } 
         }
-        //new writeLogFile();
+       WriteLogFile.writeLogFile(evento);
+      
         return new Value(formula);
 
     }
@@ -64,6 +70,6 @@ public class Evset implements Function {
 
     @Override
     public boolean isVarArg() {
-        return false;
+        return true;
     }
 }
