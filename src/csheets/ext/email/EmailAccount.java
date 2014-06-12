@@ -6,6 +6,11 @@
 package csheets.ext.email;
 
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -26,6 +31,9 @@ public class EmailAccount {
     private String password;
     private String host;
     private String port;
+    private String listEmail;
+    private String subject;
+    private String message; 
 
      public EmailAccount(){     
      }  
@@ -65,15 +73,68 @@ public class EmailAccount {
 			message.setSubject("Test");
 			message.setText("successful test from "+ this.getName() + ".");
  
-			Transport.send(message);
- 
-			System.out.println("Done");
+			Transport.send(message);    
  
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
 		}
         }
         
+        //Gravar configuracoes no ficheiro
+        public void Save(){
+            Properties prop = new Properties();
+            OutputStream output = null;
+            try {
+                output = new FileOutputStream("src\\csheets\\ext\\email\\email.properties");
+                prop.setProperty("name", this.getName());
+                prop.setProperty("email", this.getEmail());
+                prop.setProperty("password", this.getPassword());
+                prop.setProperty("host", this.getHost());
+                prop.setProperty("port", this.getPort());
+
+                prop.store(output, null);
+
+            } catch (IOException io) {
+                io.printStackTrace();
+            } finally {
+                if (output != null) {
+                    try {
+                        output.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+        }
+             
+        // Metodo para fazer load das configuracoes do ficheiro
+        public void Load(){
+            Properties prop = new Properties();
+            InputStream input = null;
+            try {
+                input = new FileInputStream("src\\csheets\\ext\\email\\email.properties");
+
+                prop.load(input);
+
+                this.setName(prop.getProperty("name"));
+                this.setEmail(prop.getProperty("email"));
+                this.setPassword(prop.getProperty("password"));
+                this.setHost(prop.getProperty("host"));
+                this.setPort(prop.getProperty("port"));
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            } finally {
+                if (input != null) {
+                    try {
+                        input.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
     
 
     public String getName() {
@@ -115,8 +176,6 @@ public class EmailAccount {
     public void setPort(String port) {
         this.port = port;
     }
-    
-    
-    
+
 }
 
