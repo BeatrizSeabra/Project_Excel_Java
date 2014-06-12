@@ -56,7 +56,9 @@ public class CellTransferHandler extends TransferHandler {
 		}
 		return null;
 	}
-        
+        /*
+        * This method is to get the return of the createTransferable(JComponent c).
+        */
         public Cell[][] getSelec(){
             return sourceTable.getSelectedCells();
         }

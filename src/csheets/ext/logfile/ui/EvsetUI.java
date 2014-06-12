@@ -6,6 +6,7 @@
 
 package csheets.ext.logfile.ui;
 
+import csheets.ext.logfile.AtributeFormula;
 import csheets.ui.ctrl.UIController;
 
 /**
@@ -119,7 +120,8 @@ public class EvsetUI extends javax.swing.JFrame {
         String formula = jTextField1.getText();
         
         if (jCheckBox1.isSelected()) {
-                
+                AtributeFormula a = new AtributeFormula(jCheckBox1.getName(),formula);
+                //tentar fazer aqui com que ele insira as colunas que pretenda modificar com o evento e depois mudar as classes do US anterior
             }
     }//GEN-LAST:event_jButton1ActionPerformed
     

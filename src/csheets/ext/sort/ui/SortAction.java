@@ -60,7 +60,9 @@ public class SortAction extends BaseAction {
         }
         return al;
     }
-    
+    /*
+        added a few lines of code to the previous method of sorting
+    */
      public void actionPerformed(ActionEvent event) {
 
         try {
