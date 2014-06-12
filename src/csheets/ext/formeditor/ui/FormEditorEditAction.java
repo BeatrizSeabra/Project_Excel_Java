@@ -4,9 +4,11 @@
  */
 package csheets.ext.formeditor.ui;
 
+import csheets.ext.formeditor.InMemoryForm;
 import csheets.ui.ctrl.BaseAction;
 import csheets.ui.ctrl.UIController;
 import java.awt.event.ActionEvent;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -36,10 +38,13 @@ public class FormEditorEditAction extends BaseAction{
 	 * An action that presents a new window, in which the user can select a function of the showned ones.
 	 * @param event the event that was fired
 	 */
-	public void actionPerformed(ActionEvent event) {                
-		/*FormEditor invoke=new FormEditor(this.uiController);
-                invoke.setVisible(true);
-                invoke.setLocation(500, 200);*/
-	}
+	public void actionPerformed(ActionEvent event) {
+                InMemoryForm mem = InMemoryForm.getInstance();
+                if(mem.getDataList()!=null){
+                    FormEditorWindow call = new FormEditorWindow(mem.getForm(), mem.getDataList());
+                    call.setVisible(true);
+                    call.setLocation(500, 200);
+                }
+        }
    
 }
