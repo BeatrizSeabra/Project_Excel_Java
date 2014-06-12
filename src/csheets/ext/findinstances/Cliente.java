@@ -29,7 +29,7 @@ public class Cliente extends Thread{
     }
     public void run(){
 
-        boolean received = true;
+        boolean received = false;
         
         while(running)                
         {
@@ -47,7 +47,7 @@ public class Cliente extends Thread{
                     new DatagramPacket(sendData, sendData.length, IPAddress, 9877);                   
             socket.send(sendPacket);
 
-            socket.setSoTimeout(1000);
+            socket.setSoTimeout(10000);
 
                 while (!received) {
                     try {

@@ -118,7 +118,10 @@ public class ExcelExpressionCompiler implements ExpressionCompiler {
 	 */
 	protected Expression convert(Cell cell, Tree node) throws FormulaCompilationException {
 		// System.out.println("Converting node '" + node.getText() + "' of tree '" + node.toStringTree() + "' with " + node.getNumberOfChildren() + " children.");
-		if (node.getChildCount() == 0) {
+		if(node.getType()==FormulaParser.SEMI){
+                    convert(cell,node.getChild(1));
+                }
+                if (node.getChildCount() == 0) {
 			try {
 				switch (node.getType()) {
 					case FormulaLexer.NUMBER:

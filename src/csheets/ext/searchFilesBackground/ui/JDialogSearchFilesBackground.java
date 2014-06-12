@@ -198,7 +198,6 @@ public class JDialogSearchFilesBackground extends javax.swing.JDialog {
 
                     }
                     search.searchFilesBackground(pattern, dir,ui);
-                    JOptionPane.showMessageDialog(this, "File Search Finished!", "Search", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         }

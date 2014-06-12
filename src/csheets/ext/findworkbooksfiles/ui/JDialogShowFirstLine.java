@@ -217,7 +217,7 @@ public class JDialogShowFirstLine extends javax.swing.JDialog {
      */
     public void updateText(Cell[] firstRow) {
         textArea.setEditable(false);
-        String input = "First Row:\n";
+        String input = String.format("File: %s\nFirst Row:\n", filePath);
         for (int i = 0; i < firstRow.length; i++) {
             input += String.format(" %s |", firstRow[i].getContent());
         }

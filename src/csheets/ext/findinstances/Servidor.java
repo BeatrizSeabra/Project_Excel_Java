@@ -49,6 +49,7 @@ public class Servidor {
             String resp = "Recebi";
             byte[] msgr=resp.getBytes();
             DatagramPacket sendPacket2 = new DatagramPacket(msgr, msgr.length, receivePacket.getAddress(), 9876);
+            socket.send(sendPacket2);
             System.out.println("Enviei sucesso");
             receiveData = new byte[1024];
             
