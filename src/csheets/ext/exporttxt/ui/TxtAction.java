@@ -97,11 +97,12 @@ public class TxtAction extends BaseAction{
             String caminho = "";
             
             // USER OPTIONS FOR SEPARATOR AND HEADER
+            do{
             SEPARATOR = JOptionPane.showInputDialog("Choose Separator");
-            int dialogButton = JOptionPane.YES_NO_OPTION;
-            JOptionPane.showConfirmDialog (null,"Include Header ?","Header", dialogButton);
-            if(dialogButton == JOptionPane.YES_OPTION)         
-                 HEADER = JOptionPane.showInputDialog("Header text");
+            if (SEPARATOR.length()>1 || SEPARATOR.length()<1)
+                JOptionPane.showMessageDialog(null,"Invalid format, only 1 char","ERROR",JOptionPane.ERROR_MESSAGE);
+            }while (SEPARATOR.length() > 1 || SEPARATOR.length()<1);
+            HEADER = JOptionPane.showInputDialog("Header text");
                                  
             int retorno = fc.showSaveDialog(null);
             if (retorno == JFileChooser.APPROVE_OPTION) {

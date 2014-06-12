@@ -33,6 +33,11 @@
  * <br/>
  * <br/>
  *
+ * <b>S055u: Unit Tests</b><br/>
+ * Has this user story only have a UI and write the workbook events when they are called in a txt file, we don't create unit Tests. To teste and execute this US see Functional Tests below.
+ * <br/>
+ * <br/>
+ * 
  * @author Nélson Mourão
  **/
 /*
