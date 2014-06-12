@@ -21,12 +21,16 @@
  * <br/>
  *
  * <b>S073a: Design</b><br/>
- * <img src="../../../csheets/userstories/us046/doc-files/US046_design.png">
+ * <img src="../../../csheets/userstories/us046/doc-files/US046_design1.png">
  * <br/>
  * <br/>
  *
  * <b>S073c: Coding</b><br/>
- *
+ * Na implementaçao do codigo sera necessario utilizar uma extensao para a
+ * insercao de um botao.
+ * Sera necessario utilizar um painel onde irao ser colocados os botes, o 
+ * painel estara com o fundo transparente para assim ser possivel visualizar
+ * a folha de calculo.
  * <br/>
  * <br/>
  *
@@ -39,9 +43,12 @@
  *
  *
  *
- * @startuml doc-files/us046_design1.png menuBar -> ButtonSheet : create();
- * buttonSheet -> StyleToolbar : add(); buttonSheet -> SpreadSheetTable:
- * getselectedcells(); buttonSheet -> Workbook: show();
+ * @startuml 
+ * doc-files/us046_design1.png
+ * menuBar -> ButtonSheet : create();
+ * buttonSheet -> StyleToolbar : add(); 
+ * buttonSheet -> SpreadSheetTable:getselectedcells(); 
+ * buttonSheet -> Workbook: show();
  * @enduml
  *
  *

@@ -21,6 +21,8 @@ import javax.swing.JPanel;
  */
 public class ButtonAction extends FocusOwnerAction {
 
+    private int cont = 1;
+
     /**
      * The user interface controller
      */
@@ -49,14 +51,13 @@ public class ButtonAction extends FocusOwnerAction {
      * @param event the event that was fired
      */
     public void actionPerformed(ActionEvent event) {
-
         JPanel jp = new JPanel();
         jp.setOpaque(false);
         jp.setLayout(null);
 
-        JButton btn1 = new JButton("Button 1");
-        btn1.setBounds(200, 400, 100, 25);
-
+        JButton btn1 = new JButton("Button" + cont);
+        btn1.setBounds(200 + cont * 10, 400 + cont * 10, 100, 25);
+        cont++;
         jp.add(btn1);
         focusOwner.getRootPane().setGlassPane(jp);
         jp.setVisible(true);
