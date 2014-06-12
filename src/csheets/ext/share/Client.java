@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 /**
  * Classe responsável pela connecção a um ponto de partilha
  *
- * @author Rui 1110506
+ * @author Rui 1110506 and Marc
  */
 public class Client extends BaseConnection implements Runnable {
 
@@ -25,18 +25,14 @@ public class Client extends BaseConnection implements Runnable {
     private ObjectInputStream ois;
     private Socket con;
 
-    /**
-     * Cria um novo cliente para uma partilha previamente definida
-     *
-     */
     public Client(String pass, int port, Spreadsheet folha_actual, Address addres, String ip) {
         super(pass, folha_actual, port, addres, null);
         this.ip = ip;
     }
 
-    /**
-     * Pára a conecção com uma partilha
-     */
+    
+     //Pára a conecção com uma partilha
+    
     public void stopClient() {
         try {
             threadIn.interrupt();
@@ -44,7 +40,7 @@ public class Client extends BaseConnection implements Runnable {
                 threadOut.interrupt();
             }
             con.close();
-
+           
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -56,6 +52,7 @@ public class Client extends BaseConnection implements Runnable {
             InetAddress addressip = InetAddress.getByName(getIp());
             con = new Socket(addressip, getPort());
 
+            //enviar a password
             setOos(new ObjectOutputStream(getCon().getOutputStream()));
 
             //password
@@ -66,11 +63,15 @@ public class Client extends BaseConnection implements Runnable {
             setOis(new ObjectInputStream(getCon().getInputStream()));
             try {
                 String resposta = (String) decrypt(getOis().readObject());
-                threadIn = new Thread(new In(ois));
-                threadIn.start();
-
+               
+                    //criar as thread
+                    threadIn = new Thread(new BaseConnection.In(ois));
+                    threadIn.start();
+                    threadOut = new Thread(new BaseConnection.Out(oos));
+                    threadOut.start();
+                                
             } catch (ClassNotFoundException ex) {
-                System.err.println("error");
+                System.err.println("Error");
             }
         } catch (IOException f) {
             System.out.println("IOException: " + f.getMessage());
@@ -82,6 +83,10 @@ public class Client extends BaseConnection implements Runnable {
         return ip;
     }
 
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+    
     public ObjectOutputStream getOos() {
         return oos;
     }
