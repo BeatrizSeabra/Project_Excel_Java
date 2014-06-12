@@ -28,8 +28,8 @@ public class AdvancedWorkbookSearch {
 
     /**
      * Method that takes as arguments the "startingDirectory" where you want to
-     * search for workbook files, and a parameter "pattern" with the desired
-     * file extension. It's a recursive method that searches for workbook files
+     * search for workbook files, and a parameter "pattern" which is a regex expression
+     * that indicates the file extension. The method searches for workbook files
      * on the directory and its subdirectories. As files are found the results
      * will be shown in a JFrame. This method runs on a parallel thread.
      *
@@ -76,6 +76,8 @@ public class AdvancedWorkbookSearch {
                 }
                 if(!flag){
                     JOptionPane.showMessageDialog(null,"No workbooks were found in this directory!");
+                }else{
+                    JOptionPane.showMessageDialog(null,"The search has finished!");
                 }
             }
         }

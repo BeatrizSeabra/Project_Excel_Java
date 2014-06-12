@@ -13,6 +13,7 @@ import csheets.ui.ctrl.UIController;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -61,6 +62,8 @@ public class AdvancedWorkbookSearchAction extends BaseAction{
         AdvancedWorkbookSearch advancedWorkbookSearch = new AdvancedWorkbookSearch();
         JFrameWorkbookSearchResults workbookSearchResults= new JFrameWorkbookSearchResults(null);
         advancedWorkbookSearch.advancedWorkbookSearch(fc.getSelectedFile(), ".*\\.cls", workbookSearchResults);
+        JOptionPane.showMessageDialog(null, "The search began!\n This procedure may take a few minutes depending on the size of the directory you selected.\n"
+                + "You can keep using the CleanSheets application while the search is running.\n Do NOT close the list until the search is over!");
     }
     
 }

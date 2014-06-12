@@ -1,13 +1,12 @@
 package csheets.ext.button.ui;
 
-import java.awt.event.ActionEvent;
+import csheets.core.*;
+import java.awt.event.*;
 
-import csheets.ui.ctrl.FocusOwnerAction;
-import csheets.ui.ctrl.UIController;
+import csheets.ui.ctrl.*;
 
-import javax.swing.JButton;
+import javax.swing.*;
 
-import javax.swing.JPanel;
 
 /*
  *
@@ -16,6 +15,7 @@ import javax.swing.JPanel;
 public class ButtonAction extends FocusOwnerAction {
 
     private int cont = 1;
+    JPanel jp = new JPanel();
 
     /**
      * The user interface controller
@@ -45,15 +45,17 @@ public class ButtonAction extends FocusOwnerAction {
      * @param event the event that was fired
      */
     public void actionPerformed(ActionEvent event) {
-        JPanel jp = new JPanel();
+
         jp.setOpaque(false);
         jp.setLayout(null);
 
         JButton btn1 = new JButton("Button " + cont);
-        btn1.setBounds(200 + cont * 10, 400 + cont * 10, 100, 25);
         cont++;
+        Address i = this.uiController.getActiveCell().getAddress();
+        btn1.setBounds(i.getRow()*30 + 100, i.getColumn()*20 + 100, 90, 40);
         jp.add(btn1);
         focusOwner.getRootPane().setGlassPane(jp);
         jp.setVisible(true);
+
     }
 }
