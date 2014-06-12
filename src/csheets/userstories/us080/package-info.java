@@ -15,14 +15,16 @@
 * <br/>
 * 
 * <b>S001d: Design</b><br/>
+* Now that is understood the structure of the functionality that resulted of the US079, the choice was the next strategy.
 * Create two distinct classes, where each one has a running thread: UDPClient and UDPServer.
-* The first one, UDPClien, has a thread to continuously sending broadcaste requests to the entire network, with a string message, and waiting for a response with the same message.
+* The first one, UDPClien, has a thread continuously sending broadcaste requests to the network, waiting for a response.
 *
-* The second one, UDPServer, has a thread that is continuously listening for the message that has been combined before. Case it receives that message, respondes with is ip address.
+* The second one, UDPServer, has a thread that is continuously listening for the message. Case it receives some request, respondes with is ip address.
 * 
-* When the UDPClient class receives that response, it put that ip in a list of ip's. Both of these classes are singleton. 
+* When the UDPClient class receives some response, it put that ip in a list of ip's.
+* Both of these classes are singleton. 
 * 
-* The ChatUI class will have a thread (ThreadUpdateList) that calls a method that gets the list of ip's and puts them in the JList.
+* The ChatUI class will have a thread (ThreadUpdateList) that calls a method that gets the list of ip's and puts them in the JList witch contains the ip's.
 * The same thread must make stops from five seconds during its execution.
 * 
 * <img src="../../../csheets/userstories/us080/doc-files/us080_design1.png"> 
