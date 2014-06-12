@@ -7,7 +7,7 @@
  * Add the possibility of write a block (or sequence) of instructions. A block must be 
  * bounded by braces and his instructions splitted by ";". Instructions of a block 
  * are executed sequentially an the result of block is the result of last instruction of that block.
- * For example the formula "={1+2; sum(A1:A10); B3+4}” must result in execution sequentially of all
+ * For example the formula "={1+2; sum(A1:A10); B3+4}" must result in execution sequentially of all
  * expressions and the result will be the value of expression "B3+4".
  * <br/>
  * <br/>
