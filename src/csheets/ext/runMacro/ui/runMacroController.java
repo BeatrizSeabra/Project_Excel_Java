@@ -3,6 +3,7 @@ package csheets.ext.runMacro.ui;
 import csheets.core.Cell;
 import csheets.core.Workbook;
 import csheets.ui.ctrl.FocusOwnerAction;
+import csheets.ui.ctrl.UIController;
 import csheets.ui.sheet.SpreadsheetTable;
 import java.awt.event.ActionEvent;
 
@@ -12,9 +13,11 @@ import java.awt.event.ActionEvent;
  */
 public class runMacroController extends FocusOwnerAction {
 
+    protected UIController uiController;
     
-    public runMacroController(SpreadsheetTable focusOwner) {
+    public runMacroController(SpreadsheetTable focusOwner, UIController uicont) {
         this.focusOwner = focusOwner;
+        this.uiController = uicont;
     }
 
     /**
@@ -22,14 +25,11 @@ public class runMacroController extends FocusOwnerAction {
      */
     public String results(String macro ) {
         String [] lines = macro.split("\n");
-        Workbook WB = new Workbook(1);
+        int x = 30;
+        int y = 30;
+        Cell tmp = getEmptyCell(x, y);
         String res="";
-        //if(focusOwner == null) {
-           // return "";
-        //} else {
-        Cell tmp = WB.getSpreadsheet(0).getCell(0 ,0);
-        //Cell tmp2 = focusOwner.getSpreadsheet().getCell(30, 30);
-
+        
         for (int i = 0; i < lines.length; i++) {
             try {
                 String content = lines[i];
@@ -46,6 +46,18 @@ public class runMacroController extends FocusOwnerAction {
         }
         return res;
        // }
+    }
+    
+    /**
+     * Este metodo, retorna uma celula vazia.
+     */
+    public Cell getEmptyCell(int x, int y){
+        ++x;
+        Cell tmp = this.uiController.getActiveSpreadsheet().getCell(x, y);
+        if(!"".equals(tmp.getContent())) {
+            tmp = getEmptyCell(x, y);     
+        }
+        return tmp;
     }
 
     protected String getName() {
