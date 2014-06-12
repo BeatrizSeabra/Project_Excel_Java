@@ -8,8 +8,8 @@ import csheets.ui.ctrl.UIController;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.GroupLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -23,6 +23,7 @@ import javax.swing.JTextField;
 public class FormLinesWindow extends JFrame implements ActionListener {
     
     private JTextField lines = new JTextField();  
+    private String[] comboTypes = {"Edit Box/Button", "Text Box/Button", "Text Box/Edit Box" };
     
     public FormLinesWindow(UIController UIController){
         super("Creating a new form");
@@ -40,7 +41,13 @@ public class FormLinesWindow extends JFrame implements ActionListener {
     
     public void actionPerformed(ActionEvent e) {
                 try {
-                    FormEditorWindow editorWindow = new FormEditorWindow(Integer.valueOf(lines.getText()));
+                    String[] selected = new String[Integer.valueOf(lines.getText())];
+                    JComboBox box1 = new JComboBox(comboTypes);
+                    for(int i=0; i<Integer.valueOf(lines.getText()); i++){       
+                        JOptionPane.showMessageDialog( null, box1, "Select a type of line: "+i, JOptionPane.QUESTION_MESSAGE);
+                        selected[i]= box1.getSelectedItem().toString();
+                    }
+                    FormEditorWindow editorWindow = new FormEditorWindow(Integer.valueOf(lines.getText()), selected);
                     editorWindow.setVisible(true);
                     editorWindow.setLocation(500, 200);
                     editorWindow.setSize(250, 110);

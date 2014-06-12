@@ -27,16 +27,20 @@ public class TxtAction extends BaseAction {
      * The user interface controller
      */
     protected UIController uiController;
-
-    public static final String SEPARATOR = ",";
+    
+    public String SEPARATOR = ",";
+    public String HEADER ="";
 
     /**
      * Creates a new action.
      *
      * @param uiController the user interface controller
      */
+   
+
     public TxtAction(UIController uiController) {
         this.uiController = uiController;
+        
     }
 
     protected String getName() {
@@ -68,6 +72,15 @@ public class TxtAction extends BaseAction {
             //fc.addChoosableFileFilter(new FileNameExtensionFilter("", "pdf"));
             fc.setFileFilter(new FileNameExtensionFilter("Ficheiro TXT (.txt)", "txt"));
             String caminho = "";
+            
+            // USER OPTIONS FOR SEPARATOR AND HEADER
+            SEPARATOR = JOptionPane.showInputDialog("Choose Separator");
+            int dialogButton = JOptionPane.YES_NO_OPTION;
+            JOptionPane.showConfirmDialog (null,"Include Header ?","Header", dialogButton);
+            if(dialogButton == JOptionPane.YES_OPTION) {
+               HEADER = JOptionPane.showInputDialog("Header text");
+            } else HEADER = "";
+                     
             int retorno = fc.showSaveDialog(null);
             if (retorno == JFileChooser.APPROVE_OPTION) {
                 caminho = fc.getSelectedFile().getAbsolutePath();
@@ -78,7 +91,7 @@ public class TxtAction extends BaseAction {
 
             System.out.println(c);
             System.out.println(r);
-
+            wr.println(SEPARATOR+HEADER);
             for (int row = 0; row < r + 1; row++) {
                 for (int column = 0; column < c + 1; column++) {
                     wr.print(this.uiController.getActiveSpreadsheet().getCell(column, row).getContent() + SEPARATOR);
