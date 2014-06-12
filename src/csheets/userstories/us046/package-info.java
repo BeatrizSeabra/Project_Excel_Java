@@ -21,6 +21,7 @@
  * <br/>
  *
  * <b>S073a: Design</b><br/>
+ * Diagrama de sequencia relativo ao US046.
  * <img src="../../../csheets/userstories/us046/doc-files/US046_design1.png">
  * <br/>
  * <br/>
@@ -35,12 +36,12 @@
  * <br/>
  *
  * <b>S073u: Unit Tests</b><br/>
- *
+ * A realização de testes unitarios na interface grafica nao e possivel.
  * <br/>
  * <br/>
  * <b>S028f: Functional Tests</b><br/>
- *
- *
+ * 1- Correr o programa;<br/>
+ * 2- Seleceionar no Menu a opcao "Button" e de seguida "insert button";<br/>
  *
  *
  * @startuml 

@@ -1,21 +1,15 @@
 package csheets.ext.button.ui;
 
-import csheets.core.Address;
-
 import java.awt.event.ActionEvent;
 
 import csheets.ui.ctrl.FocusOwnerAction;
 import csheets.ui.ctrl.UIController;
 
-import java.awt.Dimension;
-
 import javax.swing.JButton;
 
 import javax.swing.JPanel;
 
-/**
- * An action of the simple extension that exemplifies how to interact with the
- * spreadsheet.
+/*
  *
  * @author Tiba
  */
@@ -46,7 +40,7 @@ public class ButtonAction extends FocusOwnerAction {
 
     /**
      * The action proposal is create a button over the sheet with a randow text
-     * "Button ..". Scrowling the spreadsheet dont't affect the create buttons.
+     * "Button .."
      *
      * @param event the event that was fired
      */
@@ -55,7 +49,7 @@ public class ButtonAction extends FocusOwnerAction {
         jp.setOpaque(false);
         jp.setLayout(null);
 
-        JButton btn1 = new JButton("Button" + cont);
+        JButton btn1 = new JButton("Button " + cont);
         btn1.setBounds(200 + cont * 10, 400 + cont * 10, 100, 25);
         cont++;
         jp.add(btn1);
