@@ -25,7 +25,7 @@ public class Servidor {
         ArrayList<InetAddress> ips = new ArrayList();
         
        //Envio de uma mensagem em broadcast
-        DatagramSocket socket = new DatagramSocket();
+        DatagramSocket socket = new DatagramSocket(9877);
         socket.setBroadcast(true);
         InetAddress IPAddress = InetAddress.getByName("255.255.255.255");     
         String sentence = "Quem está?";
