@@ -17,14 +17,24 @@ import java.util.logging.Logger;
  */
 public class Cliente extends Thread{
     boolean running =true;
-    public void run()
+    DatagramSocket socket;
+    
+    public Cliente()
     {
-        boolean received =true;
+        try{
+         socket = new DatagramSocket(9876); 
+        } catch (SocketException ex1) {
+                    Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex1);
+        }
+    }
+    public void run(){
+
+        boolean received = true;
         
         while(running)                
         {
             try{
-            DatagramSocket socket = new DatagramSocket(9876); 
+            
             socket.setReuseAddress(true);
             byte[] receiveData = new byte[1024];                 
             DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);                   
@@ -34,7 +44,7 @@ public class Cliente extends Thread{
             String resp = "Eu";                
             byte[] sendData = resp.getBytes();                   
             DatagramPacket sendPacket =                   
-                    new DatagramPacket(sendData, sendData.length, IPAddress, 9876);                   
+                    new DatagramPacket(sendData, sendData.length, IPAddress, 9877);                   
             socket.send(sendPacket);
 
             socket.setSoTimeout(1000);
@@ -47,17 +57,17 @@ public class Cliente extends Thread{
                         running = false;
                     } catch (SocketTimeoutException ex) {
                         System.out.println("A tentar enviar outra vez o ip");
-                        receivePacket = new DatagramPacket(sendData, sendData.length, IPAddress, 15600);
+                        receivePacket = new DatagramPacket(sendData, sendData.length, IPAddress, 9877);
                         socket.send(receivePacket);
                     }
                 }
-            } catch (SocketException ex) {
-                    Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
+            
             } catch (IOException ex) {
                 Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
+    
     
     public void startRunning() {
         running = true;
