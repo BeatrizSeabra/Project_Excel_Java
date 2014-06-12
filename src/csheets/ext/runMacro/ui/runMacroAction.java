@@ -5,6 +5,7 @@ import csheets.ui.ctrl.BaseAction;
 import csheets.ui.ctrl.UIController;
 import java.awt.Dimension;
 import javax.swing.JFrame;
+import csheets.ui.ctrl.FocusOwnerAction;
 
 /**
  * @author 1120564MarcoEsteves
@@ -35,7 +36,8 @@ public class runMacroAction extends BaseAction {
     }
 
     public void actionPerformed(ActionEvent event) {
-        JDialogRunMacro p= new JDialogRunMacro(runMacro,true);
+        JDialogRunMacro p= new JDialogRunMacro(runMacro,true,uiController);
+        p.setTitle("RUN MACRO");
         p.setVisible(true);
         p.setResizable(enabled);
         p.setMinimumSize(new Dimension(40, 40));

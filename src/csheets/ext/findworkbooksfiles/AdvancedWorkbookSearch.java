@@ -10,7 +10,9 @@ import java.io.File;
 import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  * Class that receives the directory and the extension pattern to find workbook
@@ -50,23 +52,30 @@ public class AdvancedWorkbookSearch {
 
             @Override
             public void run() {
-                if (startingDirectory.isDirectory()) {
-                    File[] sub = startingDirectory.listFiles(new FileFilter() {
-                        @Override
-                        public boolean accept(File pathname) {
-                            return pathname.isDirectory() || pathname.getName().matches(pattern);
+                boolean flag=false;
+                Stack<File> stack = new Stack<File>();
+                stack.push(startingDirectory);
+                while (!stack.isEmpty()) {
+                    File child = stack.pop();
+                    if (child.isDirectory()) {
+                        File[] sub = child.listFiles(new FileFilter() {
+                            @Override
+                            public boolean accept(File pathname) {
+                                return (pathname.isDirectory() || pathname.getName().matches(pattern));
+                            }
+                        });
+                        if (!(sub == null)) {
+                            for (File fileDirectory : sub) {
+                                stack.push(fileDirectory);
+                            }
                         }
-                    });
-                    for (File fileDirectory : sub) {
-                        if (fileDirectory.isDirectory()) {
-                            // add on list<File> a sub directory of the main directory,
-                            // using an recursive method to find again on the others subdirectories
-                            advancedWorkbookSearch(fileDirectory, pattern, workbookSearchResults);
-                        } else {
-                            // add on list<File>, a valid workbook file
-                            workbookSearchResults.updateInformation(fileDirectory);
-                        }
+                    } else if (child.isFile()) {
+                        workbookSearchResults.updateInformation(child);
+                        flag=true;
                     }
+                }
+                if(!flag){
+                    JOptionPane.showMessageDialog(null,"No workbooks were found in this directory!");
                 }
             }
         }

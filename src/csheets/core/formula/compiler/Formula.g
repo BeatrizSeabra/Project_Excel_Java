@@ -107,6 +107,10 @@ literal
 	|	STRING
 	;
 	
+block
+        :       EQ! LBRA (attribution | comparison) (SEMI (attribution | comparison))* RBRA EOF!
+        ;
+     
 
 fragment LETTER: ('a'..'z'|'A'..'Z') ;
   
@@ -167,7 +171,9 @@ TEMP : '@' ;
 COMMA	: ',' ;
 SEMI	: ';' ;
 LPAR	: '(' ;
-RPAR	: ')' ; 
+RPAR	: ')' ;
+LBRA    : '{' ;
+RBRA    : '}' ; 
 
 
 /* White-space (ignored) */

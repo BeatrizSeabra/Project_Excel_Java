@@ -25,6 +25,9 @@
  * <br/>
  * 
  * <b>S076c: Coding</b><br/>
+ * see:<br/>
+ * <a href="../../../csheets/ext/runMacro/package-summary.html">csheets.ext.runMacro</a><br/>
+ * <a href="../../../csheets/ext/runMacro/ui/package-summary.html">csheets.ext.runMacro.ui</a><br/>
  * <br/>
  * <br/>
  * 

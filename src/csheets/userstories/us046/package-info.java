@@ -21,27 +21,35 @@
  * <br/>
  *
  * <b>S073a: Design</b><br/>
- * <img src="../../../csheets/userstories/us046/doc-files/US046_design.png">
+ * Diagrama de sequencia relativo ao US046.
+ * <img src="../../../csheets/userstories/us046/doc-files/US046_design1.png">
  * <br/>
  * <br/>
  *
  * <b>S073c: Coding</b><br/>
- *
+ * Na implementaçao do codigo sera necessario utilizar uma extensao para a
+ * insercao de um botao.
+ * Sera necessario utilizar um painel onde irao ser colocados os botes, o 
+ * painel estara com o fundo transparente para assim ser possivel visualizar
+ * a folha de calculo.
  * <br/>
  * <br/>
  *
  * <b>S073u: Unit Tests</b><br/>
- *
+ * A realização de testes unitarios na interface grafica nao e possivel.
  * <br/>
  * <br/>
  * <b>S028f: Functional Tests</b><br/>
+ * 1- Correr o programa;<br/>
+ * 2- Seleceionar no Menu a opcao "Button" e de seguida "insert button";<br/>
  *
  *
- *
- *
- * @startuml doc-files/us046_design1.png menuBar -> ButtonSheet : create();
- * buttonSheet -> StyleToolbar : add(); buttonSheet -> SpreadSheetTable:
- * getselectedcells(); buttonSheet -> Workbook: show();
+ * @startuml 
+ * doc-files/us046_design1.png
+ * menuBar -> ButtonSheet : create();
+ * buttonSheet -> StyleToolbar : add(); 
+ * buttonSheet -> SpreadSheetTable:getselectedcells(); 
+ * buttonSheet -> Workbook: show();
  * @enduml
  *
  *

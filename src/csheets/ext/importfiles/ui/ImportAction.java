@@ -22,7 +22,7 @@ import java.util.List;
  * An action of the simple extension that exemplifies how to interact with the
  * spreadsheet.
  *
- * @author Tiago
+ * @author Tiago and Frederico Calor Us70 and Us71
  */
 public class ImportAction extends BaseAction {
 
@@ -32,7 +32,8 @@ public class ImportAction extends BaseAction {
     protected UIController uiController;
     private FileChooser chooser;
 
-    public static final String SEPARATOR = ",";
+        public static boolean HAS_HEADER = false;
+        public static String SEPARATOR = ",";
 
     /**
      * Creates a new action.
@@ -40,8 +41,8 @@ public class ImportAction extends BaseAction {
      * @param uiController the user interface controller
      */
     public ImportAction(UIController uiController, FileChooser chooser) {
-        this.uiController = uiController;
-        this.chooser = chooser;
+        this.uiController = uiController; // menu inicial
+        this.chooser = chooser; // escolher ficheiro
     }
 
     protected String getName() {
@@ -60,9 +61,31 @@ public class ImportAction extends BaseAction {
      */
     public void actionPerformed(ActionEvent event) {
 
-        //Filechooser to select file
+       
+        
+        //Filechooser to select file      
         File file = getFile();
-
+        //nova thread que importa o ficheiros
+        Thread thread = new Thread(new FileImporter(file));
+        //iniciar a thread
+        thread.start();
+    }
+    // classe que implementa a thread
+    private class FileImporter implements Runnable{
+        File file;
+        
+        public FileImporter(File file){
+            this.file = file;
+        }
+        @Override
+        public void run() {
+            //chama o import file
+            importFile(file);
+        }
+        
+    }
+    
+    private void importFile(File file) {
         //Variables to manipulate txt file
         FileReader fileReader = null;
         BufferedReader bufferedReader;
@@ -91,13 +114,49 @@ public class ImportAction extends BaseAction {
                 //Reads the first line
                 try {
                     line = bufferedReader.readLine();
+                    
+                    //separador e o primeiro caracter
+                    //NAO PODE SER CARACTERES RESERVADOS EM EXPRESSOES REGULARES!!!!!
+                    //exemplos ->  [ ] - + \ * ( ) ? . 
+                    SEPARATOR=""+line.charAt(0);
+                    //primeira linha sem contar com o primeiro caracter que e o separador
+                    line = line.substring(1);
+                    // ver se tem o cabeçalho
+                    if(line.contains(SEPARATOR))
+                        HAS_HEADER=false;
+                    else HAS_HEADER=true;
+                    
                 } catch (IOException ex) {
                     showErrorDialog("There was a problem reading a line.\n");
                 }
+                
+                if(HAS_HEADER){
+                    data = Arrays.asList(line.split(SEPARATOR));
+                    for (int i = 0; i < data.size(); i++) {
+                        cl = ss.getCell(addr.getColumn() + i, addr.getRow() + it);
 
+                        //Inserts data into the cell
+                        try {
+                            cl.setContent("h:"+data.get(i));
+                        } catch (FormulaCompilationException ex) {
+                            showErrorDialog("There was a problem inserting data into the cell\n");
+                        }
+
+                    }
+                    
+                    it++;
+                    
+                    try {
+                        line = bufferedReader.readLine();
+                    } catch (IOException ex) {
+                        showErrorDialog("There was a problem reading the file\n");
+                    }
+                    
+                }
+                
                 while (line != null) {
-
-                    data = Arrays.asList(line.split(","));
+                    // utilizo a variavel em cima
+                    data = Arrays.asList(line.split(SEPARATOR));
 
                     for (int i = 0; i < data.size(); i++) {
                         cl = ss.getCell(addr.getColumn() + i, addr.getRow() + it);
