@@ -31,10 +31,22 @@
 * <br/>
 * 
 * <b>S016u: Unit Tests</b><br/>
+ * Neste caso de uso (US016) não foi possível realizar teste unitários devido ao facto de os metodos a serem testados (que estão dentro de uma classe JForm) não terem return.<br/>
+ * Devido à falta de return é dificil de esperar um resultado para casos de testes.<br/>
+ * Por exemplo:<br/>
+ * Como o metodo run não possui um return logo é dificil de ter um resultado esperado para confirmar o caso de teste.<br/>
+ * <br/>
 * <br/>
 * <br/>
 * 
 * <b>S016f: Functional Tests</b><br/>
+* Abrir uma instancia do cleansheet e ir ao menu extensions e escolher o Menu - > Email Configuration. <br/>
+* Preencher com os dados do email (email e password) o host e a porta. <br/>
+* Se escolher o botao save ele grava os dados num ficheiro e carrega-o automaticamente nas proximas vezes.<br/>
+* Tambem pode escolher o botao test que envia um email para o seu email como teste.
+* host que utilizei : smtp.gmail.com <br/>
+* port: 857 <br/>
+
 * <br/>
 * <br/>
 * 

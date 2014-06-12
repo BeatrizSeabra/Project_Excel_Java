@@ -137,7 +137,7 @@ public class ImportAction extends BaseAction {
 
                         //Inserts data into the cell
                         try {
-                            cl.setContent("h:"+data.get(i));
+                            cl.setContent(data.get(i));
                         } catch (FormulaCompilationException ex) {
                             showErrorDialog("There was a problem inserting data into the cell\n");
                         }
