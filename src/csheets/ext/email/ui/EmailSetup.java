@@ -21,8 +21,22 @@ public class EmailSetup extends javax.swing.JFrame {
         initComponents();
         // lê os dados apartir do ficheiro
         EmailAccount account = new EmailAccount();
+                Load(account);
 
     }
+    
+      private void Load(EmailAccount account){
+                account.Load();
+                jTextField1.setText(account.getName());
+                jTextField2.setText(account.getEmail());
+                jPasswordField1.setText(account.getPassword());
+                jTextField3.setText(account.getHost());
+                jTextField4.setText(account.getPort());
+        }
+        
+        private void Save(EmailAccount account){
+                account.Save();
+        }
 
 
     @SuppressWarnings("unchecked")
@@ -80,7 +94,7 @@ public class EmailSetup extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Ok");
+        jButton3.setText("Save");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -107,15 +121,13 @@ public class EmailSetup extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(135, 135, 135)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addComponent(jButton2))
-                            .addComponent(jButton3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(123, 123, 123)
+                        .addComponent(jButton3)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)
+                        .addGap(18, 18, 18)
                         .addComponent(jButton1)
-                        .addContainerGap(166, Short.MAX_VALUE))
+                        .addContainerGap(97, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
@@ -183,7 +195,10 @@ public class EmailSetup extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField3ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        dispose();
+         EmailAccount acc = new EmailAccount(jTextField2.getText(), String.valueOf(jPasswordField1.getPassword()), jTextField1.getText(), jTextField3.getText(), jTextField4.getText());
+         Save(acc);
+               jButton3.setEnabled(false);
+                JOptionPane.showMessageDialog(this, "Setup saved.");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

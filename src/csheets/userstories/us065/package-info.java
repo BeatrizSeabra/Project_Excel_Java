@@ -6,7 +6,7 @@
  *
  * <b>Requirement</b><br/>
  * Após estabelecida a conexão entre duas instâncias do cleansheets as
- * alterações efectuadas em qualquer dos “lados” devem dar origem a
+ * alteracoes efectuadas em qualquer dos "lados" devem dar origem a
  * actualizações imediatas
  * <br/>
  * <br/>

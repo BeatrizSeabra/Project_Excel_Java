@@ -4,29 +4,29 @@
 * <br/>
 * 
 * <b>Requirement</b><br/>
-* Deve existir uma janela que permita “descrever” um formulário. Os
-formulários são janelas que permitem a introdução de dados. Os formulários devem ser simples. Devem ser
-constituidos por linhas. Em cada linha deve ser possível deﬁnir 2 compoenentes visuais. Os componentes
-visuais suportados são: botao, edit box e text box. Na janela de edição de formulário deve haver um botão
-“play” para testar o formulário. Para já apenas é necessário suportar um formulário.
+* Deve existir uma janela que permita "descrever" um formulario. Os
+formularios sao janelas que permitem a introducao de dados. Os formularios devem ser simples. Devem ser
+constituidos por linhas. Em cada linha deve ser possivel definir 2 componentes visuais. Os componentes
+visuais suportados sao: botao, edit box e text box. Na janela de edicao de formulario deve haver um botao
+"play" para testar o formulario. Para ja apenas e necessario suportar um formulario.
 * <br/>
 * <br/>
 *  
 * <b>S052a: Analysis</b><br/>
-* US052 consiste em criar uma extensão, que consiste numa janela, cuja tem como principal objectivo criar formulários.
-* Isto é, nesta fase inicial, só será possível a existência de um único formulário carregado na memória, isto siginifica que ao criar um novo formulário, esse virá substituir o existente (caso exista), também será possível editar um formulário existente.
-* As opções de 'Editar' ou 'Criar novo' são exibidas numa janela a parte, caso seja escolhida a opção 'Criar novo', será necessário o utilizador inserir o número de linhas do formulário.
-* O formulário é constituido por linhas, em que cada linha só pode possuir dois componentes visuais que são editáveis, dos três referidos no Requerimento(botão, edit box e text box).
-* Existe também um botão 'play' que tem como principal objectivo visualizar o esquema de formulário que o utilizador criou.
+* US052 consiste em criar uma extensao, que consiste numa janela, cuja tem como principal objectivo criar formularios.
+* Isto e, nesta fase inicial, sa sera possível a existência de um único formulario carregado na memaria, isto siginifica que ao criar um novo formulario, esse vira substituir o existente (caso exista), tambem sera possível editar um formulario existente.
+* As opcões de 'Editar' ou 'Criar novo' sao exibidas numa janela a parte, caso seja escolhida a opcao 'Criar novo', sera necessario o utilizador inserir o número de linhas do formulario.
+* O formulario e constituido por linhas, em que cada linha sa pode possuir dois componentes visuais que sao editaveis, dos tres referidos no Requerimento(botao, edit box e text box).
+* Existe também um botao 'play' que tem como principal objectivo visualizar o esquema de formulario que o utilizador criou.
 * 
 * <br/>
 * <br/>
 * 
 * <b>S052d: Design</b><br/>
-* Para realizar este User Story será necessário criar elementos de Interface Gráfica, subclasse da UIExtension.
-* Classe da Extensão FormEdit subclasse da Extension.
-* Serão necessárias várias janelas de interface com o utilizador.
-* As classes serão implementadas de forma que a instáncia de um formulário criado/editado fiquei gravada na memória.
+* Para realizar este User Story sera necessario criar elementos de Interface Grafica, subclasse da UIExtension.
+* Classe da Extensao FormEdit subclasse da Extension.
+* Serao necessarias varias janelas de interface com o utilizador.
+* As classes serao implementadas de forma que a instancia de um formulario criado/editado fiquei gravada na memaria.
 * <img src="../../../csheets/userstories/us052/doc-files/us052_design1.png"> 
 * <br/>
 * <br/>

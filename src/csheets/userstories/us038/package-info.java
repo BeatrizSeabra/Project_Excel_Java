@@ -1,19 +1,19 @@
 /**
- * Documentação tecnica da user story 038 : Variável temporária. 
+ * Documentacao tecnica da user story 038 : Variavel temporaria. 
  * <br/>
  * <br/>
  * 
  * <b>Requirement</b><br/>
- * Acrescentar o conceito de variável temporária. As variáveis temporárias devem ter um nome que se inicia pelo simbolo “@”. <br/>
- * Quando a variável é referida numa fórmula ela deve ser criada se ainda não existir. <br/>
- * Caso exista, deve-se utilizar “essa"variável. O seu valor permanece até ser sobreposto ou se fechar a folha. <br/>
+ * Acrescentar o conceito de variavel temporaria. As variaveis temporarias devem ter um nome que se inicia pelo simbolo "@". <br/>
+ * Quando a variavel e referida numa formula ela deve ser criada se ainda nao existir. <br/>
+ * Caso exista, deve-se utilizar "essa" variavel. O seu valor permanece ate ser sobreposto ou se fechar a folha. <br/>
  * <br/>
  * <br/>
  *  
  * <b>S038a: Analysis</b><br/>
- * Escolher o local onde vai ser implementada a funcionalidade. Como é um elemento de uma fórmula na folha de Excel, será em principio implementado nos packages csheets.core.formula e csheets.core.formula.compiler. <br/>
- * Análise dos packages referidos anteriormentes e necessária a análise da utilização de referências em Excel, como modo de auxiliar <br/>
- * Deverá ser ainda necessário a alteração da gramatica das fórmulas de modo a poder ser utilizada essa funcionalidade.
+ * Escolher o local onde vai ser implementada a funcionalidade. Como e um elemento de uma formula na folha de Excel, sera em principio implementado nos packages csheets.core.formula e csheets.core.formula.compiler. <br/>
+ * Analise dos packages referidos anteriormentes e necessaria a analise da utilizacao de referências em Excel, como modo de auxiliar <br/>
+ * Devera ser ainda necessario a alteracao da gramatica das formulas de modo a poder ser utilizada essa funcionalidade.
  * <br/>
  * <br/>
  * 

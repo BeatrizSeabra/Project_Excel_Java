@@ -248,7 +248,7 @@ public class UIController implements SpreadsheetAppListener {
 	public TransferHandler getCellTransferHandler() {
 		return transferHandler;
 	}
-        
+        // Initialize the ArrayList events, workbook events and cell events
         private void initEvl()
         {
             evl.add("onClick");
@@ -259,20 +259,22 @@ public class UIController implements SpreadsheetAppListener {
             evl.add("sheetDeleted");
             evl.add("sheetRenamed");
         }
-        
+        // returns the  ArrayList events
         public ArrayList<String> getEvl()
         {
             return evl;
         }
-        
+        // set the ArrayList events
         public void setEvl(ArrayList<String> e)
         {
             evl=e;
         }
+        //method to write in the logFile when the workbook events occurs
         public void writeLogFileWB(String event)
         {
             WriteLogFile.writeLogFile( event, getEvl());
         }
+        //method to write in the logFile when the cell events occurs
         public void writeLogFile(String cell, String event)
         {
             WriteLogFile.writeLogFile(cell, event, getEvl());
