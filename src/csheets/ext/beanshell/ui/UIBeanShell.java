@@ -102,6 +102,12 @@ public class UIBeanShell extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+         if(jTextArea1.getText().equals("")){
+             JOptionPane.showMessageDialog(rootPane, "Must enter a macro");
+             return;
+         }
+        
+
           //coloca a area dos resultados em branco
           jTextArea2.setText("");
           ArrayList<String> resultados = new ArrayList();
@@ -120,10 +126,10 @@ public class UIBeanShell extends javax.swing.JFrame {
                             try {
                                 resultados.add(interpreter.Execute(macro));
                             } catch (EvalError ex1) {
-                                JOptionPane.showMessageDialog(rootPane, "Erro a executar macro");
+                                JOptionPane.showMessageDialog(rootPane, "Error ocurred executing macro");
                             }
                             } catch (EvalError ex) {
-                                JOptionPane.showMessageDialog(rootPane, "Erro a executar macro");
+                                JOptionPane.showMessageDialog(rootPane, "Error ocurred executing macro");
                             }
                     }
                     //preenche a jTextArea2 com os resultados

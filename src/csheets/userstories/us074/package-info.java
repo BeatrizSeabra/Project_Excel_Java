@@ -4,9 +4,9 @@
  * <br/>
  * 
  * <b>Requirement</b><br/>
- *  A exportação de dados deve ser efectuada em “paralelo”. Deve ser
- *  possível definir os caracteres separadores de campo e se existe
- *  linha cabeçalho ou não.
+ *  A exportacao de dados deve ser efectuada em "paralelo". Deve ser
+ *  possivel definir os caracteres separadores de campo e se existe
+ *  linha cabecalho ou nao.
  * <br/>
  * <br/>
  *  
