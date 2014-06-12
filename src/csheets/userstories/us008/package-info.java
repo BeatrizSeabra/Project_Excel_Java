@@ -25,7 +25,14 @@
  * <br/>
  * <br/>
  *
- *<>
+ *<b>S007c: Coding</b><br/>
+ * The class in use is the CellTransferHandler, i had some problems using this one because a NullPointer exception would appear, to fix this, i had to do some research and realize that the problem,
+ * was that this class is "activated" when the cells are either copied or moved.
+ * see:<br/>
+ * <a href="../../../csheets/ext/sort/package-summary.html">csheets.ext.sort</a><br/>
+ * <a href="../../../csheets/ext/sort/ui/package-summary.html">csheets.ext.sort.ui</a><br/>
+ * <br/>
+ * <br/>
  *
  *
  *
