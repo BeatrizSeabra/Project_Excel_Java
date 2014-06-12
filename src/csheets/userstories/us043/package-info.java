@@ -32,6 +32,9 @@
  * <br/>
  * 
  * <b>S076u: Unit Tests</b><br/>
+ * see:<br/>
+ * <a href="../../../csheets/ext/runMacro/package-summary.html">csheets.ext.runMacro</a><br/>
+ * <a href="../../../csheets/ext/runMacro/ui/package-summary.html">csheets.ext.runMacro.ui</a><br/>
  * <br/>
  * <br/>
  * 
