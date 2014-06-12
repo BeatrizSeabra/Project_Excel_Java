@@ -18,6 +18,7 @@
 * 
 * <b>S016d: Design</b><br/>
 * <br/>
+* O Diagrama de sequencia é muito parecido com o do us016 porque faz basicamente o mesmo muda só o local no menu a seleccionar e o metodo que chama. <br/>
 * <br/>
 * 
 * <b>S016c: Coding</b><br/>
@@ -38,7 +39,14 @@
 /*
 *
  @startuml doc-files/us017_design1.png
-
+UIController -> EmailExtension : getUIExtension(this);
+EmailExtension -> UIExtensionEmail : new();
+UIExtensionEmail -> EmailMenu : getMenu();
+EmailMenu -> SendAction : new EmailAction();
+SendAction -> EmailSetup : new();
+EmailSetup -> EmailAccount : new EmailAccount();
+EmailAccount -> EmailSetup : EmailAccount data;
+EmailSetup -> EmailSetup : sendEmail();
  @enduml
 *
 */
