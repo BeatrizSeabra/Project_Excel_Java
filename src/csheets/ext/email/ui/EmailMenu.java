@@ -27,6 +27,7 @@ public class EmailMenu extends JMenu {
 		setMnemonic(KeyEvent.VK_E);
 
 		// Adds Email actions
-		add(new EmailAction(uiController));        
+		add(new EmailAction(uiController));
+                add(new SendAction(uiController));
 	}	
 }
