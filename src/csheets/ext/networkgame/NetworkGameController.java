@@ -94,7 +94,7 @@ public class NetworkGameController {
 
     public static int parseGame(byte[] data) {
          String s = "";
-        for (int i = 0; i < 3; i++) {
+        for (int i = 2; i < 3; i++) {
             s += (char) data[i];
         }
         
