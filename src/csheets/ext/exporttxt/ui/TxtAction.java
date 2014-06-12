@@ -5,7 +5,6 @@
  */
 package csheets.ext.exporttxt.ui;
 
-import csheets.ext.importfiles.ui.ImportAction;
 import csheets.ui.ctrl.BaseAction;
 import csheets.ui.ctrl.UIController;
 import java.awt.event.ActionEvent;
@@ -81,12 +80,12 @@ public class TxtAction extends BaseAction{
         @Override
         public void run() {
             //chama o import file
-            importFile(file);
+            exportFile(file);
         }
       
     }
     
-    private void importFile(File file) {
+    private void exportFile(File file) {
         int c = this.uiController.getActiveSpreadsheet().getColumnCount();
         int r = this.uiController.getActiveSpreadsheet().getRowCount();
            
@@ -99,13 +98,10 @@ public class TxtAction extends BaseAction{
             
             // USER OPTIONS FOR SEPARATOR AND HEADER
             SEPARATOR = JOptionPane.showInputDialog("Choose Separator");
-            //
             int dialogButton = JOptionPane.YES_NO_OPTION;
             JOptionPane.showConfirmDialog (null,"Include Header ?","Header", dialogButton);
-            if(dialogButton == JOptionPane.NO_OPTION){
-               HEADER = "";
-            }else 
-               HEADER = JOptionPane.showInputDialog("Header text");
+            if(dialogButton == JOptionPane.YES_OPTION)         
+                 HEADER = JOptionPane.showInputDialog("Header text");
                                  
             int retorno = fc.showSaveDialog(null);
             if (retorno == JFileChooser.APPROVE_OPTION) {
