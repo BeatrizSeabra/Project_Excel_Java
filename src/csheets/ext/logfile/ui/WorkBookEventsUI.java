@@ -20,8 +20,10 @@ public class WorkBookEventsUI extends javax.swing.JFrame {
      */
     public WorkBookEventsUI(UIController uic) {
         uiController=uic;
-        ArrayList<String> mylist=uiController.getEvl();
+        ArrayList<String> mylist=uiController.getEvl(); //copy the ArrayList events
         initComponents();
+        
+        //set the checkBoxes activated
         CBOpen.setSelected(true);
         CBClose.setSelected(true);
         CBsheetCreated.setSelected(true);
