@@ -1,5 +1,5 @@
 /**
- * Documentação tecnica da user story 071 : Iportação Paralela. 
+ * Documentação tecnica da user story 071 : Importação Paralela. 
  * <br/>
  * <br/>
  * 
@@ -50,7 +50,11 @@
  */
 /*
  *
-  @startuml doc-files/us037_design1.png
+  @startuml doc-files/us071_design1.png
+    extensioImport->uiExtensionImport: getUiExtension() 
+    uiExtensionImport->importMenu: getMenu() 
+    importMenu->importAction: new ImportAction()
+    importAction->importAction: FileImport() 
   
   @enduml
  *
