@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Diogo
+ * @author Diogo Moreira (1120339)
  */
 public class JDialogShowFirstLine extends javax.swing.JDialog {
 
@@ -211,6 +211,10 @@ public class JDialogShowFirstLine extends javax.swing.JDialog {
         });
     }
 
+    /**
+     * Method that inserts the "sample" of a workbook on the textArea
+     * @param firstRow is an array of Cell objetcs with the information of the first row of the first spreadsheet on a workbook
+     */
     public void updateText(Cell[] firstRow) {
         textArea.setEditable(false);
         String input = "First Row:\n";
@@ -222,6 +226,10 @@ public class JDialogShowFirstLine extends javax.swing.JDialog {
 
     private String filePath;
 
+    /**
+     * Sets the path of the file which sample is shown on the JDialog
+     * @param filePath 
+     */
     public void setFilePath(String filePath) {
         this.filePath = filePath;
     }

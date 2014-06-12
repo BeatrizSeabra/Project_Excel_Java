@@ -8,7 +8,6 @@ package csheets.ext.searchFilesBackground.ui;
 import csheets.ui.FileChooser;
 import csheets.ui.ctrl.UIController;
 import csheets.ui.ext.UIExtension;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
@@ -26,6 +25,7 @@ public class JDialogSearchFilesBackground extends javax.swing.JDialog {
         super(parent, modal);
         this.setModal(true);
         initComponents();
+        setLocationRelativeTo(null);
         this.uiController = uiController;
     }
 
@@ -183,12 +183,11 @@ public class JDialogSearchFilesBackground extends javax.swing.JDialog {
                 if (pattern.isEmpty()) {
                     JOptionPane.showMessageDialog(this, "Invalid Pattern", "ERROR", JOptionPane.ERROR_MESSAGE);
                 } else {
-
-                    String[] files = null;
+                    dispose();
+                    JOptionPane.showMessageDialog(this, "File Search Started!", "Search", JOptionPane.INFORMATION_MESSAGE);
                     //cria thread
                     SearchFilesBackground search = new SearchFilesBackground();
-                    files = search.searchFilesBackground(pattern, dir);
-
+                    
                     //acede a extensao UIExtensionSearchFilesBackground para actualizar lista com o nome dos ficheiros
                     UIExtensionSearchFilesBackground ui = null;
                     for (UIExtension extension : uiController.getExtensions()) {
@@ -198,20 +197,19 @@ public class JDialogSearchFilesBackground extends javax.swing.JDialog {
                         }
 
                     }
-
-                    ui.actualizarSidebarConteudo(files);
-
+                    search.searchFilesBackground(pattern, dir,ui);
+                    JOptionPane.showMessageDialog(this, "File Search Finished!", "Search", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         }
-        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        JFileChooser chooser=new JFileChooser();
-        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        FileChooser chooser=new FileChooser(null, null);
+        chooser.setFileSelectionMode(FileChooser.DIRECTORIES_ONLY);
+        chooser.showDialog(null, null);
         
-        jTextField2.setText(chooser.getCurrentDirectory().getAbsolutePath());
+        jTextField2.setText(chooser.getCurrentDirectory().getPath());
     }//GEN-LAST:event_jButton3ActionPerformed
 
 

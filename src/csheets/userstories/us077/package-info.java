@@ -23,6 +23,8 @@
  * 
  * <b>S077c: Coding</b><br/>
  * see:<br/>
+ * <a href="../../../csheets/ext/searchFilesBackground/package-summary.html">csheets.ext.searchFilesBackground</a><br/>
+ * <a href="../../../csheets/ext/searchFilesBackground/ui/package-summary.html">csheets.ext.searchFilesBackground.ui</a><br/>
  * <br/>
  * <br/>
  * 
