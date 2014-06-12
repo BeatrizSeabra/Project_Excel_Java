@@ -11,9 +11,11 @@ public class SearchFilesBackground {
 
     public SearchFilesBackground() {
     }
+    
+    //METODOS AUXILIARES
 
     /*
-     Metodo base mplementado no use case 76 que permite pesquisar ficheiros cujo o nome obedece a uma padrao(pattern),
+     Metodo base implementado no use case 76 que permite pesquisar ficheiros cujo o nome obedece a uma padrao(pattern),
      atraves de expressoes regulares, no diretorio(dir).
      Alteracao no metodo de comparacao de nomes, em vez de verificar se contem o pattern, verfica se obedece a uma expressao regular.
      */
@@ -49,31 +51,37 @@ public class SearchFilesBackground {
         }
         return paths;
     }
+    
+    //METODO RESPONSAVEL PELA CRIACAO DA THREAD
+    public String[] searchFilesBackground(final String pattern, final String dir){
+        
+        class ParallelSearch implements Runnable {
+            
+            String pattern;
+            String dir;
+            String[]results;
 
-    public static class ThreadSearch extends Thread {
-
-        private String[] listaficheiros;
-        private String pattern;
-        private String dir;
-
-        public void setDir(String dir) {
-            this.dir = dir;
+            public ParallelSearch(String pattern, String dir) {
+                this.pattern = pattern;
+                this.dir = dir;
+            }
+            
+            public String[] getResults(){
+                return results;
+            }
+            
+            @Override
+            public void run() {
+                results=searchNames(pattern, dir);
+            }
+            
         }
-
-        public void setPattern(String pattern) {
-            this.pattern = pattern;
-        }
-
-        public String[] getList() {
-            return listaficheiros;
-        }
-
-        @Override
-        public void run() {
-            Thread thread = Thread.currentThread();
-
-            listaficheiros = SearchFilesBackground.searchNames(pattern, dir);
-        }
+        
+        ParallelSearch parallel=new ParallelSearch(pattern,dir);
+        Thread thread=new Thread(parallel);
+        thread.start();
+        
+        return parallel.getResults();        
     }
 
 }

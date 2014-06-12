@@ -8,6 +8,7 @@ package csheets.ext.logfile;
 
 import csheets.CleanSheets;
 import csheets.ui.ctrl.UIController;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,11 +18,13 @@ public class AtributeFormula {
     
     String evento,formula;
     public boolean activo=false;
-    //public CleanSheets cs;
+    public static ArrayList<String> eve= new ArrayList();
+    public static ArrayList<String> form= new ArrayList();
+
+    public AtributeFormula() {
+    }
     
-    /*public AtributeFormula(CleanSheets cs){
-		this.cs = cs;
-	}*/
+    
     
     public AtributeFormula(String evento, String formula) {
         setEvento(evento);
@@ -36,17 +39,29 @@ public class AtributeFormula {
         return formula;
     }
 
+    public ArrayList<String> getEve() {
+        return eve;
+    }
+
+    public ArrayList<String> getForm() {
+        return form;
+    }
+    
+    
+
     public boolean isActivo() {
         return activo;
     }
 
     public void setEvento(String evento) {
         this.evento = evento;
+        eve.add(this.evento);
         activo=true;
     }
 
     public void setFormula(String formula) {
         this.formula = formula;
+        form.add(this.formula);
     }
     
     

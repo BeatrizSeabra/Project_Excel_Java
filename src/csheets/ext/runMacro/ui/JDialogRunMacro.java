@@ -2,6 +2,7 @@ package csheets.ext.runMacro.ui;
 
 import csheets.ext.runMacro.ui.runMacroController;
 import csheets.ui.ctrl.FocusOwnerAction;
+import csheets.ui.ctrl.UIController;
 import csheets.ui.sheet.SpreadsheetTable;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -14,13 +15,16 @@ public class JDialogRunMacro extends javax.swing.JDialog {
 
     public runMacroController controller;
     public SpreadsheetTable focusOwner;
+    private UIController uiController;
 
     
     /**
      * Cria uma nova janela JDialogRunMacro
      */
-    public JDialogRunMacro(java.awt.Frame parent, boolean modal) {
+    public JDialogRunMacro(java.awt.Frame parent, boolean modal,UIController uicont) {
+        
         super(parent, modal);
+        this.uiController = uicont;
         initComponents();
     }
 
@@ -106,68 +110,7 @@ public class JDialogRunMacro extends javax.swing.JDialog {
      * Este metodo serve para criar o botao OK e executar uma macro.
      */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        getResults();        
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JDialogRunMacro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JDialogRunMacro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JDialogRunMacro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JDialogRunMacro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                JDialogRunMacro dialog = new JDialogRunMacro(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    // End of variables declaration//GEN-END:variables
-
-    /**
-     * Chama o metodo que vai retornar os resultados da macro.
-     */
-    private void getResults() {
-        controller = new runMacroController(focusOwner);
+       controller = new runMacroController(focusOwner, uiController);
         
         String macro = jTextArea1.getText();
         if (macro == null || "".equals(macro)) {
@@ -178,5 +121,19 @@ public class JDialogRunMacro extends javax.swing.JDialog {
             dialog.setAlwaysOnTop(true);
             dialog.setVisible(true);
         }
-    }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
+    // End of variables declaration//GEN-END:variables
+
 }

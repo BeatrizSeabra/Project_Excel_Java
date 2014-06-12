@@ -133,6 +133,18 @@ public class MenuEdWindow extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        /*
+        Quando a us44 estiver implementada o codigo seguinte pode ser usado
+        para preencher a combobox com uma lista de macros
+
+        ArrayList macroCombobox = new ArrayList();
+        for (Macro m : macros) {
+            macroCombobox.add(m.getName);
+        }
+
+        jComboBox1 = new jComboBox(macroCombobox.toArray());
+        */
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -152,9 +164,9 @@ public class MenuEdWindow extends javax.swing.JFrame {
                             public void actionPerformed(ActionEvent e) {
 
                                 try {
-//                               Macro m = jComboBox1.getSelectedItem();
-//                               Macros.execMacro(m);    Esta parte do código só pode ser implementada quando a US44 for implementada.
-                                    //                              até lá vamos usar os exemplos abaixo
+/*                              Macro m = jComboBox1.getSelectedItem();
+                                Macros.execMacro(m);    Esta parte do código só pode ser implementada quando a US44 for implementada.
+                                até lá vamos usar os exemplos abaixo*/
 
                                     switch (jComboBox1.getSelectedIndex()) {
                                         case 0:
