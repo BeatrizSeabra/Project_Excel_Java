@@ -53,8 +53,6 @@ public class FindInstancesAction extends BaseAction {
         */
         
 	public void actionPerformed(ActionEvent event) {
-            Cliente c=new Cliente();
-            c.start();
             FindInstancesUI l= new FindInstancesUI();
             l.setSize(300, 300);
             l.setResizable(false);
