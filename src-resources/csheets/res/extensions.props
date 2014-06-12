@@ -24,4 +24,4 @@ csheets.ext.runMacro.ExtensionRunMacro
 csheets.ext.findinstances.ExtensionFindInstances
 csheets.ext.formeditor.ExtensionFormEditor
 csheets.ext.beanshell.BeanShellExtension
-csheets.ext.email.ExtensionEmail
+csheets.ext.button.ExtensionButton

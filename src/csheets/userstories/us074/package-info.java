@@ -23,21 +23,27 @@
  * <br/>
  * 
  * <b>S074d: Design</b><br/>
- *
- * 
+ * Juntamente com o colega que estava a fazer a importação paralela, foi definido
+ * que o ficheiro de texto iria conter na primeira linha as informações fornecidas
+ * pelo cliente. ou seja, na primeira linha ficaria o simbolo separador, e depois
+ * o cabecalho. 
+ * A função que escreve o ficheiro´irá ser usada numa thread para funcionar em
+ * paralelo com o resto do programa como pedido.
  * 
  * <br/>
  * <br/>
- * <img src="../../../csheets/userstories/us034/doc-files/us074_design1.png"> 
+ * <img src="../../../csheets/userstories/us074/doc-files/us074_design1.png"> 
  * <br/>
  * <br/>
  * 
  * <b>S074c: Coding</b><br/>
+ * csheets.ext.exporttxt.ui/TxtAction.java
  * <br/>
  * <br/>
  * <br/>
  * 
  * <b>S074u: Unit Tests</b><br/>
+ * Testes não necessarios
  * <br/>
  * <br/>
  * <br/>
@@ -52,8 +58,11 @@
 /*
  *
   @startuml doc-files/us074_design1.png
-    
-  @enduml
+    extensionImport->uiExtensionImport: getUiExtension() 
+    uiExtensionImport->exportMenu: getMenu() 
+    exportMenu->exportAction: new exportAction()
+    exportAction->exportAction: FileExport()
+   @enduml
  *
  */
 package csheets.userstories.us074;
