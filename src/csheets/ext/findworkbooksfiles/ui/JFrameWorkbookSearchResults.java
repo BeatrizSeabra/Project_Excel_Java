@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JRootPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -47,7 +48,7 @@ public class JFrameWorkbookSearchResults extends JFrame {
     int i = 0;
 
     public JFrameWorkbookSearchResults(List<File> listingF) {
-        setTitle("Listing Workbooks files found in the directory");
+        setTitle("Workbook Files Found - DO NOT CLOSE THIS WINDOW UNTIL SEARCH IS OVER");
         setSize(600, 200);
 
         jTable.setRowHeight(20);
@@ -76,7 +77,7 @@ public class JFrameWorkbookSearchResults extends JFrame {
             @Override
             public void valueChanged(ListSelectionEvent lse) {
                 if (lse.getValueIsAdjusting()) {
-                    return;
+                    return; //Filters events fired by the mouse click. Only the last event of a chain will pass this "filter".
                 }
                 try {
                     String selectedData = null;
@@ -86,12 +87,13 @@ public class JFrameWorkbookSearchResults extends JFrame {
                     for (int i = 0; i < selectedRow.length; i++) {
                         selectedData = (String) jTable.getValueAt(selectedRow[i], 1);
                     }
-                    if (selectedData==null) {
-                        return;
+                    if (selectedData == null) {
+                        return; //the clearSelection() method called in the end of this method fires an event we don't need. This "filter" deals with that problem 
                     }
                     CleanSheets cleanSheets = new CleanSheets();
                     File selectedFile = new File(selectedData);
                     Workbook workbook = cleanSheets.getWorkbookFromFile(selectedFile);
+
                     Cell[] firstRow = workbook.getSpreadsheet(0).getRow(0);
                     JDialogShowFirstLine showFirstLine = new JDialogShowFirstLine(null, false);
                     showFirstLine.setTitle("File Sample");
@@ -106,12 +108,17 @@ public class JFrameWorkbookSearchResults extends JFrame {
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(JFrameWorkbookSearchResults.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
             }
         });
-        
+
     }
 
+    /**
+     * Method that updates the JTable information every time a File is found by
+     * the parallel thread
+     *
+     * @param file
+     */
     public void updateInformation(File file) {
         dtm.insertRow(i, new Object[]{file.getName(), file.getAbsolutePath()});
         i++;
