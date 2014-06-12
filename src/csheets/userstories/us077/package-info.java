@@ -29,7 +29,13 @@
  * <br/>
  * 
  * <b>S077u: Unit Tests</b><br/>
- * see:<br/>
+ * O metodo responsavel pela pesquisa dos ficheiros que sequem determinado padrao esta contindo na thread, uma vez que e para fazer a busca em segundo plano.<br/>
+ * Deste modo nao e possivel efectuar testes unitarios.<br/>
+ * Apesar de nao ser possivel efectuar testes unitarios,e importante referir alguns aspectos que esta extensao tem em relacao a validacao de resultados.<br/>
+ * Ao iniciar a aplicacao podemos verificar que na seccao do sidebar referente a pesquisa de ficheiros(search files in background) tem apenas um valor a dizer "background".<br/>
+ * Quando a pesquisa inicia uma messageDialog e ativada a avisar que a pesquisa iniciou. Durante a pesquisa o valor "background" e apagado e substituido pelos nomes dos ficheiros encontrados.<br/>
+ * Se nao for encontrado nenhum ficheiros o valor "background" e substituido por "file not found".<br/>
+ * No final da pesuisa outra messageDialog e ativada a avisar que a pesuisa terminou.<br/>
  * <br/>
  * <br/>
  * 
