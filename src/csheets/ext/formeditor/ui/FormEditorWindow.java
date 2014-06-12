@@ -88,7 +88,7 @@ public class FormEditorWindow extends JFrame{
                 final JButton button=new JButton("add text...");
                 button.addActionListener( new ActionListener() {  
                     public void actionPerformed(ActionEvent e) {
-                        String nameButton = JOptionPane.showInputDialog(null, "Insert the text of the button", JOptionPane.OK_CANCEL_OPTION);
+                        String nameButton = JOptionPane.showInputDialog(null, "Insert the text of the button", "", JOptionPane.OK_CANCEL_OPTION);
                         button.setText(nameButton);             
                     }  
                 });               
@@ -97,9 +97,9 @@ public class FormEditorWindow extends JFrame{
                 temp.add(button);
                 grid.add(temp);
             }
-
         }
         this.add(grid);
+        this.pack();
         this.setSize(500,size);       
         this.setVisible(true);      
     }   
