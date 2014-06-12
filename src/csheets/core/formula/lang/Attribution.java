@@ -40,23 +40,23 @@ public class Attribution implements BinaryOperator {
                 default:
                     throw new IllegalValueTypeException(valorDireita, Value.Type.NUMERIC);
             }
-//        } else {
-//            leftOperand = (Expression) leftOperand.evaluate();
-//            switch (valorDireita.getType()) {
-//                case NUMERIC:
-//                    return new Value(valorDireita.toDouble());
-//                case BOOLEAN:
-//                    return new Value(valorDireita.toBoolean());
-//                case DATE:
-//                    return new Value(valorDireita.toDate());
-//                case TEXT:
-//                    return new Value(valorDireita.toText());
-//                default:
-//                    throw new IllegalValueTypeException(valorDireita, Value.Type.NUMERIC);
-//            }
-//
+        } else {
+            leftOperand = (Expression) leftOperand.evaluate();
+            switch (valorDireita.getType()) {
+                case NUMERIC:
+                    return new Value(valorDireita.toDouble());
+                case BOOLEAN:
+                    return new Value(valorDireita.toBoolean());
+                case DATE:
+                    return new Value(valorDireita.toDate());
+                case TEXT:
+                    return new Value(valorDireita.toText());
+                default:
+                    throw new IllegalValueTypeException(valorDireita, Value.Type.NUMERIC);
+            }
+
         }
-        throw new IllegalValueTypeException(valorDireita, Value.Type.NUMERIC);
+//        throw new IllegalValueTypeException(valorDireita, Value.Type.NUMERIC);
     }
 
     public String getIdentifier() {

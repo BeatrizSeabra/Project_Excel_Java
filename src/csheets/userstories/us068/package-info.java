@@ -28,7 +28,19 @@
  *<br/>
  *<br/>
  *
- * 
+ * <b>S068c: Coding</b><br/>
+ * See:<br/>
+ * <a href="../../../csheets/ext/findworkbooksfiles/package-summary.html">csheets.ext.findworkbooksfiles</a><br/>
+ * <a href="../../../csheets/ext/findworkbooksfiles/ui/package-summary.html">csheets.ext.findworkbooksfiles.ui</a><br/>
+ * <br/>
+ * <br/>
+ *
+ * <b>S068u: Unit Tests</b><br/>
+ * See:<br/>
+ * Nao foram implementados testes unitarios. Esta funcionalidade nao tem metodos com retorno, servindo apenas para leitura e abertura de workbooks, pelo que nao fez sentido a implementacao do JUnit.
+ * <br/>
+ * <br/>
+ *  
  * @author Diogo Moreira (1120339)
  */
  /*
@@ -40,6 +52,8 @@ participant "<b>fc</b> : FileChooser" as FC
 participant "AdvancedWorkbookSearch" as workbookSearch
 participant Thread as thread
 participant "JFrameWorkbookSearchResults" as window
+participant JDialogShowFirstLine
+participant CleanSheets as cs
 
   
 User -> searchAction: actionPerformed(ActionEvent event)
@@ -57,6 +71,13 @@ workbookSearch-> thread: <b>thread</b>.start()
 loop for File <b>fileDirectory</b> : 
    thread-> window: <b>windowLWF</b>.updateInformation(File file)
 end
+
+loop
+window->window: valueChanged()
+window->JDialogShowFirstLine: create()
+JDialogShowFirstLine->JDialogShowFirstLine: open()
+JDialogShowFirstLine->cs: create()
+end 
 @enduml
 *
 */

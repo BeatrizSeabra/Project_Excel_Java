@@ -1,7 +1,9 @@
 package csheets.ext.searchFilesBackground.ui;
 
 import java.io.File;
-import java.io.FilenameFilter;
+import java.io.FileFilter;
+import java.util.Stack;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -11,77 +13,64 @@ public class SearchFilesBackground {
 
     public SearchFilesBackground() {
     }
-    
-    //METODOS AUXILIARES
 
-    /*
-     Metodo base implementado no use case 76 que permite pesquisar ficheiros cujo o nome obedece a uma padrao(pattern),
-     atraves de expressoes regulares, no diretorio(dir).
-     Alteracao no metodo de comparacao de nomes, em vez de verificar se contem o pattern, verfica se obedece a uma expressao regular.
-     */
-    public static File[] searchFiles(final String pattern, File dir) {
+    //METODO RESPONSAVEL PELA CRIACAO DA THREAD E DA PESQUISA DE FICHEIROS NOS DIRETORIOS E SUBDIRETORIOS
+    public void searchFilesBackground(final String pattern, final String dir, UIExtensionSearchFilesBackground extension) {
 
-        FilenameFilter filter = new FilenameFilter() {
-            public boolean accept(File dir, String name) {
-                return name.contains(pattern);
-            }
-        };
-        File[] files = dir.listFiles(filter);
-        return files;
-    }
-
-    /**
-     * Este metodo que invoca um metodo e recebe todos os ficheiros encontrados
-     * e retorna o nome desses. Caso nao encontre nenhum ficheiro retorna null.
-     */
-    public static String[] searchNames(String pattern, String dir) {
-        File dirr = new File(dir);
-        File[] files = searchFiles(pattern, dirr);
-        if (files == null || files.length == 0 || dir == null || dir.length() == 0) {
-            return null;
-        }
-        String[] paths = new String[files.length];
-
-        for (int i = 0; i < files.length; ++i) {
-            paths[i] = files[i].getName();
-        }
-
-        if (paths == null || paths.length == 0) {
-            return null;
-        }
-        return paths;
-    }
-    
-    //METODO RESPONSAVEL PELA CRIACAO DA THREAD
-    public String[] searchFilesBackground(final String pattern, final String dir){
-        
         class ParallelSearch implements Runnable {
-            
+
             String pattern;
             String dir;
-            String[]results;
+            String[] results;
+            UIExtensionSearchFilesBackground extension;
 
-            public ParallelSearch(String pattern, String dir) {
+            public ParallelSearch(String pattern, String dir, UIExtensionSearchFilesBackground extension) {
                 this.pattern = pattern;
                 this.dir = dir;
+                this.extension = extension;
             }
-            
-            public String[] getResults(){
+
+            public String[] getResults() {
                 return results;
             }
-            
+
             @Override
             public void run() {
-                results=searchNames(pattern, dir);
+                extension.cleanList();
+                boolean flag = false;
+                Stack<File> stack = new Stack<File>();
+                File startingDirectory = new File(dir);
+                stack.push(startingDirectory);
+                while (!stack.isEmpty()) {
+                    File child = stack.pop();
+                    if (child.isDirectory()) {
+                        File[] sub = child.listFiles(new FileFilter() {
+                            @Override
+                            public boolean accept(File pathname) {
+                                return (pathname.isDirectory() || pathname.getName().matches(pattern));
+                            }
+                        });
+                        if (!(sub == null)) {
+                            for (File fileDirectory : sub) {
+                                stack.push(fileDirectory);
+                            }
+                        }
+                    } else if (child.isFile()) {
+                        extension.addFileName(child.getName());
+                        flag = true;
+                    }
+                }
+                if (flag == false) {
+                    extension.noFileFound();
+                }
+                JOptionPane.showMessageDialog(null, "File Search Finished!", "Search", JOptionPane.INFORMATION_MESSAGE);
             }
-            
+
         }
-        
-        ParallelSearch parallel=new ParallelSearch(pattern,dir);
-        Thread thread=new Thread(parallel);
+        ParallelSearch parallel = new ParallelSearch(pattern, dir, extension);
+        Thread thread = new Thread(parallel);
         thread.start();
-        
-        return parallel.getResults();        
+
     }
 
 }
