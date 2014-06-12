@@ -59,7 +59,7 @@ UIController -> EmailExtension : getUIExtension(this);
 EmailExtension -> UIExtensionEmail : new();
 UIExtensionEmail -> EmailMenu : getMenu();
 EmailMenu -> EmailAction : new EmailAction();
-EmailAction -> EmailSetup : showDialog();
+EmailAction -> EmailSetup : new();
 EmailSetup -> EmailAccount : new EmailAccount();
 EmailAccount -> EmailSetup : EmailAccount data;
 EmailSetup -> EmailSetup : send();
