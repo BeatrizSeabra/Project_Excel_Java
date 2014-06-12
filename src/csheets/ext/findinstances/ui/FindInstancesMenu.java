@@ -15,7 +15,6 @@ import java.awt.event.KeyEvent;
 import javax.swing.JMenu;
 
 import csheets.ui.ctrl.UIController;
-import java.util.ArrayList;
 
 /**
  * Representes the UI extension menu of the simple extension.
@@ -36,6 +35,7 @@ public class FindInstancesMenu extends JMenu {
 
 		// Adds font actions
 		add(new FindInstancesAction(uiController));
+                add(new StartClientAction(uiController));
 	}
 
 }
