@@ -1,5 +1,6 @@
 package csheets.ext.searchFiles.ui;
 
+import csheets.ext.searchFilesBackground.ui.SearchFilesBackgroundAction;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JMenu;
@@ -20,5 +21,6 @@ public class searchFilesMenu extends JMenu {
 
 		// Adds font actions
 		add(new SearchFilesAction(uiController));
+                add(new SearchFilesBackgroundAction(uiController));
 	}	
 }

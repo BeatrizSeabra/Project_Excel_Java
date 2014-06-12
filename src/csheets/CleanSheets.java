@@ -373,4 +373,30 @@ public class CleanSheets {
 				}
 		}
 	}
+        
+        /**
+	 * Return a workbook from the given file.
+	 * @param file the file in which the workbook is stored
+	 * @throws IOException if the file could not be loaded correctly
+	 */
+	public Workbook getWorkbookFromFile(File file) throws IOException, ClassNotFoundException {
+		Codec codec = new CodecFactory().getCodec(file);
+		if (codec != null) {
+			FileInputStream stream = null;
+			Workbook workbook;
+			try {
+				// Reads workbook data
+				stream = new FileInputStream(file);
+				workbook = codec.read(stream);
+			} finally {
+				try {
+					if (stream != null)
+						stream.close();
+				} catch (IOException e) {}
+			}
+
+			return workbook;
+		} else
+			throw new IOException("Codec could not be found");
+	}
 }

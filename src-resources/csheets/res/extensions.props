@@ -23,3 +23,4 @@ csheets.ext.residenceexport.ExtensionResidenceExport
 csheets.ext.runMacro.ExtensionRunMacro
 csheets.ext.findinstances.ExtensionFindInstances
 csheets.ext.formeditor.ExtensionFormEditor
+csheets.ext.beanshell.BeanShellExtension

@@ -10,10 +10,12 @@ package csheets.ext.sort.ui;
  * @author Stefan Parker
  */
 import csheets.CleanSheets;
+import csheets.core.Cell;
 import csheets.core.formula.compiler.FormulaCompilationException;
 import java.awt.event.ActionEvent;
 import csheets.ui.ctrl.BaseAction;
 import csheets.ui.ctrl.UIController;
+import csheets.ui.sheet.CellTransferHandler;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -28,6 +30,8 @@ public class SortActionZA extends BaseAction {
     protected UIController uiController;
     ArrayList<String> conteudos = new ArrayList();
     List<Integer> conteudosN = new ArrayList();
+    protected CellTransferHandler cth;
+    Cell[][] range;
 
     /**
      * Creates a new action.
@@ -47,13 +51,29 @@ public class SortActionZA extends BaseAction {
         setEnabled(true);
         putValue(SMALL_ICON, new ImageIcon(CleanSheets.class.getResource("res/img/sort.gif")));
     }
+    
+    public ArrayList getCollumns(){
+        ArrayList al = new ArrayList();
+        for(int i=0; i<range.length;i++){
+            for(int j=0; j<range[i].length ;j++){
+                if(!al.contains(range[i][j].getAddress().getColumn())){
+                    al.add(range[i][j].getAddress().getColumn());
+                }
+            }
+        }
+        return al;
+    }
 
     public void actionPerformed(ActionEvent event) {
 
         try {
             int maxrows = this.uiController.getActiveSpreadsheet().getRowCount();
-            int collumn = this.uiController.getActiveCell().getAddress().getColumn();
-            sortZA(maxrows, collumn);
+            cth=(CellTransferHandler)this.uiController.getCellTransferHandler();
+            range=cth.getSelec();
+            ArrayList columns = getCollumns();
+            for(int i=0; i<columns.size();i++){
+                sortZA(maxrows, (int)columns.get(i));
+            }
         } catch (FormulaCompilationException ex) {
             System.out.println("Não foi possivel localizar a celula ativa ou o numero de linhas existentes");
         }

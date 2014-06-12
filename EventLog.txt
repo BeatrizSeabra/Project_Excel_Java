@@ -390,39 +390,27 @@ onClick Event, on cell A1. time:2014/06/11 16:09:25
 
 
 
-onClick Event, on cell A1. time:2014/06/11 16:13:40
+onClick Event, on cell A1. time:2014/06/12 11:50:24
 
 
 
-onClick Event, on cell A1. time:2014/06/11 16:13:40
+onClick Event, on cell A1. time:2014/06/12 11:50:24
 
 
 
-onClick Event, on cell D10. time:2014/06/11 16:13:46
+onClick Event, on cell A1. time:2014/06/12 11:58:43
 
 
 
-Close WorkBookEvent, time:2014/06/11 16:17:58
+onClick Event, on cell A1. time:2014/06/12 11:58:43
 
 
 
-Close WorkBookEvent, time:2014/06/11 16:17:58
+onClick Event, on cell A1. time:2014/06/12 12:03:58
 
 
 
-onClick Event, on cell A1. time:2014/06/11 16:21:10
-
-
-
-onClick Event, on cell A1. time:2014/06/11 16:21:10
-
-
-
-Close WorkBookEvent, time:2014/06/11 16:35:18
-
-
-
-Close WorkBookEvent, time:2014/06/11 16:35:18
+onClick Event, on cell A1. time:2014/06/12 12:03:58
 
 
 
