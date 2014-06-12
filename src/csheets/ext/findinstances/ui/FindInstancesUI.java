@@ -6,10 +6,10 @@
 
 package csheets.ext.findinstances.ui;
 
-import java.io.BufferedReader;
+import csheets.ext.findinstances.Servidor;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.*;
+import java.net.InetAddress;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,6 +22,7 @@ public class FindInstancesUI extends javax.swing.JFrame {
     /**
      * Creates new form FindInstancesUI
      */
+    ArrayList<InetAddress> ips;
     public FindInstancesUI() {
         initComponents();
     }
@@ -43,7 +44,7 @@ public class FindInstancesUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = {};
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
@@ -99,32 +100,10 @@ public class FindInstancesUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        BufferedReader inFromUser =          
-                new BufferedReader(new InputStreamReader(System.in));       
-         
-        try{
-            int i=0;
-        DatagramSocket clientSocket = new DatagramSocket();  
-        InetAddress IPAddress = InetAddress.getByName("255.255.255.255");       
-        byte[] sendData = new byte[1024];       
-        byte[] receiveData = new byte[1024];       
-        String sentence = "OLA!";       
-        sendData = sentence.getBytes();       
-        DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 9876);       
-        clientSocket.send(sendPacket);
-        while(i<2)
-        {
-            DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);       
-            clientSocket.receive(receivePacket);       
-            String modifiedSentence = new String(receivePacket.getData());       
-            System.out.println("FROM SERVER:" + modifiedSentence);       
-           
-            i++;
-        }
-         clientSocket.close(); 
-        } catch (UnknownHostException ex) {
-            Logger.getLogger(FindInstancesUI.class.getName()).log(Level.SEVERE, null, ex);
+        try {
+            // TODO add your handling code here:
+            ips=Servidor.Srv();
+            jList1.setListData(ips.toArray());
         } catch (IOException ex) {
             Logger.getLogger(FindInstancesUI.class.getName()).log(Level.SEVERE, null, ex);
         }
