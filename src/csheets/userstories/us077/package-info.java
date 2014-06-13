@@ -9,14 +9,17 @@
  * <br/>
  *  
  * <b>S077a: Analysis</b><br/>
- * Uma vez que o metodo de pesquisa de ficheiros ja esta implementado, e necessario analisar como funciona threads em java.A thread a usar sera uma classe que estende a classe Thread <br/> 
+ * Uma vez que o metodo de pesquisa de ficheiros ja esta implementado(incompleto), e necessario analisar como funciona threads em java.A thread a usar sera uma classe que estende a classe Thread <br/> 
  * O use case 77 para alem da pesquisa em segundo plano, especifica que o modo de saida deve ser um sidebar. A componente sidebar nesta extensao deve ser implementada na classe UIExtensionSearchFilesBackground.<br/>
  * <br/>
  * 
  * <b>S077d: Design</b><br/>
- * Para realizar esta user story, temos de criar a classe JDialogSearch, para o Utilizador inserir o padrao e para mostrar os resultados,
- * e a classe Search para realizar a pesquisa dos ficheiros e uma classe qque representara a Thread. O diagrama seguinte
- * mostra como integrar estas classes... <br/><br/>
+ * Para realizar esta user story, temos de criar a classe JDialogSearch, para o Utilizador inserir o padrao e o diretorio.<br/>
+ * Esta classe para alem de ser responsavel pela invocacao da classe de pesquisa, tera uma opcao que permite o utilizador inserir manualmente ou atraves de uma dialog search directory.<br/>
+ * Teremos tambem de criar uma classe Search para realizar a pesquisa dos ficheiros que representara a Thread.<br/>
+ * Esta classe implementara um metodo run, necessario para a utilizacao da thread, que ira pesquisar todos os subdirectorios e ficheiros do directorio indicado que obedecem a um determinado padrao.<br/>
+ * O metodo de busca dos ficheiros implementados no use case anterior(76) apenas permite listar os ficheiros de um directorio, dai ser necessario reescrever este metodo no run.<br/>
+ * O diagrama seguinte* mostra como integrar estas classes... <br/><br/>
  * <img src="../../../csheets/userstories/us077/doc-files/US077_design.png"> 
  * <br/>
  * <br/>
