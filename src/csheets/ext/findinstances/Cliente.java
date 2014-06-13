@@ -20,6 +20,7 @@ public class Cliente extends Thread {
     boolean running = true;
     DatagramSocket socket;
 
+    // Creates the socket with the port n 9876 and listen to every menssage sent to his ip
     public Cliente() throws BindException {
         try {
             socket = new DatagramSocket(9876,InetAddress.getByName("0.0.0.0"));
@@ -47,7 +48,7 @@ public class Cliente extends Thread {
                 DatagramPacket sendPacket =
                         new DatagramPacket(sendData, sendData.length, IPAddress, 9877);
                 socket.send(sendPacket);
-
+                // sets a 10sec timeout
                 socket.setSoTimeout(10000);
 
                 while (!received) {
