@@ -1,7 +1,6 @@
 package csheets.ext.runMacro.ui;
 
 import csheets.core.Cell;
-import csheets.core.Workbook;
 import csheets.ui.ctrl.FocusOwnerAction;
 import csheets.ui.ctrl.UIController;
 import csheets.ui.sheet.SpreadsheetTable;
