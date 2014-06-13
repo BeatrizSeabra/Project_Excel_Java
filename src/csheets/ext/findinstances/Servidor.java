@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.MulticastSocket;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 
@@ -25,9 +26,9 @@ public class Servidor {
         ArrayList<InetAddress> ips = new ArrayList();
         
        //Envio de uma mensagem em broadcast
-        DatagramSocket socket = new DatagramSocket(9877);
+        MulticastSocket socket = new MulticastSocket(9877);
         socket.setBroadcast(true);
-        InetAddress IPAddress = InetAddress.getByName("255.255.255.255");     
+        InetAddress IPAddress = InetAddress.getByAddress(new byte[] { (byte) 255, (byte) 255, (byte) 255, (byte) 255 });
         String sentence = "Quem está?";
         byte[] sendData = sentence.getBytes();       
         DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 9876);       
