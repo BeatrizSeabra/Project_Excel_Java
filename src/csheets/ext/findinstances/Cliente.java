@@ -32,10 +32,10 @@ public class Cliente extends Thread {
     }
 
     public void run() {
+       boolean received=false;
         while (running) {
             try {
                 socket.setSoTimeout(0);
-                boolean received = false;
                 socket.setReuseAddress(true);
                 byte[] receiveData = new byte[1024];
                 DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
@@ -55,6 +55,7 @@ public class Cliente extends Thread {
                         socket.receive(receivePacket);
                         System.out.println("Recebi sucesso do serv");
                         received = true;
+                        running= false;
                     } catch (SocketTimeoutException ex) {
                         System.out.println("A tentar enviar outra vez o ip");
                         receivePacket = new DatagramPacket(sendData, sendData.length, IPAddress, 9877);
