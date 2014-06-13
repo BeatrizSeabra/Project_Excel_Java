@@ -5,9 +5,10 @@ import csheets.ui.ctrl.BaseAction;
 import csheets.ui.ctrl.UIController;
 import java.awt.Dimension;
 import javax.swing.JFrame;
-import csheets.ui.ctrl.FocusOwnerAction;
 
 /**
+ * Representa a acçao de executar a extensao Run Macro.
+ * 
  * @author 1120564MarcoEsteves
  */
 public class runMacroAction extends BaseAction {

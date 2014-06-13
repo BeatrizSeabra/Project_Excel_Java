@@ -27,7 +27,7 @@ import java.util.ArrayList;
  * This class implements the UI interface extension for the simple extension.
  * A UI interface extension must extend the UIExtension abstract class.
  * @see UIExtension
- * @author Alexandre Braganca
+ * @author RafaelChaves
  */
 public class UIExtensionFindInstances extends UIExtension {
 
@@ -39,7 +39,6 @@ public class UIExtensionFindInstances extends UIExtension {
 
 	public UIExtensionFindInstances(Extension extension, UIController uiController) {
 		super(extension, uiController);
-		// TODO Auto-generated constructor stub
 	}
 	
 	/**
@@ -54,7 +53,7 @@ public class UIExtensionFindInstances extends UIExtension {
 	/**
 	 * Returns an instance of a class that implements JMenu.
 	 * In this simple case this class only supplies one menu option.
-	 * @see ExampleMenu
+	 * @see FinsIntancesMenu
 	 * @return a JMenu component
 	 */
 	public JMenu getMenu() {

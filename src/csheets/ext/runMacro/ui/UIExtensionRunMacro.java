@@ -7,7 +7,8 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JMenu;
 /**
- *
+ * Representa o criacçao do menu Run Macro.
+ * 
  * @author 1120564MarcoEsteves
  */
 public class UIExtensionRunMacro extends UIExtension {

@@ -277,7 +277,7 @@ public class UIController implements SpreadsheetAppListener {
         //method to write in the logFile when the cell events occurs
         public void writeLogFile(String cell, String event)
         {
-            WriteLogFile.writeLogFile(cell, event, getEvl());
+            WriteLogFile.writeLogFile(cell, event, getEvl(),"");
         }
 
 /*

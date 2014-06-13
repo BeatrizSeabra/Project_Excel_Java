@@ -1,13 +1,12 @@
 package csheets.ext.runMacro.ui;
 
-import csheets.ext.runMacro.ui.runMacroController;
-import csheets.ui.ctrl.FocusOwnerAction;
 import csheets.ui.ctrl.UIController;
 import csheets.ui.sheet.SpreadsheetTable;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 /**
+ * Representa a interface com o utilizador da extensao Run Macro.
  *
  * @author 1120564MarcoEsteves
  */

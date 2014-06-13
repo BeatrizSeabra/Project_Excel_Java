@@ -40,13 +40,13 @@
 * <br/>
 * 
 * <b>S016f: Functional Tests</b><br/>
-* Abrir uma instancia do cleansheet e ir ao menu extensions e escolher o Menu - > Email Configuration. <br/>
-* Preencher com os dados do email (email e password) o host e a porta. <br/>
-* Se escolher o botao save ele grava os dados num ficheiro e carrega-o automaticamente nas proximas vezes.<br/>
-* Tambem pode escolher o botao test que envia um email para o seu email como teste.
-* host que utilizei : smtp.gmail.com <br/>
-* port: 857 <br/>
-
+ Para ter acesso a esta funcionalidade deve ir ao menu Extensions -> Email -> Send Email. <br/>
+* Convem em primeiro lugar ver se as configuracoes estao correctas(mas sendo esta parte relativa à US016). <br/>
+* Ao seleccionar a opcao no Menu irá aparecer uma janela onde poderá escrever os destinatarios, assunto, mensagem e ainda inserir um ficheiro como anexo. <br/>
+* Poderá enviar o mesmo email para varios destinatarios tendo de separar os emails por ";" na jTextField referente aos destinatarios <br/>
+* Ao premir o botão "Attach File" abre um file chooser para escolher qual é o ficheiro que deseja anexar ao email. <br/>
+* <br/>
+* <br/>
 * <br/>
 * <br/>
 * 

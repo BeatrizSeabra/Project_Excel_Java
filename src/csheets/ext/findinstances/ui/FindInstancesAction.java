@@ -6,13 +6,11 @@
 
 package csheets.ext.findinstances.ui;
 
-import csheets.ext.findinstances.Cliente;
 import java.awt.event.ActionEvent;
 
 
 import csheets.ui.ctrl.BaseAction;
 import csheets.ui.ctrl.UIController;
-import java.util.ArrayList;
 
 /**
  *
@@ -39,19 +37,9 @@ public class FindInstancesAction extends BaseAction {
 	}
 
 	/**
-	 * A simple action that presents a confirmation dialog.
-	 * If the user confirms then the contents of the cell A1 of the current sheet are set to the string "Changed".
+	 * A simple action that presents a new UI.
 	 * @param event the event that was fired
-	 */
-                        
-       /* private void initEventList()
-        {
-            eventlist.add("OnClick");
-            eventlist.add("OnChange");
-
-        }
-        */
-        
+	 */       
 	public void actionPerformed(ActionEvent event) {
             FindInstancesUI l= new FindInstancesUI();
             l.setSize(300, 300);
