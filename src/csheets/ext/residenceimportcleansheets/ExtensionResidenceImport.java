@@ -4,11 +4,10 @@
  * and open the template in the editor.
  */
 
-package csheets.ext.residenceexport;
+package csheets.ext.residenceimportcleansheets;
 
 import csheets.ext.Extension;
-import csheets.ext.residenceexport.ui.UIExtensionResidenceExport;
-//import csheets.ext.residenceimport.ui.UIExtensionResidenceImport;
+import csheets.ext.residenceimportcleansheets.ui.UIExtensionResidenceImport;
 import csheets.ui.ctrl.UIController;
 import csheets.ui.ext.UIExtension;
 
@@ -19,7 +18,7 @@ import csheets.ui.ext.UIExtension;
  * @see Extension
  * @author Alexandre Braganca
  */
-public class ExtensionResidenceExport extends Extension {
+public class ExtensionResidenceImport extends Extension {
 
 	/** The name of the extension */
 	public static final String NAME = "Residence";
@@ -27,7 +26,7 @@ public class ExtensionResidenceExport extends Extension {
 	/**
 	 * Creates a new Example extension.
 	 */
-	public ExtensionResidenceExport() {
+	public ExtensionResidenceImport() {
             super(NAME);
 	}
 	
@@ -39,6 +38,6 @@ public class ExtensionResidenceExport extends Extension {
 	 */
         @Override
 	public UIExtension getUIExtension(UIController uiController) {
-            return new UIExtensionResidenceExport(this, uiController);
+            return new UIExtensionResidenceImport(this, uiController);
 	}
 }

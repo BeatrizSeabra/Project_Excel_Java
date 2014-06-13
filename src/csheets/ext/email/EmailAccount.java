@@ -5,36 +5,26 @@
  */
 package csheets.ext.email;
 
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Properties;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 
 /**
  *
- * @author Rui 1110506
+ * @author Rui 1110506 Classe Responsavel pelas configuracoes.
+ * (Guardar/Carregar)
  */
-public class EmailAccount {
+public abstract class EmailAccount {
 
     private String name;
     private String email;
     private String password;
     private String host;
     private String port;
-    private String listEmail;
-    private String subject;
-    private String message; 
-
+    
      public EmailAccount(){     
      }  
     
@@ -45,41 +35,7 @@ public class EmailAccount {
         this.setHost(host);
         this.setPort(port);
     }
-    
-   //Enviar email teste
-    public void Send(){
-                final String emails = this.getEmail();
-		final String passwords = this.getPassword();
  
-		Properties props = new Properties();
-		props.put("mail.smtp.auth", "true");
-		props.put("mail.smtp.starttls.enable", "true");
-		props.put("mail.smtp.host", this.getHost());
-		props.put("mail.smtp.port", this.getPort());
- 
-		Session session = Session.getInstance(props,
-		  new javax.mail.Authenticator() {
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(emails, passwords);
-			}
-		  });
- 
-		try {
- 
-			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(this.getEmail()));
-			message.setRecipients(Message.RecipientType.TO,
-				InternetAddress.parse(this.getEmail()));
-			message.setSubject("Test");
-			message.setText("successful test from "+ this.getName() + ".");
- 
-			Transport.send(message);    
- 
-		} catch (MessagingException e) {
-			throw new RuntimeException(e);
-		}
-        }
-        
         //Gravar configuracoes no ficheiro
         public void Save(){
             Properties prop = new Properties();
@@ -108,7 +64,7 @@ public class EmailAccount {
             }
         }
              
-        // Metodo para fazer load das configuracoes do ficheiro
+        // Metodo para carregar as configuracoes do ficheiro
         public void Load(){
             Properties prop = new Properties();
             InputStream input = null;
@@ -135,6 +91,7 @@ public class EmailAccount {
                 }
             }
         }
+    
     
 
     public String getName() {

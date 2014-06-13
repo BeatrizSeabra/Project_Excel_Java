@@ -27,34 +27,33 @@ public class ResidenceRepository {
 //        }
 //        return instance;
 //    }
-    public void insert(Residence residence) {
+    public static void insert(Residence residence) {
 
         EntityManager entityManager = csheets.PersistenceJPA.Persistence.getInstance().connection("JPA2PU");
         entityManager.persist(residence);
         entityManager.getTransaction().commit();
         csheets.PersistenceJPA.Persistence.getInstance().close();
-
     }
 
-    public List<Residence> getAll() {
+    public static List<Residence> getAll() {
         EntityManager entityManager = csheets.PersistenceJPA.Persistence.getInstance().connection("JPA2PU");
         Query query = entityManager.createQuery("SELECT e FROM Residence e");
-        List<Residence> listResidence = new ArrayList<>();
-        listResidence = query.getResultList();
+        //List<Residence> listResidence = new ArrayList<>();
+        List<Residence> listResidence = query.getResultList();
+        //listResidence = query.getResultList();
         csheets.PersistenceJPA.Persistence.getInstance().close();
 
         return listResidence;
-
     }
 
-    public void edit(Residence residence) {
+    public static void edit(Residence residence) {
         EntityManager entityManager = csheets.PersistenceJPA.Persistence.getInstance().connection("JPA2PU");
         entityManager.merge(residence);
         entityManager.getTransaction().commit();
         csheets.PersistenceJPA.Persistence.getInstance().close();
     }
 
-    public void delete(Residence residence) {
+    public static void delete(Residence residence) {
         EntityManager entityManager = csheets.PersistenceJPA.Persistence.getInstance().connection("JPA2PU");
         Query query = entityManager.createQuery("delete from Residence c where c.id_residence like :id_residence");
         query.setParameter("id_residence", residence.getId_residence());
@@ -62,4 +61,5 @@ public class ResidenceRepository {
         entityManager.getTransaction().commit();
         csheets.PersistenceJPA.Persistence.getInstance().close();
     }
+    
 }
