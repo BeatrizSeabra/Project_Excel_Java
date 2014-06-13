@@ -107,18 +107,14 @@ public class GameChoserPanel extends javax.swing.JPanel {
                 //temos o jogo certo
                 try {
                     s.sendData(("GS" + i).getBytes(), address.getHostName(), 7777);
-                    sleep(2000);
-                    new GameController(game, players, s, address);
-
+                    NetworkGameController.mainWindow.dispose();
+                    NetworkGameController.pickGame(i, address);
                 } catch (UnknownHostException ex) {
-                    Logger.getLogger(GameChoserPanel.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (InterruptedException ex) {
                     Logger.getLogger(GameChoserPanel.class.getName()).log(Level.SEVERE, null, ex);
                 }
             };
             i++;
         }
-        NetworkGameController.mainWindow.dispose();
     }//GEN-LAST:event_pickGame
 
     void parsePlayers(byte[] data) {
