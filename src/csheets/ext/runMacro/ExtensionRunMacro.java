@@ -2,11 +2,11 @@ package csheets.ext.runMacro;
 
 import csheets.ext.Extension;
 import csheets.ext.runMacro.ui.UIExtensionRunMacro;
-import csheets.ext.searchFiles.ui.UIExtensionSearchFiles;
 import csheets.ui.ctrl.UIController;
 import csheets.ui.ext.UIExtension;
 
 /**
+ * Representa o extensao Run Macro.
  *
  * @author 1120564MarcoEsteves
  */

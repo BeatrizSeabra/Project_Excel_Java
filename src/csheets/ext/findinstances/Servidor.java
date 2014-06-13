@@ -23,21 +23,23 @@ public class Servidor {
 
     public static ArrayList<InetAddress> Srv() throws IOException {
 
-        //ArrayList com  informações dos ips que respondem ao broadcast
+        //ArrayList with the information of every ip address that respondes
         ArrayList<InetAddress> ips = new ArrayList();
 
-        //Envio de uma mensagem em broadcast
+        //Sends a broadcast
         DatagramSocket socket = new DatagramSocket(9877);
         socket.setBroadcast(true);
-        InetAddress IPAddress = InetAddress.getByName("192.168.1.255");
+        InetAddress IPAddress = InetAddress.getByName("255.255.255.255");
         String sentence = "Quem está?";
         byte[] sendData = sentence.getBytes();
+        
+        // Look for every network interface to see the broadcast address
         Enumeration interfaces = NetworkInterface.getNetworkInterfaces();
         while (interfaces.hasMoreElements()) {
             NetworkInterface networkInterface = (NetworkInterface) interfaces.nextElement();
 
             if (networkInterface.isLoopback() || !networkInterface.isUp()) {
-                continue; // Don't want to broadcast to the loopback interface
+                continue;
             }
 
             for (InterfaceAddress interfaceAddress : networkInterface.getInterfaceAddresses()) {
@@ -54,13 +56,13 @@ public class Servidor {
                 
             }
         }
-        //preparar para receber respostas
-        socket.setSoTimeout(10000); // dar um timeout de 10s à socket
+        //sets a 10sec timeout for the responses
+        socket.setSoTimeout(10000); 
         byte[] receiveData = new byte[1024];
         boolean timeout = false;
         DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
 
-        //enquanto não fizer timeout corre tenta ler respostas
+        //while it doesnt timeout it tries to read as many responses as it can
         while (!timeout) {
             try {
                 socket.receive(receivePacket);
