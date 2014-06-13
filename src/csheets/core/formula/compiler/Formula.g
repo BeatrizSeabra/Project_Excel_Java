@@ -47,7 +47,7 @@ expression
        	;
 
 attribution
-        : CELL_REF ATT^ (attribution | comparison)
+        : ( CELL_REF | TEMPVAR ) ATT^ (attribution | comparison)
         ;
 
 comparison
@@ -87,6 +87,7 @@ atom
 	:	function_call
 	|	reference
 	|	literal
+        |       TEMPVAR
 	|	LPAR! comparison RPAR!
 	;
 
@@ -126,6 +127,10 @@ STRING	:	QUOT
 		QUOT  { setText(getText().substring(1, getText().length()-1)); }
 	;  	
 
+/*TEMPORARY VARIABLE*/
+
+TEMPVAR :   VARSIMBLE LETTER+;
+
 QUOT: '"' 
 	;
 
@@ -158,7 +163,7 @@ PERCENT : '%' ;
 fragment ABS : '$' ;
 fragment EXCL:  '!'  ;
 COLON	: ':' ;
-TEMP : '@' ;
+VARSIMBLE : '@' ;
 
  
 /* Miscellaneous operators */
