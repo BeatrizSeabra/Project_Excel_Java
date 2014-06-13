@@ -9,8 +9,8 @@ import csheets.ext.connection.Server;
 import csheets.ext.networkgame.Game;
 import csheets.ext.networkgame.GameController;
 import csheets.ext.networkgame.NetworkGameController;
+import static csheets.ext.networkgame.NetworkGameController.games;
 import csheets.ext.networkgame.Player;
-import static java.lang.Thread.sleep;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.List;
@@ -108,7 +108,7 @@ public class GameChoserPanel extends javax.swing.JPanel {
                 try {
                     s.sendData(("GS" + i).getBytes(), address.getHostName(), 7777);
                     NetworkGameController.mainWindow.dispose();
-                    NetworkGameController.pickGame(i, address);
+                    NetworkGameController.gc = new GameController(games.get(i), players, s, address, true);
                 } catch (UnknownHostException ex) {
                     Logger.getLogger(GameChoserPanel.class.getName()).log(Level.SEVERE, null, ex);
                 }
