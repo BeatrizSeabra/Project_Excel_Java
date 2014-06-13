@@ -72,8 +72,15 @@ public class ExcelExpressionCompiler implements ExpressionCompiler {
 
 	public Expression compile(Cell cell, String source) throws FormulaCompilationException {
 		// Creates the lexer and parser
-		ANTLRStringStream input = new ANTLRStringStream(source);
-		
+                ANTLRStringStream input;
+                if(source.startsWith("={") && source.contains(";")){
+                    String[] aux = source.split(";");
+                    String aux1 = aux[aux.length-1];
+                    String last = "=" + aux1.substring(0, aux1.length()-1);
+                    input = new ANTLRStringStream(last);    
+                }else{
+                    input = new ANTLRStringStream(source);  
+                }
 		// create the buffer of tokens between the lexer and parser 
 		FormulaLexer lexer=new FormulaLexer(input);
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
@@ -118,7 +125,7 @@ public class ExcelExpressionCompiler implements ExpressionCompiler {
 	 */
 	protected Expression convert(Cell cell, Tree node) throws FormulaCompilationException {
 		// System.out.println("Converting node '" + node.getText() + "' of tree '" + node.toStringTree() + "' with " + node.getNumberOfChildren() + " children.");
-		if(node.getType()==FormulaParser.SEMI){
+		if(node.getType()==FormulaLexer.SEMI){
                     convert(cell,node.getChild(1));
                 }
                 if (node.getChildCount() == 0) {

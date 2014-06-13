@@ -1,7 +1,7 @@
 package csheets.ext.importfiles.ui;
 
 import csheets.ext.importfiles.ui.ImportAction;
-import csheets.ext.residenceimport.ui.ResidenceImportAction;
+import csheets.ext.residenceimportcleansheets.ui.ResidenceImportAction;
 import csheets.ui.FileChooser;
 import java.awt.event.KeyEvent;
 
@@ -29,6 +29,5 @@ public class ImportMenu extends JMenu {
             // Adds font actions
             add(new ImportAction(uiController,chooser));
             add(new ResidenceImportAction(uiController));                
-	}	
+        }
 }
-

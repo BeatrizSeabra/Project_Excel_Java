@@ -14,7 +14,6 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -42,7 +41,7 @@ public final class ConsultResidenceUI extends JFrame {
     JButton home;
     JButton end;
     
-    List<Residence> listResidence;
+    private List<Residence> listResidence;
     
     int index = 0;
     
@@ -55,7 +54,7 @@ public final class ConsultResidenceUI extends JFrame {
         return instance;
     }
     
-    private ConsultResidenceUI()
+    public ConsultResidenceUI()
     {
         super("Consult Residence");
         Container c = getContentPane();
@@ -128,6 +127,20 @@ public final class ConsultResidenceUI extends JFrame {
         
     }
 
+    /**
+     * @return the listResidence
+     */
+    public List<Residence> getListResidence() {
+        return listResidence;
+    }
+
+    /**
+     * @param listResidence the listResidence to set
+     */
+    public void setListResidence(List<Residence> listResidence) {
+        this.listResidence = listResidence;
+    }
+
     class BotaoListener implements ActionListener {
 
         @Override
@@ -150,7 +163,7 @@ public final class ConsultResidenceUI extends JFrame {
             }
             else if(edit == e.getSource())
             {
-                Residence residence = new Residence(listResidence.get(index));
+                Residence residence = new Residence(getListResidence().get(index));
                 EditResidenceUI editResidenceUI = new EditResidenceUI(residence);
             }
             else if(delete == e.getSource())
@@ -161,20 +174,20 @@ public final class ConsultResidenceUI extends JFrame {
     }
     
     public void insertListResidences() {
-        ResidenceRepository res = new ResidenceRepository();
-        listResidence = new ArrayList<>();
-        listResidence = res.getAll();
+        //ResidenceRepository res = new ResidenceRepository();
+//        setListResidence(new ArrayList<>());
+        setListResidence(ResidenceRepository.getAll());
     }
     
     public void fill()
     {
-        id_residence.setText(Integer.toString(listResidence.get(index).getId_residence()));
-        street.setText(listResidence.get(index).getStreet());
-        locality.setText(listResidence.get(index).getLocality());
-        city.setText(listResidence.get(index).getCity());
-        country.setText(listResidence.get(index).getCountry());
+        id_residence.setText(Integer.toString(getListResidence().get(index).getId_residence()));
+        street.setText(getListResidence().get(index).getStreet());
+        locality.setText(getListResidence().get(index).getLocality());
+        city.setText(getListResidence().get(index).getCity());
+        country.setText(getListResidence().get(index).getCountry());
         
-        String postal_code = Integer.toString(listResidence.get(index).getPostal_code());
+        String postal_code = Integer.toString(getListResidence().get(index).getPostal_code());
         
         String scode = postal_code.substring(4);
         
@@ -189,7 +202,7 @@ public final class ConsultResidenceUI extends JFrame {
         
         index++;
         
-        if(index >= listResidence.size())
+        if(index >= getListResidence().size())
         {
             index--;
         }
@@ -215,13 +228,13 @@ public final class ConsultResidenceUI extends JFrame {
     }
     
     public void end() {
-        index = listResidence.size() - 1;
+        index = getListResidence().size() - 1;
         
         fill();
     }
     
     public void setResidence(int i, Residence residence) {
-        listResidence.set(i, residence);
+        getListResidence().set(i, residence);
     }
     
     public int getIndex() {
@@ -237,7 +250,7 @@ public final class ConsultResidenceUI extends JFrame {
 
             if(option == JOptionPane.YES_OPTION)
             {
-                Residence residence = new Residence(listResidence.get(index));
+                Residence residence = new Residence(getListResidence().get(index));
                 ResidenceRepository resRepo = new ResidenceRepository();
                 resRepo.delete(residence);
 

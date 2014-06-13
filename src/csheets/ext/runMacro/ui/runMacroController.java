@@ -1,13 +1,13 @@
 package csheets.ext.runMacro.ui;
 
 import csheets.core.Cell;
-import csheets.core.Workbook;
 import csheets.ui.ctrl.FocusOwnerAction;
 import csheets.ui.ctrl.UIController;
 import csheets.ui.sheet.SpreadsheetTable;
 import java.awt.event.ActionEvent;
 
 /**
+ * Representa o Controlador da JDialogRunMacro.
  *
  * @author 1120564MarcoEsteves
  */
