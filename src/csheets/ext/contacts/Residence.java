@@ -138,4 +138,5 @@ public class Residence implements java.io.Serializable {
         
         return residence;
     }
+    
 }

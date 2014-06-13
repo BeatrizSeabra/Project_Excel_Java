@@ -38,8 +38,7 @@ public class EvsetAction extends BaseAction {
 	}
 
 	/**
-	 * A simple action that presents a confirmation dialog.
-	 * If the user confirms then the contents of the cell A1 of the current sheet are set to the string "Changed".
+	 * A simple action that calls the interface.
 	 * @param event the event that was fired
 	 */
                        
@@ -51,7 +50,6 @@ public class EvsetAction extends BaseAction {
             l.setResizable(false);
             l.setLocationRelativeTo(null);
             l.setVisible(true);
-           // eventlist=l.getList();
 
 	}
         

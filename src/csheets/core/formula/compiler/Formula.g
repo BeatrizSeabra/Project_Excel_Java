@@ -43,12 +43,11 @@ package csheets.core.formula.compiler;
 }
 	         
 expression
-	: EQ! (attribution | comparison) EOF!
+	: EQ! (LBRA!)? ( attribution | comparison) (SEMI^ (attribution | comparison))* (RBRA!)? EOF!
        	;
 
 attribution
         : CELL_REF ATT^ (attribution | comparison)
-        : TEMP LETTER ATT^ (attribution | comparison)
         ;
 
 comparison
@@ -107,11 +106,6 @@ literal
 	|	STRING
 	;
 	
-block
-        :       EQ! LBRA (attribution | comparison) (SEMI (attribution | comparison))* RBRA EOF!
-        ;
-     
-
 fragment LETTER: ('a'..'z'|'A'..'Z') ;
   
 FUNCTION : 

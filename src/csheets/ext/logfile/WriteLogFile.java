@@ -16,7 +16,7 @@ import java.util.Date;
 
 /**
  *
- * @author RafaelChaves
+ * @author RafaelChaves/Stefan Teixeira
  */
 
 /*
@@ -24,8 +24,16 @@ import java.util.Date;
  * */
 public final class WriteLogFile {
 
-    //Create or writes at the end of the EventLog file each event that occurs in the cells. 
-    public static void writeLogFile(String address, String event, ArrayList<String> evl) {
+    /**Create or writes at the end of the EventLog file each event that occurs in the cells. 
+     * 
+     * @param address
+     * @param event
+     * @param evl
+     * @param formula 
+     */
+    
+    public static void writeLogFile(String address, String event, ArrayList<String> evl,String formula) {
+        if(formula.equals("")){
         if (evl.contains(event)) {
             try {
                 DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -35,6 +43,22 @@ public final class WriteLogFile {
                 String newLine = System.getProperty("line.separator");
                 BufferedWriter writer = new BufferedWriter(new FileWriter("EventLog.txt", true));
                 log = String.format("%s Event, on cell %s. time:%s\n\n\n", event, address, dateFormat.format(date));
+                writer.write(log + newLine);
+                writer.close();
+
+            } catch (Exception ee) {
+                ee.printStackTrace();
+            }
+        }
+        }else{
+            try {
+                DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                Date date = new Date();
+                File file;
+                String log = "";
+                String newLine = System.getProperty("line.separator");
+                BufferedWriter writer = new BufferedWriter(new FileWriter("EventLog.txt", true));
+                log = String.format("%s Event with formula: %s time:%s\n\n\n", event, formula, dateFormat.format(date));
                 writer.write(log + newLine);
                 writer.close();
 
@@ -61,4 +85,24 @@ public final class WriteLogFile {
             }
         }
     }
+    
+     public static void writeLogFile(String event) {
+        
+            try {
+                DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                Date date = new Date();
+                File file;
+                String log = "";
+                String newLine = System.getProperty("line.separator");
+                BufferedWriter writer = new BufferedWriter(new FileWriter("EventLog.txt", true));
+                log = String.format("%s WorkBookEvent, time:%s\n\n\n", event, dateFormat.format(date));
+                writer.write(log + newLine);
+                writer.close();
+
+            } catch (Exception ee) {
+                ee.printStackTrace();
+            }
+        
+    }
+     
 }

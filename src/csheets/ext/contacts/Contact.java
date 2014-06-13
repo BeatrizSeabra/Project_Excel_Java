@@ -13,11 +13,11 @@ import javax.persistence.*;
 
 /**
  *
- * @author PedroRosário
+ * @author PedroRosário & 1090675 - Tiago Pereira
  */
 
 @Entity
-@Table(name = "Contacts")
+@Table(name = "ContactsTest")
 public class Contact implements Serializable {
     
     @Id
@@ -27,9 +27,20 @@ public class Contact implements Serializable {
     private String firstName;
     private String lastName;
     private String occupation;
-    private Residence residence;
+    private int id_residenceFK;
+    private int id_residenceFK2;
 
-    public Contact(String firstName, String lastName) {
+    public Contact(String firstName, String lastName, int id_residenceFK, int id_residenceFK2) {
+        id2++;
+        this.id=id2;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.id_residenceFK = id_residenceFK;
+        this.id_residenceFK2 = id_residenceFK2;
+    }
+    
+    public Contact(String firstName, String lastName)
+    {
         id2++;
         this.id=id2;
         this.firstName = firstName;
@@ -78,20 +89,31 @@ public class Contact implements Serializable {
     }
 
     /**
-     * @return the residence
+     * @return the id_residenceFK
      */
-    public Residence getResidence() {
-        return residence;
+    public int getId_residenceFK() {
+        return id_residenceFK;
     }
 
     /**
-     * @param residence the residence to set
+     * @param id_residenceFK the id_residenceFK to set
      */
-    public void setResidence(Residence residence) {
-        this.residence = residence;
+    public void setId_residenceFK(int id_residenceFK) {
+        this.id_residenceFK = id_residenceFK;
     }
-    
-    
-    
-    
+
+    /**
+     * @return the id_residenceFK2
+     */
+    public int getId_residenceFK2() {
+        return id_residenceFK2;
+    }
+
+    /**
+     * @param id_residenceFK2 the id_residenceFK2 to set
+     */
+    public void setId_residenceFK2(int id_residenceFK2) {
+        this.id_residenceFK2 = id_residenceFK2;
+    }
+            
 }

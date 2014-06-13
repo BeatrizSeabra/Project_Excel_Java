@@ -23,15 +23,33 @@
  * 
  * <b>S077c: Coding</b><br/>
  * see:<br/>
+ * <a href="../../../csheets/ext/searchFilesBackground/package-summary.html">csheets.ext.searchFilesBackground</a><br/>
+ * <a href="../../../csheets/ext/searchFilesBackground/ui/package-summary.html">csheets.ext.searchFilesBackground.ui</a><br/>
  * <br/>
  * <br/>
  * 
  * <b>S077u: Unit Tests</b><br/>
- * see:<br/>
+ * O metodo responsavel pela pesquisa dos ficheiros que sequem determinado padrao esta contindo na thread, uma vez que e para fazer a busca em segundo plano.<br/>
+ * Deste modo nao e possivel efectuar testes unitarios.<br/>
+ * Apesar de nao ser possivel efectuar testes unitarios,e importante referir alguns aspectos que esta extensao tem em relacao a validacao de resultados.<br/>
+ * Ao iniciar a aplicacao podemos verificar que na seccao do sidebar referente a pesquisa de ficheiros(search files in background) tem apenas um valor a dizer "background".<br/>
+ * Quando a pesquisa inicia uma messageDialog e ativada a avisar que a pesquisa iniciou. Durante a pesquisa o valor "background" e apagado e substituido pelos nomes dos ficheiros encontrados.<br/>
+ * Se nao for encontrado nenhum ficheiros o valor "background" e substituido por "file not found".<br/>
+ * No final da pesuisa outra messageDialog e ativada a avisar que a pesuisa terminou.<br/>
  * <br/>
  * <br/>
  * 
  * <b>S077f: Functional Tests</b><br/>
+ * Para testar esta funcionalidade, o utilizador deve seguir os passos seguintes:<br/>
+ * 1. Executar o CleanSheets. <br/>
+ * 2.Selecionar o sidebar referente a pesquisa de ficheiros. <br/>
+ * 3.Selecionar no menu a opcao Extensions. <br/>
+ * 4.Selecionar na Extensions a opcao  SearchFiles Menu. <br/>
+ * 5.Seleciona no SearchFiles Menu a opcao  SearchFiles in Background. <br/>
+ * 6.Inserir na JDialog o Padrao(Pattern) e o diretorio(Directory) <br/>
+ * 7.Confirmar operacao no butao OK. <br/>
+ * 8.Apos a confirmacao uma MessageDialog ira aparecer a informar que a busca iniciou e no final da busca outra MessageDialog ira aparecer a informar que a busca terminou. <br/>
+ * Os ficheiros irao ser listados no sidebar <br/>.
  * <br/>
  * <br/>
  * 

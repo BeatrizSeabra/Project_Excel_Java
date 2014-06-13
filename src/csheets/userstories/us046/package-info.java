@@ -28,10 +28,11 @@
  *
  * <b>S073c: Coding</b><br/>
  * Na implementaçao do codigo sera necessario utilizar uma extensao para a
- * insercao de um botao.
- * Sera necessario utilizar um painel onde irao ser colocados os botes, o 
- * painel estara com o fundo transparente para assim ser possivel visualizar
- * a folha de calculo.
+ * insercao de um botao. Sera necessario utilizar um painel onde irao ser
+ * colocados os botes, o painel estara com o fundo transparente para assim ser
+ * possivel visualizar a folha de calculo. see:<br/>
+ * <a href="../../../csheets/ext/button/package-summary.html">csheets.ext.button</a><br/>
+ * <a href="../../../csheets/ext/button/ui/package-summary.html">csheets.ext.button.ui</a><br/>
  * <br/>
  * <br/>
  *
@@ -41,21 +42,24 @@
  * <br/>
  * <b>S028f: Functional Tests</b><br/>
  * 1- Correr o programa;<br/>
- * 2- Seleceionar no Menu a opcao "Button" e de seguida "insert button";<br/>
+ * 2- Selecionar uma celula;<br/>
+ * 3- Selecionar no Menu a opcao "Button";<br/>
+ * 4- Selecionar "insert button";<br/>
+ *
+ * 5- Selecione celulas diferentes para os proximos botoes nao aparecerem por
+ * cima do anterior.<br/>
  *
  *
- * @startuml 
- * doc-files/us046_design1.png
- * menuBar -> ButtonSheet : create();
- * buttonSheet -> StyleToolbar : add(); 
- * buttonSheet -> SpreadSheetTable:getselectedcells(); 
- * buttonSheet -> Workbook: show();
- * @enduml
- *
- *
- * /
  *
  * @author 1110316
+ */
+/**
+  @startuml doc-files/us046_design1.png 
+  menuBar -> ButtonSheet : create()
+  buttonSheet -> StyleToolbar : add()
+  buttonSheet -> SpreadSheetTable:getselectedcells()
+  buttonSheet -> Workbook: show()
+  @enduml
  *
  */
 package csheets.userstories.us046;

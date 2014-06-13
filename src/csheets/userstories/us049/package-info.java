@@ -8,13 +8,13 @@
  * <br/>
  * <br/>
  *  
- * <b>S055a: Analysis</b><br/>
+ * <b>S049a: Analysis</b><br/>
  * Since there are many events to apply on the workbook like (Open, Close, sheetCreated, sheetDeleted and sheetRenamed) we have to study how and when said events occur.
  * With the need of making a graphic interface we have to study how to add another sub-menu. We latter have to sketch an example of the interface as it will be added to the code.
  * <br/>
  * <br/>
  * 
- * <b>S055d: Design</b><br/>
+ * <b>S049d: Design</b><br/>
  * For the User Interface we will need to create a subclass Extention. We will also need to create a subclass of UIExtension. For the sub-menu we will need a MenuItem named EventLogFile.
  * To demonstrate the interaction between the User and the UI heres a diagram: <img src="../../../csheets/userstories/us055/doc-files/us055_design1.png">. Every event will be added to the EventList by default.
  * Since for this US we only need to write to the logfile, every time the events occurs the system checks the event's name against the list. If the name is in there it writes to the logFile (Events name + date).
@@ -26,13 +26,28 @@
  * <br/>
  * <br/>
  * 
- * <b>S055c: Coding</b><br/>
+ * <b>S049c: Coding</b><br/>
  * see:<br/>
  * <a href="../../../csheets/ext/logfile/package-summary.html">csheets.ext.logfile</a><br/>
  * <a href="../../../csheets/ext/logfile/ui/package-summary.html">csheets.ext.logfile.ui</a><br/>
  * <br/>
  * <br/>
  *
+ * <b>S049u: Unit Tests</b><br/>
+ * Has this user story only have a UI and write the workbook events when they are called in a txt file, we don't create unit Tests. To teste and execute this US see Functional Tests below.
+ * <br/>
+ * <br/>
+ * 
+ * <b>S049f: Functional Tests</b><br/>
+ * To test this user story, the user should follow these steps:
+ * 1- run cleansheets;
+ * 2- click on the Extension menu, go to WorkBookEvents. There must appear a menu option containning one option for the EventLog File Options;<br/>
+ * 3- the previous option is a set of five check boxes that: when checked and after the said event occurs it will be logged into to EventLog; when not checked the event will not be logged;<br/>
+ * 4- Doing the events and when the check boxes are selected the system will print the events in the logFile . <br/>
+ * <br/>
+ * <br/>
+ * 
+ * 
  * @author Nélson Mourão
  **/
 /*

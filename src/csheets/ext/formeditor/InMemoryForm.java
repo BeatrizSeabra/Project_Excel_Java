@@ -20,27 +20,27 @@ public class InMemoryForm {
         return instance; 
     }
     
-    private static ExtensionFormEditor form= new ExtensionFormEditor();
-    private static ArrayList<JTextField> ListaTexto;
+    private static Form form= new Form();
+    private static ArrayList<JTextField> dataList;
     
-   public void add(ExtensionFormEditor form) 
+   public void addForm(Form form) 
    { 
        form=form; 
    } 
    
-   public void addPreenchimento(ArrayList<JTextField> ListaTexto)
+   public void addDataList(ArrayList<JTextField> dataList)
    {
-       this.ListaTexto=ListaTexto;
+       this.dataList=dataList;
    }
    
-   public ExtensionFormEditor getForm()
+   public Form getForm()
    {
        return form;
    }
    
-   public ArrayList<JTextField> getPreenchimento()
+   public ArrayList<JTextField> getDataList()
    {
-       return ListaTexto;
+       return dataList;
    }
     
 }
