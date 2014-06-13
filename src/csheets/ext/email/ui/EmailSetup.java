@@ -6,6 +6,7 @@
 package csheets.ext.email.ui;
 
 import csheets.ext.email.EmailAccount;
+import csheets.ext.email.SendEmail;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,10 +21,23 @@ public class EmailSetup extends javax.swing.JFrame {
     public EmailSetup() {
         initComponents();
         // lê os dados apartir do ficheiro
-        EmailAccount account = new EmailAccount();
+        SendEmail account = new SendEmail();
+        Load(account);
 
     }
 
+    private void Load(EmailAccount account) {
+        account.Load();
+        jTextField1.setText(account.getName());
+        jTextField2.setText(account.getEmail());
+        jPasswordField1.setText(account.getPassword());
+        jTextField3.setText(account.getHost());
+        jTextField4.setText(account.getPort());
+    }
+
+    private void Save(EmailAccount account) {
+        account.Save();
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -43,7 +57,7 @@ public class EmailSetup extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Nome: ");
 
@@ -80,7 +94,7 @@ public class EmailSetup extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Ok");
+        jButton3.setText("Save");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -107,15 +121,13 @@ public class EmailSetup extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(135, 135, 135)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addComponent(jButton2))
-                            .addComponent(jButton3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(123, 123, 123)
+                        .addComponent(jButton3)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)
+                        .addGap(18, 18, 18)
                         .addComponent(jButton1)
-                        .addContainerGap(166, Short.MAX_VALUE))
+                        .addContainerGap(97, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
@@ -183,29 +195,32 @@ public class EmailSetup extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField3ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        dispose();
+        SendEmail acc = new SendEmail(jTextField2.getText(), String.valueOf(jPasswordField1.getPassword()), jTextField1.getText(), jTextField3.getText(), jTextField4.getText());
+        Save(acc);
+        jButton3.setEnabled(false);
+        JOptionPane.showMessageDialog(this, "Setup saved");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        EmailAccount accounts = new EmailAccount(jTextField2.getText(), String.valueOf(jPasswordField1.getPassword()), jTextField1.getText(), jTextField3.getText(), jTextField4.getText());
+        SendEmail accounts = new SendEmail(jTextField2.getText(), String.valueOf(jPasswordField1.getPassword()), jTextField1.getText(), jTextField3.getText(), jTextField4.getText());
         try {
             accounts.Send();
             jButton2.setEnabled(false);
-            JOptionPane.showMessageDialog(this, "Success!");
+            JOptionPane.showMessageDialog(this, "Success");
 
         } catch (RuntimeException u) {
-            JOptionPane.showMessageDialog(this, "Fail...");
+            JOptionPane.showMessageDialog(this, "Fail");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     dispose();
+        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-   public void run() {
+    public void run() {
         this.setVisible(true);
         setLocationRelativeTo(null);
     }

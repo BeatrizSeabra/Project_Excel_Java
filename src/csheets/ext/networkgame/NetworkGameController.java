@@ -44,19 +44,19 @@ public class NetworkGameController {
                 if (file_string.contains("CN")) {                       //CN Connection
                     mainWindow.dispose();
                     initJFrame("Players Found");
-                    games.add(new GameExample("Example", players, s, address));
+                    addGames(address);
                     mainWindow.add(new GameChoserPanel(games, data, s, address));
                     packJFrame();
                 } else if (file_string.contains("GS")) {                                        //GS game selected response  
-                    games.add(new GameExample("Example", players, s, address));
+                    addGames(address);
                     int game = parseGame(data);
                     players.add(parsePlayer(data));
                     if (players.size() == 1) {
                         profile = new Player("Player 2");
                         players.add(profile);
                     }
-                    gc = new GameController(games.get(game), players, s, address);
-                    System.out.println("GC init");
+                    mainWindow.dispose();
+                    pickGame(game, address);
                 } else if (file_string.contains("GM")) {                                        //GM GAme message
                     gc.recieve(data);
                 }
@@ -93,7 +93,12 @@ public class NetworkGameController {
     }
 
     public static int parseGame(byte[] data) {
-        return (int) data[2];
+         String s = "";
+        for (int i = 2; i < 3; i++) {
+            s += (char) data[i];
+        }
+        
+        return Integer.parseInt(s);
     }
 
     public static Player parsePlayer(byte[] data) {
@@ -108,4 +113,11 @@ public class NetworkGameController {
         return p;
     }
 
+    public static void addGames(InetAddress address){
+        games.add(new GameExample("Example", players, s, address));
+    }
+    
+    public static void pickGame(int i, InetAddress address){
+        gc = new GameController(games.get(i), players, s, address);
+    }
 }

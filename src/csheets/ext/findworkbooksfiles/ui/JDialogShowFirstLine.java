@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package csheets.ext.findworkbooksfiles.ui;
 
 import csheets.CleanSheets;
@@ -15,7 +14,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Diogo
+ * @author Diogo Moreira (1120339)
  */
 public class JDialogShowFirstLine extends javax.swing.JDialog {
 
@@ -150,17 +149,24 @@ public class JDialogShowFirstLine extends javax.swing.JDialog {
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void openButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openButtonActionPerformed
-        try {
-            CleanSheets cleansheets = new CleanSheets();
-            File selectedFile = new File(filePath);
-            new csheets.ui.Frame.Creator(cleansheets);
-            cleansheets.load(selectedFile);
-            dispose();
-        } catch (IOException ex) {
-            Logger.getLogger(JDialogShowFirstLine.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(JDialogShowFirstLine.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        dispose();
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    CleanSheets cleansheets = new CleanSheets();
+                    File selectedFile = new File(filePath);
+                    new csheets.ui.Frame.Creator(cleansheets).createAndWait();
+                    cleansheets.load(selectedFile);
+                } catch (IOException ex) {
+                    Logger.getLogger(JDialogShowFirstLine.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(JDialogShowFirstLine.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+        });
+        t.start();
     }//GEN-LAST:event_openButtonActionPerformed
 
     /**
@@ -204,20 +210,28 @@ public class JDialogShowFirstLine extends javax.swing.JDialog {
             }
         });
     }
-    
-    public void updateText(Cell[] firstRow){
+
+    /**
+     * Method that inserts the "sample" of a workbook on the textArea
+     * @param firstRow is an array of Cell objetcs with the information of the first row of the first spreadsheet on a workbook
+     */
+    public void updateText(Cell[] firstRow) {
         textArea.setEditable(false);
-        String input="";
+        String input = String.format("File: %s\nFirst Row:\n", filePath);
         for (int i = 0; i < firstRow.length; i++) {
-            input+=String.format("| %s ", firstRow[i].getContent());
+            input += String.format(" %s |", firstRow[i].getContent());
         }
         textArea.setText(input);
     }
-    
+
     private String filePath;
-    
-    public void setFilePath(String filePath){
-        this.filePath=filePath;
+
+    /**
+     * Sets the path of the file which sample is shown on the JDialog
+     * @param filePath 
+     */
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

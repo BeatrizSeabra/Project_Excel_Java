@@ -15,6 +15,7 @@ import javax.swing.border.TitledBorder;
 
 import csheets.ui.ctrl.UIController;
 import csheets.ui.ext.UIExtension;
+import javax.swing.DefaultListModel;
 import javax.swing.JList;
 
 /**
@@ -29,6 +30,8 @@ public class UIExtensionSearchFilesBackground extends UIExtension {
     private Icon icon;
     private JList filelist;
 
+    private DefaultListModel listModel;
+
     /**
      * Um panel onde os ficheiros que são encontrados irao ser listados.
      */
@@ -36,7 +39,6 @@ public class UIExtensionSearchFilesBackground extends UIExtension {
 
     public UIExtensionSearchFilesBackground(Extension extension, UIController uiController) {
         super(extension, uiController);
-        // TODO Auto-generated constructor stub
     }
 
     /**
@@ -58,8 +60,11 @@ public class UIExtensionSearchFilesBackground extends UIExtension {
      */
     @Override
     public JComponent getSideBar() {
-        String[] inicio = {"Background", ""};
-        filelist = new JList(inicio);
+        listModel=new DefaultListModel();
+        listModel.addElement("Background");
+        
+        filelist = new JList(listModel);
+
         if (sideBar == null) {
             sideBar = new JPanel(new GridLayout(1, 1));
             sideBar.setName(ExtensionSearchFilesBackground.NAME);
@@ -77,18 +82,26 @@ public class UIExtensionSearchFilesBackground extends UIExtension {
         }
         return sideBar;
     }
-
-    public void actualizarSidebarConteudo(String[] conteudo) {
-        filelist.removeAll();
-
-        if (conteudo != null) {
-            filelist = new JList(conteudo);
-        } else {
-            String[] vazia = new String[1];
-            vazia[0] = "No files found";
-            filelist = new JList(vazia);
-        }
+    
+    public void cleanList(){
+        listModel.removeAllElements();
+        filelist = new JList(listModel);
+        
         sideBar.removeAll();
+        
+        JScrollPane filesPane = new JScrollPane(filelist);
+        sideBar.add(filesPane);
+
+        sideBar.repaint();
+        sideBar.revalidate();
+    }
+
+    public void addFileName(String name) {
+        listModel.addElement(name);
+        filelist = new JList(listModel);
+        
+        sideBar.removeAll();
+        
         JScrollPane filesPane = new JScrollPane(filelist);
         sideBar.add(filesPane);
 
@@ -96,4 +109,20 @@ public class UIExtensionSearchFilesBackground extends UIExtension {
         sideBar.revalidate();
 
     }
+
+    public void noFileFound() {
+        filelist.removeAll();
+
+        String[] vazia = new String[1];
+        vazia[0] = "No files found";
+        filelist = new JList(vazia);
+
+        sideBar.removeAll();
+        JScrollPane filesPane = new JScrollPane(filelist);
+        sideBar.add(filesPane);
+
+        sideBar.repaint();
+        sideBar.revalidate();
+    }
+
 }

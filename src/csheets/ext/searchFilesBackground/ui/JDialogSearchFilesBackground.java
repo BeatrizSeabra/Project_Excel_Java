@@ -5,7 +5,7 @@
  */
 package csheets.ext.searchFilesBackground.ui;
 
-import csheets.ext.searchFilesBackground.ui.SearchFilesBackground.ThreadSearch;
+import csheets.ui.FileChooser;
 import csheets.ui.ctrl.UIController;
 import csheets.ui.ext.UIExtension;
 import javax.swing.JOptionPane;
@@ -25,6 +25,7 @@ public class JDialogSearchFilesBackground extends javax.swing.JDialog {
         super(parent, modal);
         this.setModal(true);
         initComponents();
+        setLocationRelativeTo(null);
         this.uiController = uiController;
     }
 
@@ -46,6 +47,7 @@ public class JDialogSearchFilesBackground extends javax.swing.JDialog {
         jButton2 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -71,7 +73,7 @@ public class JDialogSearchFilesBackground extends javax.swing.JDialog {
             }
         });
 
-        jButton1.setText("Search");
+        jButton1.setText("OK");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -82,6 +84,13 @@ public class JDialogSearchFilesBackground extends javax.swing.JDialog {
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Search");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
             }
         });
 
@@ -101,10 +110,13 @@ public class JDialogSearchFilesBackground extends javax.swing.JDialog {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(18, 18, 18)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton3))
                             .addComponent(jTextField1))
-                        .addGap(26, 34, Short.MAX_VALUE))
+                        .addGap(18, 18, 18))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -131,8 +143,9 @@ public class JDialogSearchFilesBackground extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(26, 26, 26)
+                    .addComponent(jLabel3)
+                    .addComponent(jButton3))
+                .addGap(24, 24, 24)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -157,8 +170,10 @@ public class JDialogSearchFilesBackground extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
         String pattern = jTextField1.getText();
         String dir = jTextField2.getText();
+
         if (pattern.isEmpty() && dir.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Invalid Pattern \nInvalid Directory", "ERROR", JOptionPane.ERROR_MESSAGE);
         } else {
@@ -168,17 +183,11 @@ public class JDialogSearchFilesBackground extends javax.swing.JDialog {
                 if (pattern.isEmpty()) {
                     JOptionPane.showMessageDialog(this, "Invalid Pattern", "ERROR", JOptionPane.ERROR_MESSAGE);
                 } else {
-
+                    dispose();
+                    JOptionPane.showMessageDialog(this, "File Search Started!", "Search", JOptionPane.INFORMATION_MESSAGE);
                     //cria thread
-                    ThreadSearch search = new SearchFilesBackground.ThreadSearch();
-
-                    //inicia as variaveis da thread
-                    search.setPattern(pattern);
-                    search.setDir(dir);
-
-                    //executa thread
-                    search.start();
-
+                    SearchFilesBackground search = new SearchFilesBackground();
+                    
                     //acede a extensao UIExtensionSearchFilesBackground para actualizar lista com o nome dos ficheiros
                     UIExtensionSearchFilesBackground ui = null;
                     for (UIExtension extension : uiController.getExtensions()) {
@@ -188,22 +197,25 @@ public class JDialogSearchFilesBackground extends javax.swing.JDialog {
                         }
 
                     }
-
-                    if (search.getList() != null) {
-                        ui.actualizarSidebarConteudo(search.getList());
-                    } else {
-                        ui.actualizarSidebarConteudo(null);
-                    }
+                    search.searchFilesBackground(pattern, dir,ui);
                 }
             }
         }
-        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        FileChooser chooser=new FileChooser(null, null);
+        chooser.setFileSelectionMode(FileChooser.DIRECTORIES_ONLY);
+        chooser.showDialog(null, null);
+        
+        jTextField2.setText(chooser.getCurrentDirectory().getPath());
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

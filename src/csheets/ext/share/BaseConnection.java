@@ -14,7 +14,7 @@ import org.jasypt.util.binary.BasicBinaryEncryptor;
  * Super classe que qualquer ligação, controla os dados de entrada e os de
  * saida. (Client / Server)
  *
- * @author Rui 1110506
+ * @author Rui 1110506 and Marc
  */
 public abstract class BaseConnection {
 
@@ -39,13 +39,7 @@ public abstract class BaseConnection {
         binaryEncryptor = new BasicBinaryEncryptor();
         binaryEncryptor.setPassword(password);
     }
-
-    /**
-     * Metodo para encriptar qualquer objecto
-     *
-     * @param obj
-     * @return dados encriptados do @see obj
-     */
+    
     public Object encryptor(Object obj) {
         try {
             ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -60,12 +54,6 @@ public abstract class BaseConnection {
         }
     }
 
-    /**
-     * Metodo para desencriptar dados do tipo @see ByteObject
-     *
-     * @param obj
-     * @return
-     */
     public Object decrypt(Object obj) {
         try {
             byte[] bites = ((ByteObject) obj).bytes;
@@ -74,7 +62,6 @@ public abstract class BaseConnection {
             ObjectInputStream is = new ObjectInputStream(in);
             return is.readObject();
         } catch (Exception e) {
-            //e.printStackTrace();
             return null;
         }
     }
@@ -83,60 +70,83 @@ public abstract class BaseConnection {
         return password;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Spreadsheet getFolha() {
+        return folha;
+    }
+
+    public void setFolha(Spreadsheet folha) {
+        this.folha = folha;
+    }
+
     public int getPort() {
         return port;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
     }
 
     public Address getInicio() {
         return inicio;
     }
 
+    public void setInicio(Address inicio) {
+        this.inicio = inicio;
+    }
     public Address getFim() {
         return fim;
     }
 
-    public boolean isReceberData() {
-        return receberData;
-
+    public void setFim(Address fim) {
+        if (this.fim == null) {
+            this.fim = fim;  
+        } else {
+            this.fim = fim;
+        }
     }
+
+    public boolean isReceberData() {
+            return receberData;
+    }
+
 
     public void setReceberData(boolean receberData) {
-        this.receberData = receberData;
+            this.receberData = receberData; 
     }
 
-    /**
-     * Class responsável pelo tratamento de todos os dados de entrada
-     */
     public class In implements Runnable {
 
         private ObjectInputStream ois;
 
         public In(ObjectInputStream ois) {
             this.ois = ois;
-
+            
         }
 
         @Override
         public void run() {
             try {
-                synchronized (ois) {
-                    Object recv = decrypt(ois.readObject());
-                    try {
-                        String[][] share = (String[][]) recv;
-                        toSpreedsheet(share);
-                    } catch (Exception e) {
+
+                while (true) {
+                    synchronized (ois) {
+                        Object recv = decrypt(ois.readObject());
+                        try {
+                            String[][] share = (String[][]) recv;
+                            toSpreedsheet(share);
+                            setFim(new Address(getInicio().getColumn() + share[0].length - 1, getInicio().getRow() + share.length - 1));
+                        } catch (Exception e) {
+                        }
                     }
+
                 }
             } catch (Exception e) {
             }
-
         }
-
-        /**
-         * exporta para a @see Spreedsheet os dados recebidos
-         *
-         * @param share
-         */
+        
         private void toSpreedsheet(String[][] share) {
             setReceberData(true);
             for (int i = 0; i < share.length; i++) {
@@ -152,9 +162,6 @@ public abstract class BaseConnection {
         }
     }
 
-    /**
-     * controla todos os dados de saida da ligação
-     */
     public class Out implements Runnable, CellListener {
 
         private ObjectOutputStream oos;
@@ -163,31 +170,26 @@ public abstract class BaseConnection {
         public Out(ObjectOutputStream oos) {
             this.oos = oos;
             folha.addCellListener(this);
-
         }
 
         @Override
         public void run() {
             try {
-                if (getFim() != null) {
-                    synchronized (getObj()) {
-                        getOos().writeObject(encryptor(getCells()));
-                        getOos().flush();
+                while (true) {
+                    if (getFim() != null) {
+                        synchronized (getObj()) {
+                            getOos().writeObject(encryptor(getCells()));
+                            getOos().flush();
+                        }
+                    }
+                    synchronized (obj) {
+                        obj.wait();
                     }
                 }
-                synchronized (obj) {
-                    obj.wait();
-                }
             } catch (Exception e) {
-                //e.printStackTrace();
             }
         }
 
-        /**
-         * retorna uma matriz de @see Cell
-         *
-         * @return
-         */
         private String[][] getCells() {
             String[][] matriz = new String[getFim().getRow() - getInicio().getRow() + 1][getFim().getColumn() - getInicio().getColumn() + 1];
             for (int i = 0; i < matriz.length; i++) {
@@ -200,6 +202,9 @@ public abstract class BaseConnection {
 
         @Override
         public void valueChanged(Cell cell) {
+            if (isReceberData() == true) {
+                return;
+            }
             if (cell.getAddress().getColumn() >= getInicio().getColumn() && cell.getAddress().getRow() >= getInicio().getRow()) {
                 if (cell.getAddress().getColumn() <= getFim().getColumn() && cell.getAddress().getRow() <= getFim().getRow()) {
                     synchronized (getObj()) {
@@ -233,5 +238,8 @@ public abstract class BaseConnection {
             return obj;
         }
 
+        public void setObj(Object obj) {
+            this.obj = obj;
+        }
     }
 }
