@@ -7,6 +7,7 @@ import csheets.ui.ctrl.UIController;
 import csheets.ui.ext.UIExtension;
 
 /**
+ * Representa o extensao Run Macro.
  *
  * @author 1120564MarcoEsteves
  */

@@ -8,6 +8,7 @@ import csheets.ui.sheet.SpreadsheetTable;
 import java.awt.event.ActionEvent;
 
 /**
+ * Representa o Controlador da JDialogRunMacro.
  *
  * @author 1120564MarcoEsteves
  */
