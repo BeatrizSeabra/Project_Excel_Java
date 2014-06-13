@@ -2,7 +2,6 @@ package csheets.ext.runMacro;
 
 import csheets.ext.Extension;
 import csheets.ext.runMacro.ui.UIExtensionRunMacro;
-import csheets.ext.searchFiles.ui.UIExtensionSearchFiles;
 import csheets.ui.ctrl.UIController;
 import csheets.ui.ext.UIExtension;
 

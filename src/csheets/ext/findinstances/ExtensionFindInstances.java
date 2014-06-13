@@ -29,7 +29,7 @@ public class ExtensionFindInstances extends Extension {
 	}
 	
 	/**
-	 * Returns the user interface extension of this extension (an instance of the class {@link  csheets.ext.simple.ui.UIExtensionExample}). <br/>
+	 * Returns the user interface extension of this extension (an instance of the class {@link  csheets.ext.findinstances.ui.UIExtensionFindInstances}). <br/>
 	 * In this extension example we are only extending the user interface.
 	 * @param uiController the user interface controller
 	 * @return a user interface extension, or null if none is provided
