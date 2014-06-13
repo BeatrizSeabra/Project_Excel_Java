@@ -17,7 +17,7 @@ public class UDPClient extends Thread {
         return instance;
     }
 
-    private int port = 6789;
+    private int port = 2000;
     private static ArrayList<String> listParticipants = new ArrayList<String>();
 
     private UDPClient() {
