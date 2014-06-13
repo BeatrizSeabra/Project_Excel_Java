@@ -1,10 +1,10 @@
 /**
-* Technical documentation regarding the user story 016: Conﬁguração de email <br/> 
+* Technical documentation regarding the user story 016: Configuração de email <br/> 
 * <br/>
 * <br/>
 * 
 * <b>Requirement</b><br/>
-* Deve haver uma janela para conﬁgurar os dados da conta de email <br/>
+* Deve haver uma janela para configurar os dados da conta de email <br/>
 * e do serviço que será usado para enviar emails. Deve haver um botão para enviar um email de teste. <br/>
 * <br/>
 * <br/>

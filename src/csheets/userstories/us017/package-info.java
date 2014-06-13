@@ -5,7 +5,7 @@
 * 
 * <b>Requirement</b><br/>
 * Acrescentar uma janela que permite enviar um email. Deve ser possível <br/>
-* indicar os destinatários do email, o assunto e a mensagem. Deve ser possível anexar um ﬁcheiro. <br/>
+* indicar os destinatários do email, o assunto e a mensagem. Deve ser possivel anexar um ficheiro. <br/>
 * <br/>
 * <br/>
 *  
