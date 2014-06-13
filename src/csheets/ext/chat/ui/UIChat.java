@@ -11,8 +11,6 @@ import csheets.ext.chat.UDPClient;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -140,7 +138,7 @@ public class UIChat extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setText("Provide Char");
+        jButton5.setText("Provide Chat");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -269,14 +267,13 @@ public class UIChat extends javax.swing.JFrame {
     public class ThreadUpdateList extends Thread {
 
         public void run() {
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
             while (true) {
-                System.out.println("Updating list");
                 updateList();
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -287,44 +284,25 @@ public class UIChat extends javax.swing.JFrame {
         int size = listParticipants.size();
 
         if (size > 0) {
-            
-            for(int i=0; i<size; i++)
-            {
-                if(controlo.getConnections().contains(listParticipants.get(i)))
-                {
+
+            for (int i = 0; i < size; i++) {
+                if (!(controlo.getConnections().contains(listParticipants.get(i)))) {
                     controlo.getConnections().add(listParticipants.get(i));
                 }
             }
-            
             refreshChatList(controlo.listConnections());
-
-//            jList1.removeAll();
-//            DefaultListModel lm1 = new DefaultListModel();
-//            for (int i = 0; i < size; i++) {
-//                lm1.addElement(listParticipants.get(i));
-//                System.out.println(listParticipants.get(i));
-//            }
-//            jList1.setModel(lm1);
-//
-//            this.repaint();
-//            this.revalidate();
-//        } else {
-//            jList1.removeAll();
         }
-        System.out.println("List updated");
     }
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
         if (controlo == null) {
             JOptionPane.showMessageDialog(rootPane, "Must Activate first");
-        }
-        else {
+        } else {
             UDPClient.getInstance().start();
-            
-            //ThreadUpdateList threadUpdateList = new ThreadUpdateList();
-            //threadUpdateList.start();
-            updateList();
+
+            ThreadUpdateList threadUpdateList = new ThreadUpdateList();
+            threadUpdateList.start();
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
