@@ -208,7 +208,12 @@ public class JDialogSearchFilesBackground extends javax.swing.JDialog {
         chooser.setFileSelectionMode(FileChooser.DIRECTORIES_ONLY);
         chooser.showDialog(null, null);
         
-        jTextField2.setText(chooser.getCurrentDirectory().getPath());
+        if(chooser.getSelectedFile()==null){
+            return;
+        }
+            
+        jTextField2.setText(chooser.getSelectedFile().getAbsolutePath());
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
 

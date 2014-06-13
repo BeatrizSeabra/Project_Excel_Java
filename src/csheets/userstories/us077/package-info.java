@@ -40,6 +40,16 @@
  * <br/>
  * 
  * <b>S077f: Functional Tests</b><br/>
+ * Para testar esta funcionalidade, o utilizador deve seguir os passos seguintes:<br/>
+ * 1. Executar o CleanSheets. <br/>
+ * 2.Selecionar o sidebar referente a pesquisa de ficheiros. <br/>
+ * 3.Selecionar no menu a opcao Extensions. <br/>
+ * 4.Selecionar na Extensions a opcao  SearchFiles Menu. <br/>
+ * 5.Seleciona no SearchFiles Menu a opcao  SearchFiles in Background. <br/>
+ * 6.Inserir na JDialog o Padrao(Pattern) e o diretorio(Directory) <br/>
+ * 7.Confirmar operacao no butao OK. <br/>
+ * 8.Apos a confirmacao uma MessageDialog ira aparecer a informar que a busca iniciou e no final da busca outra MessageDialog ira aparecer a informar que a busca terminou. <br/>
+ * Os ficheiros irao ser listados no sidebar <br/>.
  * <br/>
  * <br/>
  * 
