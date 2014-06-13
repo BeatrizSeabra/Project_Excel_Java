@@ -1,7 +1,5 @@
 package csheets.ext.runMacro.ui;
 
-import csheets.ext.runMacro.ui.runMacroController;
-import csheets.ui.ctrl.FocusOwnerAction;
 import csheets.ui.ctrl.UIController;
 import csheets.ui.sheet.SpreadsheetTable;
 import javax.swing.JDialog;
