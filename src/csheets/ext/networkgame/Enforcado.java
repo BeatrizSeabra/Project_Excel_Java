@@ -82,12 +82,14 @@ public class Enforcado extends Game {
             file_string += (char) dados[i];
         }
         if (file_string.charAt(2) == 'W') {                       //Word Index
-            wordIndex = Integer.parseInt(file_string.substring(3, file_string.length() - 1));
+            wordIndex = ((int)(file_string.toCharArray()[3])) - 48;
         } else if (file_string.charAt(2) == 'A') {                  //atempt
             if (atempts == null) {
                 atempts = file_string.substring(3, file_string.length() - 1);
+                System.out.println(file_string);
             } else {
                 atempts += " " + file_string.substring(3, file_string.length() - 1);
+                System.out.println(file_string);
             }
         } else if (file_string.charAt(2) == 'E') {
             if (file_string.charAt(3) == 'W') {
