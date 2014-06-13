@@ -41,7 +41,7 @@
  * <br/>
  * <br/>
  *
- * <b>S007f: Functional Tests</b><br/>
+ * <b>S008f: Functional Tests</b><br/>
 * To test this user story, the user should follow these steps:<br/>
 * 1 Run cleansheets;<br/>
 * 2 Copy or move a cell to another collumn (this is explained in Coding and Analysis)
