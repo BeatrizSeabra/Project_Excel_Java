@@ -55,8 +55,8 @@ public class NetworkGameController {
                         profile = new Player("Player 2");
                         players.add(profile);
                     }
-                    gc = new GameController(games.get(game), players, s, address);
-                    System.out.println("GC init");
+                    mainWindow.dispose();
+                    pickGame(game, address);
                 } else if (file_string.contains("GM")) {                                        //GM GAme message
                     gc.recieve(data);
                 }
@@ -115,5 +115,9 @@ public class NetworkGameController {
 
     public static void addGames(InetAddress address){
         games.add(new GameExample("Example", players, s, address));
+    }
+    
+    public static void pickGame(int i, InetAddress address){
+        gc = new GameController(games.get(i), players, s, address);
     }
 }

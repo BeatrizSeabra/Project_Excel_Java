@@ -13,7 +13,7 @@ import java.awt.event.ActionEvent;
  *
  * @author Rui 1110506
  */
-public class EmailAction extends BaseAction {
+public class SendAction extends BaseAction {
 
     /**
      * The user interface controller
@@ -25,12 +25,12 @@ public class EmailAction extends BaseAction {
      *
      * @param uiController the user interface controller
      */
-    public EmailAction(UIController uiController) {
+    public SendAction(UIController uiController) {
         this.uiController = uiController;
     }
 
     protected String getName() {
-        return "Email Configuration";
+        return "Send Email";
     }
 
     protected void defineProperties() {
@@ -44,7 +44,7 @@ public class EmailAction extends BaseAction {
      * @param event the event that was fired
      */
     public void actionPerformed(ActionEvent event) {
-        EmailSetup EmailFrame = new EmailSetup();
-        EmailFrame.run();
+        SendUI SendUI = new SendUI();
+        SendUI.run();
     }
 }
