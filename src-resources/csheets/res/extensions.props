@@ -1,5 +1,6 @@
 csheets.ext.style.StyleExtension
 csheets.ext.deptree.DependencyTreeExtension
+csheets.ext.searchFilesBackground.ExtensionSearchFilesBackground
 csheets.ext.assertion.AssertionExtension
 csheets.ext.test.TestExtension
 csheets.ext.simple.ExtensionExample

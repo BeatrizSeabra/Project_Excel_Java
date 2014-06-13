@@ -19,7 +19,7 @@
 * <b>S001d: Design</b><br/>
 * To realize this user story we will need to create a subclass of Extension. We will also need to create a subclass of UIExtension. For the sidebar we need to implement a JPanel.<br/>
 * The following diagram shows how these new classes will be loaded and "integrated" with cleansheets.<br/><br/>
-* <img src="../../../csheets/userstories/us001/doc-files/us001_design1.png"> 
+* <img src="../../../csheets/userstories/us001/doc-files/us001_design1.png">
 * <br/>
 * <br/>
 * 

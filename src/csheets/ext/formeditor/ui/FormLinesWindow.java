@@ -50,9 +50,7 @@ public class FormLinesWindow extends JFrame implements ActionListener {
                     FormEditorWindow editorWindow = new FormEditorWindow(Integer.valueOf(lines.getText()), selected);
                     editorWindow.setVisible(true);
                     editorWindow.setLocation(500, 200);
-                    editorWindow.setSize(250, 110);
                     editorWindow.setResizable(true);
-                    editorWindow.setLocationRelativeTo(null);
                     this.dispose();
                 }
                 catch (NumberFormatException nfe) {
