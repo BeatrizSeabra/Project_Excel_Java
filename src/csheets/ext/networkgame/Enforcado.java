@@ -6,16 +6,8 @@
 package csheets.ext.networkgame;
 
 import csheets.ext.connection.Server;
-import static csheets.ext.networkgame.NetworkGameController.initJFrame;
-import static csheets.ext.networkgame.NetworkGameController.mainWindow;
-import static csheets.ext.networkgame.NetworkGameController.packJFrame;
-import static csheets.ext.networkgame.NetworkGameController.players;
-import static csheets.ext.networkgame.NetworkGameController.profile;
-import static csheets.ext.networkgame.NetworkGameController.s;
-import csheets.ext.networkgame.ui.ClientPanel;
 import csheets.ext.networkgame.ui.EnforcadoUI;
 import csheets.ext.networkgame.ui.ResultUI;
-import csheets.ext.networkgame.ui.ServerPanel;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -63,8 +55,8 @@ public class Enforcado extends Game {
             }
         }
 
-        for (Boolean dis : discovered) {
-            dis = false;
+        for (int i = 0; i < dictionary.get(wordIndex).length(); i++) {
+            discovered.add(false);
         }
 
         //mark spaces as discovered
@@ -142,7 +134,7 @@ public class Enforcado extends Game {
                 NetworkGameController.initJFrame("Enforcado");
                 NetworkGameController.mainWindow.add(new EnforcadoUI(this));
                 NetworkGameController.packJFrame();
-                
+
             } else {
                 NetworkGameController.s.allDone = true;
                 NetworkGameController.mainWindow.dispose();

@@ -7,6 +7,7 @@ package csheets.ext.networkgame.ui;
 
 import csheets.ext.networkgame.Enforcado;
 import csheets.ext.networkgame.NetworkGameController;
+import static java.lang.Thread.sleep;
 import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,6 +27,8 @@ public class EnforcadoUI extends javax.swing.JPanel {
     public EnforcadoUI(Enforcado game) {
         initComponents();
         this.game = game;
+        updateMessage();
+        updateHangman();
     }
 
     /**
@@ -38,30 +41,19 @@ public class EnforcadoUI extends javax.swing.JPanel {
     private void initComponents() {
 
         jTextField1 = new javax.swing.JTextField();
-        jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jLabel3 = new javax.swing.JLabel();
 
         jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField1KeyReleased(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 239, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton1.setText("Guess!");
@@ -81,9 +73,7 @@ public class EnforcadoUI extends javax.swing.JPanel {
 
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
-        jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
-        jTextArea1.setWrapStyleWord(true);
         jScrollPane1.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -110,6 +100,10 @@ public class EnforcadoUI extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("...");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -122,26 +116,31 @@ public class EnforcadoUI extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE))
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextField1)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))))
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
-        guess();
+        if (evt.getKeyCode() == evt.VK_ENTER) {
+            guess();
+        }
     }//GEN-LAST:event_jTextField1KeyReleased
 
     private void jButton1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseReleased
@@ -149,26 +148,33 @@ public class EnforcadoUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1MouseReleased
 
     public void guess() {
-        if (jTextField1.getText().length() == 1) {
-            guess(jTextField1.getText().charAt(0));
-        } else {
-            guess(jTextField1.getText());
+        if (jTextField1.getText() != "") {
+            if (jTextField1.getText().length() == 1) {
+                guess(jTextField1.getText().charAt(0));
+            } else {
+                guess(jTextField1.getText());
+            }
+            jTextField1.setText("");
         }
     }
 
     public void guess(char guess) {
         boolean isRight = false;
+        String aux = "";
         if (game.atempts == null) {
             //1st guess
-            game.atempts = "" + guess;
+            aux += guess;
+            game.atempts = aux;
         } else {
-            game.atempts = game.atempts + " " + guess;
+            aux = game.atempts + " " + guess;
+            game.atempts = aux;
         }
 
         updateAtempts(guess);
         int i = 0;
+        String s = ""+guess;
         for (char c : game.dictionary.get(game.wordIndex).toCharArray()) {
-            if (guess == c) {
+            if (s.equalsIgnoreCase(""+c)) {
                 this.game.discovered.set(i, true);
                 isRight = true;
             }
@@ -198,7 +204,7 @@ public class EnforcadoUI extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
@@ -207,7 +213,7 @@ public class EnforcadoUI extends javax.swing.JPanel {
 
     private void updateAtempts(char guess) {
         jTextArea1.setText(game.atempts);
-
+        
         //send the latest atemp to the other client
         String message = "GM" + "A" + guess;
         try {
@@ -221,7 +227,7 @@ public class EnforcadoUI extends javax.swing.JPanel {
         String message = "";
         for (int i = 0; i < game.dictionary.get(game.wordIndex).length() - 1; i++) {
             if (game.discovered.get(i) == true) {
-                message += game.message.toCharArray()[i] + " ";
+                message += game.dictionary.get(game.wordIndex).toCharArray()[i] + " ";
             } else {
                 message += "_ ";
             }
@@ -261,13 +267,18 @@ public class EnforcadoUI extends javax.swing.JPanel {
 
     private void updateHangman() {
         if (game.strikes == 0) {
-            jPanel1 = new HangmanPanel(0);
+            jLabel3.setText("<html> 0 <br><br><br></html>");
         } else if (game.strikes == 1) {
-            jPanel1 = new HangmanPanel(1);
+            jLabel3.setText("<html> 0 <br>|<br><br></html>");
         } else if (game.strikes == 2) {
-            jPanel1 = new HangmanPanel(2);
+            jLabel3.setText("<html> 0 <br>-|-<br><br></html>");
         } else {
-            jPanel1 = new HangmanPanel(3);
+            jLabel3.setText("<html> 0 <br>-|-<br>/<br>\\</html>");
+            try {
+                sleep(500);//tempo para apreciar a obra prima!
+            } catch (InterruptedException ex) {
+                Logger.getLogger(EnforcadoUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 }
