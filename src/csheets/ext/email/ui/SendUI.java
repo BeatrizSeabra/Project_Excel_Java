@@ -3,19 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package csheets.ext.email.ui;
+
+import csheets.ext.email.SendEmail;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 /**
  *
- * @author Rui
+ * @author Rui 1110506
  */
 public class SendUI extends javax.swing.JFrame {
+
+    private SendEmail acc;
 
     /**
      * Creates new form SendUI
      */
     public SendUI() {
+        acc = new SendEmail();
+        acc.Load();
         initComponents();
     }
 
@@ -33,22 +43,33 @@ public class SendUI extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("Destinatario(s):");
+        jLabel1.setText("Send to: (;)");
 
-        jLabel2.setText("Assunto: ");
+        jLabel2.setText("Subject:");
 
-        jLabel3.setText("Mensagem:");
+        jLabel3.setText("Message:");
 
-        jButton1.setText("Anexar Ficheiro");
+        jButton1.setText("Attach File");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Send");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Ok");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -57,6 +78,10 @@ public class SendUI extends javax.swing.JFrame {
             }
         });
 
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -64,6 +89,7 @@ public class SendUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addComponent(jTextField1)
                     .addComponent(jTextField2)
                     .addGroup(layout.createSequentialGroup()
@@ -74,12 +100,13 @@ public class SendUI extends javax.swing.JFrame {
                                 .addComponent(jButton2)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton3))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel1)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel3)))
-                        .addGap(0, 10, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                                .addGap(295, 295, 295)))
+                        .addGap(0, 29, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -95,9 +122,9 @@ public class SendUI extends javax.swing.JFrame {
                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
@@ -109,13 +136,50 @@ public class SendUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       dispose();
+        dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
-      /**
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        JFileChooser fc = new JFileChooser();
+        String path = "";
+        int returned = fc.showOpenDialog(null);
+        if (returned == JFileChooser.APPROVE_OPTION) {
+            path = fc.getSelectedFile().getAbsolutePath();
+        }
+        acc.setPath(path);
+        acc.setBoolAttach(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            acc.setSubject(jTextField2.getText());
+            acc.setListEmail(jTextField1.getText());
+            acc.setMessage(jTextArea1.getText());
+
+            if (acc.getBoolAttach() == true) {
+                try {
+                    acc.Send(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(SendUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else if (acc.getBoolAttach() == false) {
+                try {
+                    acc.Send(false);
+                } catch (IOException ex) {
+                    Logger.getLogger(SendUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            JOptionPane.showMessageDialog(null, "Emails have been sent");
+            dispose();
+        } catch (RuntimeException u) {
+            JOptionPane.showMessageDialog(null, "Error! Confirm the fields");
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    /**
      * @param args the command line arguments
      */
-   public void run() {
+    public void run() {
         this.setVisible(true);
         setLocationRelativeTo(null);
     }
@@ -127,8 +191,9 @@ public class SendUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 }
