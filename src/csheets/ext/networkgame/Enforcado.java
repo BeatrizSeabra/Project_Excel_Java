@@ -82,7 +82,7 @@ public class Enforcado extends Game {
             file_string += (char) dados[i];
         }
         if (file_string.charAt(2) == 'W') {                       //Word Index
-            wordIndex = ((int)(file_string.toCharArray()[3])) - 48;
+            wordIndex = ((int) (file_string.toCharArray()[3])) - 48;
         } else if (file_string.charAt(2) == 'A') {                  //atempt
             if (atempts == null) {
                 atempts = file_string.substring(3, file_string.length() - 1);
@@ -103,33 +103,8 @@ public class Enforcado extends Game {
                 NetworkGameController.mainWindow.add(new ResultUI("You Loose"));
                 NetworkGameController.packJFrame();
             }
-            if (isServer) {
-                int result = JOptionPane.showConfirmDialog(null, "Another Round?");
-                String message = "GM" + "R";
-                if (result == JOptionPane.YES_OPTION) {
-                    try {
-                        message += "Y";
-                        s.sendData(message.getBytes(), address.getHostName(), 7777);
-                    } catch (UnknownHostException ex) {
-                        Logger.getLogger(Enforcado.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-
-                    NetworkGameController.mainWindow.dispose();
-                    NetworkGameController.initJFrame("Enforcado");
-                    NetworkGameController.mainWindow.add(new EnforcadoUI(this));
-                    NetworkGameController.packJFrame();
-                } else {
-                    try {
-                        message += "N";
-                        s.sendData(message.getBytes(), address.getHostName(), 7777);
-                    } catch (UnknownHostException ex) {
-                        Logger.getLogger(Enforcado.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-
-                    NetworkGameController.s.allDone = true;
-                    NetworkGameController.mainWindow.dispose();
-                }
-            }
+            NetworkGameController.s.allDone = true;
+            NetworkGameController.mainWindow.dispose();
         } else if (file_string.charAt(2) == 'R') {
             if (file_string.charAt(3) == 'Y') {
                 NetworkGameController.mainWindow.dispose();
