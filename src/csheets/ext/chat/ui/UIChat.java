@@ -303,8 +303,9 @@ public ChatController controlo;
         // TODO add your handling code here:
         UDPClient.getInstance().start();
        
-        ThreadUpdateList threadUpdateList = new ThreadUpdateList();
-        threadUpdateList.start();
+        //ThreadUpdateList threadUpdateList = new ThreadUpdateList();
+        //threadUpdateList.start();
+        updateList();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     /**

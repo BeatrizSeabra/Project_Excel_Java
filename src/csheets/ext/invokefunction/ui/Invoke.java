@@ -24,7 +24,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -37,6 +41,9 @@ public class Invoke extends javax.swing.JFrame {
      */
     protected final UIController uiController;
     private Language lang=Language.getInstance();
+    private JPanel panel;
+    private JLabel label;
+    private JTextField text;
     
     private String[] help = {"A function that returns true if and only if all of its arguments are true.",
         "A function that returns the numeric average of its arguments.",
@@ -220,7 +227,11 @@ public class Invoke extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        chooseFunction(jFormattedTextField1.getText(),jComboBox1.getSelectedItem().toString());
+        try {
+            changeUI(lang.getFunction(jComboBox1.getSelectedItem().toString()));
+        } catch (UnknownElementException ex) {
+        }
+                chooseFunction(jFormattedTextField1.getText(),jComboBox1.getSelectedItem().toString());
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -331,18 +342,30 @@ public class Invoke extends javax.swing.JFrame {
         }
     }
     
-    private void changeUI(){
+    private void changeUI(Function f){
+        for (int i=0;i< f.getParameters().length;i++) {
+            jPanel3.add(createPanel(i,f.getParameters()[i]));
+        }
+        jPanel3.add(panelButton());
         //for parameters:
         //  createPanel();
         
     }
-    private void createPanel(){
-        //criar Panel
-        //  criar label "Parâmetro X"
-        //  criar TextField
-        //adicionar label e TextField a panel
-        //painel3.add(panel);
-        //pack();
+    private JPanel panelButton(){
+        panel=new JPanel();
+        JButton calcular=new JButton("Calcular");
+        panel.add(calcular);
+        return panel;
+    }
+    private JPanel createPanel(int i,FunctionParameter fp){
+        panel=new JPanel();
+        label=new JLabel("Parâmetro "+i+":");
+        text=new JTextField();
+        text.setText(fp.getName());
+        
+        panel.add(label);
+        panel.add(text);
+        return panel;
     }
     
     /**

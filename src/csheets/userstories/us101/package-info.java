@@ -1,5 +1,7 @@
 /**
-* Technical documentation regarding the user story 101: Import/Export Residence with relation Contacts
+* Technical documentation regarding the user story 101: Import/Export Residence with relation with Contacts
+* Contacts have associated a reference to the residence, and the contact can take a main residence and
+* a secondary residence (optional)
 * <br/>
 * <br/>
 * 
@@ -7,7 +9,7 @@
 * Import Residence with relation to Contacts from the table Residence and Contacts on database
 * to the cleansheets workspace (cells), to show to user the contacts with the residence
 * Export Residence with relation to Contacts from the cleansheets workspace (cells),
-* to the table Residence and Contacts, insert on database application.
+* to the table Residence and Contacts, insert into database application.
 * <br/>
 * <br/>
 *  
