@@ -43,8 +43,24 @@ package csheets.core.formula.compiler;
 }
 	         
 expression
-	: EQ! (LBRA!)? ( attribution | comparison) (SEMI^ (attribution | comparison))* (RBRA!)? EOF!
+	: EQ! sq EOF!
        	;
+
+sq
+        : attribution | comparison | sequencia
+        ;
+
+sequencia:
+        ((NUMBER) arithmetic^)? block (arithmetic^ atom)?
+        ;
+
+arithmetic:
+        PLUS|MINUS|MULTI|DIV|POWER|PERCENT
+        ;
+
+block:
+        LBRA! (attribution | comparison | block) (SEMI^ (attribution | comparison | block))* RBRA!
+        ;
 
 attribution
         : ( CELL_REF | TEMPVAR ) ATT^ (attribution | comparison)
