@@ -55,6 +55,27 @@
  *
  * <b>S065f: Functional Tests</b><br/>
  *
+ * To test this user story, the user should follow these steps:<br/>
+ * 1 - É necessário correr duas instâncias do cleansheets; <br/>
+ * 2 - Escrever nas celulas; <br/>
+ * 3 - Seleccionar as células que pretende partilhar <br/>
+ * 4 - Ir ao Menu "Extensions", seleccionar a opcao "Share" e em seguida
+ * "Server"; <br/>
+ * 5 - Vai abrir uma nova janela, onde é necessário escolher a porta e a
+ * password para a partilha. Esta janela apresenta também o IP da máquina para
+ * poder colocar na janela do cliente na outra instância do cleansheets;<br/>
+ * 6 - Ir à segunda instância do cleansheets, seleccionar as células onde
+ * pretende que a informação da outra instância seja transferida;<br/>
+ * 7 - Nessa segunda instância, ir ao Menu "Extensions", seleccionar a opcao
+ * "Share" e em seguida "Client"<br/>
+ * 8 - Escrever o IP do servidor (se for a mesma máquina basta escrever
+ * "localhost"), a porta e a password definidas na outra instância;<br/>
+ * 9 - A informação por esta altura deverá ter sido transferida de uma instância
+ * para a outra. É possivel agora escrever tanto na instância "server" como na
+ * "client" que as informações contidas nas células seleccionadas para a
+ * partilha são modificadas automaticamente.<br/>
+ *
+ *
  * @author marc
  */
 /*
