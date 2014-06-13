@@ -26,9 +26,9 @@ public class Servidor {
         ArrayList<InetAddress> ips = new ArrayList();
         
        //Envio de uma mensagem em broadcast
-        MulticastSocket socket = new MulticastSocket(9877);
+        DatagramSocket socket = new DatagramSocket(9877);
         socket.setBroadcast(true);
-        InetAddress IPAddress = InetAddress.getByAddress(new byte[] { (byte) 255, (byte) 255, (byte) 255, (byte) 255 });
+        InetAddress IPAddress = InetAddress.getByName("192.168.1.255");
         String sentence = "Quem está?";
         byte[] sendData = sentence.getBytes();       
         DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 9876);       
@@ -45,7 +45,14 @@ public class Servidor {
         while(!timeout) {
             try {     
             socket.receive(receivePacket);
-            ips.add(receivePacket.getAddress());
+            InetAddress a= receivePacket.getAddress();
+            if(!ips.contains(a))
+            {
+                if(!a.equals(InetAddress.getByName("localhost"))){
+                    ips.add(a);
+                }
+                
+            }
             receiveData= new byte[1024];
             String resp = "Recebi";
             byte[] msgr=resp.getBytes();

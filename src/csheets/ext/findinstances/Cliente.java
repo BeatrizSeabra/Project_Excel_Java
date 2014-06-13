@@ -22,13 +22,13 @@ public class Cliente extends Thread {
 
     public Cliente() throws BindException {
         try {
-            socket = new DatagramSocket(9876, InetAddress.getByName("0.0.0.0"));
+            socket = new DatagramSocket(9876,InetAddress.getByName("0.0.0.0"));
             socket.setBroadcast(true);
         } catch (SocketException ex1) {
             JOptionPane.showMessageDialog(null, "Error: Client already running");
         } catch (UnknownHostException ex) {
             Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
     }
 
     public void run() {
