@@ -18,27 +18,40 @@
  * 
  * <b>S056d: Design</b><br/>
  * The user will introduce a text in a cell. If the text starts by "=" and contains EVSET it will assign a event cell that is on the parameters to the formula that comes afer the event cell.
+ * The user can choose too to use an interface that can select the events and introduce the formula on a textbox and that will originate the same thing(call a method to associate the formula to event)
  * That expression will originate a functionCall and there will have a method that will associate the event cell to the formula. 
- * Then will have a method that will verify if the cell event have any formula assign and if there is will write on the cell the content relative to the formula.
- * Then if setContent() happens, it will write too on the EventLogFile.
+ * Then there will be cell listeners that whenever the event happens, it apply the formula to the cell.
+ * It will write on the EventLogFile when the function is called.
  * <br/>
  * <br/>
  * 
  * <b>S056c: Coding</b><br/>
-
+ * See:<br/>
+ * <a href="../../../csheets/ext/logfile/package-summary.html">csheets.ext.logfile</a><br/>
+ * <a href="../../../csheets/ext/logfile/ui/package-summary.html">csheets.ext.logfile.ui</a><br/>
  * <br/>
  * <br/>
  * 
  * <b>S056u: Unit Tests</b><br/>
- *
+ ** see:<br/>
+ * <a href="../../../csheets/ext/logfile/package-summary.html">csheets.ext.logfile</a><br/>
+ * <a href="../../../csheets/ext/logfile/ui/package-summary.html">csheets.ext.logfile.ui</a><br/>
  * <br/>
  * <br/>
  * 
  * <b>S056f: Functional Tests</b><br/>
-
+ * * To test this user story, the user can try in different ways:
+ * First mode:
+ * 1- Run cleansheets;
+ * 2- Click on the Extension menu, go to EventLogFile. There must appear a menu option containing one option for the Events with formula;<br/>
+ * 3- The previous option is a set of two check boxes that when checked and after introduced a formula, when that event occurs, the cell change to the formula result<br/>
+ * 4- This will write on EventLogFile which event was choosen and it's formula assigned <br/>
  * <br/>
  * <br/>
- * 
+ * Second mode:
+ * 1- Run cleansheets;
+ * 2- Write on function mode "Evset( event , formula ).
+ * 3- It will only write on EventLogFile and write on cell the formula (Not implemented, it should get the event and when that occurs, the cell change to the formula result).
  * @author Stefan Parker
  **/
 package csheets.userstories.us056;
