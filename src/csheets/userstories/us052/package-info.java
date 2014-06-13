@@ -24,21 +24,26 @@ visuais suportados sao: botao, edit box e text box. Na janela de edicao de formu
 * 
 * <b>S052d: Design</b><br/>
 * Para realizar este User Story sera necessario criar elementos de Interface Grafica, subclasse da UIExtension.
-* Classe da Extensao FormEdit subclasse da Extension.
+* Classe da Extensao FormEdit subclasse da Extension. E ainda uma classe que contenha informação de um Formulário.
 * Serao necessarias varias janelas de interface com o utilizador.
-* As classes serao implementadas de forma que a instancia de um formulario criado/editado fiquei gravada na memaria.
+* As classes serao implementadas de forma que a instancia de um formulario criado/editado fiquei gravada na memória, InMemoryForm.
 * <img src="../../../csheets/userstories/us052/doc-files/us052_design1.png"> 
 * <br/>
 * <br/>
 * 
 * <b>S052c: Coding</b><br/>
-* 
+* Ver:<br/>
+* <a href="../../../csheets/ext/formeditor/package-summary.html">csheets.ext.formeditor</a><br/>
+* <a href="../../../csheets/formeditor/ui/package-summary.html">csheets.ext.formeditor.ui</a><br/>
+* <br/>
+* <br/>
 * 
 * <b>S052u: Unit Tests</b><br/>
+* Ver:<br/>
+* <a href="../../../csheets/ext/formeditor/package-summary.html">csheets.ext.formeditor</a><br/>
+* <br/>
+* <br/>
 *
-* 
-* <br/>
-* <br/>
 * 
 * <b>S052f: Functional Tests</b><br/>
 *
