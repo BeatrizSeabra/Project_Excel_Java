@@ -104,8 +104,70 @@
         cleansheets
     end note
  @enduml
- @startuml doc-files/us101_design2_SD_export.png
+ @startuml doc-files/us101_design2_SD_export_residence.png
+    hide footbox
+    skinparam backgroundColor #EEEBDC
 
+    skinparam sequence {
+            ArrowColor DeepSkyBlue
+            ActorBorderColor DeepSkyBlue
+            LifeLineBorderColor blue
+            LifeLineBackgroundColor #A9DCDF
+
+            ParticipantBorderColor DeepSkyBlue
+            ParticipantBackgroundColor DodgerBlue
+            ParticipantFontName Impact
+            ParticipantFontSize 17
+            ParticipantFontColor #A9DCDF
+
+            ActorBackgroundColor blue
+            ActorFontColor DeepSkyBlue
+            ActorFontSize 17
+            ActorFontName Aapex
+    }
+    actor User
+      participant ResidenceExportAction as REA
+      participant "<b>residenceExport</b> : ResidenceExport" as RE
+      participant "<b>uiController</b> : UIController" as UIC
+      participant "List<>" as L
+      participant ": Residence" as RP
+      participant "<b>contact</b> : Contact" as C
+      participant ResidenceRepository as RR
+      participant ContactsRepository as CR
+        User -> REA : actionPerformed(ActionEvent event)
+        REA -> RE : <b>residenceImport</b> = new ResidenceImport()
+        REA -> RE : <b>residenceImport</b>.importContactsResidenceToCleansheets(uiController)    
+        ...
+        RE -> L : <b>listResidence</b> = new List<Residence>()
+        ...
+        L -> RR : ResidenceRepository.getAll()
+        L -> CR : ContactRepository.getAll()
+        activate RE
+             loop while(!uiController.getActiveSpreadsheet().getCell(0, i).getContent().isEmpty())
+                 RE -> RP : <b>residencePrincipal</b> = new Residence()
+                 RE -> C : <b>contact</b> = new Contact()
+                 RE -> RP : <b>residenceSecondary</b> = new Residence()
+                 RE -> UIC : uiController.getActiveSpreadsheet().getCell(X, Y).getContent();
+                 RE -> RR : ResidenceRepository.insert(residenceSecondary);
+                 RE -> CR : ContactsRepository.add(contact);
+             end
+        deactivate RE
+        ...some seconds or minutes later... 
+        UIC --> User
+        note left
+            if any parameter of the input
+            on cells of the contact or residence
+            it´s wrong, will be shown to user
+            a message box that the data inset on
+            cells is not valid to do this export
+        end note  
+        ...
+        UIC --> User
+        note left
+            show to the user a message
+            box to inform that the process
+            of export to database has successfully
+        end note 
  @enduml
 *
 */
