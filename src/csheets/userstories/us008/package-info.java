@@ -37,9 +37,7 @@
  *
  *<b>S008u: Unit Tests</b><br/>
  * This is the continuation of a use case from the 1st week the only difference is that instead of only 1 the user can sort 2 columns so the unit tests are basically the ones from first week.
- * see:<br/>
- * <a href="../../../csheets/ext/sort/package-summary.html">csheets.ext.sort</a><br/>
- * <a href="../../../csheets/ext/sort/ui/package-summary.html">csheets.ext.sort.ui</a><br/>
+ * see: the last week Unit Tests
  * <br/>
  * <br/>
  *
