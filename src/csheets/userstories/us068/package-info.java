@@ -20,8 +20,11 @@
  * 
  * <b>S068d: Design</b><br/>
  * Para implementar este caso de uso e' necessario a utilizacao de uma thread que faz a pesquisa de ficheiros de forma paralela. A implementacao deste caso de uso e' em todo semelhante 'a implementacao do US067.<br/>
- * A principal alteracao e' a de que a pesquisa e' feita atraves da thread e a UI e' imediatamente atualizada sempre que e' encontrado um novo ficheiro.<br/>
- * Por fim, e' necessario implementar um listener em cada um dos ficheiros apresentados na JTable para que seja apresentada uma "amostra" do seu conteudo sempre que seja selecionado.
+ * O utilizador escolhe um diretorio onde fazer a pesquisa. A pesquisa e' feita nos diretorios e sub-diretorios.
+ * A principal alteracao e' a de que a pesquisa e' feita atraves da thread e a UI e' imediatamente atualizada sempre que e' encontrado um novo ficheiro. Uma das novas funcionalidade e' que a pesquisa permite abrir os ficheiros encontrados.<br/>
+ * Por fim, e' necessario implementar um listener em cada um dos ficheiros apresentados na JTable para que seja apresentada uma "amostra" do seu conteudo sempre que seja selecionado.<br/>
+ * Na janela onde a "amostra" e' apresentada, existe a opcao de abrir o workbook selecionado. Para abrir o workbook e' criada uma nova instancia do CleanSheets atraves de uma thread.<br/>
+ * Nao sao utilizados joins na utilizacao das threads porque nao fazem sentido. O objetivo e' correr operacoes em background e nunca queremos que uma thread fique 'a espera de outra.<br/>
  * <br/>
  * <br/>
  *<img src="../../../csheets/userstories/us068/doc-files/us068_design1.png"> 
@@ -41,6 +44,16 @@
  * <br/>
  * <br/>
  *  
+ * <b>S068f: Functional Tests</b><br/>
+ * Para testar esta User Story e' necessario seguir os seguintes passos:<br/>
+ * 1. Correr o cleansheets;<br/>
+ * 2. Clicar no menu Extensions, clicar em  Find Workbook Files e selecionar a opcao Advanced Workbook Search;<br/>
+ * 3. Escolher o diretorio onde deseja aplicar a pesquisa atraves da caixa que surge no ecra;<br/>
+ * 4. Esperar que surjam ficheiros na lista apresentada e selecionar um dos ficheiros;<br/> 
+ * 5. Selecionar o botao Open File para abrir o ficheiro pretendido numa instancia nova do Cleansheets;<br/>
+ * 6. Nao fechar nenhuma das instancias do Cleansheets ate terminar o trabalho pretendido. (O fecho de uma instancia provoca o fecho das outras)<br/>
+ * <br/>
+ * <br/> 
  * @author Diogo Moreira (1120339)
  */
  /*

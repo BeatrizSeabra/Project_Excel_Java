@@ -8,6 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 /**
+ * Representa a interface com o utilizador da extensao Run Macro.
  *
  * @author 1120564MarcoEsteves
  */

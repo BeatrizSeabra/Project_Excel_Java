@@ -3,11 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package csheets.ext.logfile.ui;
 
+import csheets.core.formula.compiler.FormulaCompilationException;
 import csheets.ext.logfile.AtributeFormula;
+import csheets.ext.logfile.WriteLogFile;
 import csheets.ui.ctrl.UIController;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,9 +24,9 @@ public class EvsetUI extends javax.swing.JFrame {
      */
     UIController uiController;
     private static boolean primeira = true;
-    
+
     public EvsetUI(UIController uiController) {
-        this.uiController=uiController;
+        this.uiController = uiController;
         initComponents();
     }
 
@@ -79,10 +83,8 @@ public class EvsetUI extends javax.swing.JFrame {
                         .addGap(38, 38, 38)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jCheckBox2)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jCheckBox1)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(36, 36, 36)
+                            .addComponent(jCheckBox1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addGroup(layout.createSequentialGroup()
@@ -118,13 +120,35 @@ public class EvsetUI extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String formula = jTextField1.getText();
-        
-        if (jCheckBox1.isSelected()) {
-                AtributeFormula a = new AtributeFormula(jCheckBox1.getName(),formula);
-                //tentar fazer aqui com que ele insira as colunas que pretenda modificar com o evento e depois mudar as classes do US anterior
+        if (!formula.isEmpty()) {
+            if (jCheckBox1.isSelected() || jCheckBox2.isSelected()) {
+                if (jCheckBox1.isSelected()) {
+                    WriteLogFile.writeLogFile(null, jCheckBox1.getText(), null, formula);
+                    AtributeFormula a = new AtributeFormula(jCheckBox1.getName(), formula);
+                }
+
+                if (jCheckBox2.isSelected()) {
+                    WriteLogFile.writeLogFile(null, jCheckBox2.getText(), null, formula);
+                    AtributeFormula a = new AtributeFormula(jCheckBox1.getName(), formula);
+                }
+                try {
+                    uiController.getActiveCell().setContent(formula);
+                    //Aplicar aqui as cell listeners.
+                } catch (FormulaCompilationException ex) {
+                    Logger.getLogger(EvsetUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                this.dispose();
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Events can't be empty", "Without Events selected", JOptionPane.ERROR_MESSAGE);
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "Formula can't be empty", "Formula empty", JOptionPane.ERROR_MESSAGE);
+        }
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
-    
+
     private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox2ActionPerformed
