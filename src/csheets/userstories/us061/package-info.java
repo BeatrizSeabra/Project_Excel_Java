@@ -26,13 +26,19 @@
  * <br/>
  * 
  * <b>S061c: Coding</b><br/>
+ * Foram criadas as extensoes necessarias a realizaçao do projecto, mais um interface grafica e uma classe com um metodo que executa o script.<br/>
  * <br/>
  * <br/>
  * 
  * <b>S061u: Unit Tests</b><br/>
+ * Nao ha testes possiveis a fazer. Visto que existem apenas duas classes, sendo que uma é interface e a outra contem um metodo, que interage com a libraria do BeanShell nao sabendo qual o resultado esperado em cada teste.<br/>
  * <br/>
  * 
  * <b>S061f: Functional Tests</b><br/>
+ * 1-Executar programa.<br/>
+ * 2-Clicar em Extension>BeanShell>BeanShell<br/>
+ * 3-Introduzir script.<br/>
+ * 4-Executar script.<br/>
  * <br/>
  * <br/>
  * 
