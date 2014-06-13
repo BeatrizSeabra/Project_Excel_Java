@@ -7,7 +7,8 @@
 package csheets.ext.residenceexport;
 
 import csheets.ext.Extension;
-import csheets.ext.residenceimport.ui.UIExtensionResidenceImport;
+import csheets.ext.residenceexport.ui.UIExtensionResidenceExport;
+//import csheets.ext.residenceimport.ui.UIExtensionResidenceImport;
 import csheets.ui.ctrl.UIController;
 import csheets.ui.ext.UIExtension;
 
@@ -38,6 +39,6 @@ public class ExtensionResidenceExport extends Extension {
 	 */
         @Override
 	public UIExtension getUIExtension(UIController uiController) {
-            return new UIExtensionResidenceImport(this, uiController);
+            return new UIExtensionResidenceExport(this, uiController);
 	}
 }

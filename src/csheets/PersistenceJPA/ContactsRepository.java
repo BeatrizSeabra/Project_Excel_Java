@@ -6,14 +6,13 @@
 package csheets.PersistenceJPA;
 
 import csheets.ext.contacts.Contact;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 /**
  *
- * @author Luis
+ * @author Luis and 1090675 - Tiago Pereira
  */
 public class ContactsRepository {
 
@@ -27,7 +26,6 @@ public class ContactsRepository {
         entityManager.getTransaction().commit();
         csheets.PersistenceJPA.Persistence.getInstance().close();
         //System.err.println("The following contact was added: " + Contact.getFirstName() + " " + Contact.getLastName());
-
     }
 
     /**
@@ -69,7 +67,6 @@ public class ContactsRepository {
         query.setParameter("id", contact.getId());
         int changed = query.executeUpdate();
         csheets.PersistenceJPA.Persistence.getInstance().close();
-
     }
     
     /**
@@ -90,6 +87,40 @@ public class ContactsRepository {
 
     }
     
+    public static void deleteAll() { 
+        //long init = 0;  
+        //long end;  
+        //long diff;  
+        //init = System.currentTimeMillis();  
+       // open();  
+        EntityManager entityManager = csheets.PersistenceJPA.Persistence.getInstance().connection("JPA2PU");
+        try {  
+            entityManager.getTransaction().begin();  
+            entityManager.createNativeQuery("DELETE FROM Contacts").executeUpdate();
+            //entityManager.createNativeQuery("ALTER SEQUENCE GEN_CONTACTS RESTART WITH 0").executeUpdate();
+        } catch (Exception e) {  
+            System.out.println("Deu erro!" + e);  
+            entityManager.getTransaction().rollback(); // desfaz transacao se ocorrer erro ao persitir  
+        } finally {  
+            if (entityManager.getTransaction().isActive()) {  
+                entityManager.getTransaction().commit();  
+            }  
+            //close();  
+            //end = System.currentTimeMillis();  
+            //diff = end - init;  
+            //System.out.println("Tempo de resposta = " + (diff / 1000.0) + " segundos em JPA - Hibernate");  
+  
+        }
+    }
+    
+    public static void eliminarTabela() { 
+        EntityManager entityManager = csheets.PersistenceJPA.Persistence.getInstance().connection("JPA2PU");
+        entityManager.getTransaction().begin();  
+        entityManager.createNativeQuery("DROP TABLE Contacts").executeUpdate();
+        entityManager.getTransaction().commit();
+                
+    }
+       
     public static List<Contact> getAll()
     {
         EntityManager em = csheets.PersistenceJPA.Persistence.getInstance().connection("JPA2PU");
