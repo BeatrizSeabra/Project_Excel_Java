@@ -1,5 +1,5 @@
 /**
- * Documentação tecnica da user story 037 : Operador de atribuicão. 
+ * Documentação tecnica da user story 037 : Operador de atribuicao. 
  * <br/>
  * <br/>
  * 
@@ -27,7 +27,7 @@
  * A formula por sua vez é uma expressao.
  * Vai validar a expressao e faz o que é pretendido
  * use case:
- * o user coloca a informaçao e vai para cell
+ * o user coloca a informacao e vai para cell
  * vai para o cell imp pelo set content
  * cria uma nova formula e vai ao formula compilar ver se 
  * esta correcta eenvia novamente para a cellImp
@@ -52,7 +52,7 @@
  * <br/>
  * 
  * <b>S037f: Functional Tests</b><br/>
- * Para verificar a atribuição necessita:<br/>
+ * Para verificar a atribuicao necessita:<br/>
  * 1- colocar a correr o cleansheets;<br/>
  * 2- colocar numa celula =;<br/>
  * 3- Colocar de seguida a celula "a2" ou "c7" com a atribuiçao e o numero exemplo: a4:=7;<br/>
