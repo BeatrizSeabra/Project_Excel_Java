@@ -1579,3 +1579,43 @@ Close WorkBookEvent, time:2014/06/13 14:01:51
 
 
 
+onClick Event, on cell A1. time:2014/06/13 14:28:02
+
+
+
+onClick Event, on cell A1. time:2014/06/13 14:28:02
+
+
+
+Close WorkBookEvent, time:2014/06/13 14:31:44
+
+
+
+Close WorkBookEvent, time:2014/06/13 14:31:44
+
+
+
+onClick Event, on cell A1. time:2014/06/16 13:54:13
+
+
+
+onClick Event, on cell A1. time:2014/06/16 13:54:13
+
+
+
+onClick Event, on cell A2. time:2014/06/16 13:54:50
+
+
+
+onClick Event, on cell A1. time:2014/06/16 13:54:50
+
+
+
+Close WorkBookEvent, time:2014/06/16 13:54:58
+
+
+
+Close WorkBookEvent, time:2014/06/16 13:54:58
+
+
+
