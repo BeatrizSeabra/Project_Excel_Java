@@ -68,6 +68,7 @@ public class Cliente extends Thread {
                 Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        socket.close();
     }
 
     public void startRunning() {

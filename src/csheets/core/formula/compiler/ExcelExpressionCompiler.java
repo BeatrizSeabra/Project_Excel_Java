@@ -125,9 +125,9 @@ public class ExcelExpressionCompiler implements ExpressionCompiler {
 	 */
 	protected Expression convert(Cell cell, Tree node) throws FormulaCompilationException {
 		// System.out.println("Converting node '" + node.getText() + "' of tree '" + node.toStringTree() + "' with " + node.getNumberOfChildren() + " children.");
-		if(node.getType()==FormulaLexer.SEMI){
-                    convert(cell,node.getChild(1));
-                }
+//		if(node.getType()==FormulaLexer.SEMI){
+//                    convert(cell,node.getChild(1));
+//                }
                 if (node.getChildCount() == 0) {
 			try {
 				switch (node.getType()) {
@@ -178,10 +178,7 @@ public class ExcelExpressionCompiler implements ExpressionCompiler {
 					(Reference)convert(cell, node.getChild(0)),
 					(RangeReference)operator,
 					(Reference)convert(cell, node.getChild(1))
-				);
-			 
-                            // se o operator for o da atribuicao entao
-                    else if (operator instanceof Attribution) {
+				); else if (operator instanceof Attribution) {
                              try {
                             //crias uma referencia para a cell
                             CellReference cellR = new CellReference(cell.getSpreadsheet(), node.getChild(0).getText());
@@ -197,6 +194,9 @@ public class ExcelExpressionCompiler implements ExpressionCompiler {
                              catch (IllegalValueTypeException ex) {
                                 throw new FormulaCompilationException(ex);
                             }
+			 
+                            // se o operator for o da atribuicao entao
+                   
                             return new BinaryOperation(
                                     (Reference) convert(cell, node.getChild(0)), operator, convert(cell, node.getChild(1)));
                             }        

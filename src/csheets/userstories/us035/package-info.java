@@ -20,13 +20,14 @@
  * <br/>
  *
  * <b>S035d: Design</b><br/>
+ * In order to build this funcionality it will be need to edit the class ExcelExpressionCompiler to compile blocks.
  * <br/><br/>
  * <img src="../../../csheets/userstories/us001/doc-files/us035_design1.png">
  * <br/>
  * <br/>
  *
  * <b>S035c: Coding</b><br/>
- * see:<br/>
+ * <br/>
  * <a
  * href="../../../csheets/ext/comments/package-summary.html">csheets.ext.comments</a><br/>
  * <a
@@ -46,10 +47,9 @@
  * <b>S035f: Functional Tests</b><br/>
  * To test this user story, the user should follow these steps:<br/>
  * 1run cleansheets;<br/>
- * 2click on the Extension menu and select contacts. There must appear a contacts list.<br/>
- * 3to test create option, he should click on create button it will show a new window, now user must fill data, if succeed the contact created is visible on the list.<br/>
- * 4to test edit/remove option, he should click on contact he wants edit, it will pop a window with contact information, then if chooses to remove and confirm and get succeed it will be removed from the list,
- * if he chooses to edit user is able to edit the textfields, then if fields edited and confirmed and get succeed contact will appear edited on the list.  <br/>
+ * 2insert on the formula bar the block to be executed;<br/>
+ * 3to test insert some instructions splitted by ";" between brackets (ex. "={A1+4;A1+3}").
+ * The result of last instruction appears in the cell.<br/>
  * 
  * <br/>
  * <br/>
@@ -59,10 +59,10 @@
 /*
  *
  @startuml doc-files/us035_design1.png
-    formulaUI->ExcelExpressionCompiler: compile()
-    ExcelExpressionCompiler->Eval: apply()
-    Eval->Expression : evaluate()
-    Expression->CellImpl : evaluate()
+    cellEditor->cellImpl: setContent()
+    cellImpl->FormulaCompiler: storeContent()
+    FormulaCompiler->ExcelExpressionCompiler : compile()
+    ExcelExpressionCompiler->CellImpl : evaluate()
   @enduml
  *
  */
