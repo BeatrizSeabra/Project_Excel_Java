@@ -17,7 +17,7 @@
  * 
  * <b>S011d: Design</b><br/>
  * For the User Interface we will need to create a subclass Extention. We will also need to create a subclass of UIExtension. For the sub-menu we will need a MenuItem named Load Extension.
- * The follwoing diagram examples the user-UI-system interaction: <img src="../../../csheets/userstories/us011/doc-files/us011_design1.png">
+ * The follwoing diagram examples the user-UI-system interaction:<img src="../../../csheets/userstories/us011/doc-files/us011_design1.png">
  * <br/>
  * <br/>
  * 
