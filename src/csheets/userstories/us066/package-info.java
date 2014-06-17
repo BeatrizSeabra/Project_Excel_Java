@@ -19,11 +19,11 @@
 * 
 * <b>S066d: Design</b><br/>
 * Criação do diagrama de sequencia na plataforma plantuml da US066.<br/>
-*
+* 
 * <img src="../../../csheets/userstories/us066/doc-files/us066_design1.png">
 * <br/>
 * <img src="../../../csheets/userstories/us066/doc-files/us066_design2.png">
-*
+* 
 * <br/>
 * <br/>
 * 
