@@ -20,20 +20,18 @@ public class Search {
     public Search() {
     }
 
-    
-
     public Address simpleSearch(SpreadsheetTable focusOwner, String text) {
-        if(text==null){
+        if (text == null) {
             return null;
         }
         Spreadsheet spreadsheet = focusOwner.getSpreadsheet();
-        int rows=spreadsheet.getRowCount();
+        int rows = spreadsheet.getRowCount();
         Cell row[];
         for (int i = 0; i < rows; i++) {
-            row=spreadsheet.getRow(i);
+            row = spreadsheet.getRow(i);
             int length = row.length;
             for (int y = 0; y < length; y++) {
-                if(row[y].getContent().matches(text)){
+                if (row[y].getContent().matches(text)) {
                     return new Address(y, i);
                 }
             }
