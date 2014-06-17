@@ -28,6 +28,10 @@
  * <br/>
  *
  * <b>S036d: Design</b><br/>
+ * In order to build this funcionality it will be need to edit the class ExcelExpressionCompiler to compile DoWhile and WhileDo.
+ * <br/><br/>
+ * <img src="../../../csheets/userstories/us001/doc-files/us036_design1.png">
+ * <br/>
  * <br/>
  *
  * <b>S036c: Coding</b><br/>
@@ -39,11 +43,11 @@
  * <b>S036f: Functional Tests</b><br/>
  * <br/>
  * 
-* @author alexandrebraganca
+* @author 1120588
  */
 /*
  *
- @startuml doc-files/us035_design1.png
+ @startuml doc-files/us036_design1.png
     cellEditor->cellImpl: setContent()
     cellImpl->FormulaCompiler: storeContent()
     FormulaCompiler->ExcelExpressionCompiler : compile()
