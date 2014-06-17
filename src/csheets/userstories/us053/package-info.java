@@ -20,6 +20,8 @@
 * <br/>
 * 
 * <b>S053d: Design</b><br/>
+* <img src="../../../csheets/userstories/us053/doc-files/us053_design1.png"> <br/>
+* <img src="../../../csheets/userstories/us053/doc-files/us053_design2.png"> <br/>
 * <br/>
 * <br/>
 * 
@@ -44,8 +46,22 @@
 /*
 *
  @startuml doc-files/us053_design1.png
-
+UIController -> ExtensionFormEditor : getUIExtension(this);
+ExtensionFormEditor -> UIExtensionFormEditor : new();
+FormEditorMenu -> FormEditorNewAction : new(UIController);
+FormEditorNewAction -> FormLinesWindow : new(UIController);
+FormLinesWindow -> FormEditorWindow : new(int nLines, String[] selected);
+FormEditorWindow -> FormEditorWindow : newForm();
  @enduml
+ 
+ @startuml doc-files/us53_design2.png
+UIController -> ExtensionFormEditor : getUIExtension(this);
+ExtensionFormEditor -> UIExtensionFormEditor : new();
+FormEditorMenu -> FormEditorEditAction : new(UIController);
+FormEditorEditAction -> InMemoryForm : getInstance();
+FormEditorEditAction -> FormEditorWindow : new(Form form, ArrayList<JTextField> dataList)
+FormEditorWindow -> FormEditorWindow : loadForm();
+ @enduml 
 *
 */
 package csheets.userstories.us053;
