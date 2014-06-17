@@ -63,7 +63,7 @@ block:
         ;
 
 attribution
-        : ( CELL_REF | TEMPVAR ) ATT^ (attribution | comparison)
+        : ( CELL_REF | tempvar ) ATT^ (attribution | comparison)
         ;
 
 comparison
@@ -103,7 +103,7 @@ atom
 	:	function_call
 	|	reference
 	|	literal
-        |       TEMPVAR
+	|	tempvar
 	|	LPAR! comparison RPAR!
 	;
 
@@ -122,6 +122,8 @@ literal
 	:	NUMBER
 	|	STRING
 	;
+	
+tempvar	:	VARNAME;
 	
 fragment LETTER: ('a'..'z'|'A'..'Z') ;
   
@@ -143,10 +145,6 @@ STRING	:	QUOT
 		QUOT  { setText(getText().substring(1, getText().length()-1)); }
 	;  	
 
-/*TEMPORARY VARIABLE*/
-
-TEMPVAR :   VARSIMBLE LETTER+;
-
 QUOT: '"' 
 	;
 
@@ -156,11 +154,16 @@ NUMBER: ( DIGIT )+ ( COMMA ( DIGIT )+ )? ;
 fragment 
 DIGIT : '0'..'9' ;
 
+/*Temporary Variable*/
+VARNAME
+	:	('@')('0'..'9'|'a'..'z'|'A'..'Z')+;
+
+
 /* Comparison operators */
 EQ		: '=' ;
 NEQ		: '<>' ;
-LTEQ	: '<=' ;
-GTEQ	: '>=' ;
+LTEQ		: '<=' ;
+GTEQ		: '>=' ;
 GT		: '>' ;
 LT		: '<' ;
 
@@ -171,7 +174,7 @@ AMP		: '&' ;
 PLUS	: '+' ;
 MINUS	: '-' ;
 MULTI	: '*' ;
-DIV		: '/' ;
+DIV	: '/' ;
 POWER	: '^' ;
 PERCENT : '%' ;
 
@@ -179,7 +182,6 @@ PERCENT : '%' ;
 fragment ABS : '$' ;
 fragment EXCL:  '!'  ;
 COLON	: ':' ;
-VARSIMBLE : '@' ;
 
  
 /* Miscellaneous operators */
