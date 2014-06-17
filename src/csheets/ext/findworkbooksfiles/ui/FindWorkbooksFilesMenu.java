@@ -27,5 +27,6 @@ public class FindWorkbooksFilesMenu extends JMenu {
 		// Adds font actions
 		add(new FindWorkbooksFilesAction(uiController));
                 add(new AdvancedWorkbookSearchAction(uiController));
+                add(new FolderMonitorAction(uiController));
         }
 }
