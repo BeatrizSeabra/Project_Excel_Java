@@ -172,7 +172,7 @@ public class MenuEdWindow extends javax.swing.JFrame {
                                         case 0:
                                             uiController.getActiveSpreadsheet().getCell(0, 0).setContent("1"); //Esta macro de exemplo muda o conteudo da celula A1 para 1
                                             break;
-                                        case 1:
+                                        case 1:                                            
                                             if (uiController.getActiveSpreadsheet().getCell(1, 0).getContent().equals("")) {
                                                 uiController.getActiveSpreadsheet().getCell(1, 0).setContent("0");
                                             }

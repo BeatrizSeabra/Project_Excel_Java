@@ -48,7 +48,7 @@ public class JFrameWorkbookSearchResults extends JFrame {
     int i = 0;
 
     public JFrameWorkbookSearchResults(List<File> listingF) {
-        setTitle("Workbook Files Found - DO NOT CLOSE THIS WINDOW UNTIL SEARCH IS OVER");
+        setTitle("Workbook Files Found - This list refreshes automatically");
         setSize(600, 200);
 
         jTable.setRowHeight(20);
@@ -120,8 +120,15 @@ public class JFrameWorkbookSearchResults extends JFrame {
      * @param file
      */
     public void updateInformation(File file) {
+        
         dtm.insertRow(i, new Object[]{file.getName(), file.getAbsolutePath()});
         i++;
+    }
+    
+    public void clearInformation(){
+        
+        dtm.setRowCount(0);
+        i=0;        
     }
 
 }
