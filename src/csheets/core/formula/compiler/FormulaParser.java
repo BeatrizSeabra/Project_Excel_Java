@@ -1,4 +1,4 @@
-// $ANTLR 3.5.2 ../src/csheets/core/formula/compiler/Formula.g 2014-06-12 17:15:14
+// $ANTLR 3.5.2 ../src/csheets/core/formula/compiler/Formula.g 2014-06-13 16:00:25
 
 package csheets.core.formula.compiler;
 
@@ -18,7 +18,7 @@ public class FormulaParser extends Parser {
 		"COLON", "COMMA", "DIGIT", "DIV", "EQ", "EXCL", "FUNCTION", "GT", "GTEQ", 
 		"LBRA", "LETTER", "LPAR", "LT", "LTEQ", "MINUS", "MULTI", "NEQ", "NUMBER", 
 		"PERCENT", "PLUS", "POWER", "QUOT", "RBRA", "RPAR", "SEMI", "STRING", 
-		"TEMP", "WS"
+		"TEMPVAR", "VARSIMBLE", "WS"
 	};
 	public static final int EOF=-1;
 	public static final int ABS=4;
@@ -51,8 +51,9 @@ public class FormulaParser extends Parser {
 	public static final int RPAR=31;
 	public static final int SEMI=32;
 	public static final int STRING=33;
-	public static final int TEMP=34;
-	public static final int WS=35;
+	public static final int TEMPVAR=34;
+	public static final int VARSIMBLE=35;
+	public static final int WS=36;
 
 	// delegates
 	public Parser[] getDelegates() {
@@ -107,7 +108,7 @@ public class FormulaParser extends Parser {
 
 
 	// $ANTLR start "expression"
-	// ../src/csheets/core/formula/compiler/Formula.g:45:1: expression : EQ ! ( LBRA !)? ( attribution | comparison ) ( SEMI ^ ( attribution | comparison ) )* ( RBRA !)? EOF !;
+	// ../src/csheets/core/formula/compiler/Formula.g:45:1: expression : EQ ! sq EOF !;
 	public final FormulaParser.expression_return expression() throws RecognitionException {
 		FormulaParser.expression_return retval = new FormulaParser.expression_return();
 		retval.start = input.LT(1);
@@ -115,209 +116,27 @@ public class FormulaParser extends Parser {
 		Object root_0 = null;
 
 		Token EQ1=null;
-		Token LBRA2=null;
-		Token SEMI5=null;
-		Token RBRA8=null;
-		Token EOF9=null;
-		ParserRuleReturnScope attribution3 =null;
-		ParserRuleReturnScope comparison4 =null;
-		ParserRuleReturnScope attribution6 =null;
-		ParserRuleReturnScope comparison7 =null;
+		Token EOF3=null;
+		ParserRuleReturnScope sq2 =null;
 
 		Object EQ1_tree=null;
-		Object LBRA2_tree=null;
-		Object SEMI5_tree=null;
-		Object RBRA8_tree=null;
-		Object EOF9_tree=null;
+		Object EOF3_tree=null;
 
 		try {
-			// ../src/csheets/core/formula/compiler/Formula.g:46:2: ( EQ ! ( LBRA !)? ( attribution | comparison ) ( SEMI ^ ( attribution | comparison ) )* ( RBRA !)? EOF !)
-			// ../src/csheets/core/formula/compiler/Formula.g:46:4: EQ ! ( LBRA !)? ( attribution | comparison ) ( SEMI ^ ( attribution | comparison ) )* ( RBRA !)? EOF !
+			// ../src/csheets/core/formula/compiler/Formula.g:46:2: ( EQ ! sq EOF !)
+			// ../src/csheets/core/formula/compiler/Formula.g:46:4: EQ ! sq EOF !
 			{
 			root_0 = (Object)adaptor.nil();
 
 
 			EQ1=(Token)match(input,EQ,FOLLOW_EQ_in_expression80); 
-			// ../src/csheets/core/formula/compiler/Formula.g:46:8: ( LBRA !)?
-			int alt1=2;
-			int LA1_0 = input.LA(1);
-			if ( (LA1_0==LBRA) ) {
-				alt1=1;
-			}
-			switch (alt1) {
-				case 1 :
-					// ../src/csheets/core/formula/compiler/Formula.g:46:9: LBRA !
-					{
-					LBRA2=(Token)match(input,LBRA,FOLLOW_LBRA_in_expression84); 
-					}
-					break;
+			pushFollow(FOLLOW_sq_in_expression83);
+			sq2=sq();
+			state._fsp--;
 
-			}
+			adaptor.addChild(root_0, sq2.getTree());
 
-			// ../src/csheets/core/formula/compiler/Formula.g:46:17: ( attribution | comparison )
-			int alt2=2;
-			int LA2_0 = input.LA(1);
-			if ( (LA2_0==CELL_REF) ) {
-				int LA2_1 = input.LA(2);
-				if ( (LA2_1==ATT) ) {
-					alt2=1;
-				}
-				else if ( (LA2_1==EOF||LA2_1==AMP||LA2_1==COLON||(LA2_1 >= DIV && LA2_1 <= EQ)||(LA2_1 >= GT && LA2_1 <= GTEQ)||(LA2_1 >= LT && LA2_1 <= NEQ)||(LA2_1 >= PERCENT && LA2_1 <= POWER)||LA2_1==RBRA||LA2_1==SEMI) ) {
-					alt2=2;
-				}
-
-				else {
-					int nvaeMark = input.mark();
-					try {
-						input.consume();
-						NoViableAltException nvae =
-							new NoViableAltException("", 2, 1, input);
-						throw nvae;
-					} finally {
-						input.rewind(nvaeMark);
-					}
-				}
-
-			}
-			else if ( (LA2_0==FUNCTION||LA2_0==LPAR||LA2_0==MINUS||LA2_0==NUMBER||LA2_0==STRING) ) {
-				alt2=2;
-			}
-
-			else {
-				NoViableAltException nvae =
-					new NoViableAltException("", 2, 0, input);
-				throw nvae;
-			}
-
-			switch (alt2) {
-				case 1 :
-					// ../src/csheets/core/formula/compiler/Formula.g:46:19: attribution
-					{
-					pushFollow(FOLLOW_attribution_in_expression91);
-					attribution3=attribution();
-					state._fsp--;
-
-					adaptor.addChild(root_0, attribution3.getTree());
-
-					}
-					break;
-				case 2 :
-					// ../src/csheets/core/formula/compiler/Formula.g:46:33: comparison
-					{
-					pushFollow(FOLLOW_comparison_in_expression95);
-					comparison4=comparison();
-					state._fsp--;
-
-					adaptor.addChild(root_0, comparison4.getTree());
-
-					}
-					break;
-
-			}
-
-			// ../src/csheets/core/formula/compiler/Formula.g:46:45: ( SEMI ^ ( attribution | comparison ) )*
-			loop4:
-			while (true) {
-				int alt4=2;
-				int LA4_0 = input.LA(1);
-				if ( (LA4_0==SEMI) ) {
-					alt4=1;
-				}
-
-				switch (alt4) {
-				case 1 :
-					// ../src/csheets/core/formula/compiler/Formula.g:46:46: SEMI ^ ( attribution | comparison )
-					{
-					SEMI5=(Token)match(input,SEMI,FOLLOW_SEMI_in_expression99); 
-					SEMI5_tree = (Object)adaptor.create(SEMI5);
-					root_0 = (Object)adaptor.becomeRoot(SEMI5_tree, root_0);
-
-					// ../src/csheets/core/formula/compiler/Formula.g:46:52: ( attribution | comparison )
-					int alt3=2;
-					int LA3_0 = input.LA(1);
-					if ( (LA3_0==CELL_REF) ) {
-						int LA3_1 = input.LA(2);
-						if ( (LA3_1==ATT) ) {
-							alt3=1;
-						}
-						else if ( (LA3_1==EOF||LA3_1==AMP||LA3_1==COLON||(LA3_1 >= DIV && LA3_1 <= EQ)||(LA3_1 >= GT && LA3_1 <= GTEQ)||(LA3_1 >= LT && LA3_1 <= NEQ)||(LA3_1 >= PERCENT && LA3_1 <= POWER)||LA3_1==RBRA||LA3_1==SEMI) ) {
-							alt3=2;
-						}
-
-						else {
-							int nvaeMark = input.mark();
-							try {
-								input.consume();
-								NoViableAltException nvae =
-									new NoViableAltException("", 3, 1, input);
-								throw nvae;
-							} finally {
-								input.rewind(nvaeMark);
-							}
-						}
-
-					}
-					else if ( (LA3_0==FUNCTION||LA3_0==LPAR||LA3_0==MINUS||LA3_0==NUMBER||LA3_0==STRING) ) {
-						alt3=2;
-					}
-
-					else {
-						NoViableAltException nvae =
-							new NoViableAltException("", 3, 0, input);
-						throw nvae;
-					}
-
-					switch (alt3) {
-						case 1 :
-							// ../src/csheets/core/formula/compiler/Formula.g:46:53: attribution
-							{
-							pushFollow(FOLLOW_attribution_in_expression103);
-							attribution6=attribution();
-							state._fsp--;
-
-							adaptor.addChild(root_0, attribution6.getTree());
-
-							}
-							break;
-						case 2 :
-							// ../src/csheets/core/formula/compiler/Formula.g:46:67: comparison
-							{
-							pushFollow(FOLLOW_comparison_in_expression107);
-							comparison7=comparison();
-							state._fsp--;
-
-							adaptor.addChild(root_0, comparison7.getTree());
-
-							}
-							break;
-
-					}
-
-					}
-					break;
-
-				default :
-					break loop4;
-				}
-			}
-
-			// ../src/csheets/core/formula/compiler/Formula.g:46:81: ( RBRA !)?
-			int alt5=2;
-			int LA5_0 = input.LA(1);
-			if ( (LA5_0==RBRA) ) {
-				alt5=1;
-			}
-			switch (alt5) {
-				case 1 :
-					// ../src/csheets/core/formula/compiler/Formula.g:46:82: RBRA !
-					{
-					RBRA8=(Token)match(input,RBRA,FOLLOW_RBRA_in_expression113); 
-					}
-					break;
-
-			}
-
-			EOF9=(Token)match(input,EOF,FOLLOW_EOF_in_expression118); 
+			EOF3=(Token)match(input,EOF,FOLLOW_EOF_in_expression85); 
 			}
 
 			retval.stop = input.LT(-1);
@@ -340,6 +159,815 @@ public class FormulaParser extends Parser {
 	// $ANTLR end "expression"
 
 
+	public static class sq_return extends ParserRuleReturnScope {
+		Object tree;
+		@Override
+		public Object getTree() { return tree; }
+	};
+
+
+	// $ANTLR start "sq"
+	// ../src/csheets/core/formula/compiler/Formula.g:49:1: sq : ( attribution | comparison | sequencia );
+	public final FormulaParser.sq_return sq() throws RecognitionException {
+		FormulaParser.sq_return retval = new FormulaParser.sq_return();
+		retval.start = input.LT(1);
+
+		Object root_0 = null;
+
+		ParserRuleReturnScope attribution4 =null;
+		ParserRuleReturnScope comparison5 =null;
+		ParserRuleReturnScope sequencia6 =null;
+
+
+		try {
+			// ../src/csheets/core/formula/compiler/Formula.g:50:9: ( attribution | comparison | sequencia )
+			int alt1=3;
+			switch ( input.LA(1) ) {
+			case CELL_REF:
+				{
+				int LA1_1 = input.LA(2);
+				if ( (LA1_1==ATT) ) {
+					alt1=1;
+				}
+				else if ( (LA1_1==EOF||LA1_1==AMP||LA1_1==COLON||(LA1_1 >= DIV && LA1_1 <= EQ)||(LA1_1 >= GT && LA1_1 <= GTEQ)||(LA1_1 >= LT && LA1_1 <= NEQ)||(LA1_1 >= PERCENT && LA1_1 <= POWER)) ) {
+					alt1=2;
+				}
+
+				else {
+					int nvaeMark = input.mark();
+					try {
+						input.consume();
+						NoViableAltException nvae =
+							new NoViableAltException("", 1, 1, input);
+						throw nvae;
+					} finally {
+						input.rewind(nvaeMark);
+					}
+				}
+
+				}
+				break;
+			case FUNCTION:
+			case LPAR:
+			case MINUS:
+			case STRING:
+				{
+				alt1=2;
+				}
+				break;
+			case TEMPVAR:
+				{
+				int LA1_3 = input.LA(2);
+				if ( (LA1_3==ATT) ) {
+					alt1=1;
+				}
+				else if ( (LA1_3==EOF||LA1_3==AMP||(LA1_3 >= DIV && LA1_3 <= EQ)||(LA1_3 >= GT && LA1_3 <= GTEQ)||(LA1_3 >= LT && LA1_3 <= NEQ)||(LA1_3 >= PERCENT && LA1_3 <= POWER)) ) {
+					alt1=2;
+				}
+
+				else {
+					int nvaeMark = input.mark();
+					try {
+						input.consume();
+						NoViableAltException nvae =
+							new NoViableAltException("", 1, 3, input);
+						throw nvae;
+					} finally {
+						input.rewind(nvaeMark);
+					}
+				}
+
+				}
+				break;
+			case NUMBER:
+				{
+				switch ( input.LA(2) ) {
+				case PERCENT:
+					{
+					int LA1_7 = input.LA(3);
+					if ( (LA1_7==EOF||LA1_7==AMP||(LA1_7 >= DIV && LA1_7 <= EQ)||(LA1_7 >= GT && LA1_7 <= GTEQ)||(LA1_7 >= LT && LA1_7 <= NEQ)||(LA1_7 >= PLUS && LA1_7 <= POWER)) ) {
+						alt1=2;
+					}
+					else if ( (LA1_7==LBRA) ) {
+						alt1=3;
+					}
+
+					else {
+						int nvaeMark = input.mark();
+						try {
+							for (int nvaeConsume = 0; nvaeConsume < 3 - 1; nvaeConsume++) {
+								input.consume();
+							}
+							NoViableAltException nvae =
+								new NoViableAltException("", 1, 7, input);
+							throw nvae;
+						} finally {
+							input.rewind(nvaeMark);
+						}
+					}
+
+					}
+					break;
+				case POWER:
+					{
+					int LA1_8 = input.LA(3);
+					if ( (LA1_8==CELL_REF||LA1_8==FUNCTION||LA1_8==LPAR||LA1_8==MINUS||LA1_8==NUMBER||(LA1_8 >= STRING && LA1_8 <= TEMPVAR)) ) {
+						alt1=2;
+					}
+					else if ( (LA1_8==LBRA) ) {
+						alt1=3;
+					}
+
+					else {
+						int nvaeMark = input.mark();
+						try {
+							for (int nvaeConsume = 0; nvaeConsume < 3 - 1; nvaeConsume++) {
+								input.consume();
+							}
+							NoViableAltException nvae =
+								new NoViableAltException("", 1, 8, input);
+							throw nvae;
+						} finally {
+							input.rewind(nvaeMark);
+						}
+					}
+
+					}
+					break;
+				case MULTI:
+					{
+					int LA1_9 = input.LA(3);
+					if ( (LA1_9==CELL_REF||LA1_9==FUNCTION||LA1_9==LPAR||LA1_9==MINUS||LA1_9==NUMBER||(LA1_9 >= STRING && LA1_9 <= TEMPVAR)) ) {
+						alt1=2;
+					}
+					else if ( (LA1_9==LBRA) ) {
+						alt1=3;
+					}
+
+					else {
+						int nvaeMark = input.mark();
+						try {
+							for (int nvaeConsume = 0; nvaeConsume < 3 - 1; nvaeConsume++) {
+								input.consume();
+							}
+							NoViableAltException nvae =
+								new NoViableAltException("", 1, 9, input);
+							throw nvae;
+						} finally {
+							input.rewind(nvaeMark);
+						}
+					}
+
+					}
+					break;
+				case DIV:
+					{
+					int LA1_10 = input.LA(3);
+					if ( (LA1_10==CELL_REF||LA1_10==FUNCTION||LA1_10==LPAR||LA1_10==MINUS||LA1_10==NUMBER||(LA1_10 >= STRING && LA1_10 <= TEMPVAR)) ) {
+						alt1=2;
+					}
+					else if ( (LA1_10==LBRA) ) {
+						alt1=3;
+					}
+
+					else {
+						int nvaeMark = input.mark();
+						try {
+							for (int nvaeConsume = 0; nvaeConsume < 3 - 1; nvaeConsume++) {
+								input.consume();
+							}
+							NoViableAltException nvae =
+								new NoViableAltException("", 1, 10, input);
+							throw nvae;
+						} finally {
+							input.rewind(nvaeMark);
+						}
+					}
+
+					}
+					break;
+				case PLUS:
+					{
+					int LA1_11 = input.LA(3);
+					if ( (LA1_11==CELL_REF||LA1_11==FUNCTION||LA1_11==LPAR||LA1_11==MINUS||LA1_11==NUMBER||(LA1_11 >= STRING && LA1_11 <= TEMPVAR)) ) {
+						alt1=2;
+					}
+					else if ( (LA1_11==LBRA) ) {
+						alt1=3;
+					}
+
+					else {
+						int nvaeMark = input.mark();
+						try {
+							for (int nvaeConsume = 0; nvaeConsume < 3 - 1; nvaeConsume++) {
+								input.consume();
+							}
+							NoViableAltException nvae =
+								new NoViableAltException("", 1, 11, input);
+							throw nvae;
+						} finally {
+							input.rewind(nvaeMark);
+						}
+					}
+
+					}
+					break;
+				case MINUS:
+					{
+					int LA1_12 = input.LA(3);
+					if ( (LA1_12==CELL_REF||LA1_12==FUNCTION||LA1_12==LPAR||LA1_12==MINUS||LA1_12==NUMBER||(LA1_12 >= STRING && LA1_12 <= TEMPVAR)) ) {
+						alt1=2;
+					}
+					else if ( (LA1_12==LBRA) ) {
+						alt1=3;
+					}
+
+					else {
+						int nvaeMark = input.mark();
+						try {
+							for (int nvaeConsume = 0; nvaeConsume < 3 - 1; nvaeConsume++) {
+								input.consume();
+							}
+							NoViableAltException nvae =
+								new NoViableAltException("", 1, 12, input);
+							throw nvae;
+						} finally {
+							input.rewind(nvaeMark);
+						}
+					}
+
+					}
+					break;
+				case EOF:
+				case AMP:
+				case EQ:
+				case GT:
+				case GTEQ:
+				case LT:
+				case LTEQ:
+				case NEQ:
+					{
+					alt1=2;
+					}
+					break;
+				default:
+					int nvaeMark = input.mark();
+					try {
+						input.consume();
+						NoViableAltException nvae =
+							new NoViableAltException("", 1, 4, input);
+						throw nvae;
+					} finally {
+						input.rewind(nvaeMark);
+					}
+				}
+				}
+				break;
+			case LBRA:
+				{
+				alt1=3;
+				}
+				break;
+			default:
+				NoViableAltException nvae =
+					new NoViableAltException("", 1, 0, input);
+				throw nvae;
+			}
+			switch (alt1) {
+				case 1 :
+					// ../src/csheets/core/formula/compiler/Formula.g:50:11: attribution
+					{
+					root_0 = (Object)adaptor.nil();
+
+
+					pushFollow(FOLLOW_attribution_in_sq111);
+					attribution4=attribution();
+					state._fsp--;
+
+					adaptor.addChild(root_0, attribution4.getTree());
+
+					}
+					break;
+				case 2 :
+					// ../src/csheets/core/formula/compiler/Formula.g:50:25: comparison
+					{
+					root_0 = (Object)adaptor.nil();
+
+
+					pushFollow(FOLLOW_comparison_in_sq115);
+					comparison5=comparison();
+					state._fsp--;
+
+					adaptor.addChild(root_0, comparison5.getTree());
+
+					}
+					break;
+				case 3 :
+					// ../src/csheets/core/formula/compiler/Formula.g:50:38: sequencia
+					{
+					root_0 = (Object)adaptor.nil();
+
+
+					pushFollow(FOLLOW_sequencia_in_sq119);
+					sequencia6=sequencia();
+					state._fsp--;
+
+					adaptor.addChild(root_0, sequencia6.getTree());
+
+					}
+					break;
+
+			}
+			retval.stop = input.LT(-1);
+
+			retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+			adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
+
+		}
+
+			catch (RecognitionException e) {
+				reportError(e);
+				throw e; 
+			}
+
+		finally {
+			// do for sure before leaving
+		}
+		return retval;
+	}
+	// $ANTLR end "sq"
+
+
+	public static class sequencia_return extends ParserRuleReturnScope {
+		Object tree;
+		@Override
+		public Object getTree() { return tree; }
+	};
+
+
+	// $ANTLR start "sequencia"
+	// ../src/csheets/core/formula/compiler/Formula.g:53:1: sequencia : ( ( NUMBER ) arithmetic ^)? block ( arithmetic ^ atom )? ;
+	public final FormulaParser.sequencia_return sequencia() throws RecognitionException {
+		FormulaParser.sequencia_return retval = new FormulaParser.sequencia_return();
+		retval.start = input.LT(1);
+
+		Object root_0 = null;
+
+		Token NUMBER7=null;
+		ParserRuleReturnScope arithmetic8 =null;
+		ParserRuleReturnScope block9 =null;
+		ParserRuleReturnScope arithmetic10 =null;
+		ParserRuleReturnScope atom11 =null;
+
+		Object NUMBER7_tree=null;
+
+		try {
+			// ../src/csheets/core/formula/compiler/Formula.g:53:10: ( ( ( NUMBER ) arithmetic ^)? block ( arithmetic ^ atom )? )
+			// ../src/csheets/core/formula/compiler/Formula.g:54:9: ( ( NUMBER ) arithmetic ^)? block ( arithmetic ^ atom )?
+			{
+			root_0 = (Object)adaptor.nil();
+
+
+			// ../src/csheets/core/formula/compiler/Formula.g:54:9: ( ( NUMBER ) arithmetic ^)?
+			int alt2=2;
+			int LA2_0 = input.LA(1);
+			if ( (LA2_0==NUMBER) ) {
+				alt2=1;
+			}
+			switch (alt2) {
+				case 1 :
+					// ../src/csheets/core/formula/compiler/Formula.g:54:10: ( NUMBER ) arithmetic ^
+					{
+					// ../src/csheets/core/formula/compiler/Formula.g:54:10: ( NUMBER )
+					// ../src/csheets/core/formula/compiler/Formula.g:54:11: NUMBER
+					{
+					NUMBER7=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_sequencia145); 
+					NUMBER7_tree = (Object)adaptor.create(NUMBER7);
+					adaptor.addChild(root_0, NUMBER7_tree);
+
+					}
+
+					pushFollow(FOLLOW_arithmetic_in_sequencia148);
+					arithmetic8=arithmetic();
+					state._fsp--;
+
+					root_0 = (Object)adaptor.becomeRoot(arithmetic8.getTree(), root_0);
+					}
+					break;
+
+			}
+
+			pushFollow(FOLLOW_block_in_sequencia153);
+			block9=block();
+			state._fsp--;
+
+			adaptor.addChild(root_0, block9.getTree());
+
+			// ../src/csheets/core/formula/compiler/Formula.g:54:39: ( arithmetic ^ atom )?
+			int alt3=2;
+			int LA3_0 = input.LA(1);
+			if ( (LA3_0==DIV||(LA3_0 >= MINUS && LA3_0 <= MULTI)||(LA3_0 >= PERCENT && LA3_0 <= POWER)) ) {
+				alt3=1;
+			}
+			switch (alt3) {
+				case 1 :
+					// ../src/csheets/core/formula/compiler/Formula.g:54:40: arithmetic ^ atom
+					{
+					pushFollow(FOLLOW_arithmetic_in_sequencia156);
+					arithmetic10=arithmetic();
+					state._fsp--;
+
+					root_0 = (Object)adaptor.becomeRoot(arithmetic10.getTree(), root_0);
+					pushFollow(FOLLOW_atom_in_sequencia159);
+					atom11=atom();
+					state._fsp--;
+
+					adaptor.addChild(root_0, atom11.getTree());
+
+					}
+					break;
+
+			}
+
+			}
+
+			retval.stop = input.LT(-1);
+
+			retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+			adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
+
+		}
+
+			catch (RecognitionException e) {
+				reportError(e);
+				throw e; 
+			}
+
+		finally {
+			// do for sure before leaving
+		}
+		return retval;
+	}
+	// $ANTLR end "sequencia"
+
+
+	public static class arithmetic_return extends ParserRuleReturnScope {
+		Object tree;
+		@Override
+		public Object getTree() { return tree; }
+	};
+
+
+	// $ANTLR start "arithmetic"
+	// ../src/csheets/core/formula/compiler/Formula.g:57:1: arithmetic : ( PLUS | MINUS | MULTI | DIV | POWER | PERCENT );
+	public final FormulaParser.arithmetic_return arithmetic() throws RecognitionException {
+		FormulaParser.arithmetic_return retval = new FormulaParser.arithmetic_return();
+		retval.start = input.LT(1);
+
+		Object root_0 = null;
+
+		Token set12=null;
+
+		Object set12_tree=null;
+
+		try {
+			// ../src/csheets/core/formula/compiler/Formula.g:57:11: ( PLUS | MINUS | MULTI | DIV | POWER | PERCENT )
+			// ../src/csheets/core/formula/compiler/Formula.g:
+			{
+			root_0 = (Object)adaptor.nil();
+
+
+			set12=input.LT(1);
+			if ( input.LA(1)==DIV||(input.LA(1) >= MINUS && input.LA(1) <= MULTI)||(input.LA(1) >= PERCENT && input.LA(1) <= POWER) ) {
+				input.consume();
+				adaptor.addChild(root_0, (Object)adaptor.create(set12));
+				state.errorRecovery=false;
+			}
+			else {
+				MismatchedSetException mse = new MismatchedSetException(null,input);
+				throw mse;
+			}
+			}
+
+			retval.stop = input.LT(-1);
+
+			retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+			adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
+
+		}
+
+			catch (RecognitionException e) {
+				reportError(e);
+				throw e; 
+			}
+
+		finally {
+			// do for sure before leaving
+		}
+		return retval;
+	}
+	// $ANTLR end "arithmetic"
+
+
+	public static class block_return extends ParserRuleReturnScope {
+		Object tree;
+		@Override
+		public Object getTree() { return tree; }
+	};
+
+
+	// $ANTLR start "block"
+	// ../src/csheets/core/formula/compiler/Formula.g:61:1: block : LBRA ! ( attribution | comparison | block ) ( SEMI ^ ( attribution | comparison | block ) )* RBRA !;
+	public final FormulaParser.block_return block() throws RecognitionException {
+		FormulaParser.block_return retval = new FormulaParser.block_return();
+		retval.start = input.LT(1);
+
+		Object root_0 = null;
+
+		Token LBRA13=null;
+		Token SEMI17=null;
+		Token RBRA21=null;
+		ParserRuleReturnScope attribution14 =null;
+		ParserRuleReturnScope comparison15 =null;
+		ParserRuleReturnScope block16 =null;
+		ParserRuleReturnScope attribution18 =null;
+		ParserRuleReturnScope comparison19 =null;
+		ParserRuleReturnScope block20 =null;
+
+		Object LBRA13_tree=null;
+		Object SEMI17_tree=null;
+		Object RBRA21_tree=null;
+
+		try {
+			// ../src/csheets/core/formula/compiler/Formula.g:61:6: ( LBRA ! ( attribution | comparison | block ) ( SEMI ^ ( attribution | comparison | block ) )* RBRA !)
+			// ../src/csheets/core/formula/compiler/Formula.g:62:9: LBRA ! ( attribution | comparison | block ) ( SEMI ^ ( attribution | comparison | block ) )* RBRA !
+			{
+			root_0 = (Object)adaptor.nil();
+
+
+			LBRA13=(Token)match(input,LBRA,FOLLOW_LBRA_in_block219); 
+			// ../src/csheets/core/formula/compiler/Formula.g:62:15: ( attribution | comparison | block )
+			int alt4=3;
+			switch ( input.LA(1) ) {
+			case CELL_REF:
+				{
+				int LA4_1 = input.LA(2);
+				if ( (LA4_1==ATT) ) {
+					alt4=1;
+				}
+				else if ( (LA4_1==AMP||LA4_1==COLON||(LA4_1 >= DIV && LA4_1 <= EQ)||(LA4_1 >= GT && LA4_1 <= GTEQ)||(LA4_1 >= LT && LA4_1 <= NEQ)||(LA4_1 >= PERCENT && LA4_1 <= POWER)||LA4_1==RBRA||LA4_1==SEMI) ) {
+					alt4=2;
+				}
+
+				else {
+					int nvaeMark = input.mark();
+					try {
+						input.consume();
+						NoViableAltException nvae =
+							new NoViableAltException("", 4, 1, input);
+						throw nvae;
+					} finally {
+						input.rewind(nvaeMark);
+					}
+				}
+
+				}
+				break;
+			case FUNCTION:
+			case LPAR:
+			case MINUS:
+			case NUMBER:
+			case STRING:
+				{
+				alt4=2;
+				}
+				break;
+			case TEMPVAR:
+				{
+				int LA4_3 = input.LA(2);
+				if ( (LA4_3==ATT) ) {
+					alt4=1;
+				}
+				else if ( (LA4_3==AMP||(LA4_3 >= DIV && LA4_3 <= EQ)||(LA4_3 >= GT && LA4_3 <= GTEQ)||(LA4_3 >= LT && LA4_3 <= NEQ)||(LA4_3 >= PERCENT && LA4_3 <= POWER)||LA4_3==RBRA||LA4_3==SEMI) ) {
+					alt4=2;
+				}
+
+				else {
+					int nvaeMark = input.mark();
+					try {
+						input.consume();
+						NoViableAltException nvae =
+							new NoViableAltException("", 4, 3, input);
+						throw nvae;
+					} finally {
+						input.rewind(nvaeMark);
+					}
+				}
+
+				}
+				break;
+			case LBRA:
+				{
+				alt4=3;
+				}
+				break;
+			default:
+				NoViableAltException nvae =
+					new NoViableAltException("", 4, 0, input);
+				throw nvae;
+			}
+			switch (alt4) {
+				case 1 :
+					// ../src/csheets/core/formula/compiler/Formula.g:62:16: attribution
+					{
+					pushFollow(FOLLOW_attribution_in_block223);
+					attribution14=attribution();
+					state._fsp--;
+
+					adaptor.addChild(root_0, attribution14.getTree());
+
+					}
+					break;
+				case 2 :
+					// ../src/csheets/core/formula/compiler/Formula.g:62:30: comparison
+					{
+					pushFollow(FOLLOW_comparison_in_block227);
+					comparison15=comparison();
+					state._fsp--;
+
+					adaptor.addChild(root_0, comparison15.getTree());
+
+					}
+					break;
+				case 3 :
+					// ../src/csheets/core/formula/compiler/Formula.g:62:43: block
+					{
+					pushFollow(FOLLOW_block_in_block231);
+					block16=block();
+					state._fsp--;
+
+					adaptor.addChild(root_0, block16.getTree());
+
+					}
+					break;
+
+			}
+
+			// ../src/csheets/core/formula/compiler/Formula.g:62:50: ( SEMI ^ ( attribution | comparison | block ) )*
+			loop6:
+			while (true) {
+				int alt6=2;
+				int LA6_0 = input.LA(1);
+				if ( (LA6_0==SEMI) ) {
+					alt6=1;
+				}
+
+				switch (alt6) {
+				case 1 :
+					// ../src/csheets/core/formula/compiler/Formula.g:62:51: SEMI ^ ( attribution | comparison | block )
+					{
+					SEMI17=(Token)match(input,SEMI,FOLLOW_SEMI_in_block235); 
+					SEMI17_tree = (Object)adaptor.create(SEMI17);
+					root_0 = (Object)adaptor.becomeRoot(SEMI17_tree, root_0);
+
+					// ../src/csheets/core/formula/compiler/Formula.g:62:57: ( attribution | comparison | block )
+					int alt5=3;
+					switch ( input.LA(1) ) {
+					case CELL_REF:
+						{
+						int LA5_1 = input.LA(2);
+						if ( (LA5_1==ATT) ) {
+							alt5=1;
+						}
+						else if ( (LA5_1==AMP||LA5_1==COLON||(LA5_1 >= DIV && LA5_1 <= EQ)||(LA5_1 >= GT && LA5_1 <= GTEQ)||(LA5_1 >= LT && LA5_1 <= NEQ)||(LA5_1 >= PERCENT && LA5_1 <= POWER)||LA5_1==RBRA||LA5_1==SEMI) ) {
+							alt5=2;
+						}
+
+						else {
+							int nvaeMark = input.mark();
+							try {
+								input.consume();
+								NoViableAltException nvae =
+									new NoViableAltException("", 5, 1, input);
+								throw nvae;
+							} finally {
+								input.rewind(nvaeMark);
+							}
+						}
+
+						}
+						break;
+					case FUNCTION:
+					case LPAR:
+					case MINUS:
+					case NUMBER:
+					case STRING:
+						{
+						alt5=2;
+						}
+						break;
+					case TEMPVAR:
+						{
+						int LA5_3 = input.LA(2);
+						if ( (LA5_3==ATT) ) {
+							alt5=1;
+						}
+						else if ( (LA5_3==AMP||(LA5_3 >= DIV && LA5_3 <= EQ)||(LA5_3 >= GT && LA5_3 <= GTEQ)||(LA5_3 >= LT && LA5_3 <= NEQ)||(LA5_3 >= PERCENT && LA5_3 <= POWER)||LA5_3==RBRA||LA5_3==SEMI) ) {
+							alt5=2;
+						}
+
+						else {
+							int nvaeMark = input.mark();
+							try {
+								input.consume();
+								NoViableAltException nvae =
+									new NoViableAltException("", 5, 3, input);
+								throw nvae;
+							} finally {
+								input.rewind(nvaeMark);
+							}
+						}
+
+						}
+						break;
+					case LBRA:
+						{
+						alt5=3;
+						}
+						break;
+					default:
+						NoViableAltException nvae =
+							new NoViableAltException("", 5, 0, input);
+						throw nvae;
+					}
+					switch (alt5) {
+						case 1 :
+							// ../src/csheets/core/formula/compiler/Formula.g:62:58: attribution
+							{
+							pushFollow(FOLLOW_attribution_in_block239);
+							attribution18=attribution();
+							state._fsp--;
+
+							adaptor.addChild(root_0, attribution18.getTree());
+
+							}
+							break;
+						case 2 :
+							// ../src/csheets/core/formula/compiler/Formula.g:62:72: comparison
+							{
+							pushFollow(FOLLOW_comparison_in_block243);
+							comparison19=comparison();
+							state._fsp--;
+
+							adaptor.addChild(root_0, comparison19.getTree());
+
+							}
+							break;
+						case 3 :
+							// ../src/csheets/core/formula/compiler/Formula.g:62:85: block
+							{
+							pushFollow(FOLLOW_block_in_block247);
+							block20=block();
+							state._fsp--;
+
+							adaptor.addChild(root_0, block20.getTree());
+
+							}
+							break;
+
+					}
+
+					}
+					break;
+
+				default :
+					break loop6;
+				}
+			}
+
+			RBRA21=(Token)match(input,RBRA,FOLLOW_RBRA_in_block252); 
+			}
+
+			retval.stop = input.LT(-1);
+
+			retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+			adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
+
+		}
+
+			catch (RecognitionException e) {
+				reportError(e);
+				throw e; 
+			}
+
+		finally {
+			// do for sure before leaving
+		}
+		return retval;
+	}
+	// $ANTLR end "block"
+
+
 	public static class attribution_return extends ParserRuleReturnScope {
 		Object tree;
 		@Override
@@ -348,46 +976,53 @@ public class FormulaParser extends Parser {
 
 
 	// $ANTLR start "attribution"
-	// ../src/csheets/core/formula/compiler/Formula.g:49:1: attribution : CELL_REF ATT ^ ( attribution | comparison ) ;
+	// ../src/csheets/core/formula/compiler/Formula.g:65:1: attribution : ( CELL_REF | TEMPVAR ) ATT ^ ( attribution | comparison ) ;
 	public final FormulaParser.attribution_return attribution() throws RecognitionException {
 		FormulaParser.attribution_return retval = new FormulaParser.attribution_return();
 		retval.start = input.LT(1);
 
 		Object root_0 = null;
 
-		Token CELL_REF10=null;
-		Token ATT11=null;
-		ParserRuleReturnScope attribution12 =null;
-		ParserRuleReturnScope comparison13 =null;
+		Token set22=null;
+		Token ATT23=null;
+		ParserRuleReturnScope attribution24 =null;
+		ParserRuleReturnScope comparison25 =null;
 
-		Object CELL_REF10_tree=null;
-		Object ATT11_tree=null;
+		Object set22_tree=null;
+		Object ATT23_tree=null;
 
 		try {
-			// ../src/csheets/core/formula/compiler/Formula.g:50:9: ( CELL_REF ATT ^ ( attribution | comparison ) )
-			// ../src/csheets/core/formula/compiler/Formula.g:50:11: CELL_REF ATT ^ ( attribution | comparison )
+			// ../src/csheets/core/formula/compiler/Formula.g:66:9: ( ( CELL_REF | TEMPVAR ) ATT ^ ( attribution | comparison ) )
+			// ../src/csheets/core/formula/compiler/Formula.g:66:11: ( CELL_REF | TEMPVAR ) ATT ^ ( attribution | comparison )
 			{
 			root_0 = (Object)adaptor.nil();
 
 
-			CELL_REF10=(Token)match(input,CELL_REF,FOLLOW_CELL_REF_in_attribution144); 
-			CELL_REF10_tree = (Object)adaptor.create(CELL_REF10);
-			adaptor.addChild(root_0, CELL_REF10_tree);
+			set22=input.LT(1);
+			if ( input.LA(1)==CELL_REF||input.LA(1)==TEMPVAR ) {
+				input.consume();
+				adaptor.addChild(root_0, (Object)adaptor.create(set22));
+				state.errorRecovery=false;
+			}
+			else {
+				MismatchedSetException mse = new MismatchedSetException(null,input);
+				throw mse;
+			}
+			ATT23=(Token)match(input,ATT,FOLLOW_ATT_in_attribution288); 
+			ATT23_tree = (Object)adaptor.create(ATT23);
+			root_0 = (Object)adaptor.becomeRoot(ATT23_tree, root_0);
 
-			ATT11=(Token)match(input,ATT,FOLLOW_ATT_in_attribution146); 
-			ATT11_tree = (Object)adaptor.create(ATT11);
-			root_0 = (Object)adaptor.becomeRoot(ATT11_tree, root_0);
-
-			// ../src/csheets/core/formula/compiler/Formula.g:50:25: ( attribution | comparison )
-			int alt6=2;
-			int LA6_0 = input.LA(1);
-			if ( (LA6_0==CELL_REF) ) {
-				int LA6_1 = input.LA(2);
-				if ( (LA6_1==ATT) ) {
-					alt6=1;
+			// ../src/csheets/core/formula/compiler/Formula.g:66:39: ( attribution | comparison )
+			int alt7=2;
+			switch ( input.LA(1) ) {
+			case CELL_REF:
+				{
+				int LA7_1 = input.LA(2);
+				if ( (LA7_1==ATT) ) {
+					alt7=1;
 				}
-				else if ( (LA6_1==EOF||LA6_1==AMP||LA6_1==COLON||(LA6_1 >= DIV && LA6_1 <= EQ)||(LA6_1 >= GT && LA6_1 <= GTEQ)||(LA6_1 >= LT && LA6_1 <= NEQ)||(LA6_1 >= PERCENT && LA6_1 <= POWER)||LA6_1==RBRA||LA6_1==SEMI) ) {
-					alt6=2;
+				else if ( (LA7_1==EOF||LA7_1==AMP||LA7_1==COLON||(LA7_1 >= DIV && LA7_1 <= EQ)||(LA7_1 >= GT && LA7_1 <= GTEQ)||(LA7_1 >= LT && LA7_1 <= NEQ)||(LA7_1 >= PERCENT && LA7_1 <= POWER)||LA7_1==RBRA||LA7_1==SEMI) ) {
+					alt7=2;
 				}
 
 				else {
@@ -395,44 +1030,73 @@ public class FormulaParser extends Parser {
 					try {
 						input.consume();
 						NoViableAltException nvae =
-							new NoViableAltException("", 6, 1, input);
+							new NoViableAltException("", 7, 1, input);
 						throw nvae;
 					} finally {
 						input.rewind(nvaeMark);
 					}
 				}
 
-			}
-			else if ( (LA6_0==FUNCTION||LA6_0==LPAR||LA6_0==MINUS||LA6_0==NUMBER||LA6_0==STRING) ) {
-				alt6=2;
-			}
+				}
+				break;
+			case FUNCTION:
+			case LPAR:
+			case MINUS:
+			case NUMBER:
+			case STRING:
+				{
+				alt7=2;
+				}
+				break;
+			case TEMPVAR:
+				{
+				int LA7_3 = input.LA(2);
+				if ( (LA7_3==ATT) ) {
+					alt7=1;
+				}
+				else if ( (LA7_3==EOF||LA7_3==AMP||(LA7_3 >= DIV && LA7_3 <= EQ)||(LA7_3 >= GT && LA7_3 <= GTEQ)||(LA7_3 >= LT && LA7_3 <= NEQ)||(LA7_3 >= PERCENT && LA7_3 <= POWER)||LA7_3==RBRA||LA7_3==SEMI) ) {
+					alt7=2;
+				}
 
-			else {
+				else {
+					int nvaeMark = input.mark();
+					try {
+						input.consume();
+						NoViableAltException nvae =
+							new NoViableAltException("", 7, 3, input);
+						throw nvae;
+					} finally {
+						input.rewind(nvaeMark);
+					}
+				}
+
+				}
+				break;
+			default:
 				NoViableAltException nvae =
-					new NoViableAltException("", 6, 0, input);
+					new NoViableAltException("", 7, 0, input);
 				throw nvae;
 			}
-
-			switch (alt6) {
+			switch (alt7) {
 				case 1 :
-					// ../src/csheets/core/formula/compiler/Formula.g:50:26: attribution
+					// ../src/csheets/core/formula/compiler/Formula.g:66:40: attribution
 					{
-					pushFollow(FOLLOW_attribution_in_attribution150);
-					attribution12=attribution();
+					pushFollow(FOLLOW_attribution_in_attribution292);
+					attribution24=attribution();
 					state._fsp--;
 
-					adaptor.addChild(root_0, attribution12.getTree());
+					adaptor.addChild(root_0, attribution24.getTree());
 
 					}
 					break;
 				case 2 :
-					// ../src/csheets/core/formula/compiler/Formula.g:50:40: comparison
+					// ../src/csheets/core/formula/compiler/Formula.g:66:54: comparison
 					{
-					pushFollow(FOLLOW_comparison_in_attribution154);
-					comparison13=comparison();
+					pushFollow(FOLLOW_comparison_in_attribution296);
+					comparison25=comparison();
 					state._fsp--;
 
-					adaptor.addChild(root_0, comparison13.getTree());
+					adaptor.addChild(root_0, comparison25.getTree());
 
 					}
 					break;
@@ -469,153 +1133,153 @@ public class FormulaParser extends Parser {
 
 
 	// $ANTLR start "comparison"
-	// ../src/csheets/core/formula/compiler/Formula.g:53:1: comparison : concatenation ( ( EQ ^| NEQ ^| GT ^| LT ^| LTEQ ^| GTEQ ^) concatenation )? ;
+	// ../src/csheets/core/formula/compiler/Formula.g:69:1: comparison : concatenation ( ( EQ ^| NEQ ^| GT ^| LT ^| LTEQ ^| GTEQ ^) concatenation )? ;
 	public final FormulaParser.comparison_return comparison() throws RecognitionException {
 		FormulaParser.comparison_return retval = new FormulaParser.comparison_return();
 		retval.start = input.LT(1);
 
 		Object root_0 = null;
 
-		Token EQ15=null;
-		Token NEQ16=null;
-		Token GT17=null;
-		Token LT18=null;
-		Token LTEQ19=null;
-		Token GTEQ20=null;
-		ParserRuleReturnScope concatenation14 =null;
-		ParserRuleReturnScope concatenation21 =null;
+		Token EQ27=null;
+		Token NEQ28=null;
+		Token GT29=null;
+		Token LT30=null;
+		Token LTEQ31=null;
+		Token GTEQ32=null;
+		ParserRuleReturnScope concatenation26 =null;
+		ParserRuleReturnScope concatenation33 =null;
 
-		Object EQ15_tree=null;
-		Object NEQ16_tree=null;
-		Object GT17_tree=null;
-		Object LT18_tree=null;
-		Object LTEQ19_tree=null;
-		Object GTEQ20_tree=null;
+		Object EQ27_tree=null;
+		Object NEQ28_tree=null;
+		Object GT29_tree=null;
+		Object LT30_tree=null;
+		Object LTEQ31_tree=null;
+		Object GTEQ32_tree=null;
 
 		try {
-			// ../src/csheets/core/formula/compiler/Formula.g:54:2: ( concatenation ( ( EQ ^| NEQ ^| GT ^| LT ^| LTEQ ^| GTEQ ^) concatenation )? )
-			// ../src/csheets/core/formula/compiler/Formula.g:54:4: concatenation ( ( EQ ^| NEQ ^| GT ^| LT ^| LTEQ ^| GTEQ ^) concatenation )?
+			// ../src/csheets/core/formula/compiler/Formula.g:70:2: ( concatenation ( ( EQ ^| NEQ ^| GT ^| LT ^| LTEQ ^| GTEQ ^) concatenation )? )
+			// ../src/csheets/core/formula/compiler/Formula.g:70:4: concatenation ( ( EQ ^| NEQ ^| GT ^| LT ^| LTEQ ^| GTEQ ^) concatenation )?
 			{
 			root_0 = (Object)adaptor.nil();
 
 
-			pushFollow(FOLLOW_concatenation_in_comparison173);
-			concatenation14=concatenation();
+			pushFollow(FOLLOW_concatenation_in_comparison315);
+			concatenation26=concatenation();
 			state._fsp--;
 
-			adaptor.addChild(root_0, concatenation14.getTree());
+			adaptor.addChild(root_0, concatenation26.getTree());
 
-			// ../src/csheets/core/formula/compiler/Formula.g:55:3: ( ( EQ ^| NEQ ^| GT ^| LT ^| LTEQ ^| GTEQ ^) concatenation )?
-			int alt8=2;
-			int LA8_0 = input.LA(1);
-			if ( (LA8_0==EQ||(LA8_0 >= GT && LA8_0 <= GTEQ)||(LA8_0 >= LT && LA8_0 <= LTEQ)||LA8_0==NEQ) ) {
-				alt8=1;
+			// ../src/csheets/core/formula/compiler/Formula.g:71:3: ( ( EQ ^| NEQ ^| GT ^| LT ^| LTEQ ^| GTEQ ^) concatenation )?
+			int alt9=2;
+			int LA9_0 = input.LA(1);
+			if ( (LA9_0==EQ||(LA9_0 >= GT && LA9_0 <= GTEQ)||(LA9_0 >= LT && LA9_0 <= LTEQ)||LA9_0==NEQ) ) {
+				alt9=1;
 			}
-			switch (alt8) {
+			switch (alt9) {
 				case 1 :
-					// ../src/csheets/core/formula/compiler/Formula.g:55:5: ( EQ ^| NEQ ^| GT ^| LT ^| LTEQ ^| GTEQ ^) concatenation
+					// ../src/csheets/core/formula/compiler/Formula.g:71:5: ( EQ ^| NEQ ^| GT ^| LT ^| LTEQ ^| GTEQ ^) concatenation
 					{
-					// ../src/csheets/core/formula/compiler/Formula.g:55:5: ( EQ ^| NEQ ^| GT ^| LT ^| LTEQ ^| GTEQ ^)
-					int alt7=6;
+					// ../src/csheets/core/formula/compiler/Formula.g:71:5: ( EQ ^| NEQ ^| GT ^| LT ^| LTEQ ^| GTEQ ^)
+					int alt8=6;
 					switch ( input.LA(1) ) {
 					case EQ:
 						{
-						alt7=1;
+						alt8=1;
 						}
 						break;
 					case NEQ:
 						{
-						alt7=2;
+						alt8=2;
 						}
 						break;
 					case GT:
 						{
-						alt7=3;
+						alt8=3;
 						}
 						break;
 					case LT:
 						{
-						alt7=4;
+						alt8=4;
 						}
 						break;
 					case LTEQ:
 						{
-						alt7=5;
+						alt8=5;
 						}
 						break;
 					case GTEQ:
 						{
-						alt7=6;
+						alt8=6;
 						}
 						break;
 					default:
 						NoViableAltException nvae =
-							new NoViableAltException("", 7, 0, input);
+							new NoViableAltException("", 8, 0, input);
 						throw nvae;
 					}
-					switch (alt7) {
+					switch (alt8) {
 						case 1 :
-							// ../src/csheets/core/formula/compiler/Formula.g:55:7: EQ ^
+							// ../src/csheets/core/formula/compiler/Formula.g:71:7: EQ ^
 							{
-							EQ15=(Token)match(input,EQ,FOLLOW_EQ_in_comparison181); 
-							EQ15_tree = (Object)adaptor.create(EQ15);
-							root_0 = (Object)adaptor.becomeRoot(EQ15_tree, root_0);
+							EQ27=(Token)match(input,EQ,FOLLOW_EQ_in_comparison323); 
+							EQ27_tree = (Object)adaptor.create(EQ27);
+							root_0 = (Object)adaptor.becomeRoot(EQ27_tree, root_0);
 
 							}
 							break;
 						case 2 :
-							// ../src/csheets/core/formula/compiler/Formula.g:55:13: NEQ ^
+							// ../src/csheets/core/formula/compiler/Formula.g:71:13: NEQ ^
 							{
-							NEQ16=(Token)match(input,NEQ,FOLLOW_NEQ_in_comparison186); 
-							NEQ16_tree = (Object)adaptor.create(NEQ16);
-							root_0 = (Object)adaptor.becomeRoot(NEQ16_tree, root_0);
+							NEQ28=(Token)match(input,NEQ,FOLLOW_NEQ_in_comparison328); 
+							NEQ28_tree = (Object)adaptor.create(NEQ28);
+							root_0 = (Object)adaptor.becomeRoot(NEQ28_tree, root_0);
 
 							}
 							break;
 						case 3 :
-							// ../src/csheets/core/formula/compiler/Formula.g:55:20: GT ^
+							// ../src/csheets/core/formula/compiler/Formula.g:71:20: GT ^
 							{
-							GT17=(Token)match(input,GT,FOLLOW_GT_in_comparison191); 
-							GT17_tree = (Object)adaptor.create(GT17);
-							root_0 = (Object)adaptor.becomeRoot(GT17_tree, root_0);
+							GT29=(Token)match(input,GT,FOLLOW_GT_in_comparison333); 
+							GT29_tree = (Object)adaptor.create(GT29);
+							root_0 = (Object)adaptor.becomeRoot(GT29_tree, root_0);
 
 							}
 							break;
 						case 4 :
-							// ../src/csheets/core/formula/compiler/Formula.g:55:26: LT ^
+							// ../src/csheets/core/formula/compiler/Formula.g:71:26: LT ^
 							{
-							LT18=(Token)match(input,LT,FOLLOW_LT_in_comparison196); 
-							LT18_tree = (Object)adaptor.create(LT18);
-							root_0 = (Object)adaptor.becomeRoot(LT18_tree, root_0);
+							LT30=(Token)match(input,LT,FOLLOW_LT_in_comparison338); 
+							LT30_tree = (Object)adaptor.create(LT30);
+							root_0 = (Object)adaptor.becomeRoot(LT30_tree, root_0);
 
 							}
 							break;
 						case 5 :
-							// ../src/csheets/core/formula/compiler/Formula.g:55:32: LTEQ ^
+							// ../src/csheets/core/formula/compiler/Formula.g:71:32: LTEQ ^
 							{
-							LTEQ19=(Token)match(input,LTEQ,FOLLOW_LTEQ_in_comparison201); 
-							LTEQ19_tree = (Object)adaptor.create(LTEQ19);
-							root_0 = (Object)adaptor.becomeRoot(LTEQ19_tree, root_0);
+							LTEQ31=(Token)match(input,LTEQ,FOLLOW_LTEQ_in_comparison343); 
+							LTEQ31_tree = (Object)adaptor.create(LTEQ31);
+							root_0 = (Object)adaptor.becomeRoot(LTEQ31_tree, root_0);
 
 							}
 							break;
 						case 6 :
-							// ../src/csheets/core/formula/compiler/Formula.g:55:40: GTEQ ^
+							// ../src/csheets/core/formula/compiler/Formula.g:71:40: GTEQ ^
 							{
-							GTEQ20=(Token)match(input,GTEQ,FOLLOW_GTEQ_in_comparison206); 
-							GTEQ20_tree = (Object)adaptor.create(GTEQ20);
-							root_0 = (Object)adaptor.becomeRoot(GTEQ20_tree, root_0);
+							GTEQ32=(Token)match(input,GTEQ,FOLLOW_GTEQ_in_comparison348); 
+							GTEQ32_tree = (Object)adaptor.create(GTEQ32);
+							root_0 = (Object)adaptor.becomeRoot(GTEQ32_tree, root_0);
 
 							}
 							break;
 
 					}
 
-					pushFollow(FOLLOW_concatenation_in_comparison211);
-					concatenation21=concatenation();
+					pushFollow(FOLLOW_concatenation_in_comparison353);
+					concatenation33=concatenation();
 					state._fsp--;
 
-					adaptor.addChild(root_0, concatenation21.getTree());
+					adaptor.addChild(root_0, concatenation33.getTree());
 
 					}
 					break;
@@ -652,60 +1316,60 @@ public class FormulaParser extends Parser {
 
 
 	// $ANTLR start "concatenation"
-	// ../src/csheets/core/formula/compiler/Formula.g:58:1: concatenation : arithmetic_lowest ( AMP ^ arithmetic_lowest )* ;
+	// ../src/csheets/core/formula/compiler/Formula.g:74:1: concatenation : arithmetic_lowest ( AMP ^ arithmetic_lowest )* ;
 	public final FormulaParser.concatenation_return concatenation() throws RecognitionException {
 		FormulaParser.concatenation_return retval = new FormulaParser.concatenation_return();
 		retval.start = input.LT(1);
 
 		Object root_0 = null;
 
-		Token AMP23=null;
-		ParserRuleReturnScope arithmetic_lowest22 =null;
-		ParserRuleReturnScope arithmetic_lowest24 =null;
+		Token AMP35=null;
+		ParserRuleReturnScope arithmetic_lowest34 =null;
+		ParserRuleReturnScope arithmetic_lowest36 =null;
 
-		Object AMP23_tree=null;
+		Object AMP35_tree=null;
 
 		try {
-			// ../src/csheets/core/formula/compiler/Formula.g:59:2: ( arithmetic_lowest ( AMP ^ arithmetic_lowest )* )
-			// ../src/csheets/core/formula/compiler/Formula.g:59:4: arithmetic_lowest ( AMP ^ arithmetic_lowest )*
+			// ../src/csheets/core/formula/compiler/Formula.g:75:2: ( arithmetic_lowest ( AMP ^ arithmetic_lowest )* )
+			// ../src/csheets/core/formula/compiler/Formula.g:75:4: arithmetic_lowest ( AMP ^ arithmetic_lowest )*
 			{
 			root_0 = (Object)adaptor.nil();
 
 
-			pushFollow(FOLLOW_arithmetic_lowest_in_concatenation225);
-			arithmetic_lowest22=arithmetic_lowest();
+			pushFollow(FOLLOW_arithmetic_lowest_in_concatenation367);
+			arithmetic_lowest34=arithmetic_lowest();
 			state._fsp--;
 
-			adaptor.addChild(root_0, arithmetic_lowest22.getTree());
+			adaptor.addChild(root_0, arithmetic_lowest34.getTree());
 
-			// ../src/csheets/core/formula/compiler/Formula.g:60:3: ( AMP ^ arithmetic_lowest )*
-			loop9:
+			// ../src/csheets/core/formula/compiler/Formula.g:76:3: ( AMP ^ arithmetic_lowest )*
+			loop10:
 			while (true) {
-				int alt9=2;
-				int LA9_0 = input.LA(1);
-				if ( (LA9_0==AMP) ) {
-					alt9=1;
+				int alt10=2;
+				int LA10_0 = input.LA(1);
+				if ( (LA10_0==AMP) ) {
+					alt10=1;
 				}
 
-				switch (alt9) {
+				switch (alt10) {
 				case 1 :
-					// ../src/csheets/core/formula/compiler/Formula.g:60:5: AMP ^ arithmetic_lowest
+					// ../src/csheets/core/formula/compiler/Formula.g:76:5: AMP ^ arithmetic_lowest
 					{
-					AMP23=(Token)match(input,AMP,FOLLOW_AMP_in_concatenation231); 
-					AMP23_tree = (Object)adaptor.create(AMP23);
-					root_0 = (Object)adaptor.becomeRoot(AMP23_tree, root_0);
+					AMP35=(Token)match(input,AMP,FOLLOW_AMP_in_concatenation373); 
+					AMP35_tree = (Object)adaptor.create(AMP35);
+					root_0 = (Object)adaptor.becomeRoot(AMP35_tree, root_0);
 
-					pushFollow(FOLLOW_arithmetic_lowest_in_concatenation234);
-					arithmetic_lowest24=arithmetic_lowest();
+					pushFollow(FOLLOW_arithmetic_lowest_in_concatenation376);
+					arithmetic_lowest36=arithmetic_lowest();
 					state._fsp--;
 
-					adaptor.addChild(root_0, arithmetic_lowest24.getTree());
+					adaptor.addChild(root_0, arithmetic_lowest36.getTree());
 
 					}
 					break;
 
 				default :
-					break loop9;
+					break loop10;
 				}
 			}
 
@@ -739,96 +1403,96 @@ public class FormulaParser extends Parser {
 
 
 	// $ANTLR start "arithmetic_lowest"
-	// ../src/csheets/core/formula/compiler/Formula.g:63:1: arithmetic_lowest : arithmetic_low ( ( PLUS ^| MINUS ^) arithmetic_low )* ;
+	// ../src/csheets/core/formula/compiler/Formula.g:79:1: arithmetic_lowest : arithmetic_low ( ( PLUS ^| MINUS ^) arithmetic_low )* ;
 	public final FormulaParser.arithmetic_lowest_return arithmetic_lowest() throws RecognitionException {
 		FormulaParser.arithmetic_lowest_return retval = new FormulaParser.arithmetic_lowest_return();
 		retval.start = input.LT(1);
 
 		Object root_0 = null;
 
-		Token PLUS26=null;
-		Token MINUS27=null;
-		ParserRuleReturnScope arithmetic_low25 =null;
-		ParserRuleReturnScope arithmetic_low28 =null;
+		Token PLUS38=null;
+		Token MINUS39=null;
+		ParserRuleReturnScope arithmetic_low37 =null;
+		ParserRuleReturnScope arithmetic_low40 =null;
 
-		Object PLUS26_tree=null;
-		Object MINUS27_tree=null;
+		Object PLUS38_tree=null;
+		Object MINUS39_tree=null;
 
 		try {
-			// ../src/csheets/core/formula/compiler/Formula.g:64:2: ( arithmetic_low ( ( PLUS ^| MINUS ^) arithmetic_low )* )
-			// ../src/csheets/core/formula/compiler/Formula.g:64:4: arithmetic_low ( ( PLUS ^| MINUS ^) arithmetic_low )*
+			// ../src/csheets/core/formula/compiler/Formula.g:80:2: ( arithmetic_low ( ( PLUS ^| MINUS ^) arithmetic_low )* )
+			// ../src/csheets/core/formula/compiler/Formula.g:80:4: arithmetic_low ( ( PLUS ^| MINUS ^) arithmetic_low )*
 			{
 			root_0 = (Object)adaptor.nil();
 
 
-			pushFollow(FOLLOW_arithmetic_low_in_arithmetic_lowest248);
-			arithmetic_low25=arithmetic_low();
+			pushFollow(FOLLOW_arithmetic_low_in_arithmetic_lowest390);
+			arithmetic_low37=arithmetic_low();
 			state._fsp--;
 
-			adaptor.addChild(root_0, arithmetic_low25.getTree());
+			adaptor.addChild(root_0, arithmetic_low37.getTree());
 
-			// ../src/csheets/core/formula/compiler/Formula.g:65:3: ( ( PLUS ^| MINUS ^) arithmetic_low )*
-			loop11:
+			// ../src/csheets/core/formula/compiler/Formula.g:81:3: ( ( PLUS ^| MINUS ^) arithmetic_low )*
+			loop12:
 			while (true) {
-				int alt11=2;
-				int LA11_0 = input.LA(1);
-				if ( (LA11_0==MINUS||LA11_0==PLUS) ) {
-					alt11=1;
+				int alt12=2;
+				int LA12_0 = input.LA(1);
+				if ( (LA12_0==MINUS||LA12_0==PLUS) ) {
+					alt12=1;
 				}
 
-				switch (alt11) {
+				switch (alt12) {
 				case 1 :
-					// ../src/csheets/core/formula/compiler/Formula.g:65:5: ( PLUS ^| MINUS ^) arithmetic_low
+					// ../src/csheets/core/formula/compiler/Formula.g:81:5: ( PLUS ^| MINUS ^) arithmetic_low
 					{
-					// ../src/csheets/core/formula/compiler/Formula.g:65:5: ( PLUS ^| MINUS ^)
-					int alt10=2;
-					int LA10_0 = input.LA(1);
-					if ( (LA10_0==PLUS) ) {
-						alt10=1;
+					// ../src/csheets/core/formula/compiler/Formula.g:81:5: ( PLUS ^| MINUS ^)
+					int alt11=2;
+					int LA11_0 = input.LA(1);
+					if ( (LA11_0==PLUS) ) {
+						alt11=1;
 					}
-					else if ( (LA10_0==MINUS) ) {
-						alt10=2;
+					else if ( (LA11_0==MINUS) ) {
+						alt11=2;
 					}
 
 					else {
 						NoViableAltException nvae =
-							new NoViableAltException("", 10, 0, input);
+							new NoViableAltException("", 11, 0, input);
 						throw nvae;
 					}
 
-					switch (alt10) {
+					switch (alt11) {
 						case 1 :
-							// ../src/csheets/core/formula/compiler/Formula.g:65:7: PLUS ^
+							// ../src/csheets/core/formula/compiler/Formula.g:81:7: PLUS ^
 							{
-							PLUS26=(Token)match(input,PLUS,FOLLOW_PLUS_in_arithmetic_lowest256); 
-							PLUS26_tree = (Object)adaptor.create(PLUS26);
-							root_0 = (Object)adaptor.becomeRoot(PLUS26_tree, root_0);
+							PLUS38=(Token)match(input,PLUS,FOLLOW_PLUS_in_arithmetic_lowest398); 
+							PLUS38_tree = (Object)adaptor.create(PLUS38);
+							root_0 = (Object)adaptor.becomeRoot(PLUS38_tree, root_0);
 
 							}
 							break;
 						case 2 :
-							// ../src/csheets/core/formula/compiler/Formula.g:65:15: MINUS ^
+							// ../src/csheets/core/formula/compiler/Formula.g:81:15: MINUS ^
 							{
-							MINUS27=(Token)match(input,MINUS,FOLLOW_MINUS_in_arithmetic_lowest261); 
-							MINUS27_tree = (Object)adaptor.create(MINUS27);
-							root_0 = (Object)adaptor.becomeRoot(MINUS27_tree, root_0);
+							MINUS39=(Token)match(input,MINUS,FOLLOW_MINUS_in_arithmetic_lowest403); 
+							MINUS39_tree = (Object)adaptor.create(MINUS39);
+							root_0 = (Object)adaptor.becomeRoot(MINUS39_tree, root_0);
 
 							}
 							break;
 
 					}
 
-					pushFollow(FOLLOW_arithmetic_low_in_arithmetic_lowest266);
-					arithmetic_low28=arithmetic_low();
+					pushFollow(FOLLOW_arithmetic_low_in_arithmetic_lowest408);
+					arithmetic_low40=arithmetic_low();
 					state._fsp--;
 
-					adaptor.addChild(root_0, arithmetic_low28.getTree());
+					adaptor.addChild(root_0, arithmetic_low40.getTree());
 
 					}
 					break;
 
 				default :
-					break loop11;
+					break loop12;
 				}
 			}
 
@@ -862,96 +1526,96 @@ public class FormulaParser extends Parser {
 
 
 	// $ANTLR start "arithmetic_low"
-	// ../src/csheets/core/formula/compiler/Formula.g:68:1: arithmetic_low : arithmetic_medium ( ( MULTI ^| DIV ^) arithmetic_medium )* ;
+	// ../src/csheets/core/formula/compiler/Formula.g:84:1: arithmetic_low : arithmetic_medium ( ( MULTI ^| DIV ^) arithmetic_medium )* ;
 	public final FormulaParser.arithmetic_low_return arithmetic_low() throws RecognitionException {
 		FormulaParser.arithmetic_low_return retval = new FormulaParser.arithmetic_low_return();
 		retval.start = input.LT(1);
 
 		Object root_0 = null;
 
-		Token MULTI30=null;
-		Token DIV31=null;
-		ParserRuleReturnScope arithmetic_medium29 =null;
-		ParserRuleReturnScope arithmetic_medium32 =null;
+		Token MULTI42=null;
+		Token DIV43=null;
+		ParserRuleReturnScope arithmetic_medium41 =null;
+		ParserRuleReturnScope arithmetic_medium44 =null;
 
-		Object MULTI30_tree=null;
-		Object DIV31_tree=null;
+		Object MULTI42_tree=null;
+		Object DIV43_tree=null;
 
 		try {
-			// ../src/csheets/core/formula/compiler/Formula.g:69:2: ( arithmetic_medium ( ( MULTI ^| DIV ^) arithmetic_medium )* )
-			// ../src/csheets/core/formula/compiler/Formula.g:69:4: arithmetic_medium ( ( MULTI ^| DIV ^) arithmetic_medium )*
+			// ../src/csheets/core/formula/compiler/Formula.g:85:2: ( arithmetic_medium ( ( MULTI ^| DIV ^) arithmetic_medium )* )
+			// ../src/csheets/core/formula/compiler/Formula.g:85:4: arithmetic_medium ( ( MULTI ^| DIV ^) arithmetic_medium )*
 			{
 			root_0 = (Object)adaptor.nil();
 
 
-			pushFollow(FOLLOW_arithmetic_medium_in_arithmetic_low280);
-			arithmetic_medium29=arithmetic_medium();
+			pushFollow(FOLLOW_arithmetic_medium_in_arithmetic_low422);
+			arithmetic_medium41=arithmetic_medium();
 			state._fsp--;
 
-			adaptor.addChild(root_0, arithmetic_medium29.getTree());
+			adaptor.addChild(root_0, arithmetic_medium41.getTree());
 
-			// ../src/csheets/core/formula/compiler/Formula.g:70:3: ( ( MULTI ^| DIV ^) arithmetic_medium )*
-			loop13:
+			// ../src/csheets/core/formula/compiler/Formula.g:86:3: ( ( MULTI ^| DIV ^) arithmetic_medium )*
+			loop14:
 			while (true) {
-				int alt13=2;
-				int LA13_0 = input.LA(1);
-				if ( (LA13_0==DIV||LA13_0==MULTI) ) {
-					alt13=1;
+				int alt14=2;
+				int LA14_0 = input.LA(1);
+				if ( (LA14_0==DIV||LA14_0==MULTI) ) {
+					alt14=1;
 				}
 
-				switch (alt13) {
+				switch (alt14) {
 				case 1 :
-					// ../src/csheets/core/formula/compiler/Formula.g:70:5: ( MULTI ^| DIV ^) arithmetic_medium
+					// ../src/csheets/core/formula/compiler/Formula.g:86:5: ( MULTI ^| DIV ^) arithmetic_medium
 					{
-					// ../src/csheets/core/formula/compiler/Formula.g:70:5: ( MULTI ^| DIV ^)
-					int alt12=2;
-					int LA12_0 = input.LA(1);
-					if ( (LA12_0==MULTI) ) {
-						alt12=1;
+					// ../src/csheets/core/formula/compiler/Formula.g:86:5: ( MULTI ^| DIV ^)
+					int alt13=2;
+					int LA13_0 = input.LA(1);
+					if ( (LA13_0==MULTI) ) {
+						alt13=1;
 					}
-					else if ( (LA12_0==DIV) ) {
-						alt12=2;
+					else if ( (LA13_0==DIV) ) {
+						alt13=2;
 					}
 
 					else {
 						NoViableAltException nvae =
-							new NoViableAltException("", 12, 0, input);
+							new NoViableAltException("", 13, 0, input);
 						throw nvae;
 					}
 
-					switch (alt12) {
+					switch (alt13) {
 						case 1 :
-							// ../src/csheets/core/formula/compiler/Formula.g:70:7: MULTI ^
+							// ../src/csheets/core/formula/compiler/Formula.g:86:7: MULTI ^
 							{
-							MULTI30=(Token)match(input,MULTI,FOLLOW_MULTI_in_arithmetic_low288); 
-							MULTI30_tree = (Object)adaptor.create(MULTI30);
-							root_0 = (Object)adaptor.becomeRoot(MULTI30_tree, root_0);
+							MULTI42=(Token)match(input,MULTI,FOLLOW_MULTI_in_arithmetic_low430); 
+							MULTI42_tree = (Object)adaptor.create(MULTI42);
+							root_0 = (Object)adaptor.becomeRoot(MULTI42_tree, root_0);
 
 							}
 							break;
 						case 2 :
-							// ../src/csheets/core/formula/compiler/Formula.g:70:16: DIV ^
+							// ../src/csheets/core/formula/compiler/Formula.g:86:16: DIV ^
 							{
-							DIV31=(Token)match(input,DIV,FOLLOW_DIV_in_arithmetic_low293); 
-							DIV31_tree = (Object)adaptor.create(DIV31);
-							root_0 = (Object)adaptor.becomeRoot(DIV31_tree, root_0);
+							DIV43=(Token)match(input,DIV,FOLLOW_DIV_in_arithmetic_low435); 
+							DIV43_tree = (Object)adaptor.create(DIV43);
+							root_0 = (Object)adaptor.becomeRoot(DIV43_tree, root_0);
 
 							}
 							break;
 
 					}
 
-					pushFollow(FOLLOW_arithmetic_medium_in_arithmetic_low298);
-					arithmetic_medium32=arithmetic_medium();
+					pushFollow(FOLLOW_arithmetic_medium_in_arithmetic_low440);
+					arithmetic_medium44=arithmetic_medium();
 					state._fsp--;
 
-					adaptor.addChild(root_0, arithmetic_medium32.getTree());
+					adaptor.addChild(root_0, arithmetic_medium44.getTree());
 
 					}
 					break;
 
 				default :
-					break loop13;
+					break loop14;
 				}
 			}
 
@@ -985,51 +1649,51 @@ public class FormulaParser extends Parser {
 
 
 	// $ANTLR start "arithmetic_medium"
-	// ../src/csheets/core/formula/compiler/Formula.g:73:1: arithmetic_medium : arithmetic_high ( POWER ^ arithmetic_high )? ;
+	// ../src/csheets/core/formula/compiler/Formula.g:89:1: arithmetic_medium : arithmetic_high ( POWER ^ arithmetic_high )? ;
 	public final FormulaParser.arithmetic_medium_return arithmetic_medium() throws RecognitionException {
 		FormulaParser.arithmetic_medium_return retval = new FormulaParser.arithmetic_medium_return();
 		retval.start = input.LT(1);
 
 		Object root_0 = null;
 
-		Token POWER34=null;
-		ParserRuleReturnScope arithmetic_high33 =null;
-		ParserRuleReturnScope arithmetic_high35 =null;
+		Token POWER46=null;
+		ParserRuleReturnScope arithmetic_high45 =null;
+		ParserRuleReturnScope arithmetic_high47 =null;
 
-		Object POWER34_tree=null;
+		Object POWER46_tree=null;
 
 		try {
-			// ../src/csheets/core/formula/compiler/Formula.g:74:2: ( arithmetic_high ( POWER ^ arithmetic_high )? )
-			// ../src/csheets/core/formula/compiler/Formula.g:74:4: arithmetic_high ( POWER ^ arithmetic_high )?
+			// ../src/csheets/core/formula/compiler/Formula.g:90:2: ( arithmetic_high ( POWER ^ arithmetic_high )? )
+			// ../src/csheets/core/formula/compiler/Formula.g:90:4: arithmetic_high ( POWER ^ arithmetic_high )?
 			{
 			root_0 = (Object)adaptor.nil();
 
 
-			pushFollow(FOLLOW_arithmetic_high_in_arithmetic_medium312);
-			arithmetic_high33=arithmetic_high();
+			pushFollow(FOLLOW_arithmetic_high_in_arithmetic_medium454);
+			arithmetic_high45=arithmetic_high();
 			state._fsp--;
 
-			adaptor.addChild(root_0, arithmetic_high33.getTree());
+			adaptor.addChild(root_0, arithmetic_high45.getTree());
 
-			// ../src/csheets/core/formula/compiler/Formula.g:75:3: ( POWER ^ arithmetic_high )?
-			int alt14=2;
-			int LA14_0 = input.LA(1);
-			if ( (LA14_0==POWER) ) {
-				alt14=1;
+			// ../src/csheets/core/formula/compiler/Formula.g:91:3: ( POWER ^ arithmetic_high )?
+			int alt15=2;
+			int LA15_0 = input.LA(1);
+			if ( (LA15_0==POWER) ) {
+				alt15=1;
 			}
-			switch (alt14) {
+			switch (alt15) {
 				case 1 :
-					// ../src/csheets/core/formula/compiler/Formula.g:75:5: POWER ^ arithmetic_high
+					// ../src/csheets/core/formula/compiler/Formula.g:91:5: POWER ^ arithmetic_high
 					{
-					POWER34=(Token)match(input,POWER,FOLLOW_POWER_in_arithmetic_medium318); 
-					POWER34_tree = (Object)adaptor.create(POWER34);
-					root_0 = (Object)adaptor.becomeRoot(POWER34_tree, root_0);
+					POWER46=(Token)match(input,POWER,FOLLOW_POWER_in_arithmetic_medium460); 
+					POWER46_tree = (Object)adaptor.create(POWER46);
+					root_0 = (Object)adaptor.becomeRoot(POWER46_tree, root_0);
 
-					pushFollow(FOLLOW_arithmetic_high_in_arithmetic_medium321);
-					arithmetic_high35=arithmetic_high();
+					pushFollow(FOLLOW_arithmetic_high_in_arithmetic_medium463);
+					arithmetic_high47=arithmetic_high();
 					state._fsp--;
 
-					adaptor.addChild(root_0, arithmetic_high35.getTree());
+					adaptor.addChild(root_0, arithmetic_high47.getTree());
 
 					}
 					break;
@@ -1066,44 +1730,44 @@ public class FormulaParser extends Parser {
 
 
 	// $ANTLR start "arithmetic_high"
-	// ../src/csheets/core/formula/compiler/Formula.g:78:1: arithmetic_high : arithmetic_highest ( PERCENT ^)? ;
+	// ../src/csheets/core/formula/compiler/Formula.g:94:1: arithmetic_high : arithmetic_highest ( PERCENT ^)? ;
 	public final FormulaParser.arithmetic_high_return arithmetic_high() throws RecognitionException {
 		FormulaParser.arithmetic_high_return retval = new FormulaParser.arithmetic_high_return();
 		retval.start = input.LT(1);
 
 		Object root_0 = null;
 
-		Token PERCENT37=null;
-		ParserRuleReturnScope arithmetic_highest36 =null;
+		Token PERCENT49=null;
+		ParserRuleReturnScope arithmetic_highest48 =null;
 
-		Object PERCENT37_tree=null;
+		Object PERCENT49_tree=null;
 
 		try {
-			// ../src/csheets/core/formula/compiler/Formula.g:79:2: ( arithmetic_highest ( PERCENT ^)? )
-			// ../src/csheets/core/formula/compiler/Formula.g:79:4: arithmetic_highest ( PERCENT ^)?
+			// ../src/csheets/core/formula/compiler/Formula.g:95:2: ( arithmetic_highest ( PERCENT ^)? )
+			// ../src/csheets/core/formula/compiler/Formula.g:95:4: arithmetic_highest ( PERCENT ^)?
 			{
 			root_0 = (Object)adaptor.nil();
 
 
-			pushFollow(FOLLOW_arithmetic_highest_in_arithmetic_high335);
-			arithmetic_highest36=arithmetic_highest();
+			pushFollow(FOLLOW_arithmetic_highest_in_arithmetic_high477);
+			arithmetic_highest48=arithmetic_highest();
 			state._fsp--;
 
-			adaptor.addChild(root_0, arithmetic_highest36.getTree());
+			adaptor.addChild(root_0, arithmetic_highest48.getTree());
 
-			// ../src/csheets/core/formula/compiler/Formula.g:79:23: ( PERCENT ^)?
-			int alt15=2;
-			int LA15_0 = input.LA(1);
-			if ( (LA15_0==PERCENT) ) {
-				alt15=1;
+			// ../src/csheets/core/formula/compiler/Formula.g:95:23: ( PERCENT ^)?
+			int alt16=2;
+			int LA16_0 = input.LA(1);
+			if ( (LA16_0==PERCENT) ) {
+				alt16=1;
 			}
-			switch (alt15) {
+			switch (alt16) {
 				case 1 :
-					// ../src/csheets/core/formula/compiler/Formula.g:79:25: PERCENT ^
+					// ../src/csheets/core/formula/compiler/Formula.g:95:25: PERCENT ^
 					{
-					PERCENT37=(Token)match(input,PERCENT,FOLLOW_PERCENT_in_arithmetic_high339); 
-					PERCENT37_tree = (Object)adaptor.create(PERCENT37);
-					root_0 = (Object)adaptor.becomeRoot(PERCENT37_tree, root_0);
+					PERCENT49=(Token)match(input,PERCENT,FOLLOW_PERCENT_in_arithmetic_high481); 
+					PERCENT49_tree = (Object)adaptor.create(PERCENT49);
+					root_0 = (Object)adaptor.becomeRoot(PERCENT49_tree, root_0);
 
 					}
 					break;
@@ -1140,49 +1804,49 @@ public class FormulaParser extends Parser {
 
 
 	// $ANTLR start "arithmetic_highest"
-	// ../src/csheets/core/formula/compiler/Formula.g:82:1: arithmetic_highest : ( MINUS ^)? atom ;
+	// ../src/csheets/core/formula/compiler/Formula.g:98:1: arithmetic_highest : ( MINUS ^)? atom ;
 	public final FormulaParser.arithmetic_highest_return arithmetic_highest() throws RecognitionException {
 		FormulaParser.arithmetic_highest_return retval = new FormulaParser.arithmetic_highest_return();
 		retval.start = input.LT(1);
 
 		Object root_0 = null;
 
-		Token MINUS38=null;
-		ParserRuleReturnScope atom39 =null;
+		Token MINUS50=null;
+		ParserRuleReturnScope atom51 =null;
 
-		Object MINUS38_tree=null;
+		Object MINUS50_tree=null;
 
 		try {
-			// ../src/csheets/core/formula/compiler/Formula.g:83:2: ( ( MINUS ^)? atom )
-			// ../src/csheets/core/formula/compiler/Formula.g:83:4: ( MINUS ^)? atom
+			// ../src/csheets/core/formula/compiler/Formula.g:99:2: ( ( MINUS ^)? atom )
+			// ../src/csheets/core/formula/compiler/Formula.g:99:4: ( MINUS ^)? atom
 			{
 			root_0 = (Object)adaptor.nil();
 
 
-			// ../src/csheets/core/formula/compiler/Formula.g:83:4: ( MINUS ^)?
-			int alt16=2;
-			int LA16_0 = input.LA(1);
-			if ( (LA16_0==MINUS) ) {
-				alt16=1;
+			// ../src/csheets/core/formula/compiler/Formula.g:99:4: ( MINUS ^)?
+			int alt17=2;
+			int LA17_0 = input.LA(1);
+			if ( (LA17_0==MINUS) ) {
+				alt17=1;
 			}
-			switch (alt16) {
+			switch (alt17) {
 				case 1 :
-					// ../src/csheets/core/formula/compiler/Formula.g:83:6: MINUS ^
+					// ../src/csheets/core/formula/compiler/Formula.g:99:6: MINUS ^
 					{
-					MINUS38=(Token)match(input,MINUS,FOLLOW_MINUS_in_arithmetic_highest356); 
-					MINUS38_tree = (Object)adaptor.create(MINUS38);
-					root_0 = (Object)adaptor.becomeRoot(MINUS38_tree, root_0);
+					MINUS50=(Token)match(input,MINUS,FOLLOW_MINUS_in_arithmetic_highest498); 
+					MINUS50_tree = (Object)adaptor.create(MINUS50);
+					root_0 = (Object)adaptor.becomeRoot(MINUS50_tree, root_0);
 
 					}
 					break;
 
 			}
 
-			pushFollow(FOLLOW_atom_in_arithmetic_highest362);
-			atom39=atom();
+			pushFollow(FOLLOW_atom_in_arithmetic_highest504);
+			atom51=atom();
 			state._fsp--;
 
-			adaptor.addChild(root_0, atom39.getTree());
+			adaptor.addChild(root_0, atom51.getTree());
 
 			}
 
@@ -1214,110 +1878,129 @@ public class FormulaParser extends Parser {
 
 
 	// $ANTLR start "atom"
-	// ../src/csheets/core/formula/compiler/Formula.g:86:1: atom : ( function_call | reference | literal | LPAR ! comparison RPAR !);
+	// ../src/csheets/core/formula/compiler/Formula.g:102:1: atom : ( function_call | reference | literal | TEMPVAR | LPAR ! comparison RPAR !);
 	public final FormulaParser.atom_return atom() throws RecognitionException {
 		FormulaParser.atom_return retval = new FormulaParser.atom_return();
 		retval.start = input.LT(1);
 
 		Object root_0 = null;
 
-		Token LPAR43=null;
-		Token RPAR45=null;
-		ParserRuleReturnScope function_call40 =null;
-		ParserRuleReturnScope reference41 =null;
-		ParserRuleReturnScope literal42 =null;
-		ParserRuleReturnScope comparison44 =null;
+		Token TEMPVAR55=null;
+		Token LPAR56=null;
+		Token RPAR58=null;
+		ParserRuleReturnScope function_call52 =null;
+		ParserRuleReturnScope reference53 =null;
+		ParserRuleReturnScope literal54 =null;
+		ParserRuleReturnScope comparison57 =null;
 
-		Object LPAR43_tree=null;
-		Object RPAR45_tree=null;
+		Object TEMPVAR55_tree=null;
+		Object LPAR56_tree=null;
+		Object RPAR58_tree=null;
 
 		try {
-			// ../src/csheets/core/formula/compiler/Formula.g:87:2: ( function_call | reference | literal | LPAR ! comparison RPAR !)
-			int alt17=4;
+			// ../src/csheets/core/formula/compiler/Formula.g:103:2: ( function_call | reference | literal | TEMPVAR | LPAR ! comparison RPAR !)
+			int alt18=5;
 			switch ( input.LA(1) ) {
 			case FUNCTION:
 				{
-				alt17=1;
+				alt18=1;
 				}
 				break;
 			case CELL_REF:
 				{
-				alt17=2;
+				alt18=2;
 				}
 				break;
 			case NUMBER:
 			case STRING:
 				{
-				alt17=3;
+				alt18=3;
+				}
+				break;
+			case TEMPVAR:
+				{
+				alt18=4;
 				}
 				break;
 			case LPAR:
 				{
-				alt17=4;
+				alt18=5;
 				}
 				break;
 			default:
 				NoViableAltException nvae =
-					new NoViableAltException("", 17, 0, input);
+					new NoViableAltException("", 18, 0, input);
 				throw nvae;
 			}
-			switch (alt17) {
+			switch (alt18) {
 				case 1 :
-					// ../src/csheets/core/formula/compiler/Formula.g:87:4: function_call
+					// ../src/csheets/core/formula/compiler/Formula.g:103:4: function_call
 					{
 					root_0 = (Object)adaptor.nil();
 
 
-					pushFollow(FOLLOW_function_call_in_atom373);
-					function_call40=function_call();
+					pushFollow(FOLLOW_function_call_in_atom515);
+					function_call52=function_call();
 					state._fsp--;
 
-					adaptor.addChild(root_0, function_call40.getTree());
+					adaptor.addChild(root_0, function_call52.getTree());
 
 					}
 					break;
 				case 2 :
-					// ../src/csheets/core/formula/compiler/Formula.g:88:4: reference
+					// ../src/csheets/core/formula/compiler/Formula.g:104:4: reference
 					{
 					root_0 = (Object)adaptor.nil();
 
 
-					pushFollow(FOLLOW_reference_in_atom378);
-					reference41=reference();
+					pushFollow(FOLLOW_reference_in_atom520);
+					reference53=reference();
 					state._fsp--;
 
-					adaptor.addChild(root_0, reference41.getTree());
+					adaptor.addChild(root_0, reference53.getTree());
 
 					}
 					break;
 				case 3 :
-					// ../src/csheets/core/formula/compiler/Formula.g:89:4: literal
+					// ../src/csheets/core/formula/compiler/Formula.g:105:4: literal
 					{
 					root_0 = (Object)adaptor.nil();
 
 
-					pushFollow(FOLLOW_literal_in_atom383);
-					literal42=literal();
+					pushFollow(FOLLOW_literal_in_atom525);
+					literal54=literal();
 					state._fsp--;
 
-					adaptor.addChild(root_0, literal42.getTree());
+					adaptor.addChild(root_0, literal54.getTree());
 
 					}
 					break;
 				case 4 :
-					// ../src/csheets/core/formula/compiler/Formula.g:90:4: LPAR ! comparison RPAR !
+					// ../src/csheets/core/formula/compiler/Formula.g:106:17: TEMPVAR
 					{
 					root_0 = (Object)adaptor.nil();
 
 
-					LPAR43=(Token)match(input,LPAR,FOLLOW_LPAR_in_atom388); 
-					pushFollow(FOLLOW_comparison_in_atom391);
-					comparison44=comparison();
+					TEMPVAR55=(Token)match(input,TEMPVAR,FOLLOW_TEMPVAR_in_atom543); 
+					TEMPVAR55_tree = (Object)adaptor.create(TEMPVAR55);
+					adaptor.addChild(root_0, TEMPVAR55_tree);
+
+					}
+					break;
+				case 5 :
+					// ../src/csheets/core/formula/compiler/Formula.g:107:4: LPAR ! comparison RPAR !
+					{
+					root_0 = (Object)adaptor.nil();
+
+
+					LPAR56=(Token)match(input,LPAR,FOLLOW_LPAR_in_atom548); 
+					pushFollow(FOLLOW_comparison_in_atom551);
+					comparison57=comparison();
 					state._fsp--;
 
-					adaptor.addChild(root_0, comparison44.getTree());
+					adaptor.addChild(root_0, comparison57.getTree());
 
-					RPAR45=(Token)match(input,RPAR,FOLLOW_RPAR_in_atom393); 
+					RPAR58=(Token)match(input,RPAR,FOLLOW_RPAR_in_atom553); 
 					}
 					break;
 
@@ -1350,78 +2033,78 @@ public class FormulaParser extends Parser {
 
 
 	// $ANTLR start "function_call"
-	// ../src/csheets/core/formula/compiler/Formula.g:93:1: function_call : FUNCTION ^ LPAR ! ( comparison ( SEMI ! comparison )* )? RPAR !;
+	// ../src/csheets/core/formula/compiler/Formula.g:110:1: function_call : FUNCTION ^ LPAR ! ( comparison ( SEMI ! comparison )* )? RPAR !;
 	public final FormulaParser.function_call_return function_call() throws RecognitionException {
 		FormulaParser.function_call_return retval = new FormulaParser.function_call_return();
 		retval.start = input.LT(1);
 
 		Object root_0 = null;
 
-		Token FUNCTION46=null;
-		Token LPAR47=null;
-		Token SEMI49=null;
-		Token RPAR51=null;
-		ParserRuleReturnScope comparison48 =null;
-		ParserRuleReturnScope comparison50 =null;
+		Token FUNCTION59=null;
+		Token LPAR60=null;
+		Token SEMI62=null;
+		Token RPAR64=null;
+		ParserRuleReturnScope comparison61 =null;
+		ParserRuleReturnScope comparison63 =null;
 
-		Object FUNCTION46_tree=null;
-		Object LPAR47_tree=null;
-		Object SEMI49_tree=null;
-		Object RPAR51_tree=null;
+		Object FUNCTION59_tree=null;
+		Object LPAR60_tree=null;
+		Object SEMI62_tree=null;
+		Object RPAR64_tree=null;
 
 		try {
-			// ../src/csheets/core/formula/compiler/Formula.g:94:2: ( FUNCTION ^ LPAR ! ( comparison ( SEMI ! comparison )* )? RPAR !)
-			// ../src/csheets/core/formula/compiler/Formula.g:94:4: FUNCTION ^ LPAR ! ( comparison ( SEMI ! comparison )* )? RPAR !
+			// ../src/csheets/core/formula/compiler/Formula.g:111:2: ( FUNCTION ^ LPAR ! ( comparison ( SEMI ! comparison )* )? RPAR !)
+			// ../src/csheets/core/formula/compiler/Formula.g:111:4: FUNCTION ^ LPAR ! ( comparison ( SEMI ! comparison )* )? RPAR !
 			{
 			root_0 = (Object)adaptor.nil();
 
 
-			FUNCTION46=(Token)match(input,FUNCTION,FOLLOW_FUNCTION_in_function_call405); 
-			FUNCTION46_tree = (Object)adaptor.create(FUNCTION46);
-			root_0 = (Object)adaptor.becomeRoot(FUNCTION46_tree, root_0);
+			FUNCTION59=(Token)match(input,FUNCTION,FOLLOW_FUNCTION_in_function_call565); 
+			FUNCTION59_tree = (Object)adaptor.create(FUNCTION59);
+			root_0 = (Object)adaptor.becomeRoot(FUNCTION59_tree, root_0);
 
-			LPAR47=(Token)match(input,LPAR,FOLLOW_LPAR_in_function_call408); 
-			// ../src/csheets/core/formula/compiler/Formula.g:95:3: ( comparison ( SEMI ! comparison )* )?
-			int alt19=2;
-			int LA19_0 = input.LA(1);
-			if ( (LA19_0==CELL_REF||LA19_0==FUNCTION||LA19_0==LPAR||LA19_0==MINUS||LA19_0==NUMBER||LA19_0==STRING) ) {
-				alt19=1;
+			LPAR60=(Token)match(input,LPAR,FOLLOW_LPAR_in_function_call568); 
+			// ../src/csheets/core/formula/compiler/Formula.g:112:3: ( comparison ( SEMI ! comparison )* )?
+			int alt20=2;
+			int LA20_0 = input.LA(1);
+			if ( (LA20_0==CELL_REF||LA20_0==FUNCTION||LA20_0==LPAR||LA20_0==MINUS||LA20_0==NUMBER||(LA20_0 >= STRING && LA20_0 <= TEMPVAR)) ) {
+				alt20=1;
 			}
-			switch (alt19) {
+			switch (alt20) {
 				case 1 :
-					// ../src/csheets/core/formula/compiler/Formula.g:95:5: comparison ( SEMI ! comparison )*
+					// ../src/csheets/core/formula/compiler/Formula.g:112:5: comparison ( SEMI ! comparison )*
 					{
-					pushFollow(FOLLOW_comparison_in_function_call416);
-					comparison48=comparison();
+					pushFollow(FOLLOW_comparison_in_function_call576);
+					comparison61=comparison();
 					state._fsp--;
 
-					adaptor.addChild(root_0, comparison48.getTree());
+					adaptor.addChild(root_0, comparison61.getTree());
 
-					// ../src/csheets/core/formula/compiler/Formula.g:95:16: ( SEMI ! comparison )*
-					loop18:
+					// ../src/csheets/core/formula/compiler/Formula.g:112:16: ( SEMI ! comparison )*
+					loop19:
 					while (true) {
-						int alt18=2;
-						int LA18_0 = input.LA(1);
-						if ( (LA18_0==SEMI) ) {
-							alt18=1;
+						int alt19=2;
+						int LA19_0 = input.LA(1);
+						if ( (LA19_0==SEMI) ) {
+							alt19=1;
 						}
 
-						switch (alt18) {
+						switch (alt19) {
 						case 1 :
-							// ../src/csheets/core/formula/compiler/Formula.g:95:18: SEMI ! comparison
+							// ../src/csheets/core/formula/compiler/Formula.g:112:18: SEMI ! comparison
 							{
-							SEMI49=(Token)match(input,SEMI,FOLLOW_SEMI_in_function_call420); 
-							pushFollow(FOLLOW_comparison_in_function_call423);
-							comparison50=comparison();
+							SEMI62=(Token)match(input,SEMI,FOLLOW_SEMI_in_function_call580); 
+							pushFollow(FOLLOW_comparison_in_function_call583);
+							comparison63=comparison();
 							state._fsp--;
 
-							adaptor.addChild(root_0, comparison50.getTree());
+							adaptor.addChild(root_0, comparison63.getTree());
 
 							}
 							break;
 
 						default :
-							break loop18;
+							break loop19;
 						}
 					}
 
@@ -1430,7 +2113,7 @@ public class FormulaParser extends Parser {
 
 			}
 
-			RPAR51=(Token)match(input,RPAR,FOLLOW_RPAR_in_function_call433); 
+			RPAR64=(Token)match(input,RPAR,FOLLOW_RPAR_in_function_call593); 
 			}
 
 			retval.stop = input.LT(-1);
@@ -1461,54 +2144,54 @@ public class FormulaParser extends Parser {
 
 
 	// $ANTLR start "reference"
-	// ../src/csheets/core/formula/compiler/Formula.g:99:1: reference : CELL_REF ( ( COLON ^) CELL_REF )? ;
+	// ../src/csheets/core/formula/compiler/Formula.g:116:1: reference : CELL_REF ( ( COLON ^) CELL_REF )? ;
 	public final FormulaParser.reference_return reference() throws RecognitionException {
 		FormulaParser.reference_return retval = new FormulaParser.reference_return();
 		retval.start = input.LT(1);
 
 		Object root_0 = null;
 
-		Token CELL_REF52=null;
-		Token COLON53=null;
-		Token CELL_REF54=null;
+		Token CELL_REF65=null;
+		Token COLON66=null;
+		Token CELL_REF67=null;
 
-		Object CELL_REF52_tree=null;
-		Object COLON53_tree=null;
-		Object CELL_REF54_tree=null;
+		Object CELL_REF65_tree=null;
+		Object COLON66_tree=null;
+		Object CELL_REF67_tree=null;
 
 		try {
-			// ../src/csheets/core/formula/compiler/Formula.g:100:2: ( CELL_REF ( ( COLON ^) CELL_REF )? )
-			// ../src/csheets/core/formula/compiler/Formula.g:100:4: CELL_REF ( ( COLON ^) CELL_REF )?
+			// ../src/csheets/core/formula/compiler/Formula.g:117:2: ( CELL_REF ( ( COLON ^) CELL_REF )? )
+			// ../src/csheets/core/formula/compiler/Formula.g:117:4: CELL_REF ( ( COLON ^) CELL_REF )?
 			{
 			root_0 = (Object)adaptor.nil();
 
 
-			CELL_REF52=(Token)match(input,CELL_REF,FOLLOW_CELL_REF_in_reference445); 
-			CELL_REF52_tree = (Object)adaptor.create(CELL_REF52);
-			adaptor.addChild(root_0, CELL_REF52_tree);
+			CELL_REF65=(Token)match(input,CELL_REF,FOLLOW_CELL_REF_in_reference605); 
+			CELL_REF65_tree = (Object)adaptor.create(CELL_REF65);
+			adaptor.addChild(root_0, CELL_REF65_tree);
 
-			// ../src/csheets/core/formula/compiler/Formula.g:101:3: ( ( COLON ^) CELL_REF )?
-			int alt20=2;
-			int LA20_0 = input.LA(1);
-			if ( (LA20_0==COLON) ) {
-				alt20=1;
+			// ../src/csheets/core/formula/compiler/Formula.g:118:3: ( ( COLON ^) CELL_REF )?
+			int alt21=2;
+			int LA21_0 = input.LA(1);
+			if ( (LA21_0==COLON) ) {
+				alt21=1;
 			}
-			switch (alt20) {
+			switch (alt21) {
 				case 1 :
-					// ../src/csheets/core/formula/compiler/Formula.g:101:5: ( COLON ^) CELL_REF
+					// ../src/csheets/core/formula/compiler/Formula.g:118:5: ( COLON ^) CELL_REF
 					{
-					// ../src/csheets/core/formula/compiler/Formula.g:101:5: ( COLON ^)
-					// ../src/csheets/core/formula/compiler/Formula.g:101:7: COLON ^
+					// ../src/csheets/core/formula/compiler/Formula.g:118:5: ( COLON ^)
+					// ../src/csheets/core/formula/compiler/Formula.g:118:7: COLON ^
 					{
-					COLON53=(Token)match(input,COLON,FOLLOW_COLON_in_reference453); 
-					COLON53_tree = (Object)adaptor.create(COLON53);
-					root_0 = (Object)adaptor.becomeRoot(COLON53_tree, root_0);
+					COLON66=(Token)match(input,COLON,FOLLOW_COLON_in_reference613); 
+					COLON66_tree = (Object)adaptor.create(COLON66);
+					root_0 = (Object)adaptor.becomeRoot(COLON66_tree, root_0);
 
 					}
 
-					CELL_REF54=(Token)match(input,CELL_REF,FOLLOW_CELL_REF_in_reference458); 
-					CELL_REF54_tree = (Object)adaptor.create(CELL_REF54);
-					adaptor.addChild(root_0, CELL_REF54_tree);
+					CELL_REF67=(Token)match(input,CELL_REF,FOLLOW_CELL_REF_in_reference618); 
+					CELL_REF67_tree = (Object)adaptor.create(CELL_REF67);
+					adaptor.addChild(root_0, CELL_REF67_tree);
 
 					}
 					break;
@@ -1545,28 +2228,28 @@ public class FormulaParser extends Parser {
 
 
 	// $ANTLR start "literal"
-	// ../src/csheets/core/formula/compiler/Formula.g:104:1: literal : ( NUMBER | STRING );
+	// ../src/csheets/core/formula/compiler/Formula.g:121:1: literal : ( NUMBER | STRING );
 	public final FormulaParser.literal_return literal() throws RecognitionException {
 		FormulaParser.literal_return retval = new FormulaParser.literal_return();
 		retval.start = input.LT(1);
 
 		Object root_0 = null;
 
-		Token set55=null;
+		Token set68=null;
 
-		Object set55_tree=null;
+		Object set68_tree=null;
 
 		try {
-			// ../src/csheets/core/formula/compiler/Formula.g:105:2: ( NUMBER | STRING )
+			// ../src/csheets/core/formula/compiler/Formula.g:122:2: ( NUMBER | STRING )
 			// ../src/csheets/core/formula/compiler/Formula.g:
 			{
 			root_0 = (Object)adaptor.nil();
 
 
-			set55=input.LT(1);
+			set68=input.LT(1);
 			if ( input.LA(1)==NUMBER||input.LA(1)==STRING ) {
 				input.consume();
-				adaptor.addChild(root_0, (Object)adaptor.create(set55));
+				adaptor.addChild(root_0, (Object)adaptor.create(set68));
 				state.errorRecovery=false;
 			}
 			else {
@@ -1598,58 +2281,70 @@ public class FormulaParser extends Parser {
 
 
 
-	public static final BitSet FOLLOW_EQ_in_expression80 = new BitSet(new long[]{0x00000002024A4080L});
-	public static final BitSet FOLLOW_LBRA_in_expression84 = new BitSet(new long[]{0x0000000202484080L});
-	public static final BitSet FOLLOW_attribution_in_expression91 = new BitSet(new long[]{0x0000000140000000L});
-	public static final BitSet FOLLOW_comparison_in_expression95 = new BitSet(new long[]{0x0000000140000000L});
-	public static final BitSet FOLLOW_SEMI_in_expression99 = new BitSet(new long[]{0x0000000202484080L});
-	public static final BitSet FOLLOW_attribution_in_expression103 = new BitSet(new long[]{0x0000000140000000L});
-	public static final BitSet FOLLOW_comparison_in_expression107 = new BitSet(new long[]{0x0000000140000000L});
-	public static final BitSet FOLLOW_RBRA_in_expression113 = new BitSet(new long[]{0x0000000000000000L});
-	public static final BitSet FOLLOW_EOF_in_expression118 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_CELL_REF_in_attribution144 = new BitSet(new long[]{0x0000000000000040L});
-	public static final BitSet FOLLOW_ATT_in_attribution146 = new BitSet(new long[]{0x0000000202484080L});
-	public static final BitSet FOLLOW_attribution_in_attribution150 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_comparison_in_attribution154 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_concatenation_in_comparison173 = new BitSet(new long[]{0x0000000001319002L});
-	public static final BitSet FOLLOW_EQ_in_comparison181 = new BitSet(new long[]{0x0000000202484080L});
-	public static final BitSet FOLLOW_NEQ_in_comparison186 = new BitSet(new long[]{0x0000000202484080L});
-	public static final BitSet FOLLOW_GT_in_comparison191 = new BitSet(new long[]{0x0000000202484080L});
-	public static final BitSet FOLLOW_LT_in_comparison196 = new BitSet(new long[]{0x0000000202484080L});
-	public static final BitSet FOLLOW_LTEQ_in_comparison201 = new BitSet(new long[]{0x0000000202484080L});
-	public static final BitSet FOLLOW_GTEQ_in_comparison206 = new BitSet(new long[]{0x0000000202484080L});
-	public static final BitSet FOLLOW_concatenation_in_comparison211 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_arithmetic_lowest_in_concatenation225 = new BitSet(new long[]{0x0000000000000022L});
-	public static final BitSet FOLLOW_AMP_in_concatenation231 = new BitSet(new long[]{0x0000000202484080L});
-	public static final BitSet FOLLOW_arithmetic_lowest_in_concatenation234 = new BitSet(new long[]{0x0000000000000022L});
-	public static final BitSet FOLLOW_arithmetic_low_in_arithmetic_lowest248 = new BitSet(new long[]{0x0000000008400002L});
-	public static final BitSet FOLLOW_PLUS_in_arithmetic_lowest256 = new BitSet(new long[]{0x0000000202484080L});
-	public static final BitSet FOLLOW_MINUS_in_arithmetic_lowest261 = new BitSet(new long[]{0x0000000202484080L});
-	public static final BitSet FOLLOW_arithmetic_low_in_arithmetic_lowest266 = new BitSet(new long[]{0x0000000008400002L});
-	public static final BitSet FOLLOW_arithmetic_medium_in_arithmetic_low280 = new BitSet(new long[]{0x0000000000800802L});
-	public static final BitSet FOLLOW_MULTI_in_arithmetic_low288 = new BitSet(new long[]{0x0000000202484080L});
-	public static final BitSet FOLLOW_DIV_in_arithmetic_low293 = new BitSet(new long[]{0x0000000202484080L});
-	public static final BitSet FOLLOW_arithmetic_medium_in_arithmetic_low298 = new BitSet(new long[]{0x0000000000800802L});
-	public static final BitSet FOLLOW_arithmetic_high_in_arithmetic_medium312 = new BitSet(new long[]{0x0000000010000002L});
-	public static final BitSet FOLLOW_POWER_in_arithmetic_medium318 = new BitSet(new long[]{0x0000000202484080L});
-	public static final BitSet FOLLOW_arithmetic_high_in_arithmetic_medium321 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_arithmetic_highest_in_arithmetic_high335 = new BitSet(new long[]{0x0000000004000002L});
-	public static final BitSet FOLLOW_PERCENT_in_arithmetic_high339 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_MINUS_in_arithmetic_highest356 = new BitSet(new long[]{0x0000000202084080L});
-	public static final BitSet FOLLOW_atom_in_arithmetic_highest362 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_function_call_in_atom373 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_reference_in_atom378 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_literal_in_atom383 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_LPAR_in_atom388 = new BitSet(new long[]{0x0000000202484080L});
-	public static final BitSet FOLLOW_comparison_in_atom391 = new BitSet(new long[]{0x0000000080000000L});
-	public static final BitSet FOLLOW_RPAR_in_atom393 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_FUNCTION_in_function_call405 = new BitSet(new long[]{0x0000000000080000L});
-	public static final BitSet FOLLOW_LPAR_in_function_call408 = new BitSet(new long[]{0x0000000282484080L});
-	public static final BitSet FOLLOW_comparison_in_function_call416 = new BitSet(new long[]{0x0000000180000000L});
-	public static final BitSet FOLLOW_SEMI_in_function_call420 = new BitSet(new long[]{0x0000000202484080L});
-	public static final BitSet FOLLOW_comparison_in_function_call423 = new BitSet(new long[]{0x0000000180000000L});
-	public static final BitSet FOLLOW_RPAR_in_function_call433 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_CELL_REF_in_reference445 = new BitSet(new long[]{0x0000000000000102L});
-	public static final BitSet FOLLOW_COLON_in_reference453 = new BitSet(new long[]{0x0000000000000080L});
-	public static final BitSet FOLLOW_CELL_REF_in_reference458 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_EQ_in_expression80 = new BitSet(new long[]{0x00000006024A4080L});
+	public static final BitSet FOLLOW_sq_in_expression83 = new BitSet(new long[]{0x0000000000000000L});
+	public static final BitSet FOLLOW_EOF_in_expression85 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_attribution_in_sq111 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_comparison_in_sq115 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_sequencia_in_sq119 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_NUMBER_in_sequencia145 = new BitSet(new long[]{0x000000001CC00800L});
+	public static final BitSet FOLLOW_arithmetic_in_sequencia148 = new BitSet(new long[]{0x0000000000020000L});
+	public static final BitSet FOLLOW_block_in_sequencia153 = new BitSet(new long[]{0x000000001CC00802L});
+	public static final BitSet FOLLOW_arithmetic_in_sequencia156 = new BitSet(new long[]{0x0000000602084080L});
+	public static final BitSet FOLLOW_atom_in_sequencia159 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_LBRA_in_block219 = new BitSet(new long[]{0x00000006024A4080L});
+	public static final BitSet FOLLOW_attribution_in_block223 = new BitSet(new long[]{0x0000000140000000L});
+	public static final BitSet FOLLOW_comparison_in_block227 = new BitSet(new long[]{0x0000000140000000L});
+	public static final BitSet FOLLOW_block_in_block231 = new BitSet(new long[]{0x0000000140000000L});
+	public static final BitSet FOLLOW_SEMI_in_block235 = new BitSet(new long[]{0x00000006024A4080L});
+	public static final BitSet FOLLOW_attribution_in_block239 = new BitSet(new long[]{0x0000000140000000L});
+	public static final BitSet FOLLOW_comparison_in_block243 = new BitSet(new long[]{0x0000000140000000L});
+	public static final BitSet FOLLOW_block_in_block247 = new BitSet(new long[]{0x0000000140000000L});
+	public static final BitSet FOLLOW_RBRA_in_block252 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_set_in_attribution278 = new BitSet(new long[]{0x0000000000000040L});
+	public static final BitSet FOLLOW_ATT_in_attribution288 = new BitSet(new long[]{0x0000000602484080L});
+	public static final BitSet FOLLOW_attribution_in_attribution292 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_comparison_in_attribution296 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_concatenation_in_comparison315 = new BitSet(new long[]{0x0000000001319002L});
+	public static final BitSet FOLLOW_EQ_in_comparison323 = new BitSet(new long[]{0x0000000602484080L});
+	public static final BitSet FOLLOW_NEQ_in_comparison328 = new BitSet(new long[]{0x0000000602484080L});
+	public static final BitSet FOLLOW_GT_in_comparison333 = new BitSet(new long[]{0x0000000602484080L});
+	public static final BitSet FOLLOW_LT_in_comparison338 = new BitSet(new long[]{0x0000000602484080L});
+	public static final BitSet FOLLOW_LTEQ_in_comparison343 = new BitSet(new long[]{0x0000000602484080L});
+	public static final BitSet FOLLOW_GTEQ_in_comparison348 = new BitSet(new long[]{0x0000000602484080L});
+	public static final BitSet FOLLOW_concatenation_in_comparison353 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_arithmetic_lowest_in_concatenation367 = new BitSet(new long[]{0x0000000000000022L});
+	public static final BitSet FOLLOW_AMP_in_concatenation373 = new BitSet(new long[]{0x0000000602484080L});
+	public static final BitSet FOLLOW_arithmetic_lowest_in_concatenation376 = new BitSet(new long[]{0x0000000000000022L});
+	public static final BitSet FOLLOW_arithmetic_low_in_arithmetic_lowest390 = new BitSet(new long[]{0x0000000008400002L});
+	public static final BitSet FOLLOW_PLUS_in_arithmetic_lowest398 = new BitSet(new long[]{0x0000000602484080L});
+	public static final BitSet FOLLOW_MINUS_in_arithmetic_lowest403 = new BitSet(new long[]{0x0000000602484080L});
+	public static final BitSet FOLLOW_arithmetic_low_in_arithmetic_lowest408 = new BitSet(new long[]{0x0000000008400002L});
+	public static final BitSet FOLLOW_arithmetic_medium_in_arithmetic_low422 = new BitSet(new long[]{0x0000000000800802L});
+	public static final BitSet FOLLOW_MULTI_in_arithmetic_low430 = new BitSet(new long[]{0x0000000602484080L});
+	public static final BitSet FOLLOW_DIV_in_arithmetic_low435 = new BitSet(new long[]{0x0000000602484080L});
+	public static final BitSet FOLLOW_arithmetic_medium_in_arithmetic_low440 = new BitSet(new long[]{0x0000000000800802L});
+	public static final BitSet FOLLOW_arithmetic_high_in_arithmetic_medium454 = new BitSet(new long[]{0x0000000010000002L});
+	public static final BitSet FOLLOW_POWER_in_arithmetic_medium460 = new BitSet(new long[]{0x0000000602484080L});
+	public static final BitSet FOLLOW_arithmetic_high_in_arithmetic_medium463 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_arithmetic_highest_in_arithmetic_high477 = new BitSet(new long[]{0x0000000004000002L});
+	public static final BitSet FOLLOW_PERCENT_in_arithmetic_high481 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_MINUS_in_arithmetic_highest498 = new BitSet(new long[]{0x0000000602084080L});
+	public static final BitSet FOLLOW_atom_in_arithmetic_highest504 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_function_call_in_atom515 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_reference_in_atom520 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_literal_in_atom525 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_TEMPVAR_in_atom543 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_LPAR_in_atom548 = new BitSet(new long[]{0x0000000602484080L});
+	public static final BitSet FOLLOW_comparison_in_atom551 = new BitSet(new long[]{0x0000000080000000L});
+	public static final BitSet FOLLOW_RPAR_in_atom553 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_FUNCTION_in_function_call565 = new BitSet(new long[]{0x0000000000080000L});
+	public static final BitSet FOLLOW_LPAR_in_function_call568 = new BitSet(new long[]{0x0000000682484080L});
+	public static final BitSet FOLLOW_comparison_in_function_call576 = new BitSet(new long[]{0x0000000180000000L});
+	public static final BitSet FOLLOW_SEMI_in_function_call580 = new BitSet(new long[]{0x0000000602484080L});
+	public static final BitSet FOLLOW_comparison_in_function_call583 = new BitSet(new long[]{0x0000000180000000L});
+	public static final BitSet FOLLOW_RPAR_in_function_call593 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_CELL_REF_in_reference605 = new BitSet(new long[]{0x0000000000000102L});
+	public static final BitSet FOLLOW_COLON_in_reference613 = new BitSet(new long[]{0x0000000000000080L});
+	public static final BitSet FOLLOW_CELL_REF_in_reference618 = new BitSet(new long[]{0x0000000000000002L});
 }

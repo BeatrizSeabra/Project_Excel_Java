@@ -50,7 +50,7 @@ visuais suportados sao: botao, edit box e text box. Na janela de edicao de formu
 * De seguida seleccionar a opção "Form Editor".
 * (aqui há duas possíveis escolhas:)
 * 
-* *** 1 - CRIAR UM NOVO FORMULÁRIO***
+* *** 1 - CRIAR UM NOVO FORMULARIO***
 * Seleccionar a opção "New Form".
 * Na janela que será disponibilizada é necessário introduzir o número de linhas que é pretendido o formulário ter e carregar no botão "Apply".
 * Consoante o número de linhas seleccionadas serão disponibilizadas janelas onde é pedido escolher o tipo de cada linha através de uma "Combo Box", carregar no botão "OK".
@@ -58,7 +58,7 @@ visuais suportados sao: botao, edit box e text box. Na janela de edicao de formu
 * Será disponibilizada uma janela onde está o formulário com o número e tipo de linhas seleccionado. Deve se introduzir todos as informações pedidas, tais como, nome do botão,
 * texto na edit box e na text box. Carregando no botão "Play" o programa irá validar o formulário criado e gravar o mesmo em memória.
 * 
-* *** 2 - EDITAR UM FORMULÁRIO PREVIAMENTE CRIADO EXISTENTE EM MEMÓRIA***
+* *** 2 - EDITAR UM FORMULARIO PREVIAMENTE CRIADO EXISTENTE EM MEMORIA***
 * Caso quer aceder a um formulário já previamente criado deve seleccionar a opção "Edit".
 * É disponibilizada uma janela com o formulário já preenchido anteriormente.
 * Para editar o nome dos botões, edit box e text box deve proceder à mesmos passos descritos em cima.

@@ -9,6 +9,7 @@ import csheets.core.IllegalValueTypeException;
 import csheets.core.Value;
 import csheets.core.formula.BinaryOperator;
 import csheets.core.formula.Expression;
+import csheets.ext.temporary.TemporaryVar;
 
 /**
  * Operador de atribuicao
@@ -40,7 +41,7 @@ public class Attribution implements BinaryOperator {
                 default:
                     throw new IllegalValueTypeException(valorDireita, Value.Type.NUMERIC);
             }
-        } else {
+        } else if(leftOperand instanceof TemporaryVar){
             leftOperand = (Expression) leftOperand.evaluate();
             switch (valorDireita.getType()) {
                 case NUMERIC:
@@ -56,7 +57,7 @@ public class Attribution implements BinaryOperator {
             }
 
         }
-//        throw new IllegalValueTypeException(valorDireita, Value.Type.NUMERIC);
+        throw new IllegalValueTypeException(valorDireita, Value.Type.NUMERIC);
     }
 
     public String getIdentifier() {

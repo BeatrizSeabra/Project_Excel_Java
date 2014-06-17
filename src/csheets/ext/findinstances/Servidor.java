@@ -32,15 +32,14 @@ public class Servidor {
         InetAddress IPAddress = InetAddress.getByName("255.255.255.255");
         String sentence = "Quem está?";
         byte[] sendData = sentence.getBytes();
+        
+        // Look for every network interface to see the broadcast address
         Enumeration interfaces = NetworkInterface.getNetworkInterfaces();
-        DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 9876);
-	socket.send(sendPacket);
-        System.out.println("Broadcast enviado!");
-        /*while (interfaces.hasMoreElements()) {
+        while (interfaces.hasMoreElements()) {
             NetworkInterface networkInterface = (NetworkInterface) interfaces.nextElement();
 
             if (networkInterface.isLoopback() || !networkInterface.isUp()) {
-                continue; // Don't want to broadcast to the loopback interface
+                continue;
             }
 
             for (InterfaceAddress interfaceAddress : networkInterface.getInterfaceAddresses()) {
@@ -56,7 +55,7 @@ public class Servidor {
 	      }
                 
             }
-        }*/
+        }
         //sets a 10sec timeout for the responses
         socket.setSoTimeout(10000); 
         byte[] receiveData = new byte[1024];
