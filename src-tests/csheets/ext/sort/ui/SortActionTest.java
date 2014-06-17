@@ -147,14 +147,14 @@ public class SortActionTest {
         instance.conteudos.set(1, "b");
         instance.conteudos.set(2, "c");
         instance.conteudos.set(3, "d");
-        instance.orderContents();
+        //instance.orderContents();
         ArrayList test = new ArrayList();
         test.add("d");
         test.add("c");
         test.add("b");
         test.add("a");
         assertEquals(instance.conteudos,test);
-        instance.orderContents();
+        //instance.orderContents();
         //testar se array inicial é igual ao array teste apos fazer o collections.sort
         fail("The test case is a prototype.");
     }

@@ -18,7 +18,12 @@
 * <br/>
 * 
 * <b>S066d: Design</b><br/>
-* 
+* Criação do diagrama de sequencia na plataforma plantuml da US066.<br/>
+*
+* <img src="../../../csheets/userstories/us066/doc-files/us066_design1.png">
+* <br/>
+* <img src="../../../csheets/userstories/us066/doc-files/us066_design2.png">
+*
 * <br/>
 * <br/>
 * 
@@ -34,5 +39,18 @@
 * <b>S066f: Functional Tests</b><br/>
 * 
 * 
+* 
+* @startuml doc-files/us066_design1.png
+ User -> ServerUI : ChooseShare(ip, port)
+ ServerUI -> Server : Server(String pass, int port, Address inicio, Address fim, Spreadsheet folha)
+ Server -> TrataCliente : new(socket)
+ @enduml
+* 
+* @startuml doc-files/us066_design2.png
+ User -> ClientUI : ChooseShare(ip, port)
+ ClientUI -> Client :Client(String pass, int port, Spreadsheet folha_actual, Address addres, String ip)
+ @enduml
 */
+
+
 package csheets.userstories.us066;
