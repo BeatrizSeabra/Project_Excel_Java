@@ -17,7 +17,7 @@ public class UDPClient extends Thread {
         return instance;
     }
 
-    private int port = 2000;
+    private int port = 2001;
     private static ArrayList<String> listParticipants = new ArrayList<String>();
 
     private UDPClient() {
@@ -26,7 +26,7 @@ public class UDPClient extends Thread {
 
     public void run() {
         try {
-            DatagramSocket socket = new DatagramSocket();
+            DatagramSocket socket = new DatagramSocket(2000);
             socket.setBroadcast(true);
 
             String message = InetAddress.getLocalHost().getHostName();
