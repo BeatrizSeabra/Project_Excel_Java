@@ -20,7 +20,9 @@
  * <br/>
  * <br/>
  *
- * <b>S023a: Design</b><br/>
+ * <b>S023d: Design</b><br/>
+ * <br/>
+ * <img src="../../../csheets/userstories/us023/doc-files/us023_design1.png">
  * <br/>
  * <br/>
  *
@@ -38,6 +40,14 @@
  * @author 1110316
  */
 /*
+ @startuml doc-files/us023_design1.png
+ User -> UIController: searchAndReplace()
+ UIController -> SearchAction: actionListener()
+ SearchAction -> JDialogSearchAndReplace: create()
+ JDialogSearchAndReplace-> Search : create()
+ JDialogSearchAndReplace-> Search : searchAll()
+ Search->JDialogSearchAndReplace: updateMatch()
+ @enduml
  *
  */
 package csheets.userstories.us023;
