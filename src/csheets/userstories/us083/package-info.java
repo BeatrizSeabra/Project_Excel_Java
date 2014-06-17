@@ -17,6 +17,11 @@
  * <br/>
  * <br/>
  * 
+ * 
+ * <b>S083d: Design</b><br/>
+ * Usarei as classes já criadas para a US082, que consistiu na criação de uma extensão que permite encontrar outras instâncias do cleansheets na mesma rede local, alterando e ocasionalmente adicionando os métodos das mesmas de forma a comportar a informação requerida para esta US.
+ * <br/>
+ * <br/>
  */
 
 package csheets.userstories.us083;
