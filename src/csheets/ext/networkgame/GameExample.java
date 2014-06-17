@@ -31,7 +31,7 @@ public class GameExample extends Game{
     
     
     @Override
-    public void init() {
+    public void init(boolean isServer) {
         //set up some variables
         NetworkGameController.initJFrame("Example game");
         NetworkGameController.mainWindow.add(lbl);

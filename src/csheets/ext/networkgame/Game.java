@@ -18,8 +18,8 @@ public abstract class Game {
     
     protected String name;
     protected List<Player> players;
-    protected Server s;
-    protected InetAddress address;
+    public Server s;
+    public InetAddress address;
     
     public Game(String name, List<Player> players, Server s, InetAddress address){
         this.s = s;
@@ -28,7 +28,7 @@ public abstract class Game {
         this.address = address;
     }
     
-    public abstract void init();
+    public abstract void init(boolean isServer);
     
     public abstract void start();
     

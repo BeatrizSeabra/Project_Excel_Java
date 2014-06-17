@@ -19,14 +19,16 @@ public class GameController {
     Game game;
     List<Player> players = new ArrayList();
     Server s;
+    boolean isServer;
     InetAddress address;
     
     
-    public GameController(Game game, List<Player> players, Server s, InetAddress address) {
+    public GameController(Game game, List<Player> players, Server s, InetAddress address, boolean isServer) {
         this.game = game;
         this.s = s;
+        this.isServer = isServer;
         this.address = address;
-        this.game.init();
+        this.game.init(isServer);
         this.game.start();
     }
 

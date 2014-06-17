@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package csheets.ext.chat.ui;
 
 import csheets.ext.chat.ChatController;
@@ -12,8 +11,6 @@ import csheets.ext.chat.UDPClient;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -22,7 +19,9 @@ import javax.swing.JOptionPane;
  * @author i121228
  */
 public class UIChat extends javax.swing.JFrame {
-public ChatController controlo;
+
+    public ChatController controlo;
+
     /**
      * Creates new form UIChat
      */
@@ -30,17 +29,17 @@ public ChatController controlo;
         initComponents();
     }
 
-    public void refreshChatList(String[] IP){
+    public void refreshChatList(String[] IP) {
         jList1.removeAll();
-        DefaultListModel lm1= new DefaultListModel();
-        for(int i=0;i<IP.length;i++){
+        DefaultListModel lm1 = new DefaultListModel();
+        for (int i = 0; i < IP.length; i++) {
             lm1.addElement(IP[i]);
         }
         jList1.setModel(lm1);
         this.repaint();
         this.revalidate();
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -139,7 +138,7 @@ public ChatController controlo;
             }
         });
 
-        jButton5.setText("Provide Char");
+        jButton5.setText("Provide Chat");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -211,101 +210,100 @@ public ChatController controlo;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    if(controlo==null){
-        controlo= new ChatController(this);
-        controlo.getServidor().start();
-    }else{
-        if(controlo.getServidor().allDone==true){
-        controlo.getServidor().allDone=false;
+        if (controlo == null) {
+            controlo = new ChatController(this);
+            controlo.getServidor().start();
+        } else {
+            if (controlo.getServidor().allDone == true) {
+                controlo.getServidor().allDone = false;
+            }
         }
-    }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-     if(controlo==null){
-        JOptionPane.showMessageDialog(rootPane, "Must Activate first");
-        }else{
-        if(jTextField1.getText()==null || jTextField1.getText().isEmpty()){
-        JOptionPane.showMessageDialog(rootPane, "Must enter a valid IP address");
-    }  else{
-            try {
-                InetAddress.getByName(jTextField1.getText()); 
-                controlo.newChat(jTextField1.getText());
-            } catch (UnknownHostException ex) {
+        if (controlo == null) {
+            JOptionPane.showMessageDialog(rootPane, "Must Activate first");
+        } else {
+            if (jTextField1.getText() == null || jTextField1.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(rootPane, "Must enter a valid IP address");
+            } else {
+                try {
+                    InetAddress.getByName(jTextField1.getText());
+                    controlo.newChat(jTextField1.getText());
+                } catch (UnknownHostException ex) {
+                    JOptionPane.showMessageDialog(rootPane, "Must enter a valid IP address");
+                }
+
             }
-      
-    }
-     }
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    if(controlo!=null){
-        controlo.deactivating();
-        refreshChatList(controlo.listConnections());
-    }else{
-        JOptionPane.showMessageDialog(rootPane, "Must be activated");
-    }
+        if (controlo != null) {
+            controlo.deactivating();
+            refreshChatList(controlo.listConnections());
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Must be activated");
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-    if(controlo==null){
-        JOptionPane.showMessageDialog(rootPane, "Must Activate first");
-    }else{
-        controlo.setvisible((String)jList1.getSelectedValue());
-    }
+        if (controlo == null) {
+            JOptionPane.showMessageDialog(rootPane, "Must Activate first");
+        } else {
+            controlo.setvisible((String) jList1.getSelectedValue());
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        UDPServer.getInstance().start();
+        if (controlo == null) {
+            JOptionPane.showMessageDialog(rootPane, "Must Activate first");
+        } else {
+            UDPServer.getInstance().start();
+        }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     public class ThreadUpdateList extends Thread {
-        
+
         public void run() {
-           try {
+            while (true) {
+                updateList();
+                try {
                     Thread.sleep(5000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-            while(true) {
-                System.out.println("Updating list");
-                updateList();
             }
         }
     }
-    
+
     public void updateList() {
-        ArrayList<String> listParticipants = new ArrayList<>();
-        listParticipants = UDPClient.getInstance().getListParticipants();        
+        ArrayList<String> listParticipants = new ArrayList();
+        listParticipants = UDPClient.getInstance().getListParticipants();
         int size = listParticipants.size();
-        
-        if(size>0) {
-            jList1.removeAll();
-            DefaultListModel lm1= new DefaultListModel();
-            for(int i=0; i<size; i++) {
-                lm1.addElement(listParticipants.get(i));
-                System.out.println(listParticipants.get(i));
+
+        if (size > 0) {
+
+            for (int i = 0; i < size; i++) {
+                if (!(controlo.getConnections().contains(listParticipants.get(i)))) {
+                    controlo.getConnections().add(listParticipants.get(i));
+                }
             }
-            jList1.setModel(lm1);
-            
-            this.repaint();
-            this.revalidate();
+            refreshChatList(controlo.listConnections());
         }
-        else {
-            jList1.removeAll(); 
-        }
-        System.out.println("List updated");
     }
-    
+
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        UDPClient.getInstance().start();
-       
-        //ThreadUpdateList threadUpdateList = new ThreadUpdateList();
-        //threadUpdateList.start();
-        updateList();
+        if (controlo == null) {
+            JOptionPane.showMessageDialog(rootPane, "Must Activate first");
+        } else {
+            UDPClient.getInstance().start();
+
+            ThreadUpdateList threadUpdateList = new ThreadUpdateList();
+            threadUpdateList.start();
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     /**

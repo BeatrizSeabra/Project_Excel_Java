@@ -91,7 +91,6 @@ public class Invoke extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
-        jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -178,28 +177,15 @@ public class Invoke extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 211, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -207,9 +193,7 @@ public class Invoke extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -223,15 +207,21 @@ public class Invoke extends javax.swing.JFrame {
         jFormattedTextField1.setText(getSintaxe(jComboBox1.getSelectedItem().toString()));
         pack();
         jPanel1.setSize(jPanel2.getSize());
-        jPanel3.setSize(jPanel2.getWidth(), 0);
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
-            changeUI(lang.getFunction(jComboBox1.getSelectedItem().toString()));
+            if(lang.getFunction(jComboBox1.getSelectedItem().toString()).getParameters().length==0){
+                chooseFunction("()",jComboBox1.getSelectedItem().toString());
+            }
+            else{
+                NewWindow n=new NewWindow(jComboBox1.getSelectedItem().toString());
+                n.setVisible(true);
+                n.setLocation(500, 200);
+            }
         } catch (UnknownElementException ex) {
+            Logger.getLogger(Invoke.class.getName()).log(Level.SEVERE, null, ex);
         }
-                chooseFunction(jFormattedTextField1.getText(),jComboBox1.getSelectedItem().toString());
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -341,33 +331,7 @@ public class Invoke extends javax.swing.JFrame {
             }
         }
     }
-    
-    private void changeUI(Function f){
-        for (int i=0;i< f.getParameters().length;i++) {
-            jPanel3.add(createPanel(i,f.getParameters()[i]));
-        }
-        jPanel3.add(panelButton());
-        //for parameters:
-        //  createPanel();
-        
-    }
-    private JPanel panelButton(){
-        panel=new JPanel();
-        JButton calcular=new JButton("Calcular");
-        panel.add(calcular);
-        return panel;
-    }
-    private JPanel createPanel(int i,FunctionParameter fp){
-        panel=new JPanel();
-        label=new JLabel("Parâmetro "+i+":");
-        text=new JTextField();
-        text.setText(fp.getName());
-        
-        panel.add(label);
-        panel.add(text);
-        return panel;
-    }
-    
+   
     /**
      * @param args the command line arguments
      */
@@ -381,6 +345,5 @@ public class Invoke extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
 }
