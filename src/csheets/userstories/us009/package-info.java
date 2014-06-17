@@ -17,6 +17,10 @@
  * <br/>
  * 
  * <b>S009d: Design</b><br/>
+ * Nesta user story será pedido ao utilizador para escolher uma coluna que servira como referencia antes de executar o metodo
+ * orderContents(), so essa coluna sera ordenada, as restantes simplesmente acompanharao a coluna escolhida pelo utilizador.
+ * O restante design será como na user story anterior, como mostra o seguinte diagrama:
+ * <img src="../../../csheets/userstories/us043/doc-files/US009_design.png">
  * <br/>
  * <br/>
  * 
@@ -34,6 +38,17 @@
  * 
  * @author 1120564MarcoEsteves
  */
+/*
+@startuml doc-files/US009_design.png
+ participant "uic : UIController" as UIC
+ participant "cth : CellTransferHandler" as CTH
+ participant "c : Cell" as C
+ participant "sa : SortAction" as SA
+ UIC->CTH : getCellTransferHandler()
+ C->CTH : getSelec()
+ CTH->SA : sourceTable.getSelectedCells()
+@end
+*/
 
 
 package csheets.userstories.us009;
