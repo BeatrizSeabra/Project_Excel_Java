@@ -28,8 +28,5 @@ csheets.ext.formeditor.ExtensionFormEditor
 csheets.ext.beanshell.BeanShellExtension
 csheets.ext.button.ExtensionButton
 csheets.ext.email.ExtensionEmail
-<<<<<<< HEAD
 csheets.ext.macrotomenuitem.ExtensionMacroToMenuItem
-=======
 csheets.ext.loadextension.ExtensionLoadExtension
->>>>>>> 5ae9ab0d2dc1d0a2c19be71ed83c393d04c3cd3b
