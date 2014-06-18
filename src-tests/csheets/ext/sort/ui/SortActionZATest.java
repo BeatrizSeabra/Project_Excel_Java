@@ -89,7 +89,7 @@ public class SortActionZATest {
         int collumn = 0;
         UIController uiController = null;
         SortActionZA instance = new SortActionZA(uiController);
-        instance.sortZA(maxrows, collumn);
+        //instance.sortZA(maxrows, collumn);
         fail("The test case is a prototype.");
     }
 
