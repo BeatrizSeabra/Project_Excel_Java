@@ -1,22 +1,23 @@
 package csheets.ext.importfiles.ui;
 
 import csheets.core.Address;
-import csheets.core.Spreadsheet;
-import csheets.ui.FileChooser;
-import java.awt.event.ActionEvent;
-
 import csheets.core.Cell;
+import csheets.core.Spreadsheet;
 import csheets.core.formula.compiler.FormulaCompilationException;
+import csheets.ui.FileChooser;
 import csheets.ui.ctrl.BaseAction;
 import csheets.ui.ctrl.UIController;
+import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * An action of the simple extension that exemplifies how to interact with the
@@ -31,7 +32,7 @@ public class ImportAction extends BaseAction {
      */
     protected UIController uiController;
     private FileChooser chooser;
-
+    
         public static boolean HAS_HEADER = false;
         public static String SEPARATOR = ",";
 
@@ -61,32 +62,56 @@ public class ImportAction extends BaseAction {
      */
     public void actionPerformed(ActionEvent event) {
 
-       
-        
+        this.uiController.setImportStatus(false);
         //Filechooser to select file      
         File file = getFile();
+        this.uiController.setImportStatus(true);    
         //nova thread que importa o ficheiros
         Thread thread = new Thread(new FileImporter(file));
         //iniciar a thread
         thread.start();
+         
     }
     // classe que implementa a thread
     private class FileImporter implements Runnable{
         File file;
-        
+        Date date;
         public FileImporter(File file){
             this.file = file;
         }
         @Override
         public void run() {
             //chama o import file
-            importFile(file);
+            date = new Date(file.lastModified());
+            try {
+                importFile(file);
+            } catch (FormulaCompilationException ex) {
+                Logger.getLogger(ImportAction.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            // fica à espera da modificação no txt aberto
+            while(uiController.getImportStatus())
+            {
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(ImportAction.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                if(date.before(new Date(file.lastModified()))){
+                    try {  
+                        importFile(file);
+                    } catch (FormulaCompilationException ex) {
+                        Logger.getLogger(ImportAction.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    date = new Date(file.lastModified());
+                }
+            }
         }
         
     }
     
-    private void importFile(File file) {
+    private void importFile(File file) throws FormulaCompilationException {
         //Variables to manipulate txt file
+        clearSpreadSheet();
         FileReader fileReader = null;
         BufferedReader bufferedReader;
         String line = "";
@@ -188,6 +213,17 @@ public class ImportAction extends BaseAction {
             }
         }
     }
+    private void clearSpreadSheet() throws FormulaCompilationException{
+       int r = this.uiController.getActiveSpreadsheet().getRowCount();
+       int c = this.uiController.getActiveSpreadsheet().getColumnCount();
+       
+       for(int i=0;i<r+1;i++){
+           for(int j=0;j<c+1;j++){
+               this.uiController.getActiveSpreadsheet().getCell(i, j).setContent("");
+           }
+       }
+    }
+    
 
     /**
      * Returns the file to open.

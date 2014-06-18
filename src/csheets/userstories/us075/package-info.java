@@ -27,7 +27,9 @@
 * <br/>
 * 
 * * <b>S075c: Coding</b><br/>
-
+* see:<br/>
+* <a href="../../../csheets/ext/exporttxt/package-summary.html">csheets.ext.exporttxt</a><br/>
+* <a href="../../../csheets/ext/exporttxt/ui/package-summary.html">csheets.ext.exporttxt.ui</a><br/>
 * <br/>
 * <br/>
 * 

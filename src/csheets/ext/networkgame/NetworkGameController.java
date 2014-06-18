@@ -116,5 +116,6 @@ public class NetworkGameController {
     public static void addGames(InetAddress address){
         games.add(new GameExample("Example", players, s, address));
         games.add(new Enforcado("Enforcado", players, s, address));
+        games.add(new TicTacToe("Tic Tac Toe", players, s, address));
     }
 }
