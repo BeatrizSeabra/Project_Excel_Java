@@ -7,13 +7,12 @@ package csheets.ext.formeditor.ui;
 import csheets.ui.ctrl.BaseAction;
 import csheets.ui.ctrl.UIController;
 import java.awt.event.ActionEvent;
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author Oleg and Rui 1110506
  */
-public class FormEditorEditAction extends BaseAction{
+public class FormEditorPlayAction extends BaseAction{
     
     /** The user interface controller */
 	protected UIController uiController;
@@ -22,12 +21,12 @@ public class FormEditorEditAction extends BaseAction{
 	 * Creates a new action.
 	 * @param uiController the user interface controller
 	 */
-	public FormEditorEditAction(UIController uiController) {
+	public FormEditorPlayAction(UIController uiController) {
 		this.uiController = uiController;
 	}
 
 	protected String getName() {
-		return "Edit Forms";
+		return "Play Forms";
 	}
 
 	protected void defineProperties() {
@@ -38,15 +37,8 @@ public class FormEditorEditAction extends BaseAction{
 	 * @param event the event that was fired
 	 */
 	public void actionPerformed(ActionEvent event) {
-//                InMemoryForm mem = InMemoryForm.getInstance();
-//                
-//                if(mem.getDataList()!=null){
-//                    FormEditorWindow call = new FormEditorWindow(mem.getForm(), mem.getDataList());
-//                    call.setVisible(true);
-//                    call.setLocation(500, 200);
-//                } else {
-//                    JOptionPane.showMessageDialog(null,"No Forms");
-//                }
+            ChooseFormToPlay ChooseForm = new ChooseFormToPlay();
+            ChooseForm.run();
         }
    
 }
