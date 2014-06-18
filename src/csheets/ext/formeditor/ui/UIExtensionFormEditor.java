@@ -16,7 +16,7 @@ import javax.swing.JToolBar;
 
 /**
  *
- * @author Oleg
+ * @author Oleg and Rui 1110506
  */
 public class UIExtensionFormEditor extends UIExtension {
     

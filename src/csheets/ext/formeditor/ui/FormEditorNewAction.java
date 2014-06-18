@@ -10,39 +10,44 @@ import java.awt.event.ActionEvent;
 
 /**
  *
- * @author Oleg
+ * @author Oleg and Rui 1110506
  */
-public class FormEditorNewAction extends BaseAction{
+public class FormEditorNewAction extends BaseAction {
 
-    /** The user interface controller */
-	protected UIController uiController;
+    /**
+     * The user interface controller
+     */
+    protected UIController uiController;
 
-	/**
-	 * Creates a new action.
-	 * @param uiController the user interface controller
-	 */
-	public FormEditorNewAction(UIController uiController) {
-		this.uiController = uiController;
-	}
+    /**
+     * Creates a new action.
+     *
+     * @param uiController the user interface controller
+     */
+    public FormEditorNewAction(UIController uiController) {
+        this.uiController = uiController;
+    }
 
-	protected String getName() {
-		return "New Form";
-	}
+    protected String getName() {
+        return "New Form";
+    }
 
-	protected void defineProperties() {
-	}
+    protected void defineProperties() {
+    }
 
-	/**
-	 * An action that presents a new window, in which the user can select a function of the showned ones.
-	 * @param event the event that was fired
-	 */
-	public void actionPerformed(ActionEvent event) {                
-		FormLinesWindow linesWindow = new FormLinesWindow(this.uiController);
-                linesWindow.setVisible(true);
-                linesWindow.setLocation(500, 200);
-                linesWindow.setSize(250, 110);
-                linesWindow.setResizable(true);
-                linesWindow.setLocationRelativeTo(null);
-	}
-   
+    /**
+     * An action that presents a new window, in which the user can select a
+     * function of the showned ones.
+     *
+     * @param event the event that was fired
+     */
+    public void actionPerformed(ActionEvent event) {
+        FormLinesWindow linesWindow = new FormLinesWindow(this.uiController);
+        linesWindow.setVisible(true);
+        linesWindow.setLocation(500, 200);
+        linesWindow.setSize(250, 110);
+        linesWindow.setResizable(true);
+        linesWindow.setLocationRelativeTo(null);
+    }
+
 }

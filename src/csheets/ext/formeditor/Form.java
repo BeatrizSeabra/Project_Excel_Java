@@ -4,34 +4,65 @@
  */
 package csheets.ext.formeditor;
 
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
  *
- * @author Oleg
+ * @author Oleg & Rui 1110506
  */
 public class Form {
+
+    private String name;   
+    private  int nLines;
+    private  String[] selected;
+    private  ArrayList<String> buttonList;
+    private  ArrayList<JTextField> dataList;
     
-    public static final String NAME = "Form";
-    
-    public static int nLines;
-    
-    public static String[] selected;
-    
-    public static ArrayList<String> buttonList;
-    
-    public Form(){
-        
+    public Form(){ 
     }
-    
+   
     public Form(int nLines, String[] selected){
         this.nLines = nLines;
         this.selected = selected;
     }
+      public Form(String name,int nLines, String[] selected,ArrayList<String> buttonList,ArrayList<JTextField> dataList){
+        this.name = name;
+        this.nLines = nLines;
+        this.selected = selected;
+        this.buttonList = buttonList;
+        this.dataList = dataList;
+    }
+     public  ArrayList<JTextField> getDataList() {
+        return dataList;
+    }
+
+
+    public void setDataList(ArrayList<JTextField> aDataList) {
+        dataList = aDataList;
+    }
     
     public int getnLines(){
         return nLines;
+    }
+    
+    public String getName(){
+        return name;
+    }
+    
+     public void setName(String name){
+        this.name = name;
     }
     
     public String[] getSelected(){
@@ -45,11 +76,5 @@ public class Form {
      public void setButtonList(ArrayList<String> buttonList){
         this.buttonList = buttonList;
     }
-    
-    public void save(Form form, ArrayList<JTextField> dataList) {
-        InMemoryForm inm = InMemoryForm.getInstance();
-        inm.addForm(form);
-        inm.addDataList(dataList);
-    }
-    
+     
 }

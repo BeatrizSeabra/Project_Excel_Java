@@ -66,7 +66,7 @@ public class AtributeFormula {
         form.add(this.formula);
     }
 
-    public void addEvent(UIController uiController, String formula, String[] event) {
+    public void addCellEvent(UIController uiController, String formula, String[] event) {
         Expression compile = null;
         ExcelExpressionCompiler ec = new ExcelExpressionCompiler();
         this.formula = formula;

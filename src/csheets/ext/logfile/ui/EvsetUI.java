@@ -165,7 +165,7 @@ public class EvsetUI extends javax.swing.JFrame {
                     event[1] = "x";
                 }
 
-                a.addEvent(uiController, formula, event);
+                a.addCellEvent(uiController, formula, event);
                 uiController.setEvl(mylist);
 
             } else {
