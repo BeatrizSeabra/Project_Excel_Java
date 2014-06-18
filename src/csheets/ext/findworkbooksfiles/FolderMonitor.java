@@ -9,17 +9,12 @@ import csheets.ext.findworkbooksfiles.ui.JFrameWorkbookSearchResults;
 import java.io.File;
 import java.io.FileFilter;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Stack;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 /**
  * Class that receives the directory and the extension pattern to find workbook
  * files on the directory. The search will be done by a thread. The results will
- * be sent to a JFrame as files are found.
+ * be sent to a JFrame.
  *
  * @author Luís Abreu 1120546
  */
@@ -39,7 +34,7 @@ public class FolderMonitor {
      * @param startingDirectory
      * @param pattern
      */
-    public void FolderMonitor(final File startingDirectory, final String pattern, JFrameWorkbookSearchResults workbookSearchResults) {
+    public void FolderMonitor(final File startingDirectory, final String pattern, JFrameWorkbookSearchResults workbookSearchResults){
 
         class ParallelSearch implements Runnable {
 

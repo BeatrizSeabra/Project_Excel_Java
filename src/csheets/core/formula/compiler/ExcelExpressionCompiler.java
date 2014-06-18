@@ -35,7 +35,9 @@ import org.antlr.runtime.tree.CommonTree;
 import org.antlr.runtime.tree.Tree;
 
 import csheets.core.Cell;
+import csheets.core.CellImpl;
 import csheets.core.IllegalValueTypeException;
+import csheets.core.SpreadsheetImpl;
 import csheets.core.Value;
 import csheets.core.formula.BinaryOperation;
 import csheets.core.formula.BinaryOperator;
@@ -44,6 +46,7 @@ import csheets.core.formula.Function;
 import csheets.core.formula.FunctionCall;
 import csheets.core.formula.Literal;
 import csheets.core.formula.Reference;
+import csheets.core.formula.TemporaryVariable;
 import csheets.core.formula.UnaryOperation;
 import csheets.core.formula.lang.Attribution;
 import csheets.core.formula.lang.CellReference;
@@ -54,159 +57,176 @@ import csheets.core.formula.lang.UnknownElementException;
 
 /**
  * A compiler that generates Excel-style formulas from strings.
+ *
  * @author Einar Pehrson
  */
 public class ExcelExpressionCompiler implements ExpressionCompiler {
 
-	/** The character that signals that a cell's content is a formula ('=') */
-	public static final char FORMULA_STARTER = '=';
+    /**
+     * The character that signals that a cell's content is a formula ('=')
+     */
+    public static final char FORMULA_STARTER = '=';
 
-	/**
-	 * Creates the Excel expression compiler.
-	 */
-	public ExcelExpressionCompiler() {}
+    /**
+     * Creates the Excel expression compiler.
+     */
+    public ExcelExpressionCompiler() {
+    }
 
-	public char getStarter() {
-		return FORMULA_STARTER;
-	}
+    public char getStarter() {
+        return FORMULA_STARTER;
+    }
 
-	public Expression compile(Cell cell, String source) throws FormulaCompilationException {
-		// Creates the lexer and parser
-                ANTLRStringStream input;
-                if(source.startsWith("={") && source.contains(";")){
-                    String[] aux = source.split(";");
-                    String aux1 = aux[aux.length-1];
-                    String last = "=" + aux1.substring(0, aux1.length()-1);
-                    input = new ANTLRStringStream(last);    
-                }else{
-                    input = new ANTLRStringStream(source);  
-                }
-		// create the buffer of tokens between the lexer and parser 
-		FormulaLexer lexer=new FormulaLexer(input);
-		CommonTokenStream tokens = new CommonTokenStream(lexer);
-		
-		FormulaParser parser = new FormulaParser(tokens);
-		
-		CommonTree tree = null;	
-	
-		try {
-			// Attempts to match an expression
-			tree=(CommonTree)parser.expression().getTree();
-		} /* catch (MismatchedTokenException e){
-	        //not production-quality code, just forming a useful message
-	        String expected = e.expecting == -1 ? "<EOF>" : parser.tokenNames[e.expecting];
-	        String found = e.getUnexpectedType() == -1 ? "<EOF>" : parser.tokenNames[e.getUnexpectedType()];
+    public Expression compile(Cell cell, String source) throws FormulaCompilationException {
+        // Creates the lexer and parser
+        ANTLRStringStream input;
+        if (source.startsWith("={") && source.contains(";")) {
+            String[] aux = source.split(";");
+            String aux1 = aux[aux.length - 1];
+            String last = "=" + aux1.substring(0, aux1.length() - 1);
+            input = new ANTLRStringStream(last);
+        } else {
+            input = new ANTLRStringStream(source);
+        }
+        // create the buffer of tokens between the lexer and parser 
+        FormulaLexer lexer = new FormulaLexer(input);
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
 
-	        String message="At ("+e.line+";"+e.charPositionInLine+"): "+"Fatal mismatched token exception: expected " + expected + " but was " + found;   
-	        throw new FormulaCompilationException(message);
-	    } catch (NoViableAltException e) {
-	    	//String message="Fatal recognition exception " + e.getClass().getName()+ " : " + e;
-	    	String message=parser.getErrorMessage(e, parser.tokenNames);
-	    	String message2="At ("+e.line+";"+e.charPositionInLine+"): "+message;
-	    	throw new FormulaCompilationException(message2);
-	    } */
-		catch (RecognitionException e) {
-	    	//String message="Fatal recognition exception " + e.getClass().getName()+ " : " + e;
-	    	String message=parser.getErrorMessage(e, parser.tokenNames);
-	    	throw new FormulaCompilationException("At ("+e.line+";"+e.charPositionInLine+"): "+message);
-	    } catch (Exception e) {
-	    	String message="Other exception : " + e.getMessage();
-	    	throw new FormulaCompilationException(message);
-	    } 
-		
-		// Converts the expression and returns it
-		return convert(cell, tree);
-	}
+        FormulaParser parser = new FormulaParser(tokens);
 
-	/**
-	 * Converts the given ANTLR AST to an expression.
-	 * @param node the abstract syntax tree node to convert
-	 * @return the result of the conversion
-	 */
-	protected Expression convert(Cell cell, Tree node) throws FormulaCompilationException {
-		// System.out.println("Converting node '" + node.getText() + "' of tree '" + node.toStringTree() + "' with " + node.getNumberOfChildren() + " children.");
+        CommonTree tree = null;
+
+        try {
+            // Attempts to match an expression
+            tree = (CommonTree) parser.expression().getTree();
+        } /* catch (MismatchedTokenException e){
+         //not production-quality code, just forming a useful message
+         String expected = e.expecting == -1 ? "<EOF>" : parser.tokenNames[e.expecting];
+         String found = e.getUnexpectedType() == -1 ? "<EOF>" : parser.tokenNames[e.getUnexpectedType()];
+
+         String message="At ("+e.line+";"+e.charPositionInLine+"): "+"Fatal mismatched token exception: expected " + expected + " but was " + found;   
+         throw new FormulaCompilationException(message);
+         } catch (NoViableAltException e) {
+         //String message="Fatal recognition exception " + e.getClass().getName()+ " : " + e;
+         String message=parser.getErrorMessage(e, parser.tokenNames);
+         String message2="At ("+e.line+";"+e.charPositionInLine+"): "+message;
+         throw new FormulaCompilationException(message2);
+         } */ catch (RecognitionException e) {
+            //String message="Fatal recognition exception " + e.getClass().getName()+ " : " + e;
+            String message = parser.getErrorMessage(e, parser.tokenNames);
+            throw new FormulaCompilationException("At (" + e.line + ";" + e.charPositionInLine + "): " + message);
+        } catch (Exception e) {
+            String message = "Other exception : " + e.getMessage();
+            throw new FormulaCompilationException(message);
+        }
+
+        // Converts the expression and returns it
+        return convert(cell, tree);
+    }
+
+    /**
+     * Converts the given ANTLR AST to an expression.
+     *
+     * @param node the abstract syntax tree node to convert
+     * @return the result of the conversion
+     */
+    protected Expression convert(Cell cell, Tree node) throws FormulaCompilationException {
+        // System.out.println("Converting node '" + node.getText() + "' of tree '" + node.toStringTree() + "' with " + node.getNumberOfChildren() + " children.");
 //		if(node.getType()==FormulaLexer.SEMI){
 //                    convert(cell,node.getChild(1));
 //                }
-                if (node.getChildCount() == 0) {
-			try {
-				switch (node.getType()) {
-					case FormulaLexer.NUMBER:
-						return new Literal(Value.parseNumericValue(node.getText()));
-					case FormulaLexer.STRING:
-						return new Literal(Value.parseValue(node.getText(), Value.Type.BOOLEAN, Value.Type.DATE));
-					case FormulaLexer.CELL_REF:
-						return new CellReference(cell.getSpreadsheet(), node.getText());
+        if (node.getChildCount() == 0) {
+            try {
+                switch (node.getType()) {
+                    case FormulaLexer.NUMBER:
+                        return new Literal(Value.parseNumericValue(node.getText()));
+                    case FormulaLexer.STRING:
+                        return new Literal(Value.parseValue(node.getText(), Value.Type.BOOLEAN, Value.Type.DATE));
+                    case FormulaLexer.CELL_REF:
+                        return new CellReference(cell.getSpreadsheet(), node.getText());
+                    case FormulaLexer.VARNAME:
+                        return ((SpreadsheetImpl)cell.getSpreadsheet()).getTemporaryVariable(node.getText());
 //					case FormulaParserTokenTypes.NAME:
 						/* return cell.getSpreadsheet().getWorkbook().
-							getRange(node.getText()) (Reference)*/
-				}
-			} catch (ParseException e) {
-				throw new FormulaCompilationException(e);
-			}
-		}
+                     getRange(node.getText()) (Reference)*/
+                }
+            } catch (ParseException e) {
+                throw new FormulaCompilationException(e);
+            }
+        }
 
-		// Convert function call
-		Function function = null;
-		try {
-			function = Language.getInstance().getFunction(node.getText());
-		} catch (UnknownElementException e) {}
+        // Convert function call
+        Function function = null;
+        try {
+            function = Language.getInstance().getFunction(node.getText());
+        } catch (UnknownElementException e) {
+        }
 
-		if (function != null) {
-			List<Expression> args = new ArrayList<Expression>();
-			Tree child = node.getChild(0);
-			if (child != null) {
-				for (int nChild=0; nChild<node.getChildCount(); ++nChild) {
-					args.add(convert(cell, child));
-				}
-			}
-			Expression[] argArray = args.toArray(new Expression[args.size()]);
-			return new FunctionCall(function, argArray);
-		}
+        if (function != null) {
+            List<Expression> args = new ArrayList<Expression>();
+            Tree child = node.getChild(0);
+            if (child != null) {
+                for (int nChild = 0; nChild < node.getChildCount(); ++nChild) {
+                    args.add(convert(cell, child));
+                }
+            }
+            Expression[] argArray = args.toArray(new Expression[args.size()]);
+            return new FunctionCall(function, argArray);
+        }
 
-		if (node.getChildCount() == 1)
-			// Convert unary operation
-			return new UnaryOperation(
-				Language.getInstance().getUnaryOperator(node.getText()),
-				convert(cell, node.getChild(0))
-			);
-		else if (node.getChildCount() == 2) {
-			// Convert binary operation
-			BinaryOperator operator = Language.getInstance().getBinaryOperator(node.getText());
-			if (operator instanceof RangeReference)
-				return new ReferenceOperation(
-					(Reference)convert(cell, node.getChild(0)),
-					(RangeReference)operator,
-					(Reference)convert(cell, node.getChild(1))
-				); else if (operator instanceof Attribution) {
-                             try {
-                            //crias uma referencia para a cell
-                            CellReference cellR = new CellReference(cell.getSpreadsheet(), node.getChild(0).getText());
-                            //buscar a cell,atraves da referencia
-                            Cell cellToAttribute = cellR.getCell();
-                            //vou buscar a expressao que se encontra a direita do :=
-                            Expression exp = convert(cellToAttribute, node.getChild(1));
-                            //colocaquei na cell o resultado da expressao anterior
-                            cellToAttribute.setContent(exp.evaluate().toString());
-                            }catch (ParseException e) {
-                                throw new FormulaCompilationException(e);
-                            }
-                             catch (IllegalValueTypeException ex) {
-                                throw new FormulaCompilationException(ex);
-                            }
-			 
-                            // se o operator for o da atribuicao entao
-                   
-                            return new BinaryOperation(
-                                    (Reference) convert(cell, node.getChild(0)), operator, convert(cell, node.getChild(1)));
-                            }        
-				return new BinaryOperation(
-					convert(cell, node.getChild(0)),
-					operator,
-					convert(cell, node.getChild(1))
-				);
-		} else
-			// Shouldn't happen
-			throw new FormulaCompilationException();
-	}
+        if (node.getChildCount() == 1) // Convert unary operation
+        {
+            return new UnaryOperation(
+                    Language.getInstance().getUnaryOperator(node.getText()),
+                    convert(cell, node.getChild(0))
+            );
+        } else if (node.getChildCount() == 2) {
+            // Convert binary operation
+            BinaryOperator operator = Language.getInstance().getBinaryOperator(node.getText());
+            if (operator instanceof RangeReference) {
+                return new ReferenceOperation(
+                        (Reference) convert(cell, node.getChild(0)),
+                        (RangeReference) operator,
+                        (Reference) convert(cell, node.getChild(1))
+                );
+            } else if (operator instanceof Attribution) {
+                try {
+
+                    if (node.getChild(0).getText().matches("@[a-zA-Z0-9]+")) { //Tests if the attribution is being made to a temporary variable 
+                        Value value = convert(cell, node.getChild(1)).evaluate();
+                        TemporaryVariable temporaryVariable = new TemporaryVariable(node.getChild(0).getText(), value);
+                        for (int i = 0; i < cell.getSpreadsheet().getWorkbook().getSpreadsheetCount(); i++) { //The temporary variables have the same value in every sheet of the workbook
+                            SpreadsheetImpl auxSheet = (SpreadsheetImpl)cell.getSpreadsheet().getWorkbook().getSpreadsheet(i);
+                            auxSheet.addOrUpdateTemporaryVariable(temporaryVariable);
+                        }
+                    } else { //Attribution to a Cell Reference
+                        //crias uma referencia para a cell
+                        CellReference cellR = new CellReference(cell.getSpreadsheet(), node.getChild(0).getText());
+                        //buscar a cell,atraves da referencia
+                        Cell cellToAttribute = cellR.getCell();
+                        //vou buscar a expressao que se encontra a direita do :=
+                        Expression exp = convert(cellToAttribute, node.getChild(1));
+                        //colocaquei na cell o resultado da expressao anterior
+                        cellToAttribute.setContent(exp.evaluate().toString());
+                        // se o operator for o da atribuicao entao
+                        return new BinaryOperation((Reference) convert(cell, node.getChild(0)), operator, convert(cell, node.getChild(1)));
+                    }
+
+                } catch (ParseException e) {
+                    throw new FormulaCompilationException(e);
+                } catch (IllegalValueTypeException ex) {
+                    throw new FormulaCompilationException(ex);
+                }
+
+            }
+            return new BinaryOperation(
+                    convert(cell, node.getChild(0)),
+                    operator,
+                    convert(cell, node.getChild(1))
+            );
+        } else // Shouldn't happen
+        {
+            throw new FormulaCompilationException();
+        }
+    }
 }

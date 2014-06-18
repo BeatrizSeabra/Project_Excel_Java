@@ -8,7 +8,6 @@ package csheets.ext.chat;
 
 import csheets.ext.chat.ui.Chat;
 import csheets.ext.chat.ui.UIChat;
-import csheets.ext.connection.Connection;
 import csheets.ext.connection.Server;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -22,12 +21,14 @@ import java.util.ArrayList;
 public class ChatController {
 
     
-    
+    private ArrayList<Conversation> conversas;
     private ArrayList<String> connections;
     private ArrayList<Chat> chats;
     private Server servidor;
     private int porta=30347;
     private UIChat UI;
+    private UDPClient cliente;
+    
  /**
      * empty constructor
      */
@@ -35,6 +36,7 @@ public class ChatController {
     public ChatController() {
         chats= new ArrayList();
         connections= new ArrayList();
+        conversas= new ArrayList();
     }
     /**
      * construtor
@@ -42,12 +44,14 @@ public class ChatController {
     public ChatController(UIChat sp) {
         chats= new ArrayList();
         connections= new ArrayList();
+        conversas = new ArrayList();
         UI=sp;
         servidor= new Server(porta) {
 
             @Override
             public void handleMessage(byte[] data, InetAddress address, int port) {
                  boolean existe=false;
+                 int tipo;
                 for(String con: connections){
                     if(con.equals(address)){
                         existe=true;
@@ -57,11 +61,35 @@ public class ChatController {
                     newChat(address.getHostAddress());
                 }
                 String file_string = "";
-                for(int i = 0; i < data.length; i++)
+                for(int i = 1; i < data.length; i++)
                 {
                     file_string += (char)data[i];
                 }
-             refreshChat(address.getHostAddress(), file_string);
+                String aux="";
+                aux+=(char)data[0];
+                tipo=Integer.parseInt(aux);
+                
+            switch (tipo) {
+               case 0:  
+                        //1 é mensagem individual
+                        refreshChat(address.getHostAddress(), file_string);
+                        break;
+               case 1:  
+                        //0 é mensagem para conversa
+                        String id;
+                        id=file_string.substring(0,10);
+                        refreshConversation(address.getHostAddress(),id,file_string.substring(11));
+                        break;
+               case 2:  
+                        // Alguém criou uma conversa
+                        String[] ips=file_string.split(";");
+                        if(createConversation(ips[0])){//se falso é porque a conversa ja tinha sido adicionada
+                        for(int i=1;i<ips.length;i++){
+                            addToConversation(ips[0],ips[i]);
+                        }
+                        }
+                        break;         
+                   }    
             }
         };
     }
@@ -107,8 +135,7 @@ public class ChatController {
     public void newChat(String ip){
        if(!existe(ip)){
        connections.add(ip);
-       Chat p= new Chat(ip, this);
-       p.setVisible(true);
+       Chat p= new Chat(ip,"ind", this);
        getChats().add(p);
        UI.refreshChatList(listConnections());
        }else{
@@ -127,13 +154,14 @@ public class ChatController {
         
     }
     /**
+     * @return 
      * retorna os ips com que houve troca de mensagem
      */
     public String[] listConnections(){
-        String[] ret= new String[connections.size()];
+        String[] ret= new String[chats.size()];
         int cont=0;
-         for(String con: connections){
-            ret[cont]=con;
+         for(Chat con: chats){
+            ret[cont]=con.getIp();
             cont++; 
          }
         return ret;
@@ -204,6 +232,78 @@ public class ChatController {
         return porta;
     }
     
+    public boolean createConversation(String ID){
+        for(Conversation conv: conversas){
+            if(conv.getID().equals(ID)){
+                return false;
+            }
+        }
+        conversas.add(new Conversation(ID));
+        Chat p= new Chat(ID,"conv", this);
+        getChats().add(p);
+    return true;
+    }
     
+    public boolean addToConversation(String ID, String IP){
+        for(Conversation conv: conversas){
+            if(conv.getID().equals(ID)){
+                conv.addIP(IP);
+                return true;
+            }
+        }
+        return false;
+    }
     
+    public boolean sendConversation(String id) throws UnknownHostException{
+        String mensagem="";
+        for(Conversation conv: conversas){
+            if(conv.getID().equals(id)){
+               
+               mensagem+=2;
+               mensagem+=conv.getID()+";";
+               for(String ips: conv.getIps()){
+                   mensagem+=ips+";";
+               }
+            }
+        }
+         for(Conversation conv: conversas){
+            if(conv.getID().equals(id)){
+               for(String ips: conv.getIps()){
+                   servidor.sendData(mensagem.getBytes(Charset.forName("UTF-8")),ips,porta);
+               }
+            }
+        }
+        return false;
+    }
+    
+    public void refreshConversation(String ip,String id, String data){
+        for(Chat chat: getChats()){
+            if(chat.getIp().equals(id)){
+                chat.addMensagem(ip, data);
+                chat.setVisible(true);
+            }
+        }
+    }
+    
+    public boolean sendMessageConversation(String id, String message) throws UnknownHostException{
+        String mensagem="";
+        for(Conversation conv: conversas){
+            if(conv.getID().equals(id)){
+               
+               mensagem+=1;
+               mensagem+=conv.getID();
+               for(int i=0;i<(10-conv.getID().length());i++){
+                   mensagem+=" ";
+               }
+               mensagem+=message;
+                for(String ips: conv.getIps()){
+                   servidor.sendData(mensagem.getBytes(Charset.forName("UTF-8")),ips,porta);
+                }
+                return true;
+            }
+            
+        }
+        
+        return false;
+    }
 }

@@ -26,6 +26,7 @@ import java.util.Map;
 
 import csheets.core.Address;
 import csheets.core.Spreadsheet;
+import csheets.core.formula.TemporaryVariable;
 import csheets.ext.SpreadsheetExtension;
 
 /**

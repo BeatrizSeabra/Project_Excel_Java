@@ -17,7 +17,33 @@
  * <br/>
  * <br/>
  * 
+ * <b>S068d: Design</b><br/>
+ * Na semana passada as variaveis temporarias existiam num contexto de spreadsheet e nesta semana devem existir num contexto de workbook.</br>
+ * Face a esta alteracao, decidi manter as variaveis num ArrayList associado a uma sheet (ou as alteracoes seriam mutio significativas) mas sempre que e' alterada ou adicionada uma variavel, as outras sheets tambem sao atualizadas.<br/>
+ * Para a implementacao desta US e' necessario criar um sidebar que mostras as variaveis temporarias do workbook.<br/>
+ * E' necessario implementar um WorkbookListener que atribui as variaveis temporarias a uma folha quando ela e' criada.<br/>
+ * Cada sheet tem um arraylist de variaveis que podem ser editadas atraves de uma JDialog.<br/>
+ * A JDialog contem informacao do conteudo da variavel. Contem um botao para Editar o conteudo e um botao para Sair da JDialog.<br/>
+ * A sidebar tera' uma JList para mostrar as variaveis. Um listener sera' implementado para que, sempre que a variavel seja selecionada, a JDialog de Edicao do conteudo da variavel apareca.<br/>
+ * <br/>
+ * <br/>
+ *<img src="../../../csheets/userstories/us068/doc-files/us039_design1.png"> 
+ *<br/>
+ *<br/>
+ *
  * @author Diogo Moreira (1120339)
  */
-
+ /*
+*
+@startuml doc-files/us039_design1.png
+title Temporary Variables Editor
+User -> UIController: temporaryVariablesSideBar()
+UIController -> UIExtensionTemporaryVariables: actionListener()
+UIExtensionTemporaryVariables -> JDialogTemporaryVariablesEditor: create()
+alt Edit Variable
+JDialogTemporaryVariablesEditor -> Spreadsheet: addOrUpdateTemporaryVariable(TemporaryVariable temporaryVariable)
+end
+@enduml
+*
+*/
 package csheets.userstories.us039;

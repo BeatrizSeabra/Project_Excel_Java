@@ -1,4 +1,4 @@
-// $ANTLR 3.5.2 ../src/csheets/core/formula/compiler/Formula.g 2014-06-13 16:00:25
+// $ANTLR 3.5.2 ../src/csheets/core/formula/compiler/Formula.g 2014-06-18 15:07:14
 
 package csheets.core.formula.compiler;
 
@@ -18,7 +18,7 @@ public class FormulaParser extends Parser {
 		"COLON", "COMMA", "DIGIT", "DIV", "EQ", "EXCL", "FUNCTION", "GT", "GTEQ", 
 		"LBRA", "LETTER", "LPAR", "LT", "LTEQ", "MINUS", "MULTI", "NEQ", "NUMBER", 
 		"PERCENT", "PLUS", "POWER", "QUOT", "RBRA", "RPAR", "SEMI", "STRING", 
-		"TEMPVAR", "VARSIMBLE", "WS"
+		"VARNAME", "WS"
 	};
 	public static final int EOF=-1;
 	public static final int ABS=4;
@@ -51,9 +51,8 @@ public class FormulaParser extends Parser {
 	public static final int RPAR=31;
 	public static final int SEMI=32;
 	public static final int STRING=33;
-	public static final int TEMPVAR=34;
-	public static final int VARSIMBLE=35;
-	public static final int WS=36;
+	public static final int VARNAME=34;
+	public static final int WS=35;
 
 	// delegates
 	public Parser[] getDelegates() {
@@ -215,7 +214,7 @@ public class FormulaParser extends Parser {
 				alt1=2;
 				}
 				break;
-			case TEMPVAR:
+			case VARNAME:
 				{
 				int LA1_3 = input.LA(2);
 				if ( (LA1_3==ATT) ) {
@@ -271,7 +270,7 @@ public class FormulaParser extends Parser {
 				case POWER:
 					{
 					int LA1_8 = input.LA(3);
-					if ( (LA1_8==CELL_REF||LA1_8==FUNCTION||LA1_8==LPAR||LA1_8==MINUS||LA1_8==NUMBER||(LA1_8 >= STRING && LA1_8 <= TEMPVAR)) ) {
+					if ( (LA1_8==CELL_REF||LA1_8==FUNCTION||LA1_8==LPAR||LA1_8==MINUS||LA1_8==NUMBER||(LA1_8 >= STRING && LA1_8 <= VARNAME)) ) {
 						alt1=2;
 					}
 					else if ( (LA1_8==LBRA) ) {
@@ -297,7 +296,7 @@ public class FormulaParser extends Parser {
 				case MULTI:
 					{
 					int LA1_9 = input.LA(3);
-					if ( (LA1_9==CELL_REF||LA1_9==FUNCTION||LA1_9==LPAR||LA1_9==MINUS||LA1_9==NUMBER||(LA1_9 >= STRING && LA1_9 <= TEMPVAR)) ) {
+					if ( (LA1_9==CELL_REF||LA1_9==FUNCTION||LA1_9==LPAR||LA1_9==MINUS||LA1_9==NUMBER||(LA1_9 >= STRING && LA1_9 <= VARNAME)) ) {
 						alt1=2;
 					}
 					else if ( (LA1_9==LBRA) ) {
@@ -323,7 +322,7 @@ public class FormulaParser extends Parser {
 				case DIV:
 					{
 					int LA1_10 = input.LA(3);
-					if ( (LA1_10==CELL_REF||LA1_10==FUNCTION||LA1_10==LPAR||LA1_10==MINUS||LA1_10==NUMBER||(LA1_10 >= STRING && LA1_10 <= TEMPVAR)) ) {
+					if ( (LA1_10==CELL_REF||LA1_10==FUNCTION||LA1_10==LPAR||LA1_10==MINUS||LA1_10==NUMBER||(LA1_10 >= STRING && LA1_10 <= VARNAME)) ) {
 						alt1=2;
 					}
 					else if ( (LA1_10==LBRA) ) {
@@ -349,7 +348,7 @@ public class FormulaParser extends Parser {
 				case PLUS:
 					{
 					int LA1_11 = input.LA(3);
-					if ( (LA1_11==CELL_REF||LA1_11==FUNCTION||LA1_11==LPAR||LA1_11==MINUS||LA1_11==NUMBER||(LA1_11 >= STRING && LA1_11 <= TEMPVAR)) ) {
+					if ( (LA1_11==CELL_REF||LA1_11==FUNCTION||LA1_11==LPAR||LA1_11==MINUS||LA1_11==NUMBER||(LA1_11 >= STRING && LA1_11 <= VARNAME)) ) {
 						alt1=2;
 					}
 					else if ( (LA1_11==LBRA) ) {
@@ -375,7 +374,7 @@ public class FormulaParser extends Parser {
 				case MINUS:
 					{
 					int LA1_12 = input.LA(3);
-					if ( (LA1_12==CELL_REF||LA1_12==FUNCTION||LA1_12==LPAR||LA1_12==MINUS||LA1_12==NUMBER||(LA1_12 >= STRING && LA1_12 <= TEMPVAR)) ) {
+					if ( (LA1_12==CELL_REF||LA1_12==FUNCTION||LA1_12==LPAR||LA1_12==MINUS||LA1_12==NUMBER||(LA1_12 >= STRING && LA1_12 <= VARNAME)) ) {
 						alt1=2;
 					}
 					else if ( (LA1_12==LBRA) ) {
@@ -742,7 +741,7 @@ public class FormulaParser extends Parser {
 				alt4=2;
 				}
 				break;
-			case TEMPVAR:
+			case VARNAME:
 				{
 				int LA4_3 = input.LA(2);
 				if ( (LA4_3==ATT) ) {
@@ -866,7 +865,7 @@ public class FormulaParser extends Parser {
 						alt5=2;
 						}
 						break;
-					case TEMPVAR:
+					case VARNAME:
 						{
 						int LA5_3 = input.LA(2);
 						if ( (LA5_3==ATT) ) {
@@ -976,7 +975,7 @@ public class FormulaParser extends Parser {
 
 
 	// $ANTLR start "attribution"
-	// ../src/csheets/core/formula/compiler/Formula.g:65:1: attribution : ( CELL_REF | TEMPVAR ) ATT ^ ( attribution | comparison ) ;
+	// ../src/csheets/core/formula/compiler/Formula.g:65:1: attribution : ( VARNAME | CELL_REF ) ATT ^ ( attribution | comparison ) ;
 	public final FormulaParser.attribution_return attribution() throws RecognitionException {
 		FormulaParser.attribution_return retval = new FormulaParser.attribution_return();
 		retval.start = input.LT(1);
@@ -992,14 +991,14 @@ public class FormulaParser extends Parser {
 		Object ATT23_tree=null;
 
 		try {
-			// ../src/csheets/core/formula/compiler/Formula.g:66:9: ( ( CELL_REF | TEMPVAR ) ATT ^ ( attribution | comparison ) )
-			// ../src/csheets/core/formula/compiler/Formula.g:66:11: ( CELL_REF | TEMPVAR ) ATT ^ ( attribution | comparison )
+			// ../src/csheets/core/formula/compiler/Formula.g:66:9: ( ( VARNAME | CELL_REF ) ATT ^ ( attribution | comparison ) )
+			// ../src/csheets/core/formula/compiler/Formula.g:66:11: ( VARNAME | CELL_REF ) ATT ^ ( attribution | comparison )
 			{
 			root_0 = (Object)adaptor.nil();
 
 
 			set22=input.LT(1);
-			if ( input.LA(1)==CELL_REF||input.LA(1)==TEMPVAR ) {
+			if ( input.LA(1)==CELL_REF||input.LA(1)==VARNAME ) {
 				input.consume();
 				adaptor.addChild(root_0, (Object)adaptor.create(set22));
 				state.errorRecovery=false;
@@ -1048,7 +1047,7 @@ public class FormulaParser extends Parser {
 				alt7=2;
 				}
 				break;
-			case TEMPVAR:
+			case VARNAME:
 				{
 				int LA7_3 = input.LA(2);
 				if ( (LA7_3==ATT) ) {
@@ -1878,14 +1877,14 @@ public class FormulaParser extends Parser {
 
 
 	// $ANTLR start "atom"
-	// ../src/csheets/core/formula/compiler/Formula.g:102:1: atom : ( function_call | reference | literal | TEMPVAR | LPAR ! comparison RPAR !);
+	// ../src/csheets/core/formula/compiler/Formula.g:102:1: atom : ( function_call | reference | literal | VARNAME | LPAR ! comparison RPAR !);
 	public final FormulaParser.atom_return atom() throws RecognitionException {
 		FormulaParser.atom_return retval = new FormulaParser.atom_return();
 		retval.start = input.LT(1);
 
 		Object root_0 = null;
 
-		Token TEMPVAR55=null;
+		Token VARNAME55=null;
 		Token LPAR56=null;
 		Token RPAR58=null;
 		ParserRuleReturnScope function_call52 =null;
@@ -1893,12 +1892,12 @@ public class FormulaParser extends Parser {
 		ParserRuleReturnScope literal54 =null;
 		ParserRuleReturnScope comparison57 =null;
 
-		Object TEMPVAR55_tree=null;
+		Object VARNAME55_tree=null;
 		Object LPAR56_tree=null;
 		Object RPAR58_tree=null;
 
 		try {
-			// ../src/csheets/core/formula/compiler/Formula.g:103:2: ( function_call | reference | literal | TEMPVAR | LPAR ! comparison RPAR !)
+			// ../src/csheets/core/formula/compiler/Formula.g:103:2: ( function_call | reference | literal | VARNAME | LPAR ! comparison RPAR !)
 			int alt18=5;
 			switch ( input.LA(1) ) {
 			case FUNCTION:
@@ -1917,7 +1916,7 @@ public class FormulaParser extends Parser {
 				alt18=3;
 				}
 				break;
-			case TEMPVAR:
+			case VARNAME:
 				{
 				alt18=4;
 				}
@@ -1976,14 +1975,14 @@ public class FormulaParser extends Parser {
 					}
 					break;
 				case 4 :
-					// ../src/csheets/core/formula/compiler/Formula.g:106:17: TEMPVAR
+					// ../src/csheets/core/formula/compiler/Formula.g:106:4: VARNAME
 					{
 					root_0 = (Object)adaptor.nil();
 
 
-					TEMPVAR55=(Token)match(input,TEMPVAR,FOLLOW_TEMPVAR_in_atom543); 
-					TEMPVAR55_tree = (Object)adaptor.create(TEMPVAR55);
-					adaptor.addChild(root_0, TEMPVAR55_tree);
+					VARNAME55=(Token)match(input,VARNAME,FOLLOW_VARNAME_in_atom530); 
+					VARNAME55_tree = (Object)adaptor.create(VARNAME55);
+					adaptor.addChild(root_0, VARNAME55_tree);
 
 					}
 					break;
@@ -1993,14 +1992,14 @@ public class FormulaParser extends Parser {
 					root_0 = (Object)adaptor.nil();
 
 
-					LPAR56=(Token)match(input,LPAR,FOLLOW_LPAR_in_atom548); 
-					pushFollow(FOLLOW_comparison_in_atom551);
+					LPAR56=(Token)match(input,LPAR,FOLLOW_LPAR_in_atom535); 
+					pushFollow(FOLLOW_comparison_in_atom538);
 					comparison57=comparison();
 					state._fsp--;
 
 					adaptor.addChild(root_0, comparison57.getTree());
 
-					RPAR58=(Token)match(input,RPAR,FOLLOW_RPAR_in_atom553); 
+					RPAR58=(Token)match(input,RPAR,FOLLOW_RPAR_in_atom540); 
 					}
 					break;
 
@@ -2059,22 +2058,22 @@ public class FormulaParser extends Parser {
 			root_0 = (Object)adaptor.nil();
 
 
-			FUNCTION59=(Token)match(input,FUNCTION,FOLLOW_FUNCTION_in_function_call565); 
+			FUNCTION59=(Token)match(input,FUNCTION,FOLLOW_FUNCTION_in_function_call552); 
 			FUNCTION59_tree = (Object)adaptor.create(FUNCTION59);
 			root_0 = (Object)adaptor.becomeRoot(FUNCTION59_tree, root_0);
 
-			LPAR60=(Token)match(input,LPAR,FOLLOW_LPAR_in_function_call568); 
+			LPAR60=(Token)match(input,LPAR,FOLLOW_LPAR_in_function_call555); 
 			// ../src/csheets/core/formula/compiler/Formula.g:112:3: ( comparison ( SEMI ! comparison )* )?
 			int alt20=2;
 			int LA20_0 = input.LA(1);
-			if ( (LA20_0==CELL_REF||LA20_0==FUNCTION||LA20_0==LPAR||LA20_0==MINUS||LA20_0==NUMBER||(LA20_0 >= STRING && LA20_0 <= TEMPVAR)) ) {
+			if ( (LA20_0==CELL_REF||LA20_0==FUNCTION||LA20_0==LPAR||LA20_0==MINUS||LA20_0==NUMBER||(LA20_0 >= STRING && LA20_0 <= VARNAME)) ) {
 				alt20=1;
 			}
 			switch (alt20) {
 				case 1 :
 					// ../src/csheets/core/formula/compiler/Formula.g:112:5: comparison ( SEMI ! comparison )*
 					{
-					pushFollow(FOLLOW_comparison_in_function_call576);
+					pushFollow(FOLLOW_comparison_in_function_call563);
 					comparison61=comparison();
 					state._fsp--;
 
@@ -2093,8 +2092,8 @@ public class FormulaParser extends Parser {
 						case 1 :
 							// ../src/csheets/core/formula/compiler/Formula.g:112:18: SEMI ! comparison
 							{
-							SEMI62=(Token)match(input,SEMI,FOLLOW_SEMI_in_function_call580); 
-							pushFollow(FOLLOW_comparison_in_function_call583);
+							SEMI62=(Token)match(input,SEMI,FOLLOW_SEMI_in_function_call567); 
+							pushFollow(FOLLOW_comparison_in_function_call570);
 							comparison63=comparison();
 							state._fsp--;
 
@@ -2113,7 +2112,7 @@ public class FormulaParser extends Parser {
 
 			}
 
-			RPAR64=(Token)match(input,RPAR,FOLLOW_RPAR_in_function_call593); 
+			RPAR64=(Token)match(input,RPAR,FOLLOW_RPAR_in_function_call580); 
 			}
 
 			retval.stop = input.LT(-1);
@@ -2166,7 +2165,7 @@ public class FormulaParser extends Parser {
 			root_0 = (Object)adaptor.nil();
 
 
-			CELL_REF65=(Token)match(input,CELL_REF,FOLLOW_CELL_REF_in_reference605); 
+			CELL_REF65=(Token)match(input,CELL_REF,FOLLOW_CELL_REF_in_reference592); 
 			CELL_REF65_tree = (Object)adaptor.create(CELL_REF65);
 			adaptor.addChild(root_0, CELL_REF65_tree);
 
@@ -2183,13 +2182,13 @@ public class FormulaParser extends Parser {
 					// ../src/csheets/core/formula/compiler/Formula.g:118:5: ( COLON ^)
 					// ../src/csheets/core/formula/compiler/Formula.g:118:7: COLON ^
 					{
-					COLON66=(Token)match(input,COLON,FOLLOW_COLON_in_reference613); 
+					COLON66=(Token)match(input,COLON,FOLLOW_COLON_in_reference600); 
 					COLON66_tree = (Object)adaptor.create(COLON66);
 					root_0 = (Object)adaptor.becomeRoot(COLON66_tree, root_0);
 
 					}
 
-					CELL_REF67=(Token)match(input,CELL_REF,FOLLOW_CELL_REF_in_reference618); 
+					CELL_REF67=(Token)match(input,CELL_REF,FOLLOW_CELL_REF_in_reference605); 
 					CELL_REF67_tree = (Object)adaptor.create(CELL_REF67);
 					adaptor.addChild(root_0, CELL_REF67_tree);
 
@@ -2334,17 +2333,17 @@ public class FormulaParser extends Parser {
 	public static final BitSet FOLLOW_function_call_in_atom515 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_reference_in_atom520 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_literal_in_atom525 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_TEMPVAR_in_atom543 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_LPAR_in_atom548 = new BitSet(new long[]{0x0000000602484080L});
-	public static final BitSet FOLLOW_comparison_in_atom551 = new BitSet(new long[]{0x0000000080000000L});
-	public static final BitSet FOLLOW_RPAR_in_atom553 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_FUNCTION_in_function_call565 = new BitSet(new long[]{0x0000000000080000L});
-	public static final BitSet FOLLOW_LPAR_in_function_call568 = new BitSet(new long[]{0x0000000682484080L});
-	public static final BitSet FOLLOW_comparison_in_function_call576 = new BitSet(new long[]{0x0000000180000000L});
-	public static final BitSet FOLLOW_SEMI_in_function_call580 = new BitSet(new long[]{0x0000000602484080L});
-	public static final BitSet FOLLOW_comparison_in_function_call583 = new BitSet(new long[]{0x0000000180000000L});
-	public static final BitSet FOLLOW_RPAR_in_function_call593 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_CELL_REF_in_reference605 = new BitSet(new long[]{0x0000000000000102L});
-	public static final BitSet FOLLOW_COLON_in_reference613 = new BitSet(new long[]{0x0000000000000080L});
-	public static final BitSet FOLLOW_CELL_REF_in_reference618 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_VARNAME_in_atom530 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_LPAR_in_atom535 = new BitSet(new long[]{0x0000000602484080L});
+	public static final BitSet FOLLOW_comparison_in_atom538 = new BitSet(new long[]{0x0000000080000000L});
+	public static final BitSet FOLLOW_RPAR_in_atom540 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_FUNCTION_in_function_call552 = new BitSet(new long[]{0x0000000000080000L});
+	public static final BitSet FOLLOW_LPAR_in_function_call555 = new BitSet(new long[]{0x0000000682484080L});
+	public static final BitSet FOLLOW_comparison_in_function_call563 = new BitSet(new long[]{0x0000000180000000L});
+	public static final BitSet FOLLOW_SEMI_in_function_call567 = new BitSet(new long[]{0x0000000602484080L});
+	public static final BitSet FOLLOW_comparison_in_function_call570 = new BitSet(new long[]{0x0000000180000000L});
+	public static final BitSet FOLLOW_RPAR_in_function_call580 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_CELL_REF_in_reference592 = new BitSet(new long[]{0x0000000000000102L});
+	public static final BitSet FOLLOW_COLON_in_reference600 = new BitSet(new long[]{0x0000000000000080L});
+	public static final BitSet FOLLOW_CELL_REF_in_reference605 = new BitSet(new long[]{0x0000000000000002L});
 }
