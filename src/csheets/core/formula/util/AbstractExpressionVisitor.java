@@ -25,42 +25,51 @@ import csheets.core.formula.Expression;
 import csheets.core.formula.FunctionCall;
 import csheets.core.formula.Literal;
 import csheets.core.formula.Reference;
+import csheets.core.formula.TemporaryVariable;
 import csheets.core.formula.UnaryOperation;
 
 /**
- * A default implementation of an expression visitor, that simply visits all
- * the nodes in the tree. All methods return the expression that was visited.
+ * A default implementation of an expression visitor, that simply visits all the
+ * nodes in the tree. All methods return the expression that was visited.
+ *
  * @author Einar Pehrson
  */
 public abstract class AbstractExpressionVisitor implements ExpressionVisitor {
 
-	/**
-	 * Creates a new expression visitor.
-	 */
-	public AbstractExpressionVisitor() {}
+    /**
+     * Creates a new expression visitor.
+     */
+    public AbstractExpressionVisitor() {
+    }
 
-	public Object visitLiteral(Literal literal) {
-		return literal;
-	}
+    public Object visitLiteral(Literal literal) {
+        return literal;
+    }
 
-	public Object visitUnaryOperation(UnaryOperation operation) {
-		operation.getOperand().accept(this);
-		return operation;
-	}
+    public Object visitUnaryOperation(UnaryOperation operation) {
+        operation.getOperand().accept(this);
+        return operation;
+    }
 
-	public Object visitBinaryOperation(BinaryOperation operation) {
-		operation.getLeftOperand().accept(this);
-		operation.getRightOperand().accept(this);
-		return operation;
-	}
+    public Object visitBinaryOperation(BinaryOperation operation) {
+        operation.getLeftOperand().accept(this);
+        operation.getRightOperand().accept(this);
+        return operation;
+    }
 
-	public Object visitReference(Reference reference) {
-		return reference;
-	}
+    public Object visitReference(Reference reference) {
+        return reference;
+    }
 
-	public Object visitFunctionCall(FunctionCall call) {
-		for (Expression argument : call.getArguments())
-			argument.accept(this);
-		return call;
-	}
+    public Object visitFunctionCall(FunctionCall call) {
+        for (Expression argument : call.getArguments()) {
+            argument.accept(this);
+        }
+        return call;
+    }
+
+    public Object visitTemporaryVariable(TemporaryVariable variable) {
+        return variable;
+    }
+
 }

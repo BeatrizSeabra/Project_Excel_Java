@@ -20,6 +20,7 @@
  */
 package csheets.core;
 
+import csheets.core.formula.TemporaryVariable;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -38,283 +39,367 @@ import csheets.ext.SpreadsheetExtension;
 
 /**
  * The implementation of the <code>Spreadsheet</code> interface.
+ *
  * @author Einar Pehrson
  */
 public class SpreadsheetImpl implements Spreadsheet {
 
-	/** The unique version identifier used for serialization */
-	private static final long serialVersionUID = 7010464744129096272L;
+    /**
+     * The unique version identifier used for serialization
+     */
+    private static final long serialVersionUID = 7010464744129096272L;
 
-	/** The base of the titles of new spreadsheets */
-	public static final String BASE_TITLE = "Sheet ";
+    /**
+     * The base of the titles of new spreadsheets
+     */
+    public static final String BASE_TITLE = "Sheet ";
 
-	/** The workbook to which the spreadsheet belongs */
-	private Workbook workbook;
+    /**
+     * The workbook to which the spreadsheet belongs
+     */
+    private Workbook workbook;
 
-	/** The cells that have been instantiated */
-	private Map<Address, Cell> cells = new HashMap<Address, Cell>();
+    /**
+     * The cells that have been instantiated
+     */
+    private Map<Address, Cell> cells = new HashMap<Address, Cell>();
 
-	/** The title of the spreadsheet */
-	private String title;
+    /**
+     * The title of the spreadsheet
+     */
+    private String title;
 
-	/** The number of columns in the spreadsheet */
-	private int columns = 0;
+    /**
+     * The number of columns in the spreadsheet
+     */
+    private int columns = 0;
 
-	/** The number of rows in the spreadsheet */
-	private int rows = 0;
+    /**
+     * The number of rows in the spreadsheet
+     */
+    private int rows = 0;
 
-	/** The cell listeners that have been registered on the cell */
-	private transient List<CellListener> cellListeners
-		= new ArrayList<CellListener>();
+    /**
+     * The cell listeners that have been registered on the cell
+     */
+    private transient List<CellListener> cellListeners
+            = new ArrayList<CellListener>();
 
-	/** The cell listener that forwards events from all cells */
-	private transient CellListener eventForwarder = new EventForwarder();
+    /**
+     * The cell listener that forwards events from all cells
+     */
+    private transient CellListener eventForwarder = new EventForwarder();
 
-	/** The spreadsheet extensions that have been instantiated */
-	private transient Map<String, SpreadsheetExtension> extensions = 
-		new HashMap<String, SpreadsheetExtension>();
+    /**
+     * The spreadsheet extensions that have been instantiated
+     */
+    private transient Map<String, SpreadsheetExtension> extensions
+            = new HashMap<String, SpreadsheetExtension>();
 
-	/**
-	 * Creates a new spreadsheet.
-	 * @param workbook the workbook to which the spreadsheet belongs
-	 * @param title the title of the spreadsheet
-	 */
-	SpreadsheetImpl(Workbook workbook, String title) {
-		this.workbook = workbook;
-		this.title = title;
-	}
+    /**
+     * The spreadsheet temporary variables list
+     */
+    private ArrayList<TemporaryVariable> temporaryVariableList = new ArrayList<TemporaryVariable>();
 
-	/**
-	 * Creates a new spreadsheet, in which cells are initialized with data from
-	 * the given content matrix.
-	 * @param workbook the workbook to which the spreadsheet belongs
-	 * @param title the title of the spreadsheet
-	 * @param content the contents of the cells in the spreadsheet
-	 */
-	SpreadsheetImpl(Workbook workbook, String title, String[][] content) {
-		this(workbook, title);
-		rows = content.length;
-		for (int row = 0; row < content.length; row++) {
-			int columns = content[row].length;
-			if (this.columns < columns)
-				this.columns = columns;
-			for (int column = 0; column < columns; column++) {
-				try {
-					Address address = new Address(column, row);
-					Cell cell = new CellImpl(this, address, content[row][column]);
-					cell.addCellListener(eventForwarder);
-					cells.put(address, cell);
-				} catch (FormulaCompilationException e) {}
-			}
-		}
-	}
+    /**
+     * Creates a new spreadsheet.
+     *
+     * @param workbook the workbook to which the spreadsheet belongs
+     * @param title the title of the spreadsheet
+     */
+    SpreadsheetImpl(Workbook workbook, String title) {
+        this.workbook = workbook;
+        this.title = title;
+    }
 
-/*
- * LOCATION
- */
+    /**
+     * Creates a new spreadsheet, in which cells are initialized with data from
+     * the given content matrix.
+     *
+     * @param workbook the workbook to which the spreadsheet belongs
+     * @param title the title of the spreadsheet
+     * @param content the contents of the cells in the spreadsheet
+     */
+    SpreadsheetImpl(Workbook workbook, String title, String[][] content) {
+        this(workbook, title);
+        rows = content.length;
+        for (int row = 0; row < content.length; row++) {
+            int columns = content[row].length;
+            if (this.columns < columns) {
+                this.columns = columns;
+            }
+            for (int column = 0; column < columns; column++) {
+                try {
+                    Address address = new Address(column, row);
+                    Cell cell = new CellImpl(this, address, content[row][column]);
+                    cell.addCellListener(eventForwarder);
+                    cells.put(address, cell);
+                } catch (FormulaCompilationException e) {
+                }
+            }
+        }
+    }
 
-	public Workbook getWorkbook() {
-		return workbook;
-	}
+    /*
+     * LOCATION
+     */
+    public Workbook getWorkbook() {
+        return workbook;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-		// fireTitleChanged();
-	}
+    public void setTitle(String title) {
+        this.title = title;
+        // fireTitleChanged();
+    }
 
-/*
- * DIMENSIONS
- */
+    /*
+     * DIMENSIONS
+     */
+    public int getColumnCount() {
+        return columns;
+    }
 
-	public int getColumnCount() {
-		return columns;
-	}
+    public int getRowCount() {
+        return rows;
+    }
 
-	public int getRowCount() {
-		return rows;
-	}
+    /*
+     * CELLS
+     */
+    public Cell getCell(Address address) {
+        // Updates spreadsheet dimensions
+        if (address.getRow() > rows) {
+            rows = address.getRow();
+        }
+        if (address.getColumn() > columns) {
+            columns = address.getColumn();
+        }
 
-/*
- * CELLS
- */
+        // Looks for a previously used cell with this address
+        Cell cell = cells.get(address);
 
-	public Cell getCell(Address address) {
-		// Updates spreadsheet dimensions
-		if (address.getRow() > rows)
-			rows = address.getRow();
-		if (address.getColumn() > columns)
-			columns = address.getColumn();
+        // If the cell has never been requested, create a new one
+        if (cell == null) {
+            cell = new CellImpl(this, address);
+            cell.addCellListener(eventForwarder);
+            cells.put(address, cell);
+        }
+        return cell;
+    }
 
-		// Looks for a previously used cell with this address
-		Cell cell = cells.get(address);
+    public Cell getCell(int column, int row) {
+        return getCell(new Address(column, row));
+    }
 
-		// If the cell has never been requested, create a new one
-		if (cell == null) {
-			cell = new CellImpl(this, address);
-			cell.addCellListener(eventForwarder);
-			cells.put(address, cell);
-		}
-		return cell;
-	}
+    public SortedSet<Cell> getCells(Address address1, Address address2) {
+        // Sorts addresses
+        if (address1.compareTo(address2) > 0) {
+            Address tempAddress = address1;
+            address1 = address2;
+            address2 = tempAddress;
+        }
 
-	public Cell getCell(int column, int row) {
-		return getCell(new Address(column, row));
-	}
+        // Builds the set
+        SortedSet<Cell> cells = new TreeSet<Cell>();
+        for (int column = address1.getColumn(); column <= address2.getColumn(); column++) {
+            for (int row = address1.getRow(); row <= address2.getRow(); row++) {
+                cells.add(getCell(new Address(column, row)));
+            }
+        }
 
-	public SortedSet<Cell> getCells(Address address1, Address address2) {
-		// Sorts addresses
-		if (address1.compareTo(address2) > 0) {
-			Address tempAddress = address1;
-			address1 = address2;
-			address2 = tempAddress;
-		}
+        return cells;
+    }
 
-		// Builds the set
-		SortedSet<Cell> cells = new TreeSet<Cell>();
-		for (int column = address1.getColumn(); column <= address2.getColumn(); column++)
-			for (int row = address1.getRow(); row <= address2.getRow(); row++)
-				cells.add(getCell(new Address(column, row)));
+    public Cell[] getColumn(int index) {
+        Cell[] column = new Cell[rows];
+        for (int row = 0; row < row; row++) {
+            column[row] = getCell(new Address(index, row));
+        }
+        return column;
+    }
 
-		return cells;
-	}
+    public Cell[] getRow(int index) {
+        Cell[] row = new Cell[columns];
+        for (int column = 0; column < columns; column++) {
+            row[column] = getCell(new Address(column, index));
+        }
+        return row;
+    }
 
-	public Cell[] getColumn(int index) {
-		Cell[] column = new Cell[rows];
-		for (int row = 0; row < row; row++)
-			column[row] = getCell(new Address(index, row));
-		return column;
-	}
+    public Iterator<Cell> iterator() {
+        return cells.values().iterator();
+    }
 
-	public Cell[] getRow(int index) {
-		Cell[] row = new Cell[columns];
-		for (int column = 0; column < columns; column++)
-			row[column] = getCell(new Address(column, index));
-		return row;
-	}
+    /*
+     * EVENT HANDLING
+     */
+    public void addCellListener(CellListener listener) {
+        cellListeners.add(listener);
+    }
 
-	public Iterator<Cell> iterator() {
-		return cells.values().iterator();
-	}
+    public void removeCellListener(CellListener listener) {
+        cellListeners.remove(listener);
+    }
 
-/*
- * EVENT HANDLING
- */
+    public CellListener[] getCellListeners() {
+        return cellListeners.toArray(new CellListener[cellListeners.size()]);
+    }
 
-	public void addCellListener(CellListener listener) {
-		cellListeners.add(listener);
-	}
+    /**
+     * A cell listener that forwards events from all cells to registered
+     * listeners.
+     */
+    private class EventForwarder implements CellListener {
 
-	public void removeCellListener(CellListener listener) {
-		cellListeners.remove(listener);
-	}
+        /**
+         * Creates a new event forwarder.
+         */
+        public EventForwarder() {
+        }
 
-	public CellListener[] getCellListeners() {
-		return cellListeners.toArray(new CellListener[cellListeners.size()]);
-	}
+        public void valueChanged(Cell cell) {
+            for (CellListener listener : cellListeners) {
+                listener.valueChanged(cell);
+            }
+        }
 
-	/**
-	 * A cell listener that forwards events from all cells to registered listeners.
-	 */
-	private class EventForwarder implements CellListener {
+        public void contentChanged(Cell cell) {
+            for (CellListener listener : cellListeners) {
+                listener.contentChanged(cell);
+            }
+        }
 
-		/**
-		 * Creates a new event forwarder.
-		 */
-		public EventForwarder() {}
+        public void dependentsChanged(Cell cell) {
+            for (CellListener listener : cellListeners) {
+                listener.dependentsChanged(cell);
+            }
+        }
 
-		public void valueChanged(Cell cell) {
-			for (CellListener listener : cellListeners)
-				listener.valueChanged(cell);
-		}
+        public void cellCleared(Cell cell) {
+            for (CellListener listener : cellListeners) {
+                listener.cellCleared(cell);
+            }
+        }
 
-		public void contentChanged(Cell cell) {
-			for (CellListener listener : cellListeners)
-				listener.contentChanged(cell);
-		}
+        public void cellCopied(Cell cell, Cell source) {
+            for (CellListener listener : cellListeners) {
+                listener.cellCopied(cell, source);
+            }
+        }
+    }
 
-		public void dependentsChanged(Cell cell) {
-			for (CellListener listener : cellListeners)
-				listener.dependentsChanged(cell);
-		}
+    /*
+     * EXTENSIONS
+     */
+    public Spreadsheet getExtension(String name) {
+        // Looks for an existing spreadsheet extension
+        SpreadsheetExtension extension = extensions.get(name);
+        if (extension == null) {
+            // Creates a new spreadsheet extension
+            Extension x = ExtensionManager.getInstance().getExtension(name);
+            if (x != null) {
+                extension = x.extend(this);
+                if (extension != null) {
+                    extensions.put(name, extension);
+                }
+            }
+        }
+        return extension;
+    }
 
-		public void cellCleared(Cell cell) {
-			for (CellListener listener : cellListeners)
-				listener.cellCleared(cell);
-		}
+    /*
+     * GENERAL
+     */
+    /**
+     * Customizes deserialization by catching exceptions when extensions are not
+     * found.
+     *
+     * @param stream the object input stream from which the object is to be read
+     * @throws IOException If any of the usual Input/Output related exceptions
+     * occur
+     * @throws ClassNotFoundException If the class of a serialized object cannot
+     * be found.
+     */
+    private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
+        stream.defaultReadObject();
 
-		public void cellCopied(Cell cell, Cell source) {
-			for (CellListener listener : cellListeners)
-				listener.cellCopied(cell, source);
-		}
-	}
+        // Sets up event forwarder
+        eventForwarder = new EventForwarder();
+        for (Cell cell : cells.values()) {
+            cell.addCellListener(eventForwarder);
+        }
+        cellListeners = new ArrayList<CellListener>();
 
-/*
- * EXTENSIONS
- */
+        // Reads extensions
+        extensions = new HashMap<String, SpreadsheetExtension>();
+        int extCount = stream.readInt();
+        for (int i = 0; i < extCount; i++) {
+            try {
+                SpreadsheetExtension extension = (SpreadsheetExtension) stream.readObject();
+                extensions.put(extension.getName(), extension);
+            } catch (ClassNotFoundException e) {
+                System.err.println(e);
+            }
+        }
+    }
 
-	public Spreadsheet getExtension(String name) {
-		// Looks for an existing spreadsheet extension
-		SpreadsheetExtension extension = extensions.get(name);
-		if (extension == null) {
-			// Creates a new spreadsheet extension
-			Extension x = ExtensionManager.getInstance().getExtension(name);
-			if (x != null) {
-				extension = x.extend(this);
-				if (extension != null)
-					extensions.put(name, extension);
-			}
-		}
-		return extension;
-	}
+    /**
+     * Customizes serialization, by writing extensions separately.
+     *
+     * @param stream the object output stream to which the object is to be
+     * written
+     * @throws IOException If any of the usual Input/Output related exceptions
+     * occur
+     */
+    private void writeObject(ObjectOutputStream stream) throws IOException {
+        stream.defaultWriteObject();
 
-/*
- * GENERAL
- */
+        // Writes extensions
+        stream.writeInt(extensions.size());
+        for (SpreadsheetExtension extension : extensions.values()) {
+            stream.writeObject(extension);
+        }
+    }
 
-	/**
-	 * Customizes deserialization by catching exceptions when extensions
-	 * are not found.
-	 * @param stream the object input stream from which the object is to be read
-	 * @throws IOException If any of the usual Input/Output related exceptions occur
-	 * @throws ClassNotFoundException If the class of a serialized object cannot be found.
-	 */
-	private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
-	    stream.defaultReadObject();
+   /**
+    * Adds a temporary variable to the spreadsheet
+    * @param temporaryVariable
+    * @return true if successfully added, false otherwise
+    */
+    public boolean addOrUpdateTemporaryVariable(TemporaryVariable temporaryVariable) {
+        for (TemporaryVariable tempVar : temporaryVariableList) {
+            if(tempVar.getVarName().equals(temporaryVariable.getVarName())){
+                tempVar.setValue(temporaryVariable.getValue());
+                return true;
+            }
+        }
+        return temporaryVariableList.add(temporaryVariable);
+    }
 
-		// Sets up event forwarder
-		eventForwarder = new EventForwarder();
-		for (Cell cell : cells.values())
-			cell.addCellListener(eventForwarder);
-		cellListeners = new ArrayList<CellListener>();
-
-		// Reads extensions
-		extensions = new HashMap<String, SpreadsheetExtension>();
-		int extCount = stream.readInt();
-		for (int i = 0; i < extCount; i++) {
-			try {
-				SpreadsheetExtension extension = (SpreadsheetExtension)stream.readObject();
-				extensions.put(extension.getName(), extension);
-			} catch (ClassNotFoundException e) {
-				System.err.println(e);
-			}
-		}
-	}
-
-	/**
-	 * Customizes serialization, by writing extensions separately.
-	 * @param stream the object output stream to which the object is to be written
-	 * @throws IOException If any of the usual Input/Output related exceptions occur
-	 */
-	private void writeObject(ObjectOutputStream stream) throws IOException {
-		stream.defaultWriteObject();
-
-		// Writes extensions
-		stream.writeInt(extensions.size());
-		for (SpreadsheetExtension extension : extensions.values())
-			stream.writeObject(extension);
-	}
+    /**
+     * Removes a temporary variavle from the spredsheet
+     * @param temporaryVariable
+     * @return true if successfully removed, false otherwise
+     */
+    public boolean removeTemporaryVariable(TemporaryVariable temporaryVariable){
+        return temporaryVariableList.remove(temporaryVariable);
+    }
+    
+    /**
+     * 
+     * @param variableName
+     * @return a TemporaryVariable object which matches the variable name or the defaultZeroVar witch value 0
+     */
+    public TemporaryVariable getTemporaryVariable(String variableName){
+        for (TemporaryVariable tempVar : temporaryVariableList) {
+            if(tempVar.getVarName().equals(variableName)){
+                return tempVar;
+            }
+        }
+        return new TemporaryVariable("@defaultZeroVar", new Value(0));
+    }
 }
