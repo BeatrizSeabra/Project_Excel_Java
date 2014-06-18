@@ -31,7 +31,9 @@ public class SortActionZA extends BaseAction {
     ArrayList<String> conteudos = new ArrayList();
     List<Integer> conteudosN = new ArrayList();
     protected CellTransferHandler cth;
-    Cell[][] range;
+    int contR = 0;
+    int contC = 0;
+    Cell[][] range = new Cell[contC][contR];
 
     /**
      * Creates a new action.
@@ -51,12 +53,12 @@ public class SortActionZA extends BaseAction {
         setEnabled(true);
         putValue(SMALL_ICON, new ImageIcon(CleanSheets.class.getResource("res/img/sort.gif")));
     }
-    
-    public ArrayList getCollumns(){
+
+    public ArrayList getCollumns() {
         ArrayList al = new ArrayList();
-        for(int i=0; i<range.length;i++){
-            for(int j=0; j<range[i].length ;j++){
-                if(!al.contains(range[i][j].getAddress().getColumn())){
+        for (int i = 0; i < range.length; i++) {
+            for (int j = 0; j < range[i].length; j++) {
+                if (!al.contains(range[i][j].getAddress().getColumn())) {
                     al.add(range[i][j].getAddress().getColumn());
                 }
             }
@@ -65,19 +67,18 @@ public class SortActionZA extends BaseAction {
     }
 
     /*
-        added a few lines of code to the previous method of sorting
-        week 2 US008
-    */
-    
+     added a few lines of code to the previous method of sorting
+     week 2 US008
+     */
     public void actionPerformed(ActionEvent event) {
 
         try {
             int maxrows = this.uiController.getActiveSpreadsheet().getRowCount();
-            cth=(CellTransferHandler)this.uiController.getCellTransferHandler();
-            range=cth.getSelec();
+            cth = (CellTransferHandler) this.uiController.getCellTransferHandler();
+            range = cth.getSelec();
             ArrayList columns = getCollumns();
-            for(int i=0; i<columns.size();i++){
-                sortZA(maxrows, (int)columns.get(i));
+            for (int i = 0; i < columns.size(); i++) {
+                sortZA(maxrows, (int) columns.get(i));
             }
         } catch (FormulaCompilationException ex) {
             System.out.println("Não foi possivel localizar a celula ativa ou o numero de linhas existentes");
@@ -86,28 +87,27 @@ public class SortActionZA extends BaseAction {
 
     public void sortZA(int maxrows, int collumn) throws FormulaCompilationException {
         checkListEmpty();
-        addToLists(maxrows, collumn);
+        //addToLists(maxrows, collumn);
         orderContents();
         setContentCells(collumn);
 
     }
 
-    public void addToLists(int maxrows, int collumn) throws FormulaCompilationException {
-        for (int i = 0; i < maxrows; i++) {
-            String conteudo = this.uiController.getActiveSpreadsheet().getCell(collumn, i).getContent();
-            try {
-                int conteudoN = Integer.parseInt(conteudo);
-                this.uiController.getActiveSpreadsheet().getCell(collumn, i).setContent("");
-                conteudosN.add(conteudoN);
-            } catch (NumberFormatException e) {
-                if (!(conteudo.isEmpty() || conteudo.equals(" "))) {
-                    this.uiController.getActiveSpreadsheet().getCell(collumn, i).setContent("");
-                    conteudos.add(conteudo);
-                }
-            }
-        }
-    }
-
+    /*public void addToLists(int maxrows, int collumn) throws FormulaCompilationException {
+     for (int i = 0; i < maxrows; i++) {
+     String conteudo = this.uiController.getActiveSpreadsheet().getCell(collumn, i).getContent();
+     try {
+     int conteudoN = Integer.parseInt(conteudo);
+     this.uiController.getActiveSpreadsheet().getCell(collumn, i).setContent("");
+     conteudosN.add(conteudoN);
+     } catch (NumberFormatException e) {
+     if (!(conteudo.isEmpty() || conteudo.equals(" "))) {
+     this.uiController.getActiveSpreadsheet().getCell(collumn, i).setContent("");
+     conteudos.add(conteudo);
+     }
+     }
+     }
+     }*/
     public void checkListEmpty() {
         if (!conteudos.isEmpty()) {
             conteudos.removeAll(conteudos);
@@ -122,15 +122,28 @@ public class SortActionZA extends BaseAction {
             this.uiController.getActiveSpreadsheet().getCell(collumn, i).setContent(conteudos.get(i));
         }
         for (int j = 0; j < conteudosN.size(); j++) {
-            this.uiController.getActiveSpreadsheet().getCell(collumn, j+ conteudos.size()).setContent(Integer.toString(conteudosN.get(j)));
+            this.uiController.getActiveSpreadsheet().getCell(collumn, j + conteudos.size()).setContent(Integer.toString(conteudosN.get(j)));
         }
-        
+
     }
 
-    public void orderContents() {
-        Collections.sort(conteudosN);
-        Collections.reverse(conteudosN);
-        Collections.sort(conteudos, String.CASE_INSENSITIVE_ORDER);
-        Collections.reverse(conteudos);
+    public void orderContents() throws FormulaCompilationException {
+        boolean sorting = true;
+        while (sorting == true) {
+            sorting = false;
+            int j = 0;
+            for (int i = 0; i < range.length - 1; i++) {
+                String firstValue = range[i][0].getContent();
+                String secondValue = range[i + 1][0].getContent();
+                if (secondValue.compareToIgnoreCase(firstValue) > 0) {
+                    for (j = 0; j < range[0].length; j++) {
+                        String tmp = range[i][j].getContent();
+                        range[i][j].setContent(range[i + 1][j].getContent());
+                        range[i + 1][j].setContent(tmp);
+                        sorting = true;
+                    }
+                }
+            }
+        }
     }
 }

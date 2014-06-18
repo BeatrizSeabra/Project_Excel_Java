@@ -104,7 +104,7 @@ public class SortActionTest {
         int collumn = 0;
         UIController uiController = null;
         SortAction instance = new SortAction(uiController);
-        instance.addToLists(maxrows, collumn);
+        //instance.addToLists(maxrows, collumn);
         //Ver aqui se o tamanho dos dois arrays são iguais
         fail("The test case is a prototype.");
     }
