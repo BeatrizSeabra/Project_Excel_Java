@@ -89,6 +89,9 @@ public class UIController implements SpreadsheetAppListener {
 	private ArrayList<String> evl;
         private static boolean modificado;
         private static boolean exportStatus;
+        private static boolean importStatus;
+
+   
 
 	/**
 	 * Creates a new user interface controller.
@@ -299,6 +302,13 @@ public class UIController implements SpreadsheetAppListener {
             return exportStatus;
         }
 
+        public void setImportStatus(boolean importStatus) {
+            UIController.importStatus = importStatus;
+        }
+
+        public boolean getImportStatus() {
+            return importStatus;
+        }
 /*
  * PROPERTIES
  */
