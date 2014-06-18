@@ -21,6 +21,7 @@ import java.util.Collections;
 import java.util.List;
 import static javax.swing.Action.SMALL_ICON;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 public class SortActionZA extends BaseAction {
 
@@ -34,6 +35,9 @@ public class SortActionZA extends BaseAction {
     int contR = 0;
     int contC = 0;
     Cell[][] range = new Cell[contC][contR];
+    String[] abc = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S",
+        "T", "U", "V", "W", "X", "Y", "Z", "A", "AB", "AC", "AD", "AE", "AF", "AG", "AH", "AI", "AJ", "AK", "AL", "AM",
+        "AN", "AO", "AP", "AQ", "AR", "AS", "AT", "AU", "AV", "AW", "AX", "AY", "AZ"};
 
     /**
      * Creates a new action.
@@ -77,18 +81,25 @@ public class SortActionZA extends BaseAction {
             cth = (CellTransferHandler) this.uiController.getCellTransferHandler();
             range = cth.getSelec();
             ArrayList columns = getCollumns();
+            String col = askColumn(columns, abc);
+            int k = 0;
+            for (int m = 0; m < abc.length; m++) {
+                if (col == abc[m].toString()) {
+                    k = m;
+                }
+            }
             for (int i = 0; i < columns.size(); i++) {
-                sortZA(maxrows, (int) columns.get(i));
+                sortZA(maxrows, (int) columns.get(i), columns, k);
             }
         } catch (FormulaCompilationException ex) {
             System.out.println("Não foi possivel localizar a celula ativa ou o numero de linhas existentes");
         }
     }
 
-    public void sortZA(int maxrows, int collumn) throws FormulaCompilationException {
+    public void sortZA(int maxrows, int collumn, ArrayList columns, int k ) throws FormulaCompilationException {
         checkListEmpty();
         //addToLists(maxrows, collumn);
-        orderContents();
+        orderContents(k);
         setContentCells(collumn);
 
     }
@@ -127,16 +138,15 @@ public class SortActionZA extends BaseAction {
 
     }
 
-    public void orderContents() throws FormulaCompilationException {
+    public void orderContents(int k) throws FormulaCompilationException {
         boolean sorting = true;
         while (sorting == true) {
             sorting = false;
-            int j = 0;
             for (int i = 0; i < range.length - 1; i++) {
-                String firstValue = range[i][0].getContent();
-                String secondValue = range[i + 1][0].getContent();
+                String firstValue = range[i][k].getContent();
+                String secondValue = range[i + 1][k].getContent();
                 if (secondValue.compareToIgnoreCase(firstValue) > 0) {
-                    for (j = 0; j < range[0].length; j++) {
+                    for (int j = 0; j < range[0].length; j++) {
                         String tmp = range[i][j].getContent();
                         range[i][j].setContent(range[i + 1][j].getContent());
                         range[i + 1][j].setContent(tmp);
@@ -145,5 +155,21 @@ public class SortActionZA extends BaseAction {
                 }
             }
         }
+    }
+     public String askColumn(ArrayList columns, String[] abc) {
+
+        Object[] col = new String[columns.size()];
+        int n = 0;
+        for (Object obj : columns) {
+            for (int i = 0; i < abc.length; i++) {
+                if (obj.equals(i)) {
+                    col[n] = abc[i].toString();
+                    n++;
+                }
+            }
+        }
+        Object tmp = JOptionPane.showInputDialog(null, "Choose a Reference Column", "REFERENCE COLUMN", JOptionPane.QUESTION_MESSAGE, null, col, col[0]);
+        String column = tmp.toString();
+        return column;
     }
 }
