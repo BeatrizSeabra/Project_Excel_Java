@@ -20,6 +20,7 @@
  */
 package csheets.core;
 
+import csheets.core.formula.TemporaryVariable;
 import java.io.Serializable;
 import java.util.SortedSet;
 
@@ -27,111 +28,148 @@ import csheets.ext.Extensible;
 
 /**
  * A spreadsheet which provides cell data and dependencies.
+ *
  * @author Einar Pehrson
  */
 public interface Spreadsheet extends Iterable<Cell>, Extensible<Spreadsheet>,
-		Serializable {
+        Serializable {
 
-/*
- * LOCATION
- */
+    /*
+     * LOCATION
+     */
+    /**
+     * Returns the workbook to which the spreadsheet belongs.
+     *
+     * @return the workbook to which the spreadsheet belongs
+     */
+    public Workbook getWorkbook();
 
-	/**
-	 * Returns the workbook to which the spreadsheet belongs.
-	 * @return the workbook to which the spreadsheet belongs
-	 */
-	public Workbook getWorkbook();
+    /**
+     * Returns the title of the spreadsheet.
+     *
+     * @return the title of the spreadsheet.
+     */
+    public String getTitle();
 
-	/**
-	 * Returns the title of the spreadsheet.
-	 * @return the title of the spreadsheet.
-	 */
-	public String getTitle();
+    /**
+     * Sets the title of the spreadsheet.
+     *
+     * @param title the title of the spreadsheet.
+     */
+    public void setTitle(String title);
 
-	/**
-	 * Sets the title of the spreadsheet.
-	 * @param title the title of the spreadsheet.
-	 */
-	public void setTitle(String title);
+    /*
+     * DIMENSIONS
+     */
+    /**
+     * Returns the number of columns in the spreadsheet.
+     *
+     * @return the number of columns in the spreadsheet.
+     */
+    public int getColumnCount();
 
-/*
- * DIMENSIONS
- */
+    /**
+     * Returns the number of rows in the spreadsheet.
+     *
+     * @return the number of rows in the spreadsheet.
+     */
+    public int getRowCount();
 
-	/**
-	 * Returns the number of columns in the spreadsheet.
-	 * @return the number of columns in the spreadsheet.
-	 */
-	public int getColumnCount();
+    /*
+     * CELLS
+     */
+    /**
+     * Returns the cell at the given address.
+     *
+     * @param address the address of the cell
+     * @return the cell at the given address
+     */
+    public Cell getCell(Address address);
 
-	/**
-	 * Returns the number of rows in the spreadsheet.
-	 * @return the number of rows in the spreadsheet.
-	 */
-	public int getRowCount();
+    /**
+     * Returns the cell at the given column and row in the spreadsheet.
+     *
+     * @param column the column index of the cell's location
+     * @param row the row index of the cell's location
+     * @return the cell at the given column and row in the spreadsheet
+     */
+    public Cell getCell(int column, int row);
 
-/*
- * CELLS
- */
+    /**
+     * Returns the cells in the range between the given addresses.
+     *
+     * @param address1 the address of the cell in one end of the range
+     * @param address2 the address of the cell in the other end of the range
+     * @return a sorted set of the cells in the range
+     */
+    public SortedSet<Cell> getCells(Address address1, Address address2);
 
-	/**
-	 * Returns the cell at the given address.
-	 * @param address the address of the cell
-	 * @return the cell at the given address
-	 */
-	public Cell getCell(Address address);
+    /**
+     * Returns the cells in the given column.
+     *
+     * @param index the index of the column
+     * @return an array of the cells in the column
+     */
+    public Cell[] getColumn(int index);
 
-	/**
-	 * Returns the cell at the given column and row in the spreadsheet.
-	 * @param column the column index of the cell's location
-	 * @param row the row index of the cell's location
-	 * @return the cell at the given column and row in the spreadsheet
-	 */
-	public Cell getCell(int column, int row);
+    /**
+     * Returns the cells in the given row.
+     *
+     * @param index the index of the row
+     * @return an array of the cells in the row
+     */
+    public Cell[] getRow(int index);
 
-	/**
-	 * Returns the cells in the range between the given addresses.
-	 * @param address1 the address of the cell in one end of the range
-	 * @param address2 the address of the cell in the other end of the range
-	 * @return a sorted set of the cells in the range
-	 */
-	public SortedSet<Cell> getCells(Address address1, Address address2);
+    /*
+     * EVENT HANDLING
+     */
+    /**
+     * Registers the given listener to receive events from all cells in the
+     * spreadsheet.
+     *
+     * @param listener the listener to be added
+     */
+    public void addCellListener(CellListener listener);
 
-	/**
-	 * Returns the cells in the given column.
-	 * @param index the index of the column
-	 * @return an array of the cells in the column
-	 */
-	public Cell[] getColumn(int index);
+    /**
+     * Deregisters the given listener from receiving events from all cells in
+     * the spreadsheet.
+     *
+     * @param listener the listener to be removed
+     */
+    public void removeCellListener(CellListener listener);
 
-	/**
-	 * Returns the cells in the given row.
-	 * @param index the index of the row
-	 * @return an array of the cells in the row
-	 */
-	public Cell[] getRow(int index);
+    /**
+     * Returns the cell listeners that have been registered on the spreadsheet.
+     *
+     * @return the cell listeners that have been registered on the spreadsheet
+     */
+    public CellListener[] getCellListeners();
+    /*
+     * TEMPORARY VARIABLES        
+     */
 
-/*
- * EVENT HANDLING
- */
+    /**
+     * Adds a temporary variable to the spreadsheet
+     *
+     * @param temporaryVariable
+     * @return true if successfully added, false otherwise
+     */
+    public boolean addOrUpdateTemporaryVariable(TemporaryVariable temporaryVariable);
 
-	/**
-	 * Registers the given listener to receive events from all cells in the
-	 * spreadsheet.
-	 * @param listener the listener to be added
-	 */
-	public void addCellListener(CellListener listener);
+    /**
+     * Removes a temporary variavle from the spredsheet
+     *
+     * @param temporaryVariable
+     * @return true if successfully removed, false otherwise
+     */
+    public boolean removeTemporaryVariable(TemporaryVariable temporaryVariable);
 
-	/**
-	 * Deregisters the given listener from receiving events from all cells in
-	 * the spreadsheet.
-	 * @param listener the listener to be removed
-	 */
-	public void removeCellListener(CellListener listener);
-	
-	/**
-	 * Returns the cell listeners that have been registered on the spreadsheet.
-	 * @return the cell listeners that have been registered on the spreadsheet
-	 */
-	public CellListener[] getCellListeners();
+    /**
+     *
+     * @param variableName
+     * @return a TemporaryVariable object which matches the variable name or the
+     * defaultZeroVar witch value 0
+     */
+    public TemporaryVariable getTemporaryVariable(String variableName);
 }

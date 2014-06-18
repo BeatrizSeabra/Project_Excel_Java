@@ -63,7 +63,7 @@ block:
         ;
 
 attribution
-        : ( CELL_REF | tempvar ) ATT^ (attribution | comparison)
+        : ( VARNAME | CELL_REF ) ATT^ (attribution | comparison)
         ;
 
 comparison
@@ -103,7 +103,7 @@ atom
 	:	function_call
 	|	reference
 	|	literal
-	|	tempvar
+	|	VARNAME
 	|	LPAR! comparison RPAR!
 	;
 
@@ -123,7 +123,6 @@ literal
 	|	STRING
 	;
 	
-tempvar	:	VARNAME;
 	
 fragment LETTER: ('a'..'z'|'A'..'Z') ;
   

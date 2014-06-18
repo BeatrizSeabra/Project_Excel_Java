@@ -25,6 +25,7 @@ package csheets.ext.test;
 import java.util.Set;
 
 import csheets.core.Spreadsheet;
+import csheets.core.formula.TemporaryVariable;
 import csheets.ext.SpreadsheetExtension;
 
 /**
@@ -72,4 +73,19 @@ public class TestableSpreadsheet extends SpreadsheetExtension {
 		else
 			return 0;
 	}
+
+    @Override
+    public boolean addOrUpdateTemporaryVariable(TemporaryVariable temporaryVariable) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean removeTemporaryVariable(TemporaryVariable temporaryVariable) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public TemporaryVariable getTemporaryVariable(String variableName) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

@@ -36,6 +36,7 @@ import csheets.core.formula.FunctionCall;
 import csheets.core.formula.Literal;
 import csheets.core.formula.Operator;
 import csheets.core.formula.Reference;
+import csheets.core.formula.TemporaryVariable;
 import csheets.core.formula.UnaryOperation;
 import csheets.core.formula.lang.Adder;
 import csheets.core.formula.lang.Divider;
@@ -249,4 +250,9 @@ public class AssertionArithmeticVisitor implements ExpressionVisitor {
 		for (Cell c : cell.getPrecedents())
 			checkReference(c);
 	}
+
+    @Override
+    public Object visitTemporaryVariable(TemporaryVariable variable) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
