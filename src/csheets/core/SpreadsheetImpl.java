@@ -365,6 +365,10 @@ public class SpreadsheetImpl implements Spreadsheet {
         }
     }
 
+    /*
+    TEMPORARY VARIABLES
+    */
+    
    /**
     * Adds a temporary variable to the spreadsheet
     * @param temporaryVariable
@@ -402,4 +406,14 @@ public class SpreadsheetImpl implements Spreadsheet {
         }
         return new TemporaryVariable("@defaultZeroVar", new Value(0));
     }
+
+    public ArrayList<TemporaryVariable> getTemporaryVariableList() {
+        return temporaryVariableList;
+    }
+
+    public void setTemporaryVariableList(ArrayList<TemporaryVariable> temporaryVariableList) {
+        this.temporaryVariableList = temporaryVariableList;
+    }
+    
+    
 }

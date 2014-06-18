@@ -25,6 +25,7 @@ import java.io.Serializable;
 import java.util.SortedSet;
 
 import csheets.ext.Extensible;
+import java.util.ArrayList;
 
 /**
  * A spreadsheet which provides cell data and dependencies.
@@ -145,31 +146,4 @@ public interface Spreadsheet extends Iterable<Cell>, Extensible<Spreadsheet>,
      * @return the cell listeners that have been registered on the spreadsheet
      */
     public CellListener[] getCellListeners();
-    /*
-     * TEMPORARY VARIABLES        
-     */
-
-    /**
-     * Adds a temporary variable to the spreadsheet
-     *
-     * @param temporaryVariable
-     * @return true if successfully added, false otherwise
-     */
-    public boolean addOrUpdateTemporaryVariable(TemporaryVariable temporaryVariable);
-
-    /**
-     * Removes a temporary variavle from the spredsheet
-     *
-     * @param temporaryVariable
-     * @return true if successfully removed, false otherwise
-     */
-    public boolean removeTemporaryVariable(TemporaryVariable temporaryVariable);
-
-    /**
-     *
-     * @param variableName
-     * @return a TemporaryVariable object which matches the variable name or the
-     * defaultZeroVar witch value 0
-     */
-    public TemporaryVariable getTemporaryVariable(String variableName);
 }

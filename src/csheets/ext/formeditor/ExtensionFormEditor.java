@@ -8,12 +8,10 @@ import csheets.ext.Extension;
 import csheets.ext.formeditor.ui.UIExtensionFormEditor;
 import csheets.ui.ctrl.UIController;
 import csheets.ui.ext.UIExtension;
-import java.util.ArrayList;
-import javax.swing.JTextField;
 
 /**
  *
- * @author Oleg
+ * @author Oleg and Rui 1110506
  */
 public class ExtensionFormEditor extends Extension {
     
