@@ -9,25 +9,22 @@ import java.util.logging.Logger;
 public class UDPClient extends Thread {
 
     private static UDPClient instance;
-
-    public static synchronized UDPClient getInstance() {
-        if (instance == null) {
-            return new UDPClient();
-        }
-        return instance;
-    }
+    private ChatController controlo;
+    
 
     private int port = 2001;
     private static ArrayList<String> listParticipants = new ArrayList<String>();
+    private DatagramSocket socket;
 
-    private UDPClient() {
-        
+    public UDPClient(ChatController controlo) throws SocketException {
+            this.controlo= controlo;
+            socket = new DatagramSocket(2000);
+            socket.setBroadcast(true);
     }
 
     public void run() {
         try {
-            DatagramSocket socket = new DatagramSocket(2000);
-            socket.setBroadcast(true);
+            while(true){
 
             String message = InetAddress.getLocalHost().getHostName();
             byte[] sendData = new byte[1024];
@@ -47,11 +44,13 @@ public class UDPClient extends Thread {
             System.out.println(getClass().getName() + " Broadcast response from server: "
                     + message);
             
+            if(!listParticipants.contains(message)){
             listParticipants.add(message);
-            
+            controlo.newChat(message);
+            }
             System.out.println("ip: " + listParticipants.get(listParticipants.size()-1));
-
-            socket.close();
+            }
+            
 
         } catch (SocketException ex) {
             Logger.getLogger(UDPClient.class.getName()).log(Level.SEVERE, null, ex);
