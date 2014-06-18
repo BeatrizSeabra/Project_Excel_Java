@@ -37,6 +37,7 @@ import org.antlr.runtime.tree.Tree;
 import csheets.core.Cell;
 import csheets.core.CellImpl;
 import csheets.core.IllegalValueTypeException;
+import csheets.core.SpreadsheetImpl;
 import csheets.core.Value;
 import csheets.core.formula.BinaryOperation;
 import csheets.core.formula.BinaryOperator;
@@ -144,7 +145,7 @@ public class ExcelExpressionCompiler implements ExpressionCompiler {
                     case FormulaLexer.CELL_REF:
                         return new CellReference(cell.getSpreadsheet(), node.getText());
                     case FormulaLexer.VARNAME:
-                        return cell.getSpreadsheet().getTemporaryVariable(node.getText());
+                        return ((SpreadsheetImpl)cell.getSpreadsheet()).getTemporaryVariable(node.getText());
 //					case FormulaParserTokenTypes.NAME:
 						/* return cell.getSpreadsheet().getWorkbook().
                      getRange(node.getText()) (Reference)*/
@@ -194,7 +195,10 @@ public class ExcelExpressionCompiler implements ExpressionCompiler {
                     if (node.getChild(0).getText().matches("@[a-zA-Z0-9]+")) { //Tests if the attribution is being made to a temporary variable 
                         Value value = convert(cell, node.getChild(1)).evaluate();
                         TemporaryVariable temporaryVariable = new TemporaryVariable(node.getChild(0).getText(), value);
-                        cell.getSpreadsheet().addOrUpdateTemporaryVariable(temporaryVariable);
+                        for (int i = 0; i < cell.getSpreadsheet().getWorkbook().getSpreadsheetCount(); i++) { //The temporary variables have the same value in every sheet of the workbook
+                            SpreadsheetImpl auxSheet = (SpreadsheetImpl)cell.getSpreadsheet().getWorkbook().getSpreadsheet(i);
+                            auxSheet.addOrUpdateTemporaryVariable(temporaryVariable);
+                        }
                     } else { //Attribution to a Cell Reference
                         //crias uma referencia para a cell
                         CellReference cellR = new CellReference(cell.getSpreadsheet(), node.getChild(0).getText());
