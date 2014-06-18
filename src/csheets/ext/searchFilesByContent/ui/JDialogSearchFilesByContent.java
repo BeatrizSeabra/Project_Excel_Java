@@ -25,8 +25,8 @@ public class JDialogSearchFilesByContent extends javax.swing.JFrame {
     
     
     public JDialogSearchFilesByContent(java.awt.Frame parent, boolean modal, UIController uiController) {
-        super(parent, modal);
-        this.setModal(true);
+        //super(parent, modal);
+        //this.setModal(true);
         initComponents();
         setLocationRelativeTo(null);
         this.uiController = uiController;
@@ -213,7 +213,7 @@ public class JDialogSearchFilesByContent extends javax.swing.JFrame {
                         }
 
                     }
-                    search.searchFilesBackground(pattern, dir,ui);
+                   // search.searchFilesBackground(pattern, dir,ui);
                 }
             }
         }

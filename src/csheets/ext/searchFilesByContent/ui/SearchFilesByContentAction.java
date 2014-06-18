@@ -32,7 +32,7 @@ public class SearchFilesByContentAction extends BaseAction {
     }
 
     protected String getName() {
-        return "Search Files in Background";
+        return "Search Files by Content";
     }
 
     protected void defineProperties() {
