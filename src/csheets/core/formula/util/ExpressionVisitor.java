@@ -24,6 +24,7 @@ import csheets.core.formula.BinaryOperation;
 import csheets.core.formula.FunctionCall;
 import csheets.core.formula.Literal;
 import csheets.core.formula.Reference;
+import csheets.core.formula.TemporaryVariable;
 import csheets.core.formula.UnaryOperation;
 
 /**
@@ -66,4 +67,11 @@ public interface ExpressionVisitor {
 	 * @return an arbitrary object
 	 */
 	public Object visitFunctionCall(FunctionCall call);
+        
+        /**
+         * Visits the given temporary variable
+         * @param variable
+         * @return an arbitrary object
+         */
+        public Object visitTemporaryVariable(TemporaryVariable variable);
 }

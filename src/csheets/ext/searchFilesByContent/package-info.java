@@ -4,12 +4,4 @@
  * and open the template in the editor.
  */
 
-package csheets.core.formula;
-
-/**
- *
- * @author Diogo Moreira (1120339)
- */
-public class TemporaryVariableRepo {
-    
-}
+package csheets.ext.searchFilesByContent;

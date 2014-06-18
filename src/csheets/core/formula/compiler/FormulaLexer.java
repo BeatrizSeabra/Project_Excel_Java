@@ -1,4 +1,4 @@
-// $ANTLR 3.5.2 ../src/csheets/core/formula/compiler/Formula.g 2014-06-17 16:11:17
+// $ANTLR 3.5.2 ../src/csheets/core/formula/compiler/Formula.g 2014-06-18 15:07:15
 
 package csheets.core.formula.compiler;
 
@@ -62,7 +62,7 @@ public class FormulaLexer extends Lexer {
 	// $ANTLR start "LETTER"
 	public final void mLETTER() throws RecognitionException {
 		try {
-			// ../src/csheets/core/formula/compiler/Formula.g:128:16: ( ( 'a' .. 'z' | 'A' .. 'Z' ) )
+			// ../src/csheets/core/formula/compiler/Formula.g:127:16: ( ( 'a' .. 'z' | 'A' .. 'Z' ) )
 			// ../src/csheets/core/formula/compiler/Formula.g:
 			{
 			if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
@@ -87,10 +87,10 @@ public class FormulaLexer extends Lexer {
 		try {
 			int _type = FUNCTION;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../src/csheets/core/formula/compiler/Formula.g:130:10: ( ( LETTER )+ )
-			// ../src/csheets/core/formula/compiler/Formula.g:131:4: ( LETTER )+
+			// ../src/csheets/core/formula/compiler/Formula.g:129:10: ( ( LETTER )+ )
+			// ../src/csheets/core/formula/compiler/Formula.g:130:4: ( LETTER )+
 			{
-			// ../src/csheets/core/formula/compiler/Formula.g:131:4: ( LETTER )+
+			// ../src/csheets/core/formula/compiler/Formula.g:130:4: ( LETTER )+
 			int cnt1=0;
 			loop1:
 			while (true) {
@@ -139,10 +139,10 @@ public class FormulaLexer extends Lexer {
 		try {
 			int _type = CELL_REF;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../src/csheets/core/formula/compiler/Formula.g:136:2: ( ( ABS )? LETTER ( LETTER )? ( ABS )? ( DIGIT )+ )
-			// ../src/csheets/core/formula/compiler/Formula.g:137:3: ( ABS )? LETTER ( LETTER )? ( ABS )? ( DIGIT )+
+			// ../src/csheets/core/formula/compiler/Formula.g:135:2: ( ( ABS )? LETTER ( LETTER )? ( ABS )? ( DIGIT )+ )
+			// ../src/csheets/core/formula/compiler/Formula.g:136:3: ( ABS )? LETTER ( LETTER )? ( ABS )? ( DIGIT )+
 			{
-			// ../src/csheets/core/formula/compiler/Formula.g:137:3: ( ABS )?
+			// ../src/csheets/core/formula/compiler/Formula.g:136:3: ( ABS )?
 			int alt2=2;
 			int LA2_0 = input.LA(1);
 			if ( (LA2_0=='$') ) {
@@ -167,7 +167,7 @@ public class FormulaLexer extends Lexer {
 
 			mLETTER(); 
 
-			// ../src/csheets/core/formula/compiler/Formula.g:137:19: ( LETTER )?
+			// ../src/csheets/core/formula/compiler/Formula.g:136:19: ( LETTER )?
 			int alt3=2;
 			int LA3_0 = input.LA(1);
 			if ( ((LA3_0 >= 'A' && LA3_0 <= 'Z')||(LA3_0 >= 'a' && LA3_0 <= 'z')) ) {
@@ -190,7 +190,7 @@ public class FormulaLexer extends Lexer {
 
 			}
 
-			// ../src/csheets/core/formula/compiler/Formula.g:138:3: ( ABS )?
+			// ../src/csheets/core/formula/compiler/Formula.g:137:3: ( ABS )?
 			int alt4=2;
 			int LA4_0 = input.LA(1);
 			if ( (LA4_0=='$') ) {
@@ -213,7 +213,7 @@ public class FormulaLexer extends Lexer {
 
 			}
 
-			// ../src/csheets/core/formula/compiler/Formula.g:138:12: ( DIGIT )+
+			// ../src/csheets/core/formula/compiler/Formula.g:137:12: ( DIGIT )+
 			int cnt5=0;
 			loop5:
 			while (true) {
@@ -262,12 +262,12 @@ public class FormulaLexer extends Lexer {
 		try {
 			int _type = STRING;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../src/csheets/core/formula/compiler/Formula.g:143:8: ( QUOT ( options {greedy=false; } : . )* QUOT )
-			// ../src/csheets/core/formula/compiler/Formula.g:143:10: QUOT ( options {greedy=false; } : . )* QUOT
+			// ../src/csheets/core/formula/compiler/Formula.g:142:8: ( QUOT ( options {greedy=false; } : . )* QUOT )
+			// ../src/csheets/core/formula/compiler/Formula.g:142:10: QUOT ( options {greedy=false; } : . )* QUOT
 			{
 			mQUOT(); 
 
-			// ../src/csheets/core/formula/compiler/Formula.g:144:3: ( options {greedy=false; } : . )*
+			// ../src/csheets/core/formula/compiler/Formula.g:143:3: ( options {greedy=false; } : . )*
 			loop6:
 			while (true) {
 				int alt6=2;
@@ -281,7 +281,7 @@ public class FormulaLexer extends Lexer {
 
 				switch (alt6) {
 				case 1 :
-					// ../src/csheets/core/formula/compiler/Formula.g:144:28: .
+					// ../src/csheets/core/formula/compiler/Formula.g:143:28: .
 					{
 					matchAny(); 
 					}
@@ -311,8 +311,8 @@ public class FormulaLexer extends Lexer {
 		try {
 			int _type = QUOT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../src/csheets/core/formula/compiler/Formula.g:148:5: ( '\"' )
-			// ../src/csheets/core/formula/compiler/Formula.g:148:7: '\"'
+			// ../src/csheets/core/formula/compiler/Formula.g:147:5: ( '\"' )
+			// ../src/csheets/core/formula/compiler/Formula.g:147:7: '\"'
 			{
 			match('\"'); 
 			}
@@ -331,10 +331,10 @@ public class FormulaLexer extends Lexer {
 		try {
 			int _type = NUMBER;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../src/csheets/core/formula/compiler/Formula.g:152:7: ( ( DIGIT )+ ( COMMA ( DIGIT )+ )? )
-			// ../src/csheets/core/formula/compiler/Formula.g:152:9: ( DIGIT )+ ( COMMA ( DIGIT )+ )?
+			// ../src/csheets/core/formula/compiler/Formula.g:151:7: ( ( DIGIT )+ ( COMMA ( DIGIT )+ )? )
+			// ../src/csheets/core/formula/compiler/Formula.g:151:9: ( DIGIT )+ ( COMMA ( DIGIT )+ )?
 			{
-			// ../src/csheets/core/formula/compiler/Formula.g:152:9: ( DIGIT )+
+			// ../src/csheets/core/formula/compiler/Formula.g:151:9: ( DIGIT )+
 			int cnt7=0;
 			loop7:
 			while (true) {
@@ -367,7 +367,7 @@ public class FormulaLexer extends Lexer {
 				cnt7++;
 			}
 
-			// ../src/csheets/core/formula/compiler/Formula.g:152:20: ( COMMA ( DIGIT )+ )?
+			// ../src/csheets/core/formula/compiler/Formula.g:151:20: ( COMMA ( DIGIT )+ )?
 			int alt9=2;
 			int LA9_0 = input.LA(1);
 			if ( (LA9_0==',') ) {
@@ -375,11 +375,11 @@ public class FormulaLexer extends Lexer {
 			}
 			switch (alt9) {
 				case 1 :
-					// ../src/csheets/core/formula/compiler/Formula.g:152:22: COMMA ( DIGIT )+
+					// ../src/csheets/core/formula/compiler/Formula.g:151:22: COMMA ( DIGIT )+
 					{
 					mCOMMA(); 
 
-					// ../src/csheets/core/formula/compiler/Formula.g:152:28: ( DIGIT )+
+					// ../src/csheets/core/formula/compiler/Formula.g:151:28: ( DIGIT )+
 					int cnt8=0;
 					loop8:
 					while (true) {
@@ -431,7 +431,7 @@ public class FormulaLexer extends Lexer {
 	// $ANTLR start "DIGIT"
 	public final void mDIGIT() throws RecognitionException {
 		try {
-			// ../src/csheets/core/formula/compiler/Formula.g:156:7: ( '0' .. '9' )
+			// ../src/csheets/core/formula/compiler/Formula.g:155:7: ( '0' .. '9' )
 			// ../src/csheets/core/formula/compiler/Formula.g:
 			{
 			if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
@@ -456,16 +456,16 @@ public class FormulaLexer extends Lexer {
 		try {
 			int _type = VARNAME;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../src/csheets/core/formula/compiler/Formula.g:159:2: ( ( '@' ) ( '0' .. '9' | 'a' .. 'z' | 'A' .. 'Z' )+ )
-			// ../src/csheets/core/formula/compiler/Formula.g:159:4: ( '@' ) ( '0' .. '9' | 'a' .. 'z' | 'A' .. 'Z' )+
+			// ../src/csheets/core/formula/compiler/Formula.g:158:2: ( ( '@' ) ( '0' .. '9' | 'a' .. 'z' | 'A' .. 'Z' )+ )
+			// ../src/csheets/core/formula/compiler/Formula.g:158:4: ( '@' ) ( '0' .. '9' | 'a' .. 'z' | 'A' .. 'Z' )+
 			{
-			// ../src/csheets/core/formula/compiler/Formula.g:159:4: ( '@' )
-			// ../src/csheets/core/formula/compiler/Formula.g:159:5: '@'
+			// ../src/csheets/core/formula/compiler/Formula.g:158:4: ( '@' )
+			// ../src/csheets/core/formula/compiler/Formula.g:158:5: '@'
 			{
 			match('@'); 
 			}
 
-			// ../src/csheets/core/formula/compiler/Formula.g:159:9: ( '0' .. '9' | 'a' .. 'z' | 'A' .. 'Z' )+
+			// ../src/csheets/core/formula/compiler/Formula.g:158:9: ( '0' .. '9' | 'a' .. 'z' | 'A' .. 'Z' )+
 			int cnt10=0;
 			loop10:
 			while (true) {
@@ -514,8 +514,8 @@ public class FormulaLexer extends Lexer {
 		try {
 			int _type = EQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../src/csheets/core/formula/compiler/Formula.g:163:5: ( '=' )
-			// ../src/csheets/core/formula/compiler/Formula.g:163:7: '='
+			// ../src/csheets/core/formula/compiler/Formula.g:162:5: ( '=' )
+			// ../src/csheets/core/formula/compiler/Formula.g:162:7: '='
 			{
 			match('='); 
 			}
@@ -534,8 +534,8 @@ public class FormulaLexer extends Lexer {
 		try {
 			int _type = NEQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../src/csheets/core/formula/compiler/Formula.g:164:6: ( '<>' )
-			// ../src/csheets/core/formula/compiler/Formula.g:164:8: '<>'
+			// ../src/csheets/core/formula/compiler/Formula.g:163:6: ( '<>' )
+			// ../src/csheets/core/formula/compiler/Formula.g:163:8: '<>'
 			{
 			match("<>"); 
 
@@ -555,8 +555,8 @@ public class FormulaLexer extends Lexer {
 		try {
 			int _type = LTEQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../src/csheets/core/formula/compiler/Formula.g:165:7: ( '<=' )
-			// ../src/csheets/core/formula/compiler/Formula.g:165:9: '<='
+			// ../src/csheets/core/formula/compiler/Formula.g:164:7: ( '<=' )
+			// ../src/csheets/core/formula/compiler/Formula.g:164:9: '<='
 			{
 			match("<="); 
 
@@ -576,8 +576,8 @@ public class FormulaLexer extends Lexer {
 		try {
 			int _type = GTEQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../src/csheets/core/formula/compiler/Formula.g:166:7: ( '>=' )
-			// ../src/csheets/core/formula/compiler/Formula.g:166:9: '>='
+			// ../src/csheets/core/formula/compiler/Formula.g:165:7: ( '>=' )
+			// ../src/csheets/core/formula/compiler/Formula.g:165:9: '>='
 			{
 			match(">="); 
 
@@ -597,8 +597,8 @@ public class FormulaLexer extends Lexer {
 		try {
 			int _type = GT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../src/csheets/core/formula/compiler/Formula.g:167:5: ( '>' )
-			// ../src/csheets/core/formula/compiler/Formula.g:167:7: '>'
+			// ../src/csheets/core/formula/compiler/Formula.g:166:5: ( '>' )
+			// ../src/csheets/core/formula/compiler/Formula.g:166:7: '>'
 			{
 			match('>'); 
 			}
@@ -617,8 +617,8 @@ public class FormulaLexer extends Lexer {
 		try {
 			int _type = LT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../src/csheets/core/formula/compiler/Formula.g:168:5: ( '<' )
-			// ../src/csheets/core/formula/compiler/Formula.g:168:7: '<'
+			// ../src/csheets/core/formula/compiler/Formula.g:167:5: ( '<' )
+			// ../src/csheets/core/formula/compiler/Formula.g:167:7: '<'
 			{
 			match('<'); 
 			}
@@ -637,8 +637,8 @@ public class FormulaLexer extends Lexer {
 		try {
 			int _type = AMP;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../src/csheets/core/formula/compiler/Formula.g:171:6: ( '&' )
-			// ../src/csheets/core/formula/compiler/Formula.g:171:8: '&'
+			// ../src/csheets/core/formula/compiler/Formula.g:170:6: ( '&' )
+			// ../src/csheets/core/formula/compiler/Formula.g:170:8: '&'
 			{
 			match('&'); 
 			}
@@ -657,8 +657,8 @@ public class FormulaLexer extends Lexer {
 		try {
 			int _type = PLUS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../src/csheets/core/formula/compiler/Formula.g:174:6: ( '+' )
-			// ../src/csheets/core/formula/compiler/Formula.g:174:8: '+'
+			// ../src/csheets/core/formula/compiler/Formula.g:173:6: ( '+' )
+			// ../src/csheets/core/formula/compiler/Formula.g:173:8: '+'
 			{
 			match('+'); 
 			}
@@ -677,8 +677,8 @@ public class FormulaLexer extends Lexer {
 		try {
 			int _type = MINUS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../src/csheets/core/formula/compiler/Formula.g:175:7: ( '-' )
-			// ../src/csheets/core/formula/compiler/Formula.g:175:9: '-'
+			// ../src/csheets/core/formula/compiler/Formula.g:174:7: ( '-' )
+			// ../src/csheets/core/formula/compiler/Formula.g:174:9: '-'
 			{
 			match('-'); 
 			}
@@ -697,8 +697,8 @@ public class FormulaLexer extends Lexer {
 		try {
 			int _type = MULTI;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../src/csheets/core/formula/compiler/Formula.g:176:7: ( '*' )
-			// ../src/csheets/core/formula/compiler/Formula.g:176:9: '*'
+			// ../src/csheets/core/formula/compiler/Formula.g:175:7: ( '*' )
+			// ../src/csheets/core/formula/compiler/Formula.g:175:9: '*'
 			{
 			match('*'); 
 			}
@@ -717,8 +717,8 @@ public class FormulaLexer extends Lexer {
 		try {
 			int _type = DIV;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../src/csheets/core/formula/compiler/Formula.g:177:5: ( '/' )
-			// ../src/csheets/core/formula/compiler/Formula.g:177:7: '/'
+			// ../src/csheets/core/formula/compiler/Formula.g:176:5: ( '/' )
+			// ../src/csheets/core/formula/compiler/Formula.g:176:7: '/'
 			{
 			match('/'); 
 			}
@@ -737,8 +737,8 @@ public class FormulaLexer extends Lexer {
 		try {
 			int _type = POWER;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../src/csheets/core/formula/compiler/Formula.g:178:7: ( '^' )
-			// ../src/csheets/core/formula/compiler/Formula.g:178:9: '^'
+			// ../src/csheets/core/formula/compiler/Formula.g:177:7: ( '^' )
+			// ../src/csheets/core/formula/compiler/Formula.g:177:9: '^'
 			{
 			match('^'); 
 			}
@@ -757,8 +757,8 @@ public class FormulaLexer extends Lexer {
 		try {
 			int _type = PERCENT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../src/csheets/core/formula/compiler/Formula.g:179:9: ( '%' )
-			// ../src/csheets/core/formula/compiler/Formula.g:179:11: '%'
+			// ../src/csheets/core/formula/compiler/Formula.g:178:9: ( '%' )
+			// ../src/csheets/core/formula/compiler/Formula.g:178:11: '%'
 			{
 			match('%'); 
 			}
@@ -775,8 +775,8 @@ public class FormulaLexer extends Lexer {
 	// $ANTLR start "ABS"
 	public final void mABS() throws RecognitionException {
 		try {
-			// ../src/csheets/core/formula/compiler/Formula.g:182:14: ( '$' )
-			// ../src/csheets/core/formula/compiler/Formula.g:182:16: '$'
+			// ../src/csheets/core/formula/compiler/Formula.g:181:14: ( '$' )
+			// ../src/csheets/core/formula/compiler/Formula.g:181:16: '$'
 			{
 			match('$'); 
 			}
@@ -791,8 +791,8 @@ public class FormulaLexer extends Lexer {
 	// $ANTLR start "EXCL"
 	public final void mEXCL() throws RecognitionException {
 		try {
-			// ../src/csheets/core/formula/compiler/Formula.g:183:14: ( '!' )
-			// ../src/csheets/core/formula/compiler/Formula.g:183:17: '!'
+			// ../src/csheets/core/formula/compiler/Formula.g:182:14: ( '!' )
+			// ../src/csheets/core/formula/compiler/Formula.g:182:17: '!'
 			{
 			match('!'); 
 			}
@@ -809,8 +809,8 @@ public class FormulaLexer extends Lexer {
 		try {
 			int _type = COLON;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../src/csheets/core/formula/compiler/Formula.g:184:7: ( ':' )
-			// ../src/csheets/core/formula/compiler/Formula.g:184:9: ':'
+			// ../src/csheets/core/formula/compiler/Formula.g:183:7: ( ':' )
+			// ../src/csheets/core/formula/compiler/Formula.g:183:9: ':'
 			{
 			match(':'); 
 			}
@@ -829,8 +829,8 @@ public class FormulaLexer extends Lexer {
 		try {
 			int _type = COMMA;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../src/csheets/core/formula/compiler/Formula.g:188:7: ( ',' )
-			// ../src/csheets/core/formula/compiler/Formula.g:188:9: ','
+			// ../src/csheets/core/formula/compiler/Formula.g:187:7: ( ',' )
+			// ../src/csheets/core/formula/compiler/Formula.g:187:9: ','
 			{
 			match(','); 
 			}
@@ -849,8 +849,8 @@ public class FormulaLexer extends Lexer {
 		try {
 			int _type = SEMI;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../src/csheets/core/formula/compiler/Formula.g:189:6: ( ';' )
-			// ../src/csheets/core/formula/compiler/Formula.g:189:8: ';'
+			// ../src/csheets/core/formula/compiler/Formula.g:188:6: ( ';' )
+			// ../src/csheets/core/formula/compiler/Formula.g:188:8: ';'
 			{
 			match(';'); 
 			}
@@ -869,8 +869,8 @@ public class FormulaLexer extends Lexer {
 		try {
 			int _type = LPAR;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../src/csheets/core/formula/compiler/Formula.g:190:6: ( '(' )
-			// ../src/csheets/core/formula/compiler/Formula.g:190:8: '('
+			// ../src/csheets/core/formula/compiler/Formula.g:189:6: ( '(' )
+			// ../src/csheets/core/formula/compiler/Formula.g:189:8: '('
 			{
 			match('('); 
 			}
@@ -889,8 +889,8 @@ public class FormulaLexer extends Lexer {
 		try {
 			int _type = RPAR;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../src/csheets/core/formula/compiler/Formula.g:191:6: ( ')' )
-			// ../src/csheets/core/formula/compiler/Formula.g:191:8: ')'
+			// ../src/csheets/core/formula/compiler/Formula.g:190:6: ( ')' )
+			// ../src/csheets/core/formula/compiler/Formula.g:190:8: ')'
 			{
 			match(')'); 
 			}
@@ -909,8 +909,8 @@ public class FormulaLexer extends Lexer {
 		try {
 			int _type = LBRA;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../src/csheets/core/formula/compiler/Formula.g:192:9: ( '{' )
-			// ../src/csheets/core/formula/compiler/Formula.g:192:11: '{'
+			// ../src/csheets/core/formula/compiler/Formula.g:191:9: ( '{' )
+			// ../src/csheets/core/formula/compiler/Formula.g:191:11: '{'
 			{
 			match('{'); 
 			}
@@ -929,8 +929,8 @@ public class FormulaLexer extends Lexer {
 		try {
 			int _type = RBRA;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../src/csheets/core/formula/compiler/Formula.g:193:9: ( '}' )
-			// ../src/csheets/core/formula/compiler/Formula.g:193:11: '}'
+			// ../src/csheets/core/formula/compiler/Formula.g:192:9: ( '}' )
+			// ../src/csheets/core/formula/compiler/Formula.g:192:11: '}'
 			{
 			match('}'); 
 			}
@@ -949,10 +949,10 @@ public class FormulaLexer extends Lexer {
 		try {
 			int _type = WS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../src/csheets/core/formula/compiler/Formula.g:197:3: ( ( ' ' | '\\r' '\\n' | '\\n' | '\\t' ) )
-			// ../src/csheets/core/formula/compiler/Formula.g:197:5: ( ' ' | '\\r' '\\n' | '\\n' | '\\t' )
+			// ../src/csheets/core/formula/compiler/Formula.g:196:3: ( ( ' ' | '\\r' '\\n' | '\\n' | '\\t' ) )
+			// ../src/csheets/core/formula/compiler/Formula.g:196:5: ( ' ' | '\\r' '\\n' | '\\n' | '\\t' )
 			{
-			// ../src/csheets/core/formula/compiler/Formula.g:197:5: ( ' ' | '\\r' '\\n' | '\\n' | '\\t' )
+			// ../src/csheets/core/formula/compiler/Formula.g:196:5: ( ' ' | '\\r' '\\n' | '\\n' | '\\t' )
 			int alt11=4;
 			switch ( input.LA(1) ) {
 			case ' ':
@@ -982,26 +982,26 @@ public class FormulaLexer extends Lexer {
 			}
 			switch (alt11) {
 				case 1 :
-					// ../src/csheets/core/formula/compiler/Formula.g:197:7: ' '
+					// ../src/csheets/core/formula/compiler/Formula.g:196:7: ' '
 					{
 					match(' '); 
 					}
 					break;
 				case 2 :
-					// ../src/csheets/core/formula/compiler/Formula.g:198:4: '\\r' '\\n'
+					// ../src/csheets/core/formula/compiler/Formula.g:197:4: '\\r' '\\n'
 					{
 					match('\r'); 
 					match('\n'); 
 					}
 					break;
 				case 3 :
-					// ../src/csheets/core/formula/compiler/Formula.g:199:4: '\\n'
+					// ../src/csheets/core/formula/compiler/Formula.g:198:4: '\\n'
 					{
 					match('\n'); 
 					}
 					break;
 				case 4 :
-					// ../src/csheets/core/formula/compiler/Formula.g:200:4: '\\t'
+					// ../src/csheets/core/formula/compiler/Formula.g:199:4: '\\t'
 					{
 					match('\t'); 
 					}
@@ -1026,8 +1026,8 @@ public class FormulaLexer extends Lexer {
 		try {
 			int _type = ATT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../src/csheets/core/formula/compiler/Formula.g:205:8: ( ':=' )
-			// ../src/csheets/core/formula/compiler/Formula.g:205:10: ':='
+			// ../src/csheets/core/formula/compiler/Formula.g:204:8: ( ':=' )
+			// ../src/csheets/core/formula/compiler/Formula.g:204:10: ':='
 			{
 			match(":="); 
 

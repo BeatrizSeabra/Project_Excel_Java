@@ -18,23 +18,35 @@ import csheets.core.formula.util.ExpressionVisitor;
 public class TemporaryVariable implements Expression{
     
     private String varName;
-    private Spreadsheet spreadsheet;
     private Value value;
 
-    public TemporaryVariable(String varName, Spreadsheet spreadsheet, Value value) {
+    public TemporaryVariable(String varName, Value value) {
         this.varName = varName;
-        this.spreadsheet = spreadsheet;
         this.value = value;
     }
 
     @Override
     public Value evaluate() throws IllegalValueTypeException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.value;
     }
 
     @Override
     public Object accept(ExpressionVisitor visitor) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return visitor.visitTemporaryVariable(this);
     }
+
+    public String getVarName() {
+        return varName;
+    }
+
+    public void setValue(Value value) {
+        this.value = value;
+    }
+
+    
+    public Value getValue() {
+        return value;
+    }
+    
     
 }

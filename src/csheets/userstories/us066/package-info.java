@@ -11,9 +11,10 @@
 *  
 * <b>S066a: Analysis</b><br/>
 * User Story 066 consiste em evoluir o mecanismo de partilha criado anteriormente de forma a existir várias partilhas a correr ao mesmo tempo.
-* Assim será necessário acrescentar código às classes existentes da extensão 'share' já implementada e possivelmente implementação de
-* uma classe nova. Será reutilizado ao máximo o código criado na US064 e US065, e todo código criado em diante terá em conta o código já existente.
-* Serão utilizadas as classes nos packages csheets.ext.share e csheets.ext.share.ui, e caso necessário acrescentar uma classe será também numa dessas packages.
+* Assim será necessário acrescentar código às classes existentes da extensão 'share' já implementada e implementação de
+* uma classe nova, "MultiShare". Será reutilizado ao máximo o código criado na US064 e US065, e todo código criado em diante terá em conta o código já existente.
+* Serão utilizadas as classes nos packages csheets.ext.share e csheets.ext.share.ui, acrescentada a classe "MultiShare" na package csheets.ext.share, a classe (form) SharePanel na package
+* csheets.ext.share.ui.
 * <br/>
 * <br/>
 * 

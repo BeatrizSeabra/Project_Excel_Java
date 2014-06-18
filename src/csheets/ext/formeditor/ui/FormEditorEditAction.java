@@ -4,7 +4,6 @@
  */
 package csheets.ext.formeditor.ui;
 
-import csheets.ext.formeditor.InMemoryForm;
 import csheets.ui.ctrl.BaseAction;
 import csheets.ui.ctrl.UIController;
 import java.awt.event.ActionEvent;
@@ -12,7 +11,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Oleg
+ * @author Oleg and Rui 1110506
  */
 public class FormEditorEditAction extends BaseAction{
     
@@ -28,7 +27,7 @@ public class FormEditorEditAction extends BaseAction{
 	}
 
 	protected String getName() {
-		return "Edit";
+		return "Edit Forms";
 	}
 
 	protected void defineProperties() {
@@ -39,12 +38,15 @@ public class FormEditorEditAction extends BaseAction{
 	 * @param event the event that was fired
 	 */
 	public void actionPerformed(ActionEvent event) {
-                InMemoryForm mem = InMemoryForm.getInstance();
-                if(mem.getDataList()!=null){
-                    FormEditorWindow call = new FormEditorWindow(mem.getForm(), mem.getDataList());
-                    call.setVisible(true);
-                    call.setLocation(500, 200);
-                }
+//                InMemoryForm mem = InMemoryForm.getInstance();
+//                
+//                if(mem.getDataList()!=null){
+//                    FormEditorWindow call = new FormEditorWindow(mem.getForm(), mem.getDataList());
+//                    call.setVisible(true);
+//                    call.setLocation(500, 200);
+//                } else {
+//                    JOptionPane.showMessageDialog(null,"No Forms");
+//                }
         }
    
 }

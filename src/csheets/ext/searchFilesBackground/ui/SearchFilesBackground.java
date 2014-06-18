@@ -36,7 +36,7 @@ public class SearchFilesBackground {
 
             @Override
             public void run() {
-                extension.cleanList();
+                //extension.cleanList();
                 boolean flag = false;
                 Stack<File> stack = new Stack<File>();
                 File startingDirectory = new File(dir);
