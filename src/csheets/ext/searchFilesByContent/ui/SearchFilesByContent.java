@@ -1,5 +1,12 @@
-package csheets.ext.searchFilesBackground.ui;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
+package csheets.ext.searchFilesByContent.ui;
+
+import csheets.ext.searchFilesBackground.ui.UIExtensionSearchFilesBackground;
 import java.io.File;
 import java.io.FileFilter;
 import java.util.Stack;
@@ -7,19 +14,19 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author i120388
+ * @author Pedro
  */
-public class SearchFilesBackground {
-
-    public SearchFilesBackground() {
+public class SearchFilesByContent {
+    
+    public SearchFilesByContent() {
     }
-
-    //METODO RESPONSAVEL PELA CRIACAO DA THREAD E DA PESQUISA DE FICHEIROS NOS DIRETORIOS E SUBDIRETORIOS
+    
     public void searchFilesBackground(final String pattern, final String dir, UIExtensionSearchFilesBackground extension) {
 
         class ParallelSearch implements Runnable {
 
-            String pattern;
+            String content;
+            String pattern = ".txt";
             String dir;
             String[] results;
             UIExtensionSearchFilesBackground extension;
@@ -73,4 +80,8 @@ public class SearchFilesBackground {
 
     }
 
+    
+    
+    
+    
 }

@@ -5,6 +5,7 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import csheets.core.Spreadsheet;
 import csheets.ui.ctrl.BaseAction;
@@ -18,7 +19,7 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
- * @author Marc
+ * @author Marc e Frederico Calor
  */
 public class ExportPdfAction extends BaseAction {
 
@@ -61,20 +62,19 @@ public class ExportPdfAction extends BaseAction {
                 document.open();
                 int maxrow = thissheet.getRowCount() + 1;
                 int maxcol = thissheet.getColumnCount() + 1;
+                PdfPTable table = new PdfPTable(maxcol);
 
                 for (int i = 0; i < maxrow; i++) {
-                    for (int j = 0; j < maxcol; j++) {
+                     for (int j = 0; j < maxcol; j++) {
                         if (!thissheet.getCell(j, i).getContent().isEmpty()) {
-                            Paragraph preface = new Paragraph();
-                            Phrase f = new Phrase();
-                            f.add(new Chunk(thissheet.getCell(j, i).getAddress().toString() + " - "));
-                            f.add(new Chunk(thissheet.getCell(j, i).getContent()));
-                            preface.add(f);
-                            document.add(preface);
+                            table.addCell(thissheet.getCell(j, i).getAddress().toString() + ": " + thissheet.getCell(j, i).getContent());
+                        } else {
+                            table.addCell(" ");
                         }
                     }
-
                 }
+
+                document.add(table);
                 document.close();
                 JOptionPane.showMessageDialog(null, "Ficheiro guardado com sucesso!");
             } catch (DocumentException ex) {

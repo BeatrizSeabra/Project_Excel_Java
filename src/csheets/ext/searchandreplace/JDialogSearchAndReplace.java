@@ -14,6 +14,8 @@ import csheets.ui.sheet.SpreadsheetTable;
  */
 public class JDialogSearchAndReplace extends javax.swing.JDialog {
 
+    private SpreadsheetTable focus;
+
     /**
      * Creates new form JDialogSearchAndReplace
      */
@@ -180,7 +182,13 @@ public class JDialogSearchAndReplace extends javax.swing.JDialog {
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        String text = searchText.getText();
+        Search sear = new Search();
+        //nova janela
+        UpdateSearch update = new UpdateSearch();
+        update.setVisible(true);
+        sear.SearchAll(update, focus, text);
+        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

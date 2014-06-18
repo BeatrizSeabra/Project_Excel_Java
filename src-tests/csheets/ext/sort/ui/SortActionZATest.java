@@ -89,7 +89,7 @@ public class SortActionZATest {
         int collumn = 0;
         UIController uiController = null;
         SortActionZA instance = new SortActionZA(uiController);
-        instance.sortZA(maxrows, collumn);
+        //instance.sortZA(maxrows, collumn);
         fail("The test case is a prototype.");
     }
 
@@ -103,7 +103,7 @@ public class SortActionZATest {
         int collumn = 0;
         UIController uiController = null;
         SortActionZA instance = new SortActionZA(uiController);
-        instance.addToLists(maxrows, collumn);
+        //instance.addToLists(maxrows, collumn);
         //Ver aqui se o tamanho dos dois arrays são iguais
         fail("The test case is a prototype.");
     }
@@ -147,7 +147,7 @@ public class SortActionZATest {
         instance.conteudos.set(1, "b");
         instance.conteudos.set(2, "c");
         instance.conteudos.set(3, "d");
-        instance.orderContents();
+        //instance.orderContents();
         ArrayList test = new ArrayList();
         test.add("d");
         test.add("c");
