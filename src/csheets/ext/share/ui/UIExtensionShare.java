@@ -20,7 +20,7 @@ import javax.swing.ImageIcon;
  *
  * @see UIExtension
  *
- * @author Rui 1110506
+ * @author Rui 1110506 and Oleg 1120622
  */
 public class UIExtensionShare extends UIExtension {
 
@@ -28,7 +28,8 @@ public class UIExtensionShare extends UIExtension {
      * The icon to display with the extension's name
      */
     private Icon icon;
-
+    private JComponent sideBar;
+    
     /**
      * The menu of the extension
      */
@@ -99,7 +100,9 @@ public class UIExtensionShare extends UIExtension {
      * @return a component, or null if the extension does not provide one
      */
     public JComponent getSideBar() {
-        return null;
+        if (sideBar == null)
+			sideBar = new SharePanel(uiController);
+		return sideBar;
     }
 
 }

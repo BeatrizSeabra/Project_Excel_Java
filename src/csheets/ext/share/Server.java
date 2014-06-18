@@ -24,14 +24,12 @@ public class Server extends BaseConnection implements Runnable {
     private ServerSocket serverSocket;
     private DefaultListModel clientesModel;
     private String name;
-    private boolean status;
     private int count;
 
     public Server(String pass, int port, Address inicio, Address fim, Spreadsheet folha, String name) {
         super(pass, folha, port, inicio, fim);
         this.clientesModel = new DefaultListModel();
         this.name = name;
-        status = true;
     }
 
     @Override
@@ -86,14 +84,6 @@ public class Server extends BaseConnection implements Runnable {
         }
     }
     
-    public void pauseServer() {
-        status = false;
-    }
-    
-    public void resumeServer() {
-        status = true;
-    }
-    
     public String getName() {
         return name;
     }
@@ -116,14 +106,6 @@ public class Server extends BaseConnection implements Runnable {
     
     public void setClientesModel(DefaultListModel clientesModel) {
         this.clientesModel = clientesModel;
-    }
-    
-    public boolean isStatus() {
-        return status;
-    }
-    
-    public void setStatus(boolean status) {
-        this.status = status;
     }
    
     public class TratarCliente implements Runnable {
