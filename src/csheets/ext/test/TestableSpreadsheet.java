@@ -25,6 +25,7 @@ package csheets.ext.test;
 import java.util.Set;
 
 import csheets.core.Spreadsheet;
+import csheets.core.formula.TemporaryVariable;
 import csheets.ext.SpreadsheetExtension;
 
 /**

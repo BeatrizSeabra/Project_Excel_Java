@@ -48,7 +48,7 @@ public class JFrameWorkbookSearchResults extends JFrame {
     int i = 0;
 
     public JFrameWorkbookSearchResults(List<File> listingF) {
-        setTitle("Workbook Files Found - This list refreshes automatically");
+        setTitle("Workbook Files Found");
         setSize(600, 200);
 
         jTable.setRowHeight(20);

@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author Oleg
+ * @author Oleg and Rui 1110506
  */
 public class FormLinesWindow extends JFrame implements ActionListener {
     

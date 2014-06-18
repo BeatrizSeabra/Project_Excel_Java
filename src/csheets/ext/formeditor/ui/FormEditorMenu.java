@@ -9,7 +9,7 @@ import javax.swing.JMenu;
 
 /**
  *
- * @author Oleg
+ * @author Oleg & Rui 1110506
  */
 public class FormEditorMenu extends JMenu {
     /**
@@ -20,10 +20,11 @@ public class FormEditorMenu extends JMenu {
 	 * @param uiController the user interface controller
 	 */
 	public FormEditorMenu(UIController uiController) {
-		super("Form Editor");
+		super("Forms");
 		//setMnemonic(KeyEvent.VK_I);
 		// Adds font actions
-		add(new FormEditorEditAction(uiController));
                 add(new FormEditorNewAction(uiController));
+                add(new FormEditorEditAction(uiController));
+                add(new FormEditorPlayAction(uiController));
 	}	
 }

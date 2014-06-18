@@ -8,11 +8,31 @@
  * <br/>
  * <br/>
  *  
- * <b>S049a: Analysis</b><br/>
+ * <b>S072a: Analysis</b><br/>
  * This use case is a continuation of previous use case, but now when occurs a modification in  the file, selected by the user, the sheet has to be updated.
  * I have to know how i get the modification in the file and how to connect instantly the sheet.
  *
+ * <b>S072d: Design</b><br/>
+ * In this Use Case realization we use the same graphic interface and the same classes. We also run the same thread to run this import in parallel to the main program.
+ * To  import instantly the file when it is modified we create a while cicle that will be waiting to a modification in the file. When that occurs we import the file.
+ * 
 * 
+* 
+* 
+* @startuml doc-files/us075_design1.png
+   actor User
+   User -> ImportAction : 
+   extensionImport->uiExtensionImport: getUiExtension() 
+   uiExtensionImport->importMenu: getMenu() 
+   importMenu->importAction: new ImportAction()
+   importAction->FileImporter: create(file)
+   FileImporter->importAction: ImportFile(file)
+   loop 
+       alt date.before(new Date(file.lastModified()))
+           FileImporter->importAction: importFile(file)
+       end
+   end
+ @enduml
 **/
 
 package csheets.userstories.us072;

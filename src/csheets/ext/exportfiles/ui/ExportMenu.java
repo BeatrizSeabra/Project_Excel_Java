@@ -5,6 +5,9 @@
  */
 package csheets.ext.exportfiles.ui;
 
+
+
+import csheets.ext.exportHtml.ui.HtmlAction;
 import csheets.ext.exportXML.ui.XMLAction;
 import csheets.ext.exporttxt.ui.TxtAction;
 import csheets.ext.pdf.ui.ExportPdfAction;
@@ -35,6 +38,7 @@ public class ExportMenu extends JMenu {
 
         // Adds font actions
         add(new XMLAction(uiController));
+        add(new HtmlAction(uiController));
         add(new TxtAction(uiController));
         add(new ExportPdfAction(uiController));
         add(new ResidenceExportAction(uiController));

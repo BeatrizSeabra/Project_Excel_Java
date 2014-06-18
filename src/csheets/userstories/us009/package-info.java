@@ -25,6 +25,9 @@
  * <br/>
  * 
  * <b>S009c: Coding</b><br/>
+ *  * see:<br/>
+ * <a href="../../../csheets/ext/sort/package-summary.html">csheets.ext.sort</a><br/>
+ * <a href="../../../csheets/ext/sort/ui/package-summary.html">csheets.ext.sort.ui</a><br/>
  * <br/>
  * <br/>
  * 
