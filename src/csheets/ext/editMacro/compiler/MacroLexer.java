@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 ../csheets/ext/editMacro/compiler/Macro.g 2014-06-18 14:43:19
+// $ANTLR 3.5.1 C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g 2014-06-18 16:24:05
 
 package csheets.ext.editMacro.compiler;
 
@@ -11,8 +11,8 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class MacroLexer extends Lexer {
 	public static final int EOF=-1;
-	public static final int T__37=37;
 	public static final int T__38=38;
+	public static final int T__39=39;
 	public static final int ABS=4;
 	public static final int AMP=5;
 	public static final int ATT=6;
@@ -44,8 +44,9 @@ public class MacroLexer extends Lexer {
 	public static final int SEMI=32;
 	public static final int STRING=33;
 	public static final int TEMPVAR=34;
-	public static final int VARSIMBLE=35;
-	public static final int WS=36;
+	public static final int VARNAME=35;
+	public static final int VARSIMBLE=36;
+	public static final int WS=37;
 
 	// delegates
 	// delegators
@@ -60,15 +61,15 @@ public class MacroLexer extends Lexer {
 	public MacroLexer(CharStream input, RecognizerSharedState state) {
 		super(input,state);
 	}
-	@Override public String getGrammarFileName() { return "../csheets/ext/editMacro/compiler/Macro.g"; }
+	@Override public String getGrammarFileName() { return "C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g"; }
 
-	// $ANTLR start "T__37"
-	public final void mT__37() throws RecognitionException {
+	// $ANTLR start "T__38"
+	public final void mT__38() throws RecognitionException {
 		try {
-			int _type = T__37;
+			int _type = T__38;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../csheets/ext/editMacro/compiler/Macro.g:11:7: ( '\\n' )
-			// ../csheets/ext/editMacro/compiler/Macro.g:11:9: '\\n'
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:11:7: ( '\\n' )
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:11:9: '\\n'
 			{
 			match('\n'); 
 			}
@@ -80,15 +81,15 @@ public class MacroLexer extends Lexer {
 			// do for sure before leaving
 		}
 	}
-	// $ANTLR end "T__37"
+	// $ANTLR end "T__38"
 
-	// $ANTLR start "T__38"
-	public final void mT__38() throws RecognitionException {
+	// $ANTLR start "T__39"
+	public final void mT__39() throws RecognitionException {
 		try {
-			int _type = T__38;
+			int _type = T__39;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../csheets/ext/editMacro/compiler/Macro.g:12:7: ( 'macro' )
-			// ../csheets/ext/editMacro/compiler/Macro.g:12:9: 'macro'
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:12:7: ( 'macro' )
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:12:9: 'macro'
 			{
 			match("macro"); 
 
@@ -101,13 +102,13 @@ public class MacroLexer extends Lexer {
 			// do for sure before leaving
 		}
 	}
-	// $ANTLR end "T__38"
+	// $ANTLR end "T__39"
 
 	// $ANTLR start "LETTER"
 	public final void mLETTER() throws RecognitionException {
 		try {
-			// ../csheets/ext/editMacro/compiler/Macro.g:134:16: ( ( 'a' .. 'z' | 'A' .. 'Z' ) )
-			// ../csheets/ext/editMacro/compiler/Macro.g:
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:134:16: ( ( 'a' .. 'z' | 'A' .. 'Z' ) )
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:
 			{
 			if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
 				input.consume();
@@ -131,10 +132,10 @@ public class MacroLexer extends Lexer {
 		try {
 			int _type = FUNCTION;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../csheets/ext/editMacro/compiler/Macro.g:136:10: ( ( LETTER )+ )
-			// ../csheets/ext/editMacro/compiler/Macro.g:137:4: ( LETTER )+
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:136:10: ( ( LETTER )+ )
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:137:4: ( LETTER )+
 			{
-			// ../csheets/ext/editMacro/compiler/Macro.g:137:4: ( LETTER )+
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:137:4: ( LETTER )+
 			int cnt1=0;
 			loop1:
 			while (true) {
@@ -146,7 +147,7 @@ public class MacroLexer extends Lexer {
 
 				switch (alt1) {
 				case 1 :
-					// ../csheets/ext/editMacro/compiler/Macro.g:
+					// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:
 					{
 					if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
 						input.consume();
@@ -183,10 +184,10 @@ public class MacroLexer extends Lexer {
 		try {
 			int _type = CELL_REF;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../csheets/ext/editMacro/compiler/Macro.g:142:2: ( ( ABS )? LETTER ( LETTER )? ( ABS )? ( DIGIT )+ )
-			// ../csheets/ext/editMacro/compiler/Macro.g:143:3: ( ABS )? LETTER ( LETTER )? ( ABS )? ( DIGIT )+
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:142:2: ( ( ABS )? LETTER ( LETTER )? ( ABS )? ( DIGIT )+ )
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:143:3: ( ABS )? LETTER ( LETTER )? ( ABS )? ( DIGIT )+
 			{
-			// ../csheets/ext/editMacro/compiler/Macro.g:143:3: ( ABS )?
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:143:3: ( ABS )?
 			int alt2=2;
 			int LA2_0 = input.LA(1);
 			if ( (LA2_0=='$') ) {
@@ -194,7 +195,7 @@ public class MacroLexer extends Lexer {
 			}
 			switch (alt2) {
 				case 1 :
-					// ../csheets/ext/editMacro/compiler/Macro.g:
+					// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:
 					{
 					if ( input.LA(1)=='$' ) {
 						input.consume();
@@ -211,7 +212,7 @@ public class MacroLexer extends Lexer {
 
 			mLETTER(); 
 
-			// ../csheets/ext/editMacro/compiler/Macro.g:143:19: ( LETTER )?
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:143:19: ( LETTER )?
 			int alt3=2;
 			int LA3_0 = input.LA(1);
 			if ( ((LA3_0 >= 'A' && LA3_0 <= 'Z')||(LA3_0 >= 'a' && LA3_0 <= 'z')) ) {
@@ -219,7 +220,7 @@ public class MacroLexer extends Lexer {
 			}
 			switch (alt3) {
 				case 1 :
-					// ../csheets/ext/editMacro/compiler/Macro.g:
+					// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:
 					{
 					if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
 						input.consume();
@@ -234,7 +235,7 @@ public class MacroLexer extends Lexer {
 
 			}
 
-			// ../csheets/ext/editMacro/compiler/Macro.g:144:3: ( ABS )?
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:144:3: ( ABS )?
 			int alt4=2;
 			int LA4_0 = input.LA(1);
 			if ( (LA4_0=='$') ) {
@@ -242,7 +243,7 @@ public class MacroLexer extends Lexer {
 			}
 			switch (alt4) {
 				case 1 :
-					// ../csheets/ext/editMacro/compiler/Macro.g:
+					// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:
 					{
 					if ( input.LA(1)=='$' ) {
 						input.consume();
@@ -257,7 +258,7 @@ public class MacroLexer extends Lexer {
 
 			}
 
-			// ../csheets/ext/editMacro/compiler/Macro.g:144:12: ( DIGIT )+
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:144:12: ( DIGIT )+
 			int cnt5=0;
 			loop5:
 			while (true) {
@@ -269,7 +270,7 @@ public class MacroLexer extends Lexer {
 
 				switch (alt5) {
 				case 1 :
-					// ../csheets/ext/editMacro/compiler/Macro.g:
+					// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:
 					{
 					if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
 						input.consume();
@@ -306,12 +307,12 @@ public class MacroLexer extends Lexer {
 		try {
 			int _type = STRING;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../csheets/ext/editMacro/compiler/Macro.g:149:8: ( QUOT ( options {greedy=false; } : . )* QUOT )
-			// ../csheets/ext/editMacro/compiler/Macro.g:149:10: QUOT ( options {greedy=false; } : . )* QUOT
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:149:8: ( QUOT ( options {greedy=false; } : . )* QUOT )
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:149:10: QUOT ( options {greedy=false; } : . )* QUOT
 			{
 			mQUOT(); 
 
-			// ../csheets/ext/editMacro/compiler/Macro.g:150:3: ( options {greedy=false; } : . )*
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:150:3: ( options {greedy=false; } : . )*
 			loop6:
 			while (true) {
 				int alt6=2;
@@ -325,7 +326,7 @@ public class MacroLexer extends Lexer {
 
 				switch (alt6) {
 				case 1 :
-					// ../csheets/ext/editMacro/compiler/Macro.g:150:28: .
+					// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:150:28: .
 					{
 					matchAny(); 
 					}
@@ -350,31 +351,35 @@ public class MacroLexer extends Lexer {
 	}
 	// $ANTLR end "STRING"
 
-	// $ANTLR start "TEMPVAR"
-	public final void mTEMPVAR() throws RecognitionException {
+	// $ANTLR start "VARNAME"
+	public final void mVARNAME() throws RecognitionException {
 		try {
-			int _type = TEMPVAR;
+			int _type = VARNAME;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../csheets/ext/editMacro/compiler/Macro.g:156:9: ( VARSIMBLE ( LETTER )+ )
-			// ../csheets/ext/editMacro/compiler/Macro.g:156:13: VARSIMBLE ( LETTER )+
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:156:2: ( ( '@' ) ( '0' .. '9' | 'a' .. 'z' | 'A' .. 'Z' )+ )
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:156:4: ( '@' ) ( '0' .. '9' | 'a' .. 'z' | 'A' .. 'Z' )+
 			{
-			mVARSIMBLE(); 
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:156:4: ( '@' )
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:156:5: '@'
+			{
+			match('@'); 
+			}
 
-			// ../csheets/ext/editMacro/compiler/Macro.g:156:23: ( LETTER )+
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:156:9: ( '0' .. '9' | 'a' .. 'z' | 'A' .. 'Z' )+
 			int cnt7=0;
 			loop7:
 			while (true) {
 				int alt7=2;
 				int LA7_0 = input.LA(1);
-				if ( ((LA7_0 >= 'A' && LA7_0 <= 'Z')||(LA7_0 >= 'a' && LA7_0 <= 'z')) ) {
+				if ( ((LA7_0 >= '0' && LA7_0 <= '9')||(LA7_0 >= 'A' && LA7_0 <= 'Z')||(LA7_0 >= 'a' && LA7_0 <= 'z')) ) {
 					alt7=1;
 				}
 
 				switch (alt7) {
 				case 1 :
-					// ../csheets/ext/editMacro/compiler/Macro.g:
+					// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:
 					{
-					if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
+					if ( (input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
 						input.consume();
 					}
 					else {
@@ -402,15 +407,15 @@ public class MacroLexer extends Lexer {
 			// do for sure before leaving
 		}
 	}
-	// $ANTLR end "TEMPVAR"
+	// $ANTLR end "VARNAME"
 
 	// $ANTLR start "QUOT"
 	public final void mQUOT() throws RecognitionException {
 		try {
 			int _type = QUOT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../csheets/ext/editMacro/compiler/Macro.g:158:5: ( '\"' )
-			// ../csheets/ext/editMacro/compiler/Macro.g:158:7: '\"'
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:158:5: ( '\"' )
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:158:7: '\"'
 			{
 			match('\"'); 
 			}
@@ -429,10 +434,10 @@ public class MacroLexer extends Lexer {
 		try {
 			int _type = NUMBER;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../csheets/ext/editMacro/compiler/Macro.g:162:7: ( ( DIGIT )+ ( COMMA ( DIGIT )+ )? )
-			// ../csheets/ext/editMacro/compiler/Macro.g:162:9: ( DIGIT )+ ( COMMA ( DIGIT )+ )?
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:162:7: ( ( DIGIT )+ ( COMMA ( DIGIT )+ )? )
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:162:9: ( DIGIT )+ ( COMMA ( DIGIT )+ )?
 			{
-			// ../csheets/ext/editMacro/compiler/Macro.g:162:9: ( DIGIT )+
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:162:9: ( DIGIT )+
 			int cnt8=0;
 			loop8:
 			while (true) {
@@ -444,7 +449,7 @@ public class MacroLexer extends Lexer {
 
 				switch (alt8) {
 				case 1 :
-					// ../csheets/ext/editMacro/compiler/Macro.g:
+					// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:
 					{
 					if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
 						input.consume();
@@ -465,7 +470,7 @@ public class MacroLexer extends Lexer {
 				cnt8++;
 			}
 
-			// ../csheets/ext/editMacro/compiler/Macro.g:162:20: ( COMMA ( DIGIT )+ )?
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:162:20: ( COMMA ( DIGIT )+ )?
 			int alt10=2;
 			int LA10_0 = input.LA(1);
 			if ( (LA10_0==',') ) {
@@ -473,11 +478,11 @@ public class MacroLexer extends Lexer {
 			}
 			switch (alt10) {
 				case 1 :
-					// ../csheets/ext/editMacro/compiler/Macro.g:162:22: COMMA ( DIGIT )+
+					// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:162:22: COMMA ( DIGIT )+
 					{
 					mCOMMA(); 
 
-					// ../csheets/ext/editMacro/compiler/Macro.g:162:28: ( DIGIT )+
+					// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:162:28: ( DIGIT )+
 					int cnt9=0;
 					loop9:
 					while (true) {
@@ -489,7 +494,7 @@ public class MacroLexer extends Lexer {
 
 						switch (alt9) {
 						case 1 :
-							// ../csheets/ext/editMacro/compiler/Macro.g:
+							// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:
 							{
 							if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
 								input.consume();
@@ -529,8 +534,8 @@ public class MacroLexer extends Lexer {
 	// $ANTLR start "DIGIT"
 	public final void mDIGIT() throws RecognitionException {
 		try {
-			// ../csheets/ext/editMacro/compiler/Macro.g:166:7: ( '0' .. '9' )
-			// ../csheets/ext/editMacro/compiler/Macro.g:
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:166:7: ( '0' .. '9' )
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:
 			{
 			if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
 				input.consume();
@@ -554,8 +559,8 @@ public class MacroLexer extends Lexer {
 		try {
 			int _type = EQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../csheets/ext/editMacro/compiler/Macro.g:168:5: ( '=' )
-			// ../csheets/ext/editMacro/compiler/Macro.g:168:7: '='
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:168:5: ( '=' )
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:168:7: '='
 			{
 			match('='); 
 			}
@@ -574,8 +579,8 @@ public class MacroLexer extends Lexer {
 		try {
 			int _type = NEQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../csheets/ext/editMacro/compiler/Macro.g:169:6: ( '<>' )
-			// ../csheets/ext/editMacro/compiler/Macro.g:169:8: '<>'
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:169:6: ( '<>' )
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:169:8: '<>'
 			{
 			match("<>"); 
 
@@ -595,8 +600,8 @@ public class MacroLexer extends Lexer {
 		try {
 			int _type = LTEQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../csheets/ext/editMacro/compiler/Macro.g:170:6: ( '<=' )
-			// ../csheets/ext/editMacro/compiler/Macro.g:170:8: '<='
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:170:6: ( '<=' )
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:170:8: '<='
 			{
 			match("<="); 
 
@@ -616,8 +621,8 @@ public class MacroLexer extends Lexer {
 		try {
 			int _type = GTEQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../csheets/ext/editMacro/compiler/Macro.g:171:6: ( '>=' )
-			// ../csheets/ext/editMacro/compiler/Macro.g:171:8: '>='
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:171:6: ( '>=' )
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:171:8: '>='
 			{
 			match(">="); 
 
@@ -637,8 +642,8 @@ public class MacroLexer extends Lexer {
 		try {
 			int _type = GT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../csheets/ext/editMacro/compiler/Macro.g:172:5: ( '>' )
-			// ../csheets/ext/editMacro/compiler/Macro.g:172:7: '>'
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:172:5: ( '>' )
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:172:7: '>'
 			{
 			match('>'); 
 			}
@@ -657,8 +662,8 @@ public class MacroLexer extends Lexer {
 		try {
 			int _type = LT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../csheets/ext/editMacro/compiler/Macro.g:173:5: ( '<' )
-			// ../csheets/ext/editMacro/compiler/Macro.g:173:7: '<'
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:173:5: ( '<' )
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:173:7: '<'
 			{
 			match('<'); 
 			}
@@ -677,8 +682,8 @@ public class MacroLexer extends Lexer {
 		try {
 			int _type = AMP;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../csheets/ext/editMacro/compiler/Macro.g:176:6: ( '&' )
-			// ../csheets/ext/editMacro/compiler/Macro.g:176:8: '&'
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:176:6: ( '&' )
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:176:8: '&'
 			{
 			match('&'); 
 			}
@@ -697,8 +702,8 @@ public class MacroLexer extends Lexer {
 		try {
 			int _type = PLUS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../csheets/ext/editMacro/compiler/Macro.g:179:6: ( '+' )
-			// ../csheets/ext/editMacro/compiler/Macro.g:179:8: '+'
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:179:6: ( '+' )
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:179:8: '+'
 			{
 			match('+'); 
 			}
@@ -717,8 +722,8 @@ public class MacroLexer extends Lexer {
 		try {
 			int _type = MINUS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../csheets/ext/editMacro/compiler/Macro.g:180:7: ( '-' )
-			// ../csheets/ext/editMacro/compiler/Macro.g:180:9: '-'
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:180:7: ( '-' )
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:180:9: '-'
 			{
 			match('-'); 
 			}
@@ -737,8 +742,8 @@ public class MacroLexer extends Lexer {
 		try {
 			int _type = MULTI;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../csheets/ext/editMacro/compiler/Macro.g:181:7: ( '*' )
-			// ../csheets/ext/editMacro/compiler/Macro.g:181:9: '*'
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:181:7: ( '*' )
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:181:9: '*'
 			{
 			match('*'); 
 			}
@@ -757,8 +762,8 @@ public class MacroLexer extends Lexer {
 		try {
 			int _type = DIV;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../csheets/ext/editMacro/compiler/Macro.g:182:6: ( '/' )
-			// ../csheets/ext/editMacro/compiler/Macro.g:182:8: '/'
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:182:6: ( '/' )
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:182:8: '/'
 			{
 			match('/'); 
 			}
@@ -777,8 +782,8 @@ public class MacroLexer extends Lexer {
 		try {
 			int _type = POWER;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../csheets/ext/editMacro/compiler/Macro.g:183:7: ( '^' )
-			// ../csheets/ext/editMacro/compiler/Macro.g:183:9: '^'
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:183:7: ( '^' )
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:183:9: '^'
 			{
 			match('^'); 
 			}
@@ -797,8 +802,8 @@ public class MacroLexer extends Lexer {
 		try {
 			int _type = PERCENT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../csheets/ext/editMacro/compiler/Macro.g:184:9: ( '%' )
-			// ../csheets/ext/editMacro/compiler/Macro.g:184:11: '%'
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:184:9: ( '%' )
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:184:11: '%'
 			{
 			match('%'); 
 			}
@@ -815,8 +820,8 @@ public class MacroLexer extends Lexer {
 	// $ANTLR start "ABS"
 	public final void mABS() throws RecognitionException {
 		try {
-			// ../csheets/ext/editMacro/compiler/Macro.g:187:14: ( '$' )
-			// ../csheets/ext/editMacro/compiler/Macro.g:187:16: '$'
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:187:14: ( '$' )
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:187:16: '$'
 			{
 			match('$'); 
 			}
@@ -831,8 +836,8 @@ public class MacroLexer extends Lexer {
 	// $ANTLR start "EXCL"
 	public final void mEXCL() throws RecognitionException {
 		try {
-			// ../csheets/ext/editMacro/compiler/Macro.g:188:14: ( '!' )
-			// ../csheets/ext/editMacro/compiler/Macro.g:188:17: '!'
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:188:14: ( '!' )
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:188:17: '!'
 			{
 			match('!'); 
 			}
@@ -849,8 +854,8 @@ public class MacroLexer extends Lexer {
 		try {
 			int _type = COLON;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../csheets/ext/editMacro/compiler/Macro.g:189:7: ( ':' )
-			// ../csheets/ext/editMacro/compiler/Macro.g:189:9: ':'
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:189:7: ( ':' )
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:189:9: ':'
 			{
 			match(':'); 
 			}
@@ -869,8 +874,8 @@ public class MacroLexer extends Lexer {
 		try {
 			int _type = VARSIMBLE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../csheets/ext/editMacro/compiler/Macro.g:190:11: ( '@' )
-			// ../csheets/ext/editMacro/compiler/Macro.g:190:13: '@'
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:190:11: ( '@' )
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:190:13: '@'
 			{
 			match('@'); 
 			}
@@ -889,8 +894,8 @@ public class MacroLexer extends Lexer {
 		try {
 			int _type = COMMA;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../csheets/ext/editMacro/compiler/Macro.g:194:7: ( ',' )
-			// ../csheets/ext/editMacro/compiler/Macro.g:194:9: ','
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:194:7: ( ',' )
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:194:9: ','
 			{
 			match(','); 
 			}
@@ -909,8 +914,8 @@ public class MacroLexer extends Lexer {
 		try {
 			int _type = SEMI;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../csheets/ext/editMacro/compiler/Macro.g:195:6: ( ';' )
-			// ../csheets/ext/editMacro/compiler/Macro.g:195:8: ';'
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:195:6: ( ';' )
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:195:8: ';'
 			{
 			match(';'); 
 			}
@@ -929,8 +934,8 @@ public class MacroLexer extends Lexer {
 		try {
 			int _type = LPAR;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../csheets/ext/editMacro/compiler/Macro.g:196:6: ( '(' )
-			// ../csheets/ext/editMacro/compiler/Macro.g:196:8: '('
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:196:6: ( '(' )
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:196:8: '('
 			{
 			match('('); 
 			}
@@ -949,8 +954,8 @@ public class MacroLexer extends Lexer {
 		try {
 			int _type = RPAR;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../csheets/ext/editMacro/compiler/Macro.g:197:6: ( ')' )
-			// ../csheets/ext/editMacro/compiler/Macro.g:197:8: ')'
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:197:6: ( ')' )
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:197:8: ')'
 			{
 			match(')'); 
 			}
@@ -969,8 +974,8 @@ public class MacroLexer extends Lexer {
 		try {
 			int _type = LBRA;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../csheets/ext/editMacro/compiler/Macro.g:198:9: ( '{' )
-			// ../csheets/ext/editMacro/compiler/Macro.g:198:11: '{'
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:198:9: ( '{' )
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:198:11: '{'
 			{
 			match('{'); 
 			}
@@ -989,8 +994,8 @@ public class MacroLexer extends Lexer {
 		try {
 			int _type = RBRA;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../csheets/ext/editMacro/compiler/Macro.g:199:9: ( '}' )
-			// ../csheets/ext/editMacro/compiler/Macro.g:199:11: '}'
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:199:9: ( '}' )
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:199:11: '}'
 			{
 			match('}'); 
 			}
@@ -1009,10 +1014,10 @@ public class MacroLexer extends Lexer {
 		try {
 			int _type = WS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../csheets/ext/editMacro/compiler/Macro.g:203:3: ( ( ' ' | '\\r' '\\n' | '\\n' | '\\t' ) )
-			// ../csheets/ext/editMacro/compiler/Macro.g:203:5: ( ' ' | '\\r' '\\n' | '\\n' | '\\t' )
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:203:3: ( ( ' ' | '\\r' '\\n' | '\\n' | '\\t' ) )
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:203:5: ( ' ' | '\\r' '\\n' | '\\n' | '\\t' )
 			{
-			// ../csheets/ext/editMacro/compiler/Macro.g:203:5: ( ' ' | '\\r' '\\n' | '\\n' | '\\t' )
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:203:5: ( ' ' | '\\r' '\\n' | '\\n' | '\\t' )
 			int alt11=4;
 			switch ( input.LA(1) ) {
 			case ' ':
@@ -1042,26 +1047,26 @@ public class MacroLexer extends Lexer {
 			}
 			switch (alt11) {
 				case 1 :
-					// ../csheets/ext/editMacro/compiler/Macro.g:203:7: ' '
+					// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:203:7: ' '
 					{
 					match(' '); 
 					}
 					break;
 				case 2 :
-					// ../csheets/ext/editMacro/compiler/Macro.g:204:4: '\\r' '\\n'
+					// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:204:4: '\\r' '\\n'
 					{
 					match('\r'); 
 					match('\n'); 
 					}
 					break;
 				case 3 :
-					// ../csheets/ext/editMacro/compiler/Macro.g:205:4: '\\n'
+					// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:205:4: '\\n'
 					{
 					match('\n'); 
 					}
 					break;
 				case 4 :
-					// ../csheets/ext/editMacro/compiler/Macro.g:206:4: '\\t'
+					// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:206:4: '\\t'
 					{
 					match('\t'); 
 					}
@@ -1086,8 +1091,8 @@ public class MacroLexer extends Lexer {
 		try {
 			int _type = ATT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ../csheets/ext/editMacro/compiler/Macro.g:211:8: ( ':=' )
-			// ../csheets/ext/editMacro/compiler/Macro.g:211:10: ':='
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:211:8: ( ':=' )
+			// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:211:10: ':='
 			{
 			match(":="); 
 
@@ -1104,7 +1109,7 @@ public class MacroLexer extends Lexer {
 
 	@Override
 	public void mTokens() throws RecognitionException {
-		// ../csheets/ext/editMacro/compiler/Macro.g:1:8: ( T__37 | T__38 | FUNCTION | CELL_REF | STRING | TEMPVAR | QUOT | NUMBER | EQ | NEQ | LTEQ | GTEQ | GT | LT | AMP | PLUS | MINUS | MULTI | DIV | POWER | PERCENT | COLON | VARSIMBLE | COMMA | SEMI | LPAR | RPAR | LBRA | RBRA | WS | ATT )
+		// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:1:8: ( T__38 | T__39 | FUNCTION | CELL_REF | STRING | VARNAME | QUOT | NUMBER | EQ | NEQ | LTEQ | GTEQ | GT | LT | AMP | PLUS | MINUS | MULTI | DIV | POWER | PERCENT | COLON | VARSIMBLE | COMMA | SEMI | LPAR | RPAR | LBRA | RBRA | WS | ATT )
 		int alt12=31;
 		switch ( input.LA(1) ) {
 		case '\n':
@@ -1408,7 +1413,7 @@ public class MacroLexer extends Lexer {
 		case '@':
 			{
 			int LA12_6 = input.LA(2);
-			if ( ((LA12_6 >= 'A' && LA12_6 <= 'Z')||(LA12_6 >= 'a' && LA12_6 <= 'z')) ) {
+			if ( ((LA12_6 >= '0' && LA12_6 <= '9')||(LA12_6 >= 'A' && LA12_6 <= 'Z')||(LA12_6 >= 'a' && LA12_6 <= 'z')) ) {
 				alt12=6;
 			}
 
@@ -1560,217 +1565,217 @@ public class MacroLexer extends Lexer {
 		}
 		switch (alt12) {
 			case 1 :
-				// ../csheets/ext/editMacro/compiler/Macro.g:1:10: T__37
-				{
-				mT__37(); 
-
-				}
-				break;
-			case 2 :
-				// ../csheets/ext/editMacro/compiler/Macro.g:1:16: T__38
+				// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:1:10: T__38
 				{
 				mT__38(); 
 
 				}
 				break;
+			case 2 :
+				// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:1:16: T__39
+				{
+				mT__39(); 
+
+				}
+				break;
 			case 3 :
-				// ../csheets/ext/editMacro/compiler/Macro.g:1:22: FUNCTION
+				// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:1:22: FUNCTION
 				{
 				mFUNCTION(); 
 
 				}
 				break;
 			case 4 :
-				// ../csheets/ext/editMacro/compiler/Macro.g:1:31: CELL_REF
+				// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:1:31: CELL_REF
 				{
 				mCELL_REF(); 
 
 				}
 				break;
 			case 5 :
-				// ../csheets/ext/editMacro/compiler/Macro.g:1:40: STRING
+				// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:1:40: STRING
 				{
 				mSTRING(); 
 
 				}
 				break;
 			case 6 :
-				// ../csheets/ext/editMacro/compiler/Macro.g:1:47: TEMPVAR
+				// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:1:47: VARNAME
 				{
-				mTEMPVAR(); 
+				mVARNAME(); 
 
 				}
 				break;
 			case 7 :
-				// ../csheets/ext/editMacro/compiler/Macro.g:1:55: QUOT
+				// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:1:55: QUOT
 				{
 				mQUOT(); 
 
 				}
 				break;
 			case 8 :
-				// ../csheets/ext/editMacro/compiler/Macro.g:1:60: NUMBER
+				// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:1:60: NUMBER
 				{
 				mNUMBER(); 
 
 				}
 				break;
 			case 9 :
-				// ../csheets/ext/editMacro/compiler/Macro.g:1:67: EQ
+				// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:1:67: EQ
 				{
 				mEQ(); 
 
 				}
 				break;
 			case 10 :
-				// ../csheets/ext/editMacro/compiler/Macro.g:1:70: NEQ
+				// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:1:70: NEQ
 				{
 				mNEQ(); 
 
 				}
 				break;
 			case 11 :
-				// ../csheets/ext/editMacro/compiler/Macro.g:1:74: LTEQ
+				// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:1:74: LTEQ
 				{
 				mLTEQ(); 
 
 				}
 				break;
 			case 12 :
-				// ../csheets/ext/editMacro/compiler/Macro.g:1:79: GTEQ
+				// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:1:79: GTEQ
 				{
 				mGTEQ(); 
 
 				}
 				break;
 			case 13 :
-				// ../csheets/ext/editMacro/compiler/Macro.g:1:84: GT
+				// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:1:84: GT
 				{
 				mGT(); 
 
 				}
 				break;
 			case 14 :
-				// ../csheets/ext/editMacro/compiler/Macro.g:1:87: LT
+				// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:1:87: LT
 				{
 				mLT(); 
 
 				}
 				break;
 			case 15 :
-				// ../csheets/ext/editMacro/compiler/Macro.g:1:90: AMP
+				// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:1:90: AMP
 				{
 				mAMP(); 
 
 				}
 				break;
 			case 16 :
-				// ../csheets/ext/editMacro/compiler/Macro.g:1:94: PLUS
+				// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:1:94: PLUS
 				{
 				mPLUS(); 
 
 				}
 				break;
 			case 17 :
-				// ../csheets/ext/editMacro/compiler/Macro.g:1:99: MINUS
+				// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:1:99: MINUS
 				{
 				mMINUS(); 
 
 				}
 				break;
 			case 18 :
-				// ../csheets/ext/editMacro/compiler/Macro.g:1:105: MULTI
+				// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:1:105: MULTI
 				{
 				mMULTI(); 
 
 				}
 				break;
 			case 19 :
-				// ../csheets/ext/editMacro/compiler/Macro.g:1:111: DIV
+				// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:1:111: DIV
 				{
 				mDIV(); 
 
 				}
 				break;
 			case 20 :
-				// ../csheets/ext/editMacro/compiler/Macro.g:1:115: POWER
+				// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:1:115: POWER
 				{
 				mPOWER(); 
 
 				}
 				break;
 			case 21 :
-				// ../csheets/ext/editMacro/compiler/Macro.g:1:121: PERCENT
+				// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:1:121: PERCENT
 				{
 				mPERCENT(); 
 
 				}
 				break;
 			case 22 :
-				// ../csheets/ext/editMacro/compiler/Macro.g:1:129: COLON
+				// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:1:129: COLON
 				{
 				mCOLON(); 
 
 				}
 				break;
 			case 23 :
-				// ../csheets/ext/editMacro/compiler/Macro.g:1:135: VARSIMBLE
+				// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:1:135: VARSIMBLE
 				{
 				mVARSIMBLE(); 
 
 				}
 				break;
 			case 24 :
-				// ../csheets/ext/editMacro/compiler/Macro.g:1:145: COMMA
+				// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:1:145: COMMA
 				{
 				mCOMMA(); 
 
 				}
 				break;
 			case 25 :
-				// ../csheets/ext/editMacro/compiler/Macro.g:1:151: SEMI
+				// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:1:151: SEMI
 				{
 				mSEMI(); 
 
 				}
 				break;
 			case 26 :
-				// ../csheets/ext/editMacro/compiler/Macro.g:1:156: LPAR
+				// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:1:156: LPAR
 				{
 				mLPAR(); 
 
 				}
 				break;
 			case 27 :
-				// ../csheets/ext/editMacro/compiler/Macro.g:1:161: RPAR
+				// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:1:161: RPAR
 				{
 				mRPAR(); 
 
 				}
 				break;
 			case 28 :
-				// ../csheets/ext/editMacro/compiler/Macro.g:1:166: LBRA
+				// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:1:166: LBRA
 				{
 				mLBRA(); 
 
 				}
 				break;
 			case 29 :
-				// ../csheets/ext/editMacro/compiler/Macro.g:1:171: RBRA
+				// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:1:171: RBRA
 				{
 				mRBRA(); 
 
 				}
 				break;
 			case 30 :
-				// ../csheets/ext/editMacro/compiler/Macro.g:1:176: WS
+				// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:1:176: WS
 				{
 				mWS(); 
 
 				}
 				break;
 			case 31 :
-				// ../csheets/ext/editMacro/compiler/Macro.g:1:179: ATT
+				// C:\\Users\\Diogo\\Desktop\\gramaticaTeste\\Macro.g:1:179: ATT
 				{
 				mATT(); 
 

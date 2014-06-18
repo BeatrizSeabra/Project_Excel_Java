@@ -4,7 +4,6 @@ import csheets.ext.Extension;
 import csheets.ui.ctrl.UIController;
 import csheets.ui.ext.UIExtension;
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JMenu;
 /**
  * Representa o criacçao do menu Edit Macro.
@@ -33,7 +32,7 @@ public class UIExtensionEditMacro extends UIExtension {
 
 	/**
 	 * Retorna a instancia da classe que cria o JMenu.
-	 * @see runMacroMenu
+	 * @see editMacroMenu
 	 * @return Um componente JMenu.
 	 */
 	public JMenu getMenu() {

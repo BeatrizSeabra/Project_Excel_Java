@@ -3,24 +3,10 @@ package csheets.ext.editMacro.compiler;
 import csheets.core.Cell;
 import csheets.core.IllegalValueTypeException;
 import csheets.core.Value;
-import csheets.core.formula.BinaryOperation;
-import csheets.core.formula.BinaryOperator;
-import csheets.core.formula.Expression;
-import csheets.core.formula.Function;
-import csheets.core.formula.FunctionCall;
-import csheets.core.formula.Literal;
-import csheets.core.formula.Reference;
-import csheets.core.formula.TemporaryVariable;
-import csheets.core.formula.UnaryOperation;
+import csheets.core.formula.*;
 import csheets.core.formula.compiler.ExpressionCompiler;
 import csheets.core.formula.compiler.FormulaCompilationException;
-import csheets.core.formula.compiler.MacroLexer;
-import csheets.core.formula.lang.Attribution;
-import csheets.core.formula.lang.CellReference;
-import csheets.core.formula.lang.Language;
-import csheets.core.formula.lang.RangeReference;
-import csheets.core.formula.lang.ReferenceOperation;
-import csheets.core.formula.lang.UnknownElementException;
+import csheets.core.formula.lang.*;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +23,10 @@ import org.antlr.runtime.tree.Tree;
 public class MacroCompiler implements ExpressionCompiler{
     
     public static final char MACRO_STARTER = 'm';
+    
+     private ArrayList<Expression>expressions=new ArrayList<>();
+     
+     private String name;
 
     public MacroCompiler() {
     }
@@ -59,6 +49,7 @@ public class MacroCompiler implements ExpressionCompiler{
         try {
             // Attempts to match an expression
             tree = (CommonTree) parser.macro().getTree();
+            
         } catch (RecognitionException e) {
             //String message="Fatal recognition exception " + e.getClass().getName()+ " : " + e;
             String message = parser.getErrorMessage(e, parser.tokenNames);
@@ -67,9 +58,13 @@ public class MacroCompiler implements ExpressionCompiler{
             String message = "Other exception : " + e.getMessage();
             throw new FormulaCompilationException(message);
         }
+        
+        for (int i = 3; i < tree.getChildCount()-1; i++) {
+            expressions.add(convert(cell,tree.getChild(i)));
+        }
 
         // Converts the expression and returns it
-        return convert(cell, tree);
+        return null;
     }
     
         protected Expression convert(Cell cell, Tree node) throws FormulaCompilationException {
@@ -83,11 +78,12 @@ public class MacroCompiler implements ExpressionCompiler{
                     case MacroLexer.NUMBER:
                         return new Literal(Value.parseNumericValue(node.getText()));
                     case MacroLexer.STRING:
+                        name=node.getText();
                         return new Literal(Value.parseValue(node.getText(), Value.Type.BOOLEAN, Value.Type.DATE));
                     case MacroLexer.CELL_REF:
                         return new CellReference(cell.getSpreadsheet(), node.getText());
                     case MacroLexer.VARNAME:
-                        return cell.getSpreadsheet().getTemporaryVariable(node.getText());
+                       return cell.getSpreadsheet().getTemporaryVariable(node.getText());
 //					case FormulaParserTokenTypes.NAME:
 						/* return cell.getSpreadsheet().getWorkbook().
                      getRange(node.getText()) (Reference)*/
@@ -167,6 +163,14 @@ public class MacroCompiler implements ExpressionCompiler{
         {
             throw new FormulaCompilationException();
         }
+    }
+
+    public ArrayList<Expression> getExpressions() {
+        return expressions;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override

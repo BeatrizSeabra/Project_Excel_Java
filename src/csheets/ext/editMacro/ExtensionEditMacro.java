@@ -6,17 +6,17 @@ import csheets.ui.ctrl.UIController;
 import csheets.ui.ext.UIExtension;
 
 /**
- * Representa o extensao Run Macro.
+ * Representa o extensao Edit Macro.
  *
- * @author 1120564MarcoEsteves
+ * @author 1120388
  */
 public class ExtensionEditMacro extends Extension {
     
     /** Nome da Extensao */
-	public static final String NAME = "Run Macro";
+	public static final String NAME = "Edit Macro";
 
 	/**
-	 * Cria uma nova Extensao RunMacro.
+	 * Cria uma nova Extensao EditMacro.
 	 */
 	public ExtensionEditMacro() {
 		super(NAME);

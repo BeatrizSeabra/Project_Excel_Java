@@ -47,11 +47,11 @@ expression
        	;
 
 macro
-        : 'macro'  STRING  LBRA  (line)+  RBRA 
+        : 'macro'  STRING  LBRA  '\n' (line '\n')*  RBRA 
         ;
 
 line
-        :EQ! sq '\n'
+        :sq
         ;
 
 sq
@@ -71,7 +71,7 @@ block:
         ;
 
 attribution
-        : ( CELL_REF | TEMPVAR ) ATT^ (attribution | comparison)
+        : ( VARNAME | CELL_REF ) ATT^ (attribution | comparison)
         ;
 
 comparison
@@ -151,9 +151,9 @@ STRING	:	QUOT
 		QUOT  { setText(getText().substring(1, getText().length()-1)); }
 	;  	
 
-/*TEMPORARY VARIABLE*/
-
-TEMPVAR :   VARSIMBLE LETTER+;
+/*Temporary Variable*/
+VARNAME
+	:	('@')('0'..'9'|'a'..'z'|'A'..'Z')+;
 
 QUOT: '"' 
 	;

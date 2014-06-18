@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 
 /**
  * Representa a acçao de executar a extensao Edit Macro.
- * 
+ *
  * @author 1120388
  */
 public class editMacroAction extends BaseAction {
@@ -34,7 +34,13 @@ public class editMacroAction extends BaseAction {
     protected void defineProperties() {
     }
 
-    public void actionPerformed(ActionEvent event) { 
-        
-        }
+    public void actionPerformed(ActionEvent event) {
+        JDialogEditMacro editMacro = new JDialogEditMacro(null, true, uiController);
+        editMacro.setTitle("RUN MACRO");
+        editMacro.setVisible(true);
+        editMacro.setResizable(enabled);
+        editMacro.setMinimumSize(new Dimension(40, 40));
+        editMacro.setLocationRelativeTo(null);
+        editMacro.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+    }
 }

@@ -1,41 +1,48 @@
 package csheets.ext.editMacro.compiler;
 
+import csheets.core.Cell;
 import csheets.core.IllegalValueTypeException;
-import csheets.core.Value;
-import csheets.core.formula.Formula;
-import csheets.core.formula.util.CircularReferenceException;
-import csheets.core.formula.util.CircularReferenceFinder;
-import csheets.core.formula.util.ExpressionVisitor;
-import csheets.core.formula.util.ExpressionVisitorException;
+import csheets.core.formula.Expression;
+import csheets.core.formula.compiler.FormulaCompilationException;
 import java.util.ArrayList;
 
 /**
  *
  * @author i120388
  */
-public class Macro{
+public class Macro {
 
-    private ArrayList<Formula> formulas;
+    private String source;
+    private Cell cell;
+    MacroCompiler compile = new MacroCompiler();
 
-    public Macro() {
+    public Macro(Cell cell, String source) throws FormulaCompilationException {
+        this.cell = cell;
+        this.source = source;
+
+        compile.compile(cell, source);
     }
 
-    public Macro(ArrayList<Formula> formulas) {
-        this.formulas = formulas;
+    public String getName() {
+        return compile.getName();
     }
 
+    private ArrayList<Expression> getExpressions() {
+        return compile.getExpressions();
+    }
 
-    public ArrayList<Value> evaluates() throws IllegalValueTypeException {
-        ArrayList<Value>value=new ArrayList<>();
+    public String results() throws IllegalValueTypeException {
+        String[] resultado = source.split("\n");
+        String result = "";
         
-        for (Formula formula : formulas) {
-            if (!formula.hasCircularReference()) {
-                value.add(formula.getExpression().evaluate());
-            } else {
-                value.add(new Value(new CircularReferenceException(formula)));
-            }
+        ArrayList<Expression>exp=getExpressions();
+        
+        int aux=0;
+        for (int i = 3; i <resultado.length-1; i++) {
+            result+=resultado[i]+" "+exp.get(aux).evaluate().toString()+"\n";
+            aux++;
         }
-        return null;
+        
+        return result;
     }
-
 }
