@@ -108,19 +108,4 @@ public class StylableSpreadsheet extends SpreadsheetExtension {
 	public void setColumnWidth(int column, int width) {
 		columnWidths.put(column, width);
 	}
-
-    @Override
-    public boolean addOrUpdateTemporaryVariable(TemporaryVariable temporaryVariable) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean removeTemporaryVariable(TemporaryVariable temporaryVariable) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public TemporaryVariable getTemporaryVariable(String variableName) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

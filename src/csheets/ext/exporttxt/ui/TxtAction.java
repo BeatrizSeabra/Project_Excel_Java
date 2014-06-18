@@ -20,7 +20,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
- * @author JSilva314 - Joao Paulo Silva
+ * @author JSilva314 - Joao Paulo Silva/ Stefan Parker
  * 
  */
 public class TxtAction extends BaseAction{
@@ -66,16 +66,19 @@ public class TxtAction extends BaseAction{
      */
     public void actionPerformed(ActionEvent event) {
         uiController.setExportStatus(true);
+        uiController.setModificado(false);
         File file = new File("txt");
         //nova thread que Exporta o ficheiro
         Thread thread = new Thread(new TxtAction.FileExporter(file));
         //iniciar a thread
         thread.start();
     }
-    // classe que implementa a thread
+    /**
+     * Classe que implementa o Runnable para correr a Thread. Esta thread servirá para 
+     * o programa correr em paralelo com o Export
+     */
     private class FileExporter implements Runnable{
         File file;
-        boolean bool=true;
         public FileExporter(File file){
             this.file = file;
         }
@@ -89,8 +92,7 @@ public class TxtAction extends BaseAction{
                     Logger.getLogger(TxtAction.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 if(uiController.getModificado()){
-                    exportFile2(file);
-                    uiController.setModificado(false);
+                    exportFileWithParameters(file);
                 }
             }
         }
@@ -99,7 +101,9 @@ public class TxtAction extends BaseAction{
     
     private void exportFile(File file) {
         int c = this.uiController.getActiveSpreadsheet().getColumnCount();
+        System.out.println(c);
         int r = this.uiController.getActiveSpreadsheet().getRowCount();
+        System.out.println(r);
            
         try {
 
@@ -140,9 +144,19 @@ public class TxtAction extends BaseAction{
 
     }
     
-     public void exportFile2(File file){
+    
+    /** 
+     * A method to write on the file previous created. If this method is called
+     * means that the export action already was called once and already is created a file with content.
+     * So the class verifies if there any changed cell and calls this method to write on the file.
+     * @param file 
+     */
+     public void exportFileWithParameters(File file){
         int c = this.uiController.getActiveSpreadsheet().getColumnCount();
+        System.out.println(c);
         int r = this.uiController.getActiveSpreadsheet().getRowCount();
+        System.out.println(r);
+        System.out.println("Modificado entrado");
          
          try {
             PrintWriter wr;
@@ -155,6 +169,7 @@ public class TxtAction extends BaseAction{
                 wr.println();
             }
             wr.close();
+            uiController.setModificado(false);
 
         } catch (IOException ex) {
             Logger.getLogger(TxtAction.class.getName()).log(Level.SEVERE, null, ex);
