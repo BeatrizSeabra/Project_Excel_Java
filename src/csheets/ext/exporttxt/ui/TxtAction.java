@@ -32,6 +32,7 @@ public class TxtAction extends BaseAction{
     
     public String SEPARATOR = ",";
     public String HEADER ="";
+    public String caminho = "";
         
     /**
      * Creates a new action.
@@ -39,6 +40,7 @@ public class TxtAction extends BaseAction{
      * @param uiController the user interface controller
      */
     public TxtAction(UIController uiController) {
+        uiController.setExportStatus(false);
         this.uiController = uiController;
                 
     }
@@ -63,7 +65,7 @@ public class TxtAction extends BaseAction{
      * @param event the event that was fired
      */
     public void actionPerformed(ActionEvent event) {
-        
+        uiController.setExportStatus(true);
         File file = new File("txt");
         //nova thread que Exporta o ficheiro
         Thread thread = new Thread(new TxtAction.FileExporter(file));
@@ -73,14 +75,24 @@ public class TxtAction extends BaseAction{
     // classe que implementa a thread
     private class FileExporter implements Runnable{
         File file;
-        
+        boolean bool=true;
         public FileExporter(File file){
             this.file = file;
         }
         @Override
         public void run() {
-            //chama o import file
             exportFile(file);
+            while(uiController.getExportStatus()){
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(TxtAction.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                if(uiController.getModificado()){
+                    exportFile2(file);
+                    uiController.setModificado(false);
+                }
+            }
         }
       
     }
@@ -94,7 +106,6 @@ public class TxtAction extends BaseAction{
             JFileChooser fc = new JFileChooser();
           
             fc.setFileFilter(new FileNameExtensionFilter("Ficheiro TXT (.txt)", "txt"));
-            String caminho = "";
             
             // USER OPTIONS FOR SEPARATOR AND HEADER
             do{
@@ -120,6 +131,30 @@ public class TxtAction extends BaseAction{
             }
             wr.close();
             JOptionPane.showMessageDialog(null, "Ficheiro guardado com sucesso!");
+            uiController.setModificado(false);
+            //ExportFile a = new ExportFile(uiController,file, r, c,caminho, SEPARATOR, HEADER);
+
+        } catch (IOException ex) {
+            Logger.getLogger(TxtAction.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    
+     public void exportFile2(File file){
+        int c = this.uiController.getActiveSpreadsheet().getColumnCount();
+        int r = this.uiController.getActiveSpreadsheet().getRowCount();
+         
+         try {
+            PrintWriter wr;
+            wr = new PrintWriter(new FileWriter(caminho + ".txt"));
+            wr.println(SEPARATOR+HEADER);
+            for (int row = 0; row < r + 1; row++) {
+                for (int column = 0; column < c + 1; column++) {
+                    wr.print(this.uiController.getActiveSpreadsheet().getCell(column, row).getContent() + SEPARATOR);
+                }
+                wr.println();
+            }
+            wr.close();
 
         } catch (IOException ex) {
             Logger.getLogger(TxtAction.class.getName()).log(Level.SEVERE, null, ex);

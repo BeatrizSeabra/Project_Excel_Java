@@ -116,6 +116,7 @@ public class CellEditor extends JTextField implements TableCellEditor, Selection
 			try {
 				cell.setContent(content);
                                  uiController.writeLogFile(cell.getAddress().toString(), "onChange");
+                                 uiController.setModificado(true);
 			} catch (FormulaCompilationException e) {
 				// Retrieves correct message
 				String message;
