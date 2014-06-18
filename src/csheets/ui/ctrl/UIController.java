@@ -87,8 +87,11 @@ public class UIController implements SpreadsheetAppListener {
         
         /** The List of events that will be logged */
 	private ArrayList<String> evl;
-        private static boolean modificado;
+        private static boolean modificado=false;
         private static boolean exportStatus;
+        private static boolean importStatus;
+
+   
 
 	/**
 	 * Creates a new user interface controller.
@@ -280,7 +283,6 @@ public class UIController implements SpreadsheetAppListener {
         public void writeLogFile(String cell, String event)
         {
             WriteLogFile.writeLogFile(cell, event, getEvl(),"");
-            setModificado(true);
         }
         
         public boolean getModificado() {
@@ -299,6 +301,13 @@ public class UIController implements SpreadsheetAppListener {
             return exportStatus;
         }
 
+        public void setImportStatus(boolean importStatus) {
+            UIController.importStatus = importStatus;
+        }
+
+        public boolean getImportStatus() {
+            return importStatus;
+        }
 /*
  * PROPERTIES
  */
