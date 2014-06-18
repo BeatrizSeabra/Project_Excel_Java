@@ -41,6 +41,7 @@ import csheets.core.Workbook;
 import csheets.core.formula.compiler.FormulaCompiler;
 import csheets.core.formula.lang.Language;
 import csheets.ext.ExtensionManager;
+import csheets.ext.temporaryvariable.SpreadsheetVariableSynchronizer;
 import csheets.io.Codec;
 import csheets.io.CodecFactory;
 import csheets.io.NamedProperties;
@@ -158,6 +159,8 @@ public class CleanSheets {
 	public void create() {
 		Workbook workbook = new Workbook(3);
 		workbooks.put(workbook, null);
+                SpreadsheetVariableSynchronizer sync = new SpreadsheetVariableSynchronizer();
+                workbook.addWorkbookListener(sync);
 		fireSpreadsheetAppEvent(workbook, null, SpreadsheetAppEvent.Type.CREATED);
 	}
 
