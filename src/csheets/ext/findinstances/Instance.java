@@ -7,6 +7,7 @@
 package csheets.ext.findinstances;
 
 import java.net.InetAddress;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,20 +16,22 @@ import java.net.InetAddress;
 public class Instance implements Comparable{
     private InetAddress IPAddress;
     private int UniqueID;
-    private String[] Workbooks;
-    private String[] Extensions;
+    private ArrayList<String> Workbooks;
+    private ArrayList<String> Extensions;
     
-    public Instance(){
-        
+    public Instance(InetAddress IPAddress, int UniqueID){
+        this.IPAddress=IPAddress;
+        this.UniqueID=UniqueID;
+        Workbooks=new ArrayList();
+        Extensions=new ArrayList();
     }
+    
     public void addWorkbook(String book){
-        
-        
+        Workbooks.add(book);
     }
     
     public void addExtension(String ext){
-        
-        
+        Extensions.add(ext);
     }
     /**
      * @return the IPAddress
@@ -61,28 +64,28 @@ public class Instance implements Comparable{
     /**
      * @return the Workbooks
      */
-    public String[] getWorkbooks() {
+    public ArrayList<String> getWorkbooks() {
         return Workbooks;
     }
 
     /**
      * @param Workbooks the Workbooks to set
      */
-    public void setWorkbooks(String[] Workbooks) {
+    public void setWorkbooks(ArrayList<String> Workbooks) {
         this.Workbooks = Workbooks;
     }
 
     /**
      * @return the Extensions
      */
-    public String[] getExtensions() {
+    public ArrayList<String> getExtensions() {
         return Extensions;
     }
 
     /**
      * @param Extensions the Extensions to set
      */
-    public void setExtensions(String[] Extensions) {
+    public void setExtensions(ArrayList<String> Extensions) {
         this.Extensions = Extensions;
     }
 

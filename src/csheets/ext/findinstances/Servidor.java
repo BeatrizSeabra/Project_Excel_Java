@@ -21,12 +21,16 @@ import java.util.Enumeration;
  * @author RafaelChaves
  */
 public class Servidor {
-    
-    
-    public static ArrayList<InetAddress> Srv() throws IOException {
+
+    /**
+     *
+     * @return
+     * @throws IOException
+     */
+    public static ArrayList<Instance> Srv() throws IOException {
 
         //ArrayList with the information of every ip address that respondes
-        ArrayList<InetAddress> ips = new ArrayList();
+        ArrayList<Instance> instances = new ArrayList();
 
         DatagramSocket socket = new DatagramSocket(9877);
         InetAddress IPAddress = InetAddress.getByName("0.0.0.0");
@@ -64,9 +68,9 @@ public class Servidor {
             try {
                 socket.receive(receivePacket);
                 InetAddress a = receivePacket.getAddress();
-                if (!ips.contains(a)) {
-                    ips.add(a);
-                }
+//                if (!ips.contains(a)) {
+//                    ips.add(a);
+//                }
                 receiveData = new byte[1024];
                 String resp = "Recebi";
                 byte[] msgr = resp.getBytes();
@@ -80,6 +84,6 @@ public class Servidor {
             }
         }
         socket.close();
-        return ips;
+        return instances;
     }
 }

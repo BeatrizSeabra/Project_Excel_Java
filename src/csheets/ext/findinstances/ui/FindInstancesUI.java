@@ -103,7 +103,7 @@ public class FindInstancesUI extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             //ips=Servidor.Srv();
-            
+            instances=Servidor.Srv();
             viewTree=new JScrollPane(makeTree());
         } catch (Exception ex) {
             Logger.getLogger(FindInstancesUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -120,6 +120,7 @@ public class FindInstancesUI extends javax.swing.JFrame {
     private void sortInstances(ArrayList<Instance> instances){
         
     }
+    
     private void createNodes(DefaultMutableTreeNode top){
         DefaultMutableTreeNode ip=null;
         DefaultMutableTreeNode instance=null;
