@@ -2,6 +2,7 @@ package csheets.ext.editMacro.compiler;
 
 import csheets.core.Cell;
 import csheets.core.IllegalValueTypeException;
+import csheets.core.SpreadsheetImpl;
 import csheets.core.Value;
 import csheets.core.formula.*;
 import csheets.core.formula.compiler.ExpressionCompiler;
@@ -83,7 +84,7 @@ public class MacroCompiler implements ExpressionCompiler{
                     case MacroLexer.CELL_REF:
                         return new CellReference(cell.getSpreadsheet(), node.getText());
                     case MacroLexer.VARNAME:
-                       return cell.getSpreadsheet().getTemporaryVariable(node.getText());
+                       return ((SpreadsheetImpl)cell.getSpreadsheet()).getTemporaryVariable(node.getText());
 //					case FormulaParserTokenTypes.NAME:
 						/* return cell.getSpreadsheet().getWorkbook().
                      getRange(node.getText()) (Reference)*/
@@ -132,8 +133,8 @@ public class MacroCompiler implements ExpressionCompiler{
 
                     if (node.getChild(0).getText().matches("@[a-zA-Z0-9]+")) { //Tests if the attribution is being made to a temporary variable 
                         Value value = convert(cell, node.getChild(1)).evaluate();
-                        TemporaryVariable temporaryVariable = new TemporaryVariable(node.getChild(0).getText(), value);
-                        cell.getSpreadsheet().addOrUpdateTemporaryVariable(temporaryVariable);
+                        TemporaryVariable temporaryVariable = new TemporaryVariable(node.getChild(0).getText(), value, cell);
+                        ((SpreadsheetImpl)cell.getSpreadsheet()).addOrUpdateTemporaryVariable(temporaryVariable);
                     } else { //Attribution to a Cell Reference
                         //crias uma referencia para a cell
                         CellReference cellR = new CellReference(cell.getSpreadsheet(), node.getChild(0).getText());

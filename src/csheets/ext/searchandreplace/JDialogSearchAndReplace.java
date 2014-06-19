@@ -15,13 +15,14 @@ import csheets.ui.sheet.SpreadsheetTable;
 public class JDialogSearchAndReplace extends javax.swing.JDialog {
 
     private SpreadsheetTable focus;
+    private Address cell;
 
     /**
      * Creates new form JDialogSearchAndReplace
      */
-    public JDialogSearchAndReplace(java.awt.Frame parent, boolean modal, SpreadsheetTable focusOwner) {
-        super(parent, modal);
-        this.focusOwner = focusOwner;
+    public JDialogSearchAndReplace(java.awt.Frame parent, boolean bool, SpreadsheetTable focusOwner) {
+        super(parent, bool);
+        this.focus = focusOwner;
         initComponents();
     }
 
@@ -34,6 +35,7 @@ public class JDialogSearchAndReplace extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        search1 = new csheets.ext.searchandreplace.Search();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -173,7 +175,7 @@ public class JDialogSearchAndReplace extends javax.swing.JDialog {
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         String text = searchText.getText();
         Search search = new Search();
-        cell = search.simpleSearch(focusOwner, text);
+        cell = search.simpleSearch(focus, text);
         dispose();
     }//GEN-LAST:event_searchButtonActionPerformed
 
@@ -218,6 +220,22 @@ public class JDialogSearchAndReplace extends javax.swing.JDialog {
         }
         //</editor-fold>
 
+          try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(JDialogSearchAndReplace.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(JDialogSearchAndReplace.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(JDialogSearchAndReplace.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(JDialogSearchAndReplace.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -237,8 +255,7 @@ public class JDialogSearchAndReplace extends javax.swing.JDialog {
         return this.cell;
     }
 
-    private Address cell;
-    private SpreadsheetTable focusOwner;
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton jButton1;
@@ -248,6 +265,7 @@ public class JDialogSearchAndReplace extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private csheets.ext.searchandreplace.Search search1;
     private javax.swing.JButton searchButton;
     private javax.swing.JTextField searchText;
     // End of variables declaration//GEN-END:variables

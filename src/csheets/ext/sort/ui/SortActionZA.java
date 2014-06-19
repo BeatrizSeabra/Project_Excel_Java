@@ -58,6 +58,11 @@ public class SortActionZA extends BaseAction {
         putValue(SMALL_ICON, new ImageIcon(CleanSheets.class.getResource("res/img/sort.gif")));
     }
 
+    /**
+     * Returns the columns selected by the user.
+     *
+     * @return Selected Columns
+     */
     public ArrayList getCollumns() {
         ArrayList al = new ArrayList();
         for (int i = 0; i < range.length; i++) {
@@ -81,18 +86,18 @@ public class SortActionZA extends BaseAction {
             cth = (CellTransferHandler) this.uiController.getCellTransferHandler();
             range = cth.getSelec();
             ArrayList columns = getCollumns();
-            int k = 0;
-                String col = askColumn(columns, abc);
-                if (col != "A") {
-                    for (int m = 0; m < abc.length; m++) {
-                        if (col == abc[m].toString()) {
-                            k = m;
-                        }
+            int ReferenceColumn = 0;
+            String col = askColumn(columns, abc);
+            if (col != "A") {
+                for (int m = 0; m < abc.length; m++) {
+                    if (col == abc[m].toString()) {
+                        ReferenceColumn = m;
                     }
                 }
-            
+            }
+
             for (int i = 0; i < columns.size(); i++) {
-                sortZA(maxrows, (int) columns.get(i), columns, k);
+                sortZA(maxrows, (int) columns.get(i), columns, ReferenceColumn);
             }
         } catch (FormulaCompilationException ex) {
             System.out.println("Não foi possivel localizar a celula ativa ou o numero de linhas existentes");
@@ -122,6 +127,7 @@ public class SortActionZA extends BaseAction {
      }
      }
      }*/
+    
     public void checkListEmpty() {
         if (!conteudos.isEmpty()) {
             conteudos.removeAll(conteudos);
@@ -144,16 +150,16 @@ public class SortActionZA extends BaseAction {
     /**
      * Method to sort the contents of the cells.
      *
-     *
+     * @param ReferenceColumn
      */
-    public void orderContents(int k) throws FormulaCompilationException {
+    public void orderContents(int ReferenceColumn) throws FormulaCompilationException {
         boolean sorting = true;
         while (sorting == true) {
             sorting = false;
             for (int i = 0; i < range.length - 1; i++) {
                 try {
-                    int number1 = Integer.parseInt(range[i][k].getContent());
-                    int number2 = Integer.parseInt(range[i + 1][k].getContent());
+                    int number1 = Integer.parseInt(range[i][ReferenceColumn].getContent());
+                    int number2 = Integer.parseInt(range[i + 1][ReferenceColumn].getContent());
                     if (number2 > number1) {
                         for (int j = 0; j < range[0].length; j++) {
                             String tmp = range[i][j].getContent();
@@ -163,8 +169,8 @@ public class SortActionZA extends BaseAction {
                         }
                     }
                 } catch (NumberFormatException nfe) {
-                    String firstValue = range[i][k].getContent();
-                    String secondValue = range[i + 1][k].getContent();
+                    String firstValue = range[i][ReferenceColumn].getContent();
+                    String secondValue = range[i + 1][ReferenceColumn].getContent();
                     if (secondValue.compareToIgnoreCase(firstValue) > 0) {
                         for (int j = 0; j < range[0].length; j++) {
                             String tmp = range[i][j].getContent();
@@ -181,7 +187,9 @@ public class SortActionZA extends BaseAction {
     /**
      * Method to ask the user to reference column.
      *
-     *
+     * @param columns
+     * @param abc
+     * @return ReferenceColumn
      */
     public String askColumn(ArrayList columns, String[] abc) {
 
@@ -215,4 +223,3 @@ public class SortActionZA extends BaseAction {
         }
     }
 }
-

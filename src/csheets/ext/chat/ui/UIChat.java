@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 
@@ -27,6 +26,7 @@ public class UIChat extends javax.swing.JFrame {
 
     public ChatController controlo;
     private UDPClient cliente;
+    private UDPServer server;
     /**
      * Creates new form UIChat
      */
@@ -218,13 +218,15 @@ public class UIChat extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (controlo == null) {
-            try {
-                UDPServer.getInstance().start();
+           
+            controlo = new ChatController(this);
+            controlo.getServidor().start();
+             try {
+                server= new UDPServer(controlo);
+                server.start();
             } catch (SocketException ex) {
                 Logger.getLogger(UIChat.class.getName()).log(Level.SEVERE, null, ex);
             }
-            controlo = new ChatController(this);
-            controlo.getServidor().start();
         } else {
             if (controlo.getServidor().allDone == true) {
                 controlo.getServidor().allDone = false;

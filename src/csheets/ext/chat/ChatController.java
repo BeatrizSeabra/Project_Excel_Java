@@ -12,6 +12,8 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -76,14 +78,21 @@ public class ChatController {
                         //0 é mensagem para conversa
                         String id;
                         id = file_string.substring(0, 10);
-                        refreshConversation(address.getHostAddress(), id.trim(), file_string.substring(11));
+                        refreshConversation(address.getHostAddress(), id.trim(), file_string.substring(10));
                         break;
                     case 2:
                         // Alguém criou uma conversa
                         String[] ips = file_string.split(";");
                         if (createConversation(ips[0].trim())) {//se falso é porque a conversa ja tinha sido adicionada
-                            for (int i = 1; i < ips.length; i++) {
-                                addToConversation(ips[0], ips[i]);
+                           UI.refreshChatList(listConnections());
+                            addToConversation(ips[0], address.getHostAddress());
+                            for (int i = 1; i < ips.length-1; i++) {
+                               try {
+                                   if(!ips[i].equals(InetAddress.getLocalHost().getHostAddress()))
+                                       addToConversation(ips[0], ips[i]);
+                               } catch (UnknownHostException ex) {
+                                   Logger.getLogger(ChatController.class.getName()).log(Level.SEVERE, null, ex);
+                               }
                             }
                         }
                         break;
@@ -134,6 +143,7 @@ public class ChatController {
     /**
      * cria um novo chat
      *
+     * @param ip
      */
     public void newChat(String ip) {
         if (!existe(ip)) {
