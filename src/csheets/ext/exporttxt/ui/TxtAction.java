@@ -5,6 +5,9 @@
  */
 package csheets.ext.exporttxt.ui;
 
+import csheets.CleanSheets;
+import csheets.core.Cell;
+import csheets.core.CellListener;
 import csheets.ui.ctrl.BaseAction;
 import csheets.ui.ctrl.UIController;
 import java.awt.event.ActionEvent;
@@ -14,6 +17,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static javax.swing.Action.SMALL_ICON;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -55,6 +60,8 @@ public class TxtAction extends BaseAction{
      * 
      */
     protected void defineProperties() {
+        setEnabled(true);
+        putValue(SMALL_ICON, new ImageIcon(CleanSheets.class.getResource("res/img/txt.gif")));
     }
 
     /**
@@ -77,7 +84,7 @@ public class TxtAction extends BaseAction{
      * Classe que implementa o Runnable para correr a Thread. Esta thread servirá para 
      * o programa correr em paralelo com o Export
      */
-    private class FileExporter implements Runnable{
+     private class FileExporter implements Runnable{
         File file;
         public FileExporter(File file){
             this.file = file;
@@ -85,6 +92,7 @@ public class TxtAction extends BaseAction{
         @Override
         public void run() {
             exportFile(file);
+            addListeners();
             while(uiController.getExportStatus()){
                 try {
                     Thread.sleep(500);
@@ -94,6 +102,7 @@ public class TxtAction extends BaseAction{
                 if(uiController.getModificado()){
                     exportFileWithParameters(file);
                 }
+                
             }
         }
       
@@ -101,9 +110,7 @@ public class TxtAction extends BaseAction{
     
     private void exportFile(File file) {
         int c = this.uiController.getActiveSpreadsheet().getColumnCount();
-        System.out.println(c);
         int r = this.uiController.getActiveSpreadsheet().getRowCount();
-        System.out.println(r);
            
         try {
 
@@ -151,12 +158,10 @@ public class TxtAction extends BaseAction{
      * So the class verifies if there any changed cell and calls this method to write on the file.
      * @param file 
      */
-     public void exportFileWithParameters(File file){
+	 
+     private void exportFileWithParameters(File file){
         int c = this.uiController.getActiveSpreadsheet().getColumnCount();
-        System.out.println(c);
         int r = this.uiController.getActiveSpreadsheet().getRowCount();
-        System.out.println(r);
-        System.out.println("Modificado entrado");
          
          try {
             PrintWriter wr;
@@ -176,5 +181,53 @@ public class TxtAction extends BaseAction{
         }
 
     }
+     
+        /**
+         * Implements cell listeners on the active spreedsheet. This class implements cell 
+         * listeners to all of the cell on the active spreedsheet, so if any cell change,
+         * it will set boolean true and write on the file
+         */
+	
+	class OnChangeListener implements CellListener {
 
+        @Override
+        public void valueChanged(Cell cell) {
+            uiController.setModificado(true);
+        }
+
+        @Override
+        public void contentChanged(Cell cell) {
+            uiController.setModificado(true);
+        }
+
+        @Override
+        public void dependentsChanged(Cell cell) {
+            uiController.setModificado(true);
+        }
+
+        @Override
+        public void cellCleared(Cell cell) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void cellCopied(Cell cell, Cell source) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+	 }
+	 
+	 /**
+          * This method calls the OnChangeListener to set Cell Listeners to all of the cells.
+          */
+        
+        
+	 public void addListeners(){
+	 for (int i=0;i<52;i++){
+		for(int j=0;j<128;j++){
+			
+                        Cell cell = uiController.getActiveSpreadsheet().getCell(i, j);
+			cell.addCellListener(new OnChangeListener());
+			}
+		}
+	}
 }
