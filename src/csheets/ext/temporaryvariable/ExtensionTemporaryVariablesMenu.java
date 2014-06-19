@@ -13,7 +13,7 @@ import csheets.ui.ext.UIExtension;
 
 /**
  *
- * @author Diogo
+ * @author Diogo Moreira (1120339)
  */
 public class ExtensionTemporaryVariablesMenu extends Extension{
     

@@ -12,7 +12,7 @@ import javax.swing.JMenu;
 
 /**
  *
- * @author Diogo
+ * @author Diogo Moreira (1120339)
  */
 public class TemporaryVariableMenu extends JMenu{
 
