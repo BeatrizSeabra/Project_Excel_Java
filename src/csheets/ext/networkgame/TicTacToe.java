@@ -24,14 +24,14 @@ public class TicTacToe extends Game {
 
     @Override
     public void init(boolean isServer) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
     public void start() {
         NetworkGameController.mainWindow.dispose();
         NetworkGameController.initJFrame("Tic Tac Toe");
-        NetworkGameController.mainWindow.add(new TicTacToeUI(this));
+        NetworkGameController.mainWindow=(new TicTacToeUI(this));
         NetworkGameController.packJFrame();
     }
 
