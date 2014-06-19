@@ -58,7 +58,12 @@ public class MacroTest {
             Logger.getLogger(MacroTest.class.getName()).log(Level.SEVERE, null, ex);
         }
         String expResult = "TESTE";
-        String result = instance.getName();
+        String result = null;
+        try {
+            result = instance.getName();
+        } catch (FormulaCompilationException ex) {
+            Logger.getLogger(MacroTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         assertEquals(expResult, result);
     }
 
@@ -74,6 +79,7 @@ public class MacroTest {
                     + "}";
         
         Macro instance = new Macro(null, macro);
+        instance.compiler();
         
         String expResult = "2+2 = 4\n" +
                             "2*5 = 10\n";
@@ -91,6 +97,7 @@ public class MacroTest {
                     + "}";
         
         Macro instance = new Macro(null, macro);
+        instance.compiler();
         
         String expResult = "2+2 = 4\n" +
                             "2*5+3 = 13\n";
