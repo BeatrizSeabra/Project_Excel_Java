@@ -8,10 +8,11 @@ package csheets.ext.editMacro.ui;
 import csheets.core.IllegalValueTypeException;
 import csheets.core.formula.compiler.FormulaCompilationException;
 import csheets.ext.editMacro.compiler.Macro;
+import csheets.ext.editMacro.compiler.Macros;
 import csheets.ui.ctrl.UIController;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
@@ -24,6 +25,7 @@ public class JDialogEditMacro extends javax.swing.JDialog {
     //Arraylist que ira guardar todas as macros criadas
     private ArrayList<Macro> macros = new ArrayList<Macro>();
     private UIController uicontroller;
+//    Macros macrosFile=new Macros();
 
     /**
      * Creates new form JDialogEditMacro
@@ -34,7 +36,21 @@ public class JDialogEditMacro extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         this.uicontroller = uicontroller;
+        
         jComboBox1.removeAllItems();
+        
+//        try {
+//            macrosFile.read();
+//            macros.addAll(macrosFile.getMacros());
+//            jComboBox1=new JComboBox(macros.toArray());
+//        } catch (IOException ex) {
+//            System.err.println(ex);
+//        } catch (ClassNotFoundException ex) {
+//            System.err.println(ex);
+//        }catch(Exception ex){
+//            System.err.println(ex);
+//        }
+        
     }
 
     /**
@@ -173,6 +189,7 @@ public class JDialogEditMacro extends javax.swing.JDialog {
         } else {
             try {
                 Macro macro = new Macro(uicontroller.getActiveCell(), source);
+//                macrosFile.add(macro);
                 macros.add(macro);
                 jComboBox1.addItem(macro.getName());
                 jComboBox1.revalidate();
@@ -207,7 +224,6 @@ public class JDialogEditMacro extends javax.swing.JDialog {
                         result = macro.results();
                     } catch (IllegalValueTypeException ex) {
                         JOptionPane.showMessageDialog(this, "Invalid Macro", "ERROR", JOptionPane.ERROR_MESSAGE);
-                        System.out.println("2");
                     }
                     
                     JDialog dialog = new JOptionPane("Result:\n" + result).createDialog(null, "Result");
@@ -215,7 +231,7 @@ public class JDialogEditMacro extends javax.swing.JDialog {
                     dialog.setVisible(true);
                 }
             } catch (FormulaCompilationException ex) {
-                Logger.getLogger(JDialogEditMacro.class.getName()).log(Level.SEVERE, null, ex);
+                System.err.println(ex);
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
