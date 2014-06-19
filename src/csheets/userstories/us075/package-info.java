@@ -26,7 +26,7 @@
 * <br/>
 * <br/>
 * 
-* * <b>S075c: Coding</b><br/>
+* <b>S075c: Coding</b><br/>
 * see:<br/>
 * <a href="../../../csheets/ext/exporttxt/package-summary.html">csheets.ext.exporttxt</a><br/>
 * <a href="../../../csheets/ext/exporttxt/ui/package-summary.html">csheets.ext.exporttxt.ui</a><br/>
@@ -34,10 +34,12 @@
 * <br/>
 * 
 * <b>S075u: Unit Tests</b><br/>
-
+* <a href="../../../csheets/ext/exporttxt/package-summary.html">csheets.ext.exporttxt</a><br/>
+* <a href="../../../csheets/ext/exporttxt/ui/package-summary.html">csheets.ext.exporttxt.ui</a><br/>
 * <br/>
 * <br/>
-* * <b>S075f: Functional Tests</b><br/>
+* 
+* <b>S075f: Functional Tests</b><br/>
 
 * <br/>
 * <br/>
