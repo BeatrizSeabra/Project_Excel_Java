@@ -19,12 +19,14 @@ public class Macro {
     public Macro(Cell cell, String source) throws FormulaCompilationException {
         this.cell = cell;
         this.source = source;
+    }
 
+    public void compiler() throws FormulaCompilationException {
         compile.compile(cell, source);
     }
 
-    public String getName() {
-        return compile.getName();
+    public String getName() throws FormulaCompilationException {
+        return compile.getName(source);
     }
 
     private ArrayList<Expression> getExpressions() {
@@ -34,15 +36,15 @@ public class Macro {
     public String results() throws IllegalValueTypeException {
         String[] resultado = source.split("\n");
         String result = "";
-        
-        ArrayList<Expression>exp=getExpressions();
-        
-        int aux=0;
-        for (int i = 1; i <resultado.length-1; i++) {
-            result+=resultado[i]+" = "+exp.get(aux).evaluate().toString()+"\n";
+
+        ArrayList<Expression> exp = getExpressions();
+
+        int aux = 0;
+        for (int i = 1; i < resultado.length - 1; i++) {
+            result += resultado[i] + " = " + exp.get(aux).evaluate().toString() + "\n";
             aux++;
         }
-        
+
         return result;
     }
 }

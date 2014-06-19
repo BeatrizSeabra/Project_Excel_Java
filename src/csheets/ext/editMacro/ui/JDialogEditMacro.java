@@ -10,6 +10,8 @@ import csheets.core.formula.compiler.FormulaCompilationException;
 import csheets.ext.editMacro.compiler.Macro;
 import csheets.ui.ctrl.UIController;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
@@ -98,6 +100,7 @@ public class JDialogEditMacro extends javax.swing.JDialog {
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
+        jTextArea1.setText("macro \"nome\"{\noperaçoes\noperaçoes\n}");
         jScrollPane1.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -196,19 +199,23 @@ public class JDialogEditMacro extends javax.swing.JDialog {
         }
 
         for (Macro macro : macros) {
-            if (macro.getName().equals(name)) {
-
-                String result = "";
-                try {
-                    result = macro.results();
-                } catch (IllegalValueTypeException ex) {
-                    JOptionPane.showMessageDialog(this, "Invalid Macro", "ERROR", JOptionPane.ERROR_MESSAGE);
-                    System.out.println("2");
+            try {
+                if (macro.getName().equals(name)) {
+                    macro.compiler();
+                    String result = "";
+                    try {
+                        result = macro.results();
+                    } catch (IllegalValueTypeException ex) {
+                        JOptionPane.showMessageDialog(this, "Invalid Macro", "ERROR", JOptionPane.ERROR_MESSAGE);
+                        System.out.println("2");
+                    }
+                    
+                    JDialog dialog = new JOptionPane("Result:\n" + result).createDialog(null, "Result");
+                    dialog.setAlwaysOnTop(true);
+                    dialog.setVisible(true);
                 }
-
-                JDialog dialog = new JOptionPane("Result:\n" + result).createDialog(null, "Result");
-                dialog.setAlwaysOnTop(true);
-                dialog.setVisible(true);
+            } catch (FormulaCompilationException ex) {
+                Logger.getLogger(JDialogEditMacro.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
