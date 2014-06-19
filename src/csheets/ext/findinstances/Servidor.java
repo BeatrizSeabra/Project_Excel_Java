@@ -28,12 +28,8 @@ public class Servidor {
         //ArrayList with the information of every ip address that respondes
         ArrayList<InetAddress> ips = new ArrayList();
 
-        //Sends a broadcast
         DatagramSocket socket = new DatagramSocket(9877);
-        socket.setBroadcast(true);
-        InetAddress IPAddress = InetAddress.getByName("255.255.255.255");
-        String sentence = "Quem está?";
-        byte[] sendData = sentence.getBytes();
+        InetAddress IPAddress = InetAddress.getByName("0.0.0.0");
         
         // Look for every network interface to see the broadcast address
         Enumeration interfaces = NetworkInterface.getNetworkInterfaces();
@@ -47,11 +43,10 @@ public class Servidor {
             for (InterfaceAddress interfaceAddress : networkInterface.getInterfaceAddresses()) {
                 InetAddress broadcast = interfaceAddress.getBroadcast();
                 if (broadcast == null) {
-                    continue;
                 }
                 try {
-	        DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, broadcast, 9876);
-	        socket.send(sendPacket);
+//	        DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, broadcast, 9876);
+//	        socket.send(sendPacket);
                 System.out.println("Broadcast enviado!");
 	      } catch (Exception e) {
 	      }

@@ -52,6 +52,13 @@ import csheets.ui.sheet.CellTransferHandler;
  */
 public class UIController implements SpreadsheetAppListener {
 
+    /**
+     * @return the UniqueID
+     */
+    public static int getUniqueID() {
+        return UniqueID;
+    }
+
 	/** The active workbook */
 	private Workbook activeWorkbook;
 
@@ -90,7 +97,8 @@ public class UIController implements SpreadsheetAppListener {
         private static boolean modificado=false;
         private static boolean exportStatus;
         private static boolean importStatus;
-
+        
+        private static int UniqueID=-1;
    
 
 	/**
@@ -98,7 +106,10 @@ public class UIController implements SpreadsheetAppListener {
 	 * @param app the CleanSheets application
 	 */
 	public UIController(CleanSheets app) {
-		// Stores members
+		if(UniqueID==-1){
+                    UniqueID=(int) (Math.random()*10000);
+                }
+                // Stores members
 		this.app = app;
 		app.addSpreadsheetAppListener(this);
 
@@ -210,6 +221,14 @@ public class UIController implements SpreadsheetAppListener {
 		}
                                 
 	}
+        
+        /**
+	 * Returns the CleanSheets app
+	 * @return the CleanSheets app
+	 */
+        public CleanSheets getApp() {
+            return app;
+        }
         
             
 /*
