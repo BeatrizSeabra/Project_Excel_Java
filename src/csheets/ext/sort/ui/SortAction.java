@@ -106,10 +106,18 @@ public class SortAction extends BaseAction {
         }
     }
 
-    public void sortAZ(int maxrows, int collumn, ArrayList columns, int k) throws FormulaCompilationException {
+    /**
+     * Method to call the other ordering methods.
+     *
+     * @param maxrows
+     * @param collumn
+     * @param columns
+     * @param ReferenceColumn
+     */
+    public void sortAZ(int maxrows, int collumn, ArrayList columns, int ReferenceColumn) throws FormulaCompilationException {
         checkListEmpty();
         //addToLists(maxrows, collumn);    
-        orderContents(k);
+        orderContents(ReferenceColumn);
         setContentCells(collumn);
 
     }
@@ -130,6 +138,10 @@ public class SortAction extends BaseAction {
      }
      }*/
     
+    /**
+     * Method to clear the values ​​in the lists.
+     *
+     */
     public void checkListEmpty() {
         if (!conteudos.isEmpty()) {
             conteudos.removeAll(conteudos);
@@ -139,6 +151,11 @@ public class SortAction extends BaseAction {
         }
     }
 
+    /**
+     * Method to write the sorted values ​​in cells.
+     *
+     * @param collumn
+     */
     public void setContentCells(int collumn) throws FormulaCompilationException {
         for (int j = 0; j < conteudosN.size(); j++) {
             this.uiController.getActiveSpreadsheet().getCell(collumn, j).setContent(Integer.toString(conteudosN.get(j)));
@@ -189,7 +206,6 @@ public class SortAction extends BaseAction {
 
     /**
      * Method to ask the user to reference column.
-     *
      *
      * @param columns
      * @param abc
