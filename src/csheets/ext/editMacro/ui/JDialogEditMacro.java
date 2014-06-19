@@ -191,6 +191,7 @@ public class JDialogEditMacro extends javax.swing.JDialog {
                 Macro macro = new Macro(uicontroller.getActiveCell(), source);
 //                macrosFile.add(macro);
                 macros.add(macro);
+                uicontroller.getActiveWorkbook().addMacro(macro);
                 jComboBox1.addItem(macro.getName());
                 jComboBox1.revalidate();
                 JOptionPane.showMessageDialog(this, "Macro inserted", "Macro", JOptionPane.INFORMATION_MESSAGE);
