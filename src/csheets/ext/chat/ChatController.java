@@ -76,7 +76,7 @@ public class ChatController {
                         //0 é mensagem para conversa
                         String id;
                         id = file_string.substring(0, 10);
-                        refreshConversation(address.getHostAddress(), id.trim(), file_string.substring(11));
+                        refreshConversation(address.getHostAddress(), id.trim(), file_string.substring(10));
                         break;
                     case 2:
                         // Alguém criou uma conversa
@@ -134,6 +134,7 @@ public class ChatController {
     /**
      * cria um novo chat
      *
+     * @param ip
      */
     public void newChat(String ip) {
         if (!existe(ip)) {
