@@ -224,7 +224,7 @@ public class WorkbookEventsFormulaUI extends javax.swing.JFrame {
                     }
                 }
 
-                uiController.setEvl(mylist);
+                uiController.setEvlf(mylist);
 
             } else {
                 JOptionPane.showMessageDialog(this, "Events can't be empty", "Without Events selected", JOptionPane.ERROR_MESSAGE);
