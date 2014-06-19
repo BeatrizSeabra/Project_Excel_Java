@@ -263,6 +263,7 @@ public class ChatController {
         conversas.add(new Conversation(ID));
         Chat p = new Chat(ID, "conv", this);
         getChats().add(p);
+        UI.refreshChatList(listConnections());
         return true;
     }
 
