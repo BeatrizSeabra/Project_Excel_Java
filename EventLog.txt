@@ -7243,3 +7243,19 @@ Close WorkBookEvent, time:2014/06/19 13:33:21
 
 
 
+onClick Event, on cell A1. time:2014/06/19 13:52:30
+
+
+
+onClick Event, on cell A1. time:2014/06/19 13:52:30
+
+
+
+Close WorkBookEvent, time:2014/06/19 13:53:00
+
+
+
+Close WorkBookEvent, time:2014/06/19 13:53:00
+
+
+

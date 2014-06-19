@@ -489,23 +489,6 @@ public class SharePanel extends javax.swing.JPanel implements SelectionListener 
         jTabbedPane1.getAccessibleContext().setAccessibleName("Manager");
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStopActionPerformed
-        if (listServers.getSelectedIndex() != -1) {
-            multiShare.stopServerConnection(listServers.getSelectedIndex());
-        } else {
-            JOptionPane.showMessageDialog(this, "Select server");
-        }
-
-    }//GEN-LAST:event_btnStopActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (jList1.getSelectedIndex() != -1) {
-            multiShare.stopClientConnection(jList1.getSelectedIndex());
-        } else {
-            JOptionPane.showMessageDialog(this, "Select client");
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         cells = cellsSel.table.getSelectedCells();
         txtSelectedArea.setText(cells[0][0].getAddress() + " - " + cells[cells.length - 1][cells[0].length - 1]);
@@ -539,11 +522,33 @@ public class SharePanel extends javax.swing.JPanel implements SelectionListener 
         }
     }//GEN-LAST:event_btnShareActionPerformed
 
-    private void txtCellMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCellMouseDragged
-    }//GEN-LAST:event_txtCellMouseDragged
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (jList1.getSelectedIndex() != -1) {
+            multiShare.stopClientConnection(jList1.getSelectedIndex());
+        } else {
+            JOptionPane.showMessageDialog(this, "Select client");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void txtCellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCellActionPerformed
-    }//GEN-LAST:event_txtCellActionPerformed
+    private void btnStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStopActionPerformed
+        if (listServers.getSelectedIndex() != -1) {
+            multiShare.stopServerConnection(listServers.getSelectedIndex());
+        } else {
+            JOptionPane.showMessageDialog(this, "Select server");
+        }
+    }//GEN-LAST:event_btnStopActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jTree1ValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jTree1ValueChanged
+
+    }//GEN-LAST:event_jTree1ValueChanged
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
@@ -572,20 +577,15 @@ public class SharePanel extends javax.swing.JPanel implements SelectionListener 
         } else {
             JOptionPane.showMessageDialog(this, "Please insert a number for the field port or field ip");
         }
-
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jTree1ValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jTree1ValueChanged
-        
-    }//GEN-LAST:event_jTree1ValueChanged
+    private void txtCellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCellActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-      
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_txtCellActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-       
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void txtCellMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCellMouseDragged
+
+    }//GEN-LAST:event_txtCellMouseDragged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnShare;
