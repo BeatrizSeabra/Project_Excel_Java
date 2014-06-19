@@ -11,15 +11,15 @@
 *  
 * <b>S075a: Analysis</b><br/>
 * It will be possible to, whenever that the cell changed, and if the file is already created (that means that the link needs to be established), the content is updated in the text file.
-* For that there will be a thread and maybe an infinite cicle that makes the thread and exportation never ends.
+* For that there will be a thread and a cicle that makes the thread to run until export is called again
 * That way if a cell is changed, there will be an exportation of that modification.
 * <br/>
 * <br/>
 * 
 * <b>S075d: Design</b><br/>
 * To realize this userstory first we need to call the method to write to the file in the action performed. That still needs to be done at same time the program runs, so we still need the thread to run both of them at same time.
-* After the file is created, there will be a second writing file method that write everytime a cell change. For that, there is a boolean on StopCellEditing of CellEditor that everytime that method occurs it turns true.
-* After the writing of the changed content, the boolean returns to false again and continue to search.
+* After the file is created, there will be a second writing file method that write everytime a cell change. For that, there is a boolean and Cell Listeners on the spreedsheet that verifies if the content is changed. If there is, the boolean is set to true and the method to write is called.
+* After the writing of the changed content, the boolean returns to false again and continue to verify.
 * <br/>
 * <br/>
 * <img src="../../../csheets/userstories/us075/doc-files/us075_design1.png"> 
