@@ -1,5 +1,6 @@
 package csheets.ext.importfiles.ui;
 
+import csheets.CleanSheets;
 import csheets.core.Address;
 import csheets.core.Cell;
 import csheets.core.Spreadsheet;
@@ -18,6 +19,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 
 /**
  * An action of the simple extension that exemplifies how to interact with the
@@ -51,6 +53,7 @@ public class ImportAction extends BaseAction {
     }
 
     protected void defineProperties() {
+        putValue(SMALL_ICON, new ImageIcon(CleanSheets.class.getResource("res/img/txt.gif")));
     }
 
     /**

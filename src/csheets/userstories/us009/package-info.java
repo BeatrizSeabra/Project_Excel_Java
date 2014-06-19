@@ -15,12 +15,48 @@
  * Esta user story deve ser um melhoramento das user stories em cima citadas, e nao uma nova implementacao. <br/> 
  * <br/>
  * <br/>
+ * Implementacao:<br/>
+ * <br/>
+ * Será necessaria a criacao de um metodo que peça ao utilizador para escolher uma coluna referencia de entre 
+ * as colunas por ele selecionadas.<br/>
+ * Tem de se implementar o metodo sort de maneira a que a alteraçao feita na coluna escolhida pelo utilizador 
+ * seja feita tambem nas restantes colunas.<br/>
+ * <br/>
+ * <br/>
+ * Utilizador:<br/>
+ * Do ponto de vista do utilizador, a unica diferença em relaçao a user story anterior, será que nesta user story, 
+ * o utilizador, deverá escolher uma coluna que servirá como referencia.<br/>
+ * <br/>
+ * <br/>
  * 
  * <b>S009d: Design</b><br/>
  * Nesta user story será pedido ao utilizador para escolher uma coluna que servira como referencia antes de executar o metodo
  * orderContents(), so essa coluna sera ordenada, as restantes simplesmente acompanharao a coluna escolhida pelo utilizador.
- * O restante design será como na user story anterior, como mostra o seguinte diagrama:
+ * O restante design será como na user story anterior, como mostra o seguinte diagrama:<br/><br/>
  * <img src="../../../csheets/userstories/us043/doc-files/US009_design.png">
+ * <br/>
+ * <br/>
+ * Classes:<br/>
+ * <br/>
+ * SearchAction:<br/>
+ * Classe que vai ordenar alfabeticamente os conteudos das celulas. Conta com os seguintes metodos:<br/>
+ * <br/>
+ * getColumns()->devolve as colunas selecionadas pelo utilizador;<br/>
+ * sortAZ()->chama os metodos que vao organizar os conteudos das celulas;<br/>
+ * checkListEmpty()->limpa os dados dos valores das celulas;<br/>
+ * setContentCells()->escreve nas celulas os conteudos ordenados;<br/>
+ * orderContents()->ordena os conteudos das celulas;<br/>
+ * askColumn()->pergunta ao utilizador qual a coluna referencia;<br/>
+ * <br/>
+ * SearchActionZA:<br/>
+ * Classe que vai ordenar em ordem inversa ao alfabeto os conteudos das celulas. Conta com os seguintes metodos:<br/>
+ * <br/>
+ * getColumns()->devolve as colunas selecionadas pelo utilizador;<br/>
+ * sortAZ()->chama os metodos que vao organizar os conteudos das celulas;<br/>
+ * checkListEmpty()->limpa os dados dos valores das celulas;<br/>
+ * setContentCells()->escreve nas celulas os conteudos ordenados;<br/>
+ * orderContents()->ordena os conteudos das celulas;<br/>
+ * askColumn()->pergunta ao utilizador qual a coluna referencia;<br/>
  * <br/>
  * <br/>
  * 
