@@ -9,7 +9,10 @@ import csheets.core.Address;
 import csheets.core.Cell;
 import csheets.core.Spreadsheet;
 import csheets.ui.sheet.SpreadsheetTable;
-import javax.swing.JOptionPane;
+import static java.lang.Thread.sleep;
+import java.util.logging.*;
+import javax.swing.DefaultListModel;
+import org.h2.command.dml.*;
 
 /**
  *
@@ -17,7 +20,11 @@ import javax.swing.JOptionPane;
  */
 public class Search {
 
+    private Thread threadUpdate;
+    private DefaultListModel<Address> model;
+
     public Search() {
+        this.model = new DefaultListModel<Address>();
     }
 
     public Address simpleSearch(SpreadsheetTable focusOwner, String text) {
@@ -37,5 +44,44 @@ public class Search {
             }
         }
         return null;
+    }
+
+    public void SearchAll(UpdateSearch updatesearchUI, SpreadsheetTable focusOwner, String text) {
+        if (text == null) {
+            return;
+        }
+        Spreadsheet spread = focusOwner.getSpreadsheet();
+
+        int rowCount = spread.getRowCount();
+        Cell row[];
+        for (int i = 0; i < rowCount; i++) {
+            row = spread.getRow(i);
+            int rowLength = row.length;
+            for (int j = 0; j < rowLength; j++) {
+                if (row[j].getContent().matches(text)) {
+                    Address add = new Address(j, i);
+                    threadUpdate = new Thread(new Update(updatesearchUI, add));
+                    threadUpdate.start();
+                }
+            }
+        }
+    }
+
+    public class Update extends Thread {
+
+        private UpdateSearch updateUI;
+        private Address addr;
+
+        public Update(UpdateSearch updtUI, Address add) {
+            this.updateUI = updtUI;
+            this.addr = add;
+        }
+
+        @Override
+        public void run() {
+          
+            model.addElement(addr);
+            this.updateUI.setJList(model);
+        }
     }
 }

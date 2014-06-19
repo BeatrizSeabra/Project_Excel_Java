@@ -5,6 +5,7 @@
  */
 package csheets.ext.findinstances;
 
+import java.awt.Frame;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -20,7 +21,8 @@ import java.util.Enumeration;
  * @author RafaelChaves
  */
 public class Servidor {
-
+    
+    
     public static ArrayList<InetAddress> Srv() throws IOException {
 
         //ArrayList with the information of every ip address that respondes

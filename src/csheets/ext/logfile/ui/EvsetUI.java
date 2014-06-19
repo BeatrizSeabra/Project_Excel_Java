@@ -5,12 +5,10 @@
  */
 package csheets.ext.logfile.ui;
 
-import csheets.core.formula.compiler.FormulaCompilationException;
+import csheets.core.CellListener;
 import csheets.ext.logfile.AtributeFormula;
-import csheets.ext.logfile.WriteLogFile;
 import csheets.ui.ctrl.UIController;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -28,6 +26,14 @@ public class EvsetUI extends javax.swing.JFrame {
     public EvsetUI(UIController uiController) {
         this.uiController = uiController;
         initComponents();
+        ArrayList<String> mylist = uiController.getEvl();
+
+        if (mylist.contains("onClick")) {
+            jCheckBox2.setSelected(true);
+        }
+        if (mylist.contains("onChange")) {
+            jCheckBox1.setSelected(true);
+        }
     }
 
     /**
@@ -46,7 +52,7 @@ public class EvsetUI extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jCheckBox1.setText("OnChange");
 
@@ -64,7 +70,12 @@ public class EvsetUI extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Cancel");
+        jButton2.setText("Close");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Formula to be assigned to selected event:");
 
@@ -90,7 +101,7 @@ public class EvsetUI extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 22, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(25, 25, 25))
         );
         layout.setVerticalGroup(
@@ -119,25 +130,42 @@ public class EvsetUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ArrayList<String> mylist = uiController.getEvl();
         String formula = jTextField1.getText();
+        String[] event = new String[2];
+        
         if (!formula.isEmpty()) {
             if (jCheckBox1.isSelected() || jCheckBox2.isSelected()) {
+                AtributeFormula a = new AtributeFormula();
                 if (jCheckBox1.isSelected()) {
-                    WriteLogFile.writeLogFile(null, jCheckBox1.getText(), null, formula);
-                    AtributeFormula a = new AtributeFormula(jCheckBox1.getName(), formula);
+                    if (!mylist.contains("onChange")) {
+                        mylist.add("onChange");
+                    }
+                    
+                    event[0] = "onChange";
+                    
+                } else {
+                    if (mylist.contains("onChange")) {
+                        mylist.remove("onChange");
+                    }
+                    event[0] = "x";
                 }
 
                 if (jCheckBox2.isSelected()) {
-                    WriteLogFile.writeLogFile(null, jCheckBox2.getText(), null, formula);
-                    AtributeFormula a = new AtributeFormula(jCheckBox1.getName(), formula);
+                    if (!mylist.contains("onClick")) {
+                        mylist.add("onClick");
+                    }
+                    event[1] = "onClick"; 
+
+                } else {
+                    if (mylist.contains("onClick")) {
+                        mylist.remove("onClick");
+                    }
+                    event[1] = "x";
                 }
-                try {
-                    uiController.getActiveCell().setContent(formula);
-                    //Aplicar aqui as cell listeners.
-                } catch (FormulaCompilationException ex) {
-                    Logger.getLogger(EvsetUI.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                this.dispose();
+
+                a.addCellEvent(uiController, formula, event);
+                uiController.setEvl(mylist);
 
             } else {
                 JOptionPane.showMessageDialog(this, "Events can't be empty", "Without Events selected", JOptionPane.ERROR_MESSAGE);
@@ -146,12 +174,16 @@ public class EvsetUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Formula can't be empty", "Formula empty", JOptionPane.ERROR_MESSAGE);
         }
 
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox2ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

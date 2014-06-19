@@ -90,7 +90,7 @@ public class SortActionTest {
         int collumn = 0;
         UIController uiController = null;
         SortAction instance = new SortAction(uiController);
-        instance.sortAZ(maxrows, collumn);
+        //instance.sortAZ(maxrows, collumn);
         fail("The test case is a prototype.");
     }
 
@@ -104,7 +104,7 @@ public class SortActionTest {
         int collumn = 0;
         UIController uiController = null;
         SortAction instance = new SortAction(uiController);
-        instance.addToLists(maxrows, collumn);
+        //instance.addToLists(maxrows, collumn);
         //Ver aqui se o tamanho dos dois arrays são iguais
         fail("The test case is a prototype.");
     }

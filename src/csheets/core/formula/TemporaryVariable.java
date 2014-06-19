@@ -6,6 +6,7 @@
 
 package csheets.core.formula;
 
+import csheets.core.Cell;
 import csheets.core.IllegalValueTypeException;
 import csheets.core.Spreadsheet;
 import csheets.core.Value;
@@ -18,23 +19,40 @@ import csheets.core.formula.util.ExpressionVisitor;
 public class TemporaryVariable implements Expression{
     
     private String varName;
-    private Spreadsheet spreadsheet;
     private Value value;
+    private Cell cell;
 
-    public TemporaryVariable(String varName, Spreadsheet spreadsheet, Value value) {
+    public TemporaryVariable(String varName, Value value, Cell cell) {
         this.varName = varName;
-        this.spreadsheet = spreadsheet;
         this.value = value;
+        this.cell=cell;
     }
 
     @Override
     public Value evaluate() throws IllegalValueTypeException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.value;
     }
 
     @Override
     public Object accept(ExpressionVisitor visitor) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return visitor.visitTemporaryVariable(this);
+    }
+
+    public String getVarName() {
+        return varName;
+    }
+
+    public void setValue(Value value) {
+        this.value = value;
+    }
+
+    
+    public Value getValue() {
+        return value;
+    }
+
+    public Cell getCell() {
+        return cell;
     }
     
 }

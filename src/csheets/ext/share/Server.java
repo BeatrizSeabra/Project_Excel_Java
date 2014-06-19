@@ -6,10 +6,12 @@ package csheets.ext.share;
 
 import csheets.core.Address;
 import csheets.core.Spreadsheet;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,21 +22,31 @@ import javax.swing.JOptionPane;
 public class Server extends BaseConnection implements Runnable {
     
     private ServerSocket serverSocket;
+    private DefaultListModel clientesModel;
+    private String name;
+    private int count;
 
-    public Server(String pass, int port, Address inicio, Address fim, Spreadsheet folha) {
-        super(pass, folha, port, inicio, fim); 
+    public Server(String pass, int port, Address inicio, Address fim, Spreadsheet folha, String name) {
+        super(pass, folha, port, inicio, fim);
+        this.clientesModel = new DefaultListModel();
+        this.name = name;
     }
 
     @Override
     public void run() {
         try {
             serverSocket = new ServerSocket(getPort());
-           
+            
+            getMultiShare().addServer(this);
+            
+            while (true) {
                 Socket connection = serverSocket.accept();
                 
-                TratarCliente client = new TratarCliente(connection);
+                TratarCliente client = new TratarCliente(connection, count);
                 Thread thread = new Thread(client);
                 thread.start();
+                count++;
+            }
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -44,6 +56,57 @@ public class Server extends BaseConnection implements Runnable {
         }
     }
 
+    public void stop(int cod) {
+        try {
+            ((TratarCliente) clientesModel.get(cod)).stop();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            if (cod > 0) {
+                cod--;
+                stop(cod);
+            }
+
+
+        }
+    }
+    
+    public void stopServer() {
+        for (int i = 0; i < clientesModel.size(); i++) {
+            ((TratarCliente) clientesModel.get(i)).stop();
+
+        }
+        try {
+            serverSocket.close();
+            Thread.currentThread().interrupt();
+            
+            return;
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public int getCount() {
+        return count;
+    }
+    
+    public void setCount(int count) {
+        this.count = count;
+    }
+    
+    public DefaultListModel getClientesModel() {
+        return clientesModel;
+    }
+    
+    public void setClientesModel(DefaultListModel clientesModel) {
+        this.clientesModel = clientesModel;
+    }
    
     public class TratarCliente implements Runnable {
 
@@ -51,7 +114,7 @@ public class Server extends BaseConnection implements Runnable {
         private ObjectInputStream ois;
         private ObjectOutputStream oos;
 
-        public TratarCliente(Socket con) {
+        public TratarCliente(Socket con, int cod) {
             this.con = con;
         }
 
@@ -62,11 +125,16 @@ public class Server extends BaseConnection implements Runnable {
                     threadIn.interrupt();
                 }
                 threadOut.interrupt();
+                
+                clientesModel.removeElement(this);
+                count--;
+                Thread.currentThread().interrupt();
+                return;
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-
+        
         @Override
         public void run() {
             try {

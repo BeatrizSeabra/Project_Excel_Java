@@ -5,20 +5,12 @@
  */
 package csheets.core.formula.lang;
 
-import csheets.CleanSheets;
 import csheets.core.IllegalValueTypeException;
 import csheets.core.Value;
 import csheets.core.formula.Expression;
 import csheets.core.formula.Function;
 import csheets.core.formula.FunctionParameter;
-import csheets.ext.logfile.AtributeFormula;
 import csheets.ext.logfile.WriteLogFile;
-import static csheets.ext.logfile.WriteLogFile.writeLogFile;
-import static csheets.ext.logfile.WriteLogFile.writeLogFile;
-import static csheets.ext.logfile.WriteLogFile.writeLogFile;
-import static csheets.ext.logfile.WriteLogFile.writeLogFile;
-import static csheets.ext.logfile.WriteLogFile.writeLogFile;
-import csheets.ui.ctrl.UIController;
 
 /**
  * A function that atribute a formula to event cells.

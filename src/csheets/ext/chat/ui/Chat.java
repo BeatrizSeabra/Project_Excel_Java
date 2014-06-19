@@ -22,6 +22,7 @@ import javax.swing.JOptionPane;
 public class Chat extends javax.swing.JFrame {
 
     private String ip;
+    private String tipo;
     private ChatController controlo;
 
  
@@ -29,9 +30,10 @@ public class Chat extends javax.swing.JFrame {
     /**
      * Creates new form Chat
      */
-    public Chat(String ipc, ChatController p) {
+    public Chat(String ipc,String tipo, ChatController p) {
         initComponents();
         ip=ipc;
+        this.tipo=tipo;
         controlo=p;
         jTextField3.setText(ipc); }
     
@@ -147,7 +149,11 @@ public class Chat extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(rootPane, "Error, no message to send");
         }else{
             try {
-                controlo.sendMessage(ip,jTextField2.getText());
+                if(tipo.equals("ind")){
+                    controlo.sendMessage(ip,jTextField2.getText());
+                }else{
+                    controlo.sendMessageConversation(ip, jTextField2.getText());
+                }
             } catch (UnknownHostException ex) {
                JOptionPane.showMessageDialog(this,"Erro, endereço inválido");
             }

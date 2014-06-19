@@ -9,10 +9,14 @@ import csheets.ext.chat.ChatController;
 import csheets.ext.chat.UDPServer;
 import csheets.ext.chat.UDPClient;
 import java.net.InetAddress;
+import java.net.SocketException;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 
 /**
  *
@@ -21,12 +25,15 @@ import javax.swing.JOptionPane;
 public class UIChat extends javax.swing.JFrame {
 
     public ChatController controlo;
-
+    private UDPClient cliente;
+    private UDPServer server;
     /**
      * Creates new form UIChat
      */
     public UIChat() {
         initComponents();
+        jList1.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        jList1.setVisibleRowCount(-1);
     }
 
     public void refreshChatList(String[] IP) {
@@ -36,6 +43,7 @@ public class UIChat extends javax.swing.JFrame {
             lm1.addElement(IP[i]);
         }
         jList1.setModel(lm1);
+        jList1.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         this.repaint();
         this.revalidate();
     }
@@ -101,7 +109,6 @@ public class UIChat extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jList1.setToolTipText("");
         jScrollPane1.setViewportView(jList1);
 
@@ -138,7 +145,7 @@ public class UIChat extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setText("Provide Chat");
+        jButton5.setText("Start Conversation");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -175,7 +182,7 @@ public class UIChat extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
@@ -211,8 +218,15 @@ public class UIChat extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (controlo == null) {
+           
             controlo = new ChatController(this);
             controlo.getServidor().start();
+             try {
+                server= new UDPServer(controlo);
+                server.start();
+            } catch (SocketException ex) {
+                Logger.getLogger(UIChat.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
             if (controlo.getServidor().allDone == true) {
                 controlo.getServidor().allDone = false;
@@ -230,6 +244,7 @@ public class UIChat extends javax.swing.JFrame {
                 try {
                     InetAddress.getByName(jTextField1.getText());
                     controlo.newChat(jTextField1.getText());
+                    controlo.setvisible(jTextField1.getText());
                 } catch (UnknownHostException ex) {
                     JOptionPane.showMessageDialog(rootPane, "Must enter a valid IP address");
                 }
@@ -252,57 +267,48 @@ public class UIChat extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Must Activate first");
         } else {
             controlo.setvisible((String) jList1.getSelectedValue());
+            jList1.getSelectedValuesList();
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-        if (controlo == null) {
-            JOptionPane.showMessageDialog(rootPane, "Must Activate first");
-        } else {
-            UDPServer.getInstance().start();
+    String idConversa;
+    
+    do{
+        idConversa=JOptionPane.showInputDialog(rootPane, "Digite um nome para a conversa com menos de 10 caracteres");
+    }while(idConversa.length()>=10 && idConversa.length()<1);
+    if(controlo.createConversation(idConversa)){
+    
+    List<String> ips;
+        ips = jList1.getSelectedValuesList();
+            
+        for (String ip : ips) {
+            controlo.addToConversation(idConversa, ip);
         }
+        try {
+            controlo.sendConversation(idConversa);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(UIChat.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        refreshChatList(controlo.listConnections());
+    controlo.setvisible(idConversa);
+    }
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    public class ThreadUpdateList extends Thread {
-
-        public void run() {
-            while (true) {
-                updateList();
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-    public void updateList() {
-        ArrayList<String> listParticipants = new ArrayList();
-        listParticipants = UDPClient.getInstance().getListParticipants();
-        int size = listParticipants.size();
-
-        if (size > 0) {
-
-            for (int i = 0; i < size; i++) {
-                if (!(controlo.getConnections().contains(listParticipants.get(i)))) {
-                    controlo.getConnections().add(listParticipants.get(i));
-                }
-            }
-            refreshChatList(controlo.listConnections());
-        }
-    }
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
+    
         if (controlo == null) {
             JOptionPane.showMessageDialog(rootPane, "Must Activate first");
         } else {
-            UDPClient.getInstance().start();
-
-            ThreadUpdateList threadUpdateList = new ThreadUpdateList();
-            threadUpdateList.start();
+            if(cliente==null){
+                try {
+                    cliente=new UDPClient(controlo);
+                } catch (SocketException ex) {
+                    Logger.getLogger(UIChat.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            cliente.start();
+            }
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
