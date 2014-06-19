@@ -10,8 +10,11 @@
  *  
  * <b>S081a: Analysis</b><br/>
  * Entender como se envia mensagens em broadcast <br/>
+ * -Depois de analisar o codico referente ao US080, entendi o conceito, sendo que sao precisas algumas melhorias.<br/>
  * Como filtrar as mensagens e conversas <br/>
+ * -Penso que a melhor forma é usar um identificador no corpo da mensagem para distinguir o tipo da mesma.<br/>
  * Qual a melhor forma de criar as conversas. <br/>
+ * ´- Criar uma classe com um identificador e uma lista de intervenientes.<br/>
  * Analisar o código já existente. <br/>
  * Criar estrutura dinamica para guardar conversas(ips participantes, id conversa), enviar mensagens para todos os ips, actualizar chats de todos sempre que alguém envia mensagem.
  * <br/>
@@ -20,17 +23,29 @@
  * <b>S081d: Design</b><br/>
  * Para realizar esta user story irá ser criado a classe "Conversation", cujo objectivo é ter um ID, e uma lista de ips.<br/>
  * O modo de funcionamento esta ilustrado neste diagrama de sequencia, que demonstra a forma como encontra os ips na rede, e como se processa as conversas<br/>
+ * Sempre que um utilizar envia uma mensagem, a mesma sera enviada a todos os intervenientes. <br/>
+ * Sempre que um utilizador cria uma mensagem a mesma é enviada a todos os intervenientes para actualizar a lista de conversas de cada instancia<br/>
  * <img src="../../../csheets/userstories/us081/doc-files/us081_design.png"> <br/>
  * <br/>
  * <br/>
  * 
  * <b>S081c: Coding</b><br/>
+ * No decorrer desta etapa foram realizadas alteracoes á classe ChatController, UDPCliente, UDPServer.<br/>
+ * Na ChatController foi criado um arraylist de conversas para as poder gerir atraves desta classe,
+ * além disso foi criado metodos para tratar os dados a ser enviados quer para conversas de 3 ou mais pessoas, quer para conversa entre 2 pessoas, 
+ * foi alterado o metodo de tratamento de mensagens recebidas pelo servidor que passa a identificar o tipo de mensagem(mensagem individual, criacao de conversa, mensagem numa conversa)<br/>
+ * Devido ao US80 ter ficado incompleto foram feitas alteracoes a classe UDPCliente que ficou apenas a enviar pedidos de broadcast de 10 em 10 segundos, 
+ * em vez de enviar e receber como estava implementado por um colega. A Classe UDPServer passa a identificar o tipo de mensagem, caso seja pedido, devolve uma resposta com ao ip, mas na porta do servidor com o seu endereço de IP, 
+ * caso a mensagem seja um IP, verifica se existe e guarda o Ip na lista destina a esse efeito e coloca na interface grafica o mesmo IP.<br/>
  * <br/>
  * <br/>
  * 
  * <b>S081u: Unit Tests</b><br/>
+ * Foram realizados testes unitários a classe ChatController e Conversation, na chat controller ja havia sido realizado testes, sendo que foram acrescentados 3 metodos que servem para tratamento de dados<br/>
+ * A classe conversation foram realizados testes ao metodos de adicionar e remover Ips<br/>
+ * Todos os metodos passaram nos testes elaborados.
  * <br/>
- * 
+ * ç
  * <b>S081f: Functional Tests</b><br/>
  * <br/>
  * <br/>
