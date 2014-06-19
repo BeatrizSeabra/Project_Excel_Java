@@ -22,7 +22,7 @@
  * <br/>
  * <br/>
  *
- * <b>S065d: Design</b><br/>
+ * <b>S047d: Design</b><br/>
  * Criação do diagrama de sequencia na plataforma plantuml da US047.<br/>
  * 
   * <img src="../../../csheets/userstories/us047/doc-files/US047_design1.png">
@@ -31,33 +31,39 @@
  * <br/>
  *
  *
- * <b>S065c: Coding</b><br/>
+ * <b>S047c: Coding</b><br/>
+ * 
+ * see:<br/>
+ * <a href="../../../csheets/ext/button/package-summary.html">csheets.ext.button</a><br/>
+ * <a href="../../../csheets/ext/button/ui/package-summary.html">csheets.ext.button.ui</a><br/>
  * <br/>
  *
  * <br/>
  * <br/>
  *
- * <b>S065u: Unit Tests</b><br/>
+ * <b>S047u: Unit Tests</b><br/>
+ * Métodos da interface gráfica não permitem a realização de testes unitários.
+ * see:<br/>
+ * <a href="../../../csheets/ext/button/package-summary.html">csheets.ext.button</a><br/>
+ * <a href="../../../csheets/ext/button/ui/package-summary.html">csheets.ext.button.ui</a><br/>
  * <br/>
  * <br/>
  *
- * <b>S065f: Functional Tests</b><br/>
+ * <b>S047f: Functional Tests</b><br/>
  *
  * To test this user story, the user should follow these steps:<br/>
  *
  * /
  *
- **
- * @startuml doc-files/us047_design1.png 
- * UIController -> ExtensionButton getUIExtension(this); 
- * ExtensionButton -> UIExtensionButton : new();
- * UIExtensionButton -> ButtonMenu : getMenu();
- * ButtonMenu -> ButtonAction : newButtonAction(); 
- * ButtonAction -> ButtonAction : new JFrame(); 
- * ButtonAction -> SpreadsheetTable: getselectedcells(); 
- * SpreadsheetTable -> Workbook: show();
- * @enduml
- *
+@startuml doc-files/us047_design1.png 
+ UIController -> ExtensionButton : getUIExtension(this) 
+ ExtensionButton -> UIExtensionButton : new()
+ UIExtensionButton -> ButtonMenu : getMenu()
+ ButtonMenu -> ButtonAction : newButtonAction() 
+ ButtonAction -> ButtonAction : new JFrame() 
+ ButtonAction -> SpreadsheetTable: getselectedcells()
+ SpreadsheetTable -> Workbook: show()
+ @enduml
  * @author marc
  */
 package csheets.userstories.us047;

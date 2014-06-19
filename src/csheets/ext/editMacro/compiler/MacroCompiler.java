@@ -8,6 +8,7 @@ import csheets.core.formula.*;
 import csheets.core.formula.compiler.ExpressionCompiler;
 import csheets.core.formula.compiler.FormulaCompilationException;
 import csheets.core.formula.lang.*;
+import java.io.Serializable;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,13 +22,11 @@ import org.antlr.runtime.tree.Tree;
  *
  * @author i120388
  */
-public class MacroCompiler implements ExpressionCompiler {
+public class MacroCompiler implements ExpressionCompiler, Serializable {
 
     public static final char MACRO_STARTER = 'm';
 
     private ArrayList<Expression> expressions = new ArrayList<>();
-
-    private String name;
 
     public MacroCompiler() {
     }
@@ -57,10 +56,7 @@ public class MacroCompiler implements ExpressionCompiler {
             String message = "Other exception : " + e.getMessage();
             throw new FormulaCompilationException(message);
         }
-        
-        /*nome da macro*/
-        name=tree.getChild(1).getText();
-        
+
         for (int i = 4; i < tree.getChildCount() - 2; i++) {
             if (tree.getChild(i).getChildCount() != 0) {
                 expressions.add(convert(cell, tree.getChild(i)));
@@ -135,7 +131,7 @@ public class MacroCompiler implements ExpressionCompiler {
 
                     if (node.getChild(0).getText().matches("@[a-zA-Z0-9]+")) { //Tests if the attribution is being made to a temporary variable 
                         Value value = convert(cell, node.getChild(1)).evaluate();
-                        TemporaryVariable temporaryVariable = new TemporaryVariable(node.getChild(0).getText(), value, cell);
+                        TemporaryVariable temporaryVariable = new TemporaryVariable(node.getChild(0).getText(), value, cell.getSpreadsheet());
                         ((SpreadsheetImpl) cell.getSpreadsheet()).addOrUpdateTemporaryVariable(temporaryVariable);
                     } else { //Attribution to a Cell Reference
                         //crias uma referencia para a cell
@@ -172,7 +168,34 @@ public class MacroCompiler implements ExpressionCompiler {
         return expressions;
     }
 
-    public String getName() {
+    public String getName(String source) throws FormulaCompilationException {
+        // Creates the lexer and parser
+        ANTLRStringStream input = new ANTLRStringStream(source);
+
+        // create the buffer of tokens between the lexer and parser 
+        MacroLexer lexer = new MacroLexer(input);
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+
+        MacroParser parser = new MacroParser(tokens);
+
+        CommonTree tree = null;
+
+        try {
+            // Attempts to match an expression
+            tree = (CommonTree) parser.macro().getTree();
+
+        } catch (RecognitionException e) {
+            //String message="Fatal recognition exception " + e.getClass().getName()+ " : " + e;
+            String message = parser.getErrorMessage(e, parser.tokenNames);
+            throw new FormulaCompilationException("At (" + e.line + ";" + e.charPositionInLine + "): " + message);
+        } catch (Exception e) {
+            String message = "Other exception : " + e.getMessage();
+            throw new FormulaCompilationException(message);
+        }
+
+        /*nome da macro*/
+        String name = tree.getChild(1).getText();
+        // Converts the expression and returns it
         return name;
     }
 

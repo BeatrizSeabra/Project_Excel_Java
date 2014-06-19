@@ -106,8 +106,31 @@ public class ExtensionManager {
 
         // Loads extensions
         for (Map.Entry<Object, Object> entry : extProps.entrySet()) {
-            System.out.println((String) entry.getValue());
-            LoadExtension((String) entry.getValue(), (String) entry.getKey());
+            // Resolves class path
+            String classPathProp = (String) entry.getValue();
+            URL classPath = null;
+            if (classPathProp.length() > 0) {
+                // Looks for resource
+                classPath = ExtensionManager.class.getResource(classPathProp);
+                if (classPath == null) {
+                    // Looks for file
+                    File classPathFile = new File(classPathProp);
+                    if (classPathFile.exists()) {
+                        try {
+                            classPath = classPathFile.toURL();
+                        } catch (MalformedURLException e) {
+                        }
+                    }
+                }
+            }
+
+            // Loads class
+            String className = (String) entry.getKey();
+            if (classPath == null) {
+                load(className);
+            } else {
+                load(className, classPath);
+            }
         }
     }
 
@@ -195,36 +218,6 @@ public class ExtensionManager {
             ie.printStackTrace();
             return null;
         }
-    }
-
-    public void LoadExtension(String dir, String nclass) {
-        // Resolves class path
-        String classPathProp = dir;
-        URL classPath = null;
-        if (classPathProp.length() > 0) {
-            // Looks for resource
-            classPath = ExtensionManager.class.getResource(classPathProp);
-            System.out.println(classPath);
-            if (classPath == null) {
-                // Looks for file
-                File classPathFile = new File(classPathProp);
-                if (classPathFile.exists()) {
-                    try {
-                        classPath = classPathFile.toURL();
-                    } catch (MalformedURLException e) {
-                    }
-                }
-            }
-        }
-
-        // Loads class
-        String className = nclass;
-        if (classPath == null) {
-            load(className);
-        } else {
-            load(className, classPath);
-        }
-
     }
 
     /**

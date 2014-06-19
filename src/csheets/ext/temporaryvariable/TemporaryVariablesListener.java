@@ -11,10 +11,17 @@ import java.util.ArrayList;
 import java.util.EventListener;
 
 /**
- *
+ * A listener interface for receiving notification every time a
+ * temporary variable is added or updated.
  * @author Diogo Moreira (1120339)
  */
+
+
 public interface TemporaryVariablesListener extends EventListener{
     
+    /**
+     * Invoked when a temporary variable is added or updated
+     * @param temporaryVariable 
+     */
     public void variableCreatedOrUpdated(ArrayList<TemporaryVariable> temporaryVariable);
 }
