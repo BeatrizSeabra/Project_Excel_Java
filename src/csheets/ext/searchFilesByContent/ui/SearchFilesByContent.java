@@ -6,7 +6,6 @@
 
 package csheets.ext.searchFilesByContent.ui;
 
-import csheets.ext.searchFilesBackground.ui.UIExtensionSearchFilesBackground;
 import java.io.File;
 import java.io.FileFilter;
 import java.util.Stack;
@@ -21,7 +20,7 @@ public class SearchFilesByContent {
     public SearchFilesByContent() {
     }
     
-    public void searchFilesBackground(final String pattern, final String dir, UIExtensionSearchFilesBackground extension) {
+    public void searchFilesByContent(final String pattern, final String dir, UIExtensionSearchFilesByContent extension) {
 
         class ParallelSearch implements Runnable {
 
@@ -29,9 +28,9 @@ public class SearchFilesByContent {
             String pattern = ".txt";
             String dir;
             String[] results;
-            UIExtensionSearchFilesBackground extension;
+            UIExtensionSearchFilesByContent extension;
 
-            public ParallelSearch(String pattern, String dir, UIExtensionSearchFilesBackground extension) {
+            public ParallelSearch(String pattern, String dir, UIExtensionSearchFilesByContent extension) {
                 this.pattern = pattern;
                 this.dir = dir;
                 this.extension = extension;
@@ -80,8 +79,4 @@ public class SearchFilesByContent {
 
     }
 
-    
-    
-    
-    
-}
+    }

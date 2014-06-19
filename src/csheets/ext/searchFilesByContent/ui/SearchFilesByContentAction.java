@@ -9,6 +9,7 @@ package csheets.ext.searchFilesByContent.ui;
 import csheets.ui.ctrl.BaseAction;
 import csheets.ui.ctrl.UIController;
 import java.awt.event.ActionEvent;
+import javax.swing.JDialog;
 
 /**
  *
@@ -47,14 +48,14 @@ public class SearchFilesByContentAction extends BaseAction {
      */
     @Override
     public void actionPerformed(ActionEvent ae) {
-        /*
-        JDialogSearchFilesByContent background=new JDialogSearchFilesByContent(null, true,uiController);
-        background.setVisible(true);
-        background.setResizable(false);
-        background.setDefaultCloseOperation( JFrame.DO_NOTHING_ON_CLOSE );
-        background.pack();
-        background.setLocationRelativeTo(null);
-        */
+        
+        JDialogSearchFilesByContent content=new JDialogSearchFilesByContent(null, true,uiController);
+        content.setVisible(true);
+        content.setResizable(false);
+        content.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE );
+        content.pack();
+        content.setLocationRelativeTo(null);
+        
     }
 
 }

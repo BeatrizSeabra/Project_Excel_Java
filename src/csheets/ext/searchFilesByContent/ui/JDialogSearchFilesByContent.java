@@ -6,7 +6,6 @@
 
 package csheets.ext.searchFilesByContent.ui;
 
-import csheets.ext.searchFilesBackground.ui.UIExtensionSearchFilesBackground;
 import csheets.ui.FileChooser;
 import csheets.ui.ctrl.UIController;
 import csheets.ui.ext.UIExtension;
@@ -16,7 +15,7 @@ import javax.swing.JOptionPane;
  *
  * @author Pedro
  */
-public class JDialogSearchFilesByContent extends javax.swing.JFrame {
+public class JDialogSearchFilesByContent extends javax.swing.JDialog {
 
     /**
      * Creates new form JDialogSearchFilesBackground
@@ -25,8 +24,8 @@ public class JDialogSearchFilesByContent extends javax.swing.JFrame {
     
     
     public JDialogSearchFilesByContent(java.awt.Frame parent, boolean modal, UIController uiController) {
-        //super(parent, modal);
-        //this.setModal(true);
+        super(parent, modal);
+        this.setModal(true);
         initComponents();
         setLocationRelativeTo(null);
         this.uiController = uiController;
@@ -52,13 +51,13 @@ public class JDialogSearchFilesByContent extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Search By Content");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel2.setText("Pattern:");
+        jLabel2.setText("Content:");
 
         jTextField1.setToolTipText("");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -178,7 +177,6 @@ public class JDialogSearchFilesByContent extends javax.swing.JFrame {
         }
 
         jTextField2.setText(chooser.getSelectedFile().getAbsolutePath());
-
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
@@ -208,12 +206,12 @@ public class JDialogSearchFilesByContent extends javax.swing.JFrame {
                     UIExtensionSearchFilesByContent ui = null;
                     for (UIExtension extension : uiController.getExtensions()) {
 
-                        if (extension instanceof UIExtensionSearchFilesBackground) {
+                        if (extension instanceof UIExtensionSearchFilesByContent) {
                             ui = (UIExtensionSearchFilesByContent) extension;
                         }
 
                     }
-                   // search.searchFilesBackground(pattern, dir,ui);
+                    search.searchFilesByContent(pattern, dir,ui);
                 }
             }
         }
