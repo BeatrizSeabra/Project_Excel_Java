@@ -133,7 +133,7 @@ public class MacroCompiler implements ExpressionCompiler{
 
                     if (node.getChild(0).getText().matches("@[a-zA-Z0-9]+")) { //Tests if the attribution is being made to a temporary variable 
                         Value value = convert(cell, node.getChild(1)).evaluate();
-                        TemporaryVariable temporaryVariable = new TemporaryVariable(node.getChild(0).getText(), value);
+                        TemporaryVariable temporaryVariable = new TemporaryVariable(node.getChild(0).getText(), value, cell);
                         ((SpreadsheetImpl)cell.getSpreadsheet()).addOrUpdateTemporaryVariable(temporaryVariable);
                     } else { //Attribution to a Cell Reference
                         //crias uma referencia para a cell
