@@ -47,11 +47,12 @@ expression
        	;
 
 macro
-        : 'macro'  STRING  LBRA  '\n' (line '\n')*  RBRA 
+        : MACRO  STRING  LBRA  '\n' line  RBRA 
         ;
 
 line
-        :sq
+        :sq '\n' line
+        |
         ;
 
 sq
@@ -111,7 +112,7 @@ atom
 	:	function_call
 	|	reference
 	|	literal
-        |       TEMPVAR
+        |       VARNAME
 	|	LPAR! comparison RPAR!
 	;
 
@@ -130,6 +131,12 @@ literal
 	:	NUMBER
 	|	STRING
 	;
+	
+/* Macro*/
+ MACRO	: ('macro'
+  		| 'MACRO'
+ 		) 
+ 		;
 	
 fragment LETTER: ('a'..'z'|'A'..'Z') ;
   
@@ -209,3 +216,4 @@ WS: ( ' '
 	
 /* Attribution*/
  ATT    : ':=' ;
+ 
