@@ -15,11 +15,21 @@
  * <b>S072d: Design</b><br/>
  * In this Use Case realization we use the same graphic interface and the same classes. We also run the same thread to run this import in parallel to the main program.
  * To  import instantly the file when it is modified we create a while cicle that will be waiting to a modification in the file. When that occurs we import the file.
+ * <br/>
+ * <br/>
+ * <img src="../../../csheets/userstories/us072/doc-files/us072_design1.png"> 
+ * <br/>
+ * <br/>
  * 
-* 
-* 
-* 
-* @startuml doc-files/us075_design1.png
+ * <b>S072c: Coding</b><br/>
+ * see:<br/>
+ * <a href="../../../csheets/ext/importfiles/package-summary.html">csheets.ext.importfiles</a><br/>
+ * <a href="../../../csheets/ext/importfiles/ui/package-summary.html">csheets.ext.importfiles.ui</a><br/>
+ * <br/>
+ * <br/>
+ * 
+ * 
+ * @startuml doc-files/us072_design1.png
    actor User
    User -> ImportAction : 
    extensionImport->uiExtensionImport: getUiExtension() 
