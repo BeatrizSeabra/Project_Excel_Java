@@ -419,14 +419,30 @@ public class SpreadsheetImpl implements Spreadsheet {
         return new TemporaryVariable("@defaultZeroVar", new Value(0), new CellImpl(null, null));
     }
 
+    /**
+     * Returns the temporary variable list
+     * @return 
+     */
     public ArrayList<TemporaryVariable> getTemporaryVariableList() {
         return temporaryVariableList;
     }
 
+    /**
+     * Sets the temporary variable list
+     * @param temporaryVariableList 
+     */
     public void setTemporaryVariableList(ArrayList<TemporaryVariable> temporaryVariableList) {
         this.temporaryVariableList = temporaryVariableList;
     }
     
+    /*
+    TEMPORARY VARIABLE LISTENERS
+    */
+    
+    /**
+     * Adds a temporary variable listener 
+     * @param listener 
+     */
     public void addTemporaryVariableListener(TemporaryVariablesListener listener){
         this.variableListeners.add(listener);
         if(!temporaryVariableList.isEmpty()){
@@ -434,6 +450,10 @@ public class SpreadsheetImpl implements Spreadsheet {
         }
     }
     
+    /**
+     * Notifys all listeners that a temporary variable was added or updated
+     * @param varList 
+     */
     private void fireVariableCreatedOrUpdated(ArrayList<TemporaryVariable> varList){
         for (TemporaryVariablesListener listener : this.variableListeners) {
             listener.variableCreatedOrUpdated(varList);;

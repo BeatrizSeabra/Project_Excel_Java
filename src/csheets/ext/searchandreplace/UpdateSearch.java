@@ -37,6 +37,7 @@ public class UpdateSearch extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Search all");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jButton1.setText("Cancel");
@@ -120,6 +121,7 @@ public class UpdateSearch extends javax.swing.JFrame {
             public void run() {
                 UpdateSearch updt = new UpdateSearch();
                 updt.setVisible(true);
+                
 
             }
         });

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package csheets.ext.searchandreplace;
 
 import csheets.CleanSheets;
@@ -27,22 +26,22 @@ import static org.junit.Assert.*;
  * @author Diogo
  */
 public class SearchTest {
-    
+
     public SearchTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -50,8 +49,6 @@ public class SearchTest {
     /**
      * Test of simpleSearch method, of class Search.
      */
-
-    
     @Test
     public void testSimpleSearch() {
         System.out.println("simpleSearch");
@@ -65,21 +62,21 @@ public class SearchTest {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(SearchTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        Spreadsheet s=cleanSheets.getWorkbooks()[0].getSpreadsheet(0);
-        
+
+        Spreadsheet s = cleanSheets.getWorkbooks()[0].getSpreadsheet(0);
+
         controller.setActiveWorkbook(cleanSheets.getWorkbooks()[0]);
         controller.setActiveSpreadsheet(s);
-        
-        SpreadsheetTable focusOwner= new SpreadsheetTable(s, controller);
-        
+
+        SpreadsheetTable focusOwner = new SpreadsheetTable(s, controller);
+
         String text = "a";
         Search instance = new Search();
         Address expResult = new Address(2, 1);
         Address result = instance.simpleSearch(focusOwner, text);
         assertEquals(expResult, result);
     }
-    
+
     @Test
     public void testSimpleSearch2() {
         System.out.println("simpleSearch");
@@ -93,21 +90,21 @@ public class SearchTest {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(SearchTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        Spreadsheet s=cleanSheets.getWorkbooks()[0].getSpreadsheet(0);
-        
+
+        Spreadsheet s = cleanSheets.getWorkbooks()[0].getSpreadsheet(0);
+
         controller.setActiveWorkbook(cleanSheets.getWorkbooks()[0]);
         controller.setActiveSpreadsheet(s);
-        
-        SpreadsheetTable focusOwner= new SpreadsheetTable(s, controller);
-        
+
+        SpreadsheetTable focusOwner = new SpreadsheetTable(s, controller);
+
         String text = "1";
         Search instance = new Search();
         Address expResult = new Address(0, 0);
         Address result = instance.simpleSearch(focusOwner, text);
         assertEquals(expResult, result);
     }
-    
+
     @Test
     public void testSimpleSearch3() {
         System.out.println("simpleSearch");
@@ -121,21 +118,21 @@ public class SearchTest {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(SearchTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        Spreadsheet s=cleanSheets.getWorkbooks()[0].getSpreadsheet(0);
-        
+
+        Spreadsheet s = cleanSheets.getWorkbooks()[0].getSpreadsheet(0);
+
         controller.setActiveWorkbook(cleanSheets.getWorkbooks()[0]);
         controller.setActiveSpreadsheet(s);
-        
-        SpreadsheetTable focusOwner= new SpreadsheetTable(s, controller);
-        
+
+        SpreadsheetTable focusOwner = new SpreadsheetTable(s, controller);
+
         String text = "VR[0-9]*";
         Search instance = new Search();
         Address expResult = new Address(1, 1);
         Address result = instance.simpleSearch(focusOwner, text);
         assertEquals(expResult, result);
     }
-    
+
     @Test
     public void testSimpleSearch4() {
         System.out.println("simpleSearch");
@@ -149,21 +146,21 @@ public class SearchTest {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(SearchTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        Spreadsheet s=cleanSheets.getWorkbooks()[0].getSpreadsheet(0);
-        
+
+        Spreadsheet s = cleanSheets.getWorkbooks()[0].getSpreadsheet(0);
+
         controller.setActiveWorkbook(cleanSheets.getWorkbooks()[0]);
         controller.setActiveSpreadsheet(s);
-        
-        SpreadsheetTable focusOwner= new SpreadsheetTable(s, controller);
-        
+
+        SpreadsheetTable focusOwner = new SpreadsheetTable(s, controller);
+
         String text = "[ ]*";
         Search instance = new Search();
         Address expResult = new Address(5, 0);
         Address result = instance.simpleSearch(focusOwner, text);
         assertEquals(expResult, result);
     }
-    
+
     @Test
     public void testSimpleSearch5() {
         System.out.println("simpleSearch");
@@ -177,21 +174,21 @@ public class SearchTest {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(SearchTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        Spreadsheet s=cleanSheets.getWorkbooks()[0].getSpreadsheet(0);
-        
+
+        Spreadsheet s = cleanSheets.getWorkbooks()[0].getSpreadsheet(0);
+
         controller.setActiveWorkbook(cleanSheets.getWorkbooks()[0]);
         controller.setActiveSpreadsheet(s);
-        
-        SpreadsheetTable focusOwner= new SpreadsheetTable(s, controller);
-        
+
+        SpreadsheetTable focusOwner = new SpreadsheetTable(s, controller);
+
         String text = "";
         Search instance = new Search();
         Address expResult = new Address(5, 0);
         Address result = instance.simpleSearch(focusOwner, text);
         assertEquals(expResult, result);
     }
-    
+
     @Test
     public void testSimpleSearch6() {
         System.out.println("simpleSearch");
@@ -205,19 +202,186 @@ public class SearchTest {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(SearchTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        Spreadsheet s=cleanSheets.getWorkbooks()[0].getSpreadsheet(0);
-        
+
+        Spreadsheet s = cleanSheets.getWorkbooks()[0].getSpreadsheet(0);
+
         controller.setActiveWorkbook(cleanSheets.getWorkbooks()[0]);
         controller.setActiveSpreadsheet(s);
-        
-        SpreadsheetTable focusOwner= new SpreadsheetTable(s, controller);
-        
+
+        SpreadsheetTable focusOwner = new SpreadsheetTable(s, controller);
+
         String text = null;
         Search instance = new Search();
         Address expResult = null;
         Address result = instance.simpleSearch(focusOwner, text);
         assertEquals(expResult, result);
     }
-    
+
+    /**
+     * Test of SearchAll method, of class Search.
+     */
+    @Test
+
+    public void testSearchAll() {
+        System.out.println("SearchAll");
+
+        CleanSheets cleanSheets = new CleanSheets();
+        UIController controller = new UIController(cleanSheets);
+        File file = new File("src-tests/csheets/ext/searchandreplace/testeus22.cls");
+        try {
+            cleanSheets.load(file);
+        } catch (IOException ex) {
+            Logger.getLogger(SearchTest.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(SearchTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Spreadsheet s = cleanSheets.getWorkbooks()[0].getSpreadsheet(0);
+
+        controller.setActiveWorkbook(cleanSheets.getWorkbooks()[0]);
+        controller.setActiveSpreadsheet(s);
+
+        SpreadsheetTable focusOwner = new SpreadsheetTable(s, controller);
+
+        String text = "a";
+        Search instance = new Search();
+        Address expResult = null;
+        UpdateSearch updatesearchUI = new UpdateSearch();
+        instance.SearchAll(updatesearchUI, focusOwner, text);
+    }
+
+    public void testSearchAll1() {
+        System.out.println("SearchAll1");
+
+        CleanSheets cleanSheets = new CleanSheets();
+        UIController controller = new UIController(cleanSheets);
+        File file = new File("src-tests/csheets/ext/searchandreplace/testeus22.cls");
+        try {
+            cleanSheets.load(file);
+        } catch (IOException ex) {
+            Logger.getLogger(SearchTest.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(SearchTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Spreadsheet s = cleanSheets.getWorkbooks()[0].getSpreadsheet(0);
+
+        controller.setActiveWorkbook(cleanSheets.getWorkbooks()[0]);
+        controller.setActiveSpreadsheet(s);
+
+        SpreadsheetTable focusOwner = new SpreadsheetTable(s, controller);
+
+        String text = "1";
+        Search instance = new Search();
+        Address expResult = null;
+        UpdateSearch updatesearchUI = new UpdateSearch();
+        instance.SearchAll(updatesearchUI, focusOwner, text);
+    }
+
+    public void testSearchAll2() {
+        System.out.println("SearchAll2");
+
+        CleanSheets cleanSheets = new CleanSheets();
+        UIController controller = new UIController(cleanSheets);
+        File file = new File("src-tests/csheets/ext/searchandreplace/testeus22.cls");
+        try {
+            cleanSheets.load(file);
+        } catch (IOException ex) {
+            Logger.getLogger(SearchTest.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(SearchTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Spreadsheet s = cleanSheets.getWorkbooks()[0].getSpreadsheet(0);
+
+        controller.setActiveWorkbook(cleanSheets.getWorkbooks()[0]);
+        controller.setActiveSpreadsheet(s);
+
+        SpreadsheetTable focusOwner = new SpreadsheetTable(s, controller);
+
+        String text = "VR[0-9]*";
+        Search instance = new Search();
+        Address expResult = null;
+        UpdateSearch updatesearchUI = new UpdateSearch();
+        instance.SearchAll(updatesearchUI, focusOwner, text);
+    }
+
+    public void testSearchAll3() {
+        System.out.println("SearchAll3");
+
+        CleanSheets cleanSheets = new CleanSheets();
+        UIController controller = new UIController(cleanSheets);
+        File file = new File("src-tests/csheets/ext/searchandreplace/testeus22.cls");
+        try {
+            cleanSheets.load(file);
+        } catch (IOException ex) {
+            Logger.getLogger(SearchTest.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(SearchTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Spreadsheet s = cleanSheets.getWorkbooks()[0].getSpreadsheet(0);
+
+        controller.setActiveWorkbook(cleanSheets.getWorkbooks()[0]);
+        controller.setActiveSpreadsheet(s);
+
+        SpreadsheetTable focusOwner = new SpreadsheetTable(s, controller);
+
+        String text = "";
+        Search instance = new Search();
+        Address expResult = null;
+        UpdateSearch updatesearchUI = new UpdateSearch();
+        instance.SearchAll(updatesearchUI, focusOwner, text);
+    }
+
+    public void testSearchAll4() {
+        System.out.println("SearchAll4");
+
+        CleanSheets cleanSheets = new CleanSheets();
+        UIController controller = new UIController(cleanSheets);
+        File file = new File("src-tests/csheets/ext/searchandreplace/testeus22.cls");
+        try {
+            cleanSheets.load(file);
+        } catch (IOException ex) {
+            Logger.getLogger(SearchTest.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(SearchTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Spreadsheet s = cleanSheets.getWorkbooks()[0].getSpreadsheet(0);
+
+        controller.setActiveWorkbook(cleanSheets.getWorkbooks()[0]);
+        controller.setActiveSpreadsheet(s);
+
+        SpreadsheetTable focusOwner = new SpreadsheetTable(s, controller);
+
+        String text = "[ ]*";
+        Search instance = new Search();
+        Address expResult = null;
+        UpdateSearch updatesearchUI = new UpdateSearch();
+        instance.SearchAll(updatesearchUI, focusOwner, text);
+    }
+
+    public void testSearchAll5() {
+        System.out.println("SearchAll5");
+
+        CleanSheets cleanSheets = new CleanSheets();
+        UIController controller = new UIController(cleanSheets);
+        File file = new File("src-tests/csheets/ext/searchandreplace/testeus22.cls");
+        try {
+            cleanSheets.load(file);
+        } catch (IOException ex) {
+            Logger.getLogger(SearchTest.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(SearchTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Spreadsheet s = cleanSheets.getWorkbooks()[0].getSpreadsheet(0);
+
+        controller.setActiveWorkbook(cleanSheets.getWorkbooks()[0]);
+        controller.setActiveSpreadsheet(s);
+
+        SpreadsheetTable focusOwner = new SpreadsheetTable(s, controller);
+
+        String text = null;
+        Search instance = new Search();
+        Address expResult = null;
+        UpdateSearch updatesearchUI = new UpdateSearch();
+        instance.SearchAll(updatesearchUI, focusOwner, text);
+    }
+
 }

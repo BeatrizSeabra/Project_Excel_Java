@@ -15,7 +15,7 @@ import java.awt.event.ActionEvent;
 
 /**
  *
- * @author Diogo
+ * @author Diogo Moreira (1120339)
  */
 public class TemporaryVariablesEditorAction extends BaseAction{
     
@@ -29,7 +29,7 @@ public class TemporaryVariablesEditorAction extends BaseAction{
     
     @Override
     protected String getName() {
-        return "Start Side Bar Tracking";
+        return "Activate Side Bar";
     }
 
     @Override

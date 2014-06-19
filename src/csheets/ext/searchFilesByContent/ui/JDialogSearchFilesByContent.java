@@ -185,17 +185,17 @@ public class JDialogSearchFilesByContent extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        String pattern = jTextField1.getText();
+        String content = jTextField1.getText();
         String dir = jTextField2.getText();
 
-        if (pattern.isEmpty() && dir.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Invalid Pattern \nInvalid Directory", "ERROR", JOptionPane.ERROR_MESSAGE);
+        if (content.isEmpty() && dir.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Invalid Content \nInvalid Directory", "ERROR", JOptionPane.ERROR_MESSAGE);
         } else {
             if (dir.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Invalid Directory", "ERROR", JOptionPane.ERROR_MESSAGE);
             } else {
-                if (pattern.isEmpty()) {
-                    JOptionPane.showMessageDialog(this, "Invalid Pattern", "ERROR", JOptionPane.ERROR_MESSAGE);
+                if (content.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Invalid Content", "ERROR", JOptionPane.ERROR_MESSAGE);
                 } else {
                     dispose();
                     JOptionPane.showMessageDialog(this, "File Search Started!", "Search", JOptionPane.INFORMATION_MESSAGE);
@@ -211,7 +211,7 @@ public class JDialogSearchFilesByContent extends javax.swing.JDialog {
                         }
 
                     }
-                    search.searchFilesByContent(pattern, dir,ui);
+                    search.searchFilesByContent(content, dir,ui);
                 }
             }
         }
