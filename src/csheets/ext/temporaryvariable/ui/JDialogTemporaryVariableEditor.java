@@ -165,8 +165,8 @@ public class JDialogTemporaryVariableEditor extends javax.swing.JDialog {
         dispose();
         if(variableValue.getText().matches("[+-]?(?=[\\.?\\d])\\d*(\\.\\d+)?")){
             temporaryVariable.setValue(new Value(Double.parseDouble(variableValue.getText())));
-            int count=temporaryVariable.getCell().getSpreadsheet().getWorkbook().getSpreadsheetCount();
-            Workbook workbook = temporaryVariable.getCell().getSpreadsheet().getWorkbook();
+            int count=temporaryVariable.getSpreadsheet().getWorkbook().getSpreadsheetCount();
+            Workbook workbook = temporaryVariable.getSpreadsheet().getWorkbook();
             for (int i = 0; i < count; i++) {
                 ((SpreadsheetImpl)workbook.getSpreadsheet(i)).addOrUpdateTemporaryVariable(temporaryVariable);
             }
