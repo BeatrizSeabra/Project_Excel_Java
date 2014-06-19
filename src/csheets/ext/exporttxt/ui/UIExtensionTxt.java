@@ -1,5 +1,6 @@
 package csheets.ext.exporttxt.ui;
 
+import csheets.CleanSheets;
 import javax.swing.Icon;
 import javax.swing.JComponent;
 import javax.swing.JMenu;
@@ -10,6 +11,7 @@ import csheets.ui.ctrl.UIController;
 import csheets.ui.ext.CellDecorator;
 import csheets.ui.ext.TableDecorator;
 import csheets.ui.ext.UIExtension;
+import javax.swing.ImageIcon;
 
 /**
  * This class implements the UI interface extension for the simple extension.
@@ -35,7 +37,10 @@ public class UIExtensionTxt extends UIExtension {
 	 * @return an icon with style
 	 */
 	public Icon getIcon() {
-		return null;
+		if (icon == null){
+                    icon = new ImageIcon(CleanSheets.class.getResource("res/img/export.gif"));
+                }
+		return icon;
 	}
 
 	/**
