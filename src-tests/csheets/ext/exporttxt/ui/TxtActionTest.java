@@ -4,11 +4,11 @@
  * and open the template in the editor.
  */
 
-package csheets.ext.importfiles.ui;
+package csheets.ext.exporttxt.ui;
 
+import csheets.CleanSheets;
 import csheets.ui.ctrl.UIController;
 import java.awt.event.ActionEvent;
-import java.io.File;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -18,11 +18,11 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author Nélson
+ * @author Stefan Parker
  */
-public class ImportActionTest {
+public class TxtActionTest {
     
-    public ImportActionTest() {
+    public TxtActionTest() {
     }
     
     @BeforeClass
@@ -42,53 +42,53 @@ public class ImportActionTest {
     }
 
     /**
-     * Test of getName method, of class ImportAction.
+     * Test of getName method, of class TxtAction.
      */
     @Test
     public void testGetName() {
         System.out.println("getName");
-        UIController ui = null;
-        ImportAction instance = new ImportAction(ui, null);
-        String expResult = "TXT ";
+        CleanSheets app = new CleanSheets();
+        UIController ui=new UIController(app);
+        TxtAction instance = new TxtAction(ui);
+        String expResult = "TXT";
         String result = instance.getName();
         assertEquals(expResult, result);
     }
 
     /**
-     * Test of defineProperties method, of class ImportAction.
+     * Test of defineProperties method, of class TxtAction.
      */
     @Test
     public void testDefineProperties() {
         System.out.println("defineProperties");
-        UIController ui = null;
-        ImportAction instance = new ImportAction(ui, null);
+        CleanSheets app = new CleanSheets();
+        UIController ui=new UIController(app);
+        TxtAction instance = new TxtAction(ui);
         instance.defineProperties();
     }
 
     /**
-     * Test of actionPerformed method, of class ImportAction.
+     * Test of actionPerformed method, of class TxtAction.
      */
     @Test
     public void testActionPerformed() {
-        //É necessario o uiController do programa, nao um criado agora a null
         System.out.println("actionPerformed");
         ActionEvent event = null;
-        UIController ui = null;
-        ImportAction instance = new ImportAction(ui, null);
+        TxtAction instance = null;
         instance.actionPerformed(event);
+
     }
 
     /**
-     * Test of getFile method, of class ImportAction.
+     * Test of addListeners method, of class TxtAction.
      */
     @Test
-    public void testGetFile() {
-        System.out.println("getFile");
-        UIController ui = null;
-        ImportAction instance = new ImportAction(ui, null);
-        File expResult = null; //Este teste não tem um resultado esperado, depende da escolha do utilizador no FileChooser
-        File result = instance.getFile();
-        assertEquals(expResult, result);
+    public void testAddListeners() {
+        System.out.println("addListeners");
+        //Não é possivel ir buscar o UIController do programa pelo que não funciona correctamente o teste unitário
+        TxtAction instance = null;
+        instance.addListeners();
+
     }
     
 }

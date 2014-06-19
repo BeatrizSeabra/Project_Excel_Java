@@ -10,7 +10,7 @@
  * <br/>
  * <br/>
  *  
- * <b>S025a: Analysis</b><br/>
+ * <b>S026a: Analysis</b><br/>
  * A implementacao deste use case ira permitir exportar o conteudo de uma 
  * cleanSheets para html,
  * para tal e necessario criar uma interface que permitar controlar as exportacoes 
@@ -25,7 +25,7 @@
  * no objecto da classe Workbook sera exportada para html.<br/>
  * <br/>
  *
- *<b>S025d: Design</b><br/>
+ *<b>S026d: Design</b><br/>
  *Para realizar este use case iremos precisar de utilizar uma interface que
  * controle as classes responsaveis pela exportacao e importacao.
  * Iremos precisar tambem de uma classe responsavel pela exportacao em html<br/>
@@ -34,7 +34,22 @@
  *<img src="../../../csheets/userstories/us026/doc-files/us026_design1.png"> 
   <br/>
 * 
+* <b>S026u: Unit Tests</b><br/>
+* Os metodos necessarios para a implementacao do use case 26, exportar html,<br/> 
+* sao metodos void por isso nao foi possivel realizar testes unitarios.<br/> 
+* <br/>
+* <br/>
 * 
+* <b>S026f: Functional Tests</b><br/>
+* para a realizacao desta funcionalidade, o utilizador deverá proceder da seguinte forma:
+* - correr o cleansheets
+* - efectuar as alteracoes que pretender nas celulas
+* - selecionar a celula na ultima linha/coluna de modo a selecionar a area de transferencia
+* - ir ao menu Extentions, seguido do menu Export, e selecionar a opcao HTML
+* - escolher o sitio em memoria onde pretende gravar o ficheiro, e atribuir um nome
+* - ficheiro guardado com sucesso !
+* <br/>
+* <br/>
  * @author 1040314 - João Paulo Silva
  */
 /*

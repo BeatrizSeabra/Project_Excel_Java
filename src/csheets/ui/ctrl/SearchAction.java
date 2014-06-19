@@ -70,12 +70,12 @@ public class SearchAction extends FocusOwnerAction {
         JDialogSearchAndReplace searchAndReplace = new JDialogSearchAndReplace(null, true, focusOwner);
         searchAndReplace.setLocationRelativeTo(null);
         searchAndReplace.setVisible(true);
-        
+
         Address address = searchAndReplace.getCell();
         focusOwner.clearSelection();
 
         if (address == null) {
-            JOptionPane.showMessageDialog(null, "No text found");
+            //JOptionPane.showMessageDialog(null, "No text found");
         } else {
             focusOwner.changeSelection(address.getRow(), address.getColumn(), true, false);
         }

@@ -70,17 +70,17 @@ public class Search {
     public class Update extends Thread {
 
         private UpdateSearch updateUI;
-        private Address address;
+        private Address addr;
 
         public Update(UpdateSearch updtUI, Address add) {
             this.updateUI = updtUI;
-            this.address = add;
+            this.addr = add;
         }
 
         @Override
         public void run() {
           
-            model.addElement(address);
+            model.addElement(addr);
             this.updateUI.setJList(model);
         }
     }

@@ -54,7 +54,7 @@ public class HtmlAction extends BaseAction {
      *
      * @param event the event that was fired
      */
-    @Override
+   
     public void actionPerformed(ActionEvent e) {
 
 
@@ -78,19 +78,17 @@ public class HtmlAction extends BaseAction {
                         "   <HEAD>\n" +
                         "      <TITLE>CleanSheets</TITLE>\n" +
                         "   </HEAD>\n" +
-                        "   <BODY>" + "<table width=\"300\" border=\"2\">" );
+                        "   <BODY>" + "<table cellspacing=\"1\" border=\"5\" style=\"background-color: #eeeeee;\"" );
             for (int column = 0; column < sheet.getColumnCount(); column++) {
-                writer.print("<tr>\n");
+                writer.print("\n<tr>\n");
                 for (int row = 0; row < sheet.getRowCount(); row++) {
-                    if (!(sheet.getCell(column, row).getContent().isEmpty())) {
-                        writer.print("<td>" + sheet.getCell(column, row).getContent() + "</td>\n");
-                    }
-                    
+                   writer.print("<td width=\"60\">" + sheet.getCell(row, column).getContent() + "</td>\n");
+               
                 }
                 writer.print("</tr>");
             }
 
-            writer.print("</BODY>\n" + "</HTML>");
+            writer.print("\n</BODY>\n" + "</HTML>");
 
             writer.close();
             System.out.println("Done!");

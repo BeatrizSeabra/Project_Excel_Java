@@ -6,6 +6,7 @@
 package csheets.ext.searchandreplace;
 
 import csheets.core.Address;
+import csheets.ext.searchandreplace.JDialogSearchAndReplace;
 import javax.swing.DefaultListModel;
 
 /**
@@ -119,7 +120,7 @@ public class UpdateSearch extends javax.swing.JFrame {
             public void run() {
                 UpdateSearch updt = new UpdateSearch();
                 updt.setVisible(true);
-                
+
             }
         });
     }
