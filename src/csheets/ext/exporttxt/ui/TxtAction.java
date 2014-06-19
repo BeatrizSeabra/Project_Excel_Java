@@ -220,12 +220,12 @@ public class TxtAction extends BaseAction {
 
         @Override
         public void cellCleared(Cell cell) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            uiController.setModificado(true);
         }
 
         @Override
         public void cellCopied(Cell cell, Cell source) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            uiController.setModificado(true);
         }
     }
 
