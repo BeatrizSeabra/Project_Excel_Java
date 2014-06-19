@@ -50,17 +50,16 @@ public class Search {
         if (text == null) {
             return;
         }
-        Spreadsheet spreadsheet = focusOwner.getSpreadsheet();
+        Spreadsheet spread = focusOwner.getSpreadsheet();
 
-        int rowCount = spreadsheet.getRowCount();
+        int rowCount = spread.getRowCount();
         Cell row[];
         for (int i = 0; i < rowCount; i++) {
-            row = spreadsheet.getRow(i);
+            row = spread.getRow(i);
             int rowLength = row.length;
-            for (int j = 0; j < rowLength; j++) {//para cada posicao do vector
-                //funcao @macthes() encontra texto e expressoes regulares
-                if (row[j].getContent().matches(text)) {//se for encontrada a palavra pesquisada
-                    Address add = new Address(j, i);//retorna o address da cell
+            for (int j = 0; j < rowLength; j++) {
+                if (row[j].getContent().matches(text)) {
+                    Address add = new Address(j, i);
                     threadUpdate = new Thread(new Update(updatesearchUI, add));
                     threadUpdate.start();
                 }
@@ -80,13 +79,8 @@ public class Search {
 
         @Override
         public void run() {
-            try {
-                sleep(1500); //demora 1.5s
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Search.class.getName()).log(Level.SEVERE, null, ex);
-            }
+          
             model.addElement(address);
-            System.out.println(address);
             this.updateUI.setJList(model);
         }
     }

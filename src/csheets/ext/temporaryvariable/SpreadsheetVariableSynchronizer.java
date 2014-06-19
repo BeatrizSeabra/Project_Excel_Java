@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package csheets.ext.temporaryvariable;
 
 import csheets.core.Spreadsheet;
@@ -16,27 +15,27 @@ import java.util.ArrayList;
  *
  * @author Diogo Moreira (1120339)
  */
-public class SpreadsheetVariableSynchronizer implements WorkbookListener{
+public class SpreadsheetVariableSynchronizer implements WorkbookListener {
 
     /**
-     * When a new spreadsheet is added, the temporary variables of the other sheets are added to the new spreadsheet
+     * When a new spreadsheet is added, the temporary variables of the other
+     * sheets are added to the new spreadsheet
+     *
      * @param spreadsheet
-     * @param index 
+     * @param index
      */
     @Override
     public void spreadsheetInserted(Spreadsheet spreadsheet, int index) {
-        ArrayList<TemporaryVariable> tempVarList = ((SpreadsheetImpl)spreadsheet.getWorkbook().getSpreadsheet(0)).getTemporaryVariableList();
-        ((SpreadsheetImpl)spreadsheet).setTemporaryVariableList(tempVarList);
+        ArrayList<TemporaryVariable> tempVarList = ((SpreadsheetImpl) spreadsheet.getWorkbook().getSpreadsheet(0)).getTemporaryVariableList();
+        ((SpreadsheetImpl) spreadsheet).setTemporaryVariableList(tempVarList);
     }
 
     @Override
     public void spreadsheetRemoved(Spreadsheet spreadsheet) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void spreadsheetRenamed(Spreadsheet spreadsheet) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

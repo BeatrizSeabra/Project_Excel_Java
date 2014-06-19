@@ -194,7 +194,7 @@ public class ExcelExpressionCompiler implements ExpressionCompiler {
 
                     if (node.getChild(0).getText().matches("@[a-zA-Z0-9]+")) { //Tests if the attribution is being made to a temporary variable 
                         Value value = convert(cell, node.getChild(1)).evaluate();
-                        TemporaryVariable temporaryVariable = new TemporaryVariable(node.getChild(0).getText(), value);
+                        TemporaryVariable temporaryVariable = new TemporaryVariable(node.getChild(0).getText(), value, cell);
                         for (int i = 0; i < cell.getSpreadsheet().getWorkbook().getSpreadsheetCount(); i++) { //The temporary variables have the same value in every sheet of the workbook
                             SpreadsheetImpl auxSheet = (SpreadsheetImpl)cell.getSpreadsheet().getWorkbook().getSpreadsheet(i);
                             auxSheet.addOrUpdateTemporaryVariable(temporaryVariable);

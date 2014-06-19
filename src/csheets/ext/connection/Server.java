@@ -12,7 +12,6 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -33,7 +32,7 @@ public abstract class Server extends Thread {
             //TODO adicionar verificação à porta
             this.port = port;
         } catch (SocketException ex) {
-            Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -48,7 +47,7 @@ public abstract class Server extends Thread {
                 socket.receive(packet);
                 recebeu=true;
             } catch (IOException ex) {
-                Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
             }
              while(allDone){
                 ler=false;
@@ -66,7 +65,7 @@ public abstract class Server extends Thread {
         try {
             socket.send(packet);
         } catch (IOException ex) {
-            Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
