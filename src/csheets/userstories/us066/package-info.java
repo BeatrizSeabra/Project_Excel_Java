@@ -1,10 +1,10 @@
 /**
-* Technical documentation regarding the user story 066: Several shares. 
+* Technical documentation regarding the user story 066: Several shares (Multi Shares). 
 * <br/>
 * <br/>
 * 
 * <b>Requirement</b><br/>
-* Deve ser possível ter várias partilhas "activas" (com nomes diferentes). Deve ser possível ligar-se a várias partilhas. 
+* Deve ser possível ter várias partilhas "activas" (com nomes diferentes). Deve ser possível ligar-se a várias partilhas. 
 * O local que recebe a partilha pode ser diferente do local "origem".
 * <br/>
 * <br/>

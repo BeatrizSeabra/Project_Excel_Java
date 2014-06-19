@@ -42,7 +42,6 @@ public class SharePanel extends javax.swing.JPanel implements SelectionListener 
     private DefaultListModel modelClient;
     private Address address;
     private DefaultTreeModel model_partilhas;
-    private Color theForeground;
     
     public SharePanel(UIController uiController) {
         super(new BorderLayout());
@@ -666,6 +665,8 @@ public class SharePanel extends javax.swing.JPanel implements SelectionListener 
 
         protected DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();        
 
+        Color theForeground = null;
+        
         @Override
         public Component getListCellRendererComponent(JList jlist,
                 Object value,
@@ -679,12 +680,14 @@ public class SharePanel extends javax.swing.JPanel implements SelectionListener 
 
             if (value instanceof Server) {
                 Server server = (Server) value;
+                theForeground = server.getRandomColor();
                 theText = server.getName() + " - " + server.getPort();
                 if (server.isRead_only()) {
                     renderer.setFont(new Font("Courier", Font.ITALIC, 12));
                 }
             } else if (value instanceof Client) {
                 Client client = (Client) value;
+                theForeground = client.getRandomColor();
                 theText = client.getIp() + " - " + client.getPort();
                 if (client.isRead_only()) {
                     renderer.setFont(new Font("Courier", Font.ITALIC, 12));

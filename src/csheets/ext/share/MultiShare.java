@@ -17,13 +17,13 @@ public class MultiShare {
     private static MultiShare multiShare = new MultiShare();
     private DefaultListModel modelServers;
     private DefaultListModel modelClients;
-    private boolean visible;
+    //private boolean visible;
     private DefaultTreeModel server_on_lan;
     
     private MultiShare() {
         modelServers = new DefaultListModel();
         modelClients = new DefaultListModel();
-        visible=true;
+        //visible=true;
         server_on_lan =new DefaultTreeModel(new DefaultMutableTreeNode("Servers"));
     }
     
@@ -116,15 +116,15 @@ public class MultiShare {
         this.modelClients = modelClients;
     }
 
-    public boolean isVisible() {
+    /*public boolean isVisible() {
         return visible;
     }
-
+*/
     
-    public void setVisivle(boolean visible) {
+   /* public void setVisivle(boolean visible) {
         this.visible = visible;
     }
-
+*/
     public DefaultTreeModel getServer_on_lan() {
         return server_on_lan;
     }
