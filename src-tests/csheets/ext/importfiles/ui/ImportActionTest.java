@@ -6,6 +6,7 @@
 
 package csheets.ext.importfiles.ui;
 
+import csheets.ui.ctrl.UIController;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import org.junit.After;
@@ -17,7 +18,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author User
+ * @author Nélson
  */
 public class ImportActionTest {
     
@@ -46,11 +47,11 @@ public class ImportActionTest {
     @Test
     public void testGetName() {
         System.out.println("getName");
-        ImportAction instance = null;
-        String expResult = "TEXT ";
+        UIController ui = null;
+        ImportAction instance = new ImportAction(ui, null);
+        String expResult = "TXT ";
         String result = instance.getName();
         assertEquals(expResult, result);
-        
     }
 
     /**
@@ -59,9 +60,9 @@ public class ImportActionTest {
     @Test
     public void testDefineProperties() {
         System.out.println("defineProperties");
-        ImportAction instance = null;
+        UIController ui = null;
+        ImportAction instance = new ImportAction(ui, null);
         instance.defineProperties();
-      
     }
 
     /**
@@ -69,11 +70,12 @@ public class ImportActionTest {
      */
     @Test
     public void testActionPerformed() {
+        //É necessario o uiController do programa, nao um criado agora a null
         System.out.println("actionPerformed");
         ActionEvent event = null;
-        ImportAction instance = null;
+        UIController ui = null;
+        ImportAction instance = new ImportAction(ui, null);
         instance.actionPerformed(event);
-      
     }
 
     /**
@@ -82,11 +84,11 @@ public class ImportActionTest {
     @Test
     public void testGetFile() {
         System.out.println("getFile");
-        ImportAction instance = null;
-        File expResult = null;
+        UIController ui = null;
+        ImportAction instance = new ImportAction(ui, null);
+        File expResult = null; //Este teste não tem um resultado esperado, depende da escolha do utilizador no FileChooser
         File result = instance.getFile();
         assertEquals(expResult, result);
-       
     }
     
 }
