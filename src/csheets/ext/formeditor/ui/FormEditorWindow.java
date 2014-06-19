@@ -35,10 +35,10 @@ public class FormEditorWindow extends JFrame {
     private int bc = 0;
     private static ArrayList<Form> ArrayForms = new ArrayList<>();
 
-    public FormEditorWindow(){
-        
+    public FormEditorWindow() {
+
     }
-    
+
     public FormEditorWindow(Form form, ArrayList<JTextField> dataList) {
         super("Edit Form");
         this.form = form;
@@ -46,7 +46,7 @@ public class FormEditorWindow extends JFrame {
         this.dataList = dataList;
         this.buttonList = new ArrayList<String>();
         this.buttonList = form.getButtonList();
-       // loadForm(form.getnLines(), form.getSelected());
+        // loadForm(form.getnLines(), form.getSelected());
     }
 
     public FormEditorWindow(int nLines, String[] selected) {
@@ -57,114 +57,58 @@ public class FormEditorWindow extends JFrame {
         newForm(nLines, selected);
     }
 
-    public void loadForm(int nLines, String[] selected,ArrayList<JTextField> dataList, final ArrayList<String> buttonListt) {
+    public void loadForm(int nLines, String[] selected, ArrayList<JTextField> dataList, final ArrayList<String> buttonListt) {
         int cont = 0;
         bc = 0;
-        System.out.println(nLines + "ANDREEEEEEEEEEEE");
         JPanel center = new JPanel();
         JPanel top = new JPanel();
         JLabel nome = new JLabel("Form");
         top.add(nome);
         final JPanel grid = new JPanel(new GridLayout(nLines + 1, 1));
         for (int i = 0; i < nLines; i++) {
-            System.out.println(selected[i]);
             if (selected[i].equalsIgnoreCase("Text Box/Button")) {
-                final JTextField textBox = new JTextField(dataList.get(cont).getText());
-                
+                final JTextField textBox = new JTextField(dataList.get(i).getText());
                 textBox.setPreferredSize(new Dimension(200, 24));
-                textBox.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        textBox.setText("");
-                    }
-                });
                 final JButton button = new JButton(buttonListt.get(bc));
-                button.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        String nameButton = JOptionPane.showInputDialog(null, "Insert the text of the button", JOptionPane.OK_CANCEL_OPTION);
-                        button.setText(nameButton);
-                        buttonListt.add(bc, nameButton);
-                        bc++;
-                    }
-                });
                 JPanel temp = new JPanel(new FlowLayout(FlowLayout.CENTER));
                 temp.add(textBox);
                 temp.add(button);
-                dataList.add(cont, textBox);
                 cont++;
+                bc++;
                 grid.add(temp);
             } else if (selected[i].equalsIgnoreCase("Text Box/Edit Box")) {
-                final JTextField textBox = new JTextField(dataList.get(cont).getText());
+                final JTextField textBox = new JTextField(dataList.get(cont + 1).getText());
                 textBox.setPreferredSize(new Dimension(200, 24));
-                textBox.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        textBox.setText("");
-                    }
-                });
-
                 final JTextField editBox = new JTextField(dataList.get(cont).getText());
                 editBox.setPreferredSize(new Dimension(200, 24));
-                editBox.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        editBox.setText("");
-                    }
-                });
                 JPanel temp = new JPanel(new FlowLayout(FlowLayout.CENTER));
                 temp.add(textBox);
                 temp.add(editBox);
-                dataList.add(cont, textBox);
-                cont++;
-                dataList.add(cont, editBox);
-                cont++;
+
                 grid.add(temp);
             } else {
                 final JTextField editBox = new JTextField(dataList.get(cont).getText());
                 System.out.println(dataList.get(cont).getText());
                 editBox.setPreferredSize(new Dimension(200, 24));
-                editBox.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        editBox.setText("");
-                    }
-                });
-
-                System.out.println("olaaa "+ buttonListt.size());
-                for(int j=0;j<buttonListt.size();j++){
-                    System.out.println(buttonListt.get(i));
-                }
-                final JButton button = new JButton(buttonListt.get(bc));
-                System.out.println("cagaa");
-                button.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        String nameButton = JOptionPane.showInputDialog(null, "Insert the text of the button", "", JOptionPane.OK_CANCEL_OPTION);
-                        button.setText(nameButton);
-                        buttonListt.add(bc, nameButton);
-                        bc++;
-                    }
-                });
+                JButton button = new JButton(buttonListt.get(bc));
+                bc++;
                 JPanel temp = new JPanel(new FlowLayout(FlowLayout.CENTER));
                 temp.add(editBox);
                 temp.add(button);
-                dataList.add(cont, editBox);
                 cont++;
                 grid.add(temp);
             }
-
             center.add(grid);
         }
-       this.add(grid);
+        this.add(grid);
         this.pack();
         this.setVisible(true);
         this.setResizable(true);
         this.setLocationRelativeTo(null);
-        //  play();
-        
     }
 
     public void newForm(int nLines, String[] selected) {
-     name =  JOptionPane.showInputDialog("Name:");
+        name = JOptionPane.showInputDialog("Name:");
         int cont = 0;
         JPanel center = new JPanel();
         JPanel bot = new JPanel();
@@ -173,20 +117,21 @@ public class FormEditorWindow extends JFrame {
         bot.add(create);
         final JPanel grid = new JPanel(new GridLayout(nLines + 1, 1));
         for (int i = 0; i < nLines; i++) {
-            ChooseComponents(selected[i],cont,grid);
+           
+            ChooseComponents(selected[i], cont, grid);           
             center.add(grid);
         }
         this.add(grid);
         this.pack();
         this.setVisible(true);
         this.setResizable(true);
-        Form f = new Form(name,nLines,selected,buttonList,dataList);
+        Form f = new Form(name, nLines, selected, buttonList, dataList);
         ArrayForms.add(f);
         bot.add(create);
         create.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (valid()) {
-                    
+
                     JOptionPane.showMessageDialog(null, "The Form has been created");
                     dispose();
                 } else {
@@ -196,7 +141,6 @@ public class FormEditorWindow extends JFrame {
         });
     }
 
-
     public boolean valid() {
         for (JTextField item : dataList) {
             if (item.getText().equals("") || item.getText().equals("(Edit Box)")) {
@@ -205,98 +149,96 @@ public class FormEditorWindow extends JFrame {
         }
         return true;
     }
-    
-    public void ChooseComponents(String selected,int cont,JPanel grid){
-         if (selected.equalsIgnoreCase("Text Box/Button")) {
-                final JTextField textBox = new JTextField("");
-                textBox.setPreferredSize(new Dimension(200, 24));
-                textBox.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        textBox.setText("");
-                    }
-                });
-                final JButton button = new JButton("add text...");
-                button.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        String nameButton = JOptionPane.showInputDialog(null, "Insert the text of the button", "", JOptionPane.OK_CANCEL_OPTION);
-                        button.setText(nameButton);
-                        buttonList.add(bc, nameButton);
-                        bc++;
-                    }
-                });
-                JPanel temp = new JPanel(new FlowLayout(FlowLayout.CENTER));
-                temp.add(textBox);
-                temp.add(button);
-                dataList.add(cont, textBox);
-                cont++;
-                grid.add(temp);
-            } else if (selected.equalsIgnoreCase("Text Box/Edit Box")) {
-                final JTextField textBox = new JTextField("");
-                textBox.setPreferredSize(new Dimension(200, 24));
-                textBox.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        textBox.setText("");
-                    }
-                });
 
-                final JTextField editBox = new JTextField("(Edit Box)");
-                editBox.setPreferredSize(new Dimension(200, 24));
-                editBox.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        editBox.setText("");
-                    }
-                });
-                JPanel temp = new JPanel(new FlowLayout(FlowLayout.CENTER));
-                temp.add(textBox);
-                temp.add(editBox);
-                dataList.add(cont, textBox);
-                cont++;
-                dataList.add(cont, editBox);
-                cont++;
-                grid.add(temp);
-            } else {
-                final JTextField editBox = new JTextField("(Edit Box)");
-                editBox.setPreferredSize(new Dimension(200, 24));
-                editBox.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        editBox.setText("");
-                    }
-                });
-                final JButton button = new JButton("add text...");
-                button.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        String nameButton = JOptionPane.showInputDialog(null, "Insert the text of the button", "", JOptionPane.OK_CANCEL_OPTION);
-                        button.setText(nameButton);
-                        buttonList.add(bc, nameButton);
-                        bc++;
-                    }
-                });
-                JPanel temp = new JPanel(new FlowLayout(FlowLayout.CENTER));
-                temp.add(editBox);
-                temp.add(button);
-                dataList.add(cont, editBox);
-                cont++;
-                grid.add(temp);
-            }
+    public void ChooseComponents(String selected, int cont, JPanel grid) {
+        if (selected.equalsIgnoreCase("Text Box/Button")) {
+            final JTextField textBox = new JTextField("");
+            textBox.setPreferredSize(new Dimension(200, 24));
+            textBox.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    textBox.setText("");
+                }
+            });
+            final JButton button = new JButton("add text...");
+            button.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    String nameButton = JOptionPane.showInputDialog(null, "Insert the text of the button", "", JOptionPane.OK_CANCEL_OPTION);
+                    button.setText(nameButton);
+                    buttonList.add(bc, nameButton);
+                    bc++;
+                }
+            });
+            JPanel temp = new JPanel(new FlowLayout(FlowLayout.CENTER));
+            temp.add(textBox);
+            temp.add(button);
+            dataList.add(cont, textBox);
+            cont++;
+            grid.add(temp);
+        } else if (selected.equalsIgnoreCase("Text Box/Edit Box")) {
+            final JTextField textBox = new JTextField("");
+            textBox.setPreferredSize(new Dimension(200, 24));
+            textBox.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    textBox.setText("");
+                }
+            });
+
+            final JTextField editBox = new JTextField("(Edit Box)");
+            editBox.setPreferredSize(new Dimension(200, 24));
+            editBox.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    editBox.setText("");
+                }
+            });
+            JPanel temp = new JPanel(new FlowLayout(FlowLayout.CENTER));
+            temp.add(textBox);
+            temp.add(editBox);
+            dataList.add(cont, textBox);
+            cont++;
+            dataList.add(cont, editBox);
+            cont++;
+            grid.add(temp);
+        } else {
+            final JTextField editBox = new JTextField("(Edit Box)");
+            editBox.setPreferredSize(new Dimension(200, 24));
+            editBox.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    editBox.setText("");
+                }
+            });
+            final JButton button = new JButton("add text...");
+            button.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    String nameButton = JOptionPane.showInputDialog(null, "Insert the text of the button", "", JOptionPane.OK_CANCEL_OPTION);
+                    button.setText(nameButton);
+                    buttonList.add(bc, nameButton);
+                    bc++;
+                }
+            });
+            JPanel temp = new JPanel(new FlowLayout(FlowLayout.CENTER));
+            temp.add(editBox);
+            temp.add(button);
+            dataList.add(cont, editBox);
+            cont++;
+            grid.add(temp);
+        }
     }
-    
-    public ArrayList<Form> getForms(){      
+
+    public ArrayList<Form> getForms() {
         return ArrayForms;
     }
-    
-    public Form getFormByName(String name){
+
+    public Form getFormByName(String name) {
         Form form1 = new Form();
-        for(int i=0;i<ArrayForms.size();i++)
-        {
-            if(name.equals(ArrayForms.get(i).getName()))
-            {
+        for (int i = 0; i < ArrayForms.size(); i++) {
+            if (name.equals(ArrayForms.get(i).getName())) {
                 form1 = ArrayForms.get(i);
             }
-        }      
+        }
         return form1;
     }
 //    
@@ -311,7 +253,7 @@ public class FormEditorWindow extends JFrame {
 //        }   
 //        return lines;
 //    }
-    
+
 //     public String[] getSelectedByName(String name){
 //       for(int i=0;i<ArrayForms.size();i++)
 //        {
@@ -322,7 +264,6 @@ public class FormEditorWindow extends JFrame {
 //        }   
 //        return selected;
 //    }
-     
 //  
 //             
 //             public ArrayList<JTextField> getDataListByName(String name){

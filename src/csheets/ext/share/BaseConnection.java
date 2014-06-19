@@ -4,10 +4,12 @@ import csheets.core.Address;
 import csheets.core.Cell;
 import csheets.core.CellListener;
 import csheets.core.Spreadsheet;
+import java.awt.Color;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Random;
 import org.jasypt.util.binary.BasicBinaryEncryptor;
 
 /**
@@ -28,6 +30,8 @@ public abstract class BaseConnection {
     public Thread threadIn;
     public Thread threadOut;
     public MultiShare multiShare;
+    private Color randomColor;
+    private boolean read_only;
 
     public BaseConnection(String password, Spreadsheet folha, int port, Address inicio, Address fim) {
         this.folha = folha;
@@ -39,6 +43,11 @@ public abstract class BaseConnection {
         this.multiShare = MultiShare.getShares();
         binaryEncryptor = new BasicBinaryEncryptor();
         binaryEncryptor.setPassword(password);
+        //gerar cor aleatoria para o nome das ligações
+        Random randomGenerator = new Random();
+        randomColor = new Color(randomGenerator.nextInt(255),
+                randomGenerator.nextInt(255),
+                randomGenerator.nextInt(255));
     }
     
     public Object encryptor(Object obj) {
@@ -108,6 +117,23 @@ public abstract class BaseConnection {
         } else {
             this.fim = fim;
         }
+    }
+    
+    public Color getRandomColor() {
+        return randomColor;
+    }
+
+    public void setRandomColor(Color randomColor) {
+        this.randomColor = randomColor;
+    }
+ 
+    public boolean isRead_only() {
+        return read_only;
+    }
+
+    
+    public void setRead_only(boolean read_only) {
+        this.read_only = read_only;
     }
     
     public MultiShare getMultiShare() {

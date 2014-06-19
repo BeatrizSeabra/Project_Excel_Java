@@ -1,6 +1,9 @@
 csheets.ext.style.StyleExtension
 csheets.ext.deptree.DependencyTreeExtension
 csheets.ext.searchFilesBackground.ExtensionSearchFilesBackground
+csheets.ext.searchFilesByContent.ExtensionSearchFilesByContent
+csheets.ext.temporaryvariable.ExtensionTemporaryVariablesMenu
+csheets.ext.temporaryvariable.ExtensionTemporaryVariablesSideBar
 csheets.ext.assertion.AssertionExtension
 csheets.ext.test.TestExtension
 csheets.ext.simple.ExtensionExample
@@ -27,4 +30,5 @@ csheets.ext.formeditor.ExtensionFormEditor
 csheets.ext.beanshell.BeanShellExtension
 csheets.ext.button.ExtensionButton
 csheets.ext.email.ExtensionEmail
+csheets.ext.macrotomenuitem.ExtensionMacroToMenuItem
 csheets.ext.loadextension.ExtensionLoadExtension

@@ -36,6 +36,7 @@ import csheets.core.formula.compiler.FormulaCompilationException;
 import csheets.ext.Extension;
 import csheets.ext.ExtensionManager;
 import csheets.ext.SpreadsheetExtension;
+import csheets.ext.temporaryvariable.TemporaryVariablesListener;
 
 /**
  * The implementation of the <code>Spreadsheet</code> interface.
@@ -100,6 +101,11 @@ public class SpreadsheetImpl implements Spreadsheet {
      * The spreadsheet temporary variables list
      */
     private ArrayList<TemporaryVariable> temporaryVariableList = new ArrayList<TemporaryVariable>();
+    
+    /**
+     * List of temporary variables listeners
+     */
+    private ArrayList<TemporaryVariablesListener> variableListeners = new ArrayList<TemporaryVariablesListener>();
 
     /**
      * Creates a new spreadsheet.
@@ -378,10 +384,16 @@ public class SpreadsheetImpl implements Spreadsheet {
         for (TemporaryVariable tempVar : temporaryVariableList) {
             if(tempVar.getVarName().equals(temporaryVariable.getVarName())){
                 tempVar.setValue(temporaryVariable.getValue());
+                fireVariableCreatedOrUpdated(temporaryVariableList);
                 return true;
             }
         }
-        return temporaryVariableList.add(temporaryVariable);
+        if(temporaryVariableList.add(temporaryVariable)){
+            fireVariableCreatedOrUpdated(temporaryVariableList);
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /**
@@ -404,15 +416,48 @@ public class SpreadsheetImpl implements Spreadsheet {
                 return tempVar;
             }
         }
-        return new TemporaryVariable("@defaultZeroVar", new Value(0));
+        return new TemporaryVariable("@defaultZeroVar", new Value(0), new CellImpl(null, null));
     }
 
+    /**
+     * Returns the temporary variable list
+     * @return 
+     */
     public ArrayList<TemporaryVariable> getTemporaryVariableList() {
         return temporaryVariableList;
     }
 
+    /**
+     * Sets the temporary variable list
+     * @param temporaryVariableList 
+     */
     public void setTemporaryVariableList(ArrayList<TemporaryVariable> temporaryVariableList) {
         this.temporaryVariableList = temporaryVariableList;
+    }
+    
+    /*
+    TEMPORARY VARIABLE LISTENERS
+    */
+    
+    /**
+     * Adds a temporary variable listener 
+     * @param listener 
+     */
+    public void addTemporaryVariableListener(TemporaryVariablesListener listener){
+        this.variableListeners.add(listener);
+        if(!temporaryVariableList.isEmpty()){
+            fireVariableCreatedOrUpdated(temporaryVariableList);
+        }
+    }
+    
+    /**
+     * Notifys all listeners that a temporary variable was added or updated
+     * @param varList 
+     */
+    private void fireVariableCreatedOrUpdated(ArrayList<TemporaryVariable> varList){
+        for (TemporaryVariablesListener listener : this.variableListeners) {
+            listener.variableCreatedOrUpdated(varList);;
+        }
     }
     
     

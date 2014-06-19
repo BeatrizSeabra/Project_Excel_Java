@@ -6,6 +6,7 @@
 
 package csheets.ext.exportfiles.ui;
 
+import csheets.CleanSheets;
 import csheets.ext.invokefunction.ui.*;
 import csheets.ext.simple.ui.*;
 import javax.swing.Icon;
@@ -18,6 +19,7 @@ import csheets.ui.ctrl.UIController;
 import csheets.ui.ext.CellDecorator;
 import csheets.ui.ext.TableDecorator;
 import csheets.ui.ext.UIExtension;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -41,7 +43,10 @@ public class UIExtensionExport extends UIExtension {
 	 * @return an icon with style
 	 */
 	public Icon getIcon() {
-		return null;
+		if (icon == null){
+                    icon = new ImageIcon(CleanSheets.class.getResource("res/img/export.gif"));
+                }
+		return icon;
             //return null;
             
 	}

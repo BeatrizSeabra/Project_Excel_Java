@@ -6,6 +6,7 @@
 
 package csheets.core.formula;
 
+import csheets.core.Cell;
 import csheets.core.IllegalValueTypeException;
 import csheets.core.Spreadsheet;
 import csheets.core.Value;
@@ -19,10 +20,12 @@ public class TemporaryVariable implements Expression{
     
     private String varName;
     private Value value;
+    private Cell cell;
 
-    public TemporaryVariable(String varName, Value value) {
+    public TemporaryVariable(String varName, Value value, Cell cell) {
         this.varName = varName;
         this.value = value;
+        this.cell=cell;
     }
 
     @Override
@@ -47,6 +50,9 @@ public class TemporaryVariable implements Expression{
     public Value getValue() {
         return value;
     }
-    
+
+    public Cell getCell() {
+        return cell;
+    }
     
 }

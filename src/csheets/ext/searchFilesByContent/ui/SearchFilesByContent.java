@@ -6,10 +6,13 @@
 
 package csheets.ext.searchFilesByContent.ui;
 
-import csheets.ext.searchFilesBackground.ui.UIExtensionSearchFilesBackground;
 import java.io.File;
 import java.io.FileFilter;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 import java.util.Stack;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,18 +24,18 @@ public class SearchFilesByContent {
     public SearchFilesByContent() {
     }
     
-    public void searchFilesBackground(final String pattern, final String dir, UIExtensionSearchFilesBackground extension) {
+    public void searchFilesByContent(final String content, final String dir, UIExtensionSearchFilesByContent extension) {
 
         class ParallelSearch implements Runnable {
 
             String content;
-            String pattern = ".txt";
+            String pattern = "[a-z ]*\\.txt";
             String dir;
             String[] results;
-            UIExtensionSearchFilesBackground extension;
+            UIExtensionSearchFilesByContent extension;
 
-            public ParallelSearch(String pattern, String dir, UIExtensionSearchFilesBackground extension) {
-                this.pattern = pattern;
+            public ParallelSearch(String content, String dir, UIExtensionSearchFilesByContent extension) {
+                this.content = content;
                 this.dir = dir;
                 this.extension = extension;
             }
@@ -43,7 +46,7 @@ public class SearchFilesByContent {
 
             @Override
             public void run() {
-                //extension.cleanList();
+                extension.cleanList();
                 boolean flag = false;
                 Stack<File> stack = new Stack<File>();
                 File startingDirectory = new File(dir);
@@ -63,25 +66,36 @@ public class SearchFilesByContent {
                             }
                         }
                     } else if (child.isFile()) {
-                        extension.addFileName(child.getName());
-                        flag = true;
+                        try {
+                            if(hasContent(child, content)){
+                                extension.addFileName(child.getName());
+                                flag = true;
+                            }
+                        } catch (FileNotFoundException ex) {
+                            Logger.getLogger(SearchFilesByContent.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
                 }
                 if (flag == false) {
-                    extension.noFileFound();
+                   extension.noFileFound();
+                    System.out.println("files not found");
                 }
                 JOptionPane.showMessageDialog(null, "File Search Finished!", "Search", JOptionPane.INFORMATION_MESSAGE);
             }
 
         }
-        ParallelSearch parallel = new ParallelSearch(pattern, dir, extension);
+        ParallelSearch parallel = new ParallelSearch(content, dir, extension);
         Thread thread = new Thread(parallel);
         thread.start();
 
     }
-
-    
-    
-    
-    
-}
+    private boolean hasContent(File ref, String content) throws FileNotFoundException{
+        
+        Scanner scanner = new Scanner(ref);
+       if (scanner.findWithinHorizon(content, 0) != null) {
+            return true;
+        }
+       scanner.close();
+    return false;
+    }
+    }
