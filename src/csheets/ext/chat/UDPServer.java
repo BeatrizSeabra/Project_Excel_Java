@@ -13,11 +13,10 @@ public class UDPServer extends Thread {
     private DatagramSocket socket;
     private ChatController controlo;
 
-
     private int port = 2001;
 
     public UDPServer(ChatController control) throws SocketException {
-        this.controlo= control;
+        this.controlo = control;
         socket = new DatagramSocket(port);
         socket.setBroadcast(true);
     }
@@ -57,7 +56,7 @@ public class UDPServer extends Thread {
                             receivePacket.getAddress(), port);
                     socket.send(sendPacket);
                 } else {
-                    if (!listParticipants.contains(message)&& !message.equals(InetAddress.getLocalHost().getHostAddress())) {
+                    if (!listParticipants.contains(message) && !message.equals(InetAddress.getLocalHost().getHostAddress())) {
                         listParticipants.add(message);
                         controlo.newChat(message);
                     }

@@ -21,34 +21,28 @@ public class UDPClient extends Thread {
     }
 
     public void run() {
-        
-            while (true) {
-                String message = null;
-                try{
-                    message = "pedido";
 
-                    byte[] sendData = new byte[1024];
-                    sendData = message.getBytes();
+        while (true) {
+            String message = null;
+            try {
+                message = "pedido";
 
-                    DatagramPacket sendPacket;
-                    sendPacket = new DatagramPacket(sendData, sendData.length,
-                            InetAddress.getByName("255.255.255.255"), port);
+                byte[] sendData = new byte[1024];
+                sendData = message.getBytes();
 
-                    socket.send(sendPacket);
-                    System.out.println(getClass().getName() + " Request packet sent to: "
-                            + sendPacket.getAddress().getHostAddress());
-
-                    TimeUnit.SECONDS.sleep(10);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(UDPClient.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (UnknownHostException ex) {
-                    Logger.getLogger(UDPClient.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IOException ex) {
-                    Logger.getLogger(UDPClient.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
+                DatagramPacket sendPacket;
+                sendPacket = new DatagramPacket(sendData, sendData.length,
+                        InetAddress.getByName("255.255.255.255"), port);
+                socket.send(sendPacket);
+                TimeUnit.SECONDS.sleep(10);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(UDPClient.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(UDPClient.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(UDPClient.class.getName()).log(Level.SEVERE, null, ex);
             }
+
         }
     }
-
-
+}

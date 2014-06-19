@@ -276,7 +276,11 @@ public class UIChat extends javax.swing.JFrame {
     
     do{
         idConversa=JOptionPane.showInputDialog(rootPane, "Digite um nome para a conversa com menos de 10 caracteres");
+    if(idConversa==null){
+        return;
+    }
     }while(idConversa.length()>=10 && idConversa.length()<1);
+    
     if(controlo.createConversation(idConversa)){
     
     List<String> ips;
@@ -293,6 +297,7 @@ public class UIChat extends javax.swing.JFrame {
         refreshChatList(controlo.listConnections());
     controlo.setvisible(idConversa);
     }
+    
     }//GEN-LAST:event_jButton5ActionPerformed
 
 
