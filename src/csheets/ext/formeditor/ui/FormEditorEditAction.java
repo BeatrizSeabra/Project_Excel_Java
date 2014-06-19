@@ -38,15 +38,8 @@ public class FormEditorEditAction extends BaseAction{
 	 * @param event the event that was fired
 	 */
 	public void actionPerformed(ActionEvent event) {
-//                InMemoryForm mem = InMemoryForm.getInstance();
-//                
-//                if(mem.getDataList()!=null){
-//                    FormEditorWindow call = new FormEditorWindow(mem.getForm(), mem.getDataList());
-//                    call.setVisible(true);
-//                    call.setLocation(500, 200);
-//                } else {
-//                    JOptionPane.showMessageDialog(null,"No Forms");
-//                }
+            ChooseFormToEdit FormEdit = new ChooseFormToEdit();
+            FormEdit.run();
         }
    
 }

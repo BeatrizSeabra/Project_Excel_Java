@@ -125,7 +125,13 @@ public class ChatController {
     public void setConnections(ArrayList<String> connections) {
         this.connections = connections;
     }
-
+    /**
+     * set Arraylist of conversas
+     */
+    public void setConversations(ArrayList<Conversation> conv){
+        this.conversas=conv;
+    }
+    
     /**
      * get UI
      */
@@ -255,6 +261,10 @@ public class ChatController {
         return porta;
     }
 
+    /**
+     * @return true se a conversa foi criada, false se a conversa ja existe.
+     * Verifica se a conversa ja existe, caso nao exista cria uma nova conversa, preenchendo a memoria dinamica
+     */
     public boolean createConversation(String ID) {
         for (Conversation conv : conversas) {
             if (conv.getID().equals(ID)) {
@@ -266,7 +276,10 @@ public class ChatController {
         getChats().add(p);
         return true;
     }
-
+     /**
+     * @return true se foi possivel adicionar, false caso nao seja possivel.
+     * Adiciona um Ip á conversa com o 
+     */
     public boolean addToConversation(String ID, String IP) {
         for (Conversation conv : conversas) {
             if (conv.getID().equals(ID)) {
@@ -276,7 +289,10 @@ public class ChatController {
         }
         return false;
     }
-
+     /**
+     * @return true se foi possivel enviar a conversa aos intervenientes, false caso nao seja possivel.
+     * Envia a conversa com o id enviado por parametro
+     */
     public boolean sendConversation(String id) throws UnknownHostException {
         String mensagem = "";
         for (Conversation conv : conversas) {
@@ -299,6 +315,10 @@ public class ChatController {
         return false;
     }
 
+    /**
+     * @return Actualiza o chat quando recebe uma mensagem.
+     */
+    
     public void refreshConversation(String ip, String id, String data) {
         for (Chat chat : getChats()) {
             if (chat.getIp().equals(id)) {
@@ -308,6 +328,10 @@ public class ChatController {
         }
     }
 
+    /**
+     * @return true se foi possivel enviar a conversa a todos os intervenientes, false caso nao seja possivel.
+     * Envia a conversa a todos os intervenientes na mesma
+     */
     public boolean sendMessageConversation(String id, String message) throws UnknownHostException {
         String mensagem = "";
         for (Conversation conv : conversas) {
