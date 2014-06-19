@@ -8,10 +8,10 @@ package csheets.ext.editMacro.ui;
 import csheets.core.IllegalValueTypeException;
 import csheets.core.formula.compiler.FormulaCompilationException;
 import csheets.ext.editMacro.compiler.Macro;
-import csheets.ext.editMacro.compiler.Macros;
 import csheets.ui.ctrl.UIController;
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -39,6 +39,19 @@ public class JDialogEditMacro extends javax.swing.JDialog {
         
         jComboBox1.removeAllItems();
         
+        
+        if(!uicontroller.getActiveWorkbook().getMacros().isEmpty()){
+            for (Macro macro : uicontroller.getActiveWorkbook().getMacros()) {
+                macros.add(macro);
+                try {
+                    jComboBox1.addItem(macro.getName());
+                } catch (FormulaCompilationException ex) {
+                   System.err.println(ex);
+                }
+            }
+            
+            jComboBox1.revalidate();
+        }
 //        try {
 //            macrosFile.read();
 //            macros.addAll(macrosFile.getMacros());
@@ -179,7 +192,7 @@ public class JDialogEditMacro extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        dispose();
+          dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
