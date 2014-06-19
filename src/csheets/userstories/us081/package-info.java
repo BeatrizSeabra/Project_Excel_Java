@@ -47,6 +47,15 @@
  * <br/>
  * ç
  * <b>S081f: Functional Tests</b><br/>
+ * 1-Executar o programa
+ * 2-Clicar em em Extensions->Chat->Chat.
+ * 3-Activate Chat
+ * 4-Find Participants
+ * 5-Escolher participantes(CTRL+CLICK in ips in list)
+ * 6-Start Conversation
+ * 7-Escolher id para a conversa(menos de 10 caracteres)
+ * 8-OK
+ * 9-Enviar Mensagem
  * <br/>
  * <br/>
  * 
