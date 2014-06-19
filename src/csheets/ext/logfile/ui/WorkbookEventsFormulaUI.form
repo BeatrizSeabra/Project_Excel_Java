@@ -117,7 +117,7 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="jCheckBox4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Sheet Delected"/>
+        <Property name="text" type="java.lang.String" value="sheetDeleted"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jCheckBox5">

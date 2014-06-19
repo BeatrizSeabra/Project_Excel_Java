@@ -43,6 +43,7 @@ public class WorkbookEventsFormulaAction  extends BaseAction {
 	public void actionPerformed(ActionEvent event) {
                 WorkbookEventsFormulaUI w = new WorkbookEventsFormulaUI(uiController);
                 w.setVisible(true);
+                w.setLocationRelativeTo(null);
 		
 	}
     

@@ -95,7 +95,7 @@ public class WorkbookEventsFormulaUI extends javax.swing.JFrame {
 
         jCheckBox3.setText("Sheet Created");
 
-        jCheckBox4.setText("Sheet Delected");
+        jCheckBox4.setText("sheetDeleted");
 
         jCheckBox5.setText("Sheet Renamed");
 

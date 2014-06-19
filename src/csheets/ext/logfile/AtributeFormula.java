@@ -5,6 +5,7 @@
  */
 package csheets.ext.logfile;
 
+import csheets.core.Address;
 import csheets.core.Cell;
 import csheets.core.CellListener;
 import csheets.core.Spreadsheet;
@@ -25,10 +26,11 @@ import javax.swing.JOptionPane;
  */
 public class AtributeFormula {
 
-    String evento, formula;
-    public boolean activo = false;
-    public static ArrayList<String> eve = new ArrayList();
-    public static ArrayList<String> form = new ArrayList();
+    private String evento, formula;
+    private boolean activo = false;
+    private static ArrayList<String> eve = new ArrayList();
+    private static ArrayList<String> form = new ArrayList();
+    private Address address;
 
     public AtributeFormula() {
     }
@@ -103,12 +105,16 @@ public class AtributeFormula {
         ExcelExpressionCompiler ec = new ExcelExpressionCompiler();
         this.formula = formula;
         boolean exist = false;
-        
+
         //check if the formula is valid
         try {
-            compile = ec.compile(uiController.getActiveCell(), formula);
+
+            Cell cell = uiController.getActiveCell();
+            address = cell.getAddress();
+            compile = ec.compile(cell, formula);
 
             Workbook workbook = uiController.getActiveWorkbook();
+
             if (event[0].equals("Open")) {
                 workbook.addWorkbookListener(null);
                 exist = true;
@@ -118,18 +124,81 @@ public class AtributeFormula {
                 exist = true;
             }
             if (event[2].equals("sheetCreated")) {
-                workbook.addWorkbookListener(null);
+                workbook.addWorkbookListener(new WorkbookListener() {
+
+                    @Override
+                    public void spreadsheetInserted(Spreadsheet spreadsheet, int index) {
+                        try {
+                            spreadsheet.getCell(address).setContent(getFormula());
+                        } catch (FormulaCompilationException ex) {
+                            Logger.getLogger(AtributeFormula.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        WriteLogFile.writeLogFile(null, "sheetDeleted", null, getFormula());
+                    }
+
+                    @Override
+                    public void spreadsheetRemoved(Spreadsheet spreadsheet) {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+
+                    @Override
+                    public void spreadsheetRenamed(Spreadsheet spreadsheet) {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+                });
                 exist = true;
             }
             if (event[3].equals("sheetDeleted")) {
-                workbook.addWorkbookListener(null);
+                workbook.addWorkbookListener(new WorkbookListener() {
+
+                    @Override
+                    public void spreadsheetInserted(Spreadsheet spreadsheet, int index) {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+
+                    @Override
+                    public void spreadsheetRemoved(Spreadsheet spreadsheet) {
+                        try {
+                            spreadsheet.getCell(address).setContent(getFormula());
+                        } catch (FormulaCompilationException ex) {
+                            Logger.getLogger(AtributeFormula.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        WriteLogFile.writeLogFile(null, "sheetDeleted", null, getFormula());
+                    }
+
+                    @Override
+                    public void spreadsheetRenamed(Spreadsheet spreadsheet) {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+                });
                 exist = true;
             }
             if (event[4].equals("sheetRenamed")) {
-                workbook.addWorkbookListener(null);
+                workbook.addWorkbookListener(new WorkbookListener() {
+
+                    @Override
+                    public void spreadsheetInserted(Spreadsheet spreadsheet, int index) {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+
+                    @Override
+                    public void spreadsheetRemoved(Spreadsheet spreadsheet) {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+
+                    @Override
+                    public void spreadsheetRenamed(Spreadsheet spreadsheet) {
+                        try {
+                            spreadsheet.getCell(address).setContent(getFormula());
+                        } catch (FormulaCompilationException ex) {
+                            Logger.getLogger(AtributeFormula.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        WriteLogFile.writeLogFile(null, "sheetRenamed", null, getFormula());
+                    }
+                });
                 exist = true;
             }
-            
+
             if (exist) {
                 JOptionPane.showMessageDialog(null, "Done!");
             }
@@ -138,8 +207,6 @@ public class AtributeFormula {
             JOptionPane.showMessageDialog(null, "Error formula! Insert a valid formula!!");
         }
     }
-    
-
 
     class OnChangeListener implements CellListener {
 
