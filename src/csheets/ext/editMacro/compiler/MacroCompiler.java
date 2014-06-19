@@ -21,13 +21,13 @@ import org.antlr.runtime.tree.Tree;
  *
  * @author i120388
  */
-public class MacroCompiler implements ExpressionCompiler{
-    
+public class MacroCompiler implements ExpressionCompiler {
+
     public static final char MACRO_STARTER = 'm';
-    
-     private ArrayList<Expression>expressions=new ArrayList<>();
-     
-     private String name;
+
+    private ArrayList<Expression> expressions = new ArrayList<>();
+
+    private String name;
 
     public MacroCompiler() {
     }
@@ -36,7 +36,7 @@ public class MacroCompiler implements ExpressionCompiler{
     public Expression compile(Cell cell, String source) throws FormulaCompilationException {
         // Creates the lexer and parser
         ANTLRStringStream input = new ANTLRStringStream(source);
-        
+
         // create the buffer of tokens between the lexer and parser 
         MacroLexer lexer = new MacroLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
@@ -44,13 +44,11 @@ public class MacroCompiler implements ExpressionCompiler{
         MacroParser parser = new MacroParser(tokens);
 
         CommonTree tree = null;
-        
-        
 
         try {
             // Attempts to match an expression
             tree = (CommonTree) parser.macro().getTree();
-            
+
         } catch (RecognitionException e) {
             //String message="Fatal recognition exception " + e.getClass().getName()+ " : " + e;
             String message = parser.getErrorMessage(e, parser.tokenNames);
@@ -60,15 +58,20 @@ public class MacroCompiler implements ExpressionCompiler{
             throw new FormulaCompilationException(message);
         }
         
-        for (int i = 3; i < tree.getChildCount()-1; i++) {
-            expressions.add(convert(cell,tree.getChild(i)));
+        /*nome da macro*/
+        name=tree.getChild(1).getText();
+        
+        for (int i = 4; i < tree.getChildCount() - 2; i++) {
+            if (tree.getChild(i).getChildCount() != 0) {
+                expressions.add(convert(cell, tree.getChild(i)));
+            }
         }
 
         // Converts the expression and returns it
         return null;
     }
-    
-        protected Expression convert(Cell cell, Tree node) throws FormulaCompilationException {
+
+    protected Expression convert(Cell cell, Tree node) throws FormulaCompilationException {
         // System.out.println("Converting node '" + node.getText() + "' of tree '" + node.toStringTree() + "' with " + node.getNumberOfChildren() + " children.");
 //		if(node.getType()==MacroLexer.SEMI){
 //                    convert(cell,node.getChild(1));
@@ -79,12 +82,11 @@ public class MacroCompiler implements ExpressionCompiler{
                     case MacroLexer.NUMBER:
                         return new Literal(Value.parseNumericValue(node.getText()));
                     case MacroLexer.STRING:
-                        name=node.getText();
                         return new Literal(Value.parseValue(node.getText(), Value.Type.BOOLEAN, Value.Type.DATE));
                     case MacroLexer.CELL_REF:
                         return new CellReference(cell.getSpreadsheet(), node.getText());
                     case MacroLexer.VARNAME:
-                       return ((SpreadsheetImpl)cell.getSpreadsheet()).getTemporaryVariable(node.getText());
+                        return ((SpreadsheetImpl) cell.getSpreadsheet()).getTemporaryVariable(node.getText());
 //					case FormulaParserTokenTypes.NAME:
 						/* return cell.getSpreadsheet().getWorkbook().
                      getRange(node.getText()) (Reference)*/
@@ -134,7 +136,7 @@ public class MacroCompiler implements ExpressionCompiler{
                     if (node.getChild(0).getText().matches("@[a-zA-Z0-9]+")) { //Tests if the attribution is being made to a temporary variable 
                         Value value = convert(cell, node.getChild(1)).evaluate();
                         TemporaryVariable temporaryVariable = new TemporaryVariable(node.getChild(0).getText(), value, cell);
-                        ((SpreadsheetImpl)cell.getSpreadsheet()).addOrUpdateTemporaryVariable(temporaryVariable);
+                        ((SpreadsheetImpl) cell.getSpreadsheet()).addOrUpdateTemporaryVariable(temporaryVariable);
                     } else { //Attribution to a Cell Reference
                         //crias uma referencia para a cell
                         CellReference cellR = new CellReference(cell.getSpreadsheet(), node.getChild(0).getText());
@@ -178,5 +180,5 @@ public class MacroCompiler implements ExpressionCompiler{
     public char getStarter() {
         return MACRO_STARTER;
     }
-    
+
 }
