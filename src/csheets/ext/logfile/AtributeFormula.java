@@ -7,6 +7,9 @@ package csheets.ext.logfile;
 
 import csheets.core.Cell;
 import csheets.core.CellListener;
+import csheets.core.Spreadsheet;
+import csheets.core.Workbook;
+import csheets.core.WorkbookListener;
 import csheets.core.formula.Expression;
 import csheets.core.formula.compiler.ExcelExpressionCompiler;
 import csheets.core.formula.compiler.FormulaCompilationException;
@@ -94,6 +97,49 @@ public class AtributeFormula {
         }
 
     }
+
+    public void addWorkbookEvent(UIController uiController, String formula, String[] event) {
+        Expression compile = null;
+        ExcelExpressionCompiler ec = new ExcelExpressionCompiler();
+        this.formula = formula;
+        boolean exist = false;
+        
+        //check if the formula is valid
+        try {
+            compile = ec.compile(uiController.getActiveCell(), formula);
+
+            Workbook workbook = uiController.getActiveWorkbook();
+            if (event[0].equals("Open")) {
+                workbook.addWorkbookListener(null);
+                exist = true;
+            }
+            if (event[1].equals("Close")) {
+                workbook.addWorkbookListener(null);
+                exist = true;
+            }
+            if (event[2].equals("sheetCreated")) {
+                workbook.addWorkbookListener(null);
+                exist = true;
+            }
+            if (event[3].equals("sheetDeleted")) {
+                workbook.addWorkbookListener(null);
+                exist = true;
+            }
+            if (event[4].equals("sheetRenamed")) {
+                workbook.addWorkbookListener(null);
+                exist = true;
+            }
+            
+            if (exist) {
+                JOptionPane.showMessageDialog(null, "Done!");
+            }
+
+        } catch (FormulaCompilationException ex) {
+            JOptionPane.showMessageDialog(null, "Error formula! Insert a valid formula!!");
+        }
+    }
+    
+
 
     class OnChangeListener implements CellListener {
 
