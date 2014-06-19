@@ -14,7 +14,7 @@
 * Assim será necessário acrescentar código às classes existentes da extensão 'share' já implementada e implementação de
 * uma classe nova, "MultiShare" e a sua interface SharePanel. Será reutilizado ao máximo o código criado na US064 e US065, e todo código criado em diante terá em conta o código já existente.
 * Serão utilizadas as classes nos packages csheets.ext.share e csheets.ext.share.ui, acrescentada a classe "MultiShare" na package csheets.ext.share, a classe (form) SharePanel na package
-* csheets.ext.share.ui. Ainda foram acrescentados métodos à classe "BaseConnection"
+* csheets.ext.share.ui. Ainda foram acrescentados métodos à classe "BaseConnection". A janela de ferramentas do 'MultiShare' estará disponível no sideBar.
 * <br/>
 * <br/>
 * 

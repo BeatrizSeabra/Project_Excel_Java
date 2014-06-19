@@ -1,5 +1,6 @@
 package csheets.ext.importfiles.ui;
 
+import csheets.CleanSheets;
 import csheets.ext.Extension;
 import csheets.ext.importfiles.ui.ImportMenu;
 import csheets.ui.FileChooser;
@@ -8,6 +9,7 @@ import csheets.ui.ext.CellDecorator;
 import csheets.ui.ext.TableDecorator;
 import csheets.ui.ext.UIExtension;
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JMenu;
 import javax.swing.JToolBar;
@@ -39,7 +41,10 @@ public class UIExtensionImport extends UIExtension {
 	 * @return an icon with style
 	 */
 	public Icon getIcon() {
-		return null;
+		if (icon == null){
+                    icon = new ImageIcon(CleanSheets.class.getResource("res/img/import-icon.png"));
+                }
+		return icon;
 	}
 
 	/**

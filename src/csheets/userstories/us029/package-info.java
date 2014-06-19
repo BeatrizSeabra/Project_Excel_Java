@@ -11,27 +11,32 @@
  * <br/>
  *
  * <b>S029a: Analysis</b><br/>
- * No User Story 029 é pedido que o conteudo das celulas da folha de calculo
+ * <ul><li>No User Story 029 e pedido que o conteudo das celulas da folha de calculo
  * sejam exportadas para um ficheiro PDF, so com mais um pormenos, que a informacao
- * fique organizada por tabela como o csheet. Vou tentar organizar a informação 
- * com o adpater
+ * fique organizada por tabela como o csheet.</li></ul>
  * <br/>
  * <br/>
  *
  * <b>S029d: Design</b><br/>
+ * O diagrama de Sequencia vai ser igual ao do anterir uma vez que todas as alteracoes 
+ * efectuadas, foram realizadas no ExportPdfAction.java.
  * O Diagrama de Sequencia demonstra como ira ser efectuado o caso de uso:<br/>
- * <img src="../../../csheets/userstories/us028/doc-files/us029_design1.png">
+ * <img src="../../../csheets/userstories/us029/doc-files/us029_design1.png">
  * <br/>
  * <br/>
  *
  * <b>S029c: Coding</b><br/>
  * <br/>
+ * <ul><li>Pouco foi alterado da issue anterior, foi so colocar dentro do "for" para ir
+ * buscar o que esta dentro da celula e imprimir na tabela em pdf que foi inicializada
+ * antes desse "for".</li></ul>
+ * <a href="../../../csheets/ext/pdf/package-summary.html">csheets.ext.pdf</a><br/>
  * <br/>
  * <br/>
  *
  * <b>S029u: Unit Tests:</b><br/>
- * Os metodos utilizados sao void e portanto nao foi possivel a realizaçao de
- * testes unitarios.
+ * <ul><li> De referir nao existe testes que sejam muito legiveis para esta funcionalidade, 
+ * uma vez que os metodos utilizados são void não existe qualquer retorno</li></ul>
  * <br/>
  * <br/>
  * <br/>

@@ -38,8 +38,8 @@ public class Macro {
         ArrayList<Expression>exp=getExpressions();
         
         int aux=0;
-        for (int i = 3; i <resultado.length-1; i++) {
-            result+=resultado[i]+" "+exp.get(aux).evaluate().toString()+"\n";
+        for (int i = 1; i <resultado.length-1; i++) {
+            result+=resultado[i]+" = "+exp.get(aux).evaluate().toString()+"\n";
             aux++;
         }
         

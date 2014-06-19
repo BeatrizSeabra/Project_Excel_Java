@@ -10,9 +10,6 @@ import csheets.core.formula.compiler.FormulaCompilationException;
 import csheets.ext.editMacro.compiler.Macro;
 import csheets.ui.ctrl.UIController;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
@@ -31,10 +28,11 @@ public class JDialogEditMacro extends javax.swing.JDialog {
      */
     public JDialogEditMacro(java.awt.Frame parent, boolean modal, UIController uicontroller) {
         super(parent, modal);
-         this.setModal(true);
+        this.setModal(true);
         initComponents();
         setLocationRelativeTo(null);
         this.uicontroller = uicontroller;
+        jComboBox1.removeAllItems();
     }
 
     /**
@@ -173,29 +171,19 @@ public class JDialogEditMacro extends javax.swing.JDialog {
             try {
                 Macro macro = new Macro(uicontroller.getActiveCell(), source);
                 macros.add(macro);
-                actualizarComboBox();
+                jComboBox1.addItem(macro.getName());
+                jComboBox1.revalidate();
                 JOptionPane.showMessageDialog(this, "Macro inserted", "Macro", JOptionPane.INFORMATION_MESSAGE);
                 jTextArea1.setText("");
             } catch (FormulaCompilationException ex) {
-                System.out.println("1");
                 JOptionPane.showMessageDialog(this, "Invalid Macro", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void actualizarComboBox() {
-        String[] name = new String[macros.size()];
-        for (int i = 0; i < macros.size(); i++) {
-            name[i] = macros.get(i).getName();
-        }
-        jComboBox1 = new JComboBox(name);
-        jComboBox1.revalidate();
-        jComboBox1.setSelectedIndex(0);
-    }
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        jComboBox1 = new JComboBox();
-        jComboBox1.revalidate();
+
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -210,7 +198,7 @@ public class JDialogEditMacro extends javax.swing.JDialog {
         for (Macro macro : macros) {
             if (macro.getName().equals(name)) {
 
-                String result="";
+                String result = "";
                 try {
                     result = macro.results();
                 } catch (IllegalValueTypeException ex) {
