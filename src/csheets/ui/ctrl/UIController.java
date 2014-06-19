@@ -90,7 +90,8 @@ public class UIController implements SpreadsheetAppListener {
         private static boolean modificado=false;
         private static boolean exportStatus;
         private static boolean importStatus;
-
+        private ArrayList<String> evlf;
+        private static String[] formulas;
    
 
 	/**
@@ -111,7 +112,7 @@ public class UIController implements SpreadsheetAppListener {
 		}
 		this.extensions =
 			uiExtensions.toArray(new UIExtension[uiExtensions.size()]);
-                evl=new ArrayList<String>();
+
                 initEvl();
 	}
 
@@ -256,6 +257,8 @@ public class UIController implements SpreadsheetAppListener {
         // Initialize the ArrayList events, workbook events and cell events
         private void initEvl()
         {
+            evl=new ArrayList<String>();
+                            
             evl.add("onClick");
             evl.add("onChange");
             evl.add("Open");
@@ -263,6 +266,18 @@ public class UIController implements SpreadsheetAppListener {
             evl.add("sheetCreated");
             evl.add("sheetDeleted");
             evl.add("sheetRenamed");
+            
+            evlf=new ArrayList<String>();
+            
+            evlf.add("onClick");
+            evlf.add("onChange");
+            evlf.add("Open");
+            evlf.add("Close");
+            evlf.add("sheetCreated");
+            evlf.add("sheetDeleted");
+            evlf.add("sheetRenamed");
+            
+            formulas = new String[5];
         }
         // returns the  ArrayList events
         public ArrayList<String> getEvl()
@@ -278,6 +293,12 @@ public class UIController implements SpreadsheetAppListener {
         public void writeLogFileWB(String event)
         {
             WriteLogFile.writeLogFile( event, getEvl());
+            writeLogFileWBE(event);
+        }
+        
+        public void writeLogFileWBE(String event)
+        {
+            WriteLogFile.writeLogFile(event, formulas);
         }
         //method to write in the logFile when the cell events occurs
         public void writeLogFile(String cell, String event)
@@ -308,6 +329,28 @@ public class UIController implements SpreadsheetAppListener {
         public boolean getImportStatus() {
             return importStatus;
         }
+        
+        // get the formula inserted by user
+        public String getFormula(int index) {
+            return formulas[index];
+        }
+        
+        // set the formula inserted by user
+        public void setFormula(int index, String formula) {
+            formulas[index] = formula;
+        }
+        
+        // returns the  ArrayList events with formula
+        public ArrayList<String> getEvlf()
+        {
+            return evlf;
+        }
+        // set the ArrayList events with formula
+        public void setEvlf(ArrayList<String> e)
+        {
+            evlf=e;
+        }
+        
 /*
  * PROPERTIES
  */

@@ -20,16 +20,21 @@ public class WorkbookEventsFormulaUI extends javax.swing.JFrame {
      * Creates new form WorkbookEventsFormulaUI
      */
     UIController uiController;
+    public static int CLOSE = 0;
+    public static int OPEN = 1;
+    public static int SHEETCTEATED = 2;
+    public static int SHEETDELETED = 3;
+    public static int SHEETRENAMED = 4;
 
     public WorkbookEventsFormulaUI(UIController ui) {
         this.uiController = ui;
         initComponents();
-        ArrayList<String> mylist = uiController.getEvl();
+        ArrayList<String> mylist = uiController.getEvlf();
 
         jCheckBox1.setSelected(true); // Open
         jCheckBox2.setSelected(true); // Close
         jCheckBox3.setSelected(true); // Create
-        jCheckBox4.setSelected(true); // Delect
+        jCheckBox4.setSelected(true); // Delet
         jCheckBox5.setSelected(true); // Rename
 
         if (!mylist.contains("Open")) {
@@ -160,73 +165,65 @@ public class WorkbookEventsFormulaUI extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here: Set Event
-        ArrayList<String> mylist = uiController.getEvl();
+        ArrayList<String> mylist = uiController.getEvlf();
         String formula = jTextField1.getText();
-        String[] event = new String[5];
 
         if (!formula.isEmpty()) {
             if (jCheckBox1.isSelected() || jCheckBox2.isSelected()
                     || jCheckBox3.isSelected() || jCheckBox4.isSelected()
                     || jCheckBox5.isSelected()) {
-                AtributeFormula atributeFormula = new AtributeFormula();
 
                 if (jCheckBox1.isSelected()) { // Open
                     if (!mylist.contains("Open")) {
                         mylist.add("Open");
                     }
-                    event[0] = "Open";
+                    uiController.setFormula(OPEN, formula);
                 } else {
                     if (mylist.contains("Open")) {
                         mylist.remove("Open");
                     }
-                    event[0] = "x";
                 }
                 if (jCheckBox2.isSelected()) { // Close
                     if (!mylist.contains("Close")) {
                         mylist.add("Close");
                     }
-                    event[1] = "Close";
+                    uiController.setFormula(CLOSE, formula);
                 } else {
                     if (mylist.contains("Close")) {
                         mylist.remove("Close");
                     }
-                    event[1] = "x";
                 }
                 if (jCheckBox3.isSelected()) {
                     if (!mylist.contains("sheetCreated")) { // Create
                         mylist.add("sheetCreated");
                     }
-                    event[2] = "sheetCreated";
+                    uiController.setFormula(SHEETCTEATED, formula);
                 } else {
                     if (mylist.contains("sheetCreated")) {
                         mylist.remove("sheetCreated");
                     }
-                    event[2] = "x";
                 }
                 if (jCheckBox4.isSelected()) { // Delete
                     if (!mylist.contains("sheetDeleted")) {
                         mylist.add("sheetDeleted");
                     }
-                    event[3] = "sheetDeleted";
+                    uiController.setFormula(SHEETDELETED, formula);
                 } else {
                     if (mylist.contains("sheetDeleted")) {
                         mylist.remove("sheetDeleted");
                     }
-                    event[3] = "x";
                 }
                 if (jCheckBox5.isSelected()) { // Rename
                     if (!mylist.contains("sheetRenamed")) {
                         mylist.add("sheetRenamed");
                     }
-                    event[4] = "sheetRenamed";
+                    uiController.getFormula(SHEETRENAMED);
                 } else {
                     if (mylist.contains("sheetRenamed")) {
                         mylist.remove("sheetRenamed");
                     }
-                    event[4] = "x";
                 }
 
-                atributeFormula.addWorkbookEvent(uiController, formula, event);
                 uiController.setEvl(mylist);
 
             } else {
