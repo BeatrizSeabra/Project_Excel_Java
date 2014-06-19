@@ -84,7 +84,8 @@ public class ChatController {
                         // Alguém criou uma conversa
                         String[] ips = file_string.split(";");
                         if (createConversation(ips[0].trim())) {//se falso é porque a conversa ja tinha sido adicionada
-                           addToConversation(ips[0], address.getHostAddress());
+                           UI.refreshChatList(listConnections());
+                            addToConversation(ips[0], address.getHostAddress());
                             for (int i = 1; i < ips.length-1; i++) {
                                try {
                                    if(!ips[i].equals(InetAddress.getLocalHost().getHostAddress()))
@@ -263,7 +264,6 @@ public class ChatController {
         conversas.add(new Conversation(ID));
         Chat p = new Chat(ID, "conv", this);
         getChats().add(p);
-        UI.refreshChatList(listConnections());
         return true;
     }
 
