@@ -34,6 +34,11 @@
  *<img src="../../../csheets/userstories/us026/doc-files/us026_design1.png"> 
   <br/>
 * 
+* <b>S025u: Unit Tests</b><br/>
+* Os metodos necessarios para a implementacao do use case 26, exportar html,<br/> 
+* sao metodos void por isso nao foi possivel realizar testes unitarios.<br/> 
+* <br/>
+* <br/>
 * 
  * @author 1040314 - João Paulo Silva
  */
