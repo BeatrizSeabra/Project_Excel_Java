@@ -25,16 +25,45 @@ public class JDialogEditMacro extends javax.swing.JDialog {
     //Arraylist que ira guardar todas as macros criadas
     private ArrayList<Macro> macros = new ArrayList<Macro>();
     private UIController uicontroller;
+//    Macros macrosFile=new Macros();
 
     /**
      * Creates new form JDialogEditMacro
      */
     public JDialogEditMacro(java.awt.Frame parent, boolean modal, UIController uicontroller) {
         super(parent, modal);
-         this.setModal(true);
+        this.setModal(true);
         initComponents();
         setLocationRelativeTo(null);
         this.uicontroller = uicontroller;
+        
+        jComboBox1.removeAllItems();
+        
+        
+        if(!uicontroller.getActiveWorkbook().getMacros().isEmpty()){
+            for (Macro macro : uicontroller.getActiveWorkbook().getMacros()) {
+                macros.add(macro);
+                try {
+                    jComboBox1.addItem(macro.getName());
+                } catch (FormulaCompilationException ex) {
+                   System.err.println(ex);
+                }
+            }
+            
+            jComboBox1.revalidate();
+        }
+//        try {
+//            macrosFile.read();
+//            macros.addAll(macrosFile.getMacros());
+//            jComboBox1=new JComboBox(macros.toArray());
+//        } catch (IOException ex) {
+//            System.err.println(ex);
+//        } catch (ClassNotFoundException ex) {
+//            System.err.println(ex);
+//        }catch(Exception ex){
+//            System.err.println(ex);
+//        }
+        
     }
 
     /**
@@ -100,6 +129,7 @@ public class JDialogEditMacro extends javax.swing.JDialog {
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
+        jTextArea1.setText("macro \"nome\"{\noperaçoes\noperaçoes\n}");
         jScrollPane1.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -162,7 +192,7 @@ public class JDialogEditMacro extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        dispose();
+          dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -172,30 +202,22 @@ public class JDialogEditMacro extends javax.swing.JDialog {
         } else {
             try {
                 Macro macro = new Macro(uicontroller.getActiveCell(), source);
+//                macrosFile.add(macro);
                 macros.add(macro);
-                actualizarComboBox();
+                uicontroller.getActiveWorkbook().addMacro(macro);
+                jComboBox1.addItem(macro.getName());
+                jComboBox1.revalidate();
                 JOptionPane.showMessageDialog(this, "Macro inserted", "Macro", JOptionPane.INFORMATION_MESSAGE);
                 jTextArea1.setText("");
             } catch (FormulaCompilationException ex) {
-                System.out.println("1");
                 JOptionPane.showMessageDialog(this, "Invalid Macro", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void actualizarComboBox() {
-        String[] name = new String[macros.size()];
-        for (int i = 0; i < macros.size(); i++) {
-            name[i] = macros.get(i).getName();
-        }
-        jComboBox1 = new JComboBox(name);
-        jComboBox1.revalidate();
-        jComboBox1.setSelectedIndex(0);
-    }
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        jComboBox1 = new JComboBox();
-        jComboBox1.revalidate();
+
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -208,19 +230,22 @@ public class JDialogEditMacro extends javax.swing.JDialog {
         }
 
         for (Macro macro : macros) {
-            if (macro.getName().equals(name)) {
-
-                String result="";
-                try {
-                    result = macro.results();
-                } catch (IllegalValueTypeException ex) {
-                    JOptionPane.showMessageDialog(this, "Invalid Macro", "ERROR", JOptionPane.ERROR_MESSAGE);
-                    System.out.println("2");
+            try {
+                if (macro.getName().equals(name)) {
+                    macro.compiler();
+                    String result = "";
+                    try {
+                        result = macro.results();
+                    } catch (IllegalValueTypeException ex) {
+                        JOptionPane.showMessageDialog(this, "Invalid Macro", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    }
+                    
+                    JDialog dialog = new JOptionPane("Result:\n" + result).createDialog(null, "Result");
+                    dialog.setAlwaysOnTop(true);
+                    dialog.setVisible(true);
                 }
-
-                JDialog dialog = new JOptionPane("Result:\n" + result).createDialog(null, "Result");
-                dialog.setAlwaysOnTop(true);
-                dialog.setVisible(true);
+            } catch (FormulaCompilationException ex) {
+                System.err.println(ex);
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed

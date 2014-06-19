@@ -132,7 +132,6 @@ public class EvsetUI extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         ArrayList<String> mylist = uiController.getEvl();
         String formula = jTextField1.getText();
-        CellListener listener = null;
         String[] event = new String[2];
         
         if (!formula.isEmpty()) {

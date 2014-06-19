@@ -38,6 +38,7 @@ public class LogFileMenu extends JMenu {
 		add(new LogFileAction(uiController));
                 add(new LogFileWorkBookAction(uiController));
                 add(new EvsetAction(uiController));
+                add(new WorkbookEventsFormulaAction(uiController));
 	}
 
 }

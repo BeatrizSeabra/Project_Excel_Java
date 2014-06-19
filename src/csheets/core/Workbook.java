@@ -20,6 +20,7 @@
  */
 package csheets.core;
 
+import csheets.ext.editMacro.compiler.Macro;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
@@ -45,6 +46,11 @@ public class Workbook implements Iterable<Spreadsheet>, Serializable {
 
 	/** The number of spreadsheets that have been created in the workbook */
 	private int createdSpreadsheets;
+        
+         /**
+        * Lista de macros que foram criados durante a execução do preograma
+        */
+    private ArrayList<Macro>macros=new ArrayList<Macro>();
 
 	/**
 	 * Creates a new empty workbook.
@@ -209,4 +215,21 @@ public class Workbook implements Iterable<Spreadsheet>, Serializable {
 		stream.defaultReadObject();
 		listeners = new ArrayList<WorkbookListener>();
 	}
+        
+          //Metodo para aceder as macros
+    
+    public ArrayList<Macro>getMacros(){
+        return macros;
+    }
+    
+    //Metodo para alterar o conteudo da macros
+    
+    public void setMacro(ArrayList<Macro> macro){
+        macros=new ArrayList<>(macro);
+    }
+    
+    //metodo para adicionar uma macro ao arraylist
+    public void addMacro(Macro macro){
+        macros.add(macro);
+    }
 }

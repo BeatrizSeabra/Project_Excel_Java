@@ -17,14 +17,12 @@ public class MultiShare {
     private static MultiShare multiShare = new MultiShare();
     private DefaultListModel modelServers;
     private DefaultListModel modelClients;
-    private boolean visible;
     private DefaultTreeModel server_on_lan;
     
     private MultiShare() {
         modelServers = new DefaultListModel();
         modelClients = new DefaultListModel();
-        visible=true;
-        server_on_lan =new DefaultTreeModel(new DefaultMutableTreeNode("Servers"));
+        server_on_lan = new DefaultTreeModel(new DefaultMutableTreeNode("Servers"));
     }
     
     public static MultiShare getShares() {
@@ -94,10 +92,8 @@ public class MultiShare {
                 System.out.println(e.getMessage());
             }
         }
-
     }
-    
-  
+     
     public DefaultListModel getModelServers() {
         return modelServers;
     }
@@ -114,15 +110,6 @@ public class MultiShare {
 
     public void setModelClients(DefaultListModel modelClients) {
         this.modelClients = modelClients;
-    }
-
-    public boolean isVisible() {
-        return visible;
-    }
-
-    
-    public void setVisivle(boolean visible) {
-        this.visible = visible;
     }
 
     public DefaultTreeModel getServer_on_lan() {

@@ -38,14 +38,26 @@
  * <br/>
  * 
  * <b>S076c: Coding</b><br/>
+ * A codificacao do use case foi feita de modo que a Macro inserida seja validada por uma gramatica especifica para Macros.<br/>
+ * Dai a necessidade de criar um package a parte do da formula onde esta inserido do a sintaxe da gramatica das Macros.<br/>
  * see:<br/>
- * 
+ * <a href="../../../csheets/ext/editMacro/package-summary.html">csheets.ext.editMacro</a><br/>
+ * <a href="../../../csheets/ext/editMacro/ui/package-summary.html">csheets.ext.editMacro.ui</a><br/>
+ * <a href="../../../csheets/ext/editMacro/compiler/package-summary.html">csheets.ext.editMacro.compiler</a><br/>
  * <br/>
  * <br/>
  * 
  * <b>S076u: Unit Tests</b><br/>
+ * A gramatica criada para Macros tem a seguinte sintaxe:<br/>
+ * macro "Nome da Macro"{<br/>
+ * formulas (sem a necessidade de indicar o simbolo "=")<br/>
+ * ...<br/>
+ * }<br/>
+ * Apos a compilacao e possivel ter acesso ao nome da Macro e as respectivas expressoes e resultados das formulas.<br/>
+ * Os teste unitarios realizados permitem verificar que apos a compilacao da Macro com a respectiva gramatica, esta retorna as expressoes com os valores das operacoes realizadas.<br/>
+ * Permite tambem verificar que o nome da Macro e retornada apos a compilacao da mesma.<br/> 
  * see:<br/>
- *
+ *<a href="../../../csheets/ext/editMacro/compiler/package-summary.html">csheets.ext.editMacro.compiler</a><br/>
  * <br/>
  * <br/>
  * 
@@ -61,8 +73,6 @@
  @startuml doc-files/US043_design.png
  User -> JDialogEditarMacro : macro
  User -> JDialogEditarMacro : submeter()
-
-
 
  User -> JDialogEditarMacro : selecionar()
  JDialogEditarMacro -> editarMacroController : compilarMacro(macro)

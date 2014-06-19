@@ -5,8 +5,12 @@
  */
 package csheets.ext.logfile;
 
+import csheets.core.Address;
 import csheets.core.Cell;
 import csheets.core.CellListener;
+import csheets.core.Spreadsheet;
+import csheets.core.Workbook;
+import csheets.core.WorkbookListener;
 import csheets.core.formula.Expression;
 import csheets.core.formula.compiler.ExcelExpressionCompiler;
 import csheets.core.formula.compiler.FormulaCompilationException;
@@ -22,10 +26,11 @@ import javax.swing.JOptionPane;
  */
 public class AtributeFormula {
 
-    String evento, formula;
-    public boolean activo = false;
-    public static ArrayList<String> eve = new ArrayList();
-    public static ArrayList<String> form = new ArrayList();
+    private String evento, formula;
+    private boolean activo = false;
+    private static ArrayList<String> eve = new ArrayList();
+    private static ArrayList<String> form = new ArrayList();
+    private Address address;
 
     public AtributeFormula() {
     }
@@ -95,6 +100,114 @@ public class AtributeFormula {
 
     }
 
+    public void addWorkbookEvent(UIController uiController, String formula, String[] event) {
+        Expression compile = null;
+        ExcelExpressionCompiler ec = new ExcelExpressionCompiler();
+        this.formula = formula;
+        boolean exist = false;
+
+        //check if the formula is valid
+        try {
+
+            Cell cell = uiController.getActiveCell();
+            address = cell.getAddress();
+            compile = ec.compile(cell, formula);
+
+            Workbook workbook = uiController.getActiveWorkbook();
+
+            if (event[0].equals("Open")) {
+                workbook.addWorkbookListener(null);
+                exist = true;
+            }
+            if (event[1].equals("Close")) {
+                workbook.addWorkbookListener(null);
+                exist = true;
+            }
+            if (event[2].equals("sheetCreated")) {
+                workbook.addWorkbookListener(new WorkbookListener() {
+
+                    @Override
+                    public void spreadsheetInserted(Spreadsheet spreadsheet, int index) {
+                        try {
+                            spreadsheet.getCell(address).setContent(getFormula());
+                        } catch (FormulaCompilationException ex) {
+                            Logger.getLogger(AtributeFormula.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        WriteLogFile.writeLogFile(null, "sheetDeleted", null, getFormula());
+                    }
+
+                    @Override
+                    public void spreadsheetRemoved(Spreadsheet spreadsheet) {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+
+                    @Override
+                    public void spreadsheetRenamed(Spreadsheet spreadsheet) {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+                });
+                exist = true;
+            }
+            if (event[3].equals("sheetDeleted")) {
+                workbook.addWorkbookListener(new WorkbookListener() {
+
+                    @Override
+                    public void spreadsheetInserted(Spreadsheet spreadsheet, int index) {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+
+                    @Override
+                    public void spreadsheetRemoved(Spreadsheet spreadsheet) {
+                        try {
+                            spreadsheet.getCell(address).setContent(getFormula());
+                        } catch (FormulaCompilationException ex) {
+                            Logger.getLogger(AtributeFormula.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        WriteLogFile.writeLogFile(null, "sheetDeleted", null, getFormula());
+                    }
+
+                    @Override
+                    public void spreadsheetRenamed(Spreadsheet spreadsheet) {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+                });
+                exist = true;
+            }
+            if (event[4].equals("sheetRenamed")) {
+                workbook.addWorkbookListener(new WorkbookListener() {
+
+                    @Override
+                    public void spreadsheetInserted(Spreadsheet spreadsheet, int index) {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+
+                    @Override
+                    public void spreadsheetRemoved(Spreadsheet spreadsheet) {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+
+                    @Override
+                    public void spreadsheetRenamed(Spreadsheet spreadsheet) {
+                        try {
+                            spreadsheet.getCell(address).setContent(getFormula());
+                        } catch (FormulaCompilationException ex) {
+                            Logger.getLogger(AtributeFormula.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        WriteLogFile.writeLogFile(null, "sheetRenamed", null, getFormula());
+                    }
+                });
+                exist = true;
+            }
+
+            if (exist) {
+                JOptionPane.showMessageDialog(null, "Done!");
+            }
+
+        } catch (FormulaCompilationException ex) {
+            JOptionPane.showMessageDialog(null, "Error formula! Insert a valid formula!!");
+        }
+    }
+
     class OnChangeListener implements CellListener {
 
         @Override
@@ -137,54 +250,28 @@ public class AtributeFormula {
 
         @Override
         public void valueChanged(Cell cell) {
-            try {
-                cell.setContent(formula);
-            } catch (FormulaCompilationException ex) {
-                Logger.getLogger(AtributeFormula.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            WriteLogFile.writeLogFile(null, "onClick", null, formula);
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
 
         @Override
         public void contentChanged(Cell cell) {
-            try {
-                cell.setContent(formula);
-            } catch (FormulaCompilationException ex) {
-                Logger.getLogger(AtributeFormula.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            WriteLogFile.writeLogFile(null, "onClick", null, formula);
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
 
         @Override
         public void dependentsChanged(Cell cell) {
-            try {
-                cell.setContent(formula);
-            } catch (FormulaCompilationException ex) {
-                Logger.getLogger(AtributeFormula.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            WriteLogFile.writeLogFile(null, "onClick", null, formula);
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
 
         @Override
         public void cellCleared(Cell cell) {
-            try {
-                cell.setContent(formula);
-            } catch (FormulaCompilationException ex) {
-                Logger.getLogger(AtributeFormula.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            WriteLogFile.writeLogFile(null, "onClick", null, formula);
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
 
         @Override
         public void cellCopied(Cell cell, Cell source) {
-            try {
-                cell.setContent(formula);
-            } catch (FormulaCompilationException ex) {
-                Logger.getLogger(AtributeFormula.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            WriteLogFile.writeLogFile(null, "onClick", null, formula);
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
-
     }
-
+    
 }

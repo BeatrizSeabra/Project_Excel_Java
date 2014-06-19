@@ -12,6 +12,8 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -76,14 +78,21 @@ public class ChatController {
                         //0 é mensagem para conversa
                         String id;
                         id = file_string.substring(0, 10);
-                        refreshConversation(address.getHostAddress(), id.trim(), file_string.substring(11));
+                        refreshConversation(address.getHostAddress(), id.trim(), file_string.substring(10));
                         break;
                     case 2:
                         // Alguém criou uma conversa
                         String[] ips = file_string.split(";");
                         if (createConversation(ips[0].trim())) {//se falso é porque a conversa ja tinha sido adicionada
-                            for (int i = 1; i < ips.length; i++) {
-                                addToConversation(ips[0], ips[i]);
+                           UI.refreshChatList(listConnections());
+                            addToConversation(ips[0], address.getHostAddress());
+                            for (int i = 1; i < ips.length-1; i++) {
+                               try {
+                                   if(!ips[i].equals(InetAddress.getLocalHost().getHostAddress()))
+                                       addToConversation(ips[0], ips[i]);
+                               } catch (UnknownHostException ex) {
+                                   Logger.getLogger(ChatController.class.getName()).log(Level.SEVERE, null, ex);
+                               }
                             }
                         }
                         break;
@@ -116,7 +125,13 @@ public class ChatController {
     public void setConnections(ArrayList<String> connections) {
         this.connections = connections;
     }
-
+    /**
+     * set Arraylist of conversas
+     */
+    public void setConversations(ArrayList<Conversation> conv){
+        this.conversas=conv;
+    }
+    
     /**
      * get UI
      */
@@ -134,6 +149,7 @@ public class ChatController {
     /**
      * cria um novo chat
      *
+     * @param ip
      */
     public void newChat(String ip) {
         if (!existe(ip)) {
@@ -245,6 +261,10 @@ public class ChatController {
         return porta;
     }
 
+    /**
+     * @return true se a conversa foi criada, false se a conversa ja existe.
+     * Verifica se a conversa ja existe, caso nao exista cria uma nova conversa, preenchendo a memoria dinamica
+     */
     public boolean createConversation(String ID) {
         for (Conversation conv : conversas) {
             if (conv.getID().equals(ID)) {
@@ -256,7 +276,10 @@ public class ChatController {
         getChats().add(p);
         return true;
     }
-
+     /**
+     * @return true se foi possivel adicionar, false caso nao seja possivel.
+     * Adiciona um Ip á conversa com o 
+     */
     public boolean addToConversation(String ID, String IP) {
         for (Conversation conv : conversas) {
             if (conv.getID().equals(ID)) {
@@ -266,7 +289,10 @@ public class ChatController {
         }
         return false;
     }
-
+     /**
+     * @return true se foi possivel enviar a conversa aos intervenientes, false caso nao seja possivel.
+     * Envia a conversa com o id enviado por parametro
+     */
     public boolean sendConversation(String id) throws UnknownHostException {
         String mensagem = "";
         for (Conversation conv : conversas) {
@@ -289,6 +315,10 @@ public class ChatController {
         return false;
     }
 
+    /**
+     * @return Actualiza o chat quando recebe uma mensagem.
+     */
+    
     public void refreshConversation(String ip, String id, String data) {
         for (Chat chat : getChats()) {
             if (chat.getIp().equals(id)) {
@@ -298,6 +328,10 @@ public class ChatController {
         }
     }
 
+    /**
+     * @return true se foi possivel enviar a conversa a todos os intervenientes, false caso nao seja possivel.
+     * Envia a conversa a todos os intervenientes na mesma
+     */
     public boolean sendMessageConversation(String id, String message) throws UnknownHostException {
         String mensagem = "";
         for (Conversation conv : conversas) {

@@ -101,6 +101,6 @@ public class ExpressionBuilder implements ExpressionVisitor {
 
     @Override
     public Object visitTemporaryVariable(TemporaryVariable variable) {
-        return new TemporaryVariable(variable.getVarName(), variable.getValue());
+        return new TemporaryVariable(variable.getVarName(), variable.getValue(), variable.getSpreadsheet());
     }
 }
