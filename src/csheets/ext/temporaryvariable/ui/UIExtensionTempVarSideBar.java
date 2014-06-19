@@ -8,7 +8,6 @@ package csheets.ext.temporaryvariable.ui;
 import csheets.CleanSheets;
 import csheets.core.formula.TemporaryVariable;
 import csheets.ext.Extension;
-import csheets.ext.searchFilesBackground.ExtensionSearchFilesBackground;
 import csheets.ext.temporaryvariable.TemporaryVariablesListener;
 import csheets.ui.ctrl.UIController;
 import csheets.ui.ext.UIExtension;

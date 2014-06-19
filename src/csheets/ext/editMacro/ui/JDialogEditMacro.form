@@ -168,6 +168,7 @@
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
+            <Property name="text" type="java.lang.String" value="macro &quot;nome&quot;{&#xa;opera&#xe7;oes&#xa;opera&#xe7;oes&#xa;}"/>
           </Properties>
         </Component>
       </SubComponents>
