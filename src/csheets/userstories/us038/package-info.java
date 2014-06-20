@@ -25,47 +25,53 @@
  * <br/>
  *
  * <b>S038d: Design</b><br/>
+ * Classe TemporaryVariable foi criada para suportar as variaveis temporarias. A classe implementa a interface Expression.<br/>
+ * A gramatica Formula.g foi alterada para suportar as variaveis temporarias. VARNAME e' o identificador de uma variavel temporaria e sera adicionado ao atom e pode ser o resultado de uma atribuicao.<br/>
+ * O metodo convert() da classe ExcelExpressionCompiler tem de ser alterada em dois pontos. Quando o node.getChildCount() == 0 a variavel e' tratada como um valor e e' retornado um objeto do tipo TemporaryVariable que exista numa spreadsheet com aquele nome.<br/>
+ * Quando o node.getChildCount() == 2 e a atribuicao esta' a ser feita a uma variavel, tera que se criar um novo objeto do tipo TemporaryVariable e adiciona-la a todas as Spreadsheets(variavel contexto workbook).
  * <img src="../../../csheets/userstories/us0038/doc-files/us038_design1.png">
  * <br/><br/>
  * <br/>
  * <br/>
  *
  * <b>S038c: Coding</b><br/>
- * see: Ficou incompleto e com erros na gramática<br/>
+ * See:<br/>
+ * <a href="../../../csheets/core/formula/package-summary.html">csheets.core.formula</a><br/>
+ * <a href="../../../csheets/core/formula/compiler/package-summary.html">csheets.core.formula.compiler</a><br/>
  * <br/>
  * <br/>
  *
  * <b>S038u: Unit Tests</b><br/>
  * see:<br/>
+ * Nao e' possivel realizar testes unitarios.
  * <br/>
  * <br/>
  *
  * <b>S038f: Functional Tests</b><br/>
- * Apesar de não estar a fncionar, os passos pretendidos para testar o
- * funcionamento da funcionalidade eram os seguintes 1. Inserir uma funcao a
- * atribuir um valor a uma variavel temporária 2. Depois, caso não existisse,
- * essa variavel, teria de criar um nova, senao sobrepunha o novo valor com o
- * valor anterior 3. Atribuir a uma variavel, usando o atributo de atribtuição,
- * o valor da variavel temporaria
+ * Para testar esta User Story e' necessario seguir os seguintes passos:<br/>
+ * 1. Correr o cleansheets;<br/>
+ * 2. Atribuir (operador :=) a uma variavel temporaria (@texto) um valor ou expressao;<br/>
+ * 3. Utilizar a variavel em expressoes.<br/>
  * <br/>
- * <br/>
+ * <br/> 
  *
- * @author Tiago
+ * @author Tiago & Diogo Moreira(1120339)
  */
 /*
- *@startuml doc-files/us037_design1.png
+ *@startuml doc-files/us038_design1.png
  User -> Cell : Inserção de dados
  Cell -> CellImpl : setContent()
- CellImpl -> Formula : create
+ CellImpl -> Formula : create()
  Formula -> FormulaCompiler : getInstance()
- ExcelExpressionCompiler -> Attribution : compile ()
- Attribution -> Expression : applyTo()
- Expression -> CellImpl :evaluate()
- FormulaCompiler -> CellImpl : instance
- CellImpl -> CellImpl : updateDependencies()
- CellImpl -> CellImpl : fireContentChanged()
- CellImpl -> CellImpl : reevaluate()
+ FormulaCompiler -> ExcelExpressionCompiler: compile()
+ ExcelExpressionCompiler-> ExcelExpressionCompiler: convert()
+ alt node.getChildCount() == 0
+ ExcelExpressionCompiler<-Formula: return ((SpreadsheetImpl)cell.getSpreadsheet()).getTemporaryVariable(node.getText())
+ end
  
+ alt node.getChildCount() == 2
+ ExcelExpressionCompiler->Spreadsheet: addOrUpdateTemporaryVariable(new TemporaryVariable(node.getChild(0).getText(), value, cell.getSpreadsheet()))
+ end
  @enduml
  *
  */

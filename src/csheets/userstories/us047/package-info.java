@@ -51,9 +51,14 @@
  *
  * <b>S047f: Functional Tests</b><br/>
  *
- * To test this user story, the user should follow these steps:<br/>
- *
- * /
+* To test this user story, the user should follow these steps:<br/>
+ * 1 - Correr o cleansheets; <br/>
+ * 2 - Ir ao menu "Extensions", em seguida ao menu "Button" e clicar na opção "Insert Button"; <br/>
+ * 3 - Irá aparecer uma nova janela, lá poderá escolher o texto que irá aparecer no botão, assim como a cor e a formula associada;<br/>
+ * 4 - O botão posiona-se de acordo com a linha da célula selecionada;
+ * 5 - Agora poderá testar o botão. Por exemplo, escrever na célula A1 o valor 2 e na A2 o valor 3 e na fórmula escrever "=A1+A2", o resultado da soma irá aparecer na célula selecionada (5 neste caso);<br/>
+ * 6 - Se não escrever a fórmula correctamente irá aparecer uma mensagem de erro;<br/>
+ * <br/>
  *
 @startuml doc-files/us047_design1.png 
  UIController -> ExtensionButton : getUIExtension(this) 
