@@ -48,7 +48,11 @@
  * <a href="../../../csheets/ext/searchandreplace/package-summary.html">csheets.ext.searchandreplace</a><br/>
  * <br/>
  * <b>S023f: Functional Tests</b><br/>
- *
+ * Para testar esta User Story e' necessario seguir os seguintes passos:<br/>
+ * 1- Correr o cleansheets;<br/>
+ * 2- Clicar no menu Edit e selecionar Search And Replace;<br/>
+ * 3- Escrever o texto ou expressao regular que pretende encontrar e clicar no botao SearchAll;<br/>
+ * 4- Irá surgir uma nova janela com todos os resultados encontrados. <br/>
  *
  *
  * @author 1110316
