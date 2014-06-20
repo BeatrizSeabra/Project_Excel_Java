@@ -18,7 +18,7 @@
 * 
 * <b>S075d: Design</b><br/>
 * To realize this userstory first we need to call the method to write to the file in the action performed. That still needs to be done at same time the program runs, so we still need the thread to run both of them at same time.
-* After the file is created, there will be a second writing file method that write everytime a cell change. For that, there is a boolean and Cell Listeners on the spreedsheet that verifies if the content is changed. If there is, the boolean is set to true and the method to write is called.
+* After the file is created, there will be a second writing file method that write everytime a cell change. For that, there is a boolean created on UIController with the respective get and set, and Cell Listeners on the spreedsheet that verifies if the content is changed(implemented on TxtAction). If there is any change, the boolean is set to true and the method to write is called.
 * After the writing of the changed content, the boolean returns to false again and continue to verify.
 * <br/>
 * <br/>

@@ -32,7 +32,13 @@
  * <a href="../../../csheets/ext/searchFilesByContent/ui/package-summary.html">csheets.ext.searchFilesByContent.ui</a><br/><br/>
  * <br/>
  *
- *
+ *<b>S077u: Unit Tests</b><br/>
+ * Since the method that do the search, is restrained on the thread, since all the searches we are doing must be in background.<br/>
+ * it is not possible to realize unit tests in this way.<br/>
+ * Like my last colleague said, it is needed to advise of some validation results on this extension.<br/>
+ * this is mainly refered to messages on the side bars that switch from "background" to "files not found" if no file is found with the wanted content.<br/>
+ * <br/>
+ * <br/>
  *
  *
  *
