@@ -42,7 +42,7 @@
 * 
 * <b>S066f: Functional Tests</b><br/>
 * 
-* ***SHARE MÉTODO CLÁSSICO***
+* ***SHARE METODO CLASSICO***
 * Antes de tudo, teem de estar abertas duas instancias do cleansheets. 
 * Depois, teem de se preencher celulas e selecionar as que quer partilhar.
 * Em seguida, ir ao menu extensions e escolher a opcao share e depois server.
