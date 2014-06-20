@@ -23,7 +23,7 @@ public class ChooseFormToEdit extends javax.swing.JFrame {
     ArrayList<String> buttonList = new ArrayList<>();
     Form form = new Form();
     String SelectedOption;
-    String SelectedLine;
+    public static String SelectedLine;
 
     /**
      * Creates new form ChooseFormToEdit
@@ -35,8 +35,11 @@ public class ChooseFormToEdit extends javax.swing.JFrame {
             jComboBox1.addItem(ArrayForms.get(i).getName());
         }
         SelectedOption = (String) jComboBox1.getSelectedItem();
-        form = ed.getFormByName(SelectedOption);
-
+        form = ed.getFormByName(SelectedOption);      
+    }
+    
+     public int getChangedLine(){
+        return Integer.parseInt(SelectedLine)-1;
     }
 
     /**
@@ -128,6 +131,7 @@ public class ChooseFormToEdit extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       SelectedLine =  (String) jComboBox2.getSelectedItem();
         SelectedOption = (String) jComboBox1.getSelectedItem();
         form = ed.getFormByName(SelectedOption);
         int lines = form.getnLines();
@@ -138,12 +142,8 @@ public class ChooseFormToEdit extends javax.swing.JFrame {
         dataList = form.getDataList();
         buttonList = form.getButtonList();
         Collections.reverse(dataList);
-        for (int j = 0; j < dataList.size(); j++) {
-            System.out.println(dataList.get(j).getText());
-        }
-        ChooseColorsAndSize ColorsAndSize = new ChooseColorsAndSize(Integer.parseInt(SelectedLine));
+        ChooseColorsAndSize ColorsAndSize = new ChooseColorsAndSize(form);
         ColorsAndSize.run();
-//ed.loadForm(lines, selected, dataList, buttonList);
         this.dispose();
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -156,7 +156,6 @@ public class ChooseFormToEdit extends javax.swing.JFrame {
         for (int i = 0; i < lines; i++) {
             jComboBox2.addItem(String.valueOf(i + 1));
         }
-        SelectedLine =  (String) jComboBox2.getSelectedItem();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     public void run() {

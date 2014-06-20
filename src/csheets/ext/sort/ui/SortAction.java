@@ -75,7 +75,7 @@ public class SortAction extends BaseAction {
         }
         return al;
     }
-    
+
     /*
      added a few lines of code to the previous method of sorting
      week 2 US008
@@ -90,16 +90,24 @@ public class SortAction extends BaseAction {
             ArrayList columns = getCollumns();
             int ReferenceColumn = 0;
             String col = askColumn(columns, abc);
+            int aux = 0;
             if (col != "A") {
                 for (int m = 0; m < abc.length; m++) {
                     if (col == abc[m].toString()) {
                         ReferenceColumn = m;
+                        if (ReferenceColumn != 0) {
+
+                        }
                     }
                 }
             }
+            int exc = 0;
+            while (exc != range[0][0].getAddress().getColumn()) {
+                exc++;
+            }
 
             for (int i = 0; i < columns.size(); i++) {
-                sortAZ(maxrows, (int) columns.get(i), columns, ReferenceColumn);
+                sortAZ(maxrows, (int) columns.get(i), columns, ReferenceColumn, exc);
             }
         } catch (FormulaCompilationException ex) {
             System.out.println("Não foi possivel localizar a celula ativa ou o numero de linhas existentes");
@@ -114,10 +122,10 @@ public class SortAction extends BaseAction {
      * @param columns
      * @param ReferenceColumn
      */
-    public void sortAZ(int maxrows, int collumn, ArrayList columns, int ReferenceColumn) throws FormulaCompilationException {
+    public void sortAZ(int maxrows, int collumn, ArrayList columns, int ReferenceColumn, int exc) throws FormulaCompilationException {
         checkListEmpty();
         //addToLists(maxrows, collumn);    
-        orderContents(ReferenceColumn);
+        orderContents(ReferenceColumn, exc);
         setContentCells(collumn);
 
     }
@@ -137,7 +145,6 @@ public class SortAction extends BaseAction {
      }
      }
      }*/
-    
     /**
      * Method to clear the values ​​in the lists.
      *
@@ -171,15 +178,15 @@ public class SortAction extends BaseAction {
      *
      * @param ReferenceColumn
      */
-    public void orderContents(int ReferenceColumn) throws FormulaCompilationException {
+    public void orderContents(int ReferenceColumn, int exc) throws FormulaCompilationException {
         boolean sorting = true;
         while (sorting == true) {
 
             sorting = false;
             for (int i = 0; i < range.length - 1; i++) {
                 try {
-                    int number1 = Integer.parseInt(range[i][ReferenceColumn].getContent());
-                    int number2 = Integer.parseInt(range[i + 1][ReferenceColumn].getContent());
+                    int number1 = Integer.parseInt(range[i][ReferenceColumn - exc].getContent());
+                    int number2 = Integer.parseInt(range[i + 1][ReferenceColumn - exc].getContent());
                     if (number2 < number1) {
                         for (int j = 0; j < range[0].length; j++) {
                             String tmp = range[i][j].getContent();
@@ -189,8 +196,8 @@ public class SortAction extends BaseAction {
                         }
                     }
                 } catch (NumberFormatException nfe) {
-                    String firstValue = range[i][ReferenceColumn].getContent();
-                    String secondValue = range[i + 1][ReferenceColumn].getContent();
+                    String firstValue = range[i][ReferenceColumn - exc].getContent();
+                    String secondValue = range[i + 1][ReferenceColumn - exc].getContent();
                     if (secondValue.compareToIgnoreCase(firstValue) < 0) {
                         for (int j = 0; j < range[0].length; j++) {
                             String tmp = range[i][j].getContent();
@@ -213,32 +220,26 @@ public class SortAction extends BaseAction {
      */
     public String askColumn(ArrayList columns, String[] abc) {
 
-        if (columns.size() != 1) {
-            Object[] col = new String[columns.size()];
-            int n = 0;
-            for (Object obj : columns) {
-                for (int i = 0; i < abc.length; i++) {
-                    if (obj.equals(i)) {
-                        col[n] = abc[i].toString();
-                        n++;
-                    }
+        int pos = 0;
+        Object[] col = new String[columns.size()];
+        int n = 0;
+        for (Object obj : columns) {
+            for (int i = 0; i < abc.length; i++) {
+                if (obj.equals(i)) {
+                    col[n] = abc[i].toString();
+                    n++;
+                    pos = i;
                 }
             }
+        }
+
+        if (columns.size() != 1) {
             Object tmp = JOptionPane.showInputDialog(null, "Choose a Reference Column", "REFERENCE COLUMN", JOptionPane.QUESTION_MESSAGE, null, col, col[0]);
             String column = tmp.toString();
             return column;
         } else {
-            Object[] col = new String[columns.size()];
-            int n = 0;
-            for (Object obj : columns) {
-                for (int i = 0; i < abc.length; i++) {
-                    if (obj.equals(i)) {
-                        col[n] = abc[i].toString();
-                        n++;
-                    }
-                }
-            }
-            String column = col.toString();
+            String column = col[0].toString();
+
             return column;
         }
     }

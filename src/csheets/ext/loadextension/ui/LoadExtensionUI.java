@@ -17,6 +17,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JMenu;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -26,13 +27,15 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class LoadExtensionUI extends javax.swing.JFrame {
 
     private String name="", path="",dir="";
-    UIController uicontroller;
+    private UIController uicontroller;
+    private JMenu menu;
     
     /**
      * Creates new form LoadExtensionUI
      */
-    public LoadExtensionUI(UIController uic) {
-        uicontroller=uic;
+    public LoadExtensionUI(UIController uic, JMenu menu) {
+        this.uicontroller=uic;
+        this.menu = menu;
         initComponents();
     }
 
@@ -164,12 +167,7 @@ public class LoadExtensionUI extends javax.swing.JFrame {
 //Extension ext= em.LoadExtension(path);
             if(ext!=null){
                 UIExtension uie= ext.getUIExtension(uicontroller);
-                UIExtension ListExt[] = uicontroller.getExtensions();
-                for (UIExtension choosen : ListExt) {
-                    if (choosen instanceof UIExtensionLoadExtension) {
-                        choosen.getMenu().add(uie.getMenu());
-                    }
-                }
+                menu.add(uie.getMenu());
             }else{
                 System.out.println("skagdjaksgdfhiag");
             }
@@ -211,7 +209,7 @@ public class LoadExtensionUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LoadExtensionUI(null).setVisible(true);
+                new LoadExtensionUI(null,null).setVisible(true);
             }
         });
     }
