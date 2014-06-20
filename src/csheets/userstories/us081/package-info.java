@@ -4,7 +4,7 @@
  * <br/>
  * 
  * <b>Requisitos</b><br/>
- * Um utilizador pode contactar directamente outro cleansheets ou criar uma "conversa". Os cleansheets que entrem numa conversa recebem todas as mensagens cujo destino é a "conversa".
+ * Um utilizador pode contactar directamente outro cleansheets ou criar uma "conversa". Os cleansheets que entrem numa conversa recebem todas as mensagens cujo destino é a "conversa".
  * <br/>
  * <br/>
  *  
