@@ -4,4 +4,4 @@
  * and open the template in the editor.
  */
 
-package csheets.ext.loadextension.ui;
+package csheets.ext.ManagerExtension;
