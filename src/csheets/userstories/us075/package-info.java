@@ -40,11 +40,17 @@
 * <br/>
 * 
 * <b>S075f: Functional Tests</b><br/>
-
+* To test this user story, the user should follow these steps:<br/>
+* 1 - run cleansheets;<br/>
+* 2 - click on the Extensions menu and select Export. Then you must choose for TXT<br/>
+* 3 - Then you should choose the separator, header and path to save the file.<br/>
+* 4 - Then when a cell is changed, it's written on the file.<br/>
+* 5 - If you want to export to a new file, you should get back to number 2 (It will write in a new file and if you change a cell, it's written only on the new file).<br/>
 * <br/>
 * <br/>
 * 
 */
+
 /*@startuml doc-files/us075_design1.png
    actor User
    User -> ExtensionTxt : Export txt
