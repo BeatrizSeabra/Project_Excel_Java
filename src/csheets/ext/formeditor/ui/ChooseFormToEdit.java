@@ -138,6 +138,7 @@ public class ChooseFormToEdit extends javax.swing.JFrame {
         for (int i = 0; i < lines; i++) {
             jComboBox2.addItem(String.valueOf(i + 1));
         }
+        form.setColor(true);
         String[] selected = form.getSelected();
         dataList = form.getDataList();
         buttonList = form.getButtonList();
