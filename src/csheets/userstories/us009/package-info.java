@@ -33,7 +33,7 @@
  * Nesta user story será pedido ao utilizador para escolher uma coluna que servira como referencia antes de executar o metodo
  * orderContents(), so essa coluna sera ordenada, as restantes simplesmente acompanharao a coluna escolhida pelo utilizador.
  * O restante design será como na user story anterior, como mostra o seguinte diagrama:<br/><br/>
- * <img src="../../../csheets/userstories/us043/doc-files/US009_design.png">
+ * <img src="../../../csheets/userstories/us009/doc-files/US009_design.png">
  * <br/>
  * <br/>
  * Classes:<br/>
