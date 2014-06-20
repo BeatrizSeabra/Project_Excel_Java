@@ -24,7 +24,13 @@
  *
  *
  *
- *
+ *<b>S07c: Coding</b><br/>
+ * see:<br/>
+ * <a href="../../../csheets/ext/searchFilesBackground/package-summary.html">csheets.ext.searchFilesBackground</a><br/>
+ * <a href="../../../csheets/ext/searchFilesBackground/ui/package-summary.html">csheets.ext.searchFilesBackground.ui</a><br/>
+ * <a href="../../../csheets/ext/searchFilesByContent/package-summary.html">csheets.ext.searchFilesByContent</a><br/>
+ * <a href="../../../csheets/ext/searchFilesByContent/ui/package-summary.html">csheets.ext.searchFilesByContent.ui</a><br/><br/>
+ * <br/>
  *
  *
  *
