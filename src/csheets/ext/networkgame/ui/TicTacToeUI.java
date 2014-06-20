@@ -5,6 +5,7 @@
  */
 package csheets.ext.networkgame.ui;
 
+import csheets.ext.networkgame.NetworkGameController;
 import csheets.ext.networkgame.TicTacToe;
 import java.net.UnknownHostException;
 import java.util.logging.Level;
@@ -147,6 +148,14 @@ public class TicTacToeUI extends javax.swing.JPanel {
                 Logger.getLogger(TicTacToeUI.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        if (tie()) {
+            String message = "GM" + "T";
+            try {
+                game.s.sendData(message.getBytes(), game.address.getHostName(), 7777);
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(TicTacToeUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -163,6 +172,14 @@ public class TicTacToeUI extends javax.swing.JPanel {
                 Logger.getLogger(TicTacToeUI.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        if (tie()) {
+            String message = "GM" + "T";
+            try {
+                game.s.sendData(message.getBytes(), game.address.getHostName(), 7777);
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(TicTacToeUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -173,6 +190,15 @@ public class TicTacToeUI extends javax.swing.JPanel {
         }
         if (hasWinner()) {
             String message = "GM" + "W" + jButton3.getText();
+            try {
+                game.s.sendData(message.getBytes(), game.address.getHostName(), 7777);
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(TicTacToeUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            NetworkGameController.mainWindow.dispose();
+        }
+        if (tie()) {
+            String message = "GM" + "T";
             try {
                 game.s.sendData(message.getBytes(), game.address.getHostName(), 7777);
             } catch (UnknownHostException ex) {
@@ -195,6 +221,14 @@ public class TicTacToeUI extends javax.swing.JPanel {
                 Logger.getLogger(TicTacToeUI.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        if (tie()) {
+            String message = "GM" + "T";
+            try {
+                game.s.sendData(message.getBytes(), game.address.getHostName(), 7777);
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(TicTacToeUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -211,6 +245,14 @@ public class TicTacToeUI extends javax.swing.JPanel {
                 Logger.getLogger(TicTacToeUI.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        if (tie()) {
+            String message = "GM" + "T";
+            try {
+                game.s.sendData(message.getBytes(), game.address.getHostName(), 7777);
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(TicTacToeUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -221,6 +263,14 @@ public class TicTacToeUI extends javax.swing.JPanel {
         }
         if (hasWinner()) {
             String message = "GM" + "W" + jButton6.getText();
+            try {
+                game.s.sendData(message.getBytes(), game.address.getHostName(), 7777);
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(TicTacToeUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        if (tie()) {
+            String message = "GM" + "T";
             try {
                 game.s.sendData(message.getBytes(), game.address.getHostName(), 7777);
             } catch (UnknownHostException ex) {
@@ -253,6 +303,15 @@ public class TicTacToeUI extends javax.swing.JPanel {
         }
         if (hasWinner()) {
             String message = "GM" + "W" + jButton9.getText();
+            try {
+                game.s.sendData(message.getBytes(), game.address.getHostName(), 7777);
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(TicTacToeUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
+        if (tie()) {
+            String message = "GM" + "T";
             try {
                 game.s.sendData(message.getBytes(), game.address.getHostName(), 7777);
             } catch (UnknownHostException ex) {
@@ -314,5 +373,14 @@ public class TicTacToeUI extends javax.swing.JPanel {
         }
         return false;
     }
-
+    
+    public boolean tie() {
+        if(!jButton1.getText().equals("") && !jButton2.getText().equals("") && !jButton3.getText().equals("") && !jButton4.getText().equals("") && !jButton5.getText().equals("")
+           && !jButton6.getText().equals("") && !jButton7.getText().equals("") && !jButton8.getText().equals("") && !jButton9.getText().equals("")){
+            
+            return true;
+        
+          }
+        return false;
+    }
 }
