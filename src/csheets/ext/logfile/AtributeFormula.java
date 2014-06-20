@@ -250,54 +250,28 @@ public class AtributeFormula {
 
         @Override
         public void valueChanged(Cell cell) {
-            try {
-                cell.setContent(formula);
-            } catch (FormulaCompilationException ex) {
-                Logger.getLogger(AtributeFormula.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            WriteLogFile.writeLogFile(null, "onClick", null, formula);
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
 
         @Override
         public void contentChanged(Cell cell) {
-            try {
-                cell.setContent(formula);
-            } catch (FormulaCompilationException ex) {
-                Logger.getLogger(AtributeFormula.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            WriteLogFile.writeLogFile(null, "onClick", null, formula);
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
 
         @Override
         public void dependentsChanged(Cell cell) {
-            try {
-                cell.setContent(formula);
-            } catch (FormulaCompilationException ex) {
-                Logger.getLogger(AtributeFormula.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            WriteLogFile.writeLogFile(null, "onClick", null, formula);
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
 
         @Override
         public void cellCleared(Cell cell) {
-            try {
-                cell.setContent(formula);
-            } catch (FormulaCompilationException ex) {
-                Logger.getLogger(AtributeFormula.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            WriteLogFile.writeLogFile(null, "onClick", null, formula);
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
 
         @Override
         public void cellCopied(Cell cell, Cell source) {
-            try {
-                cell.setContent(formula);
-            } catch (FormulaCompilationException ex) {
-                Logger.getLogger(AtributeFormula.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            WriteLogFile.writeLogFile(null, "onClick", null, formula);
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
-
     }
-
+    
 }

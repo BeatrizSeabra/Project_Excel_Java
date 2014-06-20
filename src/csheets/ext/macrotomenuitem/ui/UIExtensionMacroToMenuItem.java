@@ -5,48 +5,33 @@
  */
 
 package csheets.ext.macrotomenuitem.ui;
-import javax.swing.Icon;
-import javax.swing.JComponent;
+import csheets.ext.macrotomenuitem.ExtensionMacroToMenuItem;
+import csheets.ui.ctrl.UIController;
+import csheets.ui.ext.UIExtension;
 import javax.swing.JMenu;
 import javax.swing.JToolBar;
 
-import csheets.ext.Extension;
-import csheets.ui.ctrl.UIController;
-import csheets.ui.ext.CellDecorator;
-import csheets.ui.ext.TableDecorator;
-import csheets.ui.ext.UIExtension;
-
 /**
- * This class implements the UI interface extension for the simple extension.
- * A UI interface extension must extend the UIExtension abstract class.
- * @see UIExtension
- * @author Alexandre Braganca
+ *
+ * @author 1090675 - Tiago Pereira
  */
 public class UIExtensionMacroToMenuItem extends UIExtension {
 
-	/** The icon to display with the extension's name */
-	private Icon icon;
+	/** A menu that provides editing of Menu */
+	private MacroToMenuItemMenu menu;
 
-	/** The menu of the extension */
-        private MacroToMenuItemMenu menu;
 
-	public UIExtensionMacroToMenuItem(Extension extension, UIController uiController) {
-		super(extension, uiController);
-		// TODO Auto-generated constructor stub
-	}
-	
 	/**
-	 * Returns an icon to display with the extension's name.
-	 * @return an icon with style
+	 * Creates a new user interface extension for Menu Editor.
+	 * @param extension the extension for which components are provided
+	 * @param uiController the user interface controller
 	 */
-	public Icon getIcon() {
-		return null;
+	public UIExtensionMacroToMenuItem(ExtensionMacroToMenuItem extension, UIController uiController) {
+		super(extension, uiController);
 	}
 
 	/**
-	 * Returns an instance of a class that implements JMenu.
-	 * In this simple case this class only supplies one menu option.
-	 * @see ResidenceImportMenu
+	 * Returns a menu that provides editing of Menu.
 	 * @return a JMenu component
 	 */
 	public JMenu getMenu() {
@@ -54,38 +39,13 @@ public class UIExtensionMacroToMenuItem extends UIExtension {
 			menu = new MacroToMenuItemMenu(uiController);
 		return menu;
 	}
-	
-	/**
-	 * Returns a cell decorator that visualizes the data added by the extension.
-	 * @return a cell decorator, or null if the extension does not provide one
-	 */
-	public CellDecorator getCellDecorator() {
-		return null;
-	}
 
 	/**
-	 * Returns a table decorator that visualizes the data added by the extension.
-	 * @return a table decorator, or null if the extension does not provide one
-	 */
-	public TableDecorator getTableDecorator() {
-		return null;
-	}	
-	
-	/**
-	 * Returns a toolbar that gives access to extension-specific
-	 * functionality.
-	 * @return a JToolBar component, or null if the extension does not provide one
+	 * Returns a toolbar that provides editing of Menu.
+	 * @return a JToolBar component
 	 */
 	public JToolBar getToolBar() {
 		return null;
 	}
-
-	/**
-	 * Returns a side bar that gives access to extension-specific
-	 * functionality.
-	 * @return a component, or null if the extension does not provide one
-	 */
-	public JComponent getSideBar() {
-		return null;
-	}	
+        
 }

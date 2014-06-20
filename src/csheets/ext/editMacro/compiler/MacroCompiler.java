@@ -8,6 +8,7 @@ import csheets.core.formula.*;
 import csheets.core.formula.compiler.ExpressionCompiler;
 import csheets.core.formula.compiler.FormulaCompilationException;
 import csheets.core.formula.lang.*;
+import java.io.Serializable;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,7 @@ import org.antlr.runtime.tree.Tree;
  *
  * @author i120388
  */
-public class MacroCompiler implements ExpressionCompiler {
+public class MacroCompiler implements ExpressionCompiler, Serializable {
 
     public static final char MACRO_STARTER = 'm';
 
@@ -130,7 +131,7 @@ public class MacroCompiler implements ExpressionCompiler {
 
                     if (node.getChild(0).getText().matches("@[a-zA-Z0-9]+")) { //Tests if the attribution is being made to a temporary variable 
                         Value value = convert(cell, node.getChild(1)).evaluate();
-                        TemporaryVariable temporaryVariable = new TemporaryVariable(node.getChild(0).getText(), value, cell);
+                        TemporaryVariable temporaryVariable = new TemporaryVariable(node.getChild(0).getText(), value, cell.getSpreadsheet());
                         ((SpreadsheetImpl) cell.getSpreadsheet()).addOrUpdateTemporaryVariable(temporaryVariable);
                     } else { //Attribution to a Cell Reference
                         //crias uma referencia para a cell

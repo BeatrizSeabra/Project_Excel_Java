@@ -14,18 +14,31 @@
  * 
  *
  * * <b>S078d: Design</b><br/>
- *  Para realizar esta user story, temos de criar a classe JDialogSearch, para o Utilizador inserir o padrao e o diretorio, tal como decorreu no issue passado mas desta vez deve dar mais opçoes de pesquisa ao utilizador.<br/>
- *  A utilização de threads será necessária ao longo de todo o issue uma vez que serao necessarios multiplos processos a decorrer ao mesmo tempo. <br/>
+ *  To realize this user story, there is the class JDialogSearchFilesByContent, to the user insert not only the directory but also the content that should be searched in the files.<br/>
+ *  For the realization of this use case, it will be needed the use of threads, not only for the multiple searchesbut also to the user search for a content in file and do this in background.<br/>
  *  <br/>
- * <img src="../../../csheets/userstories/us078/doc-files/US078_design.png"> 
+ * <img src="../../../csheets/userstories/us078/doc-files/US078_design.png">
+ * 
  * <br/>
  * <br/>
  *
  *
  *
+ *<b>S07c: Coding</b><br/>
+ * see:<br/>
+ * <a href="../../../csheets/ext/searchFilesBackground/package-summary.html">csheets.ext.searchFilesBackground</a><br/>
+ * <a href="../../../csheets/ext/searchFilesBackground/ui/package-summary.html">csheets.ext.searchFilesBackground.ui</a><br/>
+ * <a href="../../../csheets/ext/searchFilesByContent/package-summary.html">csheets.ext.searchFilesByContent</a><br/>
+ * <a href="../../../csheets/ext/searchFilesByContent/ui/package-summary.html">csheets.ext.searchFilesByContent.ui</a><br/><br/>
+ * <br/>
  *
- *
- *
+ *<b>S077u: Unit Tests</b><br/>
+ * Since the method that do the search, is restrained on the thread, since all the searches we are doing must be in background.<br/>
+ * it is not possible to realize unit tests in this way.<br/>
+ * Like my last colleague said, it is needed to advise of some validation results on this extension.<br/>
+ * this is mainly refered to messages on the side bars that switch from "background" to "files not found" if no file is found with the wanted content.<br/>
+ * <br/>
+ * <br/>
  *
  *
  *

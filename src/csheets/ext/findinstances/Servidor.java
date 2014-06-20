@@ -13,6 +13,7 @@ import java.net.InetAddress;
 import java.net.InterfaceAddress;
 import java.net.NetworkInterface;
 import java.net.SocketTimeoutException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
@@ -21,45 +22,21 @@ import java.util.Enumeration;
  * @author RafaelChaves
  */
 public class Servidor {
-    
-    
-    public static ArrayList<InetAddress> Srv() throws IOException {
+
+    /**
+     *
+     * @return @throws IOException
+     */
+    public static ArrayList<Instance> Srv() throws IOException {
 
         //ArrayList with the information of every ip address that respondes
-        ArrayList<InetAddress> ips = new ArrayList();
-
-        //Sends a broadcast
+        ArrayList<Instance> instances = new ArrayList();
+        ArrayList<Datagrama> datagramas = new ArrayList();
         DatagramSocket socket = new DatagramSocket(9877);
-        socket.setBroadcast(true);
-        InetAddress IPAddress = InetAddress.getByName("255.255.255.255");
-        String sentence = "Quem está?";
-        byte[] sendData = sentence.getBytes();
-        
-        // Look for every network interface to see the broadcast address
-        Enumeration interfaces = NetworkInterface.getNetworkInterfaces();
-        while (interfaces.hasMoreElements()) {
-            NetworkInterface networkInterface = (NetworkInterface) interfaces.nextElement();
+        InetAddress IPAddress = InetAddress.getByName("0.0.0.0");
 
-            if (networkInterface.isLoopback() || !networkInterface.isUp()) {
-                continue;
-            }
-
-            for (InterfaceAddress interfaceAddress : networkInterface.getInterfaceAddresses()) {
-                InetAddress broadcast = interfaceAddress.getBroadcast();
-                if (broadcast == null) {
-                    continue;
-                }
-                try {
-	        DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, broadcast, 9876);
-	        socket.send(sendPacket);
-                System.out.println("Broadcast enviado!");
-	      } catch (Exception e) {
-	      }
-                
-            }
-        }
         //sets a 10sec timeout for the responses
-        socket.setSoTimeout(10000); 
+        socket.setSoTimeout(10000);
         byte[] receiveData = new byte[1024];
         boolean timeout = false;
         DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
@@ -69,15 +46,48 @@ public class Servidor {
             try {
                 socket.receive(receivePacket);
                 InetAddress a = receivePacket.getAddress();
-                if (!ips.contains(a)) {
-                    ips.add(a);
+
+                String conteudo = new String(receiveData, Charset.defaultCharset());
+                String[] content = conteudo.split("'");
+                int ID = Integer.parseInt(content[0]);
+                int numDatagramas = Integer.parseInt(content[2]);
+                int numDtgr = Integer.parseInt(content[1]);
+                if (numDatagramas == 1) {
+                    instances.add(processar(a, ID, content[3]));
+                    
+                    System.out.println("Encontrei um solitário!!!");
+                    
+                } else {
+                    
+                    System.out.println("Esta é a parte " +numDtgr+" de "+numDatagramas);
+                    
+                    String[] partes = new String[numDatagramas];
+                    for (Datagrama dtgr : datagramas) {
+                        if (dtgr.getID() == ID) {
+                            partes[dtgr.getNumDatagrama()] = dtgr.getConteudo();
+                        }
+                    }
+                    boolean falta = false;
+                    for (int i = 0; i < numDatagramas && !falta; i++) {
+                        if (partes[i] == null) {
+                            falta = true;
+                        }
+                    }
+                    if (!falta) {
+                        String c = "";
+                        for (int i = 0; i < numDatagramas; i++) {
+                            c += partes[i];
+                        }
+                        instances.add(processar(a, ID, c));
+                        for (Datagrama dtgr : datagramas) {
+                            if (dtgr.getID() == ID) {
+                                datagramas.remove(dtgr);
+                            }
+                        }
+                    } else {
+                        datagramas.add(new Datagrama(ID, numDtgr, numDatagramas, content[3]));
+                    }
                 }
-                receiveData = new byte[1024];
-                String resp = "Recebi";
-                byte[] msgr = resp.getBytes();
-                DatagramPacket sendPacket2 = new DatagramPacket(msgr, msgr.length, receivePacket.getAddress(), 9876);
-                socket.send(sendPacket2);
-                System.out.println("Enviei sucesso");
                 receiveData = new byte[1024];
 
             } catch (SocketTimeoutException ex) {
@@ -85,6 +95,36 @@ public class Servidor {
             }
         }
         socket.close();
-        return ips;
+        return instances;
+    }
+
+    private static Instance processar(InetAddress Ip, int ID, String conteudo) {
+        Instance inst = new Instance(Ip, ID);
+        String[] temp = conteudo.split("|");
+        if (temp.length == 2) {
+            String[] wbs = temp[0].split(";");
+            for (String book : wbs) {
+                inst.addWorkbook(book);
+            }
+            String[] exts = temp[1].split(";");
+            for (String ext : exts) {
+                inst.addExtension(ext);
+            }
+        }
+        if (temp.length == 1) {
+            if (conteudo.startsWith("|")) {
+                String[] exts = temp[0].split(";");
+                for (String ext : exts) {
+                    inst.addExtension(ext);
+                }
+            }
+            else{
+                String[] wbs = temp[0].split(";");
+                for (String book : wbs) {
+                    inst.addWorkbook(book);
+                }
+            }
+        }
+        return inst;
     }
 }

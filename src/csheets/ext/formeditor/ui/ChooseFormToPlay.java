@@ -25,6 +25,8 @@ public class ChooseFormToPlay extends javax.swing.JFrame {
     ArrayList<JTextField> dataList = new ArrayList<>();
     ArrayList<String> buttonList = new ArrayList<>();
     Form form = new Form();
+    String[] ArrayColors = new String[2];
+    String[] ArraySizes = new String[2];
 
     public ChooseFormToPlay() {
         initComponents();
@@ -102,7 +104,14 @@ public class ChooseFormToPlay extends javax.swing.JFrame {
         dataList = form.getDataList();
         buttonList = form.getButtonList();
         Collections.reverse(dataList);
-        ed.loadForm(lines, selected, dataList, buttonList);
+        ChooseColorsAndSize edit = new ChooseColorsAndSize(form);
+        ChooseFormToEdit edit1 = new ChooseFormToEdit();
+
+        ArrayColors = edit.getColors();
+        ArraySizes = edit.getSizes();
+        int ChangedLine = edit1.getChangedLine();
+
+        ed.loadForm(lines, selected, dataList, buttonList, ArrayColors,ArraySizes,ChangedLine);
         this.dispose();
 
     }//GEN-LAST:event_jButton1ActionPerformed

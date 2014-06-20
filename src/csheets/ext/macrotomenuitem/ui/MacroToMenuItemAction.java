@@ -28,7 +28,7 @@ public class MacroToMenuItemAction extends BaseAction {
 
     @Override
     protected String getName() {
-            return "Macro To MenuItem";
+            return "Macro To MenuItem...";
     }
 
     @Override
@@ -43,13 +43,12 @@ public class MacroToMenuItemAction extends BaseAction {
      * after the menu option (after).
      * @param event the event that was fired
      */
-    @Override
-    @SuppressWarnings("empty-statement")
+    @Override    
     public void actionPerformed(ActionEvent event) 
     {        
-        WindowMacroToMenuItem windowMacroToMenuItem = new WindowMacroToMenuItem();
-        windowMacroToMenuItem.setVisible(true);
-        windowMacroToMenuItem.setLocationRelativeTo(null);
+        WindowMacroToMenuItem wmtmi = new WindowMacroToMenuItem(uiController);
+        wmtmi.setVisible(true);
+        wmtmi.setLocationRelativeTo(null);
     }
         
 }

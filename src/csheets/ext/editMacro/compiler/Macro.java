@@ -4,13 +4,14 @@ import csheets.core.Cell;
 import csheets.core.IllegalValueTypeException;
 import csheets.core.formula.Expression;
 import csheets.core.formula.compiler.FormulaCompilationException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author i120388
  */
-public class Macro {
+public class Macro implements Serializable{
 
     private String source;
     private Cell cell;

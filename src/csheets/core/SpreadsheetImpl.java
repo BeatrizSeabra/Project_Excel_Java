@@ -416,7 +416,7 @@ public class SpreadsheetImpl implements Spreadsheet {
                 return tempVar;
             }
         }
-        return new TemporaryVariable("@defaultZeroVar", new Value(0), new CellImpl(null, null));
+        return new TemporaryVariable("@defaultZeroVar", new Value(0), new SpreadsheetImpl(workbook, null));
     }
 
     /**

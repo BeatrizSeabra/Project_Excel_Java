@@ -5,11 +5,21 @@
  */
 package csheets.ext.sort.ui;
 
+import csheets.CleanSheets;
+import csheets.core.Cell;
+import csheets.core.Spreadsheet;
+import csheets.core.formula.compiler.FormulaCompilationException;
+import csheets.ext.runMacro.ui.runMacroControllerTest;
 import csheets.ui.ctrl.UIController;
-import java.awt.event.ActionEvent;
+import csheets.ui.sheet.SpreadsheetTable;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -18,8 +28,15 @@ import static org.junit.Assert.*;
 /**
  *
  * @author Stefan Parker
+ * @author 1120564MarcoEsteves (week3)
  */
 public class SortActionZATest {
+
+    private Spreadsheet s;
+    private SpreadsheetTable sT;
+    private CleanSheets ui;
+    private UIController controller;
+    Cell[][] range = new Cell[3][1];
 
     public SortActionZATest() {
     }
@@ -34,6 +51,23 @@ public class SortActionZATest {
 
     @Before
     public void setUp() {
+        ui = new CleanSheets();
+        File file = new File("src-tests/csheets/ext/sort/ui/SortTest.cls");
+        try {
+            ui.load(file);
+        } catch (IOException ex) {
+            Logger.getLogger(runMacroControllerTest.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(runMacroControllerTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        controller = new UIController(ui);
+        s = ui.getWorkbooks()[0].getSpreadsheet(0);
+
+        controller.setActiveWorkbook(ui.getWorkbooks()[0]);
+        controller.setActiveSpreadsheet(s);
+
+        sT = new SpreadsheetTable(s, controller);
+
     }
 
     @After
@@ -66,95 +100,83 @@ public class SortActionZATest {
     }
 
     /**
-     * Test of actionPerformed method, of class SortActionZA.
-     */
-    @Test
-    public void testActionPerformed() {
-        System.out.println("actionPerformed");
-        ActionEvent event = null;
-        UIController uiController = null;
-        SortActionZA instance = new SortActionZA(uiController);
-        instance.actionPerformed(event);
-        fail("The test case is a prototype.");
-
-    }
-
-    /**
-     * Test of sortZA method, of class SortActionZA.
-     */
-    @Test
-    public void testSortZA() throws Exception {
-        System.out.println("sortZA");
-        int maxrows = 4;
-        int collumn = 0;
-        UIController uiController = null;
-        SortActionZA instance = new SortActionZA(uiController);
-        //instance.sortZA(maxrows, collumn);
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of addToLists method, of class SortActionZA.
-     */
-    @Test
-    public void testAddToLists() throws Exception {
-        System.out.println("addToLists");
-        int maxrows = 4;
-        int collumn = 0;
-        UIController uiController = null;
-        SortActionZA instance = new SortActionZA(uiController);
-        //instance.addToLists(maxrows, collumn);
-        //Ver aqui se o tamanho dos dois arrays são iguais
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of checkListEmpty method, of class SortActionZA.
      */
     @Test
     public void testCheckListEmpty() {
         System.out.println("checkListEmpty");
-        UIController uiController=null;
+        UIController uiController = null;
         SortActionZA instance = new SortActionZA(uiController);
         instance.checkListEmpty();
-        int expected=0;
-        int result=instance.conteudos.size();
-        assertEquals(expected,result);
-        
-    }
+        int expected = 0;
+        int result = instance.conteudos.size();
+        assertEquals(expected, result);
 
-    /**
-     * Test of setContentCells method, of class SortActionZA.
-     */
-    @Test
-    public void testSetContentCells() throws Exception {
-        System.out.println("setContentCells");
-        int collumn = 0;
-        SortActionZA instance = null;
-        instance.setContentCells(collumn);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
      * Test of orderContents method, of class SortActionZA.
      */
     @Test
-    public void testOrderContents() {
+    public void testOrderContents() throws FormulaCompilationException {
         System.out.println("orderContents");
-        SortActionZA instance = null;
-        instance.conteudos.set(0, "a");
-        instance.conteudos.set(1, "b");
-        instance.conteudos.set(2, "c");
-        instance.conteudos.set(3, "d");
-        //instance.orderContents();
-        ArrayList test = new ArrayList();
-        test.add("d");
-        test.add("c");
-        test.add("b");
-        test.add("a");
-        assertEquals(instance.conteudos,test);
-        fail("The test case is a prototype.");
+        SortAction instance = new SortAction(controller);
+        instance.range = new Cell[1][3];
+        for (int i = 0; i < 3; i++) {
+            instance.range[0][i] = sT.getSpreadsheet().getCell(0, i);
+            instance.range[0][i].setContent(sT.getSpreadsheet().getCell(0, i).getContent());
+        }
+        instance.orderContents(0, 0);
+        SortAction expResult = new SortAction(controller);
+        expResult.range = new Cell[1][3];
+        expResult.range[0][0] = sT.getSpreadsheet().getCell(0, 0);
+        expResult.range[0][1] = sT.getSpreadsheet().getCell(0, 1);
+        expResult.range[0][2] = sT.getSpreadsheet().getCell(0, 2);
+        expResult.range[0][0].setContent(sT.getSpreadsheet().getCell(0, 1).getContent());
+        expResult.range[0][1].setContent(sT.getSpreadsheet().getCell(0, 0).getContent());
+        expResult.range[0][2].setContent(sT.getSpreadsheet().getCell(0, 2).getContent());
+        Assert.assertArrayEquals(instance.range, expResult.range);
     }
 
+    /**
+     * Test of getCollumns method, of class SortActionZA.
+     */
+    @Test
+    public void testGetCollumns() throws FormulaCompilationException {
+        System.out.println("getCollumns");
+        ArrayList expResult = new ArrayList();
+        SortAction instance = new SortAction(controller);
+        instance.range = new Cell[1][3];
+        for (int i = 0; i < 3; i++) {
+            instance.range[0][i] = sT.getSpreadsheet().getCell(0, i);
+            instance.range[0][i].setContent(sT.getSpreadsheet().getCell(0, i).getContent());
+        }
+        int[] col = new int[1];
+        col[0] = 1;
+        expResult.add(sT.getSpreadsheet().getCell(0, 0).getAddress().getColumn());
+        ArrayList result = instance.getCollumns();
+        assertEquals(expResult, result);
+
+    }
+
+    /**
+     * Test of askColumn method, of class SortActionZA.
+     */
+    @Test
+    public void testAskColumn() throws FormulaCompilationException {
+        System.out.println("askColumn");
+        ArrayList columns = new ArrayList();
+        columns.add(sT.getSpreadsheet().getCell(0, 0).getAddress().getColumn());
+        String[] abc = {"A"};
+        SortAction instance = new SortAction(controller);
+        instance.range = new Cell[1][3];
+        for (int i = 0; i < 3; i++) {
+            instance.range[0][i] = sT.getSpreadsheet().getCell(0, i);
+            instance.range[0][i].setContent(sT.getSpreadsheet().getCell(0, i).getContent());
+
+        }
+        String expResult = "A";
+        String result = instance.askColumn(columns, abc);
+        assertEquals(expResult, result);
+    }
 }
