@@ -10,25 +10,38 @@ import csheets.ext.editMacro.compiler.Macro;
 import javax.swing.JMenuItem;
 
 /**
- * Class that receve the configuration of the association of the 
+ * Class that has the attributes related to a macro, a menu item of cleansheets, 
+ * and a string with the extensions for applying to the menu. These variables 
+ * are needed to define the association between the running of the macro 
+ * on the selection of the menu item of the cleansheets application.
  * @author 1090675 - Tiago Pereira
  */
 public class MacroToMenuItem {
-        
+    
+    /**
+     * Macro macro, represent the macro that the user want to associate and run 
+     * with the menu item of the cleansheets application
+     * JMenuItem menuItem, represent the menu item that the user wants to associate
+     * to running the defined macro
+     * String extendMenuItem, represent the extension to apply to the menu item
+     * of the cleansheets application, that inform if the macro will run before,
+     * around or after the functionality of the specified menu.
+     */    
     private Macro macro;
     private JMenuItem menuItem;
     private String extendMenuItem;
 
     /**
-     * 
-     * @param macro 
+     * Initialize an object of type MacroToMenuItem with macro on the parameter 
+     * of the construtor of the class, that represent the macro that the user 
+     * want to associate and run, on the selection of the menu item of the 
+     * cleansheets application.
+     * @param macro
      */
     public MacroToMenuItem(Macro macro) {
         this.macro = macro;
     }
     
-    
-
     /**
      * @return the macro
      */
