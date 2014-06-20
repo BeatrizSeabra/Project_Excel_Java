@@ -34,7 +34,7 @@
 * <br/>
 * 
 * <b>S066u: Unit Tests</b><br/>
-* Não foi possível realizar Testes Unitários, visto que a maioria dos médotos implementados é do tipo 'void'.
+* Não foi possível realizar Testes Unitários, visto que a maioria dos métodos implementados é do tipo 'void'.
 * A classe SharePanel é do tipo 'form'.
 * A classe MultiShare possui um contrutor do tipo 'private' o que torna difícil a elaboração dos testes para os métodos da mesma classe.
 * Ainda assim foram efectuadas todas as validações possíveis para prevenir o maior número de possíveis erros que possam surgir.
@@ -43,8 +43,8 @@
 * <b>S066f: Functional Tests</b><br/>
 * 
 * ***SHARE MÉTODO CLÁSSICO***
-* Antes de tudo, teem de estar abertas duas instancias do cleansheets. 
-* Depois, teem de se preencher celulas e selecionar as que quer partilhar.
+* Antes de tudo, têm de estar abertas duas instancias do cleansheets. 
+* Depois, têm de se preencher celulas e selecionar as que quer partilhar.
 * Em seguida, ir ao menu extensions e escolher a opcao share e depois server.
 * Vai inserir un nome da partilha, uma porta e uma password para a partilha.
 * Na segunda instancia selecionar as celulas onde quer que a informação apareca e escolher o menu extensions -> share - > client.
@@ -52,7 +52,7 @@
 * De seguida no side bar no separados 'Share' tem várias abas relativas à gestão das partilhas.
 * 
 * ***ATIVAR JANELA SHARE NO SIDE BAR***
-* Para activar a janela do 'Multi Share', caso ainda não seja vizivel no side bar é necessário ir ao menu 'View' e clicar na opção 'Share'.
+* Para activar a janela do 'Multi Share', caso ainda não seja visível no side bar é necessário ir ao menu 'View' e clicar na opção 'Share'.
 * 
 * ***MULTI SHARE***
 * Na aba 'Multi Share' tem as informações sobre todas as partilhas activas da instância em questão.
@@ -69,7 +69,7 @@
 * Na aba 'New Share' é possível criar uma nova partilha em modo Servidor, ainda com a opção 'read only', que caso seleccionada
 * permite tornar a instância um servidor autêntico, isto é todas as celulas seleccionadas que forem modificadas os clientes conectados
 * tambem sofrem dessas alterações, mas as alterações dos clientes nunca interferem com o Servidor.
-* É necessário preencher todos os campos com os dados válidos, o botão verde 'actualizar' tem como função actualizar as celulas seleccionadas.
+* É necessário preencher todos os campos com os dados válidos, o botão verde 'actualizar' tem como função actualizar as células seleccionadas.
 * 
 * 
 * @startuml doc-files/us066_design1.png
