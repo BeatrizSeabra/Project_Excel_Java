@@ -44,9 +44,11 @@
  * <b>S087f: Functional Tests</b><br/>
  * To test this user story, the user should follow these steps:<br/>
  * 1run cleansheets;<br/>
- * 2insert on the formula bar the block to be executed;<br/>
- * 3to test insert some instructions splitted by ";" between brackets (ex. "={A1+4;A1+3}").
- * The result of last instruction appears in the cell.<br/>
+ * 2go on extensions select networkgames and click on "look for players"<br/>
+ * 3now can choose run a server or connect to a server:
+ * a.in first case waits for other player connect as client
+ * b.in second case inserts the machine's ip address he desires to connect<br/>
+ * 4.after got 2 players both users can play a standard tic tac toe game.
  * 
  * <br/>
  * <br/>

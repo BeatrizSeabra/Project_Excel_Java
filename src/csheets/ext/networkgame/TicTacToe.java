@@ -112,10 +112,13 @@ public class TicTacToe extends Game {
         }else if(file_string.charAt(2)=='W'){
             if(file_string.charAt(3)=='X'){
                 JOptionPane.showMessageDialog(null, "Player X Won!", "Winner", JOptionPane.INFORMATION_MESSAGE);
+                
             }else{
                 JOptionPane.showMessageDialog(null, "Player O Won!", "Winner", JOptionPane.INFORMATION_MESSAGE);
             }
             
+        }else if(file_string.charAt(2)=='W'){
+            JOptionPane.showMessageDialog(null, "Tie!", "Winner", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
