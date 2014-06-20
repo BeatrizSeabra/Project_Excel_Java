@@ -10,12 +10,15 @@ import csheets.CleanSheets;
 import csheets.core.formula.compiler.FormulaCompilationException;
 import csheets.ext.edMenu.ui.EdMenuUIExtension;
 import csheets.ext.editMacro.compiler.Macro;
+import csheets.ext.macrotomenuitem.MacroToMenuItem;
 import csheets.ui.ctrl.UIController;
 import csheets.ui.ext.UIExtension;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -34,19 +37,23 @@ public class WindowMacroToMenuItem extends javax.swing.JFrame {
 
     /**
      * ArrayList<Macro> arrayMacros, represent all macros created on the application
-     * to display to the user, the macro that pretend to associate to menu item
+     * to display to the user, the macro that pretend to associate to menu item.
      * ArrayList<JMenuItem> arrayMenuItem, represent all menu item of the application
-     * to display to the user, the menu item that he wants to associate with the macro
+     * to display to the user, the menu item that he wants to associate with the macro.
      * CleanSheets app = new CleanSheets(), a instance of Cleansheets to use information
-     * present on it, is usual to use as parameter on the uiController instance
+     * present on it, is usual to use as parameter on the uiController instance.
      * UIController uiController, represent an instance of the UIController of the
      * user interface controller of the cleansheets application, it´s important
      * to access to every information relative to the user interface.
+     * MacroToMenuItem macroToMenuItem, represent an instance of the MacroToMenuItem
+     * that will save the information about the association between the macro that
+     * will be execute on the menu item selection.
      */
     private ArrayList<Macro> arrayMacros = new ArrayList<>();
     private final ArrayList<JMenuItem> arrayMenuItem = new ArrayList<>();
     private final CleanSheets app = new CleanSheets();
     private UIController uiController = new UIController(app);
+    private MacroToMenuItem macroToMenuItem;
 
     /**
      * Creates new form WindowMacroToMenu
@@ -148,16 +155,33 @@ public class WindowMacroToMenuItem extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
-       //if (CbMacroRun.getSelectedIndex() != -1 && CbMenuItem.getSelectedIndex() != -1 &&
-       //        CbExtensionMenuItem.getSelectedIndex() != -1)
-       if (CbMenuItem.getSelectedIndex() != -1)  
+       if (CbMacroRun.getSelectedIndex() != -1 && CbMenuItem.getSelectedIndex() != -1 &&
+               CbExtensionMenuItem.getSelectedIndex() != -1)
        {
+           final Macro m = (Macro)CbMacroRun.getSelectedItem();
+           String nameMacro="";
+           try {
+               nameMacro = m.getName();
+           } catch (FormulaCompilationException ex) {
+               Logger.getLogger(WindowMacroToMenuItem.class.getName()).log(Level.SEVERE, null, ex);
+           }
+           
+           JMenuItem mi = (JMenuItem)CbMenuItem.getSelectedItem();
+           String str = (String)CbExtensionMenuItem.getSelectedItem();
+           try {
+               JOptionPane.showMessageDialog(null, m.getName());
+           } catch (FormulaCompilationException ex) {
+               Logger.getLogger(WindowMacroToMenuItem.class.getName()).log(Level.SEVERE, null, ex);
+           }
+           //JOptionPane.showMessageDialog(null, mi.getText());
+           JOptionPane.showMessageDialog(null, str);
+           //macroToMenuItem = new MacroToMenuItem(m,mi,str);
            UIExtension listExtension[] = uiController.getExtensions();
            for (UIExtension uiExtension : listExtension)
            {
                if (uiExtension instanceof UIExtensionMacroToMenuItem) 
                {
-                   JMenuItem itemMenu = new JMenuItem("Run Macro: "+CbMenuItem.getSelectedItem());
+                   JMenuItem itemMenu = new JMenuItem("Run Macro: "+nameMacro);
                    itemMenu.setEnabled(true);
                    ActionListener actionListener = new ActionListener() 
                    {
@@ -166,7 +190,9 @@ public class WindowMacroToMenuItem extends javax.swing.JFrame {
                        {                           
                            try 
                            {
-                               uiController.getActiveSpreadsheet().getCell(0, 0).setContent("1");
+                               m.compiler();
+                               m.results();
+                               //uiController.getActiveSpreadsheet().getCell(0, 0).setContent("1");
                            } catch (Exception ex) {
                                JOptionPane.showMessageDialog(null, ex.getMessage());
                            }
@@ -231,7 +257,7 @@ public class WindowMacroToMenuItem extends javax.swing.JFrame {
             }
             getMenuItemsOfApplication(frame.getJMenuBar());
             for (JMenuItem jMenuItem : arrayMenuItem) {
-                CbMenuItem.addItem(jMenuItem.getText());
+                CbMenuItem.addItem(jMenuItem);
             }
             CbMacroRun.setSelectedIndex(-1);
             CbMenuItem.setSelectedIndex(-1);
@@ -243,6 +269,9 @@ public class WindowMacroToMenuItem extends javax.swing.JFrame {
                     ,"No Macros Created",JOptionPane.INFORMATION_MESSAGE);
             dispose();
         }
+//        catch (FormulaCompilationException ex) {
+//            Logger.getLogger(WindowMacroToMenuItem.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }//GEN-LAST:event_formWindowActivated
 
     /**

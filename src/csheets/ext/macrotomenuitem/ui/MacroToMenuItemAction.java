@@ -46,9 +46,9 @@ public class MacroToMenuItemAction extends BaseAction {
     @Override    
     public void actionPerformed(ActionEvent event) 
     {        
-        WindowMacroToMenuItem windowMacroToMenuItem = new WindowMacroToMenuItem(uiController);
-        windowMacroToMenuItem.setVisible(true);
-        windowMacroToMenuItem.setLocationRelativeTo(null);
+        WindowMacroToMenuItem wmtmi = new WindowMacroToMenuItem(uiController);
+        wmtmi.setVisible(true);
+        wmtmi.setLocationRelativeTo(null);
     }
         
 }
