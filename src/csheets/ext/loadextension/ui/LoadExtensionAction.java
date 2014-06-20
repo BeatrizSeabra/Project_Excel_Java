@@ -50,8 +50,6 @@ public class LoadExtensionAction extends BaseAction {
             l.setResizable(false);
             l.setLocationRelativeTo(null);
             l.setVisible(true);
-            //eventlist=l.getList();
-
 	}
         
        
