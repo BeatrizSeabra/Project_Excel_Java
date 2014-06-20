@@ -139,6 +139,11 @@ public class SharePanel extends javax.swing.JPanel implements SelectionListener 
 
         ListCellRenderer renderer = new ColorItemListCellRenderer();
         listServers.setCellRenderer(renderer);
+        listServers.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listServersMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(listServers);
 
         btnStop.setText("Stop");
@@ -586,6 +591,10 @@ public class SharePanel extends javax.swing.JPanel implements SelectionListener 
     private void txtCellMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCellMouseDragged
 
     }//GEN-LAST:event_txtCellMouseDragged
+
+    private void listServersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listServersMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_listServersMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnShare;

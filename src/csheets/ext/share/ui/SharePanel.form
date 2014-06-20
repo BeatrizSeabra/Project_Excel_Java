@@ -127,6 +127,9 @@
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
                 <Component class="javax.swing.JList" name="listServers">
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="listServersMouseClicked"/>
+                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JList(modelServer)"/>
                     <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="ListCellRenderer renderer = new ColorItemListCellRenderer();&#xa;listServers.setCellRenderer(renderer);"/>
