@@ -126,7 +126,7 @@ public class SortActionZATest {
             instance.range[0][i] = sT.getSpreadsheet().getCell(0, i);
             instance.range[0][i].setContent(sT.getSpreadsheet().getCell(0, i).getContent());
         }
-        instance.orderContents(0);
+        instance.orderContents(0, 0);
         SortAction expResult = new SortAction(controller);
         expResult.range = new Cell[1][3];
         expResult.range[0][0] = sT.getSpreadsheet().getCell(0, 0);
@@ -153,7 +153,7 @@ public class SortActionZATest {
         }
         int[] col = new int[1];
         col[0] = 1;
-        expResult.add(col);
+        expResult.add(sT.getSpreadsheet().getCell(0, 0).getAddress().getColumn());
         ArrayList result = instance.getCollumns();
         assertEquals(expResult, result);
 
@@ -166,9 +166,7 @@ public class SortActionZATest {
     public void testAskColumn() throws FormulaCompilationException {
         System.out.println("askColumn");
         ArrayList columns = new ArrayList();
-        Object[] col = new String[1];
-        col[0] = "0";
-        columns.add(col.toString());
+        columns.add(sT.getSpreadsheet().getCell(0, 0).getAddress().getColumn());
         String[] abc = {"A"};
         SortAction instance = new SortAction(controller);
         instance.range = new Cell[1][3];
