@@ -14,10 +14,11 @@
  * 
  *
  * * <b>S078d: Design</b><br/>
- *  Para realizar esta user story, temos de criar a classe JDialogSearch, para o Utilizador inserir o padrao e o diretorio, tal como decorreu no issue passado mas desta vez deve dar mais opçoes de pesquisa ao utilizador.<br/>
- *  A utilização de threads será necessária ao longo de todo o issue uma vez que serao necessarios multiplos processos a decorrer ao mesmo tempo. <br/>
+ *  To realize this user story, there is the class JDialogSearchFilesByContent, to the user insert not only the directory but also the content that should be searched in the files.<br/>
+ *  For the realization of this use case, it will be needed the use of threads, not only for the multiple searchesbut also to the user search for a content in file and do this in background.<br/>
  *  <br/>
- * <img src="../../../csheets/userstories/us078/doc-files/US078_design.png"> 
+ * <img src="../../../csheets/userstories/us078/doc-files/US078_design.png">
+ * 
  * <br/>
  * <br/>
  *
