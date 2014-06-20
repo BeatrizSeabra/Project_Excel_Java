@@ -24,7 +24,7 @@
  * 
  * <b>S011c: Coding</b><br/>
  * see:<br/>
- * <a href="../../../csheets/ui/package-summary.html">csheets.ext.loadextensions.ui</a><br/>
+ * <a href="../../../csheets/ui/package-summary.html">csheets.ui</a><br/>
  * <a href="../../../csheets/ext/loadextensions/ui/package-summary.html">csheets.ext.loadextensions.ui</a><br/>
  * <br/>
  * <br/>
@@ -35,11 +35,11 @@
  * <br/>
  * 
  * <b>S011f: Functional Tests</b><br/>
- * To test this user story, the user should follow these steps:
- * 1- run cleansheets;
+ * To test this user story, the user should follow these steps:<br/>
+ * 1- run cleansheets;<br/>
  * 2- click on the Extension menu, go to ExtensionManager. There must appear a menu option containning one option named Load Extensions;<br/>
- * 3- select the .class file of the extensions wanted to be loaded.
- * 4- the new extension's menu will appear at the end of the extensions menu.
+ * 3- select the .class file of the extensions wanted to be loaded.<br/>
+ * 4- the new extension's menu will appear at the end of the extensions menu.<br/>
  * <br/>
  * <br/>
  * @author RafaelChaves
