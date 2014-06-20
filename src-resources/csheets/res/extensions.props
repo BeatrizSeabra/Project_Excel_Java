@@ -31,4 +31,3 @@ csheets.ext.beanshell.BeanShellExtension
 csheets.ext.button.ExtensionButton
 csheets.ext.email.ExtensionEmail
 csheets.ext.macrotomenuitem.ExtensionMacroToMenuItem
-csheets.ext.loadextension.ExtensionLoadExtension
