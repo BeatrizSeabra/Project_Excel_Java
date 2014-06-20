@@ -39,7 +39,13 @@ public class TicTacToe extends Game {
 
     @Override
     public void handleData(byte[] dados) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String file_string = "";
+        for (int i = 0; i < dados.length; i++) {
+            file_string += (char) dados[i];
+        }
+        //if (file_string.charAt(2) == 'J') {                       
+            TicTacToeUI.jButton1.setText("X");
+        //}
     }
     
 }
