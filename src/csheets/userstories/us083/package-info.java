@@ -20,6 +20,14 @@
  * 
  * <b>S083d: Design</b><br/>
  * Usarei as classes já criadas para a US082, que consistiu na criação de uma extensão que permite encontrar outras instâncias do cleansheets na mesma rede local, alterando e ocasionalmente adicionando os métodos das mesmas de forma a comportar a informação requerida para esta US.
+ * Para a resolução do problema, guardarei afinal a informação de cada instância através de uma classe, de modo a facilitar o tratamento da informaçao.
+ * <br/>
+ * <br/>
+ * 
+ * 
+ * <b>S083c:Coding</b><br/>
+ * Classes Servidor, Cliente e FindInstancesUI alteradas: métodos modificados para diferente resolução do problema.
+ * Classes Datagrama e Instance adicionadas  (datagrama para guardar as informaçoes recebidas no datagrama (que pode so ter parte da informaçao de uma instancia; instancias para guardar os dados enviados)
  * <br/>
  * <br/>
  */
