@@ -42,15 +42,12 @@
 * 
 * <b>S066f: Functional Tests</b><br/>
 * 
-<<<<<<< HEAD
 * ***SHARE MÉTODO CLÁSSICO***
 * Antes de tudo, têm de estar abertas duas instancias do cleansheets. 
 * Depois, têm de se preencher celulas e selecionar as que quer partilhar.
-=======
 * ***SHARE METODO CLASSICO***
 * Antes de tudo, teem de estar abertas duas instancias do cleansheets. 
 * Depois, teem de se preencher celulas e selecionar as que quer partilhar.
->>>>>>> b9564f87dfb687a16f2528336885c9e852eb194c
 * Em seguida, ir ao menu extensions e escolher a opcao share e depois server.
 * Vai inserir un nome da partilha, uma porta e uma password para a partilha.
 * Na segunda instancia selecionar as celulas onde quer que a informação apareca e escolher o menu extensions -> share - > client.
