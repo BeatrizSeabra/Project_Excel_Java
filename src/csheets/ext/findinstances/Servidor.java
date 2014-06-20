@@ -29,7 +29,7 @@ public class Servidor {
      */
     public static ArrayList<Instance> Srv() throws IOException {
 
-        //ArrayList with the information of every ip address that respondes
+        
         ArrayList<Instance> instances = new ArrayList();
         ArrayList<Datagrama> datagramas = new ArrayList();
         DatagramSocket socket = new DatagramSocket(9877);
@@ -48,18 +48,18 @@ public class Servidor {
                 InetAddress a = receivePacket.getAddress();
 
                 String conteudo = new String(receiveData, Charset.defaultCharset());
+                System.out.println(conteudo);
                 String[] content = conteudo.split("'");
+                System.out.println(content[0]);
                 int ID = Integer.parseInt(content[0]);
                 int numDatagramas = Integer.parseInt(content[2]);
                 int numDtgr = Integer.parseInt(content[1]);
                 if (numDatagramas == 1) {
                     instances.add(processar(a, ID, content[3]));
-                    
-                    System.out.println("Encontrei um solitário!!!");
+                    timeout = true;
                     
                 } else {
                     
-                    System.out.println("Esta é a parte " +numDtgr+" de "+numDatagramas);
                     
                     String[] partes = new String[numDatagramas];
                     for (Datagrama dtgr : datagramas) {
