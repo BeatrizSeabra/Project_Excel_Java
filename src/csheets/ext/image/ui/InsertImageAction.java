@@ -7,6 +7,7 @@ package csheets.ext.image.ui;
 
 import csheets.CleanSheets;
 import csheets.core.Address;
+import csheets.core.Cell;
 import csheets.ui.Frame;
 import csheets.ui.ctrl.FocusOwnerAction;
 import csheets.ui.ctrl.UIController;
@@ -23,6 +24,9 @@ import javax.swing.JLabel;
 class InsertImageAction extends FocusOwnerAction {
 
     protected UIController uiController;
+    private String largura;
+    private String altura;
+    private String posicao;
 
     public InsertImageAction(UIController uiController) {
         this.uiController = uiController;
@@ -40,8 +44,11 @@ class InsertImageAction extends FocusOwnerAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         BufferedImage image = OpenImage();
-        JLabel imageLabel = new JLabel(new ImageIcon(image));
-        showImage(imageLabel);
+        ImageIcon n = new ImageIcon(image);
+        JLabel imageLabel = new JLabel(n);
+        showImage(imageLabel,n,image);
+        
+
     }
 
     public BufferedImage OpenImage() {
@@ -49,13 +56,14 @@ class InsertImageAction extends FocusOwnerAction {
         return ImageController.OpenImage();
     }
 
-    private void showImage(JLabel imageLabel) {
+    private void showImage(JLabel imageLabel,ImageIcon img,BufferedImage bi) {
         Frame frame = (Frame) focusOwner.getTopLevelAncestor();
         Address i = this.uiController.getActiveCell().getAddress();
-        InsertImage dialog = new InsertImage(frame, false, imageLabel, i);
+        InsertImage dialog = new InsertImage(frame, false, imageLabel, i, img,bi,uiController);
         dialog.setBounds(i.getRow() * 30 + 100, i.getColumn() * 20 + 100, 90, 40);
 
     }
+
 
 //    {
 //        JFileChooser chooser = new JFileChooser();

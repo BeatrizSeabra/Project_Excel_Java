@@ -22,15 +22,15 @@ public class WorkbookEventsFormulaTest {
     }
     
     @Test
-    public static void addFormula() {
+    public void addFormula() {
     
-        String [] formula = new String[5];
+        String [] formulas = new String[5];
         
-        formula[OPEN] = "Abriu folha";
-        formula[CLOSE] = "Fechou folha";
-        formula[SHEETCTEATED] = "Criou Folha";
-        formula[SHEETDELETED] = "Eliminou Folha";
-        formula[SHEETRENAMED] = "Renomeou Folha";
+        formulas[OPEN] = "Abriu folha";
+        formulas[CLOSE] = "Fechou folha";
+        formulas[SHEETCTEATED] = "Criou Folha";
+        formulas[SHEETDELETED] = "Eliminou Folha";
+        formulas[SHEETRENAMED] = "Renomeou Folha";
         
         ArrayList<String> mylist = new ArrayList<>();
         
@@ -44,6 +44,12 @@ public class WorkbookEventsFormulaTest {
         UIController uiController = new UIController(csheets);
         
         uiController.setEvlf(mylist);
+        
+        uiController.setFormula(OPEN, formulas[OPEN]);
+        uiController.setFormula(CLOSE, formulas[CLOSE]);
+        uiController.setFormula(SHEETCTEATED, formulas[SHEETCTEATED]);
+        uiController.setFormula(SHEETDELETED, formulas[SHEETDELETED]);
+        uiController.setFormula(SHEETRENAMED, formulas[SHEETRENAMED]);
         
         uiController.writeLogFileWB("Open");
         uiController.writeLogFileWB("Close");

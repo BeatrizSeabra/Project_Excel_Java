@@ -6,8 +6,26 @@
 package csheets.ext.image.ui;
 
 import csheets.core.Address;
+import csheets.core.Cell;
+import csheets.ui.ctrl.UIController;
+import java.awt.AlphaComposite;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.util.Scanner;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 /**
  *
@@ -15,19 +33,40 @@ import javax.swing.JPanel;
  */
 public class InsertImage extends javax.swing.JDialog {
 
-    private JPanel jPanelImage;
-    
-    public InsertImage(java.awt.Frame parent, boolean modal, JLabel imageLabel, Address img) {
-        super(parent,modal);
-        jPanelImage= new JPanel();
-        getContentPane().add(jPanelImage);
+    private JTextField txtheight, txtwidth, txtposition;
+    private JButton btnOk, btnCancel;
+    private int height, width, row, column;
+    JPanel jPanel2 = new JPanel();
+    JLabel imgLabel = new JLabel();
+    private Cell c;
+    ImageIcon imagem = new ImageIcon();
+    BufferedImage i;
+    private UIController uicont;
+
+    public InsertImage(java.awt.Frame parent, boolean modal, JLabel imageLabel, Address a, ImageIcon img, BufferedImage bi, UIController ui) {
+
+        super(parent, modal);
+        uicont = ui;
+        i = bi;
+        imagem = img;
+        imgLabel = imageLabel;
+        getContentPane().add(jPanel2);
         imageLabel.setOpaque(false);
-        this.setLocation(img.getRow(), img.getColumn());
-        jPanelImage.setLocation(img.getRow(), img.getColumn());
-        jPanelImage.add(imageLabel);
+        imageLabel.setSize(100, 100);
+        this.setLocation(a.getRow(), a.getColumn());
+//        jPanel2.setLocation(a.getRow(), a.getColumn());
+
+//        jLabel1=imageLabel;
+        jPanel2.add(imageLabel);
+        jPanel1 = new JPanel();
+
+        add(jPanel2, BorderLayout.CENTER);
+        add(jPanel1, BorderLayout.SOUTH);
         pack();
         setVisible(true);
         setResizable(true);
+
+        initComponents();
     }
 
     public InsertImage(java.awt.Frame parent, boolean modal) {
@@ -46,24 +85,41 @@ public class InsertImage extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jButton1.setText("EDIT IMAGE");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(166, 166, 166)
-                .addComponent(jLabel1)
-                .addContainerGap(234, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(348, 348, 348)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(167, 167, 167)
+                        .addComponent(jButton1)))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(102, 102, 102)
+                .addGap(157, 157, 157)
                 .addComponent(jLabel1)
-                .addContainerGap(198, Short.MAX_VALUE))
+                .addContainerGap(238, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -79,6 +135,104 @@ public class InsertImage extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        TrataEvento t = new TrataEvento();
+        JFrame jf = new JFrame();
+        JPanel p0 = new JPanel(new BorderLayout());
+        JPanel p1 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JButton b1 = new JButton();
+        b1.setName("Height");
+        b1.setActionCommand("Height");
+        b1.addActionListener(t);
+        b1.setSize(200, 50);
+        b1.setText("Height");
+        p1.add(b1);
+        JPanel p2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JButton b2 = new JButton();
+        b2.setName("Width");
+        b2.setActionCommand("width");
+        b2.addActionListener(t);
+        b2.setSize(200, 50);
+        b2.setText("Width");
+        p2.add(b2);
+        JPanel p3 = new JPanel();
+        JButton b3 = new JButton();
+        b3.setName("Confirm");
+        b3.setActionCommand("confirm");
+        b3.addActionListener(t);
+        b3.setSize(200, 50);
+        b3.setText("Confirm");
+        p3.add(b3);
+        JPanel p4 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JButton b4 = new JButton();
+        b4.setName("Position");
+        b4.setActionCommand("position");
+        b4.addActionListener(t);
+        b4.setSize(200, 50);
+        b4.setText("Position");
+        p4.add(b4);
+        p0.add(p1, BorderLayout.NORTH);
+        p0.add(p2, BorderLayout.CENTER);
+        p0.add(p4, BorderLayout.SOUTH);
+        jf.add(p0, BorderLayout.NORTH);
+        jf.add(p3, BorderLayout.SOUTH);
+        jf.setSize(250, 300);
+        jf.setLocationRelativeTo(null);
+        jf.setResizable(false);
+        jf.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private class TrataEvento implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+            if (e.getActionCommand().equalsIgnoreCase("height")) {
+                String dados = JOptionPane.showInputDialog(null, "Height:", "Edit Image", JOptionPane.QUESTION_MESSAGE);
+                ;
+                height = Integer.parseInt(dados);
+                System.out.println(height);
+            } else if (e.getActionCommand().equalsIgnoreCase("width")) {
+                String dados = JOptionPane.showInputDialog(null, "Width:", "Edit Image", JOptionPane.QUESTION_MESSAGE);
+                width = Integer.parseInt(dados);
+
+                System.out.println(width);
+            } else if (e.getActionCommand().equalsIgnoreCase("position")){
+                String dados = JOptionPane.showInputDialog(null, "Row:", "Edit Image", JOptionPane.QUESTION_MESSAGE);
+                ;
+                row = Integer.parseInt(dados);
+                System.out.println(row);
+                String dados1 = JOptionPane.showInputDialog(null, "Column:", "Edit Image", JOptionPane.QUESTION_MESSAGE);
+                ;
+                column = Integer.parseInt(dados);
+                System.out.println(column);
+                }
+            else if (height == 0 || width == 0) {
+                    JOptionPane.showMessageDialog(null, "ERROR", "Introduce values", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    int type = i.getType();
+                    BufferedImage resizedImage = new BufferedImage(width, height, type);
+                    Graphics2D g = resizedImage.createGraphics();
+                    g.drawImage(i, 0, 0, width, height, null);
+                    g.dispose();
+                    g.setComposite(AlphaComposite.Src);
+                    g.
+                            setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+                    g.
+                            setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+                    g.
+                            setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                    imgLabel.removeAll();
+                    imgLabel = new JLabel(new ImageIcon(resizedImage));
+                    imgLabel.revalidate();
+                    jPanel2.removeAll();
+                    jPanel2.add(imgLabel);
+                    jPanel2.revalidate();
+                    c = uicont.getActiveSpreadsheet().getCell(row, column);
+                    setLocation(c.getAddress().getRow(), c.getAddress().getColumn());
+                }
+            }
+        
+    }
 
     /**
      * @param args the command line arguments
@@ -108,21 +262,23 @@ public class InsertImage extends javax.swing.JDialog {
         //</editor-fold>
 
         /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                InsertImage dialog = new InsertImage(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                InsertImage dialog = new InsertImage(new javax.swing.JFrame(), false);
+//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+//                    @Override
+//                    public void windowClosing(java.awt.event.WindowEvent e) {
+//                        System.exit(0);
+//                    }
+//                });
+//                dialog.setVisible(true);
             }
-        });
-    }
+//        });
+//    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
