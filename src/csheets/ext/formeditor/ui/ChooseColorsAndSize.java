@@ -22,8 +22,9 @@ public class ChooseColorsAndSize extends javax.swing.JFrame {
      */
     private int ChangedLine=0;
     Form selectedForm = new Form();
-   private static String[] ArrayColors = new String[2] ;
+   private static String[] ArrayColors = new String[2];
     private static String[] ArraySizes = new String[2] ;
+    private static String [] error = {"error"};
 
     public ChooseColorsAndSize(Form form) {
         initComponents();
@@ -34,6 +35,7 @@ public class ChooseColorsAndSize extends javax.swing.JFrame {
             jComboBox1.addItem(Colors[i]);
             jComboBox3.addItem(Colors[i]);
         }
+       
          for(int i=0;i<Sizes.length;i++)
         {
             jComboBox2.addItem(Sizes[i]);
@@ -42,7 +44,11 @@ public class ChooseColorsAndSize extends javax.swing.JFrame {
     }
     
     public String[] getColors(){
-        return ArrayColors;
+        if(ArrayColors[0].equals("Red") ||ArrayColors[0].equals("White") ||ArrayColors[0].equals("Green")||ArrayColors[0].equals("Black")||ArrayColors[0].equals("Pink")||ArrayColors[0].equals("Gray"))
+        {
+            return ArrayColors;
+        } 
+        return error;
     }
     
     public String[] getSizes() {
