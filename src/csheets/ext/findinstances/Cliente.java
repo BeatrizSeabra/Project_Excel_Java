@@ -50,14 +50,17 @@ public class Cliente extends Thread {
             if (uiController.getApp().getFile(book) == null) {
                 res += "Untitled " + untitled + ";";
                 untitled++;
+                System.out.println("um untitled found");
             } else {
                 res += uiController.getApp().getFile(book).getName() + ";";
+                System.out.println("ficheiro found");
             }
         }
         res += "|";
         UIExtension[] extensions = uiController.getExtensions();
         for (UIExtension extension : extensions) {
             res += extension.toString() + ";";
+            System.out.println("extensao found");
         }
 
         //retorna lista de workbooks abertos e extensoes
@@ -85,6 +88,7 @@ public class Cliente extends Thread {
                     DatagramPacket sendPacket
                         = new DatagramPacket(dataBlock, dataBlock.length, IPAddress, 9877);
                     socket.send(sendPacket);
+                    System.out.println("enviei um datagrama");
                     n++;
                 }
 
