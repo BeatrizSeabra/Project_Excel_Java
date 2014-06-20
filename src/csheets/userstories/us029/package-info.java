@@ -42,10 +42,15 @@
  * <br/>
  *
  * <b>S029f: Functional Tests</b><br/>
+ * <ul><li> 1. Abrir o programa</li></ul>
+ * <ul><li> 2. Colocar informacao nas celulas</li></ul>
+ * <ul><li> 3. Escolher opcao Extensions, escolher Export PDF </li></ul>
+ * <ul><li> 4. Escolher directorio e nome do ficheiro </li></ul>
+ * <ul><li> 5. Abrir ficheiro </li></ul>
  *
  *
- * Se tentar guardar um documento em branco/sem nada escrito nas celulas, da
- * erro e guarda um ficheiro corrompido com extensao PDF.
+ * Se tentar guardar um documento em branco/sem nada escrito nas celulas, vai ser feito a 
+ * exportacao e vai fazer o pdf limpo com um celula vazia.
  *
  * <br/>
  * <br/>

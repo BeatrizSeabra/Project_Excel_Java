@@ -35,6 +35,16 @@
  * <br/>
  * <br/>
  * 
+ * <b>S072f: Functional Tests</b><br/>
+ *  <ul><li>1. The User choose the menu "Extensions".</li></ul>
+ *  <ul><li>2. Picks the option import TXT.</li></ul>
+ *  <ul><li>3. Choose the pretended file.</li></ul>
+ *  <ul><li>4. Look to the result on de sheet.</li></ul>
+ *  <ul><li>5. After the file is open when the user modifie the file and save it, the changes will automatically to the sheet in the active cell.</li></ul>
+ *  <ul><li>6. The selected file will be the last file that the user select to import, could be changed repeating all the latest steps.</li></ul>
+ * <br/>
+ * <br/>
+ * 
  * @startuml doc-files/us072_design1.png
    actor User
    User -> ImportAction : 
