@@ -102,7 +102,6 @@ public class FindInstancesUI extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             // TODO add your handling code here:
-            //ips=Servidor.Srv();
             instances=Servidor.Srv();
             viewTree=new JScrollPane(makeTree());
         } catch (Exception ex) {
@@ -112,16 +111,7 @@ public class FindInstancesUI extends javax.swing.JFrame {
     
     private JTree makeTree(){
         DefaultMutableTreeNode top=new DefaultMutableTreeNode("Rede");
-        createNodes(top);
-        tree=new JTree(top);
-        return tree;
-    }
-    
-    private void sortInstances(ArrayList<Instance> instances){
         
-    }
-    
-    private void createNodes(DefaultMutableTreeNode top){
         DefaultMutableTreeNode ip=null;
         DefaultMutableTreeNode instance=null;
         DefaultMutableTreeNode workbooks=null;
@@ -129,10 +119,10 @@ public class FindInstancesUI extends javax.swing.JFrame {
         DefaultMutableTreeNode book=null;
         DefaultMutableTreeNode extension=null;
         
-        sortInstances(instances);
+        ArrayList<Instance> insts=sortInstances(instances);
         
         String lastIP="";
-        for (Instance inst : instances) {
+        for (Instance inst : insts) {
             if(!lastIP.equalsIgnoreCase(inst.getIPAddress().getHostAddress())){
                 ip=new DefaultMutableTreeNode(inst.getIPAddress().getHostAddress());
                 top.add(ip);
@@ -154,7 +144,32 @@ public class FindInstancesUI extends javax.swing.JFrame {
                 extensions.add(extension);
             }
         }
+        
+        tree=new JTree(top);
+        return tree;
     }
+    
+    private ArrayList<Instance> sortInstances(ArrayList<Instance> instances){
+        if(instances==null||instances.size()==0)
+            return instances;
+        String min=instances.get(0).getIPAddress().getHostAddress();
+        ArrayList<Instance> ret=new ArrayList();
+        while(instances.size()>0){
+            for (Instance instance : instances) {
+                if(min.compareTo(instance.getIPAddress().getHostAddress())<0){
+                    min=instance.getIPAddress().getHostAddress();
+                }
+            }
+            for (Instance instance : instances) {
+                if(min.compareTo(instance.getIPAddress().getHostAddress())==0){
+                    ret.add(instance);
+                    instances.remove(instance);
+                }
+            }
+        }
+        return ret;
+    }
+    
     
     /**
      * @param args the command line arguments

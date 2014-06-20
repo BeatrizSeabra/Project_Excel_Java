@@ -69,7 +69,7 @@ public class Cliente extends Thread {
         while (running) {
             try {
                 sleep(2000);
-                socket = new DatagramSocket(9877);
+                socket = new DatagramSocket();
                 socket.setBroadcast(true);
                 InetAddress IPAddress = InetAddress.getByName("255.255.255.255");
                 String resp = getInfoString();
