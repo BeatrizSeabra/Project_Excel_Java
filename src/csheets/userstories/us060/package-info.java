@@ -47,7 +47,12 @@
  * <br/>
  * 
  * <b>S060c: Coding</b><br/>
- * 
+ * see:<br/>
+ * <a href="../../../csheets/ext/comments/package-summary.html">csheets.ext.comments</a><br/>
+ * <a href="../../../csheets/ext/comments/ui/package-summary.html">csheets.ext.comments.ui</a><br/>
+ * see packages:<br/>
+ * csheets.ext.macrotomenuitem<br/>
+ * csheets.ext.macrotomenuitem.ui<br/>
  * <br/>
  * <br/>
  * 
@@ -60,7 +65,17 @@
  * <br/>
  * 
  * <b>S0610: Functional Tests</b><br/>
- * 
+ * To test the extend menus with macros functionality, the user should follow these steps:<br/>
+ * 1run cleansheets;<br/>
+ * 2create macros on the menu Extensions and selection the submenu Macro and select option Edit Macro;<br/>
+ * 3after this create the macros that you want to defined;<br/>
+ * 4after create the macros go to the menu Extensions and select the submenu Macro To MenuItem and select option Macro To MenuItem...;<br/>
+ * 5will appear an window to selection the macro, the menu item and extension, that you want to associate the running of the macro on the menu item of cleansheets;<br/>
+ * 6after this click on button OK, to submit the macro association to the menu;<br/>
+ * 7because it was not possible to associate the macros to the existing cleansheets menu options, I create new options on submenu Macro To MenuItem of the menu Extensions, to allow the user to run the specified macros;<br/>
+ * 8to test the running of the macro on the menu item, you must select menu Extensions and selection the submenu Macro To MenuItem and appear the menu associated to the macros defined;<br/>
+ * 9the option menu appear with the words Macro Run: name of the macro associated;<br/>
+ * 10after select this menu item, the macro will run and show the result of the macro on cleansheets workspace.<br/>
  * <br/>
  * <br/>
  * 
