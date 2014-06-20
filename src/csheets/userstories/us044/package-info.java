@@ -62,7 +62,20 @@
  * <br/>
  * 
  * <b>S076f: Functional Tests</b><br/>
- * 
+ * Para testar esta user story, o utilizador deve seguir os passos seguintes:<br/>
+ * 1 Executar o CleanSheets;<br/>
+ * 2 Clicar no menu Extensions onde serao apresentadas as extensoes disponiveis;<br/>
+ * 3 Clicar na extensao Edit Macro, em seguida será apresentada uma janela;<br/>
+ * 4 Nessa janela, o utilizador devera inserir a macro que ira ser validada com a gramatica especifica para Macros;<br/>
+ * 5 O utilizador devera escolher na combobox a macro que deseja executar;<br/>
+ * 6 Apos escolher a Macro devera executar com o butao play;<br/>
+ * O resultado ira aparecer em uma jdialog.<br/>
+ * obs.: para inserir uma gramatica valida devera seguir os eguinte exemplo:<br/>
+ * macro "Nome da macro"{<br/>
+ * 2+2<br/>
+ * A1:=2<br/>
+ * B1:=A1*2<br/>
+ * }<br/>
  * <br/>
  * <br/>
  * 
