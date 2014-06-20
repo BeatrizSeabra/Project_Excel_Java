@@ -3,26 +3,31 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package csheets.ext.networkgame.ui;
 
 import csheets.ext.networkgame.TicTacToe;
+import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author PedroRosário
  */
-public class TicTacToeUI extends javax.swing.JFrame {
+public class TicTacToeUI extends javax.swing.JPanel {
 
     public TicTacToe game;
-    
+
     /**
      * Creates new form TicTacToeUI
+     *
+     * @param game
      */
-
-    public TicTacToeUI(TicTacToe aThis) {
+    public TicTacToeUI(TicTacToe game) {
         initComponents();
-        this.game=game;
+        this.game = game;
     }
 
     /**
@@ -34,8 +39,6 @@ public class TicTacToeUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -46,72 +49,38 @@ public class TicTacToeUI extends javax.swing.JFrame {
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(400, 400));
-
-        jPanel2.setLayout(new java.awt.GridLayout(3, 3));
+        setLayout(new java.awt.GridLayout(3, 3));
 
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1);
-        jPanel2.add(jButton2);
-        jPanel2.add(jButton3);
-
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jButton4);
-        jPanel2.add(jButton5);
-        jPanel2.add(jButton6);
-        jPanel2.add(jButton7);
+        add(jButton1);
+        add(jButton2);
+        add(jButton3);
+        add(jButton4);
+        add(jButton5);
+        add(jButton6);
+        add(jButton7);
 
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton8);
-        jPanel2.add(jButton9);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        pack();
+        add(jButton8);
+        add(jButton9);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        jButton1.setText("X");
+        if (jButton1.getText() != "") {
+            jogada(jButton1);
+        } else {
+            JOptionPane.showMessageDialog(this, null, "Invalid Move", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
@@ -119,7 +88,7 @@ public class TicTacToeUI extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    public static javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -128,7 +97,35 @@ public class TicTacToeUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
+
+    private void jogada(JButton button) {
+        String message = "GM" + "J";
+        button.setText("X");
+        try {
+            game.s.sendData(message.getBytes(), game.address.getHostName(), 7777);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(TicTacToeUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+//        String aux = button.getName();
+//        if (game.isServer) {
+//            button.setText("X");
+//            message += button.getText() + aux.substring(aux.length() - 1);
+//            try {
+//                game.s.sendData(message.getBytes(), game.address.getHostName(), 7777);
+//            } catch (UnknownHostException ex) {
+//                Logger.getLogger(TicTacToeUI.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        } else {
+//            button.setText("O");
+//            message += button.getText() + aux.substring(aux.length() - 1);
+//            try {
+//                game.s.sendData(message.getBytes(), game.address.getHostName(), 7777);
+//            } catch (UnknownHostException ex) {
+//                Logger.getLogger(TicTacToeUI.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+    }
+
 }

@@ -17,6 +17,8 @@ import java.util.List;
  */
 public class TicTacToe extends Game {
 
+    public boolean isServer;
+    
     public TicTacToe(String name, List<Player> players, Server s, InetAddress address) {
         super(name, players, s, address);
     }
@@ -24,20 +26,26 @@ public class TicTacToe extends Game {
 
     @Override
     public void init(boolean isServer) {
-        
+        this.isServer = isServer;
     }
 
     @Override
     public void start() {
         NetworkGameController.mainWindow.dispose();
         NetworkGameController.initJFrame("Tic Tac Toe");
-        NetworkGameController.mainWindow=(new TicTacToeUI(this));
+        NetworkGameController.mainWindow.add(new TicTacToeUI(this));
         NetworkGameController.packJFrame();
     }
 
     @Override
     public void handleData(byte[] dados) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String file_string = "";
+        for (int i = 0; i < dados.length; i++) {
+            file_string += (char) dados[i];
+        }
+        //if (file_string.charAt(2) == 'J') {                       
+            TicTacToeUI.jButton1.setText("X");
+        //}
     }
     
 }
