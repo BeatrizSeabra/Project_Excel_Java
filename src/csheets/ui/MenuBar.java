@@ -146,10 +146,12 @@ public class MenuBar extends JMenuBar {
 		// Creates the extension menus
 		JMenu extensionsMenu = addMenu("Extensions", KeyEvent.VK_X);
                 
+                // adds the the new ExtensionManager oriented Extensions
                 JMenu extensionManagerMenu = new JMenu("Extensions Manager");
                 extensionsMenu.add(extensionManagerMenu);
                 extensionManagerMenu.add(new LoadExtensionAction(uiController, extensionsMenu));
                 extensionManagerMenu.add(actionManager.getAction("extensions"));
+                
 		for (UIExtension extension : uiController.getExtensions()) {
 			JMenu extensionMenu = extension.getMenu();
 			if (extensionMenu != null) {
