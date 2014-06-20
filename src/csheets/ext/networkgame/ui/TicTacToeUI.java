@@ -135,7 +135,7 @@ public class TicTacToeUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        if (jButton1.getText().equals("")) {
+        if (jButton8.getText().equals("")) {
             System.out.println(jButton1.getName());
             jogada(jButton1, "8");
         } else {
@@ -152,7 +152,7 @@ public class TicTacToeUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if (jButton1.getText().equals("")) {
+        if (jButton2.getText().equals("")) {
             System.out.println(jButton1.getName());
             jogada(jButton1, "2");
         } else {
@@ -169,7 +169,7 @@ public class TicTacToeUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if (jButton1.getText().equals("")) {
+        if (jButton3.getText().equals("")) {
             System.out.println(jButton1.getName());
             jogada(jButton1, "3");
         } else {
@@ -186,7 +186,7 @@ public class TicTacToeUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        if (jButton1.getText().equals("")) {
+        if (jButton4.getText().equals("")) {
             System.out.println(jButton1.getName());
             jogada(jButton1, "4");
         } else {
@@ -203,7 +203,7 @@ public class TicTacToeUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        if (jButton1.getText().equals("")) {
+        if (jButton5.getText().equals("")) {
             System.out.println(jButton1.getName());
             jogada(jButton1, "5");
         } else {
@@ -220,7 +220,7 @@ public class TicTacToeUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        if (jButton1.getText().equals("")) {
+        if (jButton6.getText().equals("")) {
             System.out.println(jButton1.getName());
             jogada(jButton1, "6");
         } else {
@@ -237,7 +237,7 @@ public class TicTacToeUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        if (jButton1.getText().equals("")) {
+        if (jButton7.getText().equals("")) {
             System.out.println(jButton1.getName());
             jogada(jButton1, "7");
         } else {
@@ -254,7 +254,7 @@ public class TicTacToeUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        if (jButton1.getText().equals("")) {
+        if (jButton9.getText().equals("")) {
             System.out.println(jButton1.getName());
             jogada(jButton1, "9");
         } else {
