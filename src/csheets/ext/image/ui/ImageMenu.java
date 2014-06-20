@@ -31,7 +31,6 @@ public class ImageMenu extends JMenu {
 
         // Adds Image actions
         add(new InsertImageAction(uiController));
-        add(new EditImageAction(uiController));
 
     }
 

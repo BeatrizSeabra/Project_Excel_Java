@@ -47,7 +47,6 @@ public class FormEditorWindow extends JFrame {
         this.dataList = dataList;
         this.buttonList = new ArrayList<String>();
         this.buttonList = form.getButtonList();
-        // loadForm(form.getnLines(), form.getSelected());
     }
 
     public FormEditorWindow(int nLines, String[] selected) {
@@ -60,13 +59,16 @@ public class FormEditorWindow extends JFrame {
 
     public void loadForm(int nLines, String[] selected, ArrayList<JTextField> dataList, final ArrayList<String> buttonListt, String[] ArrayColors, String[] ArraySizes, int ChangedLine) {
         int cont = 0;
+        int contLabels = 0;
         bc = 0;
         JPanel center = new JPanel();
         JPanel top = new JPanel();
         JLabel nome = new JLabel("Form");
         top.add(nome);
-        final JLabel label1 = new JLabel();
-        final JLabel label2 = new JLabel();
+        JLabel[] labels = new JLabel[nLines * 2];
+        for(int i=0;i<labels.length;i++){
+            labels[i] = new JLabel();
+        }
         final JPanel grid = new JPanel(new GridLayout(nLines + 1, 1));
         for (int i = 0; i < nLines; i++) {
             if (selected[i].equalsIgnoreCase("Text Box/Button")) {
@@ -75,20 +77,24 @@ public class FormEditorWindow extends JFrame {
                 final JButton button = new JButton(buttonListt.get(bc));
 
                 JPanel temp = new JPanel(new FlowLayout(FlowLayout.CENTER));
-                label1.setText("TextBox");
-                temp.add(label1);
+
+                
+               labels[contLabels].setText("TextBox");
+                temp.add(labels[contLabels]);
+                contLabels++;
                 temp.add(textBox);
-                label2.setText("button");
-                temp.add(label2);
+                labels[contLabels].setText("button");
+                temp.add(labels[contLabels]);
+                contLabels++;
                 temp.add(button);
                 cont++;
                 bc++;
                 if (ChangedLine == i) {
-                    if(!ArraySizes[0].equals("Null")){
-                    textBox.setPreferredSize(new Dimension(Integer.parseInt(ArraySizes[0]), Integer.parseInt(ArraySizes[0])));
+                    if (!ArraySizes[0].equals("Null")) {
+                        textBox.setPreferredSize(new Dimension(Integer.parseInt(ArraySizes[0]), Integer.parseInt(ArraySizes[0])));
                     }
-                    if(!ArraySizes[1].equals("Null")){
-                    button.setPreferredSize(new Dimension(Integer.parseInt(ArraySizes[1]), Integer.parseInt(ArraySizes[1])));
+                    if (!ArraySizes[1].equals("Null")) {
+                        button.setPreferredSize(new Dimension(Integer.parseInt(ArraySizes[1]), Integer.parseInt(ArraySizes[1])));
                     }
                     if (ArrayColors[0].equals("Red")) {
                         textBox.setBackground(Color.red);
@@ -126,26 +132,28 @@ public class FormEditorWindow extends JFrame {
 
             } else if (selected[i].equalsIgnoreCase("Text Box/Edit Box")) {
                 final JTextField textBox = new JTextField(dataList.get(cont + 1).getText());
-                textBox.setPreferredSize(new Dimension(Integer.parseInt(ArraySizes[0]), Integer.parseInt(ArraySizes[0])));
                 textBox.setEditable(false);
                 final JTextField editBox = new JTextField(dataList.get(cont).getText());
-                editBox.setPreferredSize(new Dimension(Integer.parseInt(ArraySizes[1]), Integer.parseInt(ArraySizes[1])));
                 JPanel temp = new JPanel(new FlowLayout(FlowLayout.CENTER));
-                label1.setText("TextBox");
-                temp.add(label1);
+                System.out.println("merda");
+                labels[contLabels].setText("TextBox");
+                System.out.println("caga");
+                temp.add(labels[contLabels]);
+                contLabels++;
                 temp.add(textBox);
-                label2.setText("EditBox");
-                temp.add(label1);
+                labels[contLabels].setText("EditBox");
+                temp.add(labels[contLabels]);
+                contLabels++;
                 temp.add(editBox);
 
                 if (ChangedLine == i) {
-                             if(!ArraySizes[0].equals("Null")){
-                    textBox.setPreferredSize(new Dimension(Integer.parseInt(ArraySizes[0]), Integer.parseInt(ArraySizes[0])));
+                    if (!ArraySizes[0].equals("Null")) {
+                        textBox.setPreferredSize(new Dimension(Integer.parseInt(ArraySizes[0]), Integer.parseInt(ArraySizes[0])));
                     }
-                    if(!ArraySizes[1].equals("Null")){
-                    editBox.setPreferredSize(new Dimension(Integer.parseInt(ArraySizes[1]), Integer.parseInt(ArraySizes[1])));
+                    if (!ArraySizes[1].equals("Null")) {
+                        editBox.setPreferredSize(new Dimension(Integer.parseInt(ArraySizes[1]), Integer.parseInt(ArraySizes[1])));
                     }
-  
+
                     if (ArrayColors[0].equals("Red")) {
                         textBox.setBackground(Color.red);
                     } else if (ArrayColors[0].equals("Yellow")) {
@@ -182,28 +190,25 @@ public class FormEditorWindow extends JFrame {
                 grid.add(temp);
             } else {
                 final JTextField editBox = new JTextField(dataList.get(cont).getText());
-                editBox.setPreferredSize(new Dimension(Integer.parseInt(ArraySizes[0]), Integer.parseInt(ArraySizes[0])));
                 JButton button = new JButton(buttonListt.get(bc));
                 bc++;
                 JPanel temp = new JPanel(new FlowLayout(FlowLayout.CENTER));
-                label1.setText("EditBox");
-                temp.add(label1);
+                labels[contLabels].setText("editBox");
+                temp.add(labels[contLabels]);
+                contLabels++;
                 temp.add(editBox);
-                label2.setText("button");
-                temp.add(label2);
+                labels[contLabels].setText("button");
+                temp.add(labels[contLabels]);
+                contLabels++;
                 temp.add(button);
                 cont++;
                 if (ChangedLine == i) {
-                     label1.setText("EditBox");
-                temp.add(label1);
-                temp.add(editBox);
-                label2.setText("button");
-                temp.add(label2);
-                             if(!ArraySizes[0].equals("Null")){
-                    editBox.setPreferredSize(new Dimension(Integer.parseInt(ArraySizes[0]), Integer.parseInt(ArraySizes[0])));
+
+                    if (!ArraySizes[0].equals("Null")) {
+                        editBox.setPreferredSize(new Dimension(Integer.parseInt(ArraySizes[0]), Integer.parseInt(ArraySizes[0])));
                     }
-                    if(!ArraySizes[1].equals("Null")){
-                    button.setPreferredSize(new Dimension(Integer.parseInt(ArraySizes[1]), Integer.parseInt(ArraySizes[1])));
+                    if (!ArraySizes[1].equals("Null")) {
+                        button.setPreferredSize(new Dimension(Integer.parseInt(ArraySizes[1]), Integer.parseInt(ArraySizes[1])));
                     }
 
                     if (ArrayColors[0].equals("Red")) {
@@ -249,6 +254,85 @@ public class FormEditorWindow extends JFrame {
         this.setLocationRelativeTo(null);
     }
 
+    public void loadForm(int nLines, String[] selected, ArrayList<JTextField> dataList, final ArrayList<String> buttonListt) {
+        int cont = 0;
+        int contLabels = 0;
+        bc = 0;
+        JPanel center = new JPanel();
+        JPanel top = new JPanel();
+        JLabel nome = new JLabel("Form");
+        top.add(nome);
+        JLabel[] labels = new JLabel[nLines * 2];
+        for(int i=0;i<labels.length;i++){
+            labels[i] = new JLabel();
+        }
+        final JPanel grid = new JPanel(new GridLayout(nLines + 1, 1));
+        for (int i = 0; i < nLines; i++) {
+            if (selected[i].equalsIgnoreCase("Text Box/Button")) {
+                final JTextField textBox = new JTextField(dataList.get(i).getText());
+                textBox.setEditable(false);
+                final JButton button = new JButton(buttonListt.get(bc));
+
+                JPanel temp = new JPanel(new FlowLayout(FlowLayout.CENTER));
+
+                
+               labels[contLabels].setText("TextBox");
+                temp.add(labels[contLabels]);
+                contLabels++;
+                temp.add(textBox);
+                labels[contLabels].setText("button");
+                temp.add(labels[contLabels]);
+                contLabels++;
+                temp.add(button);
+                cont++;
+                bc++;
+               
+                grid.add(temp);
+
+            } else if (selected[i].equalsIgnoreCase("Text Box/Edit Box")) {
+                final JTextField textBox = new JTextField(dataList.get(cont + 1).getText());
+                textBox.setEditable(false);
+                final JTextField editBox = new JTextField(dataList.get(cont).getText());
+                JPanel temp = new JPanel(new FlowLayout(FlowLayout.CENTER));
+  
+                temp.add(labels[contLabels]);
+                contLabels++;
+                temp.add(textBox);
+                labels[contLabels].setText("EditBox");
+                temp.add(labels[contLabels]);
+                contLabels++;
+                temp.add(editBox);
+
+              
+                    
+                grid.add(temp);
+            } else {
+                final JTextField editBox = new JTextField(dataList.get(cont).getText());
+                JButton button = new JButton(buttonListt.get(bc));
+                bc++;
+                JPanel temp = new JPanel(new FlowLayout(FlowLayout.CENTER));
+                labels[contLabels].setText("editBox");
+                temp.add(labels[contLabels]);
+                contLabels++;
+                temp.add(editBox);
+                labels[contLabels].setText("button");
+                temp.add(labels[contLabels]);
+                contLabels++;
+                temp.add(button);
+                cont++;
+                
+                grid.add(temp);
+            }
+            center.add(grid);
+        }
+        this.add(grid);
+        this.pack();
+        this.setVisible(true);
+        this.setResizable(true);
+        this.setLocationRelativeTo(null);
+    }
+
+    
     public void newForm(int nLines, String[] selected) {
         name = JOptionPane.showInputDialog("Name:");
         int cont = 0;
@@ -257,7 +341,7 @@ public class FormEditorWindow extends JFrame {
         this.add(bot, BorderLayout.SOUTH);
         JButton create = new JButton("Create");
         bot.add(create);
-        
+
         final JPanel grid = new JPanel(new GridLayout(nLines + 1, 1));
         for (int i = 0; i < nLines; i++) {
 
@@ -269,15 +353,11 @@ public class FormEditorWindow extends JFrame {
         this.setVisible(true);
         this.setResizable(true);
         Form f = new Form(name, nLines, selected, buttonList, dataList);
-        for(int i=0;i<buttonList.size();i++){
-            System.out.println(buttonList.get(i));
-        }
-        System.out.println(buttonList.size());
         ArrayForms.add(f);
         bot.add(create);
         create.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (validButtons()) {
+                if (validTextFields()) {
 
                     JOptionPane.showMessageDialog(null, "The Form has been created");
                     dispose();
@@ -296,16 +376,8 @@ public class FormEditorWindow extends JFrame {
         }
         return true;
     }
-    
-       public boolean validButtons() {
-        for (String item : buttonList) {
-            System.out.println(item.toString());
-            if (item.equals("") || item.equals("add text...")) {
-                return false;
-            }
-        }
-        return true;
-    }
+
+ 
 
     public void ChooseComponents(String selected, int cont, JPanel grid) {
         if (selected.equalsIgnoreCase("Text Box/Button")) {
@@ -325,7 +397,7 @@ public class FormEditorWindow extends JFrame {
 //                    if(button.getText().equals("add text...")){
 //                     buttonList.add(bc,nameButton);
 //                    }else {
-                    buttonList.add(bc, nameButton);        
+                    buttonList.add(bc, nameButton);
                     bc++;
                 }
             });

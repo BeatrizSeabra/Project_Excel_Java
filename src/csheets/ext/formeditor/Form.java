@@ -18,6 +18,7 @@ public class Form {
     private  String[] selected;
     private  ArrayList<String> buttonList;
     private  ArrayList<JTextField> dataList;
+    private boolean color;
     
     public Form(){ 
     }
@@ -25,6 +26,7 @@ public class Form {
     public Form(int nLines, String[] selected){
         this.nLines = nLines;
         this.selected = selected;
+        this.color = false;
     }
       public Form(String name,int nLines, String[] selected,ArrayList<String> buttonList,ArrayList<JTextField> dataList){
         this.name = name;
@@ -32,6 +34,7 @@ public class Form {
         this.selected = selected;
         this.buttonList = buttonList;
         this.dataList = dataList;
+        this.color = color;
     }
      public  ArrayList<JTextField> getDataList() {
         return dataList;
@@ -40,6 +43,14 @@ public class Form {
 
     public void setDataList(ArrayList<JTextField> aDataList) {
         dataList = aDataList;
+    }
+    
+    public void setColor(boolean color){
+        this.color = color;
+    }
+    
+    public boolean getColor(){
+        return color;
     }
     
     public int getnLines(){

@@ -18,10 +18,12 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import org.antlr.runtime.RecognitionException;
 
 
 /**
@@ -55,12 +57,37 @@ public class WindowMacroToMenuItem extends javax.swing.JFrame {
     private MacroToMenuItem macroToMenuItem;
 
     /**
-     * Creates new form WindowMacroToMenu
+     * Creates new form WindowMacroToMenu, an the associated objects.
      * @param uic
      */
     public WindowMacroToMenuItem(UIController uic) {
         uiController = uic;
         initComponents();
+        try 
+        {            
+            arrayMacros = uiController.getActiveWorkbook().getMacros();
+            csheets.ui.Frame frame = new csheets.ui.Frame(app);
+            for (Macro macro : arrayMacros) {
+                try {
+                    CbMacroRun.addItem(macro.getName());
+                } catch (FormulaCompilationException ex) {
+                    Logger.getLogger(WindowMacroToMenuItem.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            getMenuItemsOfApplication(frame.getJMenuBar());
+            for (JMenuItem jMenuItem : arrayMenuItem) {
+                CbMenuItem.addItem(jMenuItem.getText());
+            }
+            CbMacroRun.setSelectedIndex(-1);
+            CbMenuItem.setSelectedIndex(-1);
+        } 
+        catch (NullPointerException exception)
+        {
+            JOptionPane.showMessageDialog(null, "There are no macros created on the application!"
+                    + "\nYou must create macros to run and associate with menu option."
+                    ,"No Macros Created",JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+        }
     }
 
     /**
@@ -82,11 +109,6 @@ public class WindowMacroToMenuItem extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Extend Menus with Macros");
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                formWindowActivated(evt);
-            }
-        });
 
         jLabel1.setText("Select Macro to run:");
 
@@ -154,82 +176,67 @@ public class WindowMacroToMenuItem extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
-       try {
+       try
+       {
            if (CbMacroRun.getSelectedIndex() != -1 && CbMenuItem.getSelectedIndex() != -1 &&
                CbExtensionMenuItem.getSelectedIndex() != -1)
-       {
-           String macroName2 = (String)CbMacroRun.getSelectedItem();
-           for (Macro macro : arrayMacros) {
-               if (macroName2.equalsIgnoreCase(macro.getName()))
+           {               
+               String macroName2 = (String)CbMacroRun.getSelectedItem();
+               for (Macro macro : arrayMacros) 
                {
-                   //Macro m = macro;
-                   macroToMenuItem = new MacroToMenuItem(macro);                   
-               }
-           }
-           String menuItemName = (String)CbMenuItem.getSelectedItem();
-           for (JMenuItem obj : arrayMenuItem) {
-               if (menuItemName.equalsIgnoreCase(obj.getText()))
-               {
-                   //Macro m = macro;
-                   macroToMenuItem.setMenuItem(obj);
-                   //macroToMenuItem = new MacroToMenuItem(macro);                   
-               }
-           }
-           macroToMenuItem.setExtendMenuItem((String)CbExtensionMenuItem.getSelectedItem());
-           //final Macro m = (Macro)CbMacroRun.getSelectedItem();
-           String nameMacro="";
-           //try {
-               nameMacro = macroToMenuItem.getMacro().getName();
-           
-           
-           /////JMenuItem mi = (JMenuItem)CbMenuItem.getSelectedItem();
-           /////String str = (String)CbExtensionMenuItem.getSelectedItem();
-           //try {
-               //JOptionPane.showMessageDialog(null, m.getName());
-           //} catch (FormulaCompilationException ex) {
-           //    Logger.getLogger(WindowMacroToMenuItem.class.getName()).log(Level.SEVERE, null, ex);
-           //}
-           //JOptionPane.showMessageDialog(null, mi.getText());
-           //JOptionPane.showMessageDialog(null, str);
-           //macroToMenuItem = new MacroToMenuItem(m,mi,str);
-           UIExtension listExtension[] = uiController.getExtensions();
-           for (UIExtension uiExtension : listExtension)
-           {
-               if (uiExtension instanceof UIExtensionMacroToMenuItem) 
-               {
-                   JMenuItem itemMenu = new JMenuItem("Run Macro: "+nameMacro);
-                   itemMenu.setEnabled(true);
-                   ActionListener actionListener = new ActionListener() 
+                   if (macroName2.equalsIgnoreCase(macro.getName()))
                    {
-                       @Override
-                       public void actionPerformed(ActionEvent e) 
-                       {                           
-                           try 
-                           {
-                               macroToMenuItem.getMacro().compiler();
-                               macroToMenuItem.getMacro().results();
-                               //uiController.getActiveSpreadsheet().getCell(0, 0).setContent("1");
-                           } catch (Exception ex) {
-                               JOptionPane.showMessageDialog(null, ex.getMessage());
-                           }
-                       }
-                   };
-                   itemMenu.addActionListener(actionListener);
-                   uiExtension.getMenu().add(itemMenu);                    
+                       macroToMenuItem = new MacroToMenuItem(macro);                   
+                   }
                }
+               String menuItemName = (String)CbMenuItem.getSelectedItem();
+               for (JMenuItem obj : arrayMenuItem) 
+               {
+                   if (menuItemName.equalsIgnoreCase(obj.getText()))
+                   {
+                       macroToMenuItem.setMenuItem(obj);
+                   }
+               }
+               macroToMenuItem.setExtendMenuItem((String)CbExtensionMenuItem.getSelectedItem());
+               UIExtension listExtension[] = uiController.getExtensions();
+               for (UIExtension uiExtension : listExtension)
+               {
+                   if (uiExtension instanceof UIExtensionMacroToMenuItem) 
+                   {
+                       JMenuItem itemMenu = new JMenuItem("Run Macro: "+macroToMenuItem.getMacro().getName());
+                       itemMenu.setEnabled(true);
+                       ActionListener actionListener = new ActionListener() 
+                       {
+                           @Override
+                           public void actionPerformed(ActionEvent e) 
+                           {                           
+                               try 
+                               {                                   
+                                   macroToMenuItem.getMacro().compiler();
+                                   JDialog dialog = new JOptionPane("Result:\n" + macroToMenuItem.getMacro().results()).createDialog(null, "Result");
+                                   dialog.setAlwaysOnTop(true);
+                                   dialog.setVisible(true);
+                               } catch (Exception ex) {
+                                   JOptionPane.showMessageDialog(null, ex.getMessage());
+                               }
+                           }
+                       };
+                       itemMenu.addActionListener(actionListener);
+                       uiExtension.getMenu().add(itemMenu);                    
+                   }
+               }
+               JOptionPane.showMessageDialog(null, "Macro associated with menu successfully!",
+                       "Macro Associated",JOptionPane.INFORMATION_MESSAGE);
+               dispose();
+           }    
+           else
+           {
+               JOptionPane.showMessageDialog(null, "You must selection all fields to create the macro "
+                       + "associate with menu!","Empty Selection Field",JOptionPane.INFORMATION_MESSAGE);
            }
-           JOptionPane.showMessageDialog(null, "Macro associated with menu successfully!",
-                   "Macro Associated",JOptionPane.INFORMATION_MESSAGE);
-           dispose();
-       }    
-       else
-       {
-           JOptionPane.showMessageDialog(null, "You must selection all fields to create the macro "
-                   + "associate with menu!","Empty Selection Field",JOptionPane.INFORMATION_MESSAGE);
+       } catch (FormulaCompilationException ex) {
+            Logger.getLogger(WindowMacroToMenuItem.class.getName()).log(Level.SEVERE, null, ex);
        }
-        } catch (FormulaCompilationException ex) {
-               Logger.getLogger(WindowMacroToMenuItem.class.getName()).log(Level.SEVERE, null, ex);
-           }
     }//GEN-LAST:event_btnOKActionPerformed
     
     /**
@@ -261,41 +268,6 @@ public class WindowMacroToMenuItem extends javax.swing.JFrame {
             }
         }      
    } 
-
-    /**
-     * Provide the action of the activated of the frame of this option, to execute
-     * @param evt 
-     */
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        try 
-        {            
-            arrayMacros = uiController.getActiveWorkbook().getMacros();
-            csheets.ui.Frame frame = new csheets.ui.Frame(app);
-            for (Macro macro : arrayMacros) {
-                try {
-                    CbMacroRun.addItem(macro.getName());
-                } catch (FormulaCompilationException ex) {
-                    Logger.getLogger(WindowMacroToMenuItem.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            getMenuItemsOfApplication(frame.getJMenuBar());
-            for (JMenuItem jMenuItem : arrayMenuItem) {
-                CbMenuItem.addItem(jMenuItem.getText());
-            }
-            CbMacroRun.setSelectedIndex(-1);
-            CbMenuItem.setSelectedIndex(-1);
-        } 
-        catch (NullPointerException exception)
-        {
-            JOptionPane.showMessageDialog(null, "There are no macros created on the application!"
-                    + "\nYou must create macros to run and associate with menu option."
-                    ,"No Macros Created",JOptionPane.INFORMATION_MESSAGE);
-            dispose();
-        }
-//        catch (FormulaCompilationException ex) {
-//            Logger.getLogger(WindowMacroToMenuItem.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments

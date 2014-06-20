@@ -3,26 +3,31 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package csheets.ext.networkgame.ui;
 
 import csheets.ext.networkgame.TicTacToe;
+import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author PedroRosário
  */
-public class TicTacToeUI extends javax.swing.JFrame {
+public class TicTacToeUI extends javax.swing.JPanel {
 
     public TicTacToe game;
-    
+
     /**
      * Creates new form TicTacToeUI
+     *
+     * @param game
      */
-
-    public TicTacToeUI(TicTacToe aThis) {
+    public TicTacToeUI(TicTacToe game) {
         initComponents();
-        this.game=game;
+        this.game = game;
     }
 
     /**
@@ -34,8 +39,6 @@ public class TicTacToeUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -46,89 +49,270 @@ public class TicTacToeUI extends javax.swing.JFrame {
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(400, 400));
-
-        jPanel2.setLayout(new java.awt.GridLayout(3, 3));
+        setLayout(new java.awt.GridLayout(3, 3));
 
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1);
-        jPanel2.add(jButton2);
-        jPanel2.add(jButton3);
+        add(jButton1);
+
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        add(jButton2);
+
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        add(jButton3);
 
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton4);
-        jPanel2.add(jButton5);
-        jPanel2.add(jButton6);
-        jPanel2.add(jButton7);
+        add(jButton4);
+
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        add(jButton5);
+
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        add(jButton6);
+
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        add(jButton7);
 
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton8);
-        jPanel2.add(jButton9);
+        add(jButton8);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        pack();
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+        add(jButton9);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        jButton1.setText("X");
+
+        if (jButton1.getText().equals("")) {
+            jogada(jButton1, "1");
+        } else {
+            JOptionPane.showMessageDialog(this, null, "Invalid Move", JOptionPane.ERROR_MESSAGE);
+        }
+        if (hasWinner()) {
+            String message = "GM" + "W" + jButton1.getText();
+            try {
+                game.s.sendData(message.getBytes(), game.address.getHostName(), 7777);
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(TicTacToeUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        if (jButton8.getText().equals("")) {
+            jogada(jButton8, "8");
+        } else {
+            JOptionPane.showMessageDialog(this, null, "Invalid Move", JOptionPane.ERROR_MESSAGE);
+        }
+        if (hasWinner()) {
+            String message = "GM" + "W" + jButton8.getText();
+            try {
+                game.s.sendData(message.getBytes(), game.address.getHostName(), 7777);
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(TicTacToeUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if (jButton2.getText().equals("")) {
+            jogada(jButton2, "2");
+        } else {
+            JOptionPane.showMessageDialog(this, null, "Invalid Move", JOptionPane.ERROR_MESSAGE);
+        }
+        if (hasWinner()) {
+            String message = "GM" + "W" + jButton2.getText();
+            try {
+                game.s.sendData(message.getBytes(), game.address.getHostName(), 7777);
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(TicTacToeUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        if (jButton3.getText().equals("")) {;
+            jogada(jButton3, "3");
+        } else {
+            JOptionPane.showMessageDialog(this, null, "Invalid Move", JOptionPane.ERROR_MESSAGE);
+        }
+        if (hasWinner()) {
+            String message = "GM" + "W" + jButton3.getText();
+            try {
+                game.s.sendData(message.getBytes(), game.address.getHostName(), 7777);
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(TicTacToeUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        if (jButton4.getText().equals("")) {
+            jogada(jButton4, "4");
+        } else {
+            JOptionPane.showMessageDialog(this, null, "Invalid Move", JOptionPane.ERROR_MESSAGE);
+        }
+        if (hasWinner()) {
+            String message = "GM" + "W" + jButton4.getText();
+            try {
+                game.s.sendData(message.getBytes(), game.address.getHostName(), 7777);
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(TicTacToeUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        if (jButton5.getText().equals("")) {
+            jogada(jButton5, "5");
+        } else {
+            JOptionPane.showMessageDialog(this, null, "Invalid Move", JOptionPane.ERROR_MESSAGE);
+        }
+        if (hasWinner()) {
+            String message = "GM" + "W" + jButton5.getText();
+            try {
+                game.s.sendData(message.getBytes(), game.address.getHostName(), 7777);
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(TicTacToeUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        if (jButton6.getText().equals("")) {
+            jogada(jButton6, "6");
+        } else {
+            JOptionPane.showMessageDialog(this, null, "Invalid Move", JOptionPane.ERROR_MESSAGE);
+        }
+        if (hasWinner()) {
+            String message = "GM" + "W" + jButton6.getText();
+            try {
+                game.s.sendData(message.getBytes(), game.address.getHostName(), 7777);
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(TicTacToeUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        if (jButton7.getText().equals("")) {
+            jogada(jButton7, "7");
+        } else {
+            JOptionPane.showMessageDialog(this, null, "Invalid Move", JOptionPane.ERROR_MESSAGE);
+        }
+        if (hasWinner()) {
+            String message = "GM" + "W" + jButton7.getText();
+            try {
+                game.s.sendData(message.getBytes(), game.address.getHostName(), 7777);
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(TicTacToeUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        if (jButton9.getText().equals("")) {
+            jogada(jButton9, "9");
+        } else {
+            JOptionPane.showMessageDialog(this, null, "Invalid Move", JOptionPane.ERROR_MESSAGE);
+        }
+        if (hasWinner()) {
+            String message = "GM" + "W" + jButton9.getText();
+            try {
+                game.s.sendData(message.getBytes(), game.address.getHostName(), 7777);
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(TicTacToeUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jButton9ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    public static javax.swing.JButton jButton1;
+    public static javax.swing.JButton jButton2;
+    public static javax.swing.JButton jButton3;
+    public static javax.swing.JButton jButton4;
+    public static javax.swing.JButton jButton5;
+    public static javax.swing.JButton jButton6;
+    public static javax.swing.JButton jButton7;
+    public static javax.swing.JButton jButton8;
+    public static javax.swing.JButton jButton9;
     // End of variables declaration//GEN-END:variables
+
+    private void jogada(JButton button, String c) {
+        String message = "GM";
+        try {
+            game.s.sendData(message.getBytes(), game.address.getHostName(), 7777);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(TicTacToeUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (game.isServer) {
+            button.setText("X");
+            message += button.getText() + c;
+            try {
+                game.s.sendData(message.getBytes(), game.address.getHostName(), 7777);
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(TicTacToeUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            button.setText("O");
+            message += button.getText() + c;
+            try {
+                game.s.sendData(message.getBytes(), game.address.getHostName(), 7777);
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(TicTacToeUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    private boolean hasWinner() {
+        if (!jButton1.getText().equals("") && jButton1.getText().equals(jButton2.getText()) && jButton1.getText().equals(jButton3.getText())
+                || !jButton1.getText().equals("") && jButton1.getText().equals(jButton4.getText()) && jButton1.getText().equals(jButton7.getText())
+                || !jButton1.getText().equals("") && jButton1.getText().equals(jButton5.getText()) && jButton1.getText().equals(jButton9.getText())
+                || !jButton4.getText().equals("") && jButton4.getText().equals(jButton5.getText()) && jButton4.getText().equals(jButton6.getText())
+                || !jButton7.getText().equals("") && jButton7.getText().equals(jButton8.getText()) && jButton7.getText().equals(jButton9.getText())
+                || !jButton2.getText().equals("") && jButton2.getText().equals(jButton5.getText()) && jButton2.getText().equals(jButton8.getText())
+                || !jButton3.getText().equals("") && jButton3.getText().equals(jButton6.getText()) && jButton3.getText().equals(jButton9.getText())
+                || !jButton3.getText().equals("") && jButton3.getText().equals(jButton5.getText()) && jButton3.getText().equals(jButton7.getText())) {
+            return true;
+        }
+        return false;
+    }
+
 }

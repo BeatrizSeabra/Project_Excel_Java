@@ -9,7 +9,8 @@
  * <br/>
  *
  * <b>S078a: Analysis</b><br/>
- * For this use case, the previous issue code used, will be reutilize to allow the user to do multiple searches, and by just setting a word, all the files that have this parameter shall be displayed.
+ * For this use case, the previous issue code used, will be reutilize to allow the user to do multiple searches, and by just setting a word, all the files that have this parameter shall be displayed.<br/>
+ * The function to search by content is intended to be a new option unde the Search Menu.<br/>
  * <br/>
  * 
  *
@@ -18,7 +19,7 @@
  *  For the realization of this use case, it will be needed the use of threads, not only for the multiple searchesbut also to the user search for a content in file and do this in background.<br/>
  *  <br/>
  * <img src="../../../csheets/userstories/us078/doc-files/US078_design.png">
- * 
+ * <img src="../../../csheets/userstories/us078/doc-files/US078_design02.png">
  * <br/>
  * <br/>
  *
@@ -26,6 +27,7 @@
  *
  *<b>S07c: Coding</b><br/>
  * see:<br/>
+ * It's is important to refer that the changes done to the last US077 is the clear list,so basically now the thread doesn't clear the search when the user select a new one<br/>
  * <a href="../../../csheets/ext/searchFilesBackground/package-summary.html">csheets.ext.searchFilesBackground</a><br/>
  * <a href="../../../csheets/ext/searchFilesBackground/ui/package-summary.html">csheets.ext.searchFilesBackground.ui</a><br/>
  * <a href="../../../csheets/ext/searchFilesByContent/package-summary.html">csheets.ext.searchFilesByContent</a><br/>
@@ -63,7 +65,9 @@
  * 7.Confirm the operation with the OK button. <br/>
  * 8.After the confirmation, a MessageDialog will appear to inform that the search has begin and another MessageDialog to inform when it ends. <br/>
  * The files from the search will be listed on the sideBar. <br/>
- * <br/>
+ * 
+ * To turn the User Interface more friendly, it was added the options of "New Search" and "Clear" this buttons appear right beside with the search result list.<br/>
+ *<br/>
  * <br/>
  *
  *
