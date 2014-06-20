@@ -37,7 +37,7 @@ import javax.swing.JToolBar;
 
 import csheets.CleanSheets;
 import csheets.core.Workbook;
-import csheets.ui.ctrl.ExtensionsManagerAction;
+import csheets.ext.ManagerExtension.ExtensionsManagerAction;
 import csheets.ui.ctrl.AboutAction;
 import csheets.ui.ctrl.ActionManager;
 import csheets.ui.ctrl.AddSpreadsheetAction;
@@ -136,7 +136,6 @@ public class Frame extends JFrame implements SelectionListener {
 		actionManager.registerAction("removerow", new RemoveRowAction());
 
                 // Registers Extensions Manager in "Extensions" MenuBar
-                actionManager.registerAction("extensions", new ExtensionsManagerAction(app, uiController));
                 
 		// Registers help actions
 		actionManager.registerAction("help", new HelpAction());
