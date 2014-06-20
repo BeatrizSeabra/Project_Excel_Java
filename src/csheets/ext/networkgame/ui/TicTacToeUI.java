@@ -119,7 +119,6 @@ public class TicTacToeUI extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         if (jButton1.getText().equals("")) {
-            System.out.println(jButton1.getName());
             jogada(jButton1, "1");
         } else {
             JOptionPane.showMessageDialog(this, null, "Invalid Move", JOptionPane.ERROR_MESSAGE);
@@ -136,8 +135,7 @@ public class TicTacToeUI extends javax.swing.JPanel {
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         if (jButton8.getText().equals("")) {
-            System.out.println(jButton1.getName());
-            jogada(jButton1, "8");
+            jogada(jButton8, "8");
         } else {
             JOptionPane.showMessageDialog(this, null, "Invalid Move", JOptionPane.ERROR_MESSAGE);
         }
@@ -153,8 +151,7 @@ public class TicTacToeUI extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (jButton2.getText().equals("")) {
-            System.out.println(jButton1.getName());
-            jogada(jButton1, "2");
+            jogada(jButton2, "2");
         } else {
             JOptionPane.showMessageDialog(this, null, "Invalid Move", JOptionPane.ERROR_MESSAGE);
         }
@@ -169,9 +166,8 @@ public class TicTacToeUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if (jButton3.getText().equals("")) {
-            System.out.println(jButton1.getName());
-            jogada(jButton1, "3");
+        if (jButton3.getText().equals("")) {;
+            jogada(jButton3, "3");
         } else {
             JOptionPane.showMessageDialog(this, null, "Invalid Move", JOptionPane.ERROR_MESSAGE);
         }
@@ -187,8 +183,7 @@ public class TicTacToeUI extends javax.swing.JPanel {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         if (jButton4.getText().equals("")) {
-            System.out.println(jButton1.getName());
-            jogada(jButton1, "4");
+            jogada(jButton4, "4");
         } else {
             JOptionPane.showMessageDialog(this, null, "Invalid Move", JOptionPane.ERROR_MESSAGE);
         }
@@ -204,8 +199,7 @@ public class TicTacToeUI extends javax.swing.JPanel {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         if (jButton5.getText().equals("")) {
-            System.out.println(jButton1.getName());
-            jogada(jButton1, "5");
+            jogada(jButton5, "5");
         } else {
             JOptionPane.showMessageDialog(this, null, "Invalid Move", JOptionPane.ERROR_MESSAGE);
         }
@@ -221,8 +215,7 @@ public class TicTacToeUI extends javax.swing.JPanel {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         if (jButton6.getText().equals("")) {
-            System.out.println(jButton1.getName());
-            jogada(jButton1, "6");
+            jogada(jButton6, "6");
         } else {
             JOptionPane.showMessageDialog(this, null, "Invalid Move", JOptionPane.ERROR_MESSAGE);
         }
@@ -238,8 +231,7 @@ public class TicTacToeUI extends javax.swing.JPanel {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         if (jButton7.getText().equals("")) {
-            System.out.println(jButton1.getName());
-            jogada(jButton1, "7");
+            jogada(jButton7, "7");
         } else {
             JOptionPane.showMessageDialog(this, null, "Invalid Move", JOptionPane.ERROR_MESSAGE);
         }
@@ -255,8 +247,7 @@ public class TicTacToeUI extends javax.swing.JPanel {
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         if (jButton9.getText().equals("")) {
-            System.out.println(jButton1.getName());
-            jogada(jButton1, "9");
+            jogada(jButton9, "9");
         } else {
             JOptionPane.showMessageDialog(this, null, "Invalid Move", JOptionPane.ERROR_MESSAGE);
         }
