@@ -37,5 +37,7 @@ public class SortMenu extends JMenu {
 		// Adds font actions
 		add(new SortAction(uiController));
                 add(new SortActionZA(uiController));
+                add(new SortActionAllColumns(uiController));
+                add(new SortActionAllColumnsZA(uiController));
 	}	
 }

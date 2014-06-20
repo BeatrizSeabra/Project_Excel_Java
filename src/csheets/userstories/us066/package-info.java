@@ -42,7 +42,7 @@
 * 
 * <b>S066f: Functional Tests</b><br/>
 * 
-* ***SHARE MÉTODO CLÁSSICO***
+* ***SHARE METODO CLASSICO***
 * Antes de tudo, têm de estar abertas duas instancias do cleansheets. 
 * Depois, têm de se preencher celulas e selecionar as que quer partilhar.
 * ***SHARE METODO CLASSICO***
