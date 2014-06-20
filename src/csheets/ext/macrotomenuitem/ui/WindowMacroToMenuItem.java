@@ -6,21 +6,54 @@
 
 package csheets.ext.macrotomenuitem.ui;
 
+import csheets.CleanSheets;
+import csheets.core.formula.compiler.FormulaCompilationException;
+import csheets.ext.edMenu.ui.EdMenuUIExtension;
+import csheets.ext.editMacro.compiler.Macro;
+import csheets.ui.ctrl.UIController;
+import csheets.ui.ext.UIExtension;
+import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+
 
 /**
  * Class that represent the window to present to the user of the cleansheets
  * application, for associate macros with the menu items option. On thar window,
  * you can also set up the macro runs before the menu option (before), it is
- * executed instead of the menu option (arround), or if it is executed after the
+ * executed instead of the menu option (around), or if it is executed after the
  * menu option (after).
  * @author 1090675 - Tiago Pereira
  */
 public class WindowMacroToMenuItem extends javax.swing.JFrame {
 
     /**
-     * Creates new form WindowMacroToMenu
+     * ArrayList<Macro> arrayMacros, represent all macros created on the application
+     * to display to the user, the macro that pretend to associate to menu item
+     * ArrayList<JMenuItem> arrayMenuItem, represent all menu item of the application
+     * to display to the user, the menu item that he wants to associate with the macro
+     * CleanSheets app = new CleanSheets(), a instance of Cleansheets to use information
+     * present on it, is usual to use as parameter on the uiController instance
+     * UIController uiController, represent an instance of the UIController of the
+     * user interface controller of the cleansheets application, it´s important
+     * to access to every information relative to the user interface.
      */
-    public WindowMacroToMenuItem() {
+    private ArrayList<Macro> arrayMacros = new ArrayList<>();
+    private final ArrayList<JMenuItem> arrayMenuItem = new ArrayList<>();
+    private final CleanSheets app = new CleanSheets();
+    private UIController uiController = new UIController(app);
+
+    /**
+     * Creates new form WindowMacroToMenu
+     * @param uic
+     */
+    public WindowMacroToMenuItem(UIController uic) {
+        uiController = uic;
         initComponents();
     }
 
@@ -36,13 +69,18 @@ public class WindowMacroToMenuItem extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
-        jComboBox2 = new javax.swing.JComboBox();
-        jButton1 = new javax.swing.JButton();
-        jComboBox3 = new javax.swing.JComboBox();
+        CbMacroRun = new javax.swing.JComboBox();
+        CbExtensionMenuItem = new javax.swing.JComboBox();
+        btnOK = new javax.swing.JButton();
+        CbMenuItem = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Extend Menus with Macros");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jLabel1.setText("Select Macro to run:");
 
@@ -50,17 +88,22 @@ public class WindowMacroToMenuItem extends javax.swing.JFrame {
 
         jLabel3.setText("Specify Menu to run Macro:");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Before Menu Action", "Around Menu Action", "After Menu Action" }));
-        jComboBox2.setSelectedIndex(-1);
+        CbExtensionMenuItem.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Before Menu Action", "Around Menu Action", "After Menu Action" }));
+        CbExtensionMenuItem.setSelectedIndex(-1);
 
-        jButton1.setText("OK");
+        btnOK.setText("OK");
+        btnOK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOKActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
@@ -68,11 +111,11 @@ public class WindowMacroToMenuItem extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox2, 0, 211, Short.MAX_VALUE)
-                    .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(CbMacroRun, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(CbExtensionMenuItem, 0, 201, Short.MAX_VALUE)
+                    .addComponent(CbMenuItem, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -81,22 +124,126 @@ public class WindowMacroToMenuItem extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CbMacroRun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CbMenuItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                    .addComponent(CbExtensionMenuItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addComponent(btnOK)
                 .addGap(22, 22, 22))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    /**
+     * ActionPerformed relative to button, named btnOK, receve the information
+     * selected on the combox box's of the application and associate with the
+     * menu item that will provide the execution of the specified macro on the
+     * combox box named CbMacroRun.
+     * @param evt 
+     */
+    private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
+       //if (CbMacroRun.getSelectedIndex() != -1 && CbMenuItem.getSelectedIndex() != -1 &&
+       //        CbExtensionMenuItem.getSelectedIndex() != -1)
+       if (CbMenuItem.getSelectedIndex() != -1)  
+       {
+           UIExtension listExtension[] = uiController.getExtensions();
+           for (UIExtension uiExtension : listExtension)
+           {
+               if (uiExtension instanceof UIExtensionMacroToMenuItem) 
+               {
+                   JMenuItem itemMenu = new JMenuItem("Run Macro: "+CbMenuItem.getSelectedItem());
+                   itemMenu.setEnabled(true);
+                   ActionListener actionListener = new ActionListener() 
+                   {
+                       @Override
+                       public void actionPerformed(ActionEvent e) 
+                       {                           
+                           try 
+                           {
+                               uiController.getActiveSpreadsheet().getCell(0, 0).setContent("1");
+                           } catch (Exception ex) {
+                               JOptionPane.showMessageDialog(null, ex.getMessage());
+                           }
+                       }
+                   };
+                   itemMenu.addActionListener(actionListener);
+                   uiExtension.getMenu().add(itemMenu);                    
+               }
+           }
+           JOptionPane.showMessageDialog(null, "Macro associated with menu successfully!",
+                   "Macro Associated",JOptionPane.INFORMATION_MESSAGE);
+           dispose();
+       }    
+       else
+       {
+           JOptionPane.showMessageDialog(null, "You must selection all fields to create the macro "
+                   + "associate with menu!","Empty Selection Field",JOptionPane.INFORMATION_MESSAGE);
+       }
+    }//GEN-LAST:event_btnOKActionPerformed
+    
+    /**
+     * Recursive method that find for JMenuItem components in the JMenuBar of the
+     * window of application, to show to user, the menu itens that the user will 
+     * bind to the macro that will be executed on menu item event of cleansheets.
+     * @param obj 
+     */    
+    public void getMenuItemsOfApplication(Object obj) 
+    {
+        if (obj instanceof JMenuBar) 
+        {
+            for (Component c : ((JMenuBar) obj).getComponents()) {
+                getMenuItemsOfApplication(c);   
+            }   
+        }   
+        if (obj instanceof JMenu) {   
+
+            for (Component c : ((JMenu) obj).getMenuComponents()) {   
+                getMenuItemsOfApplication(c);   
+            }   
+        }   
+        if (obj instanceof JMenuItem) {
+            if (obj instanceof JMenu)
+            {
+                // if is a JMenu don´t want to add to the arrayList
+            } else {
+                arrayMenuItem.add((JMenuItem) obj);
+            }
+        }      
+   } 
+
+    /**
+     * Provide the action of the activated of the frame of this option, 
+     * @param evt 
+     */
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        try 
+        {            
+            arrayMacros = uiController.getActiveWorkbook().getMacros();
+            csheets.ui.Frame frame = new csheets.ui.Frame(app);
+            for (Macro macro : arrayMacros) {
+                CbMacroRun.addItem(macro);
+            }
+            getMenuItemsOfApplication(frame.getJMenuBar());
+            for (JMenuItem jMenuItem : arrayMenuItem) {
+                CbMenuItem.addItem(jMenuItem.getText());
+            }
+            CbMacroRun.setSelectedIndex(-1);
+            CbMenuItem.setSelectedIndex(-1);
+        } 
+        catch (NullPointerException exception)
+        {
+            JOptionPane.showMessageDialog(null, "There are no macros created on the application!"
+                    + "\nYou must create macros to run and associate with menu option."
+                    ,"No Macros Created",JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+        }
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
@@ -128,16 +275,16 @@ public class WindowMacroToMenuItem extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new WindowMacroToMenuItem().setVisible(true);
+                new WindowMacroToMenuItem(null).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JComboBox jComboBox3;
+    private javax.swing.JComboBox CbExtensionMenuItem;
+    private javax.swing.JComboBox CbMacroRun;
+    private javax.swing.JComboBox CbMenuItem;
+    private javax.swing.JButton btnOK;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

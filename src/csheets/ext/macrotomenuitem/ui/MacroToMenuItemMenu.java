@@ -28,6 +28,7 @@ public class MacroToMenuItemMenu extends JMenu{
             super("Macro To MenuItem");
 	    setMnemonic(KeyEvent.VK_E);
             // Adds font actions
-            add(new MacroToMenuItemAction(uiController));              
+            add(new MacroToMenuItemAction(uiController));
+            //addSeparator();
         }
 }
