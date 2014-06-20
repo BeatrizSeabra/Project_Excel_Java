@@ -59,7 +59,7 @@ public class Cliente extends Thread {
         res += "|";
         UIExtension[] extensions = uiController.getExtensions();
         for (UIExtension extension : extensions) {
-            res += extension.toString() + ";";
+            res += extension.getExtension().getName() + ";";
             System.out.println("extensao found");
         }
 
@@ -76,24 +76,35 @@ public class Cliente extends Thread {
                 socket.setBroadcast(true);
                 InetAddress IPAddress = InetAddress.getByName("255.255.255.255");
                 String resp = getInfoString();
+                System.out.println(resp);
                 byte[] sendData = resp.getBytes();
-                int i=0, n=1;
+                int i=0, n=1, j;
+                double dtgs;
                 while(i<sendData.length){
                     byte[] dataBlock;
-                    dataBlock=(uiController.getUniqueID()+"'"+n+"'"+Math.ceil(sendData.length/497.0)+"'").getBytes();
-                    for(int j=dataBlock.length;i<sendData.length && j<512;j++){
-                        dataBlock[j]=sendData[i];
+                    dtgs=sendData.length/497;
+                    if(dtgs<1){
+                        dtgs=1;
+                    }
+                    dataBlock=(uiController.getUniqueID()+"'"+n+"'"+(int)dtgs+"'").getBytes();
+                    byte[] temp=new byte[512];
+                    System.out.println(dataBlock.length);
+                    for(j=0; j<dataBlock.length; j++){
+                        temp[j]=dataBlock[j];
+                    }
+                    for(j=dataBlock.length;i<sendData.length && j<512;j++){
+                        temp[j]=sendData[i];
                         i++;
                     }
                     DatagramPacket sendPacket
-                        = new DatagramPacket(dataBlock, dataBlock.length, IPAddress, 9877);
+                        = new DatagramPacket(temp, temp.length, IPAddress, 9877);
                     socket.send(sendPacket);
                     System.out.println("enviei um datagrama");
                     n++;
                 }
 
             } catch (Exception ex) {
-//                Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         socket.close();

@@ -64,7 +64,6 @@ public class Client extends BaseConnection implements Runnable {
             try {
                 String resposta = (String) decrypt(getOis().readObject());
                 if(resposta.contains("ok")){
-                    setRead_only(Boolean.parseBoolean(resposta.split(":")[1]));
                     //criar as thread
                     getMultiShare().addClient(this);
                     threadIn = new Thread(new BaseConnection.In(ois));
