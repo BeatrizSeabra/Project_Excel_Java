@@ -41,8 +41,14 @@
 * 
 * 
 * <b>S066f: Functional Tests</b><br/>
-* 
-* 
+* Antes de tudo, teem de estar abertas duas instancias do cleansheets.
+* Para activar a janela do 'Multi Share', caso ainda não seja vizivel no side bar é necessário ir ao menu 'View' e clicar 
+* Depois, teem de se preencher celulas e selecionar as que quer partilhar.
+* Em seguida, ir ao menu extensions e escolher a opcao share e depois server.
+* Vai inserir un nome da partilha, uma porta e uma password para a partilha.
+* Na segunda instancia selecionar as celulas onde quer que a informação apareca e escolher o menu extensions -> share - > client.
+* Escrever o ip do servidor, a porta e a password (definidas anteriormente)e a informação aparecerá onde estão as celulas selecionadas.
+* De seguida no side bar no separados 'Share' tem várias abas relativas à gestão das partilhas, inclusive na 
 * 
 * @startuml doc-files/us066_design1.png
     actor User
