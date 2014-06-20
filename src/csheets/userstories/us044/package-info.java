@@ -4,9 +4,9 @@
  * <br/>
  * 
  * <b>Requirement</b><br/>
- * Deﬁnir uma gramática especiﬁca só para macros (embora deva ter exactamente as mesmas funcionalidades das fórmulas). 
+ * Definir uma gramatica especifica so para macros (embora deva ter exactamente as mesmas funcionalidades das formulas). 
  * Cada macro deve ter o seu nome. 
- * Deve existir um botão “play” para executar a macro que esteja selecionada.
+ * Deve existir um botao "play" para executar a macro que esteja selecionada.
  * <br/>
  * <br/>
  *  
