@@ -1,50 +1,52 @@
 /**
- * Technical documentation regarding the user story 060: US060- Estender menus com macros
- * Contacts have associated a reference to the residence, and the contact can take a main residence and
- * a secondary residence (optional).
+ * Technical documentation regarding the user story 060: US060 - Extend menus with macros.
  * <br/>
  * <br/>
  * 
  * <b>Requisitos</b><br/>
- * Acrescentar uma extensao que permita escrever macros usando Java BeanShell. Deve aparecer uma janela que permita escrever o script e executa-lo.<br/>
+ * This use case consist in show to the user of the application, a window that allows<br/>
+ * he to assign an execution of a macro to a menu option indicates whether you want<br/>
+ * the macro to run before (Before Menu Action), after (After Menu Action) or<br/> 
+ * instead (Around Menu Action) of the menu item in question.<br/>
  * <br/>
  * <br/>
  *  
- * <b>S061a: Analysis</b><br/>
- * Entender o conceito do BeanShell.<br/>
- * Como integrar o BeanShell no cleanSheets<br/>
- * Adicionar uma extensao.<br/>
- * Como usar macros com BeanShell.<br/>
+ * <b>S060a: Analysis</b><br/>
+ * The user storie US060 continues the work of users stories US059 and US058, for<br/> 
+ * that was first necessary to make an analysis of what had already been done in the<br/> 
+ * previous two iterations, in order to understand the follow-up to this user storie<br/>
+ * and see if any functionality needed to be complete before processer with the new<br/>
+ * user storie US060. After a review concluded that both were operating, was only<br/> 
+ * dependent on the realization of user storie US044 - "Janela de edição de Macros.",<br/>
+ * since this is what allows you to edit and create a macro, and next associate<br/> 
+ * with a menu option of the cleansheets, for when execute the option chosen this<br/> 
+ * can be performed in the cleansheets. To make the association between the<br/>
+ * implementation of macro and an option from the menu cleansheets, you need to<br/> 
+ * analyze the whole process of the actions of the menu item as well as get a<br/> 
+ * macro and therefore can run it.
  * <br/>
  * <br/>
  * 
- * <b>S061d: Design</b><br/>
- * Para implementar esta user story temos de criar as duas extensoes, BSExtension, UIExtensionBS. <br/>
- * Alem destas é necessário adicionar a libraria do BeanShell ao projecto.<br/>
- * Criar a classe UIBeanShell, e interpreter.<br/>
- * O Diagrama seguinte mostra o fluxo do programa:<br/>
- * <img src="../../../csheets/userstories/us061/doc-files/us061_design.png"> <br/>
+ * <b>S060d: Design</b><br/>
+ * 
  * <br/>
  * <br/>
  * 
- * <b>S061c: Coding</b><br/>
- * Foram criadas as extensoes necessarias a realizaçao do projecto, mais um interface grafica e uma classe com um metodo que executa o script.<br/>
+ * <b>S060c: Coding</b><br/>
+ * 
  * <br/>
  * <br/>
  * 
- * <b>S061u: Unit Tests</b><br/>
- * Nao ha testes possiveis a fazer. Visto que existem apenas duas classes, sendo que uma é interface e a outra contem um metodo, que interage com a libraria do BeanShell nao sabendo qual o resultado esperado em cada teste.<br/>
+ * <b>S060u: Unit Tests</b><br/>
+ * 
  * <br/>
  * 
- * <b>S061f: Functional Tests</b><br/>
- * 1-Executar programa.<br/>
- * 2-Clicar em Extension>BeanShell>BeanShell<br/>
- * 3-Introduzir script.<br/>
- * 4-Executar script.<br/>
+ * <b>S0610: Functional Tests</b><br/>
+ * 
  * <br/>
  * <br/>
  * 
- * @author Fábio Carvalho 1121228
+ * @author 1090675 - Tiago Pereira
  */
 
-package csheets.userstories.us061;
+package csheets.userstories.us060;
