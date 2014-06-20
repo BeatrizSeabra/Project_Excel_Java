@@ -63,12 +63,25 @@ public class Client extends BaseConnection implements Runnable {
             setOis(new ObjectInputStream(getCon().getInputStream()));
             try {
                 String resposta = (String) decrypt(getOis().readObject());
-               
+                if(resposta.contains("ok")){
+                    setRead_only(Boolean.parseBoolean(resposta.split(":")[1]));
                     //criar as thread
+                    getMultiShare().addClient(this);
                     threadIn = new Thread(new BaseConnection.In(ois));
                     threadIn.start();
                     threadOut = new Thread(new BaseConnection.Out(oos));
                     threadOut.start();
+                    
+                    
+                    if(!isRead_only()){
+                        threadOut = new Thread(new BaseConnection.Out(oos));
+                        threadOut.start();
+                    }
+                } else if(resposta.contains("block")){
+                    JOptionPane.showMessageDialog(null, "Share not acept new clients", "Block", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Wrong Password", "Password", JOptionPane.ERROR_MESSAGE);
+                }
                                 
             } catch (ClassNotFoundException ex) {
                 System.err.println("Error");
