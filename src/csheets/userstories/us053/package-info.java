@@ -34,6 +34,18 @@
 * <br/>
 * 
 * <b>S053f: Functional Tests</b><br/>
+* Criar Formulario: <br/>
+* Ir ao Menu Forms -> New Forms. Escolher o numero de linhas do formulario e em cima como são constituidas. <br/>
+* No fim disso, atribuir um nome ao formulario <br/>
+* Irá aparecer o formulario para o preencher todos os campos. <br/>
+* <br/>
+*Editar: <br/>
+* Depois de criar, existe a funcionalidade de editar. <br/>
+* Ir ao Menu Form - > Edit Forms, de seguida aparece uma combobox com os nomes de todos os formularios e tem de escolher um e depois carregar no botao "Actualize Lines" e escolher uma linha a editar.<br/>
+* Irá aparecer uma janela onde vai escolher o tamanho e cores dos dois componentes da linha. <br/>
+* Play: <br/>
+* Ir ao Menu Form - > Play Forms e escolher na combobox o formulario a apresentar.<br/>
+* Pode ser já editado ou por editar <br/>
 * <br/>
 * <br/>
 * <br/>
