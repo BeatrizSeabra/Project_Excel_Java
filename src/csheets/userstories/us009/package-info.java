@@ -15,7 +15,7 @@
  * Esta user story deve ser um melhoramento das user stories em cima citadas, e nao uma nova implementacao. <br/> 
  * <br/>
  * <br/>
- * Implementacao:<br/>
+ * <b>Implementacao:</b><br/>
  * <br/>
  * Será necessaria a criacao de um metodo que peça ao utilizador para escolher uma coluna referencia de entre 
  * as colunas por ele selecionadas.<br/>
@@ -23,7 +23,8 @@
  * seja feita tambem nas restantes colunas.<br/>
  * <br/>
  * <br/>
- * Utilizador:<br/>
+ * <b>Utilizador:</b><br/>
+ * <br/>
  * Do ponto de vista do utilizador, a unica diferença em relaçao a user story anterior, será que nesta user story, 
  * o utilizador, deverá escolher uma coluna que servirá como referencia.<br/>
  * <br/>
@@ -36,9 +37,10 @@
  * <img src="../../../csheets/userstories/us009/doc-files/US009_design.png">
  * <br/>
  * <br/>
- * Classes:<br/>
+ * <b>Classes:</b><br/>
  * <br/>
- * SearchAction:<br/>
+ * <b>SearchAction:</b><br/>
+ * <br/>
  * Classe que vai ordenar alfabeticamente os conteudos das celulas. Conta com os seguintes metodos:<br/>
  * <br/>
  * getColumns()->devolve as colunas selecionadas pelo utilizador;<br/>
@@ -48,7 +50,8 @@
  * orderContents()->ordena os conteudos das celulas;<br/>
  * askColumn()->pergunta ao utilizador qual a coluna referencia;<br/>
  * <br/>
- * SearchActionZA:<br/>
+ * <b>SearchActionZA:</b><br/>
+ * <br/>
  * Classe que vai ordenar em ordem inversa ao alfabeto os conteudos das celulas. Conta com os seguintes metodos:<br/>
  * <br/>
  * getColumns()->devolve as colunas selecionadas pelo utilizador;<br/>

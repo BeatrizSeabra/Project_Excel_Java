@@ -65,12 +65,14 @@ public class Servidor {
                     for (Datagrama dtgr : datagramas) {
                         if (dtgr.getID() == ID) {
                             partes[dtgr.getNumDatagrama()] = dtgr.getConteudo();
+                            System.out.println("Parte " +numDtgr+" de "+numDatagramas);
                         }
                     }
                     boolean falta = false;
                     for (int i = 0; i < numDatagramas && !falta; i++) {
                         if (partes[i] == null) {
                             falta = true;
+                            System.out.println("Falta parte "+(i+1));
                         }
                     }
                     if (!falta) {
@@ -79,19 +81,23 @@ public class Servidor {
                             c += partes[i];
                         }
                         instances.add(processar(a, ID, c));
+                        System.out.println("Criei uma instancia!");
                         for (Datagrama dtgr : datagramas) {
                             if (dtgr.getID() == ID) {
                                 datagramas.remove(dtgr);
+                                System.out.println("removi um datagrama");
                             }
                         }
                     } else {
                         datagramas.add(new Datagrama(ID, numDtgr, numDatagramas, content[3]));
+                        System.out.println("adicionei um datagrama");
                     }
                 }
                 receiveData = new byte[1024];
 
             } catch (SocketTimeoutException ex) {
                 timeout = true;
+                System.out.println("time out");
             }
         }
         socket.close();
@@ -102,6 +108,7 @@ public class Servidor {
         Instance inst = new Instance(Ip, ID);
         String[] temp = conteudo.split("|");
         if (temp.length == 2) {
+            System.out.println("tem tudo");
             String[] wbs = temp[0].split(";");
             for (String book : wbs) {
                 inst.addWorkbook(book);
@@ -113,12 +120,14 @@ public class Servidor {
         }
         if (temp.length == 1) {
             if (conteudo.startsWith("|")) {
+                System.out.println("tem so extensions");
                 String[] exts = temp[0].split(";");
                 for (String ext : exts) {
                     inst.addExtension(ext);
                 }
             }
             else{
+                System.out.println("tem so wbs");
                 String[] wbs = temp[0].split(";");
                 for (String book : wbs) {
                     inst.addWorkbook(book);

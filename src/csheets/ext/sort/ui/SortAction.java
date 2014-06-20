@@ -90,28 +90,30 @@ public class SortAction extends BaseAction {
             ArrayList columns = getCollumns();
             int ReferenceColumn = 0;
             String col = askColumn(columns, abc);
-            int aux = 0;
-            if (col != "A") {
-                for (int m = 0; m < abc.length; m++) {
-                    if (col == abc[m].toString()) {
-                        ReferenceColumn = m;
-                        if (ReferenceColumn != 0) {
+            if (col != "") {
+                if (col != "A") {
+                    for (int m = 0; m < abc.length; m++) {
+                        if (col == abc[m].toString()) {
+                            ReferenceColumn = m;
+                            if (ReferenceColumn != 0) {
 
+                            }
                         }
                     }
                 }
-            }
-            int exc = 0;
-            while (exc != range[0][0].getAddress().getColumn()) {
-                exc++;
-            }
+                int exc = 0;
+                while (exc != range[0][0].getAddress().getColumn()) {
+                    exc++;
+                }
 
-            for (int i = 0; i < columns.size(); i++) {
-                sortAZ(maxrows, (int) columns.get(i), columns, ReferenceColumn, exc);
+                for (int i = 0; i < columns.size(); i++) {
+                    sortAZ(maxrows, (int) columns.get(i), columns, ReferenceColumn, exc);
+                }
             }
         } catch (FormulaCompilationException ex) {
             System.out.println("Não foi possivel localizar a celula ativa ou o numero de linhas existentes");
         }
+
     }
 
     /**
@@ -220,7 +222,6 @@ public class SortAction extends BaseAction {
      */
     public String askColumn(ArrayList columns, String[] abc) {
 
-        int pos = 0;
         Object[] col = new String[columns.size()];
         int n = 0;
         for (Object obj : columns) {
@@ -228,13 +229,15 @@ public class SortAction extends BaseAction {
                 if (obj.equals(i)) {
                     col[n] = abc[i].toString();
                     n++;
-                    pos = i;
                 }
             }
         }
 
         if (columns.size() != 1) {
             Object tmp = JOptionPane.showInputDialog(null, "Choose a Reference Column", "REFERENCE COLUMN", JOptionPane.QUESTION_MESSAGE, null, col, col[0]);
+            if (tmp == null) {
+                return "";
+            }
             String column = tmp.toString();
             return column;
         } else {
