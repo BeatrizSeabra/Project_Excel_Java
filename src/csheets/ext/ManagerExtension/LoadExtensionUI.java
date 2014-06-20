@@ -4,19 +4,18 @@
  * and open the template in the editor.
  */
 
-package csheets.ext.loadextension.ui;
+package csheets.ext.ManagerExtension;
 
 import csheets.ext.Extension;
 import csheets.ext.ExtensionManager;
-import csheets.ext.edMenu.ui.EdMenuUIExtension;
 import csheets.ui.FileChooser;
 import csheets.ui.ctrl.UIController;
 import csheets.ui.ext.UIExtension;
 import java.io.File;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JMenu;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -26,13 +25,17 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class LoadExtensionUI extends javax.swing.JFrame {
 
     private String name="", path="",dir="";
-    UIController uicontroller;
+    private UIController uicontroller;
+    private JMenu menu;
     
     /**
      * Creates new form LoadExtensionUI
+     * @param uic UIController
+     * @param menu extensionsmenu
      */
-    public LoadExtensionUI(UIController uic) {
-        uicontroller=uic;
+    public LoadExtensionUI(UIController uic, JMenu menu) {
+        this.uicontroller=uic;
+        this.menu = menu;
         initComponents();
     }
 
@@ -136,8 +139,8 @@ public class LoadExtensionUI extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         FileChooser chooser=new FileChooser(null, null);
         chooser.setFileSelectionMode(FileChooser.FILES_ONLY);
-        /*FileNameExtensionFilter filter = new FileNameExtensionFilter(".class", "class");
-        chooser.setFileFilter(filter);*/
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(".class", "class");
+        chooser.setFileFilter(filter);
         chooser.showDialog(null, null);
         
         if(chooser.getSelectedFile()==null){
@@ -159,17 +162,12 @@ public class LoadExtensionUI extends javax.swing.JFrame {
             File f= new File(path);
             dir=dir.substring(dir.lastIndexOf("\\")+1);
             System.out.println(dir);
-            String name=f.getName().substring(0, f.getName().lastIndexOf('.'));
-            Extension ext=em.load("csheets.ext."+dir+"."+name,f.toURI().toURL());
+            String cname=f.getName().substring(0, f.getName().lastIndexOf('.'));
+            Extension ext=em.load("csheets.ext."+dir+"."+cname,f.toURI().toURL());
 //Extension ext= em.LoadExtension(path);
             if(ext!=null){
                 UIExtension uie= ext.getUIExtension(uicontroller);
-                UIExtension ListExt[] = uicontroller.getExtensions();
-                for (UIExtension choosen : ListExt) {
-                    if (choosen instanceof UIExtensionLoadExtension) {
-                        choosen.getMenu().add(uie.getMenu());
-                    }
-                }
+                menu.add(uie.getMenu());
             }else{
                 System.out.println("skagdjaksgdfhiag");
             }
@@ -211,7 +209,7 @@ public class LoadExtensionUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LoadExtensionUI(null).setVisible(true);
+                new LoadExtensionUI(null,null).setVisible(true);
             }
         });
     }

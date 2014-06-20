@@ -42,6 +42,34 @@
 * 
 * <b>S066f: Functional Tests</b><br/>
 * 
+* ***SHARE MÉTODO CLÁSSICO***
+* Antes de tudo, teem de estar abertas duas instancias do cleansheets. 
+* Depois, teem de se preencher celulas e selecionar as que quer partilhar.
+* Em seguida, ir ao menu extensions e escolher a opcao share e depois server.
+* Vai inserir un nome da partilha, uma porta e uma password para a partilha.
+* Na segunda instancia selecionar as celulas onde quer que a informação apareca e escolher o menu extensions -> share - > client.
+* Escrever o ip do servidor, a porta e a password (definidas anteriormente)e a informação aparecerá onde estão as celulas selecionadas.
+* De seguida no side bar no separados 'Share' tem várias abas relativas à gestão das partilhas.
+* 
+* ***ATIVAR JANELA SHARE NO SIDE BAR***
+* Para activar a janela do 'Multi Share', caso ainda não seja vizivel no side bar é necessário ir ao menu 'View' e clicar na opção 'Share'.
+* 
+* ***MULTI SHARE***
+* Na aba 'Multi Share' tem as informações sobre todas as partilhas activas da instância em questão.
+* Lista de servidores apresenta a lista de partilhas em que a instância em questão funciona em modo servidor.
+* Lista de clientes apresenta a lista de partilhas em que a instância em questão funciona em modo cleinte.
+* Para parar cada partilha dessas (Servidor/Cliente mode) basta seleccionar na partilha e clicar no botão 'Stop'.
+* 
+* ***CONNNECT***
+* Na aba 'Connect' - 'Manual' é possível criar uma nova ligação em modo cliente, tecnicamente é o mesma opção que escolher o menu extensions -> share - > client,
+* após inserir todos os campos com informações válidas é criada uma nova ligação em modo cliente à um Servidor (caso exista).
+* Na aba 'Connect' - 'Auto' é possível ligar à um servidor conectado anteriormente que ficou gravado na memória.
+* 
+* ***NEW SHARE***
+* Na aba 'New Share' é possível criar uma nova partilha em modo Servidor, ainda com a opção 'read only', que caso seleccionada
+* permite tornar a instância um servidor autêntico, isto é todas as celulas seleccionadas que forem modificadas os clientes conectados
+* tambem sofrem dessas alterações, mas as alterações dos clientes nunca interferem com o Servidor.
+* É necessário preencher todos os campos com os dados válidos, o botão verde 'actualizar' tem como função actualizar as celulas seleccionadas.
 * 
 * 
 * @startuml doc-files/us066_design1.png

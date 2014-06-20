@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package csheets.ext.loadextension.ui;
+package csheets.ext.ManagerExtension;
 
 /**
  *
@@ -33,7 +33,7 @@ public class LoadExtensionMenu extends JMenu {
 		setMnemonic(KeyEvent.VK_F);
 
 		// Adds font actions
-		add(new LoadExtensionAction(uiController));
+		add(new LoadExtensionAction(uiController,null));
 	}
 
 }

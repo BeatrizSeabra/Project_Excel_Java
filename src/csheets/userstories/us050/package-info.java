@@ -41,24 +41,25 @@
 * 
 * <b>S050c: Coding</b><br/>
 * see:<br/>
-* <a href="../../../csheets/ext/comments/package-summary.html">csheets.ext.comments</a><br/>
-* <a href="../../../csheets/ext/comments/ui/package-summary.html">csheets.ext.comments.ui</a><br/>
+* <a href="../../../csheets/ext/comments/package-summary.html">csheets.ext.logfile</a><br/>
+* <a href="../../../csheets/ext/comments/ui/package-summary.html">csheets.ext.logfile.ui</a><br/>
 * <br/>
 * <br/>
 * 
 * <b>S050u: Unit Tests</b><br/>
 * see:<br/>
-* <a href="../../../csheets/ext/comments/package-summary.html">csheets.ext.comments</a><br/>
-* <a href="../../../csheets/ext/comments/ui/package-summary.html">csheets.ext.comments.ui</a><br/>
+* <a href="../../../csheets/ext/comments/package-summary.html">csheets.ext.logfile</a><br/>
 * <br/>
 * <br/>
 * 
 * <b>S050f: Functional Tests</b><br/>
 * To test this user story, the user should follow these steps:<br/>
 * 1run cleansheets;<br/>
-* 2click on the View menu and select sidebars. There must appear a list of menu options containning one option for the comments sidebar;<br/>
-* 3the previous option is a check box that: when checked, the sidebar should appear; when not checked, the sidebar should disappear;<br/>
-* 4the sidebar window should have only one editbox. <br/>
+* 2click on the Extensions menu, EventLog File and select Workbook Events Formula. There must appear 
+* a menu width ckeck options( Open, Close, sheetCreated, sheetDeleted, sheetRenamed ) and a text field;<br/>
+* 3choose the options and write the message that you want to appear in the LogFile. 
+* 4perform that options which you have chosen, for example if you chose sheetCreated then cheate a new
+* sheet as add.<br/>
 * <br/>
 * <br/>
 * 
