@@ -106,12 +106,15 @@ public class ChooseFormToPlay extends javax.swing.JFrame {
         Collections.reverse(dataList);
         ChooseColorsAndSize edit = new ChooseColorsAndSize(form);
         ChooseFormToEdit edit1 = new ChooseFormToEdit();
-
-        ArrayColors = edit.getColors();
-        ArraySizes = edit.getSizes();
-        int ChangedLine = edit1.getChangedLine();
-
-        ed.loadForm(lines, selected, dataList, buttonList, ArrayColors,ArraySizes,ChangedLine);
+        
+            if(!form.getColor()){
+            ed.loadForm(lines, selected, dataList, buttonList);
+        } else {
+            int ChangedLine = edit1.getChangedLine();
+                  ArrayColors = edit.getColors();
+                 ArraySizes = edit.getSizes();
+            ed.loadForm(lines, selected, dataList, buttonList, ArrayColors, ArraySizes, ChangedLine);
+        }
         this.dispose();
 
     }//GEN-LAST:event_jButton1ActionPerformed
