@@ -52,7 +52,11 @@
  * <br/>
  * 
  * <b>S060u: Unit Tests</b><br/>
- * 
+ * In the user storie US060, it's no possible to do the unit tests, because<br/>
+ * have a class that just instance an object to assign the macro to the menu item,<br/>
+ * and classes with graphical interface that interact with the actions associated<br/> 
+ * with the GUI objects do not have values ​​for the expected test results, for that<br/>
+ * it's not possible to perform the unit tests for this functionality.<br/>
  * <br/>
  * 
  * <b>S0610: Functional Tests</b><br/>
