@@ -40,7 +40,7 @@
  * <br/>
  * <br/>
  *
- * <b>S077f: Functional Tests</b><br/>
+ * <b>S078f: Functional Tests</b><br/>
  * To test the functionality of multiple background searches, the user has to follow the current steps: <br/>
  * 1.Execute the CleanSheets. <br/>
  * 2.Select the sidebar relative to the search files. <br/>
