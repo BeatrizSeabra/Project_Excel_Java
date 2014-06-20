@@ -88,6 +88,7 @@ public class SortActionZA extends BaseAction {
             ArrayList columns = getCollumns();
             int ReferenceColumn = 0;
             String col = askColumn(columns, abc);
+            if (col != "") {
             if (col != "A") {
                 for (int m = 0; m < abc.length; m++) {
                     if (col == abc[m].toString()) {
@@ -101,6 +102,7 @@ public class SortActionZA extends BaseAction {
             }
             for (int i = 0; i < columns.size(); i++) {
                 sortZA(maxrows, (int) columns.get(i), columns, ReferenceColumn, exc);
+            }
             }
         } catch (FormulaCompilationException ex) {
             System.out.println("Não foi possivel localizar a celula ativa ou o numero de linhas existentes");
@@ -228,6 +230,9 @@ public class SortActionZA extends BaseAction {
         if (columns.size() != 1) {
 
             Object tmp = JOptionPane.showInputDialog(null, "Choose a Reference Column", "REFERENCE COLUMN", JOptionPane.QUESTION_MESSAGE, null, col, col[0]);
+            if (tmp == null) {
+                return "";
+            }
             String column = tmp.toString();
             return column;
         } else {
