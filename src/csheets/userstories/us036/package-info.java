@@ -35,12 +35,28 @@
  * <br/>
  *
  * <b>S036c: Coding</b><br/>
+ * csheets.core.formula.lang/WhileDo.java<br/>
+ * csheets.core.formula.lang/DoWhile.java<br/>
  * <br/>
  *
  * <b>S036u: Unit Tests</b><br/>
+ * csheets.core.formula.lang/WhileDo.java<br/>
+ * csheets.core.formula.lang/DoWhile.java<br/>
  * <br/>
  *
  * <b>S036f: Functional Tests</b><br/>
+ * Para testar esta User Story, o Utilizador deve fazer:<br/>
+ * 1- abrir o Cleansheets;<br/>
+ * 2- Seleccionar uma Celula;<br/>
+ * 3- escrever uma formula de teste:;<br/>
+ *  3.1- Deve comecar por = <br/>
+ *  3.2- Deve conter o identificador da função WhileDo ou DoWhile <br/>
+ *  3.3- Deve conter Condição segudio do bloco a executar no caos do WhileDo ou bloco a executar seguido de condição no caso do DoWhile  <br/>
+ * 4- na celula, deverá ficar o resultado da expressao testada. <br/>
+ * 5- Exemplo:
+ *      Selecionar A1 e por 1 na celula
+ *      Selecionar B2 e executar
+ *         =DoWhile(A1 = 2; A1 < 1) //falso
  * <br/>
  * 
 * @author 1120588
