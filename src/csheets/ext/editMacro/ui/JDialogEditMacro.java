@@ -200,17 +200,23 @@ public class JDialogEditMacro extends javax.swing.JDialog {
         if (source == null || source.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Invalid Macro", "ERROR", JOptionPane.ERROR_MESSAGE);
         } else {
+             String name=null;
+             Macro macro=null;
             try {
-                Macro macro = new Macro(uicontroller.getActiveCell(), source);
+                macro = new Macro(uicontroller.getActiveCell(), source);
+                name=macro.getName();
 //                macrosFile.add(macro);
+                
+            } catch (FormulaCompilationException ex) {
+                JOptionPane.showMessageDialog(this, "Invalid Macro", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+            if(name!=null && macro!=null){
                 macros.add(macro);
                 uicontroller.getActiveWorkbook().addMacro(macro);
-                jComboBox1.addItem(macro.getName());
+                jComboBox1.addItem(name);
                 jComboBox1.revalidate();
                 JOptionPane.showMessageDialog(this, "Macro inserted", "Macro", JOptionPane.INFORMATION_MESSAGE);
                 jTextArea1.setText("");
-            } catch (FormulaCompilationException ex) {
-                JOptionPane.showMessageDialog(this, "Invalid Macro", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
