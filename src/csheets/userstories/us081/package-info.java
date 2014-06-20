@@ -4,7 +4,7 @@
  * <br/>
  * 
  * <b>Requisitos</b><br/>
- * Um utilizador pode contactar directamente outro cleansheets ou criar uma "conversa". Os cleansheets que entrem numa conversa recebem todas as mensagens cujo destino é a "conversa".
+ * Um utilizador pode contactar directamente outro cleansheets ou criar uma "conversa". Os cleansheets que entrem numa conversa recebem todas as mensagens cujo destino é a "conversa".
  * <br/>
  * <br/>
  *  
@@ -26,6 +26,12 @@
  * Sempre que um utilizar envia uma mensagem, a mesma sera enviada a todos os intervenientes. <br/>
  * Sempre que um utilizador cria uma mensagem a mesma é enviada a todos os intervenientes para actualizar a lista de conversas de cada instancia<br/>
  * <img src="../../../csheets/userstories/us081/doc-files/us081_design.png"> <br/>
+ * O diagrama de sequência ilustra os seguintes eventos:<br/>
+ * Na UIChat é chamado o metodo de encontrar instancias referente aos US080.<br/>
+ * Encontradas as instancias é criada uma conversa, na qual vão ser inseridos os participantes que o utilizador pretender.<br/>
+ * Inseridos todos os participantes, o controlador envia a conversa a todos os participantes.<br/>
+ * Quando o utilizador envia uma mensagem, a interface invoca o controlador para tratar a mesma. Este envia a todos os ips a mensagem<br/>
+ * Quando uma mensagem é recebida o controlador actualiza a interface<br/>
  * <br/>
  * <br/>
  * 
@@ -45,7 +51,6 @@
  * A classe conversation foram realizados testes ao metodos de adicionar e remover Ips<br/>
  * Todos os metodos passaram nos testes elaborados.
  * <br/>
- * ç
  * <b>S081f: Functional Tests</b><br/>
  * 1-Executar o programa
  * 2-Clicar em em Extensions->Chat->Chat.
@@ -97,8 +102,10 @@ UIC -> control: addIpToConversation(ip, conv);
 control -> conv: addIP(ip);
 UIC -> control: addIpToConversation(ip, conv);
 control -> conv: addIP(ip);
+UIC -> control: SendConversation(conv);
+control->srv: SendConversation(ip,conv);
 UIC -> control: sendtoConversation(message, conv);
-control -> srv :sendMessage(ip);
+control -> srv :sendMessage(ip,message);
 control -> conv: messageReceived(from, message);
 @enduml
 
