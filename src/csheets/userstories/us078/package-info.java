@@ -65,7 +65,9 @@
  * 7.Confirm the operation with the OK button. <br/>
  * 8.After the confirmation, a MessageDialog will appear to inform that the search has begin and another MessageDialog to inform when it ends. <br/>
  * The files from the search will be listed on the sideBar. <br/>
- * <br/>
+ * 
+ * To turn the User Interface more friendly, it was added the options of "New Search" and "Clear" this buttons appear right beside with the search result list.<br/>
+ *<br/>
  * <br/>
  *
  *
