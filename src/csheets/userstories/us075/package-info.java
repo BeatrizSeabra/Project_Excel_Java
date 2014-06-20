@@ -11,8 +11,8 @@
 *  
 * <b>S075a: Analysis</b><br/>
 * It will be possible to, whenever that the cell changed, and if the file is already created (that means that the link needs to be established), the content is updated in the text file.
-* For that there will be a thread and a cicle that makes the thread to run until export is called again
-* That way if a cell is changed, there will be an exportation of that modification.
+* For that there will be a thread and a cicle that makes the thread to run until export is called again.
+* That way if a cell is changed, there will be an exportation of that modification. The thread continues running.
 * <br/>
 * <br/>
 * 
