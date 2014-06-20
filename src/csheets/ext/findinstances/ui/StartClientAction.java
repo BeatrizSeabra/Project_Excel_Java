@@ -44,7 +44,6 @@ public class StartClientAction extends BaseAction {
      */
     public void actionPerformed(ActionEvent event) {
         try {
-            
             c = new Cliente(uiController);
             c.startRunning();
             c.start();

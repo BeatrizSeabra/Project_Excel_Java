@@ -6886,6 +6886,25 @@ Close WorkBookEvent, time:2014/06/18 17:16:02
 >>>>>>> be48dd1b034255326e3bec509e1321414d86e042
 
 
+<<<<<<< HEAD
+
+onClick Event, on cell A1. time:2014/06/19 18:46:28
+
+
+
+onClick Event, on cell A1. time:2014/06/19 18:46:28
+
+
+
+Close WorkBookEvent, time:2014/06/19 18:46:53
+
+
+
+Close WorkBookEvent, time:2014/06/19 18:46:53
+
+
+
+=======
 
 onClick Event, on cell A1. time:2014/06/19 13:01:50
 
@@ -7259,3 +7278,4 @@ Close WorkBookEvent, time:2014/06/19 13:53:00
 
 
 
+>>>>>>> 20ab3269b7b0ca43e4b5762a80195e261620b66e

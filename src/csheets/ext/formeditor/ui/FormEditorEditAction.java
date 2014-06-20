@@ -7,7 +7,6 @@ package csheets.ext.formeditor.ui;
 import csheets.ui.ctrl.BaseAction;
 import csheets.ui.ctrl.UIController;
 import java.awt.event.ActionEvent;
-import javax.swing.JOptionPane;
 
 /**
  *
