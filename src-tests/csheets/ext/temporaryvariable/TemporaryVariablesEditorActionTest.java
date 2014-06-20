@@ -45,25 +45,10 @@ public class TemporaryVariablesEditorActionTest {
     @Test
     public void testGetName() {
         System.out.println("getName");
-        TemporaryVariablesEditorAction instance = null;
-        String expResult = "";
+        TemporaryVariablesEditorAction instance = new TemporaryVariablesEditorAction(null);
+        String expResult = "Activate Side Bar";
         String result = instance.getName();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of actionPerformed method, of class TemporaryVariablesEditorAction.
-     */
-    @Test
-    public void testActionPerformed() {
-        System.out.println("actionPerformed");
-        ActionEvent ae = null;
-        TemporaryVariablesEditorAction instance = null;
-        instance.actionPerformed(ae);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }

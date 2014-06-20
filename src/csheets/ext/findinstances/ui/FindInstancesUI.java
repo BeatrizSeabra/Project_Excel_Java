@@ -6,23 +6,28 @@
 
 package csheets.ext.findinstances.ui;
 
+import csheets.ext.findinstances.Instance;
 import csheets.ext.findinstances.Servidor;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JScrollPane;
+import javax.swing.JTree;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 /**
  *
  * @author RafaelChaves
  */
 public class FindInstancesUI extends javax.swing.JFrame {
-
+    private JTree tree;
     /**
      * Creates new form FindInstancesUI
      */
-    ArrayList<InetAddress> ips;
+    ArrayList<Instance> instances;
+    
     public FindInstancesUI() {
         initComponents();
     }
@@ -36,19 +41,11 @@ public class FindInstancesUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        viewTree = new javax.swing.JScrollPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = {};
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
 
         jButton1.setText("Refresh");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -69,26 +66,27 @@ public class FindInstancesUI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(viewTree, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(30, 30, 30))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(jButton1)
-                        .addGap(56, 56, 56)
-                        .addComponent(jButton2))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(43, Short.MAX_VALUE))
+                        .addGap(66, 66, 66)
+                        .addComponent(jButton2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(viewTree, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -104,13 +102,75 @@ public class FindInstancesUI extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             // TODO add your handling code here:
-            ips=Servidor.Srv();
-            jList1.setListData(ips.toArray());
-        } catch (IOException ex) {
+            instances=Servidor.Srv();
+            viewTree=new JScrollPane(makeTree());
+        } catch (Exception ex) {
             Logger.getLogger(FindInstancesUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
+    private JTree makeTree(){
+        DefaultMutableTreeNode top=new DefaultMutableTreeNode("Rede");
+        
+        DefaultMutableTreeNode ip=null;
+        DefaultMutableTreeNode instance=null;
+        DefaultMutableTreeNode workbooks=null;
+        DefaultMutableTreeNode extensions=null;
+        DefaultMutableTreeNode book=null;
+        DefaultMutableTreeNode extension=null;
+        
+        ArrayList<Instance> insts=sortInstances(instances);
+        
+        String lastIP="";
+        for (Instance inst : insts) {
+            if(!lastIP.equalsIgnoreCase(inst.getIPAddress().getHostAddress())){
+                ip=new DefaultMutableTreeNode(inst.getIPAddress().getHostAddress());
+                top.add(ip);
+            }
+            instance=new DefaultMutableTreeNode(inst.getUniqueID());
+            ip.add(instance);
+            
+            workbooks=new DefaultMutableTreeNode("Workbooks");
+            extensions=new DefaultMutableTreeNode("Extensions");
+            instance.add(workbooks);
+            instance.add(extensions);
+            
+            for (String wb : inst.getWorkbooks()) {
+                book=new DefaultMutableTreeNode(wb);
+                workbooks.add(book);
+            }
+            for (String ext : inst.getExtensions()) {
+                extension=new DefaultMutableTreeNode(ext);
+                extensions.add(extension);
+            }
+        }
+        
+        tree=new JTree(top);
+        return tree;
+    }
+    
+    private ArrayList<Instance> sortInstances(ArrayList<Instance> instances){
+        if(instances==null||instances.size()==0)
+            return instances;
+        String min=instances.get(0).getIPAddress().getHostAddress();
+        ArrayList<Instance> ret=new ArrayList();
+        while(instances.size()>0){
+            for (Instance instance : instances) {
+                if(min.compareTo(instance.getIPAddress().getHostAddress())<0){
+                    min=instance.getIPAddress().getHostAddress();
+                }
+            }
+            for (Instance instance : instances) {
+                if(min.compareTo(instance.getIPAddress().getHostAddress())==0){
+                    ret.add(instance);
+                    instances.remove(instance);
+                }
+            }
+        }
+        return ret;
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -149,7 +209,6 @@ public class FindInstancesUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JList jList1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane viewTree;
     // End of variables declaration//GEN-END:variables
 }

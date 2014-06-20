@@ -18,13 +18,24 @@
 * <br/>
 * 
 * <b>S050d: Design</b><br/>
-* Create a new window WorkbookEventsFormulaUI similar to WorkBookEventsUI but with a text field for the 
-* user writing the formula.
-* This should call the addEvent() method of the class csheets.ext.logfile.AtributeFormula which should add 
-* their events associated to the formula.
-* It's also necessary to make appropriate amendments to the method for the same treating the due events 
-* (opening, closing, sheet set, cleared leaf, leaf renamed)<br/><br/>
-* <img src="../../../csheets/userstories/us050/doc-files/us050_design1.png">
+* In the UIController class add a String[5] formulas and an ArrayList evlf. The first is for to contains the 
+* message that the user want to add to the LogFile and the second the list of events that the user chooses.
+* Adding a method writeLogFile(String event, String[] formulas) in the existent class WriteLogFile.
+* That funcion chould write the events in the LogFile if the association between the formulas[5] and the evlf
+* is correct.
+* The classes OpenAction, CloseAction, AddSpreadsheetAction, RemoveSpreadsheetAction and RenameSpreadSheetAction
+* call the writeLogFileWB("Open, Close, sheetCreated...") function through the UIController class which calls
+* the writeLogeFileWBF(String event) function that calls the WriteLogFile.writeLogFile(event, formulas) function
+* by WriteLogFile class.
+* It's also necessary create a class WorkbookEventsFormulaUI which contains the user interface to write the 
+* formula and choose the intented. Than it will change the vars formula and evlf for content the events and the
+* formula.
+* <img src="../../../csheets/userstories/us050/doc-files/us050_design1.png"/>
+* <img src="../../../csheets/userstories/us050/doc-files/us050_design2.png"/>
+* <img src="../../../csheets/userstories/us050/doc-files/us050_design3.png"/>
+* <img src="../../../csheets/userstories/us050/doc-files/us050_design4.png"/>
+* <img src="../../../csheets/userstories/us050/doc-files/us050_design5.png"/>
+* <img src="../../../csheets/userstories/us050/doc-files/us050_design6.png"/>
 * <br/>
 * <br/>
 * 
@@ -57,12 +68,54 @@
 *
  @startuml doc-files/us050_design1.png
  participant "WorkboockEventsFormulaUI" as WB
- participant "a : AtributeFormula" as AF
- participant "workboock : Workboock" as WK
+ participant "uiController : UIController" as UI
  -> WB : JButtonOK;
- WB -> AF : addEvent();
- AF -> WK : <<create>>
- AF -> WK : addWorkbookEvent();
+ WB -> UI : setFormula(OPEN,fomrula);
+ WB -> UI : setFormula(CLOSE,fomrula);
+ WB -> UI : setFormula(SHEETCREATED,fomrula);
+ WB -> UI : setFormula(SHEETDELETED,fomrula);
+ WB -> UI : setFormula(SHEETRENAMED,fomrula);
+ WB -> UI : setFormula(Evlf);
+ @enduml
+ @startuml doc-files/us050_design2.png
+ participant ": OpenAction" as OA
+ participant "uiController : UIController" as UI
+ participant ": WriteLogFile" as WLF
+ OA -> UI : writeLogFileWB("Open");
+ UI -> UI : writeLogFileWBE(event);
+ UI -> WLF : writeLogFile(event,formulas);
+ @enduml
+ @startuml doc-files/us050_design3.png
+ participant ": CloseAction" as A
+ participant "uiController : UIController" as UI
+ participant ": WriteLogFile" as WLF
+ A -> UI : writeLogFileWB("Close");
+ UI -> UI : writeLogFileWBE(event);
+ UI -> WLF : writeLogFile(event,formulas);
+ @enduml
+ @startuml doc-files/us050_design4.png
+ participant ": AddSpreadsheetAction" as A
+ participant "uiController : UIController" as UI
+ participant ": WriteLogFile" as WLF
+ A -> UI : writeLogFileWB("sheetCreated");
+ UI -> UI : writeLogFileWBE(event);
+ UI -> WLF : writeLogFile(event,formulas);
+ @enduml
+ @startuml doc-files/us050_design5.png
+ participant ": RemoveSpreadsheetAction" as A
+ participant "uiController : UIController" as UI
+ participant ": WriteLogFile" as WLF
+ A -> UI : writeLogFileWB("sheetDeleted");
+ UI -> UI : writeLogFileWBE(event);
+ UI -> WLF : writeLogFile(event,formulas);
+ @enduml
+ @startuml doc-files/us050_design6.png
+ participant ": RenameSpreadsheetAction" as A
+ participant "uiController : UIController" as UI
+ participant ": WriteLogFile" as WLF
+ A -> UI : writeLogFileWB("sheetRenamed");
+ UI -> UI : writeLogFileWBE(event);
+ UI -> WLF : writeLogFile(event,formulas);
  @enduml
 *
 */

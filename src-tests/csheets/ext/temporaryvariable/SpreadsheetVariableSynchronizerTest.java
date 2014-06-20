@@ -7,6 +7,8 @@
 package csheets.ext.temporaryvariable;
 
 import csheets.core.Spreadsheet;
+import csheets.core.SpreadsheetImpl;
+import csheets.core.Workbook;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -45,38 +47,11 @@ public class SpreadsheetVariableSynchronizerTest {
     @Test
     public void testSpreadsheetInserted() {
         System.out.println("spreadsheetInserted");
-        Spreadsheet spreadsheet = null;
+        Workbook wb = new Workbook();
+        wb.addSpreadsheet();
+        Spreadsheet spreadsheet=wb.getSpreadsheet(0);
         int index = 0;
         SpreadsheetVariableSynchronizer instance = new SpreadsheetVariableSynchronizer();
         instance.spreadsheetInserted(spreadsheet, index);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
-
-    /**
-     * Test of spreadsheetRemoved method, of class SpreadsheetVariableSynchronizer.
-     */
-    @Test
-    public void testSpreadsheetRemoved() {
-        System.out.println("spreadsheetRemoved");
-        Spreadsheet spreadsheet = null;
-        SpreadsheetVariableSynchronizer instance = new SpreadsheetVariableSynchronizer();
-        instance.spreadsheetRemoved(spreadsheet);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of spreadsheetRenamed method, of class SpreadsheetVariableSynchronizer.
-     */
-    @Test
-    public void testSpreadsheetRenamed() {
-        System.out.println("spreadsheetRenamed");
-        Spreadsheet spreadsheet = null;
-        SpreadsheetVariableSynchronizer instance = new SpreadsheetVariableSynchronizer();
-        instance.spreadsheetRenamed(spreadsheet);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-    
 }

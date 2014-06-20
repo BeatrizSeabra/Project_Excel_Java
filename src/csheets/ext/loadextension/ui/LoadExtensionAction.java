@@ -41,7 +41,7 @@ public class LoadExtensionAction extends BaseAction {
 	 * @param event the event that was fired
 	 */       
 	public void actionPerformed(ActionEvent event) {
-            LoadExtensionUI l= new LoadExtensionUI();
+            LoadExtensionUI l= new LoadExtensionUI(uiController);
             l.setSize(350, 250);
             l.setResizable(false);
             l.setLocationRelativeTo(null);
