@@ -40,7 +40,31 @@
  * <br/>
  * <br/>
  *
+ * <b>S077f: Functional Tests</b><br/>
+ * To test the functionality of multiple background searches, the user has to follow the current steps: <br/>
+ * 1.Execute the CleanSheets. <br/>
+ * 2.Select the sidebar relative to the search files. <br/>
+ * 3.Select on the menu the option Extensions. <br/>
+ * 4.Select in the Extensions the option  SearchFiles Menu. <br/>
+ * 5.Select in the SearchFiles Menu the option SearchFiles in Background. <br/>
+ * 6.Insert in the JDialog the Pattern and the Directory <br/>
+ * 7.Confirm the operation with the OK button. <br/>
+ * 8.After the confirmation, a MessageDialog will appear to inform that the search has begin and another MessageDialog to inform when it ends. <br/>
+ * The files from the search will be listed on the sideBar. <br/>
  *
+ *
+ * To test the functionality of search by Content, the user has to follow the current steps: <br/>
+ * 1.Execute the CleanSheets. <br/>
+ * 2.Select the sidebar relative to the search files by content. <br/>
+ * 3.Select on the menu the option Extensions. <br/>
+ * 4.Select in the Extensions the option  SearchFiles Menu. <br/>
+ * 5.Select in the SearchFiles Menu the option SearchFiles by Content. <br/>
+ * 6.Insert in the JDialog the Content and the Directory <br/>
+ * 7.Confirm the operation with the OK button. <br/>
+ * 8.After the confirmation, a MessageDialog will appear to inform that the search has begin and another MessageDialog to inform when it ends. <br/>
+ * The files from the search will be listed on the sideBar. <br/>
+ * <br/>
+ * <br/>
  *
  *
  *
@@ -50,8 +74,8 @@
 
 /*
 @startuml doc-files/US078_design.png
+ loop
  User -> UIController: searchFiles()
- loop for SearchAction : sa
  UIController -> SearchAction: actionListener()
  SearchAction -> Thread : search()
  SearchAction <- Thread
@@ -60,7 +84,23 @@
  SearchFiles <- JDialogSearch: pattern
  SearchFiles -> SearchFiles : search()
  SearchFiles -> JDialogSearch: results
+ end
 @enduml
+*/
+
+/*
+ @startuml doc-files/US78_design02.png
+ loop
+ User -> UIController: searchFiles()
+ UIController -> SearchAction: actionListener()
+ SearchAction -> Thread : search()
+ SearchAction <- Thread
+ SearchAction -> SearchFiles: create()
+ SearchFiles -> JDialogSearch: create()
+ SearchFiles <- JDialogSearch: content
+ SearchFiles -> SearchFiles : search()
+ SearchFiles -> JDialogSearch: results
+ end
 */
 
 
