@@ -103,7 +103,9 @@ public class FindInstancesUI extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             instances=Servidor.Srv();
+            System.out.println("instances criadas");
             viewTree=new JScrollPane(makeTree());
+            pack();
         } catch (Exception ex) {
             Logger.getLogger(FindInstancesUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -126,22 +128,28 @@ public class FindInstancesUI extends javax.swing.JFrame {
             if(!lastIP.equalsIgnoreCase(inst.getIPAddress().getHostAddress())){
                 ip=new DefaultMutableTreeNode(inst.getIPAddress().getHostAddress());
                 top.add(ip);
+                System.out.println("ip adicionado a Tree");
             }
             instance=new DefaultMutableTreeNode(inst.getUniqueID());
             ip.add(instance);
+            System.out.println("instancia adicionada a Tree");
             
             workbooks=new DefaultMutableTreeNode("Workbooks");
             extensions=new DefaultMutableTreeNode("Extensions");
             instance.add(workbooks);
+            System.out.println("Workbooks adicionado a Tree");
             instance.add(extensions);
+            System.out.println("Extensions adicionado a Tree");
             
             for (String wb : inst.getWorkbooks()) {
                 book=new DefaultMutableTreeNode(wb);
                 workbooks.add(book);
+                System.out.println("workbook adicionado a JTree");
             }
             for (String ext : inst.getExtensions()) {
                 extension=new DefaultMutableTreeNode(ext);
                 extensions.add(extension);
+                System.out.println("extension adicionada a JTree");
             }
         }
         
