@@ -8,7 +8,6 @@ package csheets.ext.macrotomenuitem.ui;
 
 import csheets.CleanSheets;
 import csheets.core.formula.compiler.FormulaCompilationException;
-import csheets.ext.edMenu.ui.EdMenuUIExtension;
 import csheets.ext.editMacro.compiler.Macro;
 import csheets.ext.macrotomenuitem.MacroToMenuItem;
 import csheets.ui.ctrl.UIController;
@@ -264,7 +263,7 @@ public class WindowMacroToMenuItem extends javax.swing.JFrame {
    } 
 
     /**
-     * Provide the action of the activated of the frame of this option, 
+     * Provide the action of the activated of the frame of this option, to execute
      * @param evt 
      */
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
