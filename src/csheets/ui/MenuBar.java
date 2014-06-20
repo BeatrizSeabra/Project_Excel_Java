@@ -30,6 +30,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 
 import csheets.CleanSheets;
+import csheets.ext.loadextension.ui.LoadExtensionAction;
 import csheets.ui.ctrl.ActionManager;
 import csheets.ui.ctrl.UIController;
 import csheets.ui.ext.CellDecorator;
@@ -147,6 +148,7 @@ public class MenuBar extends JMenuBar {
                 
                 JMenu extensionManagerMenu = new JMenu("Extensions Manager");
                 extensionsMenu.add(extensionManagerMenu);
+                extensionManagerMenu.add(new LoadExtensionAction(uiController, extensionsMenu));
                 extensionManagerMenu.add(actionManager.getAction("extensions"));
 		for (UIExtension extension : uiController.getExtensions()) {
 			JMenu extensionMenu = extension.getMenu();

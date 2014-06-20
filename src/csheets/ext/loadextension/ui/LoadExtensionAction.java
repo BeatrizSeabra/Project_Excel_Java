@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 
 import csheets.ui.ctrl.BaseAction;
 import csheets.ui.ctrl.UIController;
+import javax.swing.JMenu;
 
 /**
  *
@@ -20,13 +21,16 @@ public class LoadExtensionAction extends BaseAction {
 
 	/** The user interface controller */
 	protected UIController uiController;
+        protected JMenu menu;
 
 	/**
 	 * Creates a new action.
 	 * @param uiController the user interface controller
+         * @param menu the extension menu
 	 */
-	public LoadExtensionAction(UIController uiController) {
+	public LoadExtensionAction(UIController uiController, JMenu menu) {
 		this.uiController = uiController;
+                this.menu=menu;
 	}
 
 	protected String getName() {
@@ -41,7 +45,7 @@ public class LoadExtensionAction extends BaseAction {
 	 * @param event the event that was fired
 	 */       
 	public void actionPerformed(ActionEvent event) {
-            LoadExtensionUI l= new LoadExtensionUI(uiController);
+            LoadExtensionUI l= new LoadExtensionUI(uiController, menu);
             l.setSize(350, 250);
             l.setResizable(false);
             l.setLocationRelativeTo(null);
