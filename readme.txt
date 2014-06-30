@@ -6,6 +6,14 @@ RCOMP: 3.25
 EAPLI: 2.5
 SCOMP: 2.5
 
+2ª Semana:
+APRESENTAÇÃO: 2.74
+RCOMP: 3.20
+SCOMP: 3,5
+EAPLI: 1,5 
+Nota LPROG : 3.3
+
+
 3ª Semana:
 APRESENTACAO: 3.4
 LPROG: 2.7
