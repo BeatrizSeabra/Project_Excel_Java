@@ -1,4 +1,12 @@
 ----------------!!!NOTAS DOS ESPECIALISTAS!!!-----------------------------------
+1ª Semana:
+APRESENTACAO: 2.9
+LPROG: 3.3
+RCOMP: 3.25
+EAPLI: 2.5
+SCOMP: 2.5
+
+3ª Semana:
 LPROG: 2.7
 RCOMP: 3.08
 EAPLI: 3
