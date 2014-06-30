@@ -1,6 +1,8 @@
 ----------------!!!NOTAS DOS ESPECIALISTAS!!!-----------------------------------
 http://i.imgur.com/pi64Bat.jpg
 -------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
 The 'scripts' folder contains executable files that can be used 
 to perform important tasks of the project.
 
