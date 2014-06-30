@@ -1,6 +1,8 @@
 ----------------!!!NOTAS DOS ESPECIALISTAS!!!-----------------------------------
-http://i.imgur.com/pi64Bat.jpg
--------------------------------------------------------------------------------
+LPROG: 2.7
+RCOMP: 3.08
+EAPLI: 3
+SCOMP: 3
 -------------------------------------------------------------------------------
 
 The 'scripts' folder contains executable files that can be used 
